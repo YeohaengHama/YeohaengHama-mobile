@@ -31,6 +31,7 @@ enum CustomTheme {
 }
 
 ThemeData lightTheme = ThemeData(
+    fontFamily: "Pretendard",
     useMaterial3: true,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     brightness: Brightness.light,
@@ -41,6 +42,7 @@ ThemeData lightTheme = ThemeData(
 
 const darkColorSeed = Color(0xbcd5ff7e);
 ThemeData darkTheme = ThemeData(
+    fontFamily: "Pretendard",
     useMaterial3: true,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     brightness: Brightness.dark,
