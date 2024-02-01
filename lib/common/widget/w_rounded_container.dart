@@ -11,7 +11,7 @@ class RoundedContainer extends StatelessWidget {
   const RoundedContainer(
       {required this.child,
         super.key,
-        this.radius = 20,
+        this.radius = 10,
         this.backgroundColor,
         this.margin,
         this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15)});

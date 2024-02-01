@@ -5,11 +5,14 @@ import '../common.dart';
 class Line extends StatelessWidget {
   const Line({
     Key? key,
+
     this.color,
     this.height = 1,
     this.margin,
-  }) : super(key: key);
+    this.width,
 
+  }) : super(key: key);
+  final double? width;
   final Color? color;
   final EdgeInsets? margin;
   final double height;
@@ -20,6 +23,7 @@ class Line extends StatelessWidget {
       margin: margin,
       color: color ?? context.appColors.divider,
       height: height,
+      width:  width,
     );
   }
 }
