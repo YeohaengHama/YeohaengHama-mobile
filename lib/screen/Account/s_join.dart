@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_round_button.dart';
 import 'package:fast_app_base/common/widget/w_rounded_container.dart';
 import 'package:fast_app_base/screen/Account/w_text_widget.dart';
+import 'package:fast_app_base/screen/dialog/d_select_image_source.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class JoinScreen extends StatefulWidget {
   const JoinScreen({super.key});
@@ -16,6 +20,9 @@ class _JoinScreenState extends State<JoinScreen> {
   final rpwController = TextEditingController();
   final nameController = TextEditingController();
   bool isButtonEnabled = false;
+  File? profileFile; // 선택한 이미지를 저장하는 변수
+
+
 
   @override
   void initState() {
@@ -31,6 +38,8 @@ class _JoinScreenState extends State<JoinScreen> {
               rpwController.text.isNotEmpty &&
               nameController.text.isNotEmpty;
     });
+
+
   }
 
   @override
@@ -52,17 +61,48 @@ class _JoinScreenState extends State<JoinScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Height(10),
-              const Stack(children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundColor: AppColors.mainPurple,
-                  child: Icon(
-                    Icons.person,
-                    size: 50,
-                    color: Colors.white,
+              Stack(
+                children: [
+                Tap(
+                  onTap: () async {
+                    final selectedSource = await SelectImageSourceDialog().show();
+
+                    if(selectedSource==null){
+                      return;
+                    }
+                    final file = await ImagePicker().pickImage(source: selectedSource);
+                    if (file == null){
+                      return;
+                    }
+                    setState(() {
+                      profileFile = File(file.path);
+                    });
+
+                  },
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundColor: AppColors.mainPurple,
+                    child: profileFile != null
+                        ? Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: FileImage(profileFile!),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
+                        : const Icon(
+                      Icons.person,
+                      size: 50,
+                      color: Colors.white,
+                    ),
                   ),
+
                 ),
-                Positioned(
+                const Positioned(
                   bottom: 0,
                   right: 0,
                   child: CircleAvatar(
