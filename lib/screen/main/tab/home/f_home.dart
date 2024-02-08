@@ -15,7 +15,7 @@ class HomeFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: context.appColors.seedColor.getMaterialColorValues[100],
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
