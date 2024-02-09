@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fast_app_base/screen/opensource/s_opensource.dart';
 import 'package:flutter/foundation.dart';
@@ -24,6 +26,7 @@ class MenuDrawer extends StatefulWidget {
 }
 
 class _MenuDrawerState extends State<MenuDrawer> {
+
   @override
   void initState() {
     super.initState();
@@ -31,29 +34,27 @@ class _MenuDrawerState extends State<MenuDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    double statusBarHeight = context.statusBarHeight;
+
     return Material(
       color: Colors.transparent,
-      child: SafeArea(
-        child: Tap(
-          onTap: () {
-            closeDrawer(context);
-          },
-          child: Tap(
-            onTap: () {},
-            child: Container(
-              width: 240,
-              padding: const EdgeInsets.only(top: 10),
-              decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
-                  color: context.colors.background),
-              child: isSmallScreen(context)
-                  ? SingleChildScrollView(
-                      child: getMenus(context),
-                    )
-                  : getMenus(context),
-            ),
-          ),
+      child: Tap(
+        onTap: () {
+          closeDrawer(context);
+        },
+        child: Container(
+          width: 300,
+          height: double.infinity,
+          padding: EdgeInsets.only(top: statusBarHeight),
+          decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(5), bottomLeft: Radius.circular(5)),
+              color: context.colors.background),
+          child: isSmallScreen(context)
+              ? SingleChildScrollView(
+                  child: getMenus(context),
+                )
+              : getMenus(context),
         ),
       ),
     );
@@ -68,24 +69,27 @@ class _MenuDrawerState extends State<MenuDrawer> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Stack(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Align(
-                alignment: Alignment.topRight,
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
                 child: IconButton(
                   icon: const Icon(EvaIcons.close),
                   onPressed: () {
                     closeDrawer(context);
-                  },
-                  padding: const EdgeInsets.only(
-                    top: 0,
-                    right: 20,
-                    left: 20,
-                  ),
+                    },
                 ),
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Icon(
+                  Icons.notifications_none,
+                  color: context.appColors.drawerText,
+                ),
+              ),
             ],
-          ),
+          ).pOnly(),
           const Height(10),
           const Line(),
           _MenuWidget(
@@ -151,8 +155,8 @@ class _MenuDrawerState extends State<MenuDrawer> {
   }
 
   void closeDrawer(BuildContext context) {
-    if (Scaffold.of(context).isDrawerOpen) {
-      Scaffold.of(context).closeDrawer();
+    if (Scaffold.of(context).isEndDrawerOpen) {
+      Scaffold.of(context).closeEndDrawer();
     }
   }
 

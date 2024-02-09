@@ -25,7 +25,6 @@ class RoundButton extends StatefulWidget {
   final bool leftWidgetOnStack;
   final Widget? rightWidget;
   final TextAlign textAlign;
-
   final Color shadowColor;
   final Color borderColor;
   final Color bgColor;
@@ -154,7 +153,11 @@ class RoundButtonState extends State<RoundButton> with RefreshEverySecond {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (widget.leftWidget != null && !widget.leftWidgetOnStack) widget.leftWidget!,
+                if (widget.leftWidget != null && widget.leftWidgetOnStack)
+                  Padding(
+                    padding: EdgeInsets.only(right: 8.0), // 적절한 간격을 조절하세요.
+                    child: widget.leftWidget!,
+                  ),
                 Text(
                   widget.text,
                   textAlign: widget.textAlign,
@@ -167,14 +170,7 @@ class RoundButtonState extends State<RoundButton> with RefreshEverySecond {
               ],
             ),
           ),
-          if (widget.leftWidget != null && widget.leftWidgetOnStack)
-            Positioned.fill(
-              left: widget.leftWidgetLeftPadding,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: widget.leftWidget,
-              ),
-            ),
+
           if (widget.rightWidget != null)
             Positioned.fill(
               left: 18,

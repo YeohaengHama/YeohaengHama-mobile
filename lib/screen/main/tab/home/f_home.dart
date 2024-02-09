@@ -1,104 +1,179 @@
-import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/round_button_theme.dart';
-import 'package:fast_app_base/common/widget/w_round_button.dart';
-import 'package:fast_app_base/screen/dialog/d_message.dart';
 import 'package:flutter/material.dart';
-
-import '../../../dialog/d_color_bottom.dart';
-import '../../../dialog/d_confirm.dart';
+import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/main/tab/home/vo/dummies.dart';
+import 'package:fast_app_base/screen/main/tab/home/w_hama_area.dart';
+import 'package:fast_app_base/screen/main/tab/home/w_no_schdule.dart';
 
 class HomeFragment extends StatelessWidget {
+  final double tabListpV = 12;
+  final double tabListph = 20;
+  final double areaSize = 130;
+  final double contentP = 15;
   const HomeFragment({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              floating: false,
+              pinned: true,
+              backgroundColor: AppColors.mainPurple,
+              title: null,
+              actions: [
+                const IconButton(
+                  onPressed: null,
+                  icon: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () => openEndDrawer(context),
+                  icon: const Icon(
+                    Icons.menu,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+              flexibleSpace: FlexibleSpaceBar(
+                background: Container(
+                  color: AppColors.mainPurple,
+                ),
+              ),
+            ),
+          ];
+        },
+        body: SingleChildScrollView(
+          child: Container(color: AppColors.mainPurple,
+            child: Column(
+              children: [
+                '여행, 떠나볼까요?'
+                    .text
+                    .color(Colors.white)
+                    .size(25)
+                    .bold
+                    .center
+                    .make(),
+                RoundButton(
+                  text: '일정 등록',
+                  fontSize: 14,
+                  onTap: () => null,
+                  textColor: Colors.white,
+                  leftWidget: const Icon(
+                    Icons.calendar_today_outlined,
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                  bgColor: AppColors.secondGrey.withOpacity(0.13),
+                  height: 35,
+                ),
+                const NoScheduleWidget(),
+                Container(
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            child: '관광지'
+                                .text
+                                .size(18)
+                                .bold
+                                .color(AppColors.primaryGrey)
+                                .make(),
+                          ).pSymmetric(h: tabListph, v: tabListpV),
+                          Container(
+                            child: '맛집'
+                                .text
+                                .size(18)
+                                .bold
+                                .color(AppColors.primaryGrey)
+                                .make(),
+                          ).pSymmetric(h: tabListph, v: tabListpV),
+                          Container(
+                            child: '여행일기'
+                                .text
+                                .size(18)
+                                .bold
+                                .color(AppColors.primaryGrey)
+                                .make(),
+                          ).pSymmetric(h: tabListph, v: tabListpV),
+                        ],
+                      ),
+                      const Line(color: AppColors.outline, height: lineHeight),
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child: RichText(
+                          text: const TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '여행하마 ',
+                                style: TextStyle(
+                                    color: AppColors.mainPurple,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              TextSpan(
+                                text: '여행 추천지',
+                                style: TextStyle(
+                                    color: AppColors.primaryGrey,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ).pSymmetric(v: 8),
+                      ).pOnly(left: contentP,top: contentP),
+                      SizedBox(
+                        width: double.infinity,
+                        height: areaSize+areaSize+40,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: (areaList.length / 2).ceil(),
+                          itemBuilder: (context, index) {
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
 
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              IconButton(
-                onPressed: () => openDrawer(context),
-                icon: const Icon(Icons.menu),
-              )
-            ],
+                                if (index * 2 < areaList.length)
+                                  Container(
+                                    width: areaSize,
+                                    height: areaSize,
+                                    child: HamaAreaWidget(areaList[index * 2], indexInList: index*2+1,),
+                                  ).p(5),
+                                if (index * 2 + 1 < areaList.length)
+                                  Container(
+                                    width: areaSize,
+                                    height: areaSize,
+                                    child: HamaAreaWidget(areaList[index * 2 + 1], indexInList: index*2+2,),
+                                  ).p(5),
+                              ],
+                            );
+                          },
+                        ),
+                      ).pOnly(left: contentP-5,top: contentP-5),
+                      Container(
+                        color: Colors.white,
+                        height: 300,
+                      )
+                    ],
+                  ),
+                ),
+
+              ],
+            ),
           ),
-          const EmptyExpanded(),
-          RoundButton(
-            text: 'Snackbar 보이기',
-            onTap: () => showSnackbar(context),
-            theme: RoundButtonTheme.blue,
-          ),
-          const Height(20),
-          RoundButton(
-            text: 'Confirm 다이얼로그',
-            onTap: () => showConfirmDialog(context),
-            theme: RoundButtonTheme.whiteWithBlueBorder,
-          ),
-          const Height(20),
-          RoundButton(
-            text: 'Message 다이얼로그',
-            onTap: showMessageDialog,
-            theme: RoundButtonTheme.whiteWithBlueBorder,
-          ),
-          const Height(20),
-          RoundButton(
-            text: '메뉴 보기',
-            onTap: () => openDrawer(context),
-            theme: RoundButtonTheme.blink,
-          ),
-          const EmptyExpanded()
-        ],
+        ),
       ),
     );
   }
-
-  void showSnackbar(BuildContext context) {
-    context.showSnackbar('snackbar 입니다.',
-        extraButton: Tap(
-          onTap: () {
-            context.showErrorSnackbar('error');
-          },
-          child: '에러 보여주기 버튼'.text.white.size(13).make().centered().pSymmetric(h: 10, v: 5),
-        ));
-  }
-
-  Future<void> showConfirmDialog(BuildContext context) async {
-    final confirmDialogResult = await ConfirmDialog(
-      '오늘 기분이 좋나요?',
-      buttonText: "네",
-      cancelButtonText: "아니오",
-    ).show();
-    debugPrint(confirmDialogResult?.isSuccess.toString());
-
-    confirmDialogResult?.runIfSuccess((data) {
-      ColorBottomSheet(
-        '❤️',
-        context: context,
-        backgroundColor: Colors.yellow.shade200,
-      ).show();
-    });
-
-    confirmDialogResult?.runIfFailure((data) {
-      ColorBottomSheet(
-        '❤️힘내여',
-        backgroundColor: Colors.yellow.shade300,
-        textColor: Colors.redAccent,
-      ).show();
-    });
-  }
-
-  Future<void> showMessageDialog() async {
-    final result = await MessageDialog("안녕하세요").show();
-    debugPrint(result.toString());
-  }
-
-  void openDrawer(BuildContext context) {
-    Scaffold.of(context).openDrawer();
+  void openEndDrawer(BuildContext context) {
+    Scaffold.of(context).openEndDrawer();
   }
 }

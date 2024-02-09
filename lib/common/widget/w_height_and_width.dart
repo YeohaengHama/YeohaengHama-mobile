@@ -9,11 +9,12 @@ const height10 = Height(10);
 const height20 = Height(20);
 const height30 = Height(30);
 const height100 = Height(100);
-
+const lineHeight = 10.0;
 const loginWidth = 260.0;
 const loginHeight = 40.0;
 const eyeSize = 25.0;
 
+const maxWidthSize = double.infinity;
 
 
 class Height extends StatelessWidget {
