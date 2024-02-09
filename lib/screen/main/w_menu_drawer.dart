@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fast_app_base/screen/opensource/s_opensource.dart';
 import 'package:flutter/foundation.dart';
@@ -16,6 +17,7 @@ import '../../common/widget/w_mode_switch.dart';
 
 class MenuDrawer extends StatefulWidget {
   static const minHeightForScrollView = 380;
+
 
   const MenuDrawer({
     Key? key,
@@ -38,24 +40,19 @@ class _MenuDrawerState extends State<MenuDrawer> {
 
     return Material(
       color: Colors.transparent,
-      child: Tap(
-        onTap: () {
-          closeDrawer(context);
-        },
-        child: Container(
-          width: 300,
-          height: double.infinity,
-          padding: EdgeInsets.only(top: statusBarHeight),
-          decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(5), bottomLeft: Radius.circular(5)),
-              color: context.colors.background),
-          child: isSmallScreen(context)
-              ? SingleChildScrollView(
-                  child: getMenus(context),
-                )
-              : getMenus(context),
-        ),
+      child: Container(
+        width: 300,
+        height: double.infinity,
+        padding: EdgeInsets.only(top: statusBarHeight),
+        decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(5), bottomLeft: Radius.circular(5)),
+            color: context.colors.background),
+        child: isSmallScreen(context)
+            ? SingleChildScrollView(
+                child: getMenus(context),
+              )
+            : getMenus(context),
       ),
     );
   }
@@ -90,6 +87,17 @@ class _MenuDrawerState extends State<MenuDrawer> {
               ),
             ],
           ).pOnly(),
+          Center(
+            child: ClipOval(
+                child:
+                CachedNetworkImage(imageUrl: 'https://picsum.photos/id/200/200/200',
+                  width: 120,
+                  height: 120,)
+            ),
+          ),
+          Center(child: '여행하마'.text.color(AppColors.primaryGrey).size(24).bold.make()),
+          Center(child: '프로필 편집 >'.text.color(AppColors.forthGrey).size(12).make()),
+
           const Height(10),
           const Line(),
           _MenuWidget(
@@ -126,6 +134,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
             ).pOnly(left: 20),
           ),
           const Height(10),
+
           getLanguageOption(context),
           const Height(10),
           Row(
