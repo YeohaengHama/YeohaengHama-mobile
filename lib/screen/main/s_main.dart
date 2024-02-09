@@ -13,6 +13,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
+
   TabItem _currentTab = TabItem.home;
   final tabs = [TabItem.home, TabItem.schedule, TabItem.meeting, TabItem.information];
   final List<GlobalKey<NavigatorState>> navigatorKeys = [];

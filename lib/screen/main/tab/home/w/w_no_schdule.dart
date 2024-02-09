@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../../common/common.dart';
+import '../../../../../common/common.dart';
 
 class NoScheduleWidget extends StatelessWidget {
   const NoScheduleWidget({
@@ -15,6 +15,7 @@ class NoScheduleWidget extends StatelessWidget {
         color: AppColors.mainPurple,
         child: RoundedContainer(
           borderColor: Colors.white,
+          borderWidth: 2,
           child: RichText(
             textAlign: TextAlign.center,
             text: const TextSpan(
