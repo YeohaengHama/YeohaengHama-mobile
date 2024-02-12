@@ -28,6 +28,7 @@ class _SpaceSearchFragmentState extends State<SpaceSearchFragment>
           SliverToBoxAdapter(
             child: Column(
               children: [
+                tabBar,
                 switchTabContent(),
               ],
             ),
@@ -37,13 +38,39 @@ class _SpaceSearchFragmentState extends State<SpaceSearchFragment>
     );
   }
 
-
+  Widget get tabBar => Column(
+        children: [
+          TabBar(
+            onTap: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+            labelStyle:
+                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            labelColor: AppColors.primaryGrey,
+            controller: tabController,
+            indicatorColor: AppColors.mainPurple,
+            unselectedLabelStyle: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: AppColors.forthGrey),
+            indicatorSize: TabBarIndicatorSize.tab,
+            labelPadding: const EdgeInsets.symmetric(vertical: 5),
+            overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+            tabs: [
+              '여행일기'.text.make(),
+              '관광'.text.make(),
+              '맛집'.text.make(),
+            ],
+          ).pOnly(bottom: 5)
+        ],
+      );
 
   Widget switchTabContent() {
     switch (currentIndex) {
       case 0:
-        // ignore: prefer_const_constructors
-        return DiarySearchListFragment();
+        return const DiarySearchListFragment();
       case 1:
         return const TourismSearchListFragment();
       case 2:
