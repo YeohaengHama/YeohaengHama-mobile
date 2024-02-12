@@ -1,4 +1,5 @@
 import 'package:fast_app_base/screen/main/tab/home/w/w_home_diary.dart';
+import 'package:fast_app_base/screen/main/tab/schedule/f_space_search.dart';
 import 'package:flutter/material.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/dummies.dart';
@@ -31,13 +32,19 @@ class HomeFragment extends StatelessWidget {
             backgroundColor: AppColors.mainPurple,
             title: null,
             actions: [
-              const IconButton(
-                onPressed: null,
-                icon: Icon(
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SpaceSearchFragment()),
+                  );
+                },
+                icon: const Icon(
                   Icons.search,
                   color: Colors.white,
                 ),
               ),
+
               IconButton(
                 onPressed: () => openEndDrawer(context),
                 icon: const Icon(

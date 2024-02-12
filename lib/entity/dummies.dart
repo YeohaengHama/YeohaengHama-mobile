@@ -38,5 +38,5 @@ final diary2 = Diary(user2, 2, '목포여행', '목포에 사는 언니가 곧 �
 final diary3 = Diary(user3, 3, '동기들과 제주여행', '한 살이라도 활기 넘칠 때 제주 많이 나녀오기! 그리고 운전은 필수지만 독박 운전 하지 말기~',[picSum(319),picSum(320),picSum(321)]);
 
 
-final areaList = [hamaArea1,hamaArea2,hamaArea3,hamaArea4,hamaArea5,hamaArea6,hamaArea7,hamaArea8 ];
+final areaList = [hamaArea1,hamaArea2,hamaArea3,hamaArea4,hamaArea5,hamaArea6,hamaArea7,hamaArea8, ];
 final diaryList=[diary1,diary2,diary3,diary1,diary2,diary3];

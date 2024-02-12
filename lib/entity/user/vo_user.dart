@@ -6,5 +6,5 @@ class User with _$User {
     required final int id,
     required final String nickname,
     required final String profileUrl,
-}) =_User;
+  }) =_User;
 }

@@ -1,4 +1,6 @@
 import 'package:fast_app_base/screen/Account/s_join.dart';
+import 'package:fast_app_base/screen/main/s_main.dart';
+import 'package:fast_app_base/screen/main/tab/home/f_home.dart';
 import 'package:flutter/material.dart';
 import '../../common/common.dart';
 import 'w_text_widget.dart'; // TextWidget 파일이 있는 경로에 맞게 수정
@@ -75,22 +77,25 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Container(
-              height: loginHeight + 8,
-              width: loginWidth,
-              decoration: BoxDecoration(
-                color: AppColors.mainPurple,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: const Align(
-                alignment: Alignment.center,
-                child: Text(
-                  '로그인',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.bold,
+            Tap(
+              onTap: () { Nav.push(const MainScreen()); },
+              child: Container(
+                height: loginHeight + 8,
+                width: loginWidth,
+                decoration: BoxDecoration(
+                  color: AppColors.mainPurple,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    '로그인',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
