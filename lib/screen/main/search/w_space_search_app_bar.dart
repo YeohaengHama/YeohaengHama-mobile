@@ -3,7 +3,7 @@ import 'package:fast_app_base/common/widget/w_text_field_with_delete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../common/widget/w_arrow.dart';
+import '../../../common/widget/w_arrow.dart';
 
 class SpaceSearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TextEditingController controller;

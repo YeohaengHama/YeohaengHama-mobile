@@ -1,10 +1,12 @@
 import 'package:fast_app_base/screen/main/tab/home/w/w_home_diary.dart';
-import 'package:fast_app_base/screen/main/tab/schedule/f_space_search.dart';
 import 'package:flutter/material.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/tab/home/w/w_hama_area.dart';
 import 'package:fast_app_base/screen/main/tab/home/w/w_no_schdule.dart';
+import 'package:flutter/services.dart';
+
+import '../../search/s_space_search.dart';
 
 class HomeFragment extends StatelessWidget {
   final double tabListpV = 12;
@@ -22,9 +24,17 @@ class HomeFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: AppColors.mainPurple, // Android에서 적용됨
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarColor: AppColors.mainPurple, // Android에서 네비게이션 바의 색상 설정
+      systemNavigationBarIconBrightness: Brightness.light,
+    ));
+
     return Scaffold(
       backgroundColor: AppColors.outline,
       body: CustomScrollView(
+
         slivers: [
           SliverAppBar(
             floating: false,
@@ -178,7 +188,7 @@ class HomeFragment extends StatelessWidget {
                         );
                       },
                     ),
-                  ).pOnly(left: contentLeftPadding-5, top: contentP - 5),
+                  ).pOnly(top: contentP - 5),
                   const Line(color: AppColors.outline, height: lineHeight),
                   Container(
                     alignment: Alignment.topLeft,
@@ -203,17 +213,12 @@ class HomeFragment extends StatelessWidget {
                               width: diaryContainerWidth,
                               height: diaryContainerHeight,
                               child: HomeDiaryWidget(diaryList[index]),
-                            )
+                            ).pOnly(left: 5)
                           ],
                         ).pOnly(right: 15);
                         }),
-                  ).pOnly(left: contentLeftPadding,bottom: contentP),
-
-
-                  Container(
-                    color: Colors.white,
-                    height: 300,
-                  )
+                  ).pOnly(bottom: contentP),
+                  const Height(30),
                 ],
               ),
             ),

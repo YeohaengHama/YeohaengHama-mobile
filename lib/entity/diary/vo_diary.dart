@@ -10,6 +10,7 @@ class Diary with _$Diary {
     final String diaryTitle,
     final String diaryContent,
       final List<String> diaryImages,
+      final List<String> diaryTag,
 
       ) = _Diary;
 

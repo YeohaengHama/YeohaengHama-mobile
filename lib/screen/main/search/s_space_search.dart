@@ -1,7 +1,8 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/screen/main/tab/schedule/w_space_search_app_bar.dart';
+import 'package:fast_app_base/entity/dummies.dart';
+import 'package:fast_app_base/screen/main/search/w_space_search_app_bar.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 import 'f_diary_search_list.dart';
 import 'f_restaurant_search_list.dart';
 import 'f_tourism_search_list.dart';
@@ -19,20 +20,15 @@ class _SpaceSearchFragmentState extends State<SpaceSearchFragment>
   late final tabController = TabController(length: 3, vsync: this);
   int currentIndex = 0;
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SpaceSearchAppBar(controller: controller),
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                tabBar,
-                switchTabContent(),
-              ],
-            ),
-          )
+      body: Column(
+        children: [
+          tabBar,
+          switchTabContent(),
         ],
       ),
     );
@@ -63,7 +59,7 @@ class _SpaceSearchFragmentState extends State<SpaceSearchFragment>
               '관광'.text.make(),
               '맛집'.text.make(),
             ],
-          ).pOnly(bottom: 5)
+          )
         ],
       );
 
