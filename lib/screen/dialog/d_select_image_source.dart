@@ -1,7 +1,7 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nav/dialog/dialog.dart';
+import 'package:nav_hooks/dialog/dialog.dart';
 
 class SelectImageSourceDialog extends DialogWidget<ImageSource> {
   SelectImageSourceDialog({super.key});

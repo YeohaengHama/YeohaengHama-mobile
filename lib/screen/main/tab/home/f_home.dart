@@ -6,6 +6,7 @@ import 'package:fast_app_base/screen/main/tab/home/w/w_hama_area.dart';
 import 'package:fast_app_base/screen/main/tab/home/w/w_no_schdule.dart';
 import 'package:flutter/services.dart';
 
+import '../../../registration/calendar/s_calendar.dart';
 import '../../search/s_space_search.dart';
 
 class HomeFragment extends StatelessWidget {
@@ -34,7 +35,6 @@ class HomeFragment extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.outline,
       body: CustomScrollView(
-
         slivers: [
           SliverAppBar(
             floating: false,
@@ -66,64 +66,61 @@ class HomeFragment extends StatelessWidget {
             expandedHeight: 260,
             // Adjust this height based on your needs
             flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                color: AppColors.mainPurple,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    '여행, 떠나볼까요?'
-                        .text
-                        .color(Colors.white)
-                        .size(25)
-                        .bold
-                        .center
-                        .make(),
-                    RoundButton(
-                      text: '일정 등록',
-                      fontSize: 14,
-                      onTap: () => null,
-                      textColor: Colors.white,
-                      leftWidget: const Icon(
-                        Icons.calendar_today_outlined,
-                        size: 20,
-                        color: Colors.white,
-                      ),
-                      bgColor: AppColors.secondGrey.withOpacity(0.13),
-                      height: 35,
+              background: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  '여행, 떠나볼까요?'
+                      .text
+                      .color(Colors.white)
+                      .size(25)
+                      .bold
+                      .center
+                      .make(),
+                  RoundButton(
+                    text: '일정 등록',
+                    fontSize: 14,
+                    onTap: (){Nav.push(CalenderScreen());},
+                    textColor: Colors.white,
+                    leftWidget: const Icon(
+                      Icons.calendar_today_outlined,
+                      size: 20,
+                      color: Colors.white,
                     ),
-                    const NoScheduleWidget(),
-                    Container(color: Colors.white,
-                      child: Row(
-                        children: [
-                          Container(
-                            child: '관광지'
-                                .text
-                                .size(18)
-                                .bold
-                                .color(AppColors.primaryGrey)
-                                .make(),
-                          ).pSymmetric(h: tabListph, v: tabListpV),
-                          Container(
-                            child: '맛집'
-                                .text
-                                .size(18)
-                                .bold
-                                .color(AppColors.primaryGrey)
-                                .make(),
-                          ).pSymmetric(h: tabListph, v: tabListpV),
-                          Container(
-                            child: '여행일기'
-                                .text
-                                .size(18)
-                                .bold
-                                .color(AppColors.primaryGrey)
-                                .make(),
-                          ).pSymmetric(h: tabListph, v: tabListpV),
-                        ],
-                      ),
+                    bgColor: AppColors.secondGrey.withOpacity(0.13),
+                    height: 35,
+                  ),
+                  const NoScheduleWidget(),
+                  Container(color: Colors.white,
+                    child: Row(
+                      children: [
+                        Container(
+                          child: '관광지'
+                              .text
+                              .size(18)
+                              .bold
+                              .color(AppColors.primaryGrey)
+                              .make(),
+                        ).pSymmetric(h: tabListph, v: tabListpV),
+                        Container(
+                          child: '맛집'
+                              .text
+                              .size(18)
+                              .bold
+                              .color(AppColors.primaryGrey)
+                              .make(),
+                        ).pSymmetric(h: tabListph, v: tabListpV),
+                        Container(
+                          child: '여행일기'
+                              .text
+                              .size(18)
+                              .bold
+                              .color(AppColors.primaryGrey)
+                              .make(),
+                        ).pSymmetric(h: tabListph, v: tabListpV),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

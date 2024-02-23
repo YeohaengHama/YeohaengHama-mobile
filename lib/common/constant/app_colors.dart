@@ -23,6 +23,7 @@ class AppColors {
   static const Color thirdGrey = Color.fromARGB(255, 153, 153, 153);
   static const Color forthGrey = Color.fromARGB(255, 178, 178, 178);
   static const Color outline = Color.fromARGB(255, 231, 231, 231);
+  static const Color whiteGrey = Color.fromARGB(255, 242, 242, 242);
 
 
 
