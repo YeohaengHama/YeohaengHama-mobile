@@ -1,6 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/dummies.dart';
-import 'package:fast_app_base/screen/main/search/w_space_search_app_bar.dart';
+import 'package:fast_app_base/screen/main/search/w_search_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'f_diary_search_list.dart';
@@ -24,7 +24,7 @@ class _SpaceSearchFragmentState extends State<SpaceSearchFragment>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SpaceSearchAppBar(controller: controller),
+      appBar: SearchAppBar(controller: controller, hintText: '관광/맛집을 검색 해보세요.'),
       body: Column(
         children: [
           tabBar,
