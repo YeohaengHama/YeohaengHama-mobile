@@ -3,7 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/dummies.dart';
-import 'package:fast_app_base/entity/area/vo_hama_area.dart';
+import 'package:fast_app_base/entity/area/vo_area.dart';
 import 'package:flutter/material.dart';
 import 'package:quiver/collection.dart';
 
