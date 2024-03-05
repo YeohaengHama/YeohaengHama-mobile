@@ -2,6 +2,7 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/post_detail/provider/tourism_post_provider.dart';
 import 'package:fast_app_base/screen/post_detail/w_image_scorll_view.dart';
+import 'package:fast_app_base/screen/post_detail/w_map.dart';
 import 'package:fast_app_base/screen/post_detail/w_review_list.dart';
 import 'package:fast_app_base/screen/post_detail/w_review_star.dart';
 import 'package:fast_app_base/screen/post_detail/w_simple_review.dart';
@@ -53,17 +54,18 @@ class _PostDetail extends HookWidget {
     final shouldShowTitle = useState(false);
 
     useEffect(() {
-      customController.addListener(() {
-        if (customController.offset > 100) {
+      final controller = customController;
+      controller.addListener(() {
+        if (controller.offset > 100) {
           shouldShowTitle.value = true;
         } else {
           shouldShowTitle.value = false;
         }
       });
       return () {
-        customController.dispose();
+        controller.dispose();
       };
-    }, []);
+    }, [customController]);
     Widget buildTitle() {
       return StatefulBuilder(
         builder: (context, setState) {
@@ -81,7 +83,6 @@ class _PostDetail extends HookWidget {
         },
       );
     }
-
     return Material(
       child: CustomScrollView(
         controller: customController,
@@ -227,6 +228,12 @@ class _PostDetail extends HookWidget {
                           .bold
                           .make(),
                     ).p(25),
+                    const SizedBox(
+                      width: maxWidthSize,
+                      height: 250,
+                      child:mapWidget(),
+                    ),
+
                     const Height(200),
                   ],
                 );

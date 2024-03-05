@@ -13,5 +13,4 @@ class Diary with _$Diary {
       final List<String> diaryTag,
 
       ) = _Diary;
-
 }

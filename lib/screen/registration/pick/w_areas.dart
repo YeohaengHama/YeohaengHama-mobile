@@ -2,45 +2,78 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_height_and_width.dart';
 import 'package:fast_app_base/entity/area/vo_area.dart';
-import 'package:fast_app_base/entity/dummies.dart';
-import 'package:fast_app_base/screen/main/search/s_space_search.dart';
+
+import 'package:fast_app_base/screen/main/s_main.dart';
+
 import 'package:flutter/material.dart';
 
-class AreasWidget extends StatelessWidget {
-  const AreasWidget(this.area, {super.key,});
+import '../../../data/entity/account/vo_account.dart';
+import '../../../data/entity/itinerary/vo_itinerary.dart';
+import '../../../data/memory/Itinerary_provider.dart';
+import '../../main/tab/tab_item.dart';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class AreasWidget extends ConsumerWidget {
+  const AreasWidget(this.area, {Key? key}) : super(key: key);
   final HamaArea area;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-          child: Row(
-          children: [
-            CachedNetworkImage(
+      child: Row(
+        children: [
+          CachedNetworkImage(
             imageUrl: area.areaImages,
             width: 45,
             height: 45,
             fit: BoxFit.cover,
           ),
-          width10
-          ,
-            SizedBox(
-              height: 45,
-              width: 250, // 적절한 폭으로 제약을 설정
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  area.area.text.bold.color(AppColors.primaryGrey).size(13).make().pOnly(top: 3),
-                  area.area.text.bold.color(AppColors.thirdGrey).size(9).make().pOnly(bottom: 3),
-                ],
-              ),
+          width10,
+          SizedBox(
+            height: 45,
+            width: 250,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                area.area.text.bold.color(AppColors.primaryGrey).size(13).make().pOnly(top: 3),
+                area.area.text.bold.color(AppColors.thirdGrey).size(9).make().pOnly(bottom: 3),
+              ],
             ),
-            // 빈 컨테이너는 확장할 필요 없이 적절한 제약을 설정
-            RoundButton(text: '선택', onTap: (){Nav.push(SpaceSearchFragment());},bgColor: AppColors.outline,textColor: AppColors.primaryGrey,fontWeight: FontWeight.bold,fontSize: 12,height: 28,),
+          ),
+          RoundButton(
+            text: '선택',
+            onTap: () {
+              // 선택한 지역 정보를 ItineraryProvider에 저장
+              final itineraryProviderNotifier = ref.watch(itineraryProvider.notifier);
+              itineraryProviderNotifier.setSelectedArea(area.area);
 
-          ],
-          ).pOnly(top: 10,left: 20,bottom: 10),
-          );
-
+              final newItinerary = Itinerary(
+                id: 0,
+                name: '${itineraryProviderNotifier.selectedArea} 여행',
+                type: itineraryProviderNotifier.selectedWhoTags,
+                itineraryStyle: itineraryProviderNotifier.selectedStyleTags,
+                account: Account(),
+                transportation: 'bus',
+                area: itineraryProviderNotifier.selectedArea!,
+                startDate: itineraryProviderNotifier.selectedStartDate!,
+                endDate: itineraryProviderNotifier.selectedEndDate!,
+                places: [],
+                expense: null,
+              );
+              // 현재까지 쌓인 창을 pop하고 MainScreen으로 이동
+              Navigator.popUntil(context, (route) => route.isFirst);
+              Nav.push(MainScreen(initialTab: TabItem.schedule,));
+            },
+            bgColor: AppColors.outline,
+            textColor: AppColors.primaryGrey,
+            fontWeight: FontWeight.bold,
+            fontSize: 12,
+            height: 28,
+          ),
+        ],
+      ).pOnly(top: 10, left: 20, bottom: 10),
+    );
   }
 }

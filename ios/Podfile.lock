@@ -2,6 +2,9 @@ PODS:
   - Flutter (1.0.0)
   - flutter_native_splash (0.0.1):
     - Flutter
+  - flutter_naver_map (1.0.0):
+    - Flutter
+    - NMapsMap (= 3.17.0)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -14,6 +17,9 @@ PODS:
     - Flutter
   - keyboard_utils_fork (0.0.1):
     - Flutter
+  - NMapsGeometry (1.0.1)
+  - NMapsMap (3.17.0):
+    - NMapsGeometry
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -28,6 +34,7 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
+  - flutter_naver_map (from `.symlinks/plugins/flutter_naver_map/ios`)
   - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - isar_flutter_libs (from `.symlinks/plugins/isar_flutter_libs/ios`)
@@ -39,6 +46,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - FMDB
+    - NMapsGeometry
+    - NMapsMap
     - TOCropViewController
 
 EXTERNAL SOURCES:
@@ -46,6 +55,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_native_splash:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
+  flutter_naver_map:
+    :path: ".symlinks/plugins/flutter_naver_map/ios"
   image_cropper:
     :path: ".symlinks/plugins/image_cropper/ios"
   image_picker_ios:
@@ -64,12 +75,15 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
+  flutter_naver_map: b18663bc83c2caaab484c58dccf239a87ebbed1b
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_cropper: 60c2789d1f1a78c873235d4319ca0c34a69f2d98
   image_picker_ios: 99dfe1854b4fa34d0364e74a78448a0151025425
   isar_flutter_libs: b69f437aeab9c521821c3f376198c4371fa21073
   keyboard_utils_fork: 9822a78c5ad41829e7918ddfb58fd82ec70ba8e3
-  path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
+  NMapsGeometry: 53c573ead66466681cf123f99f698dc8071a4b83
+  NMapsMap: a5b909a31b6f3d27a670f6eb2ddc913c38975474
+  path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
   shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863

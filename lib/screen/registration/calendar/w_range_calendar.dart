@@ -1,19 +1,24 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/data/memory/Itinerary_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:isar/isar.dart';
 
+import '../../../data/entity/account/vo_account.dart';
+import '../../../data/entity/itinerary/vo_itinerary.dart';
 import '../tag/s_tag.dart';
 
-class RangeCalendar extends StatefulWidget {
+class RangeCalendar extends ConsumerStatefulWidget {
   const RangeCalendar({super.key});
 
   @override
-  State<RangeCalendar> createState() => _RangeCalendarState();
+  ConsumerState<RangeCalendar> createState() => _RangeCalendarState();
 }
 
-class _RangeCalendarState extends State<RangeCalendar> {
+class _RangeCalendarState extends ConsumerState<RangeCalendar> {
 
   List<DateTime?> _rangeDatePickerValueWithDefaultValue = [
     DateTime.now(),
@@ -93,12 +98,53 @@ class _RangeCalendarState extends State<RangeCalendar> {
         CalendarDatePicker2(
           config: config,
           value: _rangeDatePickerValueWithDefaultValue,
-          onValueChanged: (dates) =>
-              setState(() => _rangeDatePickerValueWithDefaultValue = dates),
+          onValueChanged: (dates) {
+            final itineraryProviderNotifier = ref.read(itineraryProvider.notifier);
+
+            // 선택한 날짜가 있으면 업데이트, 없으면 null로 설정
+            itineraryProviderNotifier.setSelectedDates(
+              dates.isNotEmpty ? dates[0] : null,
+              dates.length > 1 ? dates[1] : null,
+            );
+
+            // 시작 날짜와 종료 날짜가 같은 경우에 대한 처리
+            if (dates.length > 1 && dates[0] == dates[1]) {
+              // 시작 날짜와 종료 날짜가 같으면, 종료 날짜를 시작 날짜로 설정
+              itineraryProviderNotifier.setSelectedDates(dates[0], dates[0]);
+              dates[1] = dates[0];
+            }
+
+            setState(() => _rangeDatePickerValueWithDefaultValue = dates);
+          },
+
+
         ),
         const SizedBox(height: 50),
         Tap(
-          onTap: () { Nav.push(TagScreen()); },
+          onTap: () {
+            // final itineraryProviderNotifier = ref.read(itineraryProvider.notifier);
+            // final selectedStartDate = itineraryProviderNotifier.selectedStartDate;
+            // final selectedEndDate = itineraryProviderNotifier.selectedEndDate;
+            //
+            // final newItinerary = Itinerary(
+            //   id: 0,
+            //   name: '새로운 일정',
+            //   type: [],
+            //   itineraryStyle: [],
+            //   account: Account(),
+            //   transportation: 'bus',
+            //   area: '지역',
+            //   startDate: selectedStartDate ?? DateTime.now(),
+            //   endDate: selectedEndDate ?? DateTime.now(),
+            //   places: [],
+            //   expense: null,
+            // );
+            //
+            // itineraryProviderNotifier.addItinerary(newItinerary);
+// itineraryProviderNotifier.setSelectedDates(selectedStartDate, selectedEndDate);
+            Nav.push(TagScreen());
+          },
+
           child: RoundedContainer(
             radius: 5,
             backgroundColor: AppColors.mainPurple,

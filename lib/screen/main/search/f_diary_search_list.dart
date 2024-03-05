@@ -12,9 +12,7 @@ class DiarySearchListFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: maxWidthSize,
-      height: 620,
+    return Expanded(
       child: ListView.builder(
           scrollDirection: Axis.vertical,
           itemCount: diaryList.length,

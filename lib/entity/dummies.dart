@@ -3,8 +3,10 @@ import 'package:fast_app_base/entity/area/vo_restaurants.dart';
 import 'package:fast_app_base/entity/area/vo_review.dart';
 import 'package:fast_app_base/entity/area/vo_tourism_detail.dart';
 import 'package:fast_app_base/entity/diary/vo_diary.dart';
+import 'package:fast_app_base/entity/schedule/vo_schedule.dart';
 import 'package:fast_app_base/entity/tag/vo_who_tag.dart';
 import 'package:fast_app_base/entity/user/vo_user.dart';
+import 'package:fast_app_base/screen/main/tab/schedule/f_schedule.dart';
 
 import 'area/vo_tourism.dart';
 
@@ -65,18 +67,18 @@ final review1 = Review(tourism: tourism1, id: 1, user: user1,score: 5.0, wirteTi
 final review2 = Review(tourism: tourism1, id: 2, user: user2,score: 4.0, wirteTime:DateTime.now(), contents: '목포에 사는 언니가 곧 캐나다로 떠나요. 어쩌면 언니와의 마지막 만남. 언니와 특별한 기억을 남기고 왔어요');
 final review3 = Review(tourism: tourism1, id: 3, user: user3,score: 2.0, wirteTime:DateTime.now(), contents: '한 살이라도 활기 넘칠 때 제주 많이 나녀오기! 그리고 운전은 필수지만 독박 운전 하지 말기~');
 
-final restaurant1 = Restaurant(1,'배키욘방', '부산 서면', [picSum(686)]);
-final restaurant2 = Restaurant(2,'생활맥주', '부산 동래', [picSum(687)]);
-final restaurant3 = Restaurant(3,'해풍 가마솥', '부산 중구', [picSum(688)]);
-final restaurant4 = Restaurant(4,'해목', '남포동', [picSum(689)]);
-final restaurant5 = Restaurant(5,'웨이브온', '남포동', [picSum(692)]);
-final restaurant6 = Restaurant(6,'로얄경약식&스테이크', '부산 기장군', [picSum(690)]);
-final restaurant7 = Restaurant(7,'해물 칼국수', '해운대', [picSum(691)]);
-final restaurant8 = Restaurant(8,'광안 샤브샤브', '남포동', [picSum(693)]);
-final restaurant9 = Restaurant(9,'해피스토리', '부산', [picSum(694)]);
+final restaurant1 = Restaurant(1,'배키욘방', '부산 서면', [picSum(686)],"'배키욘방'입니다.");
+final restaurant2 = Restaurant(2,'생활맥주', '부산 동래', [picSum(687)],"'생활맥주'입니다.");
+final restaurant3 = Restaurant(3,'해풍 가마솥', '부산 중구', [picSum(688)],"'해풍 가마솥'입니다.");
+final restaurant4 = Restaurant(4,'해목', '남포동', [picSum(689)],"'해목'입니다.");
+final restaurant5 = Restaurant(5,'웨이브온', '남포동', [picSum(692)],"'웨이브온'입니다.");
+final restaurant6 = Restaurant(6,'로얄경약식&스테이크', '부산 기장군', [picSum(690)],"'로얄경약식&스테이크'입니다.");
+final restaurant7 = Restaurant(7,'해물 칼국수', '해운대', [picSum(691)],"'해물 칼국수'입니다.");
+final restaurant8 = Restaurant(8,'광안 샤브샤브', '남포동', [picSum(693)],"'광안 샤브샤브'입니다.");
+final restaurant9 = Restaurant(9,'해피스토리', '부산', [picSum(694)],"'해피스토리'입니다.");
 
-
-
+final schedule1 = Schedule(days: [DateTime.now().add(const Duration(days: 3)),
+  DateTime.now().add(const Duration(days: 5)),], area: hamaArea7, pickTourism: [tourism3,tourism4,tourism5] ,pickRestaurant:[restaurant2,restaurant3,restaurant4],pickMyArea: [tourism3,restaurant2,tourism4,restaurant3,tourism5,restaurant4]);
 
 final areaList = [hamaArea1,hamaArea2,hamaArea3,hamaArea4,hamaArea5,hamaArea6,hamaArea7,hamaArea8, hamaArea1,hamaArea2,hamaArea3,hamaArea4,hamaArea5,hamaArea6,hamaArea7,hamaArea8,];
 final diaryList=[diary1,diary2,diary3,diary1,diary2,diary3,diary1,diary2,diary3,diary1,diary2,diary3];
@@ -84,4 +86,5 @@ final tourismList=[tourism1,tourism2,tourism3,tourism4,tourism5,tourism6,tourism
 final tourismDetailList = [tourismDetail1];
 final reviewList = [review1,review2,review3];
 final restaurantList =[restaurant1,restaurant2,restaurant3,restaurant4,restaurant5,restaurant6,restaurant7,restaurant8,restaurant9,restaurant1,restaurant2,restaurant3,restaurant4,restaurant5,restaurant6,restaurant7,restaurant8,restaurant9];
+final scheduleList = [schedule1];
 

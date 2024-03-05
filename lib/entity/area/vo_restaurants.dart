@@ -7,6 +7,7 @@ class Restaurant with _$Restaurant {
       final String restaurantName,
       final String restaurantArea,
       final List<String> retaurantImages,
+      final String content,
       ) = _Restaurant;
 
 }

@@ -6,7 +6,8 @@ import '../../common/common.dart';
 import 'w_menu_drawer.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final TabItem? initialTab;
+  const MainScreen({super.key, this.initialTab});
 
   @override
   State<MainScreen> createState() => MainScreenState();
@@ -30,7 +31,9 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
   void initState() {
     super.initState();
     initNavigatorKeys();
+    _currentTab = widget.initialTab ?? TabItem.home;
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +73,7 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
         return;
       }
       if (_currentTab != TabItem.home) {
-        _changeTab(tabs.indexOf(TabItem.home));
+        changeTab(tabs.indexOf(TabItem.home));
 
       }
     }
@@ -114,7 +117,7 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
         .toList();
   }
 
-  void _changeTab(int index) {
+  void changeTab(int index) {
     setState(() {
       _currentTab = tabs[index];
     });
@@ -138,7 +141,7 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
       final navigationKey = _currentTabNavigationKey;
       popAllHistory(navigationKey);
     }
-    _changeTab(index);
+    changeTab(index);
   }
 
   void popAllHistory(GlobalKey<NavigatorState> navigationKey) {

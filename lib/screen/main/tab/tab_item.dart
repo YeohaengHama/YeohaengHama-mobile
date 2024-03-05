@@ -9,7 +9,7 @@ import 'meeting/f_meeting.dart';
 enum TabItem {
   home(Icons.location_on_outlined, '홈', HomeFragment()),
   schedule(Icons.calendar_today_outlined, '일정', ScheduleFragment()),
-  meeting(Icons.group_outlined, '일정', MeetingFragment()),
+  meeting(Icons.group_outlined, '모임', MeetingFragment()),
   information(Icons.cloud_outlined, '정보', InformationFragment());
 
   final IconData activeIcon;

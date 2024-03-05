@@ -1,6 +1,7 @@
 import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/search/w_search_app_bar.dart';
 import 'package:fast_app_base/screen/registration/pick/w_areas.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../common/common.dart';
@@ -25,9 +26,8 @@ class _AreaPickState extends State<AreaPick> {
       appBar: SearchAppBar(controller: controller, hintText: '여행, 어디로 떠나시나요?'),
       body: Column(
         children: [
-          SizedBox(
-            width: maxWidthSize,
-            height: 650,
+          Expanded(
+
             child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 itemCount: diaryList.length,
@@ -37,27 +37,7 @@ class _AreaPickState extends State<AreaPick> {
                   );
                 }),
           ),
-          Center(
-            child: Tap(
-              onTap: () { Nav.push(const AreaPick(), context: context); },
-              child: RoundedContainer(
-                radius: 5,
-                backgroundColor: AppColors.mainPurple,
-                child: SizedBox(
-                  width: 300,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
 
-
-                      '완료'.text.bold.white.make(),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );

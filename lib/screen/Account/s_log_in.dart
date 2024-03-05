@@ -2,27 +2,50 @@ import 'package:fast_app_base/screen/Account/s_join.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
 import 'package:fast_app_base/screen/main/tab/home/f_home.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:http/http.dart';
 import '../../common/common.dart';
+import '../../data/entity/account/vo_login.dart';
+import '../../data/network/user_api.dart';
 import 'w_text_widget.dart'; // TextWidget 파일이 있는 경로에 맞게 수정
 
-class LogInScreen extends StatefulWidget {
+
+final userApiProvider = Provider<UserApi>((ref) => UserApi());
+
+class LogInScreen extends ConsumerStatefulWidget {
   const LogInScreen({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  _LogInScreenState createState() => _LogInScreenState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
+class _LogInScreenState extends ConsumerState<LogInScreen> {
   final idController = TextEditingController();
   final pwController = TextEditingController();
   bool obscureText = true;
 
+  Future<void> _loginUser() async {
+    final login = LogIn(
+      email: idController.text,
+      pw: pwController.text,
+    );
+
+    final userApi = ref.read(userApiProvider);
+
+    try {
+      await userApi.postLoginUser(login, context);
+
+      // 다른 로직 추가
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // 배경색 설정
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           children: [
@@ -57,7 +80,7 @@ class _LogInScreenState extends State<LogInScreen> {
                     child: InkWell(
                       onTap: () {
                         setState(() {
-                          obscureText = !obscureText; // 눈 아이콘 클릭시 상태 변경
+                          obscureText = !obscureText;
                         });
                       },
                       child: Icon(
@@ -78,7 +101,7 @@ class _LogInScreenState extends State<LogInScreen> {
             ),
             const SizedBox(height: 20),
             Tap(
-              onTap: () { Nav.push(const MainScreen()); },
+              onTap: (){Nav.push(MainScreen());},
               child: Container(
                 height: loginHeight + 8,
                 width: loginWidth,
@@ -151,22 +174,22 @@ class _LogInScreenState extends State<LogInScreen> {
                 children: [
                   Expanded(
                       child: Image.asset(
-                    '$basePath/icon/kakao.png',
-                    width: 75,
-                    height: 75,
-                  )),
+                        '$basePath/icon/kakao.png',
+                        width: 75,
+                        height: 75,
+                      )),
                   Expanded(
                       child: Image.asset(
-                    '$basePath/icon/google.png',
-                    width: 75,
-                    height: 75,
-                  )),
+                        '$basePath/icon/google.png',
+                        width: 75,
+                        height: 75,
+                      )),
                   Expanded(
                       child: Image.asset(
-                    '$basePath/icon/apple.png',
-                    width: 75,
-                    height: 75,
-                  )),
+                        '$basePath/icon/apple.png',
+                        width: 75,
+                        height: 75,
+                      )),
                 ],
               ),
             )

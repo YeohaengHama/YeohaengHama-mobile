@@ -1,12 +1,17 @@
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_round_button.dart';
 import 'package:fast_app_base/common/widget/w_rounded_container.dart';
+import 'package:fast_app_base/data/entity/account/vo_account.dart';
+import 'package:fast_app_base/data/network/user_api.dart';
 import 'package:fast_app_base/screen/Account/w_text_widget.dart';
 import 'package:fast_app_base/screen/dialog/d_select_image_source.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../data/entity/vo_user.dart';
 
 class JoinScreen extends StatefulWidget {
   const JoinScreen({super.key});
@@ -20,8 +25,8 @@ class _JoinScreenState extends State<JoinScreen> {
   final rpwController = TextEditingController();
   final nameController = TextEditingController();
   bool isButtonEnabled = false;
-  File? profileFile; // 선택한 이미지를 저장하는 변수
-
+  File? profileFile;
+  final UserApi _userApi = UserApi();
 
 
   @override
@@ -41,6 +46,17 @@ class _JoinScreenState extends State<JoinScreen> {
 
 
   }
+  Future<void> _postData() async {
+    final account = Account(
+      email: idController.text,
+      pw: pwController.text,
+      photoUrl: profileFile != null ? base64Encode(profileFile!.readAsBytesSync()) : null,
+      nickName: nameController.text,
+    );
+
+    await _userApi.postAccountData(account);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -190,10 +206,13 @@ class _JoinScreenState extends State<JoinScreen> {
                 width: loginWidth - 20,
               ),
               const Height(20),
-              RoundedContainer(
-                backgroundColor: isButtonEnabled ? AppColors.mainPurple : Colors.grey,
-                padding: const EdgeInsets.symmetric(horizontal: 120, vertical: 10),
-                child: '완료'.text.bold.color(Colors.white).size(24).make(),
+              GestureDetector(
+                onTap: isButtonEnabled ? _postData : null,
+                child: RoundedContainer(
+                  backgroundColor: isButtonEnabled ? AppColors.mainPurple : Colors.grey,
+                  padding: const EdgeInsets.symmetric(horizontal: 120, vertical: 10),
+                  child: '완료'.text.bold.color(Colors.white).size(24).make(),
+                ),
               ),
             ],
           ),

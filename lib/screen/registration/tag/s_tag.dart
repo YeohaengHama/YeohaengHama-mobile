@@ -1,22 +1,49 @@
+import 'package:fast_app_base/screen/main/search/s_space_search.dart';
 import 'package:fast_app_base/screen/registration/tag/w_tag_button.dart';
 import 'package:flutter/material.dart';
 import 'package:fast_app_base/common/common.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../data/memory/Itinerary_provider.dart';
 import '../pick/s_area_pick.dart';
 
-class TagScreen extends StatefulWidget {
+class TagScreen extends ConsumerStatefulWidget {
   const TagScreen({super.key});
 
   @override
-  State<TagScreen> createState() => _TagScreenState();
+  ConsumerState<TagScreen> createState() => _TagScreenState();
 }
 
-class _TagScreenState extends State<TagScreen> {
-  final List<String> whoTag =  ['혼자', '친구와', '연인과', '배우자와', '아이와', '부모님과', '기타'];
-  final List<String> styleTag =  ['체험∙액티비티', 'SNS 핫플레이스', '자연과 함께', '유명한 관광지는 필수', '여유롭게 힐링', '문화∙예술∙역사', '여행지 느낌 물씬', '쇼핑은 열정적으로', '관광보다 먹방'];
+class _TagScreenState extends ConsumerState<TagScreen> {
+
+  final Map<int, String> whoTagMap = {
+    0: '기타',
+    1: '혼자',
+    2: '친구와',
+    3: '연인과',
+    4: '배우자와',
+    5: '아이와',
+    6: '부모님과',
+  };
+
+  final Map<int, String> styleTagMap = {
+    1: '체험∙액티비티',
+    2: 'SNS 핫플레이스',
+    3: '자연과 함께',
+    4: '유명한 관광지는 필수',
+    5: '여유롭게 힐링',
+    6: '문화∙예술∙역사',
+    7: '여행지 느낌 물씬',
+    8: '쇼핑은 열정적으로',
+    9: '관광보다 먹방',
+  };
+
+// 나머지 코드에 whoTagMap, styleTagMap 사용
+
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -39,23 +66,30 @@ class _TagScreenState extends State<TagScreen> {
                 .size(15)
                 .make(),
             const SizedBox(height: 16),
-            TagButton(whoTag: whoTag),
+            TagButton(whoTagMap: whoTagMap),
             const SizedBox(height: 16),
 
-            '누구와'
+            '스타일'
                 .text
                 .bold
                 .color(AppColors.primaryGrey)
                 .size(15)
                 .make(),
-            TagButton(styleTag: styleTag),
+            TagButton(styleTagMap: styleTagMap),
             const Height(80),
           ],).pOnly(left: contentLeftPadding),
 
 
           Center(
             child: Tap(
-              onTap: () { Nav.push(const AreaPick(), context: context); },
+              onTap:(){
+                final List<String> selectedWhoTags =
+                    ref.read(itineraryProvider.notifier).selectedWhoTags;
+                final List<String> selectedStyleTags =
+                    ref.read(itineraryProvider.notifier).selectedStyleTags;
+                print('Selected Who Tags: $selectedWhoTags');
+                print('Selected Style Tags: $selectedStyleTags');
+                Nav.push(AreaPick());} ,
               child: RoundedContainer(
                 radius: 5,
                 backgroundColor: AppColors.mainPurple,

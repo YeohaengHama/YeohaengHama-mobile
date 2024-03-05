@@ -4,7 +4,6 @@ import '../../entity/area/vo_review.dart';
 
 class ReviewStar extends StatelessWidget {
   final List<Review> reviewList;
-
   const ReviewStar(this.reviewList, {Key? key}) : super(key: key);
 
 
@@ -21,7 +20,7 @@ class ReviewStar extends StatelessWidget {
         _buildStarIcon(averageScore, 4),
         _buildStarIcon(averageScore, 5),
         Text(
-          reviewList.length.toString(),
+          averageScore.toStringAsFixed(1),
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.grey),
         ),
       ],
