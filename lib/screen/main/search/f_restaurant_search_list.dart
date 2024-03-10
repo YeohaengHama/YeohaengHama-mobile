@@ -15,7 +15,8 @@ class RestaurantSearchListFragment extends StatelessWidget {
           itemCount: restaurantList.length,
           itemBuilder: (context, index) {
             return Row(
-              children: [RestaurantSearchListWidget(restaurantList[index])],
+              children: [
+                RestaurantSearchListWidget(restaurantList[index])],
             );
           }),
     );

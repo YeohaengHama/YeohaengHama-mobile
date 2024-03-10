@@ -1,11 +1,14 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:fast_app_base/data/entity/account/vo_account.dart';
 import 'package:fast_app_base/data/entity/account/vo_login.dart';
-import 'package:fast_app_base/data/network/result/api_error.dart';
+import 'package:fast_app_base/data/network/api_error.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../screen/main/s_main.dart';
+import '../entity/open_api/open_api_area.dart';
 import '../memory/user_provider.dart';
 import '../simple_result.dart';
 
@@ -14,7 +17,7 @@ final userApiProvider = Provider<UserApi>((ref) => UserApi());
 class UserApi {
   final Dio _dio = Dio();
   final String baseUrl =
-      'https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api/';
+      'https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api';
 
   Future<void> postAccountData(Account account) async {
     final url = '$baseUrl/account/join';
@@ -44,7 +47,6 @@ class UserApi {
     }
   }
 
-
   Future<void> postLoginUser(LogIn logIn, BuildContext context) async {
     try {
       final response = await _dio.post(
@@ -72,6 +74,46 @@ class UserApi {
         // 로그인 실패 처리
       } else {
         print('로그인 실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      // 예외 발생 시에도 Future를 반환하여 호출자에게 예외 정보를 전달할 수 있도록 합니다.
+      throw e;
+    }
+  }
+  Future<Response> postSearchArea(OpenApiArea openApiArea) async {
+    try {
+      final response = await _dio.post(
+        '$baseUrl/openApi/searchArea',
+        data: {
+          'numOfRows': openApiArea.numOfRows,
+          'page': openApiArea.page,
+          'keyword': openApiArea.keyword,
+          'contentTypeId': openApiArea.contentTypeId,
+          'mobileOS': openApiArea.mobileOS,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // 성공적인 응답 데이터를 Dart Map으로 변환
+        Map<String, dynamic> responseData = json.decode(response.data);
+        // final List<dynamic> items = body['items']['item'];
+        //
+        // // 예시: 각 항목의 addr1 값을 출력
+        // for (var item in items) {
+        // print('addr1: ${item['addr1']}');
+        // }
+
+        // 원하는 정보에 접근하여 출력 (예시: addr1 값 출력)
+        String addr1 = responseData['response']['body']['items']['item'][0]['addr1'];
+        print('주소1: $addr1');
+
+        return response;
+      } else if (response.statusCode == 401) {
+        return response;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');

@@ -2,6 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quiver/strings.dart';
 
 import '../common.dart';
 
@@ -143,6 +144,7 @@ class TextFieldWithDeleteState extends State<TextFieldWithDelete> {
                 ),
                 focusedBorder: const UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.transparent),
+
                 ),
               ),
             ),

@@ -1,15 +1,21 @@
+import 'package:fast_app_base/screen/main/tab/home/w/w_exist_schedule.dart';
 import 'package:fast_app_base/screen/main/tab/home/w/w_home_diary.dart';
+import 'package:fast_app_base/screen/main/tab/home/w/w_non_schedule.dart';
+import 'package:fast_app_base/screen/main/tab/schedule/f_non_schedule.dart';
+import 'package:fast_app_base/screen/main/tab/schedule/f_schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/tab/home/w/w_hama_area.dart';
 import 'package:fast_app_base/screen/main/tab/home/w/w_no_schdule.dart';
 import 'package:flutter/services.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../data/memory/Itinerary_provider.dart';
 import '../../../registration/calendar/s_calendar.dart';
 import '../../search/s_space_search.dart';
 
-class HomeFragment extends StatelessWidget {
+class HomeFragment extends ConsumerWidget {
   final double tabListpV = 12;
   final double tabListph = 20;
   final double areaSize = 130;
@@ -24,204 +30,154 @@ class HomeFragment extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final itineraryList = ref.watch(itineraryProvider);
+
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: AppColors.mainPurple, // Android에서 적용됨
+      statusBarColor: AppColors.mainPurple,
+      // Android에서 적용됨
       statusBarIconBrightness: Brightness.light,
-      systemNavigationBarColor: AppColors.mainPurple, // Android에서 네비게이션 바의 색상 설정
+      systemNavigationBarColor: AppColors.mainPurple,
+      // Android에서 네비게이션 바의 색상 설정
       systemNavigationBarIconBrightness: Brightness.light,
     ));
 
     return Scaffold(
       backgroundColor: AppColors.outline,
       body: CustomScrollView(
-        slivers: [
+          slivers: [
           SliverAppBar(
-            floating: false,
-            pinned: true,
-            backgroundColor: AppColors.mainPurple,
-            title: null,
-            actions: [
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SpaceSearchFragment()),
-                  );
-                },
-                icon: const Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-              ),
-
-              IconButton(
-                onPressed: () => openEndDrawer(context),
-                icon: const Icon(
-                  Icons.menu,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-            expandedHeight: 260,
-            // Adjust this height based on your needs
-            flexibleSpace: FlexibleSpaceBar(
-              background: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  '여행, 떠나볼까요?'
-                      .text
-                      .color(Colors.white)
-                      .size(25)
-                      .bold
-                      .center
-                      .make(),
-                  RoundButton(
-                    text: '일정 등록',
-                    fontSize: 14,
-                    onTap: (){Nav.push(CalenderScreen());},
-                    textColor: Colors.white,
-                    leftWidget: const Icon(
-                      Icons.calendar_today_outlined,
-                      size: 20,
-                      color: Colors.white,
-                    ),
-                    bgColor: AppColors.secondGrey.withOpacity(0.13),
-                    height: 35,
-                  ),
-                  const NoScheduleWidget(),
-                  Container(color: Colors.white,
-                    child: Row(
-                      children: [
-                        Container(
-                          child: '관광지'
-                              .text
-                              .size(18)
-                              .bold
-                              .color(AppColors.primaryGrey)
-                              .make(),
-                        ).pSymmetric(h: tabListph, v: tabListpV),
-                        Container(
-                          child: '맛집'
-                              .text
-                              .size(18)
-                              .bold
-                              .color(AppColors.primaryGrey)
-                              .make(),
-                        ).pSymmetric(h: tabListph, v: tabListpV),
-                        Container(
-                          child: '여행일기'
-                              .text
-                              .size(18)
-                              .bold
-                              .color(AppColors.primaryGrey)
-                              .make(),
-                        ).pSymmetric(h: tabListph, v: tabListpV),
-                      ],
-                    ),
-                  ),
-                ],
+          floating: false,
+          pinned: true,
+          backgroundColor: AppColors.mainPurple,
+          title: null,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SpaceSearchFragment()),
+                );
+              },
+              icon: const Icon(
+                Icons.search,
+                color: Colors.white,
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: Colors.white,
-              child: Column(
-                children: [
-                  const Line(color: AppColors.outline, height: lineHeight),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: '여행하마 ',
-                            style: TextStyle(
-                                color: AppColors.mainPurple,
-                                fontSize: listFontSize,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          TextSpan(
-                            text: '여행 추천지',
-                            style: TextStyle(
-                                color: AppColors.primaryGrey,
-                                fontSize: listFontSize,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ).pSymmetric(v: 8),
-                  ).pOnly(left: contentLeftPadding, top: contentP),
-                  SizedBox(
-                    width: double.infinity,
-                    height: areaSize + areaSize + 40,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: (areaList.length / 2).ceil(),
-                      itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if (index * 2 < areaList.length)
-                              SizedBox(
-                                width: areaSize,
-                                height: areaSize,
-                                child: HamaAreaWidget(
-                                  areaList[index * 2],
-                                  indexInList: index * 2 + 1,
-                                ),
-                              ).p(5),
-                            if (index * 2 + 1 < areaList.length)
-                              SizedBox(
-                                width: areaSize,
-                                height: areaSize,
-                                child: HamaAreaWidget(
-                                  areaList[index * 2 + 1],
-                                  indexInList: index * 2 + 2,
-                                ),
-                              ).p(5),
-                          ],
-                        );
-                      },
-                    ),
-                  ).pOnly(top: contentP - 5),
-                  const Line(color: AppColors.outline, height: lineHeight),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: '국내 여행자들의 생생한 여행일기'
-                        .text
-                        .bold
-                        .size(listFontSize)
-                        .make()
-                        .pSymmetric(v: contentP , h: contentLeftPadding).pOnly(top: 6),
-                  ),
 
-                  SizedBox(
-                    width: maxWidthSize,
-                    height: diaryContainerHeight+20,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                        itemCount: diaryList.length,
-                        itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            SizedBox(
-                              width: diaryContainerWidth,
-                              height: diaryContainerHeight,
-                              child: HomeDiaryWidget(diaryList[index]),
-                            ).pOnly(left: 5)
-                          ],
-                        ).pOnly(right: 15);
-                        }),
-                  ).pOnly(bottom: contentP),
-                  const Height(30),
-                ],
+            IconButton(
+              onPressed: () => openEndDrawer(context),
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.white,
               ),
             ),
-          ),
-        ],
+          ],
+          expandedHeight: 260,
+          // Adjust this height based on your needs
+          flexibleSpace: FlexibleSpaceBar(
+              background: itineraryList.isNotEmpty ? ExistScheduleWidget(itineraryList.first) : NonSchduleWidget(tabListph: tabListph, tabListpV: tabListpV)
       ),
+    ),
+    SliverToBoxAdapter(
+    child: Container(
+    color: Colors.white,
+    child: Column(
+    children: [
+    const Line(color: AppColors.outline, height: lineHeight),
+    Container(
+    alignment: Alignment.topLeft,
+    child: RichText(
+    text: TextSpan(
+    children: [
+    TextSpan(
+    text: '여행하마 ',
+    style: TextStyle(
+    color: AppColors.mainPurple,
+    fontSize: listFontSize,
+    fontWeight: FontWeight.bold),
+    ),
+    TextSpan(
+    text: '여행 추천지',
+    style: TextStyle(
+    color: AppColors.primaryGrey,
+    fontSize: listFontSize,
+    fontWeight: FontWeight.bold),
+    ),
+    ],
+    ),
+    ).pSymmetric(v: 8),
+    ).pOnly(left: contentLeftPadding, top: contentP),
+    SizedBox(
+    width: double.infinity,
+    height: areaSize + areaSize + 40,
+    child: ListView.builder(
+    scrollDirection: Axis.horizontal,
+    itemCount: (areaList.length / 2).ceil(),
+    itemBuilder: (context, index) {
+    return Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+    if (index * 2 < areaList.length)
+    SizedBox(
+    width: areaSize,
+    height: areaSize,
+    child: HamaAreaWidget(
+    areaList[index * 2],
+    indexInList: index * 2 + 1,
+    ),
+    ).p(5),
+    if (index * 2 + 1 < areaList.length)
+    SizedBox(
+    width: areaSize,
+    height: areaSize,
+    child: HamaAreaWidget(
+    areaList[index * 2 + 1],
+    indexInList: index * 2 + 2,
+    ),
+    ).p(5),
+    ],
+    );
+    },
+    ),
+    ).pOnly(top: contentP - 5),
+    const Line(color: AppColors.outline, height: lineHeight),
+    Container(
+    alignment: Alignment.topLeft,
+    child: '국내 여행자들의 생생한 여행일기'
+        .text
+        .bold
+        .size(listFontSize)
+        .make()
+        .pSymmetric(v: contentP , h: contentLeftPadding).pOnly(top: 6),
+    ),
+
+    SizedBox(
+    width: maxWidthSize,
+    height: diaryContainerHeight+20,
+    child: ListView.builder(
+    scrollDirection: Axis.horizontal,
+    itemCount: diaryList.length,
+    itemBuilder: (context, index) {
+    return Row(
+    children: [
+    SizedBox(
+    width: diaryContainerWidth,
+    height: diaryContainerHeight,
+    child: HomeDiaryWidget(diaryList[index]),
+    ).pOnly(left: 5)
+    ],
+    ).pOnly(right: 15);
+    }),
+    ).pOnly(bottom: contentP),
+    const Height(30),
+    ],
+    ),
+    ),
+    ),
+    ],
+    ),
     );
   }
 
@@ -229,3 +185,4 @@ class HomeFragment extends StatelessWidget {
     Scaffold.of(context).openEndDrawer();
   }
 }
+

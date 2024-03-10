@@ -1,24 +1,26 @@
 import 'dart:math';
 
+import 'package:fast_app_base/data/entity/itinerary/vo_itinerary.dart';
 import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/tab/schedule/w_pickArea.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../common/common.dart';
 import '../../../../entity/schedule/vo_schedule.dart';
 import '../../../post_detail/w_map.dart';
 import '../../search/s_space_search.dart';
 
-class ScheduleScreen extends StatefulWidget {
-  const ScheduleScreen({super.key, this.schedule});
+class ScheduleScreen extends ConsumerStatefulWidget {
+  const ScheduleScreen(this.itinerary, {super.key});
 
   @override
-  State<ScheduleScreen> createState() => _ScheduleScreenState();
-  final Schedule? schedule;
+  ConsumerState<ScheduleScreen> createState() => _ScheduleScreenState();
+  final Itinerary itinerary;
 
 }
 
-class _ScheduleScreenState extends State<ScheduleScreen> {
+class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +31,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             floating: false,
             pinned: true,
             backgroundColor: Colors.white,
-            title:'국내 여행'.text.size(15).bold.color(AppColors.primaryGrey).make(),
+            title:widget.itinerary.name.text.size(15).bold.color(AppColors.primaryGrey).make(),
             leading: IconButton(
                 icon: Icon(Icons.add),
                 onPressed: () {
@@ -77,9 +79,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                       height: 100,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: (widget.schedule?.pickMyArea?.length ?? 0) + 1, // 마지막에 추가할 빈 테두리 박스를 위해 1을 더합니다
+                        itemCount: (widget.itinerary.places?.length ?? 0) + 1, // 마지막에 추가할 빈 테두리 박스를 위해 1을 더합니다
                         itemBuilder: (context, index) {
-                          if (index == widget.schedule?.pickMyArea?.length) {
+                          if (index == widget.itinerary.places?.length) {
                             // 마지막 항목인 경우
                             return SizedBox(
                               width: 105,
@@ -97,7 +99,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             ).pOnly(left: 10);
                           } else {
                             // 기존 항목들에 대한 처리
-                            final currentItem = widget.schedule?.pickMyArea?[index];
+                            final currentItem = widget.itinerary.places?[index];
                             return SizedBox(
                               width: 105,
                               height: 100,

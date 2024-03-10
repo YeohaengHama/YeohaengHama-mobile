@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import '../../../common/common.dart';
 import '../../../common/widget/w_height_and_width.dart';
 import '../../../common/widget/w_tap.dart';
+import 'area_search_app_bar.dart';
 
 class AreaPick extends StatefulWidget {
   const AreaPick({super.key});
@@ -23,7 +24,7 @@ class _AreaPickState extends State<AreaPick> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: SearchAppBar(controller: controller, hintText: '여행, 어디로 떠나시나요?'),
+      appBar: AreaSearchAppBar(controller:controller, hintText: '여행, 어디로 떠나시나요?'),
       body: Column(
         children: [
           Expanded(

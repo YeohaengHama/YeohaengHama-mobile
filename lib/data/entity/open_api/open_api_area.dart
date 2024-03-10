@@ -11,9 +11,9 @@ class OpenApiArea with _$OpenApiArea {
   {
     required String numOfRows,
   @Default('1') required String page,
-    required String MobileOS,
     required String keyword,
     required String contentTypeId,
+    required String mobileOS
 }
       ) = _OpenApiArea;
 

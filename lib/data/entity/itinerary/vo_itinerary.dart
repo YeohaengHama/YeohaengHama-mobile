@@ -12,7 +12,7 @@ class Itinerary with _$Itinerary {
   const factory Itinerary(
   {
     required int id,
-    required String? name,
+    required String name,
     required List<String> type,
     required List<String> itineraryStyle,
     required Account account,
@@ -20,7 +20,7 @@ class Itinerary with _$Itinerary {
     required String area,
     required DateTime startDate,
     required DateTime endDate,
-    required List<Place> places,
+    List<Place>? places,
     String? expense,
 
 }

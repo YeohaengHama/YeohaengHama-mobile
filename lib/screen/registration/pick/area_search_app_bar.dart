@@ -7,30 +7,17 @@ import '../../../common/widget/w_arrow.dart';
 import '../../../data/entity/open_api/open_api_area.dart';
 import '../../../data/network/area_api.dart';
 
-class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
+class AreaSearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
   final TextEditingController controller;
   final String hintText;
 
-  final String contentTypeId;
 
-  const SearchAppBar(  {super.key, required this.contentTypeId, required this.controller, required this.hintText});
+  const AreaSearchAppBar(  {super.key, required this.controller, required this.hintText});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
 
-    Future<void> postSearchArea() async {
-      final openApiArea = OpenApiArea(
-        numOfRows: '10',
-        page: '1',
-        contentTypeId: contentTypeId,
-        keyword: controller.text,
-        mobileOS: 'IOS',
-      );
-      final areaApi = ref.read(areaApiProvider);
-      await areaApi.postSearchArea(openApiArea);
-
-    }
     return SafeArea(
       child: Row(
         children: [
@@ -48,7 +35,7 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
               texthint: hintText,
               deleteRightPadding: 0,).pOnly(top:6),
           ),
-          IconButton(onPressed: (){postSearchArea();}, icon: Icon(Icons.search)).pOnly(right: 5, top: 6)
+          IconButton(onPressed: (){}, icon: Icon(Icons.search)).pOnly(right: 5, top: 6)
         ],
       ),
     );
