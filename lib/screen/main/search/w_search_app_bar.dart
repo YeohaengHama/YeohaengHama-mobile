@@ -23,12 +23,12 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
       final openApiArea = OpenApiArea(
         numOfRows: '10',
         page: '1',
-        contentTypeId: contentTypeId,
+        contentTypeId: ref.watch(contentTypeIdProvider.notifier).state,
         keyword: controller.text,
         mobileOS: 'IOS',
       );
       final areaApi = ref.read(areaApiProvider);
-      await areaApi.postSearchArea(openApiArea);
+      await areaApi.postSearchArea(openApiArea, ref);
 
     }
     return SafeArea(

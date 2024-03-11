@@ -1,6 +1,5 @@
-import 'package:dio/dio.dart';
+
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/search/w_search_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,16 +26,6 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
   int currentIndex = 0;
   String contentTypeId = '';
 
-  // Future<Response> postSearchArea(OpenApiArea openApiArea) async{
-  //   final searchArea = OpenApiArea(
-  //       numOfRows: '10',
-  //       page: '1',
-  //       contentTypeId: '14',
-  //       keyword: '',
-  //       mobileOS: 'IOS',
-  //   );
-  //   await _userApi.postSearchArea(searchArea);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -94,22 +83,7 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
         ],
       );
 
-  // Future<Widget> switchTabContent() async {
-  //   switch (currentIndex) {
-  //     case 0:
-  //       return const DiarySearchListFragment();
-  //     case 1:
-  //       ref.read(contentTypeIdProvider.notifier).state = '12';
-  //       contentTypeId = ref.read(contentTypeIdProvider.notifier).state;
-  //       return const TourismSearchListFragment();
-  //     case 2:
-  //       ref.read(contentTypeIdProvider.notifier).state = '39';
-  //       contentTypeId = ref.read(contentTypeIdProvider.notifier).state;
-  //       return const RestaurantSearchListFragment();
-  //     default:
-  //       return Container(); // Placeholder for default case
-  //   }
-  // }
+
   Future<void> switchTabContent(int index) async {
     switch (index) {
       case 0:

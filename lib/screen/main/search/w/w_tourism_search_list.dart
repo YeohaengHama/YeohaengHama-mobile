@@ -20,7 +20,7 @@ class TourismSearchListWidget extends ConsumerWidget {
         child: Row(
           children: [
             CachedNetworkImage(
-              imageUrl: searchSimpleResult.firstImage,
+              imageUrl: searchSimpleResult.firstimage,
               width: 45,
               height: 45,
               fit: BoxFit.cover,
@@ -34,7 +34,7 @@ class TourismSearchListWidget extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   searchSimpleResult.title.text.bold.color(AppColors.primaryGrey).size(13).make().pOnly(top: 3),
-                  searchSimpleResult.addr2.text.bold.color(AppColors.thirdGrey).size(9).make().pOnly(bottom: 3)
+                  searchSimpleResult.addr1.text.bold.color(AppColors.thirdGrey).size(9).make().pOnly(bottom: 3)
                 ],
               ),
             )
