@@ -1,11 +1,11 @@
-import 'package:fast_app_base/data/entity/area/search_simple_result.dart';
+import 'package:fast_app_base/data/entity/area/search_simple_toursim_result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final simpleAreaApiResponseProvider = StateNotifierProvider<SimpleAreaNotifier, List<SearchSimpleResult>>((ref) {
+final simpleAreaApiResponseProvider = StateNotifierProvider<SimpleAreaNotifier, List<SearchSimpleTourismResult>>((ref) {
   return SimpleAreaNotifier();
 });
 
-class SimpleAreaNotifier extends StateNotifier<List<SearchSimpleResult>> {
+class SimpleAreaNotifier extends StateNotifier<List<SearchSimpleTourismResult>> {
   SimpleAreaNotifier() : super([]);
 
   String _contentTypeId= "";
@@ -15,9 +15,8 @@ class SimpleAreaNotifier extends StateNotifier<List<SearchSimpleResult>> {
   String _addr2 = "";
   String _firstimage = "";
 
-  void addSimpleArea(SearchSimpleResult searchSimpleResult) {
-    state = [...state, searchSimpleResult];
-    print("Current SearchSimpleResult List: $state");
+  void addSimpleArea(SearchSimpleTourismResult searchSimpleTourismResult) {
+    state = [...state, searchSimpleTourismResult];
   }
 
   void getSimpleArea(String contentTypeId, String contentId, String title, String addr1, String addr2, String firstimage) {

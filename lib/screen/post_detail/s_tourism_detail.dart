@@ -1,4 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/data/entity/area/saerch_image_result.dart';
+import 'package:fast_app_base/data/entity/area/serch_detail_result.dart';
 import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/post_detail/provider/tourism_post_provider.dart';
 import 'package:fast_app_base/screen/post_detail/w_image_scorll_view.dart';
@@ -9,39 +11,41 @@ import 'package:fast_app_base/screen/post_detail/w_simple_review.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
+import '../../data/memory/area/area_detail_provider.dart';
 import '../../entity/area/vo_review.dart';
 import '../../entity/area/vo_tourism.dart';
 
-class TourismDetailScreen extends ConsumerWidget {
-  final Tourism? tourism;
-  final int id;
+class postDetailScreen extends ConsumerWidget {
+  final SearchDetailResult searchDetailResult;
+  final SearchImageResult searchImageResult;
 
-  const TourismDetailScreen(this.id, {super.key, this.tourism});
+  const postDetailScreen({
+    required this.searchDetailResult,
+    required this.searchImageResult,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tourismPost = ref.watch(tourismPostProvider(id));
+    final postDetail = ref.watch(DetailAreaApiResponseProvider);
 
-    return tourismPost.when(
-      data: (data) => _PostDetail(
-        tourism ?? data.tourism,
-      ),
+    return postDetail.when(
+      data: (data) => _PostDetail(searchDetailResult, searchImageResult),
       error: (error, trace) => '에러발생'.text.make(),
-      loading: () => tourism != null
-          ? _PostDetail(tourism!)
-          : const Center(
-              child: CircularProgressIndicator(),
-            ),
+      loading: () => const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }
 
 class _PostDetail extends HookWidget {
-  final Tourism tourism;
-
+  final SearchDetailResult searchDetailResult;
+  final SearchImageResult searchImageResult;
   final Review? review;
 
-  const _PostDetail(this.tourism, {super.key, this.review});
+  const _PostDetail(this.searchDetailResult, this.searchImageResult,
+      {super.key, this.review});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +77,7 @@ class _PostDetail extends HookWidget {
             duration: const Duration(milliseconds: 300),
             opacity: shouldShowTitle.value ? 1.0 : 0.0,
             child: Text(
-              tourism.tourismName,
+              searchDetailResult.title,
               style: const TextStyle(
                   color: AppColors.primaryGrey,
                   fontWeight: FontWeight.bold,
@@ -83,6 +87,7 @@ class _PostDetail extends HookWidget {
         },
       );
     }
+
     return Material(
       child: CustomScrollView(
         controller: customController,
@@ -118,7 +123,7 @@ class _PostDetail extends HookWidget {
                 color: Colors.white,
                 child: ImageScrollView(
                   pageController: pageController,
-                  tourism: tourism,
+                  searchImageResult: searchImageResult,
                 ),
               ),
             ),
@@ -129,7 +134,7 @@ class _PostDetail extends HookWidget {
                 return Column(
                   children: [
                     const Height(20),
-                    tourism.tourismName.text.bold
+                    searchDetailResult.title.text.bold
                         .size(24)
                         .color(AppColors.primaryGrey)
                         .make(),
@@ -217,7 +222,11 @@ class _PostDetail extends HookWidget {
                       color: AppColors.outline,
                       height: 1.5,
                     ).pSymmetric(h: 40),
-                    tourism.content.text.size(14).color(AppColors.secondGrey).make().pSymmetric(h: 30,v: 30),
+                    searchDetailResult.overView.text
+                        .size(14)
+                        .color(AppColors.secondGrey)
+                        .make()
+                        .pSymmetric(h: 30, v: 30),
                     const Line(color: AppColors.outline, height: 10),
                     Align(
                       alignment: Alignment.topLeft,
@@ -231,9 +240,8 @@ class _PostDetail extends HookWidget {
                     const SizedBox(
                       width: maxWidthSize,
                       height: 250,
-                      child:mapWidget(),
+                      child: mapWidget(),
                     ),
-
                     const Height(200),
                   ],
                 );
@@ -246,7 +254,6 @@ class _PostDetail extends HookWidget {
     );
   }
 }
-
 
 bool get shouldShowTitle {
   // Define the scroll threshold to show/hide the title

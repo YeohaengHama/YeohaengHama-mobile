@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../common/widget/w_arrow.dart';
 import '../../../data/entity/open_api/open_api_area.dart';
+import '../../../data/memory/area/area_simple_provider.dart';
+import '../../../data/memory/area/area_simple_restaurant_provider.dart';
 import '../../../data/network/area_api.dart';
 
 class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
@@ -13,24 +15,38 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   final String contentTypeId;
 
-  const SearchAppBar(  {super.key, required this.contentTypeId, required this.controller, required this.hintText});
+  const SearchAppBar(
+      {super.key,
+      required this.contentTypeId,
+      required this.controller,
+      required this.hintText});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-
     Future<void> postSearchArea() async {
       final openApiArea = OpenApiArea(
-        numOfRows: '10',
+        numOfRows: '100',
         page: '1',
-        contentTypeId: ref.watch(contentTypeIdProvider.notifier).state,
+        contentTypeId: '12',
         keyword: controller.text,
         mobileOS: 'IOS',
       );
       final areaApi = ref.read(areaApiProvider);
-      await areaApi.postSearchArea(openApiArea, ref);
-
+      await areaApi.postSearchTourismArea(openApiArea, ref);
     }
+
+    Future<void> postSearchRestaurantArea() async {
+      final openApiArea = OpenApiArea(
+        numOfRows: '100',
+        page: '1',
+        contentTypeId: '39',
+        keyword: controller.text,
+        mobileOS: 'IOS',
+      );
+      final areaApi = ref.read(areaApiProvider);
+      await areaApi.postSearchRestaurantArea(openApiArea, ref);
+    }
+
     return SafeArea(
       child: Row(
         children: [
@@ -43,12 +59,31 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     direction: AxisDirection.left,
                   ))),
           Expanded(
-            child: TextFieldWithDelete(controller: controller,
+            child: TextFieldWithDelete(
+              controller: controller,
               textInputAction: TextInputAction.search,
               texthint: hintText,
-              deleteRightPadding: 0,).pOnly(top:6),
+              deleteRightPadding: 0,
+            ).pOnly(top: 6),
           ),
-          IconButton(onPressed: (){postSearchArea();}, icon: Icon(Icons.search)).pOnly(right: 5, top: 6)
+          IconButton(
+                  onPressed: () {
+                    postSearchArea();
+                    postSearchRestaurantArea();
+                    // SearchSimpleResult가 비어있지 않으면 리스트 비우기
+                    final simpleAreaNotifier =
+                        ref.read(simpleAreaApiResponseProvider.notifier);
+                    final simpleAreaRestaurantNotifier = ref
+                        .read(simpleAreaRestaurantApiResponseProvider.notifier);
+                    if (simpleAreaNotifier.state.isNotEmpty) {
+                      simpleAreaNotifier.state = [];
+                    }
+                    if (simpleAreaRestaurantNotifier.state.isNotEmpty) {
+                      simpleAreaRestaurantNotifier.state = [];
+                    }
+                  },
+                  icon: Icon(Icons.search))
+              .pOnly(right: 5, top: 6)
         ],
       ),
     );

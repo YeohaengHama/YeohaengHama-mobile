@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fast_app_base/data/entity/area/saerch_image_result.dart';
+import 'package:fast_app_base/data/entity/area/serch_detail_result.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -8,12 +10,13 @@ import '../../entity/area/vo_tourism.dart';
 class ImageScrollView extends StatefulWidget {
   const ImageScrollView({
     super.key,
-    required this.pageController,
-    required this.tourism,
+    required this.pageController, required this.searchImageResult,
+
   });
 
   final PageController pageController;
-  final Tourism tourism;
+
+  final SearchImageResult searchImageResult;
 
   @override
   State<ImageScrollView> createState() => _ImageScrollViewState();
@@ -32,7 +35,7 @@ class _ImageScrollViewState extends State<ImageScrollView> {
             child: PageView(
               controller: widget.pageController,
               children: [
-                ...widget.tourism.tourismImages.map(
+                ...widget.searchImageResult.imagesUrl!.map(
                       (url) => CachedNetworkImage(imageUrl: url, fit: BoxFit.fill,),
                 ).toList(),
               ],
@@ -42,7 +45,7 @@ class _ImageScrollViewState extends State<ImageScrollView> {
             alignment: Alignment.bottomCenter,
             child: SmoothPageIndicator(
               controller: widget.pageController,
-              count: widget.tourism.tourismImages.length,
+              count: widget.searchImageResult.imagesUrl!.length,
               effect: const SwapEffect(
                 dotHeight: 10,
                 dotWidth: 10,
