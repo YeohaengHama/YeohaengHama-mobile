@@ -50,8 +50,8 @@ class _JoinScreenState extends State<JoinScreen> {
     final account = Account(
       email: idController.text,
       pw: pwController.text,
-      photoUrl: profileFile != null ? base64Encode(profileFile!.readAsBytesSync()) : null,
-      nickName: nameController.text,
+      file: profileFile != null ? base64Encode(profileFile!.readAsBytesSync()) : null,
+      nickname: nameController.text,
     );
 
     await _userApi.postAccountData(account);
@@ -60,8 +60,7 @@ class _JoinScreenState extends State<JoinScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: '회원 가입'.text.bold.color(AppColors.mainPurple).make(),
@@ -217,7 +216,6 @@ class _JoinScreenState extends State<JoinScreen> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

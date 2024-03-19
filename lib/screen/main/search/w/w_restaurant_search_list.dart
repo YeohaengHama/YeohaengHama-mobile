@@ -10,7 +10,7 @@ import '../../../../data/entity/open_api/open_api_image.dart';
 import '../../../../data/memory/area/area_detail_provider.dart';
 import '../../../../data/memory/area/area_image_provider.dart';
 import '../../../../data/network/area_api.dart';
-import '../../../post_detail/s_tourism_detail.dart';
+import '../../../post_detail/s_post_detail.dart';
 
 class RestaurantSearchListWidget extends ConsumerWidget {
   const RestaurantSearchListWidget(this.searchSimpleRestaurantResult, {super.key});

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_height_and_width.dart';
+import 'package:fast_app_base/data/memory/user_provider.dart';
 import 'package:fast_app_base/entity/area/vo_area.dart';
 
 import 'package:fast_app_base/screen/main/s_main.dart';
@@ -20,6 +21,7 @@ class AreasWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentAccount = ref.read(accountProvider);
     return Container(
       child: Row(
         children: [
@@ -50,16 +52,14 @@ class AreasWidget extends ConsumerWidget {
               itineraryProviderNotifier.setSelectedArea(area.area);
 
               final newItinerary = Itinerary(
-                id: 0,
                 name: '${itineraryProviderNotifier.selectedArea} 여행',
                 type: itineraryProviderNotifier.selectedWhoTags,
                 itineraryStyle: itineraryProviderNotifier.selectedStyleTags,
-                account: Account(),
+                accountId: int.parse(currentAccount!.id),
                 transportation: 'bus',
                 area: itineraryProviderNotifier.selectedArea!,
                 startDate: itineraryProviderNotifier.selectedStartDate!,
                 endDate: itineraryProviderNotifier.selectedEndDate!,
-                places: [],
                 expense: null,
               );
               itineraryProviderNotifier.addItinerary(newItinerary);

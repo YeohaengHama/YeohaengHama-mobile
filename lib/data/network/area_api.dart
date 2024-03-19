@@ -207,17 +207,29 @@ class AreaApi {
         String responseDataString = response.data.toString().replaceAll('<xmp>', '').replaceAll('</xmp>', '');
         Map<String, dynamic> responseData = json.decode(responseDataString);
 
-        final List<dynamic> items = responseData['response']['body']['items']['item'];
-        for (var item in items) {
-          final originImgUrl = item['originimgurl'].toString();
-          final smallImgUrl = item['smallimageurl'].toString();
+        final dynamic itemsData = responseData['response']['body']['items']['item'];
 
+        if (itemsData != null && itemsData is List && itemsData.isNotEmpty) {
+          final List<dynamic> items = itemsData;
+          for (var item in items) {
+            final originImgUrl = item['originimgurl'].toString();
+            final smallImgUrl = item['smallimageurl'].toString();
+
+            final searchImageResult = SearchImageResult(
+                imagesUrl: [originImgUrl, smallImgUrl]
+            );
+            areaImageNotifier.addAreaImage(searchImageResult);
+            print(searchImageResult);
+          }
+        } else {
+          // Handle the case where 'items' is empty or not present
           final searchImageResult = SearchImageResult(
-            imagesUrl: [originImgUrl,smallImgUrl]
+              imagesUrl: [''] // Add an empty string to imagesUrl
           );
           areaImageNotifier.addAreaImage(searchImageResult);
           print(searchImageResult);
         }
+
         return response;
       } else if (response.statusCode == 401) {
         return response;

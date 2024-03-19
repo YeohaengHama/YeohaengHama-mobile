@@ -1,10 +1,18 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fast_app_base/data/entity/account/vo_current_account.dart';
+import 'package:fast_app_base/data/entity/area/search_simple_toursim_result.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final loggedInUserIdProvider = StateProvider<String?>((ref) => null);
+// AccountProvider 생성
+final accountProvider = StateNotifierProvider<AccountNotifier, CurrentAccount?>((ref) {
+  return AccountNotifier();
+});
 
-class User {
-  final String userId;
+// AccountNotifier 클래스 정의
+class AccountNotifier extends StateNotifier<CurrentAccount?> {
+  AccountNotifier() : super(null);
 
-
-  User(this.userId);
+  // 현재 계정 정보를 업데이트하는 메서드
+  void addCurrentAccount(CurrentAccount currentAccount) {
+    state = currentAccount;
+  }
 }

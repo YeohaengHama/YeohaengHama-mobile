@@ -6,20 +6,18 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../common/common.dart';
 import '../../entity/area/vo_tourism.dart';
-
 class ImageScrollView extends StatefulWidget {
   const ImageScrollView({
-    super.key,
-    required this.pageController, required this.searchImageResult,
-
-  });
+    Key? key,
+    required this.pageController,
+    required this.searchImageResult,
+  }) : super(key: key);
 
   final PageController pageController;
-
   final SearchImageResult searchImageResult;
 
   @override
-  State<ImageScrollView> createState() => _ImageScrollViewState();
+  _ImageScrollViewState createState() => _ImageScrollViewState();
 }
 
 class _ImageScrollViewState extends State<ImageScrollView> {
@@ -35,9 +33,15 @@ class _ImageScrollViewState extends State<ImageScrollView> {
             child: PageView(
               controller: widget.pageController,
               children: [
-                ...widget.searchImageResult.imagesUrl!.map(
-                      (url) => CachedNetworkImage(imageUrl: url, fit: BoxFit.fill,),
-                ).toList(),
+                ...widget.searchImageResult.imagesUrl!.map((url) {
+                  if (url.isNotEmpty) {
+                    return CachedNetworkImage(imageUrl: url, fit: BoxFit.fill);
+                  } else {
+                    return Container(
+                      color: Colors.grey, // 배경색을 원하는 색상으로 지정
+                    );
+                  }
+                }).toList(),
               ],
             ),
           ),

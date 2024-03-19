@@ -79,9 +79,9 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                       height: 100,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: (widget.itinerary.places?.length ?? 0) + 1, // 마지막에 추가할 빈 테두리 박스를 위해 1을 더합니다
+                        itemCount: (widget.itinerary.type?.length ?? 0) + 1, // 마지막에 추가할 빈 테두리 박스를 위해 1을 더합니다
                         itemBuilder: (context, index) {
-                          if (index == widget.itinerary.places?.length) {
+                          if (index == widget.itinerary.type?.length) {
                             // 마지막 항목인 경우
                             return SizedBox(
                               width: 105,
@@ -99,7 +99,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                             ).pOnly(left: 10);
                           } else {
                             // 기존 항목들에 대한 처리
-                            final currentItem = widget.itinerary.places?[index];
+                            final currentItem = widget.itinerary.type?[index];
                             return SizedBox(
                               width: 105,
                               height: 100,

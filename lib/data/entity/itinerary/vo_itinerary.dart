@@ -11,16 +11,14 @@ part 'vo_itinerary.g.dart';
 class Itinerary with _$Itinerary {
   const factory Itinerary(
   {
-    required int id,
     required String name,
     required List<String> type,
     required List<String> itineraryStyle,
-    required Account account,
+    required int accountId,
     @Default('bus') String transportation,
     required String area,
     required DateTime startDate,
     required DateTime endDate,
-    List<Place>? places,
     String? expense,
 
 }

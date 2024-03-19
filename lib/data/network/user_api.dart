@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:fast_app_base/data/entity/account/vo_account.dart';
+import 'package:fast_app_base/data/entity/account/vo_current_account.dart';
 import 'package:fast_app_base/data/entity/account/vo_login.dart';
 import 'package:fast_app_base/data/network/api_error.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +29,8 @@ class UserApi {
         data: {
           'email': account.email,
           'pw': account.pw,
-          'photoUrl': account.photoUrl,
-          'nickName': account.nickName,
+          'file': account.file,
+          'nickname': account.nickname,
         },
       );
 
@@ -47,7 +48,8 @@ class UserApi {
     }
   }
 
-  Future<void> postLoginUser(LogIn logIn, BuildContext context) async {
+  Future<void> postLoginUser(LogIn logIn, BuildContext context, WidgetRef ref) async {
+    final accountNotifier = ref.read(accountProvider.notifier);
     try {
       final response = await _dio.post(
         '$baseUrl/account/login',
@@ -58,9 +60,16 @@ class UserApi {
       );
 
       if (response.statusCode == 200) {
-        final loggedInUserId = response.data['accountId'] as String?;
+        final data = response.data['data'] ;
 
-        print('로그인 성공: $loggedInUserId');
+        final id = data['id'].toString();
+        final nickName = data['nickname'];
+        final photoUrl = data['photoUrl'];
+        print(id.runtimeType);
+        print('로그인 성공: id=$id, nickName=$nickName, photoUrl=$photoUrl');
+        final currentAccount = CurrentAccount(id: id, nickName: nickName, photoUrl: photoUrl);
+        accountNotifier.addCurrentAccount(currentAccount);
+        print(currentAccount);
 
         // 다른 화면으로 이동 또는 필요한 작업 수행
         // 예시로 MainScreen으로 이동

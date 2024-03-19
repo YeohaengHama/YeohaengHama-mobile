@@ -35,7 +35,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
     final userApi = ref.read(userApiProvider);
 
     try {
-      await userApi.postLoginUser(login, context);
+      await userApi.postLoginUser(login, context, ref);
 
       // 다른 로직 추가
     } catch (e) {
@@ -101,7 +101,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
             ),
             const SizedBox(height: 20),
             Tap(
-              onTap: (){Nav.push(MainScreen());},
+              onTap: (){_loginUser();},
               child: Container(
                 height: loginHeight + 8,
                 width: loginWidth,
@@ -138,6 +138,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                             MaterialPageRoute(
                                 builder: (context) => const JoinScreen()),
                           );
+
                         },
                         child: ('회원가입')
                             .text
