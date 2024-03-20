@@ -54,8 +54,8 @@ class _icons_widgetState extends ConsumerState<IconsWidget> {
                     accountId: int.parse(accountNotifier.state!.id),
                     placeId: int.parse(searchDetailResult.contentId));
                 isPickArea
-                    ?  itineraryApi.postSavePlace(savePlace, ref)
-                    :itineraryApi.postDeletePlace(deletePlace, ref);
+                    ?  itineraryApi.testInsert('tlswjdrl123@nate.com')
+                    :itineraryApi.testInsert('tlswjdrl123@nate.com');
 
               } else {
                 const snackBar = SnackBar(

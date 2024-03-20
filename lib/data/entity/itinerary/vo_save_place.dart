@@ -16,15 +16,9 @@ class SavePlace with _$SavePlace {
 
   factory SavePlace.fromJson(Map<String, dynamic> json) =>
       _$SavePlaceFromJson(json);
-@override
-Map<String, dynamic> toJson() {
-  return {
-    'accountId': accountId,
-    'placeNum': placeNum,
-    'contentTypeId': contentTypeId,
-  };
+
 }
-}
+
 
 
 

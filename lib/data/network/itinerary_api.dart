@@ -12,7 +12,8 @@ final itineraryApiProvider = Provider<ItineraryApi>((ref) => ItineraryApi());
 class ItineraryApi {
   final Dio _dio = Dio();
   final String baseUrl ='https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api';
-
+  final String testUrl= 'http://localhost:8080/api';
+  final String jinUrl = 'http://172.16.111.158:8080/api';
   Future<Response> postJoinItinerary(Itinerary itinerary) async {
 
     try {
@@ -48,13 +49,15 @@ class ItineraryApi {
     }
   }
 
-  Future<Response> testInsert(int a) async {
+  Future<Response> testInsert(String a) async {
     try {
       print(a);
       print(a.runtimeType);
       final response = await _dio.post(
-        '${baseUrl}/account/testIntInsert',
-        data: {'a' : a }
+        '${jinUrl}/account/emailDuplicateCheck',
+        data: {
+          'email' : a
+        }
       );
 
       if (response.statusCode == 200) {
@@ -80,8 +83,12 @@ class ItineraryApi {
 
 
       final response = await _dio.post(
-        'http://172.16.111.158:8080/api/account/savePlace',
-        data: savePlace.toJson(),
+        '${baseUrl}/account/savePlace',
+        data: {
+          'accountId': savePlace.accountId,
+          'placeNum': savePlace.placeNum,
+          'contentTypeId': savePlace.contentTypeId,
+        }
       );
 
       if (response.statusCode == 200) {
@@ -103,7 +110,7 @@ class ItineraryApi {
   Future<Response> postDeletePlace(DeletePlace deletePlace, WidgetRef ref) async {
     try {
       final response = await _dio.post(
-        'http://172.16.111.158:8080/api/account/deletePlace',
+        '${baseUrl}/account/deletePlace',
         data: {
           'accountId' : deletePlace.accountId,
           'placeId' : deletePlace.placeId
