@@ -1,3 +1,4 @@
+import 'package:fast_app_base/data/entity/itinerary/a_check_save_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_delete_place.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,12 +22,42 @@ class IconsWidget extends ConsumerStatefulWidget {
 
 class _icons_widgetState extends ConsumerState<IconsWidget> {
   bool isPickArea = false;
+  late ItineraryApi itineraryApi; // itineraryApi 변수를 클래스 멤버로 선언
+
+
+  @override
+  void initState() {
+    super.initState();
+    itineraryApi = ref.read(itineraryApiProvider); // 올바른 itineraryApi 변수를 초기화
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      // 위젯이 빌드된 후에 checkSavePlace를 호출하여 isPickArea를 설정
+      checkSavePlace();
+    });
+  }
+  void checkSavePlace() async {
+    final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;
+    if (searchDetailResult != null) {
+      final checkSavePlace = CheckSavePlace(
+        placeNum: searchDetailResult.contentId,
+        contentTypeId: searchDetailResult.contentTypeId,
+      );
+      try {
+        final bool isSaved = await itineraryApi.checkSavePlace(checkSavePlace, ref);
+        setState(() {
+          isPickArea = isSaved;
+        });
+      } catch (e) {
+        print('장소 확인 중 예외 발생: $e');
+        // 에러 처리
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;
     final itineraryList = ref.watch(itineraryProvider);
-    final itineraryApi = ref.read(itineraryApiProvider);
+    // final itineraryApi = ref.read(itineraryApiProvider);
     const eventIconsSize = 30.0;
     const evenIconsTextSize = 13.0;
     final accountNotifier = ref.read(accountProvider.notifier);
@@ -44,6 +75,7 @@ class _icons_widgetState extends ConsumerState<IconsWidget> {
                 setState(() {
                   isPickArea = !isPickArea;
                 });
+                final checkSavePlace = CheckSavePlace(placeNum: searchDetailResult!.contentId, contentTypeId: searchDetailResult.contentTypeId);
                 final savePlace = SavePlace(
                   accountId: int.parse(accountNotifier.state!.id)!,
                   placeNum: searchDetailResult!.contentId, // 여기에 장소 번호를 제공합니다.
@@ -52,10 +84,12 @@ class _icons_widgetState extends ConsumerState<IconsWidget> {
                 );
                 final deletePlace = DeletePlace(
                     accountId: int.parse(accountNotifier.state!.id),
-                    placeId: int.parse(searchDetailResult.contentId));
+                    placeNum: searchDetailResult.contentId,
+                    contentTypeId: searchDetailResult.contentTypeId
+                );
                 isPickArea
-                    ?  itineraryApi.testInsert('tlswjdrl123@nate.com')
-                    :itineraryApi.testInsert('tlswjdrl123@nate.com');
+                    ?  itineraryApi.postSavePlace(savePlace, ref)
+                    :itineraryApi.postDeletePlace(deletePlace, ref);
 
               } else {
                 const snackBar = SnackBar(

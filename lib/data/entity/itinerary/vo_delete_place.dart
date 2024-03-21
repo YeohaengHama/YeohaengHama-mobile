@@ -9,7 +9,8 @@ class DeletePlace with _$DeletePlace {
   const factory DeletePlace(
       {
         required int accountId,
-        required int placeId,
+        required String placeNum,
+        required String contentTypeId,
       }
       ) = _DeletePlace;
 

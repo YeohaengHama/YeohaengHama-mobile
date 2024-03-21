@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:fast_app_base/data/entity/itinerary/a_check_save_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_delete_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_itinerary.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_save_place.dart';
@@ -54,10 +55,11 @@ class ItineraryApi {
       print(a);
       print(a.runtimeType);
       final response = await _dio.post(
+
         '${jinUrl}/account/emailDuplicateCheck',
-        data: {
-          'email' : a
-        }
+        // data: {
+        //   'email' : a
+        // }
       );
 
       if (response.statusCode == 200) {
@@ -83,9 +85,8 @@ class ItineraryApi {
 
 
       final response = await _dio.post(
-        '${baseUrl}/account/savePlace',
+        '${baseUrl}/account/savePlace?accountId=${savePlace.accountId}',
         data: {
-          'accountId': savePlace.accountId,
           'placeNum': savePlace.placeNum,
           'contentTypeId': savePlace.contentTypeId,
         }
@@ -108,12 +109,13 @@ class ItineraryApi {
     }
   }
   Future<Response> postDeletePlace(DeletePlace deletePlace, WidgetRef ref) async {
+    // &placeNum${deletePlace.placeNum}&contentTypeId${deletePlace.contentTypeId}
     try {
       final response = await _dio.post(
-        '${baseUrl}/account/deletePlace',
+        '${baseUrl}/account/deletePlace?accountId=${deletePlace.accountId}',
         data: {
-          'accountId' : deletePlace.accountId,
-          'placeId' : deletePlace.placeId
+          'placeNum' : deletePlace.placeNum,
+          'contentTypeId' : deletePlace.contentTypeId
         },
       );
 
@@ -133,5 +135,35 @@ class ItineraryApi {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
   }
+  Future<bool> checkSavePlace(CheckSavePlace checkSavePlace ,WidgetRef ref) async {
+    try {
+      final accountNotifier = ref.read(accountProvider.notifier);
 
+      final response = await _dio.post(
+
+        '${baseUrl}/account/checkSavePlace?accountId=${accountNotifier.state!.id}',
+        data: {
+          'placeNum' : checkSavePlace.placeNum,
+          'contentTypeId' : checkSavePlace.contentTypeId
+        }
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = response.data as Map<String, dynamic>;
+        final bool isSaved = responseData['data'] ?? false;
+        return isSaved;
+      } else if (response.statusCode == 401) {
+        print('error');
+        return false;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    } finally {
+      // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
+    }
+  }
 }
