@@ -43,8 +43,7 @@ class postDetailScreen extends ConsumerWidget {
   final SearchImageResult searchImageResult;
   final Review? review;
 
-  _PostDetail(
-      this.searchDetailResult,
+  _PostDetail(this.searchDetailResult,
       this.searchImageResult, {
         Key? key,
         this.review,

@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../common/common.dart';
+import '../../../../data/memory/show_save_place_provider.dart';
+import '../../../../data/network/itinerary_api.dart';
 import '../../../../entity/schedule/vo_schedule.dart';
 import '../../../post_detail/w_map.dart';
 import '../../search/s_space_search.dart';
@@ -21,8 +23,23 @@ class ScheduleScreen extends ConsumerStatefulWidget {
 }
 
 class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
+
+  late final ItineraryApi itineraryApi = ItineraryApi(); // itineraryApi를 초기화하는 코드 추가
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await itineraryApi.showSavePlace(ref);
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    final pickPlaceList = ref.watch(ShowPickPlaceApiResponseProvider);
+
+
     return Scaffold(
       backgroundColor: AppColors.outline,
       body: CustomScrollView(
@@ -79,10 +96,11 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                       height: 100,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: (widget.itinerary.type?.length ?? 0) + 1, // 마지막에 추가할 빈 테두리 박스를 위해 1을 더합니다
+                        itemCount: (pickPlaceList.length ?? 0) + 1,
                         itemBuilder: (context, index) {
-                          if (index == widget.itinerary.type?.length) {
-                            // 마지막 항목인 경우
+                          final pickPlaceList = ref.watch(ShowPickPlaceApiResponseProvider);
+                          if (pickPlaceList.isEmpty || index == pickPlaceList.length) {
+                            // pickPlaceList가 비어 있거나, 마지막 항목인 경우
                             return SizedBox(
                               width: 105,
                               height: 100,
@@ -94,21 +112,21 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
-                                child: Icon(Icons.add,color: AppColors.forthGrey,),
+                                child: Icon(Icons.add, color: AppColors.forthGrey),
                               ),
                             ).pOnly(left: 10);
                           } else {
                             // 기존 항목들에 대한 처리
-                            final currentItem = widget.itinerary.type?[index];
                             return SizedBox(
                               width: 105,
                               height: 100,
-                              child: PickAreaWidget(schedule: schedule1, currentIndex: index),
+                              child: PickAreaWidget(pickPlaceList[index]),
                             ).pOnly(left: 5);
                           }
                         },
                       ),
                     ),
+
 
 
 

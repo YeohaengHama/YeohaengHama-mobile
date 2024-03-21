@@ -9,7 +9,8 @@ class CheckSavePlace with _$CheckSavePlace {
   const factory CheckSavePlace(
   {
     required String placeNum,
-    required String contentTypeId
+    required String contentTypeId,
+
 }
       ) = _CheckSavePlace;
 

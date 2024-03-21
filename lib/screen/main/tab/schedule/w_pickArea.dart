@@ -1,21 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/entity/area/vo_area.dart'; // area 클래스의 import 추가
-import 'package:fast_app_base/entity/schedule/vo_schedule.dart';
 import 'package:flutter/material.dart';
+import '../../../../data/entity/itinerary/vo_pick_place.dart';
 
-import '../../../../entity/area/vo_restaurants.dart';
-import '../../../../entity/area/vo_tourism.dart';
 
 class PickAreaWidget extends StatelessWidget {
-  const PickAreaWidget({Key? key, this.schedule, this.currentIndex})
+  const PickAreaWidget( this.pickPlace, {Key? key})
       : super(key: key);
-  final Schedule? schedule;
-  final int? currentIndex;
+  final PickPlace pickPlace;
+
 
   @override
   Widget build(BuildContext context) {
-    final currentItem = schedule?.pickMyArea?[currentIndex!];
 
     return Container(
       width: 105,
@@ -28,7 +24,7 @@ class PickAreaWidget extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
             child: CachedNetworkImage(
-              imageUrl: _getImageUrl(currentItem),
+              imageUrl: pickPlace.firstImage,
               width: 105,
               height: 100,
               fit: BoxFit.cover,
@@ -41,7 +37,7 @@ class PickAreaWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  _getAreaName(currentItem),
+                  pickPlace.title,
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -49,7 +45,7 @@ class PickAreaWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  _getArea(currentItem),
+                  pickPlace.addr1,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 11,
@@ -65,35 +61,5 @@ class PickAreaWidget extends StatelessWidget {
         ],
       ),
     ).pOnly(left: 5);
-  }
-
-  String _getImageUrl(dynamic data) {
-    if (data is Restaurant) {
-      return data.retaurantImages?.first ?? ''; // null 체크 추가
-    } else if (data is Tourism) {
-      return data.tourismImages?.first ?? ''; // null 체크 추가
-    } else {
-      return ''; // 다른 경우에는 빈 문자열 또는 기본 이미지 URL 등을 반환할 수 있습니다.
-    }
-  }
-
-  String _getAreaName(dynamic data) {
-    if (data is Restaurant) {
-      return data.restaurantName ?? ''; // null 체크 추가
-    } else if (data is Tourism) {
-      return data.tourismName ?? ''; // null 체크 추가
-    } else {
-      return ''; // 다른 경우에는 빈 문자열 또는 기본 값 등을 반환할 수 있습니다.
-    }
-  }
-
-  String _getArea(dynamic data) {
-    if (data is Restaurant) {
-      return data.restaurantArea ?? ''; // null 체크 추가
-    } else if (data is Tourism) {
-      return data.tourismArea ?? ''; // null 체크 추가
-    } else {
-      return ''; // 다른 경우에는 빈 문자열 또는 기본 값 등을 반환할 수 있습니다.
-    }
   }
 }
