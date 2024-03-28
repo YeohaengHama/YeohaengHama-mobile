@@ -26,6 +26,11 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
   int currentIndex = 0;
   String contentTypeId = '';
 
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

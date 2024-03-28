@@ -14,11 +14,11 @@ class Itinerary with _$Itinerary {
     required String name,
     required List<String> type,
     required List<String> itineraryStyle,
-    required int accountId,
     @Default('bus') String transportation,
     required String area,
-    required DateTime startDate,
-    required DateTime endDate,
+    required String startDate,
+    required String endDate,
+
     String? expense,
 
 }

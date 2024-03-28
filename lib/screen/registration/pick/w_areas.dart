@@ -7,10 +7,12 @@ import 'package:fast_app_base/entity/area/vo_area.dart';
 import 'package:fast_app_base/screen/main/s_main.dart';
 
 import 'package:flutter/material.dart';
+import 'package:quiver/time.dart';
 
 import '../../../data/entity/account/vo_account.dart';
 import '../../../data/entity/itinerary/vo_itinerary.dart';
 import '../../../data/memory/Itinerary_provider.dart';
+import '../../../data/network/itinerary_api.dart';
 import '../../main/tab/tab_item.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,7 +23,8 @@ class AreasWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentAccount = ref.read(accountProvider);
+    final itineraryApi = ItineraryApi();
+
     return Container(
       child: Row(
         children: [
@@ -46,7 +49,7 @@ class AreasWidget extends ConsumerWidget {
           ),
           RoundButton(
             text: '선택',
-            onTap: () {
+            onTap: () async{
               // 선택한 지역 정보를 ItineraryProvider에 저장
               final itineraryProviderNotifier = ref.watch(itineraryProvider.notifier);
               itineraryProviderNotifier.setSelectedArea(area.area);
@@ -55,17 +58,21 @@ class AreasWidget extends ConsumerWidget {
                 name: '${itineraryProviderNotifier.selectedArea} 여행',
                 type: itineraryProviderNotifier.selectedWhoTags,
                 itineraryStyle: itineraryProviderNotifier.selectedStyleTags,
-                accountId: int.parse(currentAccount!.id),
                 transportation: 'bus',
                 area: itineraryProviderNotifier.selectedArea!,
                 startDate: itineraryProviderNotifier.selectedStartDate!,
                 endDate: itineraryProviderNotifier.selectedEndDate!,
                 expense: null,
               );
+              await itineraryApi.postJoinItinerary(newItinerary, ref);
               itineraryProviderNotifier.addItinerary(newItinerary);
+
+              await itineraryApi.showSavePlace(ref);
+
               // 현재까지 쌓인 창을 pop하고 MainScreen으로 이동
               Navigator.popUntil(context, (route) => route.isFirst);
               Nav.push(MainScreen(initialTab: TabItem.schedule,));
+
             },
             bgColor: AppColors.outline,
             textColor: AppColors.primaryGrey,

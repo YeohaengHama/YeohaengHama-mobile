@@ -70,11 +70,12 @@ class _icons_widgetState extends ConsumerState<IconsWidget> {
         Expanded(
           child: IconButton(
             padding: const EdgeInsets.all(0),
-            onPressed: () {
+            onPressed: () async{
               if (itineraryList.isNotEmpty) {
                 setState(() {
                   isPickArea = !isPickArea;
                 });
+
                 final checkSavePlace = CheckSavePlace(placeNum: searchDetailResult!.contentId, contentTypeId: searchDetailResult.contentTypeId);
                 final savePlace = SavePlace(
                   accountId: int.parse(accountNotifier.state!.id)!,
@@ -90,6 +91,7 @@ class _icons_widgetState extends ConsumerState<IconsWidget> {
                 isPickArea
                     ?  itineraryApi.postSavePlace(savePlace, ref)
                     :itineraryApi.postDeletePlace(deletePlace, ref);
+                await itineraryApi.showSavePlace(ref);
 
               } else {
                 const snackBar = SnackBar(

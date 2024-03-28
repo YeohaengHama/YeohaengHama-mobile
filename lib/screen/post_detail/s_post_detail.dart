@@ -38,6 +38,7 @@ class postDetailScreen extends ConsumerWidget {
       ),
     );
   }
+
 }class _PostDetail extends HookWidget {
   final SearchDetailResult searchDetailResult;
   final SearchImageResult searchImageResult;
@@ -71,7 +72,7 @@ class postDetailScreen extends ConsumerWidget {
       // 컴포넌트가 해제될 때 컨트롤러의 리스너와 컨트롤러 자체를 해제합니다.
       return () {
         controller.removeListener(scrollListener);
-        controller.dispose();
+
       };
     }, []);
 
@@ -196,6 +197,7 @@ class postDetailScreen extends ConsumerWidget {
     );
   }
 }
+
 
 bool get shouldShowTitle {
   // Define the scroll threshold to show/hide the title

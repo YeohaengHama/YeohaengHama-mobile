@@ -4,6 +4,7 @@ import 'package:fast_app_base/data/entity/itinerary/vo_itinerary.dart';
 import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/tab/schedule/w_pickArea.dart';
 import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../common/common.dart';
@@ -12,7 +13,6 @@ import '../../../../data/network/itinerary_api.dart';
 import '../../../../entity/schedule/vo_schedule.dart';
 import '../../../post_detail/w_map.dart';
 import '../../search/s_space_search.dart';
-
 class ScheduleScreen extends ConsumerStatefulWidget {
   const ScheduleScreen(this.itinerary, {super.key});
 
@@ -24,21 +24,13 @@ class ScheduleScreen extends ConsumerStatefulWidget {
 
 class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
 
-  late final ItineraryApi itineraryApi = ItineraryApi(); // itineraryApi를 초기화하는 코드 추가
+  ItineraryApi itineraryApi = ItineraryApi(); // itineraryApi를 초기화하는 코드 추가
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      await itineraryApi.showSavePlace(ref);
-    });
-  }
 
 
   @override
   Widget build(BuildContext context) {
-    final pickPlaceList = ref.watch(ShowPickPlaceApiResponseProvider);
-
+    final pickPlaceList = ref.watch(showPickPlaceApiResponseProvider);
 
     return Scaffold(
       backgroundColor: AppColors.outline,
@@ -96,9 +88,10 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                       height: 100,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
+
                         itemCount: (pickPlaceList.length ?? 0) + 1,
                         itemBuilder: (context, index) {
-                          final pickPlaceList = ref.watch(ShowPickPlaceApiResponseProvider);
+                          final pickPlaceList = ref.watch(showPickPlaceApiResponseProvider);
                           if (pickPlaceList.isEmpty || index == pickPlaceList.length) {
                             // pickPlaceList가 비어 있거나, 마지막 항목인 경우
                             return SizedBox(
@@ -128,10 +121,14 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                     ),
 
 
-
-
                   ],),
                 ),
+                Height(15),
+                Container(
+                  height: 100,
+                  width: maxWidthSize,
+                  color: Colors.white,
+                )
               ],
             ),
           )

@@ -2,7 +2,7 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_itinerary.dart';
 import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/search/s_space_search.dart';
-import 'package:fast_app_base/screen/main/tab/schedule/w_schedule.dart';
+import 'package:fast_app_base/screen/main/tab/schedule/s_schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'dart:math';

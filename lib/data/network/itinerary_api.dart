@@ -11,9 +11,11 @@ import 'package:fast_app_base/data/memory/show_save_place_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
 
+import '../entity/itinerary/a_creat_itinerary.dart';
 import '../entity/open_api/open_api_detail.dart';
 import '../memory/area/area_detail_provider.dart';
 import '../memory/area/area_pick_place_contents.dart';
+import '../memory/itinerary_created_provider.dart';
 import '../memory/user_provider.dart';
 import 'area_api.dart';
 
@@ -26,12 +28,13 @@ class ItineraryApi {
   final String testUrl = 'http://localhost:8080/api';
   final String jinUrl = 'http://172.16.111.158:8080/api';
 
-  Future<Response> postJoinItinerary(Itinerary itinerary) async {
+  Future<void> postJoinItinerary(Itinerary itinerary,WidgetRef ref) async {
     try {
+      final accountNotifier = ref.read(accountProvider.notifier);
+
       final response = await _dio.post(
-        '$baseUrl/join/${itinerary.accountId}',
+        '$baseUrl/itinerary/join/${accountNotifier.state!.id}',
         data: {
-          'accountId': itinerary.accountId,
           'name': itinerary.name,
           'type': itinerary.type,
           'style': itinerary.itineraryStyle,
@@ -44,10 +47,25 @@ class ItineraryApi {
       );
 
       if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = response.data['data'];
         print('일정 생성 완료');
-        return response;
+
+        final CreateItinerary createItinerary = CreateItinerary(
+          id: responseData['id'] as int,
+          name: responseData['name'] as String,
+          type: (responseData['type'] as List<dynamic>).map((type) => type as String).toList(),
+          style: (responseData['style'] as List<dynamic>).map((style) => style as String).toList(),
+          transportation: responseData['transportation'] as String?,
+          startDate: responseData['startDate'] as String,
+          endDate: responseData['endDate'] as String,
+          expense: responseData['expense'] as String?,
+        );
+
+        ref.read(itineraryCreatedProvider.notifier).addItinerary(createItinerary);
+        print(createItinerary);
+
       } else if (response.statusCode == 401) {
-        return response;
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
@@ -101,6 +119,7 @@ class ItineraryApi {
           });
 
       if (response.statusCode == 200) {
+        await showSavePlace(ref);
         print('장소 저장 완료');
         return response;
       } else if (response.statusCode == 401) {
@@ -121,6 +140,8 @@ class ItineraryApi {
       DeletePlace deletePlace, WidgetRef ref) async {
     // &placeNum${deletePlace.placeNum}&contentTypeId${deletePlace.contentTypeId}
     try {
+      final pickPlaceNotifier = ref.read(showPickPlaceApiResponseProvider.notifier);
+
       final response = await _dio.post(
         '$baseUrl/account/deletePlace?accountId=${deletePlace.accountId}',
         data: {
@@ -268,8 +289,8 @@ class ItineraryApi {
               addr1: addr1,
               firstImage: firstImage);
           ref
-              .read(ShowPickPlaceApiResponseProvider.notifier)
-              .addOrUpdatePickPlace(pickPlace);
+              .read(showPickPlaceApiResponseProvider.notifier)
+              .addOrRemovePickPlace(pickPlace);
         }
         return response;
       } else if (response.statusCode == 401) {

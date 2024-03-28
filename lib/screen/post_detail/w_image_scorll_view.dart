@@ -65,8 +65,11 @@ class _ImageScrollViewState extends State<ImageScrollView> {
 
   @override
   void dispose() {
-    // ImageScrollView가 dispose 될 때 pageController도 함께 dispose
-    widget.pageController.dispose();
+    // 이미 dispose된 경우에만 dispose하도록 null 체크
+    if (widget.pageController.hasClients) {
+      widget.pageController.dispose();
+    }
     super.dispose();
   }
+
 }
