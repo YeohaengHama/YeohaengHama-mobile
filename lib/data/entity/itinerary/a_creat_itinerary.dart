@@ -11,6 +11,7 @@ class CreateItinerary with _$CreateItinerary {
     required List<String> type,
     required List<String> style,
     @Default('Bus')  String? transportation,
+    required String area,
     required String startDate,
     required String endDate,
     @Default('0')  String? expense,

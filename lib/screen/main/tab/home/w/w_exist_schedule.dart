@@ -1,4 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/data/entity/itinerary/a_creat_itinerary.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -9,7 +10,7 @@ class ExistScheduleWidget extends ConsumerWidget {
   const ExistScheduleWidget(this.itinerary, {super.key});
   final double tabListpV = 12;
   final double tabListph = 20;
-  final Itinerary itinerary;
+  final CreateItinerary itinerary;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(

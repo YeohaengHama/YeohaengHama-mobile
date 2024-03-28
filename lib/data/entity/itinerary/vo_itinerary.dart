@@ -19,7 +19,7 @@ class Itinerary with _$Itinerary {
     required String startDate,
     required String endDate,
 
-    String? expense,
+    @Default('0')String? expense,
 
 }
       ) = _Itinerary;

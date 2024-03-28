@@ -8,6 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'dart:math';
 
 import '../../../../data/memory/Itinerary_provider.dart';
+import '../../../../data/memory/itinerary_created_provider.dart';
 import '../../../../entity/schedule/vo_schedule.dart';
 import '../../../post_detail/w_map.dart';
 import 'f_non_schedule.dart';
@@ -17,7 +18,7 @@ class ScheduleFragment extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final itineraryList = ref.watch(itineraryProvider);
+    final itineraryList = ref.watch(itineraryCreatedProvider);
 
     if (itineraryList.isNotEmpty) {
       return ScheduleScreen(itineraryList.first);

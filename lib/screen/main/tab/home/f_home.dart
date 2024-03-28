@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../data/memory/Itinerary_provider.dart';
+import '../../../../data/memory/itinerary_created_provider.dart';
 import '../../../registration/calendar/s_calendar.dart';
 import '../../search/s_space_search.dart';
 
@@ -31,7 +32,7 @@ class HomeFragment extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final itineraryList = ref.watch(itineraryProvider);
+    final itineraryList = ref.watch(itineraryCreatedProvider);
 
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: AppColors.mainPurple,

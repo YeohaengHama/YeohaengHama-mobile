@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:fast_app_base/data/entity/itinerary/a_creat_itinerary.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_itinerary.dart';
 import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/tab/schedule/w_pickArea.dart';
@@ -18,7 +19,7 @@ class ScheduleScreen extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<ScheduleScreen> createState() => _ScheduleScreenState();
-  final Itinerary itinerary;
+  final CreateItinerary itinerary;
 
 }
 
@@ -125,7 +126,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                 ),
                 Height(15),
                 Container(
-                  height: 100,
+                  height: 200,
                   width: maxWidthSize,
                   color: Colors.white,
                 )

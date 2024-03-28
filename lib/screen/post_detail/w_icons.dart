@@ -1,4 +1,4 @@
-import 'package:fast_app_base/data/entity/itinerary/a_check_save_place.dart';
+import 'package:fast_app_base/data/entity/itinerary/check_save_place/a_check_save_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_delete_place.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +91,6 @@ class _icons_widgetState extends ConsumerState<IconsWidget> {
                 isPickArea
                     ?  itineraryApi.postSavePlace(savePlace, ref)
                     :itineraryApi.postDeletePlace(deletePlace, ref);
-                await itineraryApi.showSavePlace(ref);
 
               } else {
                 const snackBar = SnackBar(

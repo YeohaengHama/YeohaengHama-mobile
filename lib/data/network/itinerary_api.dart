@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:fast_app_base/data/entity/area/vo_pick_place_contents.dart';
-import 'package:fast_app_base/data/entity/itinerary/a_check_save_place.dart';
+import 'package:fast_app_base/data/entity/itinerary/check_save_place/a_check_save_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_delete_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_itinerary.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_pick_place.dart';
@@ -11,10 +11,12 @@ import 'package:fast_app_base/data/memory/show_save_place_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
 
+import '../entity/itinerary/a_check_itinerary.dart';
 import '../entity/itinerary/a_creat_itinerary.dart';
 import '../entity/open_api/open_api_detail.dart';
 import '../memory/area/area_detail_provider.dart';
 import '../memory/area/area_pick_place_contents.dart';
+import '../memory/itinerary_check_provider.dart';
 import '../memory/itinerary_created_provider.dart';
 import '../memory/user_provider.dart';
 import 'area_api.dart';
@@ -56,12 +58,14 @@ class ItineraryApi {
           type: (responseData['type'] as List<dynamic>).map((type) => type as String).toList(),
           style: (responseData['style'] as List<dynamic>).map((style) => style as String).toList(),
           transportation: responseData['transportation'] as String?,
+          area: responseData['area'] as String,
           startDate: responseData['startDate'] as String,
           endDate: responseData['endDate'] as String,
           expense: responseData['expense'] as String?,
         );
 
         ref.read(itineraryCreatedProvider.notifier).addItinerary(createItinerary);
+        getItinerary(ref, createItinerary.id.toString());
         print(createItinerary);
 
       } else if (response.statusCode == 401) {
@@ -78,34 +82,6 @@ class ItineraryApi {
     }
   }
 
-  Future<Response> testInsert(String a) async {
-    try {
-      print(a);
-      print(a.runtimeType);
-      final response = await _dio.post(
-        '${jinUrl}/account/emailDuplicateCheck',
-        // data: {
-        //   'email' : a
-        // }
-      );
-
-      if (response.statusCode == 200) {
-        print('test완료');
-        return response;
-      } else if (response.statusCode == 401) {
-        print('error');
-        return response;
-      } else {
-        print('실패. 상태 코드: ${response.statusCode}');
-        throw Exception('실패. 상태 코드: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('예외가 발생했습니다: $e');
-      throw e;
-    } finally {
-      // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
-    }
-  }
 
   Future<Response> postSavePlace(SavePlace savePlace, WidgetRef ref) async {
     try {
@@ -307,4 +283,50 @@ class ItineraryApi {
       // container.dispose();
     }
   }
+
+  Future<Response> getItinerary(WidgetRef ref, String id) async {
+    try {
+      final itineraryCreatedNotifier = ref.read(itineraryCreatedProvider.notifier);
+
+      final response = await _dio.get(
+        '$baseUrl/itinerary/${id}',
+      );
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = response.data['data'];
+        // print(data['expense'].runtimeType);
+        print(data['itineraryId'].runtimeType);
+        // print(data['type'].runtimeType);
+        // print(data['style'].runtimeType);
+        // print(data['name'].runtimeType);
+        // print(data['transportation'].runtimeType);
+        // print(data['area'].runtimeType);
+        // print(data['startDate'].runtimeType);
+        // print(data['transportation'].runtimeType);
+        // print(data['expense'].runtimeType);
+        // print(data['endDate'].runtimeType);
+        // print(data['account'].runtimeType);
+
+
+        // String id = responseData['data']['expense'];
+
+
+        final CheckItinerary checkItinerary = CheckItinerary.fromJson(data);
+        ref.read(itineraryCheckProvider.notifier).setItinerary!(checkItinerary);
+
+        return response;
+      } else if (response.statusCode == 401) {
+        print('error');
+        return response;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    } finally {
+      // container.dispose();
+    }
+  }
+
 }
