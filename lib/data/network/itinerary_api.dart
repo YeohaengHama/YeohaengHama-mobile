@@ -11,6 +11,7 @@ import 'package:fast_app_base/data/memory/show_save_place_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
 
+import '../entity/itinerary/a_add_pick_place.dart';
 import '../entity/itinerary/a_check_itinerary.dart';
 import '../entity/itinerary/a_creat_itinerary.dart';
 import '../entity/open_api/open_api_detail.dart';
@@ -95,7 +96,7 @@ class ItineraryApi {
           });
 
       if (response.statusCode == 200) {
-        await showSavePlace(ref);
+        await addShowSavePlace(ref);
         print('장소 저장 완료');
         return response;
       } else if (response.statusCode == 401) {
@@ -127,7 +128,10 @@ class ItineraryApi {
       );
 
       if (response.statusCode == 200) {
+        await removeShowSavePlace(ref, deletePlace.placeNum);
         print('장소 삭제 완료');
+
+
         return response;
       } else if (response.statusCode == 401) {
         return response;
@@ -230,6 +234,8 @@ class ItineraryApi {
     }
   }
 
+
+
   Future<Response> showSavePlace(WidgetRef ref) async {
     try {
       final accountNotifier = ref.read(accountProvider.notifier);
@@ -283,7 +289,108 @@ class ItineraryApi {
       // container.dispose();
     }
   }
+  Future<Response> addShowSavePlace(WidgetRef ref) async {
+    try {
+      final accountNotifier = ref.read(accountProvider.notifier);
 
+      final response = await _dio.get(
+        '$baseUrl/account/${accountNotifier.state!.id}',
+      );
+      if (response.statusCode == 200) {
+        Map<String, dynamic> responseData = response.data; // 응답 데이터를 Map으로 가져옴
+        List<dynamic> dataList = responseData['data'] as List<dynamic>;
+        for (var data in dataList) {
+          String placeNum = data['placeNum'].toString(); // placeNum 값 추출
+          String contentTypeId =
+          data['contentTypeId'].toString(); // contentTypeId 값 추출
+
+          final openApiDetail = OpenApiDetail(
+            contentId: placeNum,
+            contentTypeId: contentTypeId,
+            mobileOS: 'IOS',
+          );
+
+          // pickPlaceContents 함수 호출하여 title과 firstImage 값 가져오기
+          Map<String, dynamic> contents =
+          await pickPlaceContents(openApiDetail, ref);
+          String title = contents['title'];
+          String firstImage = contents['firstImage'];
+          String addr1 = contents['addr1'];
+
+          final pickPlace = PickPlace(
+              contentId: placeNum,
+              contentTypeId: contentTypeId,
+              title: title,
+              addr1: addr1,
+              firstImage: firstImage);
+          ref
+              .read(showPickPlaceApiResponseProvider.notifier)
+              .addPickPlace(pickPlace);
+        }
+        return response;
+      } else if (response.statusCode == 401) {
+        print('error');
+        return response;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    } finally {
+      // container.dispose();
+    }
+  }
+  Future<Response> removeShowSavePlace(WidgetRef ref, String removeId) async {
+    try {
+      final accountNotifier = ref.read(accountProvider.notifier);
+
+      final response = await _dio.get(
+        '$baseUrl/account/${accountNotifier.state!.id}',
+      );
+      if (response.statusCode == 200) {
+        Map<String, dynamic> responseData = response.data; // 응답 데이터를 Map으로 가져옴
+        List<dynamic> dataList = responseData['data'] as List<dynamic>;
+        for (var data in dataList) {
+          String placeNum = data['placeNum'].toString(); // placeNum 값 추출
+          String contentTypeId =
+          data['contentTypeId'].toString(); // contentTypeId 값 추출
+
+          final openApiDetail = OpenApiDetail(
+            contentId: placeNum,
+            contentTypeId: contentTypeId,
+            mobileOS: 'IOS',
+          );
+
+          // pickPlaceContents 함수 호출하여 title과 firstImage 값 가져오기
+          Map<String, dynamic> contents =
+          await pickPlaceContents(openApiDetail, ref);
+          String title = contents['title'];
+          String firstImage = contents['firstImage'];
+          String addr1 = contents['addr1'];
+
+          print('아이디:${removeId}');
+          ref
+              .read(showPickPlaceApiResponseProvider.notifier)
+              .removePickPlace(removeId);
+
+        }
+        return response;
+      } else if (response.statusCode == 401) {
+        print('error');
+        return response;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    } finally {
+      // container.dispose();
+    }
+  }
   Future<Response> getItinerary(WidgetRef ref, String id) async {
     try {
       final itineraryCreatedNotifier = ref.read(itineraryCreatedProvider.notifier);
@@ -293,22 +400,6 @@ class ItineraryApi {
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = response.data['data'];
-        // print(data['expense'].runtimeType);
-        print(data['itineraryId'].runtimeType);
-        // print(data['type'].runtimeType);
-        // print(data['style'].runtimeType);
-        // print(data['name'].runtimeType);
-        // print(data['transportation'].runtimeType);
-        // print(data['area'].runtimeType);
-        // print(data['startDate'].runtimeType);
-        // print(data['transportation'].runtimeType);
-        // print(data['expense'].runtimeType);
-        // print(data['endDate'].runtimeType);
-        // print(data['account'].runtimeType);
-
-
-        // String id = responseData['data']['expense'];
-
 
         final CheckItinerary checkItinerary = CheckItinerary.fromJson(data);
         ref.read(itineraryCheckProvider.notifier).setItinerary!(checkItinerary);
@@ -328,5 +419,37 @@ class ItineraryApi {
       // container.dispose();
     }
   }
+  Future<Response> PostAddPickPlace(AddPickPlace addPickPlace, WidgetRef ref) async {
+    try {
+      final itineraryCheckNotifier = ref.read(itineraryCheckProvider.notifier);
+      final response = await _dio.post(
+        '$baseUrl/itinerary/${itineraryCheckNotifier.state?.itineraryId}',
+        data: {
+          'day' : addPickPlace.day,
+          'startTime' : addPickPlace.startTime,
+          'endTime' : addPickPlace.endTime,
+          'placeType' : addPickPlace.placeType,
+          'memo': addPickPlace.memo
+        }
+
+      );
+      if (response.statusCode == 200) {
+        print('일정에 장소 추가 완료');
+        return response;
+      } else if (response.statusCode == 401) {
+        print('error');
+        return response;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    } finally {
+      // container.dispose();
+    }
+  }
+
 
 }

@@ -62,7 +62,7 @@ class AreasWidget extends ConsumerWidget {
                 area: itineraryProviderNotifier.selectedArea!,
                 startDate: itineraryProviderNotifier.selectedStartDate!,
                 endDate: itineraryProviderNotifier.selectedEndDate!,
-                expense: '2',
+                expense: '',
               );
               await itineraryApi.postJoinItinerary(newItinerary, ref);
               itineraryProviderNotifier.addItinerary(newItinerary);

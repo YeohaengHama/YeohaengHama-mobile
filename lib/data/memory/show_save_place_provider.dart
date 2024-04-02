@@ -20,5 +20,18 @@ class PickPlaceNotifier extends StateNotifier<List<PickPlace>> {
       // 없으면 새로운 PickPlace를 추가합니다.
       state = [...state, newPickPlace];
     }
+
+  }
+  void addPickPlace(PickPlace newPickPlace) {
+    final isDuplicate = state.any((pickPlace) => pickPlace.contentId == newPickPlace.contentId);
+    // 이미 있다면 더 이상 진행하지 않고 종료합니다.
+    if (isDuplicate) return;
+
+    // 중복되지 않은 경우에만 새로운 PickPlace를 추가합니다.
+    state = [...state, newPickPlace];
+  }
+
+  void removePickPlace(String contentId) {
+    state = state.where((pickPlace) => pickPlace.contentId != contentId).toList();
   }
 }
