@@ -1,15 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_height_and_width.dart';
-import 'package:fast_app_base/data/memory/user_provider.dart';
 import 'package:fast_app_base/entity/area/vo_area.dart';
 
 import 'package:fast_app_base/screen/main/s_main.dart';
 
 import 'package:flutter/material.dart';
-import 'package:quiver/time.dart';
 
-import '../../../data/entity/account/vo_account.dart';
 import '../../../data/entity/itinerary/vo_itinerary.dart';
 import '../../../data/memory/Itinerary_provider.dart';
 import '../../../data/network/itinerary_api.dart';

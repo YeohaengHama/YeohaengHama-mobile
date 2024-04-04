@@ -419,20 +419,29 @@ class ItineraryApi {
       // container.dispose();
     }
   }
-  Future<Response> PostAddPickPlace(AddPickPlace addPickPlace, WidgetRef ref) async {
+  Future<Response> PostAddPickPlace(List<AddPickPlace> addPickPlaces, WidgetRef ref) async {
     try {
       final itineraryCheckNotifier = ref.read(itineraryCheckProvider.notifier);
+
+      // 각 장소를 맵으로 변환하여 리스트에 추가
+      List<Map<String, dynamic>> data = [];
+      for (var addPickPlace in addPickPlaces) {
+        data.add({
+          'day': addPickPlace.day,
+          'startTime': addPickPlace.startTime,
+          'endTime': addPickPlace.endTime,
+          'placeType': addPickPlace.placeType,
+          'placeNum': addPickPlace.placeNum,
+          'placeName': addPickPlace.placeName,
+          'memo': addPickPlace.memo,
+        });
+      }
+
       final response = await _dio.post(
         '$baseUrl/itinerary/${itineraryCheckNotifier.state?.itineraryId}',
-        data: {
-          'day' : addPickPlace.day,
-          'startTime' : addPickPlace.startTime,
-          'endTime' : addPickPlace.endTime,
-          'placeType' : addPickPlace.placeType,
-          'memo': addPickPlace.memo
-        }
-
+        data: data, // 리스트 전달
       );
+
       if (response.statusCode == 200) {
         print('일정에 장소 추가 완료');
         return response;
@@ -446,10 +455,9 @@ class ItineraryApi {
     } catch (e) {
       print('예외가 발생했습니다: $e');
       throw e;
-    } finally {
-      // container.dispose();
     }
   }
+
 
 
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../post_detail/w_map.dart';
+
 class InformationFragment extends StatefulWidget {
   const InformationFragment({super.key});
 
@@ -10,6 +12,8 @@ class InformationFragment extends StatefulWidget {
 class _InformationFragmentState extends State<InformationFragment> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      child: mapWidget(),
+    );
   }
 }

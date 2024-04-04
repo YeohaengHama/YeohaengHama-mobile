@@ -4,8 +4,11 @@ import 'package:fast_app_base/data/entity/itinerary/a_add_pick_place.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../data/entity/itinerary/a_check_itinerary.dart';
+import '../../../../data/entity/itinerary/vo_delete_place.dart';
 import '../../../../data/entity/itinerary/vo_pick_place.dart';
+import '../../../../data/memory/add_pick_place_provider.dart';
 import '../../../../data/memory/area/selectedDayIndex_provider.dart';
+import '../../../../data/memory/user_provider.dart';
 import '../../../../data/network/itinerary_api.dart';
 
 
@@ -14,19 +17,31 @@ class PickAreaWidget extends ConsumerWidget {
       : super(key: key);
   final PickPlace pickPlace;
   final CheckItinerary itinerary;
-  
 
-  
+
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final accountNotifier = ref.read(accountProvider.notifier);
     final ItineraryApi itineraryApi= ItineraryApi();
-    final selectedDayIndexNotifier = ref.watch(selectedDayIndexNotifierProvider.notifier);
-    final AddPickPlace addPickPlace = AddPickPlace(day: selectedDayIndexNotifier.state, placeType: pickPlace.contentTypeId, placeNum: pickPlace.contentId, placeName:pickPlace.title,startTime: "string", endTime: "string",memo: "string" );
+    final selectedDayIndexNotifier = ref.watch(selectedDayIndexNotifierProvider);
+    print('${selectedDayIndexNotifier}입니다.'.toString());
+    final addPickPlaceListNotifier = ref.watch(addPickPlaceProvider.notifier);
+    final AddPickPlace addPickPlace = AddPickPlace(day: selectedDayIndexNotifier+1,addr1: pickPlace.addr1, placeType: pickPlace.contentTypeId, placeNum: pickPlace.contentId, placeName:pickPlace.title,startTime: "string", endTime: "string",memo: "string" );
+    final deletePlace = DeletePlace(
+        accountId: int.parse(accountNotifier.state!.id),
+        placeNum: pickPlace.contentId,
+        contentTypeId: pickPlace.contentTypeId
+    );
     return Tap(
       onTap: () {
-        itineraryApi.PostAddPickPlace(addPickPlace, ref);
+        print('${selectedDayIndexNotifier+1}텝.'.toString());
+        addPickPlaceListNotifier.setAddPickPlace(addPickPlace);
+        itineraryApi.postDeletePlace(deletePlace, ref);
+
+        // print(addPickPlace);
       },
-      
+
       child: Container(
         width: 105,
         height: 100,

@@ -13,17 +13,20 @@ class CheckItinerary with _$CheckItinerary {
             required String transportation,
             required String area,
             required String startDate,
-            @Default('')String? expense,
+            @Default('') String? expense,
             required String endDate,
             required Account account, // Account 객체로 수정
-            required Map<String, List<PlaceByDay>> placesByDay, // Map<String, List<PlaceByDay>>로 수정
+            required Map<String,
+                List<
+                    PlaceByDay>> placesByDay, // Map<String, List<PlaceByDay>>로 수정
       }) = _CheckItinerary;
+
       //
       // factory CheckItinerary.fromJson(Map<String, dynamic> json) =>
-      // _$CheckItineraryFromJson(json);
-
-  factory CheckItinerary.fromJson(Map<String, dynamic> json) {
-            final String itineraryId = json['itineraryId'].toString(); // itineraryId를 String으로 변환
+      //     _$CheckItineraryFromJson(json);
+      factory CheckItinerary.fromJson(Map<String, dynamic> json) {
+            final String itineraryId = json['itineraryId']
+                .toString(); // itineraryId를 String으로 변환
             return _$CheckItineraryFromJson(
                   json..['itineraryId'] = itineraryId,
             );
