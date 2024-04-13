@@ -20,22 +20,50 @@ class ReviewApi {
     final accountNotifier = ref.read(accountProvider.notifier);
 
     try {
+      FormData formData = FormData.fromMap({
+        'contentId': review.contentId,
+        'contentTypeId': review.contentType,
+        'rating': review.rating,
+        'content': review.content,
+        'accountId': accountNotifier.state!.id,
+        for (int i = 0; i < review.photos!.length; i++)
+          'photos[$i]': await MultipartFile.fromFile(review.photos![i]),
+      });
+
       final response = await _dio.post(
         url,
-        data: {
-          'contentId': review.contentId,
-          'contentTypeId': review.contentType,
-          'rating': review.rating,
-          'content': review.content,
-          'accountId': accountNotifier.state!.id,
-          for (int i = 0; i < review.photos!.length; i++)
-            'photos[$i]': await MultipartFile.fromFile(review.photos![i]),
-
-        },
+        data: formData,
+        options: Options(contentType: 'multipart/form-data'),
       );
 
       if (response.statusCode == 200) {
-        print('회원가입 성공: ${response.data}');
+        print('리뷰쓰기 성공: ${response.data}');
+      } else if (response.statusCode == 401) {
+        print('error');
+        return null;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    }
+  }
+
+  Future<void> showAllReview(String id, String type) async {
+    final url = '$baseUrl/review/showAll';
+
+    try {
+      final response = await _dio.post(
+          '$baseUrl/review/showAll',
+          data: {
+            'contentId': id,
+            'contentTypeId': type
+          });
+
+      if (response.statusCode == 200) {
+        print('리뷰 불러오기 성공: ${response.data}');
       } else if (response.statusCode == 401) {
         print('error');
         return null;

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fast_app_base/data/entity/review/vo_review_post.dart';
 import 'package:fast_app_base/screen/review/picker/picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
+import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
+import '../../data/network/review_api.dart';
 import 'w_put_review_star.dart';
 import '../../data/memory/area/area_detail_provider.dart';
 
@@ -24,6 +27,7 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
   final TextEditingController _textFieldController = TextEditingController();
   late MultiImagePickerController _controller;
   late final images = _controller.images;
+
   @override
   void initState() {
     super.initState();
@@ -37,7 +41,7 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+    final reviewApi = ref.read(reviewApiProvider);
     final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;
     return Scaffold(
       body: CustomScrollView(
@@ -56,16 +60,29 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
               IconButton(
                 icon: const Icon(Icons.upload),
                 onPressed: () {
+
+                  List<String> photoNames =
+                      _controller.images.map((image) => image.path!).toList();
+
+                  reviewApi.postReview(
+                      ReviewPost(
+                          contentId: int.parse(searchDetailResult.contentId),
+                          contentType:
+                              int.parse(searchDetailResult.contentTypeId),
+                          rating: _currentRating,
+                          content: _textFieldController.toString(),
+                          photos: photoNames),
+                      ref);
                   ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(_controller.images.toString())));
-                //   for (final image in images) {
-                //     if (image.hasPath)
-                //       request.addFile(File(image.path!));
-                //     else
-                //       request.addFile(File.fromRawPath(image.bytes!));
-                //   }
-                //   request.send();
-                //
+                  //   for (final image in images) {
+                  //     if (image.hasPath)
+                  //       request.addFile(File(image.path!));
+                  //     else
+                  //       request.addFile(File.fromRawPath(image.bytes!));
+                  //   }
+                  //   request.send();
+                  //
                 },
               )
             ],
@@ -103,7 +120,6 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-
                   const SizedBox(height: 20),
                   const SizedBox(height: 32),
                   Container(
