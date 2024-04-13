@@ -1,16 +1,14 @@
-import 'dart:io';
 
-import 'package:fast_app_base/data/entity/review/vo_review_post.dart';
 import 'package:fast_app_base/screen/review/picker/picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
+import '../../data/entity/review/a_review_post.dart';
 import '../../data/network/review_api.dart';
 import 'w_put_review_star.dart';
 import '../../data/memory/area/area_detail_provider.dart';
@@ -70,7 +68,7 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                           contentType:
                               int.parse(searchDetailResult.contentTypeId),
                           rating: _currentRating,
-                          content: _textFieldController.toString(),
+                          content: _textFieldController.text,
                           photos: photoNames),
                       ref);
                   ScaffoldMessenger.of(context).showSnackBar(

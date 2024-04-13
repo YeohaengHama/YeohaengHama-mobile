@@ -1,30 +1,46 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/data/memory/review/review_show_all_provider.dart';
 import 'package:fast_app_base/screen/post_detail/review/w_simple_rivew_list.dart';
 import 'package:fast_app_base/screen/post_detail/review/w_star.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../common/theme/text_size.dart';
 import '../../../common/widget/scaffold/bottom_dialog_scaffold.dart';
 import '../../../common/widget/w_arrow.dart';
+import '../../../data/memory/area/area_detail_provider.dart';
+import '../../../data/network/review_api.dart';
 import '../../../entity/area/vo_review.dart';
 import '../../../entity/dummies.dart';
 import '../../review/s_review.dart';
 
-class SimpleReviewWidget extends StatefulWidget {
-  const SimpleReviewWidget({Key? key}) : super(key: key);
+class SimpleReviewWidget extends ConsumerStatefulWidget {
+  const SimpleReviewWidget(this.contentId, this.contentTypeId, {Key? key}) : super(key: key);
+
+  final int contentId;
+  final int contentTypeId;
 
   @override
-  State<SimpleReviewWidget> createState() => _SimpleReviewWidgetState();
+  ConsumerState<SimpleReviewWidget> createState() => _SimpleReviewWidgetState();
 }
 
-class _SimpleReviewWidgetState extends State<SimpleReviewWidget> {
+class _SimpleReviewWidgetState extends ConsumerState<SimpleReviewWidget> {
   bool _photoChecked = false;
   bool _recentTripChecked = false;
   bool _showRecentTripMessage = false; // 메세지 창을 표시할지 여부를 나타내는 변수
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    final reviewApi = ref.read(reviewApiProvider);
+    reviewApi.showAllReview(widget.contentId, widget.contentTypeId, ref);
+  }
+  @override
   Widget build(BuildContext context) {
+    final review = ref.watch(ReviewShowAllListProvider.notifier).state;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -37,7 +53,7 @@ class _SimpleReviewWidgetState extends State<SimpleReviewWidget> {
                   .size(secondTitleSize)
                   .make()
                   .pOnly(right: 5),
-              '3'
+              '${review.length}'
                   .text
                   .bold
                   .color(AppColors.mainPurple)
@@ -138,16 +154,19 @@ class _SimpleReviewWidgetState extends State<SimpleReviewWidget> {
           if (_showRecentTripMessage) // 메세지 창을 표시하는 조건 추가
             showMesage(),
 
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              for (int index = 0; index < reviewList.length; index++)
-                Padding(
-                  padding: EdgeInsets.only(bottom: 10),
-                  child: SimpleReviewList(reviewList[index]),
-                ),
-            ],
-          )
+          if (review.isNotEmpty) // 리뷰가 비어있지 않으면 리스트를 출력하고 아니면 빈 컨테이너 출력
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                for (int index = 0; index < review.length; index++)
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: SimpleReviewList(review[index]),
+                  ),
+              ],
+            )
+          else
+            Container(), // 리뷰가 비어있을 때 빈 컨테이너 출력
 
 
         ],

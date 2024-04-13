@@ -2,9 +2,12 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:fast_app_base/data/entity/open_api/open_api_image.dart';
+import 'package:fast_app_base/data/memory/review/review_show_all_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../entity/review/vo_review_post.dart';
+import '../entity/review/a_review_post.dart';
+
+import '../entity/review/a_review_show_all.dart';
 import '../memory/user_provider.dart';
 
 
@@ -51,19 +54,31 @@ class ReviewApi {
     }
   }
 
-  Future<void> showAllReview(String id, String type) async {
+  Future<void> showAllReview( int id, int type, WidgetRef ref) async {
     final url = '$baseUrl/review/showAll';
 
     try {
       final response = await _dio.post(
-          '$baseUrl/review/showAll',
-          data: {
-            'contentId': id,
-            'contentTypeId': type
-          });
+        url,
+        data: {
+          'contentId': id,
+          'contentTypeId': type,
+        },
+      );
 
       if (response.statusCode == 200) {
-        print('리뷰 불러오기 성공: ${response.data}');
+        final jsonData = response.data['data'] as List<dynamic>;
+        if (jsonData.isEmpty) {
+          ref.read(ReviewShowAllListProvider.notifier).clearReviews();
+          print('리뷰 목록이 비어있습니다.');
+        } else {
+          final reviews = jsonData
+              .map((json) =>
+              ReviewShowAll.fromJson(json as Map<String, dynamic>))
+              .toList();
+          ref.read(ReviewShowAllListProvider.notifier).addReview(reviews);
+          print('리뷰 불러오기 성공: $reviews');
+        }
       } else if (response.statusCode == 401) {
         print('error');
         return null;
@@ -72,8 +87,8 @@ class ReviewApi {
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
-      print('예외가 발생했습니다: $e');
-      throw e;
+      ref.read(ReviewShowAllListProvider.notifier).clearReviews();
+      print('리뷰 목록이 비어있습니다.');
     }
   }
 }

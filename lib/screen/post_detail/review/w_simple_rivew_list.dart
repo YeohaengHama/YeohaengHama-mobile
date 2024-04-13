@@ -2,18 +2,21 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/dart/extension/datetime_extension.dart';
 import 'package:fast_app_base/screen/post_detail/review/w_star.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../data/entity/review/a_review_show_all.dart';
+import '../../../data/memory/review/review_show_all_provider.dart';
 import '../../../entity/area/vo_review.dart';
 import '../../../entity/dummies.dart';
 
-class SimpleReviewList extends StatelessWidget {
+class SimpleReviewList extends ConsumerWidget {
   const SimpleReviewList(this.review, {Key? key}) : super(key: key);
-  final Review review;
-
+  final ReviewShowAll review;
   @override
-  Widget build(BuildContext context) {
-    String overviewText = review.contents;
+  Widget build(BuildContext context, WidgetRef ref) {
+    String overviewText = review.content;
     if (overviewText.length > 80) {
       overviewText = overviewText.substring(0, 80) + '...더보기';
     }
@@ -21,49 +24,61 @@ class SimpleReviewList extends StatelessWidget {
     List<Widget> imageWidgets = [];
 
     // 이미지 개수에 따라 이미지를 동적으로 생성
-    if (review.Images!.length == 1) {
+    if (review.reviewPhotoURLList.length == 1) {
       imageWidgets.add(
         Expanded(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: CachedNetworkImage(
-              imageUrl: review.Images![0],
-              fit: BoxFit.cover,
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: CachedNetworkImage(
+                imageUrl: review.reviewPhotoURLList[0],
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
       );
-    } else if (review.Images!.length == 2) {
+    } else if (review.reviewPhotoURLList.length == 2) {
       imageWidgets.addAll([
         Expanded(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: CachedNetworkImage(
-              imageUrl: review.Images![0],
-              fit: BoxFit.cover,
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: CachedNetworkImage(
+                imageUrl: review.reviewPhotoURLList[0],
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
         const SizedBox(width: 5),
         Expanded(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: CachedNetworkImage(
-              imageUrl: review.Images![1],
-              fit: BoxFit.cover,
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: CachedNetworkImage(
+                imageUrl: review.reviewPhotoURLList[1],
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
       ]);
-    } else if (review.Images!.length == 3) {
+    } else if (review.reviewPhotoURLList.length == 3) {
       imageWidgets.addAll([
         Expanded(
           flex: 2,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: CachedNetworkImage(
-              imageUrl: review.Images![0],
-              fit: BoxFit.cover,
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: CachedNetworkImage(
+                imageUrl: review.reviewPhotoURLList[0],
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
@@ -73,21 +88,27 @@ class SimpleReviewList extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: CachedNetworkImage(
-                    imageUrl: review.Images![1],
-                    fit: BoxFit.cover,
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: CachedNetworkImage(
+                      imageUrl: review.reviewPhotoURLList[1],
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 5),
               Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: CachedNetworkImage(
-                    imageUrl: review.Images![2],
-                    fit: BoxFit.cover,
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: CachedNetworkImage(
+                      imageUrl: review.reviewPhotoURLList[2],
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -95,15 +116,18 @@ class SimpleReviewList extends StatelessWidget {
           ),
         ),
       ]);
-    } else if (review.Images!.length == 4) {
+    } else if (review.reviewPhotoURLList.length == 4) {
       imageWidgets.addAll([
         Expanded(
           flex: 2,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: CachedNetworkImage(
-              imageUrl: review.Images![0],
-              fit: BoxFit.cover,
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: CachedNetworkImage(
+                imageUrl: review.reviewPhotoURLList[0],
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
@@ -112,32 +136,41 @@ class SimpleReviewList extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: CachedNetworkImage(
-                    imageUrl: review.Images![1],
-                    fit: BoxFit.cover,
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: CachedNetworkImage(
+                      imageUrl: review.reviewPhotoURLList[1],
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 5),
               Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: CachedNetworkImage(
-                    imageUrl: review.Images![2],
-                    fit: BoxFit.cover,
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: CachedNetworkImage(
+                      imageUrl: review.reviewPhotoURLList[2],
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(width: 5),
               const SizedBox(height: 5),
               Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: CachedNetworkImage(
-                    imageUrl: review.Images![3],
-                    fit: BoxFit.cover,
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: CachedNetworkImage(
+                      imageUrl: review.reviewPhotoURLList[3],
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -145,7 +178,7 @@ class SimpleReviewList extends StatelessWidget {
           ),
         ),
       ]);
-    } else if (review.Images!.length >= 5) {
+    } else if (review.reviewPhotoURLList.length >= 5) {
       imageWidgets.addAll([
         Expanded(
           flex: 1,
@@ -155,21 +188,27 @@ class SimpleReviewList extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: CachedNetworkImage(
-                          imageUrl: review.Images![0],
-                          fit: BoxFit.cover,
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: CachedNetworkImage(
+                            imageUrl: review.reviewPhotoURLList[0],
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                     const SizedBox(width: 5),
                     Expanded(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: CachedNetworkImage(
-                          imageUrl: review.Images![1],
-                          fit: BoxFit.cover,
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: CachedNetworkImage(
+                            imageUrl: review.reviewPhotoURLList[1],
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -181,21 +220,27 @@ class SimpleReviewList extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: CachedNetworkImage(
-                          imageUrl: review.Images![2],
-                          fit: BoxFit.cover,
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: CachedNetworkImage(
+                            imageUrl: review.reviewPhotoURLList[2],
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                     const SizedBox(width: 5),
                     Expanded(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: CachedNetworkImage(
-                          imageUrl: review.Images![3],
-                          fit: BoxFit.cover,
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5),
+                          child: CachedNetworkImage(
+                            imageUrl: review.reviewPhotoURLList[3],
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -204,24 +249,30 @@ class SimpleReviewList extends StatelessWidget {
                       child: Stack(
                         fit: StackFit.expand,
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: CachedNetworkImage(
-                              imageUrl: review.Images![4],
-                              fit: BoxFit.cover,
+                          AspectRatio(
+                            aspectRatio: 1,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: CachedNetworkImage(
+                                imageUrl: review.reviewPhotoURLList[4],
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           Positioned(
                             right: 0,
                             bottom: 0,
-                            child: ClipRRect(
-                              borderRadius:  BorderRadius.circular(5),
-                              child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Colors.black.withOpacity(0.5),
-                                child: Text(
-                                  '+${review.Images!.length - 5}',
-                                  style: TextStyle(color: Colors.white),
+                            child: AspectRatio(
+                              aspectRatio: 1,
+                              child: ClipRRect(
+                                borderRadius:  BorderRadius.circular(5),
+                                child: Container(
+                                  padding: EdgeInsets.all(5),
+                                  color: Colors.black.withOpacity(0.5),
+                                  child: Text(
+                                    '+${review.reviewPhotoURLList.length - 5}',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
                             ),
@@ -240,7 +291,7 @@ class SimpleReviewList extends StatelessWidget {
 
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+    mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
@@ -248,14 +299,21 @@ class SimpleReviewList extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(100),
-              child: CachedNetworkImage(
-                imageUrl: review.user.profileUrl ?? '',
+              child: review.account.photoUrl != null
+                  ? CachedNetworkImage(
+                imageUrl: review.account.photoUrl!,
                 width: 40,
                 height: 40,
                 fit: BoxFit.cover,
+              )
+                  : Image.asset(
+                '$basePath/icon/hama.png',
+                width: 40,
+                height: 40,
               ),
             ),
-            review.user.nickname.text
+
+            review.account.nickname.text
                 .color(AppColors.primaryGrey)
                 .bold
                 .size(13)
@@ -264,7 +322,7 @@ class SimpleReviewList extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        StarRatingWidget(score: review.score),
+        StarRatingWidget(score: review.rating.toDouble()),
         const SizedBox(height: 10),
         SizedBox(
           width: 370,
@@ -303,10 +361,10 @@ class SimpleReviewList extends StatelessWidget {
                 )),
             '0'.text.color(AppColors.thirdGrey).make(),
             spacer,
-            '${review.wirteTime.formattedDateTime}'
-                .text
-                .color(AppColors.thirdGrey)
-                .make(),
+            // '${review.wirteTime.formattedDateTime}'
+            //     .text
+            //     .color(AppColors.thirdGrey)
+            //     .make(),
           ],
         )
       ],

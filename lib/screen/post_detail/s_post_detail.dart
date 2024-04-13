@@ -172,8 +172,8 @@ class postDetailScreen extends ConsumerWidget {
                       const Line(color: AppColors.outline, height: 10),
                       InfoMapWidget(searchDetailResult: searchDetailResult, searchImageResult: searchImageResult,).pSymmetric(v:30 , h: 25),
                       const Line(color: AppColors.outline, height: 10),
-                      const SimpleReviewWidget().pSymmetric(h:25, v: 30),
-                      const Height(400),
+                      SimpleReviewWidget(int.parse(searchDetailResult.contentId), int.parse(searchDetailResult.contentTypeId)).pSymmetric(h:25, v: 30),
+                      const Height(100),
 
                     ],
                   );
