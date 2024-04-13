@@ -16,7 +16,7 @@ class AppColors {
   static const Color faleBlue = Color.fromARGB(255, 160, 206, 222);
   static const Color brightBlue = Color.fromARGB(255, 123, 182, 212);
   static const Color salmon = Color(0xffff6666);
-
+  static const Color pastelPuple = Color.fromARGB(255, 212, 219, 255);
   static const Color mainPurple = Color.fromARGB(255, 137, 152, 232);
   static const Color primaryGrey = Color.fromARGB(255, 51, 51, 51);
   static const Color secondGrey = Color.fromARGB(255, 102, 102, 102);

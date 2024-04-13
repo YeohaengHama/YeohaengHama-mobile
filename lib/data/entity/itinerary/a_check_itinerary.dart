@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'a_check_itinerary.freezed.dart';
 part 'a_check_itinerary.g.dart';
 
+
 @freezed
 class CheckItinerary with _$CheckItinerary {
       const factory CheckItinerary({
@@ -21,10 +22,10 @@ class CheckItinerary with _$CheckItinerary {
                     PlaceByDay>> placesByDay, // Map<String, List<PlaceByDay>>로 수정
       }) = _CheckItinerary;
 
-      //
+      // //
       // factory CheckItinerary.fromJson(Map<String, dynamic> json) =>
-      //     _$CheckItineraryFromJson(json);
-      factory CheckItinerary.fromJson(Map<String, dynamic> json) {
+      // _$CheckItineraryFromJson(json);
+  factory CheckItinerary.fromJson(Map<String, dynamic> json) {
             final String itineraryId = json['itineraryId']
                 .toString(); // itineraryId를 String으로 변환
             return _$CheckItineraryFromJson(

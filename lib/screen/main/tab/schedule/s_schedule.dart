@@ -4,6 +4,7 @@ import 'package:fast_app_base/data/entity/itinerary/a_creat_itinerary.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_itinerary.dart';
 import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/tab/schedule/w_pickArea.dart';
+import 'package:fast_app_base/screen/main/tab/schedule/w_schedule_map.dart';
 import 'package:fast_app_base/screen/main/tab/schedule/w_show_pick_day.dart';
 import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
@@ -11,7 +12,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../common/common.dart';
 import '../../../../data/entity/itinerary/a_check_itinerary.dart';
-import '../../../../data/memory/show_save_place_provider.dart';
+import '../../../../data/memory/itinerary/show_save_place_provider.dart';
 import '../../../../data/network/itinerary_api.dart';
 import '../../../../entity/schedule/vo_schedule.dart';
 import '../../../post_detail/w_map.dart';
@@ -64,7 +65,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                 const SizedBox(
                   width: maxWidthSize,
                   height: 270,
-                  child: mapWidget(),
+                  child: ScheduleMapWidget(),
                 ),
                 Container(
                   color: Colors.white,
@@ -139,7 +140,10 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                   ),
                 ),
                 const Height(15),
-                ShowPickDay(widget.itinerary)
+                Container(
+                  color: Colors.white,
+                    height:200,
+                    child: ShowPickDay(widget.itinerary))
               ],
             ),
           )

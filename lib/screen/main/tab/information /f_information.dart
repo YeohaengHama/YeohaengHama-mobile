@@ -13,7 +13,7 @@ class _InformationFragmentState extends State<InformationFragment> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: mapWidget(),
+      child: MapWidget(),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../entity/itinerary/a_check_itinerary.dart';
+import '../../entity/itinerary/a_check_itinerary.dart';
 
-final itineraryCheckProvider = StateNotifierProvider<ItineraryCheckNotifier, CheckItinerary?>((ref) {
+final review = StateNotifierProvider<ItineraryCheckNotifier, CheckItinerary?>((ref) {
   return ItineraryCheckNotifier();
 });
 

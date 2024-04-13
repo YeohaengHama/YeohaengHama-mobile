@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../data/memory/Itinerary_provider.dart';
+import '../../../data/memory/itinerary/Itinerary_provider.dart';
 import '../pick/s_area_pick.dart';
 
 class TagScreen extends ConsumerStatefulWidget {

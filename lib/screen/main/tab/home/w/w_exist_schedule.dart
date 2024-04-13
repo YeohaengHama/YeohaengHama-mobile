@@ -1,9 +1,14 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/data/entity/itinerary/a_check_itinerary.dart';
 import 'package:fast_app_base/data/entity/itinerary/a_creat_itinerary.dart';
+import 'package:fast_app_base/screen/main/tab/schedule/w_show_pick_day.dart';
 import 'package:flutter/material.dart';
+import 'package:get/utils.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../data/entity/itinerary/vo_itinerary.dart';
+
+import '../../../../../data/memory/itinerary/itinerary_check_provider.dart';
 import '../../../../registration/calendar/s_calendar.dart';
 
 class ExistScheduleWidget extends ConsumerWidget {
@@ -13,6 +18,7 @@ class ExistScheduleWidget extends ConsumerWidget {
   final CreateItinerary itinerary;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final itineraryCheck = ref.watch(itineraryCheckProvider);
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -36,6 +42,7 @@ class ExistScheduleWidget extends ConsumerWidget {
           bgColor: AppColors.secondGrey.withOpacity(0.13),
           height: 35,
         ),
+        ShowPickDay(itineraryCheck!).pOnly(bottom: 10),
         Container(color: Colors.white,
           child: Row(
             children: [

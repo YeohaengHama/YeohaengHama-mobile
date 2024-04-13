@@ -2,12 +2,12 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
 
-import '../../entity/area/vo_review.dart';
+import '../../../entity/area/vo_review.dart';
 
-class SimpleReview extends StatelessWidget {
+class MiniReview extends StatelessWidget {
   final Review review;
 
-  const SimpleReview(this.review, {super.key});
+  const MiniReview(this.review, {super.key});
 
   @override
   Widget build(BuildContext context) {

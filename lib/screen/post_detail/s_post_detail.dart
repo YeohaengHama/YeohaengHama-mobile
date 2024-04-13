@@ -1,20 +1,22 @@
 import 'package:fast_app_base/common/common.dart';
+
 import 'package:fast_app_base/data/entity/area/saerch_image_result.dart';
 import 'package:fast_app_base/data/entity/area/serch_detail_result.dart';
 import 'package:fast_app_base/entity/dummies.dart';
-import 'package:fast_app_base/screen/post_detail/provider/tourism_post_provider.dart';
+
+import 'package:fast_app_base/screen/post_detail/review/w_review_star.dart';
+import 'package:fast_app_base/screen/post_detail/review/w_simple_review.dart';
 import 'package:fast_app_base/screen/post_detail/w_icons.dart';
 import 'package:fast_app_base/screen/post_detail/w_image_scorll_view.dart';
-import 'package:fast_app_base/screen/post_detail/w_map.dart';
-import 'package:fast_app_base/screen/post_detail/w_review_list.dart';
-import 'package:fast_app_base/screen/post_detail/w_review_star.dart';
-import 'package:fast_app_base/screen/post_detail/w_simple_review.dart';
+import 'package:fast_app_base/screen/post_detail/w_info_map.dart';
+
+import 'package:fast_app_base/screen/post_detail/review/w_mini_review_list.dart';
+
 import 'package:flutter/material.dart';
+
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
 import '../../data/memory/area/area_detail_provider.dart';
-import '../../entity/area/vo_review.dart';
-import '../../entity/area/vo_tourism.dart';
 
 class postDetailScreen extends ConsumerWidget {
   final SearchDetailResult searchDetailResult;
@@ -42,13 +44,11 @@ class postDetailScreen extends ConsumerWidget {
 }class _PostDetail extends HookWidget {
   final SearchDetailResult searchDetailResult;
   final SearchImageResult searchImageResult;
-  final Review? review;
 
-  _PostDetail(this.searchDetailResult,
+  const _PostDetail(this.searchDetailResult,
       this.searchImageResult, {
-        Key? key,
-        this.review,
-      }) : super(key: key);
+        super.key,
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -60,13 +60,13 @@ class postDetailScreen extends ConsumerWidget {
 
     useEffect(() {
       final controller = customController;
-      final scrollListener = () {
+      scrollListener() {
         if (controller.offset > 100) {
           shouldShowTitle.value = true;
         } else {
           shouldShowTitle.value = false;
         }
-      };
+      }
       controller.addListener(scrollListener);
 
       // 컴포넌트가 해제될 때 컨트롤러의 리스너와 컨트롤러 자체를 해제합니다.
@@ -149,7 +149,7 @@ class postDetailScreen extends ConsumerWidget {
                           .make(),
                       ReviewStar(reviewList),
                       const Height(20),
-                      IconsWidget(),
+                      const IconsWidget(),
                       const Height(20),
                       const Line(
                         width: maxWidthSize,
@@ -157,7 +157,7 @@ class postDetailScreen extends ConsumerWidget {
                         height: 1.5,
                       ).pSymmetric(h: 40),
                       const Height(20),
-                      ReviewList(controller: reviewController),
+                      MiniReviewList(controller: reviewController),
                       const Height(20),
                       const Line(
                         width: maxWidthSize,
@@ -170,21 +170,11 @@ class postDetailScreen extends ConsumerWidget {
                           .make()
                           .pSymmetric(h: 30, v: 30),
                       const Line(color: AppColors.outline, height: 10),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: '기본정보'
-                            .text
-                            .color(AppColors.primaryGrey)
-                            .size(20)
-                            .bold
-                            .make(),
-                      ).p(25),
-                      const SizedBox(
-                        width: maxWidthSize,
-                        height: 250,
-                        child: mapWidget(),
-                      ),
-                      const Height(200),
+                      InfoMapWidget(searchDetailResult: searchDetailResult, searchImageResult: searchImageResult,).pSymmetric(v:30 , h: 25),
+                      const Line(color: AppColors.outline, height: 10),
+                      const SimpleReviewWidget().pSymmetric(h:25, v: 30),
+                      const Height(400),
+
                     ],
                   );
                 },

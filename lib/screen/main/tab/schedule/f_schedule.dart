@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 
-import '../../../../data/memory/itinerary_check_provider.dart';
+import '../../../../data/memory/itinerary/itinerary_check_provider.dart';
 
 import 'f_non_schedule.dart';
 

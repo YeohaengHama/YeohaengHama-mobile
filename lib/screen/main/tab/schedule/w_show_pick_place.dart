@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../data/entity/itinerary/a_add_pick_place.dart';
-import '../../../../data/memory/add_pick_place_provider.dart';
+import '../../../../data/memory/itinerary/add_pick_place_provider.dart';
 
 class ShowPickPlace extends ConsumerWidget {
   const ShowPickPlace(this.currentDay, {Key? key}) : super(key: key);
@@ -18,8 +18,8 @@ class ShowPickPlace extends ConsumerWidget {
     print(filteredList);
 
     return Container(
-      height: 85,
-      color: Colors.white,
+      height: 70,
+
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
@@ -63,8 +63,8 @@ class ShowPickPlace extends ConsumerWidget {
               ),
             ).pOnly(right: 15);
           }).toList(),
-        ),
-      ).pOnly(left: 10),
+        ).pOnly(left: 10),
+      ).pOnly(left: 0),
     );
   }
 }

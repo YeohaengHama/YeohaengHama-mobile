@@ -1,13 +1,14 @@
 import 'package:fast_app_base/data/entity/itinerary/check_save_place/a_check_save_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_delete_place.dart';
+import 'package:fast_app_base/screen/review/s_review.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../common/common.dart';
 import '../../data/entity/itinerary/vo_save_place.dart';
-import '../../data/memory/Itinerary_provider.dart';
 import '../../data/memory/area/area_detail_provider.dart';
+import '../../data/memory/itinerary/Itinerary_provider.dart';
 import '../../data/memory/user_provider.dart';
 import '../../data/network/itinerary_api.dart';
 
@@ -124,7 +125,7 @@ class _icons_widgetState extends ConsumerState<IconsWidget> {
         Expanded(
           child: IconButton(
             padding: const EdgeInsets.all(0),
-            onPressed: () {},
+            onPressed: () {Nav.push(ReviewScreen());},
             icon: Column(
               children: [
                 const Icon(

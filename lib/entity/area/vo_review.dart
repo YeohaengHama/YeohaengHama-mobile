@@ -13,7 +13,7 @@ class Review with _$Review {
     required User user,
     required double score,
     required DateTime wirteTime,
-    final List<String>? Images,
+    @Default([]) List<String>? Images,
     required String contents
 }
 

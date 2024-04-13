@@ -4,6 +4,7 @@ import 'package:fast_app_base/screen/main/tab/home/f_home.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../common/common.dart';
 import '../../data/entity/account/vo_login.dart';
 import '../../data/network/user_api.dart';
@@ -42,8 +43,10 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
       print('예외가 발생했습니다: $e');
     }
   }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -174,10 +177,13 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
               child: Row(
                 children: [
                   Expanded(
-                      child: Image.asset(
-                        '$basePath/icon/kakao.png',
-                        width: 75,
-                        height: 75,
+                      child: Tap(
+                        onTap: () { _launchURL(); },
+                        child: Image.asset(
+                          '$basePath/icon/kakao.png',
+                          width: 75,
+                          height: 75,
+                        ),
                       )),
                   Expanded(
                       child: Image.asset(
@@ -198,5 +204,14 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
         ),
       ),
     );
+  }
+}
+
+void _launchURL() async {
+  final Uri url = Uri.parse('https://kauth.kakao.com/oauth/authorize?client_id=a9d1711e66ed62d5be76957294ab0a9f&redirect_uri=https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api/kakao/login&response_type=code');
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

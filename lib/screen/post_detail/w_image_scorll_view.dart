@@ -53,8 +53,8 @@ class _ImageScrollViewState extends State<ImageScrollView> {
               effect: const SwapEffect(
                 dotHeight: 10,
                 dotWidth: 10,
-                dotColor: Colors.white,
-                activeDotColor: Colors.white38,
+                dotColor: Colors.white38,
+                activeDotColor: Colors.white,
               ),
             ).pOnly(bottom: 10),
           ),

@@ -1,13 +1,11 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:fast_app_base/data/entity/area/vo_pick_place_contents.dart';
 import 'package:fast_app_base/data/entity/itinerary/check_save_place/a_check_save_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_delete_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_itinerary.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_pick_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_save_place.dart';
-import 'package:fast_app_base/data/memory/show_save_place_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -15,12 +13,12 @@ import '../entity/itinerary/a_add_pick_place.dart';
 import '../entity/itinerary/a_check_itinerary.dart';
 import '../entity/itinerary/a_creat_itinerary.dart';
 import '../entity/open_api/open_api_detail.dart';
-import '../memory/area/area_detail_provider.dart';
-import '../memory/area/area_pick_place_contents.dart';
-import '../memory/itinerary_check_provider.dart';
-import '../memory/itinerary_created_provider.dart';
+
+import '../memory/itinerary/itinerary_check_provider.dart';
+import '../memory/itinerary/itinerary_created_provider.dart';
+import '../memory/itinerary/show_save_place_provider.dart';
+
 import '../memory/user_provider.dart';
-import 'area_api.dart';
 
 final itineraryApiProvider = Provider<ItineraryApi>((ref) => ItineraryApi());
 

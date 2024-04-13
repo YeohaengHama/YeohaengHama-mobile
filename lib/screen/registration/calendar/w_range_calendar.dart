@@ -1,6 +1,5 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/data/memory/Itinerary_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,6 +8,7 @@ import 'package:isar/isar.dart';
 
 import '../../../data/entity/account/vo_account.dart';
 import '../../../data/entity/itinerary/vo_itinerary.dart';
+import '../../../data/memory/itinerary/Itinerary_provider.dart';
 import '../tag/s_tag.dart';
 
 class RangeCalendar extends ConsumerStatefulWidget {

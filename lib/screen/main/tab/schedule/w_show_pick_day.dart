@@ -21,49 +21,34 @@ class _ShowPickAreaState extends ConsumerState<ShowPickDay> {
     int currentDay = 0;
     return Column(
       children: [
-        Container(
-          height: 200,
-          width: maxWidthSize,
-          color: Colors.white,
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Consumer(
-                  builder: (context, watch, child) {
-                    final selectedIndex = ref.watch(selectedDayIndexNotifierProvider);
-                    return DropdownButton<int>(
-                      value: selectedIndex,
-                      onChanged: (int? index) {
-                        selectedDayIndexNotifier.state = index != null ? index + 1 : 0;
-                        selectedDayIndexNotifier.setSelectedDayIndex(index!);
-                        setState(() {
-                          currentDay = index! + 1;
-                        });
-                      },
-                      items: List.generate(widget.itinerary.placesByDay.length, (index) {
-                        final day = 'Day-${index + 1}';
-                        return DropdownMenuItem<int>(
-                          value: index,
-                          child: Text(day),
-                        );
-                      }),
-                    );
-                  },
-                ),
-              ),
-              ShowPickPlace(selectedDayIndexNotifier.state+1), // 여기서 ShowPickPlace를 리빌드하도록 수정해야 함
-            ],
+        Align(
+          alignment: Alignment.topCenter,
+          child: Consumer(
+            builder: (context, watch, child) {
+              final selectedIndex = ref.watch(selectedDayIndexNotifierProvider);
+              return DropdownButton<int>(
+                value: selectedIndex,
+                onChanged: (int? index) {
+                  selectedDayIndexNotifier.state = index != null ? index + 1 : 0;
+                  selectedDayIndexNotifier.setSelectedDayIndex(index!);
+                  setState(() {
+                    currentDay = index! + 1;
+                  });
+                },
+                items: List.generate(widget.itinerary.placesByDay.length, (index) {
+                  final day = 'Day-${index + 1}';
+                  return DropdownMenuItem<int>(
+                    value: index,
+                    child: Text(day),
+                  );
+                }),
+              );
+            },
           ),
         ),
-        Text('Text${selectedDayIndexNotifier.state.toString()}'),
+        ShowPickPlace(selectedDayIndexNotifier.state+1),
 
-        Consumer(
-          builder: (context, watch, child) {
-            final selectedIndex = selectedDayIndexNotifier.state;
-            return Text('Selected Index: ${selectedIndex}');
-          },
-        ),
+
       ],
     );
   }

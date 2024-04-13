@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../entity/area/vo_review.dart';
+import '../../../entity/area/vo_review.dart';
 
-class ReviewStar extends StatelessWidget {
+
+
+class ReviewStar extends StatelessWidget  {
   final List<Review> reviewList;
-  const ReviewStar(this.reviewList, {Key? key}) : super(key: key);
+  const ReviewStar(this.reviewList, {Key? key, this.starSize=20.0}) : super(key: key);
+  final starSize;
 
 
   @override
@@ -30,7 +33,7 @@ class ReviewStar extends StatelessWidget {
   Widget _buildStarIcon(double averageScore, int index) {
 
     if (averageScore >= index) {
-      return const Icon(Icons.star, color: Colors.orangeAccent,size: 20,);
+      return  Icon(Icons.star, color: Colors.orangeAccent,size: starSize,);
     } else if (averageScore >= index - 0.5) {
       // 별 반개인 경우
       return const Icon(
@@ -40,7 +43,7 @@ class ReviewStar extends StatelessWidget {
       );
     } else {
       // 일반적인 빈 별
-      return const Icon(Icons.star_border, color: Colors.orangeAccent,size: 20);
+      return  Icon(Icons.star_border, color: Colors.orangeAccent,size: starSize);
     }
   }
 

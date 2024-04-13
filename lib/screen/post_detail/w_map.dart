@@ -1,28 +1,49 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
-class mapWidget extends StatefulWidget {
-  const mapWidget({super.key});
+
+class MapWidget extends StatefulWidget {
+  const MapWidget({Key? key, this.mapX =126.979, this.mapY = 37.566}) : super(key: key);
+  final double mapX;
+  final double mapY;
   @override
-  State<mapWidget> createState() => _mapWidgetState();
+  State<MapWidget> createState() => _MapWidgetState();
 }
-class _mapWidgetState extends State<mapWidget> {
+
+class _MapWidgetState extends State<MapWidget> {
+
+  late NaverMapController _controller;
+  late NLatLng placeLatLng;
+
+  @override
+  void initState() {
+    super.initState();
+    placeLatLng = NLatLng(widget.mapY, widget.mapX);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: NaverMap(
-        options: const NaverMapViewOptions(
-          mapType: NMapType.basic,
-          activeLayerGroups: [
-            NLayerGroup.building,
-            NLayerGroup.transit
-
-          ], // default : [NLayerGrou
+    return NaverMap(
+      onMapReady:(controller) {
+        _controller = controller;
+        _addMarker();
+        print("네이버 맵 로딩됨!");
+      },
+      options: NaverMapViewOptions(
+        initialCameraPosition: NCameraPosition(
+          target: placeLatLng,
+          zoom: 17,
         ),
-
-        onMapReady: (controller) {
-          print("네이버 맵 로딩됨!");
-        },
+        mapType: NMapType.basic,
       ),
+
     );
+  }
+
+  void _addMarker() {
+    _controller.addOverlay(NMarker(
+      id: 'test',
+      position: placeLatLng,
+    ));
   }
 }

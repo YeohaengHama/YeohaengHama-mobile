@@ -8,7 +8,7 @@ import 'package:fast_app_base/screen/main/s_main.dart';
 import 'package:flutter/material.dart';
 
 import '../../../data/entity/itinerary/vo_itinerary.dart';
-import '../../../data/memory/Itinerary_provider.dart';
+import '../../../data/memory/itinerary/Itinerary_provider.dart';
 import '../../../data/network/itinerary_api.dart';
 import '../../main/tab/tab_item.dart';
 

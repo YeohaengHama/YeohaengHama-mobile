@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../common/constant/app_colors.dart';
-import '../../../data/memory/Itinerary_provider.dart';
+import '../../../data/memory/itinerary/Itinerary_provider.dart';
 
 class TagButton extends ConsumerStatefulWidget {
   final Map<int, String>? whoTagMap;

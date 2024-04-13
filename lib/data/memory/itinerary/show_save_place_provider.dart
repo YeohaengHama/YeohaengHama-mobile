@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../entity/itinerary/vo_pick_place.dart';
+import '../../entity/itinerary/vo_pick_place.dart';
 
 final showPickPlaceApiResponseProvider = StateNotifierProvider<PickPlaceNotifier, List<PickPlace>>((ref) {
   return PickPlaceNotifier();

@@ -1,17 +1,17 @@
 
-import 'package:fast_app_base/screen/post_detail/w_simple_review.dart';
+import 'package:fast_app_base/screen/post_detail/review/w_mini_review.dart';
 import 'package:flutter/material.dart';
 
-import '../../common/common.dart';
-import '../../common/widget/w_height_and_width.dart';
-import '../../entity/area/vo_review.dart';
-import '../../entity/dummies.dart';
+import '../../../common/common.dart';
+import '../../../common/widget/w_height_and_width.dart';
+import '../../../entity/area/vo_review.dart';
+import '../../../entity/dummies.dart';
 
-class ReviewList extends StatelessWidget {
+class MiniReviewList extends StatelessWidget {
   final ScrollController controller;
 
 
-  const ReviewList({
+  const MiniReviewList({
     super.key,
     required this.controller,
   });
@@ -30,7 +30,7 @@ class ReviewList extends StatelessWidget {
             itemCount: reviewList.length,
             itemBuilder: (context, index) {
               return Row(
-                children: [SimpleReview(reviewList[index])], // SimpleReview에 Tourism 전달
+                children: [MiniReview(reviewList[index])], // SimpleReview에 Tourism 전달
               );
             },
           ),
