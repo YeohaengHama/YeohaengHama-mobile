@@ -6,6 +6,7 @@ import 'package:fast_app_base/data/entity/itinerary/vo_delete_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_itinerary.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_pick_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_save_place.dart';
+import 'package:fast_app_base/data/entity/menu/all_itinerary.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -16,6 +17,7 @@ import '../entity/open_api/open_api_detail.dart';
 
 import '../memory/itinerary/itinerary_check_provider.dart';
 import '../memory/itinerary/itinerary_created_provider.dart';
+import '../memory/itinerary/itinerary_show_all_provider.dart';
 import '../memory/itinerary/show_save_place_provider.dart';
 
 import '../memory/user_provider.dart';
@@ -455,7 +457,40 @@ class ItineraryApi {
       throw e;
     }
   }
+  Future<void> showAllItinerary(WidgetRef ref) async {
 
+    final accountNotifier = ref.read(accountProvider.notifier).state!;
+    final url = '$baseUrl/itinerary/itineraryShow/${accountNotifier.id}';
+    try {
+      final response = await _dio.get(
+        url,
+      );
+
+      if (response.statusCode == 200) {
+        final jsonData = response.data['data'] as List<dynamic>;
+        if (jsonData.isEmpty) {
+          ref.read(ItineraryShowAllListProvider.notifier).clearItinerarys();
+          print('리뷰 목록이 비어있습니다.');
+        } else {
+          final itinerarys = jsonData
+              .map((json) =>
+              AllItinerary.fromJson(json as Map<String, dynamic>))
+              .toList();
+          ref.read(ItineraryShowAllListProvider.notifier).addItinerary(itinerarys);
+          print('리뷰 불러오기 성공: $itinerarys');
+        }
+      } else if (response.statusCode == 401) {
+        print('error');
+        return null;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('오류');
+      throw e;
+    }
+  }
 
 
 }

@@ -307,7 +307,7 @@ class SimpleReviewList extends ConsumerWidget {
                 fit: BoxFit.cover,
               )
                   : Image.asset(
-                '$basePath/icon/hama.png',
+                '$basePath/icon/colorHama.png',
                 width: 40,
                 height: 40,
               ),

@@ -2,20 +2,24 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:fast_app_base/common/widget/w_arrow.dart';
+import 'package:fast_app_base/screen/main/menu/my_trip/s_my_trip.dart';
 import 'package:fast_app_base/screen/opensource/s_opensource.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
-import '../../../screen/dialog/d_message.dart';
-import '../../common/common.dart';
-import '../../common/language/language.dart';
-import '../../common/theme/theme_util.dart';
-import '../../common/widget/w_mode_switch.dart';
+import '../../../../screen/dialog/d_message.dart';
+import '../../../common/common.dart';
+import '../../../common/language/language.dart';
+import '../../../common/theme/theme_util.dart';
+import '../../../common/widget/w_mode_switch.dart';
+import '../../../data/memory/user_provider.dart';
 
-class MenuDrawer extends StatefulWidget {
+class MenuDrawer extends ConsumerStatefulWidget {
   static const minHeightForScrollView = 380;
 
 
@@ -24,10 +28,10 @@ class MenuDrawer extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<MenuDrawer> createState() => _MenuDrawerState();
+  ConsumerState<MenuDrawer> createState() => _MenuDrawerState();
 }
 
-class _MenuDrawerState extends State<MenuDrawer> {
+class _MenuDrawerState extends ConsumerState<MenuDrawer> {
 
   @override
   void initState() {
@@ -37,6 +41,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
   @override
   Widget build(BuildContext context) {
     double statusBarHeight = context.statusBarHeight;
+
 
     return Material(
       color: Colors.transparent,
@@ -61,6 +66,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
       context.deviceHeight < MenuDrawer.minHeightForScrollView;
 
   Container getMenus(BuildContext context) {
+    final accountNotifier = ref.read(accountProvider.notifier).state!;
     return Container(
       constraints: BoxConstraints(minHeight: context.deviceHeight),
       child: Column(
@@ -88,27 +94,36 @@ class _MenuDrawerState extends State<MenuDrawer> {
             ],
           ).pOnly(),
           Center(
-            child: ClipOval(
-                child:
-                CachedNetworkImage(imageUrl: 'https://picsum.photos/id/200/200/200',
-                  width: 120,
-                  height: 120,)
-            ),
+            child: accountNotifier.photoUrl != null
+                ? ClipOval(
+              child: CachedNetworkImage(
+                imageUrl: accountNotifier.photoUrl!,
+                height: 120,
+              ),
+            )
+                : ClipOval(
+                  child: Image.asset(
+                                '$basePath/icon/colorHama.png',
+                                width: 120,
+                                height: 120,
+                              ),
+                ),
           ),
-          Center(child: '여행하마'.text.color(AppColors.primaryGrey).size(24).bold.make()),
+
+          Center(child: '${accountNotifier.nickName}'.text.color(AppColors.primaryGrey).size(24).bold.make()),
           Center(child: '프로필 편집 >'.text.color(AppColors.forthGrey).size(12).make()),
 
           const Height(10),
-          const Line(),
+
           _MenuWidget(
-            'opensource'.tr(),
+            '내 여행',
             onTap: () async {
-              Nav.push(const OpensourceScreen());
+              Nav.push(const MyTripScreen());
             },
           ),
-          const Line(),
+          const Line().pSymmetric(h:15),
           _MenuWidget(
-            'clear_cache'.tr(),
+            '내 저장',
             onTap: () async {
               final manager = DefaultCacheManager();
               await manager.emptyCache();
@@ -117,7 +132,40 @@ class _MenuDrawerState extends State<MenuDrawer> {
               }
             },
           ),
-          const Line(),
+          const Line().pSymmetric(h:15),
+          _MenuWidget(
+            '내 리뷰',
+            onTap: () async {
+              final manager = DefaultCacheManager();
+              await manager.emptyCache();
+              if (mounted) {
+                MessageDialog('clear_cache_done'.tr()).show();
+              }
+            },
+          ),
+          const Line().pSymmetric(h:15),
+          _MenuWidget(
+            '내 여행일기',
+            onTap: () async {
+              final manager = DefaultCacheManager();
+              await manager.emptyCache();
+              if (mounted) {
+                MessageDialog('clear_cache_done'.tr()).show();
+              }
+            },
+          ),
+          const Line().pSymmetric(h:15),
+          _MenuWidget(
+            '내 설정',
+            onTap: () async {
+              final manager = DefaultCacheManager();
+              await manager.emptyCache();
+              if (mounted) {
+                MessageDialog('clear_cache_done'.tr()).show();
+              }
+            },
+          ),
+          const Line().pSymmetric(h:15),
           isSmallScreen(context) ? const Height(10) : const EmptyExpanded(),
           MouseRegion(
             cursor: SystemMouseCursors.click,
@@ -135,7 +183,6 @@ class _MenuDrawerState extends State<MenuDrawer> {
           ),
           const Height(10),
 
-          getLanguageOption(context),
           const Height(10),
           Row(
             children: [
@@ -256,16 +303,19 @@ class _MenuWidget extends StatelessWidget {
       child: Tap(
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.only(left: 15, right: 20),
+          padding: const EdgeInsets.only(left: 25, right: 20),
           child: Row(
             children: [
               Expanded(
                   child: text.text
-                      .textStyle(defaultFontStyle())
-                      .color(context.appColors.drawerText)
+                      .textStyle(defaultFontStyle()).bold
+                      .color(AppColors.primaryGrey)
                       .size(15)
                       .make()),
+              spacer,
+              Arrow(direction: AxisDirection.right,)
             ],
+
           ),
         ),
       ),

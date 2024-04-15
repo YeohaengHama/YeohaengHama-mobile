@@ -3,7 +3,7 @@ import 'package:fast_app_base/screen/main/tab/tab_navigator.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/common.dart';
-import 'w_menu_drawer.dart';
+import 'menu/w_menu_drawer.dart';
 
 class MainScreen extends StatefulWidget {
   final TabItem? initialTab;
