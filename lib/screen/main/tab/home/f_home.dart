@@ -11,6 +11,7 @@ import 'package:fast_app_base/screen/main/tab/home/w/w_no_schdule.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../data/memory/itinerary/itinerary_check_provider.dart';
 import '../../../../data/memory/itinerary/itinerary_created_provider.dart';
 import '../../../registration/calendar/s_calendar.dart';
 import '../../search/s_space_search.dart';
@@ -32,6 +33,7 @@ class HomeFragment extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final itineraryList = ref.watch(itineraryCreatedProvider);
+    final createdItinerary = ref.watch(itineraryCheckProvider);
 
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: AppColors.mainPurple,
@@ -76,8 +78,8 @@ class HomeFragment extends ConsumerWidget {
             expandedHeight: 260,
             // Adjust this height based on your needs
             flexibleSpace: FlexibleSpaceBar(
-                background: itineraryList.isNotEmpty
-                    ? ExistScheduleWidget(itineraryList.first)
+                background: createdItinerary != null
+                    ? ExistScheduleWidget(createdItinerary)
                     : NonSchduleWidget(
                         tabListph: tabListph, tabListpV: tabListpV)),
           ),

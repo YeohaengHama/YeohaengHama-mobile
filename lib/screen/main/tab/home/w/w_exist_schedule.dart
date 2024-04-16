@@ -15,7 +15,7 @@ class ExistScheduleWidget extends ConsumerWidget {
   const ExistScheduleWidget(this.itinerary, {super.key});
   final double tabListpV = 12;
   final double tabListph = 20;
-  final CreateItinerary itinerary;
+  final CheckItinerary itinerary;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final itineraryCheck = ref.watch(itineraryCheckProvider);
