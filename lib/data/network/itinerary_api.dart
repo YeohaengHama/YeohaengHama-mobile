@@ -491,6 +491,29 @@ class ItineraryApi {
       throw e;
     }
   }
+  Future<void> DeleteItinerary(int itineraryId, WidgetRef ref) async {
+    try {
+      final account = ref.read(accountProvider.notifier);
 
+      final response = await _dio.post(
+        '$baseUrl/itinerary/delete?itineraryId=${itineraryId}&accountId=${account.state!.id}',
 
+      );
+
+      if (response.statusCode == 200) {
+        showAllItinerary(ref);
+        print('일정삭제 완료');
+        return null;
+      } else if (response.statusCode == 401) {
+        print('error');
+        return null;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    }
+  }
 }
