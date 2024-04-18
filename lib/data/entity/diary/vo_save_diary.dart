@@ -1,3 +1,4 @@
+import 'package:fast_app_base/common/dart/extension/datetime_extension.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'vo_save_diary.freezed.dart';

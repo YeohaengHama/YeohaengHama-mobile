@@ -1,11 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/memory/user_provider.dart';
-import 'package:fast_app_base/screen/main/menu/my_trip/f_my_diary.dart';
-import 'package:fast_app_base/screen/main/menu/my_trip/f_my_review.dart';
-import 'package:fast_app_base/screen/main/menu/my_trip/f_my_itnerary.dart';
+import 'package:fast_app_base/screen/main/menu/my_trip/diary/f_my_diary.dart';
+import 'package:fast_app_base/screen/main/menu/my_trip/review/f_my_review.dart';
+import 'package:fast_app_base/screen/main/menu/my_trip/itnierary/f_my_itnerary.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../fab/w_floating_daangn_button.dart';
+
 
 
 class MyTripScreen extends ConsumerStatefulWidget {
@@ -33,39 +36,49 @@ class _MyTripScreenState extends ConsumerState<MyTripScreen> with SingleTickerPr
         ),
 
       ),
-      body: Column(
+      body: Stack(
         children: [
 
-          Center(
-            child: accountNotifier.photoUrl != null
-                ? ClipOval(
-              child: CachedNetworkImage(
-                imageUrl: accountNotifier.photoUrl!,
-                height: 120,
-              ),
-            )
-                : ClipOval(
-              child: Image.asset(
-                '$basePath/icon/colorHama.png',
-                width: 120,
-                height: 120,
+          Column(
+          children: [
+            Center(
+              child: accountNotifier.photoUrl != null
+                  ? ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl: accountNotifier.photoUrl!,
+                  height: 120,
+                ),
+              )
+                  : ClipOval(
+                child: Image.asset(
+                  '$basePath/icon/colorHama.png',
+                  width: 120,
+                  height: 120,
+                ),
               ),
             ),
-          ),
 
-          Center(child: '${accountNotifier.nickName}'.text.color(AppColors.primaryGrey).size(24).bold.make()),
-          tabBar,
-          FutureBuilder<Widget>(
-            future: switchTabFragment(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return snapshot.data ?? CircularProgressIndicator();
-              } else {
-                return CircularProgressIndicator(); // 로딩 중 표시
-              }
-            },
+            Center(child: '${accountNotifier.nickName}'.text.color(AppColors.primaryGrey).size(24).bold.make()),
+            tabBar,
+            FutureBuilder<Widget>(
+              future: switchTabFragment(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return snapshot.data ?? CircularProgressIndicator();
+                } else {
+                  return CircularProgressIndicator(); // 로딩 중 표시
+                }
+              },
+            ),
+
+          ],
+        ),
+          Positioned(
+            bottom: 95.0,
+            right: 0,
+            child: FloatingDaangnButton(), // 여기에 FloatingDaangnButton 추가
           ),
-        ],
+    ]
       ),
     );
   }

@@ -1,13 +1,13 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/data/preference/app_preferences.dart';
 import 'package:fast_app_base/data/memory/itinerary/Itinerary_provider.dart';
-import 'package:fast_app_base/screen/main/menu/my_trip/w_Itinerary_list.dart';
+import 'package:fast_app_base/screen/main/menu/my_trip/itnierary/w_Itinerary_list.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../data/entity/menu/all_itinerary.dart';
-import '../../../../data/memory/itinerary/itinerary_show_all_provider.dart';
-import '../../../../data/network/itinerary_api.dart';
+import '../../../../../data/entity/menu/all_itinerary.dart';
+import '../../../../../data/memory/itinerary/itinerary_show_all_provider.dart';
+import '../../../../../data/network/itinerary_api.dart';
 
 class MyItneraryFragment extends ConsumerStatefulWidget {
   const MyItneraryFragment({super.key});
