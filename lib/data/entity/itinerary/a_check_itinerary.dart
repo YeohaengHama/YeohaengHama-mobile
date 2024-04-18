@@ -62,6 +62,7 @@ class PlaceByDay {
       final String placeNum;
       final String placeName;
       final String memo;
+      final int placeId;
 
       PlaceByDay({
             required this.startTime,
@@ -70,6 +71,7 @@ class PlaceByDay {
             required this.placeNum,
             required this.placeName,
             required this.memo,
+            required this.placeId,
       });
 
       factory PlaceByDay.fromJson(Map<String, dynamic> json) =>
