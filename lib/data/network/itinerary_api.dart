@@ -15,6 +15,7 @@ import '../entity/itinerary/a_check_itinerary.dart';
 import '../entity/itinerary/a_creat_itinerary.dart';
 import '../entity/open_api/open_api_detail.dart';
 
+import '../memory/itinerary/add_pick_each_place_provider.dart';
 import '../memory/itinerary/itinerary_check_provider.dart';
 import '../memory/itinerary/itinerary_created_provider.dart';
 import '../memory/itinerary/itinerary_show_all_provider.dart';
@@ -438,7 +439,7 @@ class ItineraryApi {
       }
 
       final response = await _dio.post(
-        '$baseUrl/itinerary/${itineraryCheckNotifier.state?.itineraryId}',
+        '$baseUrl/itinerary/joinPlaces/${itineraryCheckNotifier.state?.itineraryId}',
         data: data, // 리스트 전달
       );
 
@@ -457,6 +458,55 @@ class ItineraryApi {
       throw e;
     }
   }
+  Future<Response> PostAddEachPickPlace(AddPickPlace addPickPlace, WidgetRef ref) async {
+    try {
+      final itineraryCheckNotifier = ref.read(itineraryCheckProvider.notifier);
+
+      final data = {
+        'day': addPickPlace.day,
+        'startTime': addPickPlace.startTime,
+        'endTime': addPickPlace.endTime,
+        'placeType': addPickPlace.placeType,
+        'placeNum': addPickPlace.placeNum,
+        'placeName': addPickPlace.placeName,
+        'memo': addPickPlace.memo,
+      };
+
+      final response = await _dio.post(
+        '$baseUrl/itinerary/joinPlace/${itineraryCheckNotifier.state?.itineraryId}',
+        data: data,
+      );
+
+      if (response.statusCode == 200) {
+        if (response.statusCode == 200) {
+          final jsonDataList = response.data['data'] as List<dynamic>;
+          final List<AddPickPlace> addPickPlaces = jsonDataList
+              .map((json) => AddPickPlace.fromJson(json))
+              .toList();
+
+          if (addPickPlaces.isEmpty) {
+            ref.read(addPickEachPlaceProvider.notifier).clearReviews();
+            print('리뷰 목록이 비어있습니다.');
+          } else {
+            ref.read(addPickEachPlaceProvider.notifier).setAddPickPlace(addPickPlaces);
+            print('장소 추가 성공: $addPickPlaces');
+          }
+        }
+        print('일정에 장소 추가 완료');
+        return response;
+      } else if (response.statusCode == 401) {
+        print('error');
+        return response;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    }
+  }
+
   Future<void> showAllItinerary(WidgetRef ref) async {
 
     final accountNotifier = ref.read(accountProvider.notifier).state!;

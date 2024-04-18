@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/entity/itinerary/a_add_pick_place.dart';
+import 'package:fast_app_base/data/memory/itinerary/add_pick_each_place_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../data/entity/itinerary/a_check_itinerary.dart';
@@ -25,7 +26,6 @@ class PickAreaWidget extends ConsumerWidget {
     final accountNotifier = ref.read(accountProvider.notifier);
     final ItineraryApi itineraryApi= ItineraryApi();
     final selectedDayIndexNotifier = ref.watch(selectedDayIndexNotifierProvider);
-    final addPickPlaceListNotifier = ref.watch(addPickPlaceProvider.notifier);
     final AddPickPlace addPickPlace = AddPickPlace(day: selectedDayIndexNotifier+1,addr1: pickPlace.addr1, placeType: pickPlace.contentTypeId, placeNum: pickPlace.contentId, placeName:pickPlace.title,startTime: "string", endTime: "string",memo: "string" );
     final deletePlace = DeletePlace(
         accountId: int.parse(accountNotifier.state!.id),
@@ -34,7 +34,7 @@ class PickAreaWidget extends ConsumerWidget {
     );
     return Tap(
       onTap: () {
-        addPickPlaceListNotifier.setAddPickPlace(addPickPlace);
+        itineraryApi.PostAddEachPickPlace(addPickPlace, ref);
         itineraryApi.postDeletePlace(deletePlace, ref);
       },
 
