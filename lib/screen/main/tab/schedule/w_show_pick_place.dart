@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../data/entity/itinerary/a_add_pick_place.dart';
-import '../../../../data/memory/itinerary/add_pick_place_provider.dart';
+import '../../../../data/memory/itinerary/add_pick_each_place_provider.dart';
 
 class ShowPickPlace extends ConsumerWidget {
   const ShowPickPlace(this.currentDay, {Key? key}) : super(key: key);
@@ -11,7 +11,8 @@ class ShowPickPlace extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final addPickPlaceListNotifier = ref.watch(addPickPlaceProvider);
+    final addPickPlaceListNotifier = ref.watch(addPickEachPlaceProvider);
+
     print(currentDay);
     // 현재 일치하는 요소만 필터링
     List<AddPickPlace> filteredList = addPickPlaceListNotifier.where((element) => element.day == currentDay).toList();

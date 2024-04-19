@@ -56,7 +56,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
               IconButton(onPressed: () {}, icon: const Icon(Icons.wallet)),
               IconButton(
                   onPressed: () {}, icon: const Icon(Icons.ios_share_outlined)),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.list)),
+              IconButton(onPressed:() => Scaffold.of(context).openEndDrawer(), icon: const Icon(Icons.list)),
             ],
           ),
           SliverToBoxAdapter(

@@ -140,4 +140,40 @@ class UserApi {
       return ApiError.createErrorResult(e);
     }
   }
+
+  Future<void> handleKakaoLogin(String code) async {
+    final String tokenUrl = 'https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api/kakao/login';
+
+    final Map<String, dynamic> data = {
+      'code': code,
+    };
+
+    try {
+      final Dio dio = Dio();
+      final Response response = await dio.post(
+        tokenUrl,
+        data: data,
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> jsonResponse = response.data;
+        final bool success = jsonResponse['success'];
+        if (success) {
+          final Map<String, dynamic> userData = jsonResponse['data'];
+          // 여기서 반환된 데이터를 저장할 수 있습니다.
+          final int id = userData['id'];
+          final String nickname = userData['nickname'];
+          final String photoUrl = userData['photoUrl'];
+          print('카카오톡 로그인 성공! ID: $id, 닉네임: $nickname, 프로필 사진 URL: $photoUrl');
+        } else {
+          final String message = jsonResponse['message'];
+          print('카카오톡 로그인 실패: $message');
+        }
+      } else {
+        print('카카오톡 로그인 요청 실패 - 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('카카오톡 로그인 요청 중 오류 발생: $e');
+    }
+  }
 }

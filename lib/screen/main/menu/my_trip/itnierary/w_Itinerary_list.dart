@@ -57,6 +57,7 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
       child: Tap(
         onTap: () {
           ItineraryApi.getItinerary(ref, widget.allItinerary.itineraryId.toString());
+          ItineraryApi.PostAddNewEachPickPlace(ref);
           Nav.pop(context);
         },
         child: Row(

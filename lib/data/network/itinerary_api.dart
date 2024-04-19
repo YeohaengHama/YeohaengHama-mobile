@@ -458,40 +458,77 @@ class ItineraryApi {
       throw e;
     }
   }
-  Future<Response> PostAddEachPickPlace(AddPickPlace addPickPlace, WidgetRef ref) async {
+  Future<Response> PostAddEachPickPlace(WidgetRef ref, AddPickPlace addPickPlace) async {
     try {
       final itineraryCheckNotifier = ref.read(itineraryCheckProvider.notifier);
+      Response response;
 
-      final data = {
-        'day': addPickPlace.day,
-        'startTime': addPickPlace.startTime,
-        'endTime': addPickPlace.endTime,
-        'placeType': addPickPlace.placeType,
-        'placeNum': addPickPlace.placeNum,
-        'placeName': addPickPlace.placeName,
-        'memo': addPickPlace.memo,
-      };
+        final data = {
+          'day': addPickPlace.day,
+          'startTime': addPickPlace.startTime,
+          'endTime': addPickPlace.endTime,
+          'placeType': addPickPlace.placeType,
+          'placeNum': addPickPlace.placeNum,
+          'placeName': addPickPlace.placeName,
+          'addr1': addPickPlace.addr1,
+          'memo': addPickPlace.memo,
+        };
 
-      final response = await _dio.post(
-        '$baseUrl/itinerary/joinPlace/${itineraryCheckNotifier.state?.itineraryId}',
-        data: data,
-      );
+        response = await _dio.post(
+          '$baseUrl/itinerary/joinPlace/${itineraryCheckNotifier.state?.itineraryId}',
+          data: data,
+        );
+
 
       if (response.statusCode == 200) {
-        if (response.statusCode == 200) {
-          final jsonDataList = response.data['data'] as List<dynamic>;
-          final List<AddPickPlace> addPickPlaces = jsonDataList
-              .map((json) => AddPickPlace.fromJson(json))
-              .toList();
+        final jsonDataList = response.data['data'] as List<dynamic>;
+        final List<AddPickPlace> addPickPlaces = jsonDataList
+            .map((json) => AddPickPlace.fromJson(json))
+            .toList();
 
-          if (addPickPlaces.isEmpty) {
-            ref.read(addPickEachPlaceProvider.notifier).clearReviews();
-            print('리뷰 목록이 비어있습니다.');
-          } else {
-            ref.read(addPickEachPlaceProvider.notifier).setAddPickPlace(addPickPlaces);
-            print('장소 추가 성공: $addPickPlaces');
-          }
+        if (addPickPlaces.isEmpty) {
+          ref.read(addPickEachPlaceProvider.notifier).clearPlace();
+          print('장소 목록이 비어있습니다.');
+        } else {
+          ref.read(addPickEachPlaceProvider.notifier).setAddPickPlace(addPickPlaces);
+          print('장소 추가 성공: $addPickPlaces');
         }
+
+        print('일정에 장소 추가 완료');
+        return response;
+      } else if (response.statusCode == 401) {
+        print('error');
+        return response;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    }
+  }
+  Future<Response> PostAddNewEachPickPlace(WidgetRef ref) async {
+    try {
+      final itineraryCheckNotifier = ref.read(itineraryCheckProvider.notifier);
+      Response response;
+      print(itineraryCheckNotifier.state!.itineraryId);
+      response = await _dio.post(
+        '$baseUrl/itinerary/joinPlace/${itineraryCheckNotifier.state!.itineraryId}',
+        data:{},
+      );
+
+
+      if (response.statusCode == 200) {
+        ref.read(addPickEachPlaceProvider.notifier).clearPlace();
+        final jsonDataList = response.data['data'] as List<dynamic>;
+        final List<AddPickPlace> addPickPlaces = jsonDataList
+            .map((json) => AddPickPlace.fromJson(json))
+            .toList();
+          ref.read(addPickEachPlaceProvider.notifier).setAddPickPlace(addPickPlaces);
+          print('장소 추가 성공: $addPickPlaces');
+
+
         print('일정에 장소 추가 완료');
         return response;
       } else if (response.statusCode == 401) {

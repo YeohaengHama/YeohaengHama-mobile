@@ -34,7 +34,7 @@ class PickAreaWidget extends ConsumerWidget {
     );
     return Tap(
       onTap: () {
-        itineraryApi.PostAddEachPickPlace(addPickPlace, ref);
+        itineraryApi.PostAddEachPickPlace(ref, addPickPlace);
         itineraryApi.postDeletePlace(deletePlace, ref);
       },
 

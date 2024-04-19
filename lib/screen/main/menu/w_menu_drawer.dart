@@ -118,6 +118,7 @@ class _MenuDrawerState extends ConsumerState<MenuDrawer> {
           _MenuWidget(
             '내 여행',
             onTap: () async {
+              Nav.pop(context);
               Nav.push(const MyTripScreen());
             },
           ),

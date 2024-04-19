@@ -24,7 +24,7 @@ final addPickEachPlaceProvider = StateNotifierProvider<AddPickEachPlaceListNotif
   void removeAddPickPlace(AddPickPlace addPickPlace) {
     state = state.where((element) => element != addPickPlace).toList();
   }
-  void clearReviews() {
+  void clearPlace() {
     state = []; // 리뷰 목록을 비움
   }
 }
