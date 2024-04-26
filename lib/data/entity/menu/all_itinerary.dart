@@ -8,7 +8,7 @@ class AllItinerary with _$AllItinerary {
   const factory AllItinerary({
     required String startDate,
     required String endDate,
-    required int itineraryId,
+    required int id,
     required String name,
     required int placeLength,
 

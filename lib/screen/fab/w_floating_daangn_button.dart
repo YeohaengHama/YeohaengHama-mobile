@@ -7,7 +7,7 @@ import 'package:fast_app_base/screen/fab/w_floating_daangn_button.riverpod.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../main/menu/my_trip/diary/s_select_itinerary.dart';
+import '../main/menu/my_trip/diary/wirte/s_select_itinerary.dart';
 import '../registration/calendar/s_calendar.dart';
 
 
@@ -47,8 +47,10 @@ class FloatingDaangnButton extends ConsumerWidget {
                     padding: const EdgeInsets.all(15),
                     margin: const EdgeInsets.only(right: 15, bottom: 10),
                     decoration: BoxDecoration(
-                        color: AppColors.pastelPuple,
-                        borderRadius: BorderRadius.circular(10)),
+
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: AppColors.mainPurple)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -70,20 +72,23 @@ class FloatingDaangnButton extends ConsumerWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 18),
                     decoration: BoxDecoration(
                         color: isExpanded
-                            ? AppColors.pastelPuple
-                            : AppColors.mainPurple,
-                        borderRadius: BorderRadius.circular(30)),
+                            ? Colors.white
+                            : AppColors.pastelPuple,
+                        borderRadius: BorderRadius.circular(30),
+                    border:Border.all(color: AppColors.pastelPuple, width: 2)),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         AnimatedRotation(
                             turns: isExpanded ? 0.125 : 0,
                             duration: duration,
-                            child: const Icon(Icons.add,color: Colors.white,),),
+                            child: Icon(Icons.add,color: isExpanded
+                                ? AppColors.pastelPuple
+                                : Colors.white),),
                         AnimatedWidthCollapse(
                           visible: !isSmall,
                           duration: duration,
-                          child: '작성하기'.text.color(Colors.white).make(),
+                          child: '작성하기'.text.color(Colors.white).bold.make(),
                         )
                       ],
                     ),
@@ -104,7 +109,7 @@ class FloatingDaangnButton extends ConsumerWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, color: Colors.white),
+              Icon(icon, color: AppColors.pastelPuple),
               const Width(8),
               title.text.bold.color(AppColors.mainPurple).make(),
             ],

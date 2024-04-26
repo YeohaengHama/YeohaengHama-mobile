@@ -56,7 +56,7 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
       },
       child: Tap(
         onTap: () {
-          ItineraryApi.getItinerary(ref, widget.allItinerary.itineraryId.toString());
+          ItineraryApi.getItinerary(ref, widget.allItinerary.id.toString());
           ItineraryApi.PostAddNewEachPickPlace(ref);
           Nav.pop(context);
         },
@@ -95,7 +95,7 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
                     if (_showIcons || _controller.isAnimating)
                       IconButton(
                         onPressed: () {
-                          ItineraryApi.DeleteItinerary(widget.allItinerary.itineraryId, ref);
+                          ItineraryApi.DeleteItinerary(widget.allItinerary.id, ref);
                           _toggleIcons(!_showIcons);
                           // 삭제 기능 실행
                         },

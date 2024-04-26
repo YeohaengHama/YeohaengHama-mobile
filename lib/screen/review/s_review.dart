@@ -72,7 +72,8 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                           photos: photoNames),
                       ref);
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(_controller.images.toString())));
+                      SnackBar(content: Text('리뷰가 작성되었습니다.')));
+                  Nav.pop(context);
                   //   for (final image in images) {
                   //     if (image.hasPath)
                   //       request.addFile(File(image.path!));

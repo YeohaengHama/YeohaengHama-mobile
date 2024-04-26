@@ -1,6 +1,6 @@
 
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/screen/main/menu/my_trip/diary/w_select_itinerary_list.dart';
+import 'package:fast_app_base/screen/main/menu/my_trip/diary/wirte/w_select_itinerary_list.dart';
 import 'package:flutter/material.dart';
 
 class SelectItineraryScreen extends StatelessWidget {

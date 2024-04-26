@@ -1,13 +1,13 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/entity/menu/all_itinerary.dart';
 import 'package:fast_app_base/data/network/itinerary_api.dart';
-import 'package:fast_app_base/screen/main/menu/my_trip/diary/s_diary_write.dart';
+import 'package:fast_app_base/screen/main/menu/my_trip/diary/wirte/s_diary_write.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:isar/isar.dart';
 
-import '../../../../../common/dart/extension/datetime_extension.dart';
+import '../../../../../../common/dart/extension/datetime_extension.dart';
 
 class SelectItineraryListItem extends ConsumerStatefulWidget {
   const SelectItineraryListItem({Key? key, required this.allItinerary}) : super(key: key);
@@ -34,7 +34,7 @@ class _SelectItineraryListItemState extends ConsumerState<SelectItineraryListIte
     final ItineraryApi = ref.watch(itineraryApiProvider);
     return Tap(
       onTap: () {
-       Nav.push(DiaryWriteScreen(widget.allItinerary.itineraryId));
+       Nav.push(DiaryWriteScreen(widget.allItinerary.id));
       },
       child: Row(
         children: [

@@ -10,7 +10,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
-import '../../../../../data/network/diary_api.dart';
+import '../../../../../../data/network/diary_api.dart';
 
 
 class DiaryWriteScreen extends ConsumerStatefulWidget {
@@ -70,15 +70,9 @@ class _DiaryWriteScreenState extends ConsumerState<DiaryWriteScreen> {
 
 
                   ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(_controller.images.toString())));
-                  //   for (final image in images) {
-                  //     if (image.hasPath)
-                  //       request.addFile(File(image.path!));
-                  //     else
-                  //       request.addFile(File.fromRawPath(image.bytes!));
-                  //   }
-                  //   request.send();
-                  //
+                      SnackBar(content: Text('여행일기가 작성 되었습니다.'),backgroundColor: AppColors.mainPurple,));
+                  Nav.pop(context);
+                  Nav.pop(context);
                 },
               )
             ],

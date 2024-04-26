@@ -7,7 +7,7 @@ import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/post_detail/review/w_review_star.dart';
 import 'package:fast_app_base/screen/post_detail/review/w_simple_review.dart';
 import 'package:fast_app_base/screen/post_detail/w_icons.dart';
-import 'package:fast_app_base/screen/post_detail/w_image_scorll_view.dart';
+import 'package:fast_app_base/screen/post_detail/w_image_scroll_view.dart';
 import 'package:fast_app_base/screen/post_detail/w_info_map.dart';
 
 import 'package:fast_app_base/screen/post_detail/review/w_mini_review_list.dart';
