@@ -86,7 +86,7 @@ class DiaryApi {
       print('일기 목록이 비어있습니다.');
     }
   }
-  Future<void> showAllDiary(int accountId, WidgetRef ref) async {
+  Future<void> showAllDiary(WidgetRef ref) async {
     final url = '$baseUrl/Diary/findAll';
 
     try {

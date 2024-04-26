@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/data/entity/diary/vo_find_all_diary.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../entity/diary/vo_diary.dart';
@@ -9,7 +10,7 @@ import '../../../../../entity/diary/vo_diary.dart';
 
 class HomeDiaryWidget extends StatelessWidget {
   const HomeDiaryWidget(this.diary,{super.key, });
-  final Diary diary;
+  final FindAllDiary diary;
   final double diaryContainerWidth = 270;
   final double diaryContainerHeight = 250;
   final double profile = 40;
@@ -40,15 +41,15 @@ class HomeDiaryWidget extends StatelessWidget {
           height: 100,
           child: Row(
             children: [
-              for (int i = 0; i < min(3, diary.diaryImages.length); i++)
+              for (int i = 0; i < min(3, diary.diaryPhotoUrls.length); i++)
                 Expanded(
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       topLeft: i == 0 ? Radius.circular(10) : Radius.zero,
-                      topRight: i == diary.diaryImages.length - 1 ? Radius.circular(10) : Radius.zero,
+                      topRight: i == diary.diaryPhotoUrls.length - 1 ? Radius.circular(10) : Radius.zero,
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: diary.diaryImages[i],
+                      imageUrl: diary.diaryPhotoUrls[i]["photoURL"]!,
                       width: diaryContainerWidth,
                       height: diaryContainerHeight,
                       fit: BoxFit.cover,
@@ -62,14 +63,14 @@ class HomeDiaryWidget extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.topLeft,
-              child: Text(diary.user.nickname+'님의 여행일기',style:const TextStyle(
+              child: Text('님의 여행일기',style:const TextStyle(
                   color: AppColors.forthGrey,
                   fontSize: 12
               ),).pOnly(bottom: 2),
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: Text(diary.diaryTitle,style:const TextStyle(
+              child: Text(diary.title,style:const TextStyle(
                   color: AppColors.primaryGrey,
                   fontWeight: FontWeight.bold,
                   fontSize: 15
@@ -77,7 +78,7 @@ class HomeDiaryWidget extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: Text(diary.diaryContent,style:const TextStyle(
+              child: Text(diary.content,style:const TextStyle(
                   color: AppColors.secondGrey,
                   fontSize: 13
               ),
@@ -105,7 +106,8 @@ class HomeDiaryWidget extends StatelessWidget {
               ),
               child: ClipOval(
                 child: CachedNetworkImage(
-                  imageUrl: diary.user.profileUrl,
+                  // imageUrl: diary.user.profileUrl,
+                  imageUrl: 'https://picsum.photos/id/13/200/200',
                   width: profile,
                   height: profile,
                 ),

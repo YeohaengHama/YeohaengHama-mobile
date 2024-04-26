@@ -36,7 +36,7 @@ class _MyDiaryFragmentState extends ConsumerState<MyDiaryFragment> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [DiaryList(allDiary[index])],
-          ).pSymmetric(v: 10,h: 35);
+          ).pSymmetric(v: 10);
                   },
                 )
           : const Center(

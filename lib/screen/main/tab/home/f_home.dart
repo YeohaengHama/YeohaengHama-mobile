@@ -1,3 +1,4 @@
+import 'package:fast_app_base/data/entity/diary/vo_find_all_diary.dart';
 import 'package:fast_app_base/screen/main/tab/home/w/w_exist_schedule.dart';
 import 'package:fast_app_base/screen/main/tab/home/w/w_home_diary.dart';
 import 'package:fast_app_base/screen/main/tab/home/w/w_non_schedule.dart';
@@ -11,30 +12,53 @@ import 'package:fast_app_base/screen/main/tab/home/w/w_no_schdule.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../data/memory/diary/diary_find_all_proiver.dart';
 import '../../../../data/memory/itinerary/itinerary_check_provider.dart';
 import '../../../../data/memory/itinerary/itinerary_created_provider.dart';
+import '../../../../data/network/diary_api.dart';
 import '../../../registration/calendar/s_calendar.dart';
 import '../../search/s_space_search.dart';
 
-class HomeFragment extends ConsumerWidget {
-  final double tabListpV = 12;
-  final double tabListph = 20;
-  final double areaSize = 130;
-  final double contentP = 15;
-  final double contentLeftPadding = 30;
-  final double listFontSize = 20.0;
-  final double diaryContainerWidth = 270;
-  final double diaryContainerHeight = 250;
+class HomeFragment extends ConsumerStatefulWidget {
 
   const HomeFragment({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeFragment> createState() => _HomeFragmentState();
+}
+
+class _HomeFragmentState extends ConsumerState<HomeFragment> {
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    final diaryApi = ref.read(diaryApiProvider);
+    diaryApi.showAllDiary(ref);
+  }
+  final double tabListpV = 12;
+
+  final double tabListph = 20;
+
+  final double areaSize = 130;
+
+  final double contentP = 15;
+
+  final double contentLeftPadding = 30;
+
+  final double listFontSize = 20.0;
+
+  final double diaryContainerWidth = 270;
+
+  final double diaryContainerHeight = 250;
+
+  @override
+  Widget build(BuildContext context) {
     final itineraryList = ref.watch(itineraryCreatedProvider);
     final createdItinerary = ref.watch(itineraryCheckProvider);
-
+    final allDiary = ref.watch(DiaryFindAllProvider);
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: AppColors.mainPurple,
       // Android에서 적용됨
@@ -161,14 +185,14 @@ class HomeFragment extends ConsumerWidget {
                     height: diaryContainerHeight + 20,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: diaryList.length,
+                        itemCount: allDiary.length,
                         itemBuilder: (context, index) {
                           return Row(
                             children: [
                               SizedBox(
                                 width: diaryContainerWidth,
                                 height: diaryContainerHeight,
-                                child: HomeDiaryWidget(diaryList[index]),
+                                child: HomeDiaryWidget(allDiary[index]),
                               ).pOnly(left: 5)
                             ],
                           ).pOnly(right: 15);
