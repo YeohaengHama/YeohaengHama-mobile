@@ -41,15 +41,15 @@ class HomeDiaryWidget extends StatelessWidget {
           height: 100,
           child: Row(
             children: [
-              for (int i = 0; i < min(3, diary.diaryPhotoUrls.length); i++)
+              for (int i = 0; i < min(3, diary.photos.length); i++)
                 Expanded(
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
                       topLeft: i == 0 ? Radius.circular(10) : Radius.zero,
-                      topRight: i == diary.diaryPhotoUrls.length - 1 ? Radius.circular(10) : Radius.zero,
+                      topRight: i == diary.photos.length - 1 ? Radius.circular(10) : Radius.zero,
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: diary.diaryPhotoUrls[i]["photoURL"]!,
+                      imageUrl: diary.photos[i]!,
                       width: diaryContainerWidth,
                       height: diaryContainerHeight,
                       fit: BoxFit.cover,
@@ -63,7 +63,7 @@ class HomeDiaryWidget extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.topLeft,
-              child: Text('님의 여행일기',style:const TextStyle(
+              child: Text('${diary.accountShowDTO.nickname}님의 여행일기',style:const TextStyle(
                   color: AppColors.forthGrey,
                   fontSize: 12
               ),).pOnly(bottom: 2),
@@ -105,9 +105,15 @@ class HomeDiaryWidget extends StatelessWidget {
                 ),
               ),
               child: ClipOval(
-                child: CachedNetworkImage(
+                child: diary.accountShowDTO.photoUrl != null
+                    ?
+                CachedNetworkImage(
                   // imageUrl: diary.user.profileUrl,
-                  imageUrl: 'https://picsum.photos/id/13/200/200',
+                  imageUrl: diary.accountShowDTO.photoUrl!,
+                  width: profile,
+                  height: profile,
+                ) :  Image.asset(
+                  '$basePath/icon/colorHama.png',
                   width: profile,
                   height: profile,
                 ),

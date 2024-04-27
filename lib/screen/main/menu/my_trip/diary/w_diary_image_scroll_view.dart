@@ -50,8 +50,7 @@ class _DiaryImageScrollViewState extends State<DiaryImageScrollView> {
                 });
               },
               children: [
-                ...widget.accountDiary.diaryPhotoUrls!.map((diaryPhotoUrls) {
-                  String url = diaryPhotoUrls['photoURL']!;
+                ...widget.accountDiary.photos.map((url) {
                   if (url.isNotEmpty) {
                     return CachedNetworkImage(imageUrl: url, fit: BoxFit.fill);
                   } else {
@@ -67,7 +66,7 @@ class _DiaryImageScrollViewState extends State<DiaryImageScrollView> {
             top: 10,
             right: 10,
             child: Text(
-              '${_currentPage.toInt() + 1}/${widget.accountDiary.diaryPhotoUrls!.length}',
+              '${_currentPage.toInt() + 1}/${widget.accountDiary.photos!.length}',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
@@ -79,7 +78,7 @@ class _DiaryImageScrollViewState extends State<DiaryImageScrollView> {
             alignment: Alignment.bottomCenter,
             child: SmoothPageIndicator(
               controller: widget.pageController,
-              count: widget.accountDiary.diaryPhotoUrls!.length,
+              count: widget.accountDiary.photos!.length,
               effect: const SwapEffect(
                 dotHeight: 10,
                 dotWidth: 10,
