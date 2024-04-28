@@ -47,14 +47,17 @@ class DiaryList extends HookWidget {
                   children: [
                     DiaryImageScrollView(pageController: pageController, accountDiary: _accounDiary),
                     Container(
+                      width: double.infinity,
                       color: Colors.white,
                       height: 100,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          '#서울 #12월출발 #2박3일 #여유롭게힐링 #친구와'.text.bold.color(AppColors.primaryGrey).make().pSymmetric(h: 10)
-                        ],
+                      child: Center(
+                        child: Wrap(
+                          alignment: WrapAlignment.start,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: _accounDiary.tag.map((tag) {
+                            return '#${tag} '.text.bold.color(AppColors.primaryGrey).make().pOnly(right: 2);
+                          }).toList(),
+                        ).pSymmetric(h:10),
                       ),
                     )
 

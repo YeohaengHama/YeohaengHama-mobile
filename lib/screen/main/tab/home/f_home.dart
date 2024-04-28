@@ -1,26 +1,22 @@
-import 'package:fast_app_base/data/entity/diary/vo_find_all_diary.dart';
 import 'package:fast_app_base/screen/main/tab/home/w/w_exist_schedule.dart';
 import 'package:fast_app_base/screen/main/tab/home/w/w_home_diary.dart';
 import 'package:fast_app_base/screen/main/tab/home/w/w_non_schedule.dart';
-import 'package:fast_app_base/screen/main/tab/schedule/f_non_schedule.dart';
-import 'package:fast_app_base/screen/main/tab/schedule/f_schedule.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/dummies.dart';
 import 'package:fast_app_base/screen/main/tab/home/w/w_hama_area.dart';
-import 'package:fast_app_base/screen/main/tab/home/w/w_no_schdule.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../data/memory/diary/diary_find_all_proiver.dart';
 import '../../../../data/memory/itinerary/itinerary_check_provider.dart';
-import '../../../../data/memory/itinerary/itinerary_created_provider.dart';
+
 import '../../../../data/network/diary_api.dart';
-import '../../../registration/calendar/s_calendar.dart';
+
 import '../../search/s_space_search.dart';
 
 class HomeFragment extends ConsumerStatefulWidget {
-
   const HomeFragment({
     Key? key,
   }) : super(key: key);
@@ -30,7 +26,6 @@ class HomeFragment extends ConsumerStatefulWidget {
 }
 
 class _HomeFragmentState extends ConsumerState<HomeFragment> {
-
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -38,6 +33,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
     final diaryApi = ref.read(diaryApiProvider);
     diaryApi.showAllDiary(ref);
   }
+
   final double tabListpV = 12;
 
   final double tabListph = 20;
@@ -56,7 +52,6 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
 
   @override
   Widget build(BuildContext context) {
-    final itineraryList = ref.watch(itineraryCreatedProvider);
     final createdItinerary = ref.watch(itineraryCheckProvider);
     final allDiary = ref.watch(DiaryFindAllProvider);
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(

@@ -6,7 +6,8 @@ part 'vo_find_all_diary.g.dart';
 @freezed
 class FindAllDiary with _$FindAllDiary {
   const factory FindAllDiary({
-    required int itinerary,
+    required int itineraryId,
+    required int diaryId,
     required List<String> tag,
     required String date,
     required String title,

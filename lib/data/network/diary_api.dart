@@ -72,7 +72,8 @@ class DiaryApi {
             final accountShowDTOJson = diaryJson['accountShowDTO'] as Map<String, dynamic>;
             final accountShowDTO = FindAccountDiary.AccountShowDTO.fromJson(accountShowDTOJson);
             return FindAccountDiary.FindAccountDiary(
-              itinerary: diaryJson['itinerary'] as int,
+              itineraryId: diaryJson['itineraryId'] as int,
+              diaryId: diaryJson['diaryId'] as int,
               tag: (diaryJson['tag'] as List).map((tag) => tag.toString()).toList(),
               date: diaryJson['date'] as String,
               title: diaryJson['title'] as String,
@@ -116,7 +117,8 @@ class DiaryApi {
             final accountShowDTOJson = diaryJson['accountShowDTO'] as Map<String, dynamic>;
             final accountShowDTO = FindAllDiary.AccountShowDTO.fromJson(accountShowDTOJson);
             return FindAllDiary.FindAllDiary(
-              itinerary: diaryJson['itinerary'] as int,
+              itineraryId: diaryJson['itineraryId'] as int,
+              diaryId: diaryJson['diaryId'] as int,
               tag: (diaryJson['tag'] as List).map((tag) => tag.toString()).toList(),
               date: diaryJson['date'] as String,
               title: diaryJson['title'] as String,

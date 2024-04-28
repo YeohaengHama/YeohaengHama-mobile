@@ -1,23 +1,24 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'vo_find_account_diary.freezed.dart';
-part 'vo_find_account_diary.g.dart';
+part 'vo_search_diary_area.freezed.dart';
+part 'vo_search_diary_area.g.dart';
+
 
 @freezed
-class FindAccountDiary with _$FindAccountDiary {
-  const factory FindAccountDiary({
-    required int itineraryId,
-    required int diaryId,
+class SearchDiaryArea with _$SearchDiaryArea {
+  const factory SearchDiaryArea({
+    required int diary,
+    required int itinerary,
     required List<String> tag,
     required String date,
     required String title,
     required String content,
     required List<String> photos,
     required AccountShowDTO accountShowDTO,
-  }) = _FindAccountDiary;
+  }) = _SearchDiaryArea;
 
-  factory FindAccountDiary.fromJson(Map<String, dynamic> json) =>
-      _$FindAccountDiaryFromJson(json);
+  factory SearchDiaryArea.fromJson(Map<String, dynamic> json) =>
+      _$SearchDiaryAreaFromJson(json);
 }
 
 @freezed
