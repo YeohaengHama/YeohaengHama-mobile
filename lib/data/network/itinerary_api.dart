@@ -208,6 +208,8 @@ class ItineraryApi {
           final contentId = item['contentid'].toString();
           final title = item['title'].toString();
           final addr1 = item['addr1'].toString();
+          final mapx = item['mapx'].toString();
+          final mapy = item['mapy'].toString();
           final firstImage = item['firstimage'].toString();
 
           // 성공적으로 가져온 항목의 값을 Map으로 반환
@@ -216,6 +218,8 @@ class ItineraryApi {
             'contentId': contentId,
             'title': title,
             'addr1': addr1,
+            'mapx': mapx,
+            'mapy': mapy,
             'firstImage': firstImage,
           };
         } else {
@@ -264,12 +268,16 @@ class ItineraryApi {
           String title = contents['title'];
           String firstImage = contents['firstImage'];
           String addr1 = contents['addr1'];
+          String mapx = contents['mapx'];
+          String mapy = contents['mapy'];
 
           final pickPlace = PickPlace(
               contentId: placeNum,
               contentTypeId: contentTypeId,
               title: title,
               addr1: addr1,
+              mapx: mapx,
+              mapy: mapy,
               firstImage: firstImage);
           ref
               .read(showPickPlaceApiResponseProvider.notifier)
@@ -317,12 +325,16 @@ class ItineraryApi {
           String title = contents['title'];
           String firstImage = contents['firstImage'];
           String addr1 = contents['addr1'];
+          String mapx = contents['mapx'];
+          String mapy = contents['mapy'];
 
           final pickPlace = PickPlace(
               contentId: placeNum,
               contentTypeId: contentTypeId,
               title: title,
               addr1: addr1,
+              mapx: mapx,
+              mapy: mapy,
               firstImage: firstImage);
           ref
               .read(showPickPlaceApiResponseProvider.notifier)
@@ -471,6 +483,8 @@ class ItineraryApi {
           'placeNum': addPickPlace.placeNum,
           'placeName': addPickPlace.placeName,
           'addr1': addPickPlace.addr1,
+          'mapx': addPickPlace.mapx.toString(),
+          'mapy': addPickPlace.mapy.toString(),
           'memo': addPickPlace.memo,
         };
 

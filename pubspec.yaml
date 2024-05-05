@@ -57,7 +57,9 @@ dependencies:
   shared_preferences: ^2.0.15
   isar: 3.1.0
   isar_flutter_libs: 3.1.0
-
+  path_provider: ^2.1.3
+  #indicator
+  loading_animation_widget: ^1.2.1
   #architecture
   event_bus: ^2.0.0
   get: ^4.6.5

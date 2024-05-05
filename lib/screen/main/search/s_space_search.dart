@@ -37,7 +37,7 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
     return Scaffold(
       appBar: SearchAppBar(
         controller: searchController,
-        hintText: '관광/맛집을 검색 해보세요.',
+        hintText: '지역/관광/맛집을 검색 해보세요.',
         contentTypeId: ref.watch(contentTypeIdProvider.notifier).state,
       ),
       body: Column(

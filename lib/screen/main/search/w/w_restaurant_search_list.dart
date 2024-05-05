@@ -62,7 +62,7 @@ class RestaurantSearchListWidget extends ConsumerWidget {
       child: Container(
         child: Row(
           children: [
-            searchSimpleRestaurantResult.firstimage != ""
+            searchSimpleRestaurantResult.firstimage != ''
                 ? CachedNetworkImage(
               imageUrl: searchSimpleRestaurantResult.firstimage,
               width: 45,

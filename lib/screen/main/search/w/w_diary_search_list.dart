@@ -1,19 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/data/entity/search/vo_search_diary_area.dart';
+import 'package:fast_app_base/data/network/search_api.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../entity/diary/vo_diary.dart';
 
-class DiarySearchListWidget extends StatelessWidget {
+class DiarySearchListWidget extends ConsumerWidget {
   const DiarySearchListWidget(
     this.diary, {
     super.key,
   });
 
-  final Diary diary;
+  final SearchDiaryArea diary;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+
+
     return Column(
       children: [
       Container(
@@ -23,7 +29,7 @@ class DiarySearchListWidget extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: CachedNetworkImage(
-                imageUrl: diary.diaryImages[0],
+                imageUrl: diary.photos[0],
                 width: 80,
                 height: 80,
                 fit: BoxFit.cover,
@@ -38,7 +44,7 @@ class DiarySearchListWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    diary.diaryTitle,
+                    diary.title,
                     style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: AppColors.primaryGrey,
@@ -48,7 +54,7 @@ class DiarySearchListWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    diary.diaryContent,
+                    diary.content,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: AppColors.secondGrey,
@@ -58,7 +64,7 @@ class DiarySearchListWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    diary.diaryTag.map((tag) => '#$tag').join('  '),
+                    diary.tag.map((tag) => '#$tag').join('  '),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: AppColors.thirdGrey,
@@ -69,7 +75,7 @@ class DiarySearchListWidget extends StatelessWidget {
                   ),
 
                   Text(
-                    diary.user.nickname,
+                    diary.accountShowDTO.nickname,
                     style: const TextStyle(
                         color: AppColors.forthGrey,
                         fontSize: 11),

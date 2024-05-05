@@ -3,7 +3,7 @@ import 'package:fast_app_base/screen/main/search/w/w_tourism_search_list.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../data/memory/area/area_simple_provider.dart';
+import '../../../data/memory/search/search_simple_area_provider.dart';
 
 class TourismSearchListFragment extends ConsumerWidget {
   const TourismSearchListFragment({super.key});

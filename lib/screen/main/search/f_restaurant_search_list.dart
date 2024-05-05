@@ -4,7 +4,9 @@ import 'package:fast_app_base/screen/main/search/w/w_restaurant_search_list.dart
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../data/memory/area/area_simple_restaurant_provider.dart';
+import '../../../data/memory/search/search_simple_restaurant_provider.dart';
+
+
 
 
 
