@@ -12,8 +12,9 @@ import '../entity/open_api/open_api_area.dart';
 import '../entity/open_api/open_api_detail.dart';
 import '../memory/area/area_detail_provider.dart';
 import '../memory/area/area_image_provider.dart';
-import '../memory/area/area_simple_provider.dart';
-import '../memory/area/area_simple_restaurant_provider.dart';
+import '../memory/search/search_simple_area_provider.dart';
+import '../memory/search/search_simple_restaurant_provider.dart';
+
 
 
 final areaApiProvider = Provider<AreaApi>((ref) => AreaApi());
@@ -207,22 +208,32 @@ class AreaApi {
         String responseDataString = response.data.toString().replaceAll('<xmp>', '').replaceAll('</xmp>', '');
         Map<String, dynamic> responseData = json.decode(responseDataString);
 
-        final dynamic itemsData = responseData['response']['body']['items']['item'];
+        final dynamic itemsData = responseData['response']['body']['items'];
 
-        if (itemsData != null && itemsData is List && itemsData.isNotEmpty) {
-          final List<dynamic> items = itemsData;
-          for (var item in items) {
-            final originImgUrl = item['originimgurl'].toString();
-            final smallImgUrl = item['smallimageurl'].toString();
+        if (itemsData != "") {
+          // 데이터가 있는 경우
+          final dynamic items = itemsData['item'];
+          if (items != null && items is List && items.isNotEmpty) {
+            for (var item in items) {
+              final originImgUrl = item['originimgurl'].toString();
+              final smallImgUrl = item['smallimageurl'].toString();
 
-            final searchImageResult = SearchImageResult(
-                imagesUrl: [originImgUrl, smallImgUrl]
+              final searchImageResult = SearchImageResult(
+                  imagesUrl: [originImgUrl, smallImgUrl]
+              );
+              areaImageNotifier.addAreaImage(searchImageResult);
+              print(searchImageResult);
+            }
+          } else {
+            // Handle the case where 'item' is empty or not present
+            const searchImageResult = SearchImageResult(
+                imagesUrl: [''] // Add an empty string to imagesUrl
             );
             areaImageNotifier.addAreaImage(searchImageResult);
             print(searchImageResult);
           }
         } else {
-          // Handle the case where 'items' is empty or not present
+          // 데이터가 없는 경우
           const searchImageResult = SearchImageResult(
               imagesUrl: [''] // Add an empty string to imagesUrl
           );

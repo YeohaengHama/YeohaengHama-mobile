@@ -10,6 +10,8 @@ class PickPlace with _$PickPlace {
     required String contentTypeId,
     required String title,
     required String addr1,
+    required String mapx,
+    required String mapy,
     required String firstImage,
 }
       ) = _PickPlace;

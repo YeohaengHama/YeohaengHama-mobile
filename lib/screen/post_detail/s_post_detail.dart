@@ -30,7 +30,7 @@ class postDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final postDetail = ref.watch(DetailAreaApiResponseProvider);
+    final postDetail = ref.read(DetailAreaApiResponseProvider);
 
     return postDetail.when(
       data: (data) => _PostDetail(searchDetailResult, searchImageResult),
@@ -149,7 +149,7 @@ class postDetailScreen extends ConsumerWidget {
                           .make(),
                       ReviewStar(reviewList),
                       const Height(20),
-                      const IconsWidget(),
+                      IconsWidget(int.parse(searchDetailResult.contentId), int.parse(searchDetailResult.contentTypeId)),
                       const Height(20),
                       const Line(
                         width: maxWidthSize,

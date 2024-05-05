@@ -16,10 +16,10 @@ import '../../../entity/dummies.dart';
 import '../../review/s_review.dart';
 
 class SimpleReviewWidget extends ConsumerStatefulWidget {
-  const SimpleReviewWidget(this.contentId, this.contentTypeId, {Key? key}) : super(key: key);
+  const SimpleReviewWidget(this.id, this.type, {Key? key}) : super(key: key);
 
-  final int contentId;
-  final int contentTypeId;
+  final int id;
+  final int type;
 
   @override
   ConsumerState<SimpleReviewWidget> createState() => _SimpleReviewWidgetState();
@@ -36,7 +36,7 @@ class _SimpleReviewWidgetState extends ConsumerState<SimpleReviewWidget> {
     super.initState();
 
     final reviewApi = ref.read(reviewApiProvider);
-    reviewApi.showAllReview(widget.contentId, widget.contentTypeId, ref);
+    reviewApi.showAllReview(widget.id, widget.type, ref);
   }
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class _SimpleReviewWidgetState extends ConsumerState<SimpleReviewWidget> {
               spacer,
               IconButton(
                 onPressed: () {
-                  Nav.push(const ReviewScreen());
+                  Nav.push(ReviewScreen(widget.id, widget.type));
                 },
                 icon: const Icon(
                   Icons.edit_note,

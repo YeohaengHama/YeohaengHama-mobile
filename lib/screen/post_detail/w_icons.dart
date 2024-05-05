@@ -12,10 +12,11 @@ import '../../data/memory/user_provider.dart';
 import '../../data/network/itinerary_api.dart';
 
 class IconsWidget extends ConsumerStatefulWidget {
-  const IconsWidget({
+  const IconsWidget(this.id, this.type, {
     super.key,
   });
-
+  final int id;
+  final int type;
   @override
   ConsumerState<IconsWidget> createState() => _icons_widgetState();
 }
@@ -125,7 +126,7 @@ class _icons_widgetState extends ConsumerState<IconsWidget> {
         Expanded(
           child: IconButton(
             padding: const EdgeInsets.all(0),
-            onPressed: () {Nav.push(ReviewScreen());},
+            onPressed: () {Nav.push(ReviewScreen(widget.id, widget.type));},
             icon: Column(
               children: [
                 const Icon(

@@ -11,7 +11,9 @@ class AddPickPlace with _$AddPickPlace {
     required String placeType,
     required String placeNum,
     String? placeName,
-    String? addr1,
+    required String  addr1,
+    required double mapx,
+    required double mapy,
     String? startTime,
     String? endTime,
     String? memo
