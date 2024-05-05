@@ -6,6 +6,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../common/common.dart';
 import '../../entity/area/vo_tourism.dart';
+
 class ImageScrollView extends StatefulWidget {
   const ImageScrollView({
     Key? key,
@@ -38,7 +39,14 @@ class _ImageScrollViewState extends State<ImageScrollView> {
                     return CachedNetworkImage(imageUrl: url, fit: BoxFit.fill);
                   } else {
                     return Container(
-                      color: Colors.grey, // 배경색을 원하는 색상으로 지정
+                      color: Colors.white,
+                      width: 50,
+                      height: 50,
+                      child: Image.asset(
+                        '$basePath/icon/hama.png',
+                        width: 50,
+                        height: 50,
+                      ), // 배경색을 원하는 색상으로 지정
                     );
                   }
                 }).toList(),
@@ -71,5 +79,4 @@ class _ImageScrollViewState extends State<ImageScrollView> {
     }
     super.dispose();
   }
-
 }

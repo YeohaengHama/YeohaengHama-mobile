@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/entity/account/vo_account.dart';
 import 'package:fast_app_base/data/entity/account/vo_current_account.dart';
 import 'package:fast_app_base/data/entity/account/vo_login.dart';
@@ -24,14 +25,21 @@ class UserApi {
     final url = '$baseUrl/account/join';
 
     try {
-      final response = await _dio.post(
+      FormData formData = FormData();
+
+      formData.fields.addAll([
+        MapEntry('email', account.email),
+        MapEntry('pw', account.pw),
+        MapEntry('nickname', account.nickname),
+      ]);
+
+      if (account.file != null) {
+        formData.files.add(MapEntry('file', await MultipartFile.fromFile(account.file!)));
+      }
+
+      final response = await Dio().post(
         url,
-        data: {
-          'email': account.email,
-          'pw': account.pw,
-          'file': account.file,
-          'nickname': account.nickname,
-        },
+        data: formData,
       );
 
       if (response.statusCode == 200) {
@@ -65,11 +73,11 @@ class UserApi {
         final id = data['id'].toString();
         final nickName = data['nickname'];
         final photoUrl = data['photoUrl'];
-        print(id.runtimeType);
         print('로그인 성공: id=$id, nickName=$nickName, photoUrl=$photoUrl');
         final currentAccount = CurrentAccount(id: id, nickName: nickName, photoUrl: photoUrl);
         accountNotifier.addCurrentAccount(currentAccount);
-        print(currentAccount);
+
+        // data['accountRole'] != 'ACCOUNT' ? Nav.push() :
 
         // 다른 화면으로 이동 또는 필요한 작업 수행
         // 예시로 MainScreen으로 이동
@@ -174,6 +182,45 @@ class UserApi {
       }
     } catch (e) {
       print('카카오톡 로그인 요청 중 오류 발생: $e');
+    }
+  }
+
+  Future<void> updateAccount(CurrentAccount account, WidgetRef ref) async {
+    final url = '$baseUrl/account/update';
+    final accountNotifier = ref.read(accountProvider.notifier);
+    try {
+      FormData formData = FormData();
+
+      formData.fields.addAll([
+        MapEntry('id', account.id),
+        MapEntry('nickname', account.nickName),
+      ]);
+
+      if (account.photoUrl != null) {
+        formData.files.add(MapEntry('photo', await MultipartFile.fromFile(account.photoUrl!)));
+      }
+
+      final response = await Dio().post(
+        url,
+        data: formData,
+      );
+
+      if (response.statusCode == 200) {
+        print('회원정보 변경 성공: ${response.data}');
+        print('회원정보 변경 성공: ${response.data}');
+        final responseData = response.data['data'];
+        final currentAccount = CurrentAccount(
+          id: responseData['id'].toString(),
+          nickName: responseData['nickname'],
+          photoUrl: responseData['photoUrl'],
+        );
+        accountNotifier.addCurrentAccount(currentAccount);
+
+      }else {
+        print('회원정보 변경 실패: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
     }
   }
 }

@@ -7,6 +7,7 @@ import 'package:fast_app_base/screen/main/menu/my_trip/itnierary/f_my_itnerary.d
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../data/network/diary_api.dart';
 import '../../../fab/w_floating_daangn_button.dart';
 
 
@@ -31,7 +32,12 @@ class _MyTripScreenState extends ConsumerState<MyTripScreen> with SingleTickerPr
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop(); // 뒤로 가기 기능 구현
+            Navigator.of(context).pop();
+            setState(() {
+              // 데이터를 새로 고침하는 작업을 수행합니다.
+              final diaryApi = ref.read(diaryApiProvider);
+              diaryApi.showAllDiary(ref);
+            });// 뒤로 가기 기능 구현
           },
         ),
 
@@ -47,6 +53,8 @@ class _MyTripScreenState extends ConsumerState<MyTripScreen> with SingleTickerPr
                 child: CachedNetworkImage(
                   imageUrl: accountNotifier.photoUrl!,
                   height: 120,
+                  width: 120,
+                  fit: BoxFit.cover,
                 ),
               )
                   : ClipOval(

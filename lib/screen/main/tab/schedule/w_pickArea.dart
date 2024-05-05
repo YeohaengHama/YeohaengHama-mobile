@@ -26,7 +26,7 @@ class PickAreaWidget extends ConsumerWidget {
     final accountNotifier = ref.read(accountProvider.notifier);
     final ItineraryApi itineraryApi= ItineraryApi();
     final selectedDayIndexNotifier = ref.watch(selectedDayIndexNotifierProvider);
-    final AddPickPlace addPickPlace = AddPickPlace(day: selectedDayIndexNotifier+1,addr1: pickPlace.addr1, placeType: pickPlace.contentTypeId, placeNum: pickPlace.contentId, placeName:pickPlace.title,startTime: "string", endTime: "string",memo: "string" );
+    final AddPickPlace addPickPlace = AddPickPlace(day: selectedDayIndexNotifier+1,addr1: pickPlace.addr1, mapx: double.parse(pickPlace.mapx), mapy: double.parse(pickPlace.mapy), placeType: pickPlace.contentTypeId, placeNum: pickPlace.contentId, placeName:pickPlace.title,startTime: "string", endTime: "string",memo: "string" );
     final deletePlace = DeletePlace(
         accountId: int.parse(accountNotifier.state!.id),
         placeNum: pickPlace.contentId,

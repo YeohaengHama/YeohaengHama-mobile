@@ -112,6 +112,7 @@ class HomeDiaryWidget extends StatelessWidget {
                   imageUrl: diary.accountShowDTO.photoUrl!,
                   width: profile,
                   height: profile,
+                  fit: BoxFit.cover,
                 ) :  Image.asset(
                   '$basePath/icon/colorHama.png',
                   width: profile,
