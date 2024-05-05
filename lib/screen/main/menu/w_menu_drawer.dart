@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fast_app_base/common/widget/w_arrow.dart';
+import 'package:fast_app_base/screen/main/menu/my_option/s_my_option.dart';
 import 'package:fast_app_base/screen/main/menu/my_trip/s_my_trip.dart';
 import 'package:fast_app_base/screen/opensource/s_opensource.dart';
 import 'package:flutter/foundation.dart';
@@ -98,7 +99,10 @@ class _MenuDrawerState extends ConsumerState<MenuDrawer> {
                 ? ClipOval(
               child: CachedNetworkImage(
                 imageUrl: accountNotifier.photoUrl!,
+
                 height: 120,
+                width: 120,
+                fit: BoxFit.cover,
               ),
             )
                 : ClipOval(
@@ -159,11 +163,8 @@ class _MenuDrawerState extends ConsumerState<MenuDrawer> {
           _MenuWidget(
             '내 설정',
             onTap: () async {
-              final manager = DefaultCacheManager();
-              await manager.emptyCache();
-              if (mounted) {
-                MessageDialog('clear_cache_done'.tr()).show();
-              }
+              Nav.pop(context);
+              Nav.push(const MyOptionScreen());
             },
           ),
           const Line().pSymmetric(h:15),
