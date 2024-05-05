@@ -1,17 +1,15 @@
 import 'dart:io';
-import 'dart:convert';
-
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_round_button.dart';
 import 'package:fast_app_base/common/widget/w_rounded_container.dart';
 import 'package:fast_app_base/data/entity/account/vo_account.dart';
 import 'package:fast_app_base/data/network/user_api.dart';
 import 'package:fast_app_base/screen/Account/w_text_widget.dart';
-import 'package:fast_app_base/screen/dialog/d_select_image_source.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import '../client/dialog/d_select_image_source.dart';
 
-import '../../data/entity/vo_user.dart';
+
 
 class JoinScreen extends StatefulWidget {
   const JoinScreen({super.key});
@@ -50,11 +48,12 @@ class _JoinScreenState extends State<JoinScreen> {
     final account = Account(
       email: idController.text,
       pw: pwController.text,
-      file: profileFile != null ? base64Encode(profileFile!.readAsBytesSync()) : null,
+      file: profileFile != null ? profileFile!.path : null,
       nickname: nameController.text,
     );
 
     await _userApi.postAccountData(account);
+    Navigator.of(context).pop();
   }
 
 

@@ -9,7 +9,7 @@ import 'package:fast_app_base/data/network/api_error.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../screen/main/s_main.dart';
+import '../../screen/client/main/s_main.dart';
 import '../entity/open_api/open_api_area.dart';
 import '../memory/user_provider.dart';
 import '../simple_result.dart';

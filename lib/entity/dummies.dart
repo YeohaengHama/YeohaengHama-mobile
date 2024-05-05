@@ -6,7 +6,6 @@ import 'package:fast_app_base/entity/diary/vo_diary.dart';
 import 'package:fast_app_base/entity/schedule/vo_schedule.dart';
 import 'package:fast_app_base/entity/tag/vo_who_tag.dart';
 import 'package:fast_app_base/entity/user/vo_user.dart';
-import 'package:fast_app_base/screen/main/tab/schedule/f_schedule.dart';
 
 import 'area/vo_tourism.dart';
 

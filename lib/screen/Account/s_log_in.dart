@@ -1,6 +1,5 @@
 import 'package:fast_app_base/screen/Account/s_join.dart';
-import 'package:fast_app_base/screen/main/s_main.dart';
-import 'package:fast_app_base/screen/main/tab/home/f_home.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
