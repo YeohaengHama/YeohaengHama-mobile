@@ -22,10 +22,10 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
   @override
   Widget build(BuildContext context) {
     placeList = ref.watch(addPickEachPlaceProvider);
-    // _removeMarkers();
-    // _updatePlaceCoordinates();
-    // _addMarkers();
-    // _drawLines();
+    _removeMarkers();
+    _updatePlaceCoordinates();
+    _addMarkers();
+    _drawLines();
     return Scaffold(
       body: NaverMap(
         forceGesture: true,
