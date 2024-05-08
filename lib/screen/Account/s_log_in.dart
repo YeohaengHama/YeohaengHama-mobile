@@ -1,26 +1,53 @@
 import 'package:fast_app_base/screen/Account/s_join.dart';
+
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:http/http.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../common/common.dart';
+import '../../data/entity/account/vo_login.dart';
+import '../../data/network/user_api.dart';
 import 'w_text_widget.dart'; // TextWidget 파일이 있는 경로에 맞게 수정
 
-class LogInScreen extends StatefulWidget {
+
+final userApiProvider = Provider<UserApi>((ref) => UserApi());
+
+class LogInScreen extends ConsumerStatefulWidget {
   const LogInScreen({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  _LogInScreenState createState() => _LogInScreenState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
+class _LogInScreenState extends ConsumerState<LogInScreen> {
   final idController = TextEditingController();
   final pwController = TextEditingController();
   bool obscureText = true;
 
+  Future<void> _loginUser() async {
+    final login = LogIn(
+      email: idController.text,
+      pw: pwController.text,
+    );
+
+    final userApi = ref.read(userApiProvider);
+
+    try {
+      await userApi.postLoginUser(login, context, ref);
+
+      // 다른 로직 추가
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      backgroundColor: Colors.white, // 배경색 설정
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           children: [
@@ -55,7 +82,7 @@ class _LogInScreenState extends State<LogInScreen> {
                     child: InkWell(
                       onTap: () {
                         setState(() {
-                          obscureText = !obscureText; // 눈 아이콘 클릭시 상태 변경
+                          obscureText = !obscureText;
                         });
                       },
                       child: Icon(
@@ -75,22 +102,25 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            Container(
-              height: loginHeight + 8,
-              width: loginWidth,
-              decoration: BoxDecoration(
-                color: AppColors.mainPurple,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: const Align(
-                alignment: Alignment.center,
-                child: Text(
-                  '로그인',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'Pretendard',
-                    fontWeight: FontWeight.bold,
+            Tap(
+              onTap: (){_loginUser();},
+              child: Container(
+                height: loginHeight + 8,
+                width: loginWidth,
+                decoration: BoxDecoration(
+                  color: AppColors.mainPurple,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    '로그인',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'Pretendard',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -110,6 +140,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             MaterialPageRoute(
                                 builder: (context) => const JoinScreen()),
                           );
+
                         },
                         child: ('회원가입')
                             .text
@@ -145,23 +176,26 @@ class _LogInScreenState extends State<LogInScreen> {
               child: Row(
                 children: [
                   Expanded(
-                      child: Image.asset(
-                    '$basePath/icon/kakao.png',
-                    width: 75,
-                    height: 75,
-                  )),
+                      child: Tap(
+                        onTap: () { _launchURL(); },
+                        child: Image.asset(
+                          '$basePath/icon/kakao.png',
+                          width: 75,
+                          height: 75,
+                        ),
+                      )),
                   Expanded(
                       child: Image.asset(
-                    '$basePath/icon/google.png',
-                    width: 75,
-                    height: 75,
-                  )),
+                        '$basePath/icon/google.png',
+                        width: 75,
+                        height: 75,
+                      )),
                   Expanded(
                       child: Image.asset(
-                    '$basePath/icon/apple.png',
-                    width: 75,
-                    height: 75,
-                  )),
+                        '$basePath/icon/apple.png',
+                        width: 75,
+                        height: 75,
+                      )),
                 ],
               ),
             )
@@ -169,5 +203,14 @@ class _LogInScreenState extends State<LogInScreen> {
         ),
       ),
     );
+  }
+}
+
+void _launchURL() async {
+  final Uri url = Uri.parse('https://kauth.kakao.com/oauth/authorize?client_id=a9d1711e66ed62d5be76957294ab0a9f&redirect_uri=https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api/kakao/login&response_type=code');
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

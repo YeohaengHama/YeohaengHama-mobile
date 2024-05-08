@@ -29,6 +29,7 @@ extension ContextExtension on BuildContext {
     return MediaQuery.of(this).padding.top;
   }
 
+
   double get viewPaddingBottom {
     return MediaQuery.of(this).padding.bottom;
   }

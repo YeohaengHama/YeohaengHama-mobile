@@ -7,14 +7,19 @@ class RoundedContainer extends StatelessWidget {
   final EdgeInsets? margin;
   final double radius;
   final Color? backgroundColor;
+  final Color? borderColor;
+  final double borderWidth;
+
 
   const RoundedContainer(
       {required this.child,
-        super.key,
-        this.radius = 10,
-        this.backgroundColor,
-        this.margin,
-        this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15)});
+      super.key,
+      this.radius = 10,
+      this.backgroundColor,
+      this.margin,
+      this.borderColor,
+      this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      this.borderWidth= 1.0});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,10 @@ class RoundedContainer extends StatelessWidget {
       padding: padding,
       margin: margin,
       decoration: BoxDecoration(
-          color: backgroundColor ?? AppColors.mainPurple,
+          color: backgroundColor ?? Colors.white,
+          border: borderColor != null
+              ? Border.all(color: borderColor!, width:borderWidth) // 테두리 굵기 설정
+              : null,
           borderRadius: BorderRadius.circular(radius)),
       child: child,
     );

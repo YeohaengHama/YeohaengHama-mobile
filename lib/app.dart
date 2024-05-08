@@ -1,7 +1,9 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/theme/custom_theme_app.dart';
 import 'package:fast_app_base/screen/Account/s_log_in.dart';
+
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'common/theme/custom_theme.dart';
 
@@ -38,14 +40,16 @@ class AppState extends State<App> with Nav, WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return CustomThemeApp(
       child: Builder(builder: (context) {
-        return MaterialApp(
-          navigatorKey: App.navigatorKey,
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          title: 'Image Finder',
-          theme: context.themeType.themeData,
-          home: LogInScreen(),
+        return ProviderScope(
+          child: MaterialApp(
+            navigatorKey: App.navigatorKey,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
+            title: 'Image Finder',
+            theme: context.themeType.themeData,
+            home: const LogInScreen(),
+          ),
         );
       }),
     );
@@ -64,7 +68,7 @@ class AppState extends State<App> with Nav, WidgetsBindingObserver {
         break;
       case AppLifecycleState.detached:
         break;
-      case AppLifecycleState.hidden: //Flutter 3.13 이하 버전을 쓰신다면 해당 라인을 삭제해주세요.
+      case AppLifecycleState.hidden:
         break;
     }
     super.didChangeAppLifecycleState(state);

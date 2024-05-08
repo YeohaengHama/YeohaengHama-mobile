@@ -4,8 +4,8 @@ export 'dart:async';
 
 export 'package:easy_localization/easy_localization.dart';
 export 'package:flutter_svg/flutter_svg.dart';
-export 'package:nav/nav.dart';
-export 'package:quiver/strings.dart';
+export 'package:nav_hooks/nav.dart';
+
 export 'package:velocity_x/velocity_x.dart';
 
 export '../common/dart/extension/animation_controller_extension.dart';
@@ -24,6 +24,8 @@ export 'widget/w_height_and_width.dart';
 export 'widget/w_line.dart';
 export 'widget/w_tap.dart';
 export 'widget/constant_widget.dart';
+export 'widget/w_round_button.dart';
+export 'widget/w_rounded_container.dart';
 
 
 const defaultFontStyle = GoogleFonts.ptSerif;

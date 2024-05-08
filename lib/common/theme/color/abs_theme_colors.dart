@@ -7,8 +7,8 @@ typedef ColorProvider = Color Function();
 
 abstract class AbstractThemeColors {
   const AbstractThemeColors();
-
-  Color get seedColor => const Color(0xff26ff8c);
+  Color get mainPurple => const Color.fromARGB(255, 137, 152, 232);
+  Color get seedColor => Colors.white;
 
   Color get veryBrightGrey => AppColors.brightGrey;
 
@@ -36,7 +36,7 @@ abstract class AbstractThemeColors {
 
   Color get hintText => AppColors.middleGrey;
 
-  Color get focusedBorder => AppColors.darkGrey;
+  Color get focusedBorder => AppColors.forthGrey;
 
   Color get confirmText => AppColors.blue;
 
