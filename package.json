@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@cloudtype/cli": "^0.7.1"
+  }
+}
