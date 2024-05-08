@@ -99,6 +99,7 @@ class postDetailScreen extends ConsumerWidget {
               expandedHeight: 200.0,
               floating: false,
               pinned: true,
+              scrolledUnderElevation: 0,
               actions: [
                 IconButton(
                   onPressed: () {},

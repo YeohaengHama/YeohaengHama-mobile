@@ -6,6 +6,7 @@ import 'package:fast_app_base/data/entity/account/vo_account.dart';
 import 'package:fast_app_base/data/entity/account/vo_current_account.dart';
 import 'package:fast_app_base/data/entity/account/vo_login.dart';
 import 'package:fast_app_base/data/network/api_error.dart';
+import 'package:fast_app_base/screen/manager/s_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -19,7 +20,7 @@ final userApiProvider = Provider<UserApi>((ref) => UserApi());
 class UserApi {
   final Dio _dio = Dio();
   final String baseUrl =
-      'https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api';
+      serverUrl;
 
   Future<void> postAccountData(Account account) async {
     final url = '$baseUrl/account/join';
@@ -77,16 +78,14 @@ class UserApi {
         final currentAccount = CurrentAccount(id: id, nickName: nickName, photoUrl: photoUrl);
         accountNotifier.addCurrentAccount(currentAccount);
 
-        // data['accountRole'] != 'ACCOUNT' ? Nav.push() :
-
-        // 다른 화면으로 이동 또는 필요한 작업 수행
-        // 예시로 MainScreen으로 이동
-        Navigator.push(
+        data['accountRole'] != 'ACCOUNT' ? Nav.push(ManagerScreen()) : Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => MainScreen(),
           ),
         );
+
+        // 다른 화면으로 이동 또는 필요한 작업 수행
       } else if (response.statusCode == 401) {
         // 로그인 실패 처리
       } else {

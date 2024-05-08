@@ -83,7 +83,7 @@ class _DiaryWriteScreenState extends ConsumerState<DiaryWriteScreen> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                                 backgroundColor: AppColors.mainPurple,
-                                content: Text('리뷰가 작성되었습니다.')),
+                                content: Text('일기가 작성되었습니다.')),
                           );
                           Nav.pop(context);
                           Nav.pop(context);
@@ -145,21 +145,21 @@ class _DiaryWriteScreenState extends ConsumerState<DiaryWriteScreen> {
                   ),
                 ),
               ),
-              if (_isLoading)
-                Stack(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      color: Colors.black.withOpacity(0.3),
-                    ),
-                    Center(
-                        child: LoadingAnimationWidget.fourRotatingDots(
-                            color: AppColors.mainPurple, size: 100)),
-                  ],
-                ),
             ],
           ),
+          if (_isLoading)
+            Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  color: Colors.black.withOpacity(0.3),
+                ),
+                Center(
+                    child: LoadingAnimationWidget.fourRotatingDots(
+                        color: AppColors.mainPurple, size: 100)),
+              ],
+            ),
         ],
       ),
     );

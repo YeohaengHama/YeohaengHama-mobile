@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:fast_app_base/data/entity/open_api/open_api_image.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../common/constants.dart';
 import '../entity/area/saerch_image_result.dart';
 import '../entity/area/search_simple_restaurant_result.dart';
 import '../entity/area/search_simple_toursim_result.dart';
@@ -22,7 +23,7 @@ final areaApiProvider = Provider<AreaApi>((ref) => AreaApi());
 class AreaApi {
   final Dio _dio = Dio();
   final String baseUrl =
-      'https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api';
+      serverUrl;
 
 
   Future<Response> postSearchTourismArea(OpenApiArea openApiArea, WidgetRef ref) async {

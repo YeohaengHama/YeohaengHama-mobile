@@ -1,14 +1,17 @@
 import 'dart:math';
 
 
+import 'package:fast_app_base/common/theme/text_size.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/w_pickArea.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/w_schedule_map.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/w_show_pick_day.dart';
+import 'package:fast_app_base/screen/client/main/tab/schedule/wallet/s_wallet.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../common/common.dart';
 
+import '../../../../../common/dart/extension/datetime_extension.dart';
 import '../../../../../data/entity/itinerary/a_check_itinerary.dart';
 import '../../../../../data/memory/itinerary/show_save_place_provider.dart';
 import '../../../../../data/network/itinerary_api.dart';
@@ -37,11 +40,16 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
             floating: false,
             pinned: true,
             backgroundColor: Colors.white,
-            title: widget.itinerary.name.text
-                .size(15)
-                .bold
-                .color(AppColors.primaryGrey)
-                .make(),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+              widget.itinerary.name.text
+                  .size(15)
+                  .bold
+                  .color(AppColors.primaryGrey)
+                  .make(),
+              formatDateRange(widget.itinerary.startDate, widget.itinerary.endDate).text.size(titleSize-2).color(AppColors.thirdGrey).make()
+            ],) ,
             leading: IconButton(
                 icon: const Icon(Icons.add),
                 onPressed: () {
@@ -49,20 +57,30 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                   Nav.push(const SpaceSearchFragment());
                 }),
             actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.wallet)),
+              IconButton(onPressed: () {
+                Nav.push(WalletScreen(widget.itinerary));
+              }, icon: const Icon(Icons.wallet)),
               IconButton(
                   onPressed: () {}, icon: const Icon(Icons.ios_share_outlined)),
               IconButton(onPressed:() => Scaffold.of(context).openEndDrawer(), icon: const Icon(Icons.list)),
             ],
           ),
           SliverToBoxAdapter(
-            child: Column(
-              children: [
-                const SizedBox(
-                  width: maxWidthSize,
-                  height: 270,
-                  child: ScheduleMapWidget(),
-                ),
+            child: SizedBox(
+              width: maxWidthSize,
+              height: 270,
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onVerticalDragUpdate: (_) {
+
+                },
+                child: ScheduleMapWidget(),
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
                 Container(
                   color: Colors.white,
                   width: maxWidthSize,
@@ -85,7 +103,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                               .make()
                               .pOnly(right: 5, bottom: 5),
                           Transform.rotate(
-                            angle: 270 * (pi / 180), // 270도를 라디안으로 변환
+                            angle: 270 * (pi / 180),
                             child: const Icon(
                               Icons.arrow_back_ios_new_rounded,
                               size: 15,
@@ -102,10 +120,9 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                           itemCount: (pickPlaceList.length ?? 0) + 1,
                           itemBuilder: (context, index) {
                             final pickPlaceList =
-                                ref.watch(showPickPlaceApiResponseProvider);
+                            ref.watch(showPickPlaceApiResponseProvider);
                             if (pickPlaceList.isEmpty ||
                                 index == pickPlaceList.length) {
-                              // pickPlaceList가 비어 있거나, 마지막 항목인 경우
                               return SizedBox(
                                 width: 105,
                                 height: 100,
@@ -122,11 +139,11 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                                 ),
                               ).pOnly(left: 10);
                             } else {
-                              // 기존 항목들에 대한 처리
                               return SizedBox(
                                 width: 105,
                                 height: 100,
-                                child: PickAreaWidget(pickPlaceList[index],widget.itinerary),
+                                child: PickAreaWidget(
+                                    pickPlaceList[index], widget.itinerary),
                               ).pOnly(left: 5);
                             }
                           },
@@ -138,12 +155,12 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                 const Height(15),
                 Container(
                   color: Colors.white,
-                    height:200,
-                    child: ShowPickDay(widget.itinerary))
+                  height: 200,
+                  child: ShowPickDay(widget.itinerary),
+                ),
               ],
             ),
-          )
-          // 다른 SliverAppBar 구성 추가 가능
+          ),
         ],
       ),
     );

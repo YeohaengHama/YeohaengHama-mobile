@@ -5,6 +5,7 @@ import 'package:fast_app_base/data/entity/open_api/open_api_image.dart';
 import 'package:fast_app_base/data/memory/review/review_show_all_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../common/constants.dart';
 import '../entity/review/a_review_post.dart';
 
 import '../entity/review/a_review_show_all.dart';
@@ -16,7 +17,7 @@ final reviewApiProvider = Provider<ReviewApi>((ref) => ReviewApi());
 class ReviewApi {
   final Dio _dio = Dio();
   final String baseUrl =
-      'https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api';
+      serverUrl;
 
   Future<void> postReview(ReviewPost review, WidgetRef ref) async {
     final url = '$baseUrl/review/join';

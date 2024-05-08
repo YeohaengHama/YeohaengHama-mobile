@@ -8,6 +8,7 @@ import 'package:fast_app_base/data/memory/diary/diary_find_all_proiver.dart';
 import 'package:fast_app_base/data/memory/diary/diary_show_account_all_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../common/constants.dart';
 import '../memory/user_provider.dart';
 
 
@@ -16,7 +17,7 @@ final diaryApiProvider = Provider<DiaryApi>((ref) => DiaryApi());
 class DiaryApi {
   final Dio _dio = Dio();
   final String baseUrl =
-      'https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api';
+      serverUrl;
 
   Future<void> saveDiary(SaveDiary diary) async {
     final url = '$baseUrl/Diary/save';

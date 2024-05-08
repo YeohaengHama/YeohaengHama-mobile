@@ -7,9 +7,12 @@ import 'package:fast_app_base/data/entity/itinerary/vo_itinerary.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_pick_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_save_place.dart';
 import 'package:fast_app_base/data/entity/menu/all_itinerary.dart';
+import 'package:fast_app_base/screen/client/main/tab/schedule/s_schedule.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nav_hooks/nav.dart';
 import 'package:riverpod/riverpod.dart';
 
+import '../../common/constants.dart';
 import '../entity/itinerary/a_add_pick_place.dart';
 import '../entity/itinerary/a_check_itinerary.dart';
 import '../entity/itinerary/a_creat_itinerary.dart';
@@ -28,7 +31,7 @@ final itineraryApiProvider = Provider<ItineraryApi>((ref) => ItineraryApi());
 class ItineraryApi {
   final Dio _dio = Dio();
   final String baseUrl =
-      'https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api';
+      serverUrl;
   final String testUrl = 'http://localhost:8080/api';
   final String jinUrl = 'http://172.16.111.158:8080/api';
 
@@ -416,6 +419,7 @@ class ItineraryApi {
 
         final CheckItinerary checkItinerary = CheckItinerary.fromJson(data);
         ref.read(itineraryCheckProvider.notifier).setItinerary!(checkItinerary);
+        PostAddNewEachPickPlace(ref);
 
         return response;
       } else if (response.statusCode == 401) {
@@ -525,6 +529,7 @@ class ItineraryApi {
   Future<Response> PostAddNewEachPickPlace(WidgetRef ref) async {
     try {
       final itineraryCheckNotifier = ref.read(itineraryCheckProvider.notifier);
+      print(CheckItinerary);
       Response response;
       print(itineraryCheckNotifier.state!.itineraryId);
       response = await _dio.post(
@@ -534,11 +539,13 @@ class ItineraryApi {
 
 
       if (response.statusCode == 200) {
+
         ref.read(addPickEachPlaceProvider.notifier).clearPlace();
         final jsonDataList = response.data['data'] as List<dynamic>;
         final List<AddPickPlace> addPickPlaces = jsonDataList
             .map((json) => AddPickPlace.fromJson(json))
             .toList();
+          // Nav.push(ScheduleScreen(itineraryCheckNotifier.state!));
           ref.read(addPickEachPlaceProvider.notifier).setAddPickPlace(addPickPlaces);
           print('장소 추가 성공: $addPickPlaces');
 

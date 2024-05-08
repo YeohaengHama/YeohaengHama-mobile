@@ -6,6 +6,7 @@ class AppColors {
   static const Color grey = Color.fromARGB(255, 139, 139, 139);
   static const Color middleGrey = Color.fromARGB(255, 171, 171, 171);
   static const Color brightGrey = Color.fromARGB(255, 228, 228, 228);
+  static const Color white = Color.fromARGB(255, 255, 255, 255);
   static const Color blueGreen = Color.fromARGB(255, 0, 185, 206);
   static const Color green = Color.fromARGB(255, 132, 206, 191);
   static const Color darkGreen = Color.fromARGB(255, 101, 160, 149);
@@ -18,6 +19,7 @@ class AppColors {
   static const Color salmon = Color(0xffff6666);
   static const Color pastelPuple = Color.fromARGB(255, 212, 219, 255);
   static const Color mainPurple = Color.fromARGB(255, 137, 152, 232);
+  static const Color deepPurple = Color.fromARGB(255, 138, 146, 189);
   static const Color primaryGrey = Color.fromARGB(255, 51, 51, 51);
   static const Color secondGrey = Color.fromARGB(255, 102, 102, 102);
   static const Color thirdGrey = Color.fromARGB(255, 153, 153, 153);

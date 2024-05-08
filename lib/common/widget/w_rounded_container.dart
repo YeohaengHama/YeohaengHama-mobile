@@ -27,7 +27,7 @@ class RoundedContainer extends StatelessWidget {
       padding: padding,
       margin: margin,
       decoration: BoxDecoration(
-          color: backgroundColor ?? AppColors.mainPurple,
+          color: backgroundColor ?? Colors.white,
           border: borderColor != null
               ? Border.all(color: borderColor!, width:borderWidth) // 테두리 굵기 설정
               : null,

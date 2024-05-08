@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:fast_app_base/data/memory/search/search_simple_diary_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../common/constants.dart';
 import '../entity/search/vo_search_diary_area.dart' as SearchDiaryArea;
 
 final SearchApiProvider = Provider<SearchApi>((ref) => SearchApi());
@@ -10,7 +11,7 @@ final SearchApiProvider = Provider<SearchApi>((ref) => SearchApi());
 class SearchApi {
   final Dio _dio = Dio();
   final String baseUrl =
-      'https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api';
+      serverUrl;
 
 
   Future<void> searchDiaryArea(String keyword, WidgetRef ref) async {

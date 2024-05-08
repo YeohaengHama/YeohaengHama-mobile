@@ -78,6 +78,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
             pinned: true,
             backgroundColor: AppColors.mainPurple,
             title: null,
+            scrolledUnderElevation: 0,
             actions: [
               IconButton(
                 onPressed: () {
