@@ -33,15 +33,13 @@ class InfoMapWidget extends StatelessWidget {
           ),
         ),
 
-          InkWell(
-            onTap: () {
+          SizedBox(
+            width: maxWidthSize,
+            height: 250,
+            child: Tap(onTap: () {
               Nav.push(MapDetailScreen(searchDetailResult: searchDetailResult, searchImageResult: searchImageResult));
             },
-            child: SizedBox(
-              width: maxWidthSize,
-              height: 250,
-              child: MapWidget(mapX: double.parse(searchDetailResult.mapX), mapY:  double.parse(searchDetailResult.mapY)),
-            ),
+            child: MapWidget(mapX: double.parse(searchDetailResult.mapX), mapY:  double.parse(searchDetailResult.mapY))),
           ),
           Height(10),
           RoundedContainer(

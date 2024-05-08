@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:fast_app_base/data/entity/open_api/open_api_image.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../common/constants.dart';
 import '../../entity/diary/vo_save_diary.dart';
 
 
@@ -14,7 +15,7 @@ final diaryApiProvider = Provider<DiaryApi>((ref) => DiaryApi());
 class DiaryApi {
   final Dio _dio = Dio();
   final String baseUrl =
-      'https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api';
+      serverUrl;
 
   Future<void> postDiary(SaveDiary diary, WidgetRef ref) async {
     final url = '$baseUrl/Diary/save';

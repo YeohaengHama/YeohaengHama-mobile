@@ -1,4 +1,5 @@
 
+import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 
@@ -29,6 +30,7 @@ class _MapWidgetState extends State<MapWidget> {
         _addMarker();
         print("네이버 맵 로딩됨!");
       },
+      forceGesture: true,
       options: NaverMapViewOptions(
         initialCameraPosition: NCameraPosition(
           target: placeLatLng,
