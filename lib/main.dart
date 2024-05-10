@@ -20,4 +20,5 @@ void main() async {
       path: 'assets/translations',
       useOnlyLangCode: true,
       child: const App()));
+
 }

@@ -11,14 +11,6 @@ StateNotifierProvider<DetailAreaNotifier, AsyncValue<SearchDetailResult>>((ref) 
 class DetailAreaNotifier extends StateNotifier<AsyncValue<SearchDetailResult>> {
   DetailAreaNotifier() : super(AsyncValue.loading());
 
-  String _contentTypeId = "";
-  String _contentId = "";
-  String _title = "";
-  String _addr1 = "";
-  String _addr2 = "";
-  String _overView = "";
-  String _mapX = "";
-  String _mapY = "";
 
   void addDetailArea(SearchDetailResult searchDetailResult) {
     state = AsyncValue.data(searchDetailResult);
