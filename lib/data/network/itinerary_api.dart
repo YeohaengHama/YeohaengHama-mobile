@@ -526,7 +526,7 @@ class ItineraryApi {
       throw e;
     }
   }
-  Future<Response> PostAddNewEachPickPlace(WidgetRef ref) async {
+  Future<Response?> PostAddNewEachPickPlace(WidgetRef ref) async {
     try {
       final itineraryCheckNotifier = ref.read(itineraryCheckProvider.notifier);
       print(CheckItinerary);
@@ -560,8 +560,8 @@ class ItineraryApi {
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
-      print('예외가 발생했습니다: $e');
-      throw e;
+      ref.read(addPickEachPlaceProvider.notifier).clearPlace();
+      return null; // 여기에 null 반환
     }
   }
 

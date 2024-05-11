@@ -8,8 +8,8 @@ part 'a_check_itinerary.g.dart';
 class CheckItinerary with _$CheckItinerary {
       const factory CheckItinerary({
             required String itineraryId,
-            required List<String> type,
-            required List<String> style,
+            required List<String>? type,
+            required List<String>? style,
             required String name,
             required String transportation,
             required String area,
@@ -23,15 +23,15 @@ class CheckItinerary with _$CheckItinerary {
       }) = _CheckItinerary;
 
 //
-      factory CheckItinerary.fromJson(Map<String, dynamic> json) =>
-_$CheckItineraryFromJson(json);
-//   factory CheckItinerary.fromJson(Map<String, dynamic> json) {
-//             final String itineraryId = json['itineraryId']
-//                 .toString(); // itineraryId를 String으로 변환
-//             return _$CheckItineraryFromJson(
-//                   json..['itineraryId'] = itineraryId,
-//             );
-//       }
+//       factory CheckItinerary.fromJson(Map<String, dynamic> json) =>
+// _$CheckItineraryFromJson(json);
+  factory CheckItinerary.fromJson(Map<String, dynamic> json) {
+            final String itineraryId = json['itineraryId']
+                .toString(); // itineraryId를 String으로 변환
+            return _$CheckItineraryFromJson(
+                  json..['itineraryId'] = itineraryId,
+            );
+      }
 }
 
 @JsonSerializable()

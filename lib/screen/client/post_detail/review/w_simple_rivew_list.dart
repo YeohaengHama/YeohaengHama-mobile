@@ -8,7 +8,7 @@ import '../../../../data/entity/review/a_review_show_all.dart';
 
 class SimpleReviewList extends ConsumerWidget {
   const SimpleReviewList(this.review, {Key? key}) : super(key: key);
-  final ReviewShowAll review;
+  final dynamic review;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     String overviewText = review.content;
