@@ -4,11 +4,13 @@ import 'package:fast_app_base/screen/client/post_detail/review/w_star.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../data/entity/review/a_review_show_all.dart';
 
-class SimpleReviewList extends ConsumerWidget {
-  const SimpleReviewList(this.review, {Key? key}) : super(key: key);
-  final ReviewShowAll review;
+import '../../../../../../data/entity/review/vo_review_show_account_.dart';
+
+
+class ReviewImagesWidget extends ConsumerWidget {
+  const ReviewImagesWidget(this.review, {Key? key}) : super(key: key);
+  final ReviewShowAccount review;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     String overviewText = review.content;
@@ -286,52 +288,9 @@ class SimpleReviewList extends ConsumerWidget {
 
 
     return Column(
-    mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: review.account.photoUrl != null
-                  ? CachedNetworkImage(
-                imageUrl: review.account.photoUrl!,
-                width: 40,
-                height: 40,
-                fit: BoxFit.cover,
-              )
-                  : Image.asset(
-                '$basePath/icon/colorHama.png',
-                width: 40,
-                height: 40,
-              ),
-            ),
-
-            review.account.nickname.text
-                .color(AppColors.primaryGrey)
-                .bold
-                .size(13)
-                .make()
-                .pOnly(left: 10),
-          ],
-        ),
-        const SizedBox(height: 10),
-        StarRatingWidget(score: review.rating.toDouble()),
-        const SizedBox(height: 10),
-        SizedBox(
-          width: 370,
-          child: Text(
-            overviewText,
-            style: TextStyle(
-              fontSize: 15,
-              color: AppColors.primaryGrey,
-            ),
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-        const SizedBox(height: 10),
         Container(
           width: maxWidthSize,
           height: 250,

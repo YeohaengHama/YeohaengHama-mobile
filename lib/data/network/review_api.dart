@@ -95,7 +95,7 @@ class ReviewApi {
     }
   }
   Future<void> showReviewAccount(int accountId, WidgetRef ref) async {
-    final url = '$baseUrl/Diary/findAccountDiary?accountId=${accountId}';
+    final url = '$baseUrl/review/showAccountAll';
 
     try {
       final response = await _dio.post(
