@@ -4,7 +4,7 @@ part 'vo_find_all_diary.freezed.dart';
 part 'vo_find_all_diary.g.dart';
 
 @freezed
-class FindAllDiary with _$FindAllDiary {
+class FindAllDiary with _$FindAllDiary  {
   const factory FindAllDiary({
     required int itineraryId,
     required int diaryId,

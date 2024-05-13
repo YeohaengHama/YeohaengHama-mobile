@@ -1,3 +1,4 @@
+import 'package:fast_app_base/data/memory/user_provider.dart';
 import 'package:fast_app_base/screen/client/review/picker/picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,7 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
   @override
   Widget build(BuildContext context) {
     final reviewApi = ref.read(reviewApiProvider);
+    final account = ref.read(accountProvider);
     final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;
     return Scaffold(
       body: Stack(
@@ -69,6 +71,8 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
 
                       reviewApi.postReview(
                         ReviewPost(
+                          placeName: searchDetailResult.title,
+                          accountId: account!.id,
                           contentId: int.parse(searchDetailResult.contentId),
                           contentType:
                               int.parse(searchDetailResult.contentTypeId),

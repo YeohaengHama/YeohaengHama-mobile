@@ -21,8 +21,8 @@ CheckItinerary _$CheckItineraryFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CheckItinerary {
   String get itineraryId => throw _privateConstructorUsedError;
-  List<String> get type => throw _privateConstructorUsedError;
-  List<String> get style => throw _privateConstructorUsedError;
+  List<String>? get type => throw _privateConstructorUsedError;
+  List<String>? get style => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get transportation => throw _privateConstructorUsedError;
   String get area => throw _privateConstructorUsedError;
@@ -47,8 +47,8 @@ abstract class $CheckItineraryCopyWith<$Res> {
   @useResult
   $Res call(
       {String itineraryId,
-      List<String> type,
-      List<String> style,
+      List<String>? type,
+      List<String>? style,
       String name,
       String transportation,
       String area,
@@ -73,8 +73,8 @@ class _$CheckItineraryCopyWithImpl<$Res, $Val extends CheckItinerary>
   @override
   $Res call({
     Object? itineraryId = null,
-    Object? type = null,
-    Object? style = null,
+    Object? type = freezed,
+    Object? style = freezed,
     Object? name = null,
     Object? transportation = null,
     Object? area = null,
@@ -89,14 +89,14 @@ class _$CheckItineraryCopyWithImpl<$Res, $Val extends CheckItinerary>
           ? _value.itineraryId
           : itineraryId // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
+      type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      style: null == style
+              as List<String>?,
+      style: freezed == style
           ? _value.style
           : style // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -143,8 +143,8 @@ abstract class _$$_CheckItineraryCopyWith<$Res>
   @useResult
   $Res call(
       {String itineraryId,
-      List<String> type,
-      List<String> style,
+      List<String>? type,
+      List<String>? style,
       String name,
       String transportation,
       String area,
@@ -167,8 +167,8 @@ class __$$_CheckItineraryCopyWithImpl<$Res>
   @override
   $Res call({
     Object? itineraryId = null,
-    Object? type = null,
-    Object? style = null,
+    Object? type = freezed,
+    Object? style = freezed,
     Object? name = null,
     Object? transportation = null,
     Object? area = null,
@@ -183,14 +183,14 @@ class __$$_CheckItineraryCopyWithImpl<$Res>
           ? _value.itineraryId
           : itineraryId // ignore: cast_nullable_to_non_nullable
               as String,
-      type: null == type
+      type: freezed == type
           ? _value._type
           : type // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      style: null == style
+              as List<String>?,
+      style: freezed == style
           ? _value._style
           : style // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -232,8 +232,8 @@ class __$$_CheckItineraryCopyWithImpl<$Res>
 class _$_CheckItinerary implements _CheckItinerary {
   const _$_CheckItinerary(
       {required this.itineraryId,
-      required final List<String> type,
-      required final List<String> style,
+      required final List<String>? type,
+      required final List<String>? style,
       required this.name,
       required this.transportation,
       required this.area,
@@ -251,20 +251,24 @@ class _$_CheckItinerary implements _CheckItinerary {
 
   @override
   final String itineraryId;
-  final List<String> _type;
+  final List<String>? _type;
   @override
-  List<String> get type {
+  List<String>? get type {
+    final value = _type;
+    if (value == null) return null;
     if (_type is EqualUnmodifiableListView) return _type;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_type);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<String> _style;
+  final List<String>? _style;
   @override
-  List<String> get style {
+  List<String>? get style {
+    final value = _style;
+    if (value == null) return null;
     if (_style is EqualUnmodifiableListView) return _style;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_style);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -352,8 +356,8 @@ class _$_CheckItinerary implements _CheckItinerary {
 abstract class _CheckItinerary implements CheckItinerary {
   const factory _CheckItinerary(
           {required final String itineraryId,
-          required final List<String> type,
-          required final List<String> style,
+          required final List<String>? type,
+          required final List<String>? style,
           required final String name,
           required final String transportation,
           required final String area,
@@ -370,9 +374,9 @@ abstract class _CheckItinerary implements CheckItinerary {
   @override
   String get itineraryId;
   @override
-  List<String> get type;
+  List<String>? get type;
   @override
-  List<String> get style;
+  List<String>? get style;
   @override
   String get name;
   @override

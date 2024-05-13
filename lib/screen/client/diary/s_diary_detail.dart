@@ -1,10 +1,132 @@
+import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/common/widget/w_image_scroll_view.dart';
+import 'package:fast_app_base/data/memory/diary/diary_detail_proiver.dart';
+import 'package:fast_app_base/screen/client/diary/w_diary_review_list.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
-class DiaryDetailScreen extends StatelessWidget {
-  const DiaryDetailScreen({super.key});
+import '../../../data/entity/diary/vo_detail_diary.dart';
+import '../../../data/memory/area/area_detail_provider.dart';
+class DetailDiaryScreen extends HookWidget {
+  final DetailDiary detailDiary;
+
+  const DetailDiaryScreen(this.detailDiary, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final pageController = usePageController();
+    final customController = usePageController();
+
+    final shouldShowTitle = useState(false);
+
+    useEffect(() {
+      final controller = customController;
+      scrollListener() {
+        if (controller.offset > 300) {
+          shouldShowTitle.value = true;
+        } else {
+          shouldShowTitle.value = false;
+        }
+      }
+      controller.addListener(scrollListener);
+
+      return () {
+        controller.removeListener(scrollListener);
+      };
+    }, []);
+
+    Widget buildTitle() {
+      return StatefulBuilder(
+        builder: (context, setState) {
+          return AnimatedOpacity(
+            duration: const Duration(milliseconds: 300),
+            opacity: shouldShowTitle.value ? 1.0 : 0.0,
+            child: Text(
+              detailDiary.title,
+              style: const TextStyle(
+                color: AppColors.primaryGrey,
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+              ),
+            ),
+          );
+        },
+      );
+    }
+
+    return Scaffold(
+      body: Material(
+        child: CustomScrollView(
+          controller: customController,
+          slivers: [
+            SliverAppBar(
+
+              floating: false,
+              pinned: true,
+              scrolledUnderElevation: 0,
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.map_outlined,
+                    color: Colors.black,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.more_horiz,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+              flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    buildTitle(),
+                  ],
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: ImageScrollViewWidget(
+                pageController: pageController,
+                page: detailDiary,
+              ),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Height(20),
+                      detailDiary.title.text.bold
+                          .size(24)
+                          .color(AppColors.primaryGrey)
+                          .make().pSymmetric(h: 40),
+
+                      detailDiary.content.text
+                          .size(14)
+                          .color(AppColors.secondGrey)
+                          .make()
+                          .pSymmetric(h: 40, v: 30),
+                      const Line(color: AppColors.outline, height: 10),
+                      DiaryReviewList(reviews: detailDiary.reviews as Map<int, List<Review>>? ?? {}),
+                    ],
+                  );
+                },
+                childCount: 1,
+              ),
+
+
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

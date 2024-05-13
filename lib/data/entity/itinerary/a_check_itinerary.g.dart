@@ -42,8 +42,9 @@ Map<String, dynamic> _$PlaceByDayToJson(PlaceByDay instance) =>
 _$_CheckItinerary _$$_CheckItineraryFromJson(Map<String, dynamic> json) =>
     _$_CheckItinerary(
       itineraryId: json['itineraryId'] as String,
-      type: (json['type'] as List<dynamic>).map((e) => e as String).toList(),
-      style: (json['style'] as List<dynamic>).map((e) => e as String).toList(),
+      type: (json['type'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      style:
+          (json['style'] as List<dynamic>?)?.map((e) => e as String).toList(),
       name: json['name'] as String,
       transportation: json['transportation'] as String,
       area: json['area'] as String,

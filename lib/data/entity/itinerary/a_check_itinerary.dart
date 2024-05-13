@@ -8,8 +8,8 @@ part 'a_check_itinerary.g.dart';
 class CheckItinerary with _$CheckItinerary {
       const factory CheckItinerary({
             required String itineraryId,
-            required List<String> type,
-            required List<String> style,
+            required List<String>? type,
+            required List<String>? style,
             required String name,
             required String transportation,
             required String area,

@@ -6,10 +6,12 @@ part 'a_review_post.freezed.dart';
 class ReviewPost with _$ReviewPost {
   factory ReviewPost(
       {
+        required String placeName,
         required int contentId,
         required int contentType,
         required int rating,
         required String content,
+        required String accountId,
         @Default([]) List<String>? photos, // Providing an empty list as default value
       }
       ) = _ReviewPost;

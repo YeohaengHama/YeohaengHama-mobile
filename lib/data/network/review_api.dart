@@ -9,6 +9,8 @@ import '../../common/constants.dart';
 import '../entity/review/a_review_post.dart';
 
 import '../entity/review/a_review_show_all.dart';
+import '../entity/review/vo_review_show_account_.dart';
+import '../memory/review/review_show_account.dart';
 import '../memory/user_provider.dart';
 
 
@@ -90,6 +92,37 @@ class ReviewApi {
     } catch (e) {
       ref.read(ReviewShowAllListProvider.notifier).clearReviews();
       print('리뷰 목록이 비어있습니다.');
+    }
+  }
+  Future<void> showReviewAccount(int accountId, WidgetRef ref) async {
+    final url = '$baseUrl/review/showAccountAll';
+
+    try {
+      final response = await _dio.post(
+        url,
+        data:
+          {
+            'accountId' : accountId
+          }
+      );
+
+      if (response.statusCode == 200) {
+        final jsonData = response.data['data'] as List<dynamic>;
+        final reviews = jsonData
+            .map((json) =>
+            ReviewShowAccount.fromJson(json as Map<String, dynamic>))
+            .toList();
+        ref.read(reviewShowAccountProvider.notifier).addReview(reviews);
+      } else if (response.statusCode == 401) {
+        print('error');
+        return null;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print(e);
+
     }
   }
 }

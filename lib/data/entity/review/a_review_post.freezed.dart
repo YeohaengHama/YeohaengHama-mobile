@@ -16,10 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ReviewPost {
+  String get placeName => throw _privateConstructorUsedError;
   int get contentId => throw _privateConstructorUsedError;
   int get contentType => throw _privateConstructorUsedError;
   int get rating => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
+  String get accountId => throw _privateConstructorUsedError;
   List<String>? get photos => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -34,10 +36,12 @@ abstract class $ReviewPostCopyWith<$Res> {
       _$ReviewPostCopyWithImpl<$Res, ReviewPost>;
   @useResult
   $Res call(
-      {int contentId,
+      {String placeName,
+      int contentId,
       int contentType,
       int rating,
       String content,
+      String accountId,
       List<String>? photos});
 }
 
@@ -54,13 +58,19 @@ class _$ReviewPostCopyWithImpl<$Res, $Val extends ReviewPost>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? placeName = null,
     Object? contentId = null,
     Object? contentType = null,
     Object? rating = null,
     Object? content = null,
+    Object? accountId = null,
     Object? photos = freezed,
   }) {
     return _then(_value.copyWith(
+      placeName: null == placeName
+          ? _value.placeName
+          : placeName // ignore: cast_nullable_to_non_nullable
+              as String,
       contentId: null == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
@@ -76,6 +86,10 @@ class _$ReviewPostCopyWithImpl<$Res, $Val extends ReviewPost>
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      accountId: null == accountId
+          ? _value.accountId
+          : accountId // ignore: cast_nullable_to_non_nullable
               as String,
       photos: freezed == photos
           ? _value.photos
@@ -94,10 +108,12 @@ abstract class _$$_ReviewPostCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int contentId,
+      {String placeName,
+      int contentId,
       int contentType,
       int rating,
       String content,
+      String accountId,
       List<String>? photos});
 }
 
@@ -112,13 +128,19 @@ class __$$_ReviewPostCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? placeName = null,
     Object? contentId = null,
     Object? contentType = null,
     Object? rating = null,
     Object? content = null,
+    Object? accountId = null,
     Object? photos = freezed,
   }) {
     return _then(_$_ReviewPost(
+      placeName: null == placeName
+          ? _value.placeName
+          : placeName // ignore: cast_nullable_to_non_nullable
+              as String,
       contentId: null == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
@@ -135,6 +157,10 @@ class __$$_ReviewPostCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
+      accountId: null == accountId
+          ? _value.accountId
+          : accountId // ignore: cast_nullable_to_non_nullable
+              as String,
       photos: freezed == photos
           ? _value._photos
           : photos // ignore: cast_nullable_to_non_nullable
@@ -147,13 +173,17 @@ class __$$_ReviewPostCopyWithImpl<$Res>
 
 class _$_ReviewPost implements _ReviewPost {
   _$_ReviewPost(
-      {required this.contentId,
+      {required this.placeName,
+      required this.contentId,
       required this.contentType,
       required this.rating,
       required this.content,
+      required this.accountId,
       final List<String>? photos = const []})
       : _photos = photos;
 
+  @override
+  final String placeName;
   @override
   final int contentId;
   @override
@@ -162,6 +192,8 @@ class _$_ReviewPost implements _ReviewPost {
   final int rating;
   @override
   final String content;
+  @override
+  final String accountId;
   final List<String>? _photos;
   @override
   @JsonKey()
@@ -175,7 +207,7 @@ class _$_ReviewPost implements _ReviewPost {
 
   @override
   String toString() {
-    return 'ReviewPost(contentId: $contentId, contentType: $contentType, rating: $rating, content: $content, photos: $photos)';
+    return 'ReviewPost(placeName: $placeName, contentId: $contentId, contentType: $contentType, rating: $rating, content: $content, accountId: $accountId, photos: $photos)';
   }
 
   @override
@@ -183,18 +215,29 @@ class _$_ReviewPost implements _ReviewPost {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ReviewPost &&
+            (identical(other.placeName, placeName) ||
+                other.placeName == placeName) &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
             (identical(other.contentType, contentType) ||
                 other.contentType == contentType) &&
             (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.content, content) || other.content == content) &&
+            (identical(other.accountId, accountId) ||
+                other.accountId == accountId) &&
             const DeepCollectionEquality().equals(other._photos, _photos));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, contentId, contentType, rating,
-      content, const DeepCollectionEquality().hash(_photos));
+  int get hashCode => Object.hash(
+      runtimeType,
+      placeName,
+      contentId,
+      contentType,
+      rating,
+      content,
+      accountId,
+      const DeepCollectionEquality().hash(_photos));
 
   @JsonKey(ignore: true)
   @override
@@ -205,12 +248,16 @@ class _$_ReviewPost implements _ReviewPost {
 
 abstract class _ReviewPost implements ReviewPost {
   factory _ReviewPost(
-      {required final int contentId,
+      {required final String placeName,
+      required final int contentId,
       required final int contentType,
       required final int rating,
       required final String content,
+      required final String accountId,
       final List<String>? photos}) = _$_ReviewPost;
 
+  @override
+  String get placeName;
   @override
   int get contentId;
   @override
@@ -219,6 +266,8 @@ abstract class _ReviewPost implements ReviewPost {
   int get rating;
   @override
   String get content;
+  @override
+  String get accountId;
   @override
   List<String>? get photos;
   @override
