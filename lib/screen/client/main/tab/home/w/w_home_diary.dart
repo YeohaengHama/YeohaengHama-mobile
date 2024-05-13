@@ -101,6 +101,16 @@ class HomeDiaryWidget extends ConsumerWidget {
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,),
               ),
+              // Align(
+              //   alignment: Alignment.topLeft,
+              //   child: Wrap(
+              //     alignment: WrapAlignment.start,
+              //     crossAxisAlignment: WrapCrossAlignment.center,
+              //     children: diary.tag.map((tag) {
+              //       return '#${tag} '.text.bold.color(AppColors.primaryGrey).size(11).make().pOnly(right: 2);
+              //     }).toList(),
+              //   ),
+              // )
             ],
           ).pOnly(top: 20, left: 20),
 

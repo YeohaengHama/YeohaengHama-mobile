@@ -159,46 +159,12 @@ class DiaryApi {
     final _dio = Dio();
     final url = '$baseUrl/Diary/show?diaryId=$diaryId';
 
-
     try {
       final response = await _dio.post(url);
 
       if (response.statusCode == 200) {
         final jsonData = response.data['data'] as Map<String, dynamic>;
-
-        final Map<String, dynamic> diaryJson = jsonData as Map<String, dynamic>;
-        final accountShowDTOJson = diaryJson['account'] as Map<String, dynamic>;
-        final account = Account.fromJson(accountShowDTOJson);
-
-        final Map<int, List<Review>> reviews = {};
-        if (diaryJson.containsKey('reviews')) {
-          final reviewsJson = diaryJson['reviews'] as Map<String, dynamic>;
-          reviewsJson.forEach((key, value) {
-            final int contentId = int.parse(key);
-            final List<dynamic> reviewListJson = value as List<dynamic>;
-            final List<Review> reviewList = reviewListJson
-                .map((reviewJson) =>
-                Review.fromJson(reviewJson as Map<String, dynamic>))
-                .toList();
-            reviews[contentId] = reviewList;
-          });
-        }
-
-        final detailDiary = DetailDiary(
-          itinerary: diaryJson['itinerary'] as int,
-          tag: (diaryJson['tag'] as List)
-              .map((tag) => tag.toString())
-              .toList(),
-          date: DateTime.parse(diaryJson['date'] as String),
-          title: diaryJson['title'] as String,
-          content: diaryJson['content'] as String,
-          photos: (diaryJson['photos'] as List)
-              .map((photo) => photo.toString())
-              .toList(),
-          account: account,
-          reviews: reviews,
-        );
-
+        final detailDiary = DetailDiary.fromJson(jsonData);
         ref.read(detailDiaryProvider.notifier).addDetailDiary(detailDiary);
       } else if (response.statusCode == 401) {
         print('error');
@@ -212,4 +178,5 @@ class DiaryApi {
       print('일기 목록이 비어있습니다.');
     }
   }
+
 }

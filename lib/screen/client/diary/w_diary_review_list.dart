@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import '../../../data/entity/diary/vo_detail_diary.dart';
 
 class DiaryReviewList extends StatelessWidget {
-  final Map<int, List<Review>>? reviews;
+  final Map<String, List<Place>> places;
 
-  const DiaryReviewList({Key? key, this.reviews}) : super(key: key);
+  const DiaryReviewList({Key? key, required this.places}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: reviews!.entries.map((entry) {
+      children: places.entries.map((entry) {
         final title = entry.key;
-        final reviewList = entry.value;
+        final placeList = entry.value;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -24,27 +24,27 @@ class DiaryReviewList extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
-            if (reviewList.isNotEmpty)
+            if (placeList.isNotEmpty)
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: reviewList.length,
+                itemCount: placeList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final review = reviewList[index];
+                  final place = placeList[index];
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      StarRating(score: review.rating),
-                      Text('Content: ${review.content}'),
+                      StarRating(score: place.review!.rating),
+                      Text('Content: ${place.review!.content}'),
                       // Review photo URLs
                       Text('Review Photos:'),
                       SizedBox(height: 5),
                       ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: review.reviewPhotoURLList.length,
+                        itemCount: place.review!.reviewPhotoURLList!.length,
                         itemBuilder: (BuildContext context, int photoIndex) {
-                          final photoUrl = review.reviewPhotoURLList[photoIndex];
+                          final photoUrl = place.review!.reviewPhotoURLList![photoIndex];
                           return Text(photoUrl);
                         },
                       ),

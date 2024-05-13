@@ -115,7 +115,7 @@ class DetailDiaryScreen extends HookWidget {
                           .make()
                           .pSymmetric(h: 40, v: 30),
                       const Line(color: AppColors.outline, height: 10),
-                      DiaryReviewList(reviews: detailDiary.reviews as Map<int, List<Review>>? ?? {}),
+                      DiaryReviewList(places: detailDiary.itinerary.place),
                     ],
                   );
                 },
