@@ -34,8 +34,8 @@ _$_Itinerary _$$_ItineraryFromJson(Map<String, dynamic> json) => _$_Itinerary(
       place: (json['place'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(
             k,
-            (e as List<dynamic>)
-                .map((e) => Place.fromJson(e as Map<String, dynamic>))
+            (e as List<dynamic>?)
+                ?.map((e) => Place.fromJson(e as Map<String, dynamic>))
                 .toList()),
       ),
     );
@@ -86,9 +86,9 @@ Map<String, dynamic> _$$_PlaceToJson(_$_Place instance) => <String, dynamic>{
     };
 
 _$_Review _$$_ReviewFromJson(Map<String, dynamic> json) => _$_Review(
-      reviewId: json['reviewId'] as int,
-      rating: (json['rating'] as num).toDouble(),
-      content: json['content'] as String,
+      reviewId: json['reviewId'] as int?,
+      rating: (json['rating'] as num?)?.toDouble(),
+      content: json['content'] as String?,
       reviewPhotoURLList: (json['reviewPhotoURLList'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),

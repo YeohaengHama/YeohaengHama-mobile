@@ -175,7 +175,7 @@ class DiaryApi {
       }
     } catch (e) {
       ref.read(DiaryFindAccountAllProvider.notifier).clearDiarys();
-      print('일기 목록이 비어있습니다.');
+      print(e);
     }
   }
 

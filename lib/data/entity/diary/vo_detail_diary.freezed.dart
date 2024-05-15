@@ -530,7 +530,7 @@ mixin _$Itinerary {
   String get area => throw _privateConstructorUsedError;
   DateTime get startDate => throw _privateConstructorUsedError;
   DateTime get endDate => throw _privateConstructorUsedError;
-  Map<String, List<Place>> get place => throw _privateConstructorUsedError;
+  Map<String, List<Place>?> get place => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -552,7 +552,7 @@ abstract class $ItineraryCopyWith<$Res> {
       String area,
       DateTime startDate,
       DateTime endDate,
-      Map<String, List<Place>> place});
+      Map<String, List<Place>?> place});
 }
 
 /// @nodoc
@@ -614,7 +614,7 @@ class _$ItineraryCopyWithImpl<$Res, $Val extends Itinerary>
       place: null == place
           ? _value.place
           : place // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<Place>>,
+              as Map<String, List<Place>?>,
     ) as $Val);
   }
 }
@@ -635,7 +635,7 @@ abstract class _$$_ItineraryCopyWith<$Res> implements $ItineraryCopyWith<$Res> {
       String area,
       DateTime startDate,
       DateTime endDate,
-      Map<String, List<Place>> place});
+      Map<String, List<Place>?> place});
 }
 
 /// @nodoc
@@ -695,7 +695,7 @@ class __$$_ItineraryCopyWithImpl<$Res>
       place: null == place
           ? _value._place
           : place // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<Place>>,
+              as Map<String, List<Place>?>,
     ));
   }
 }
@@ -712,7 +712,7 @@ class _$_Itinerary implements _Itinerary {
       required this.area,
       required this.startDate,
       required this.endDate,
-      required final Map<String, List<Place>> place})
+      required final Map<String, List<Place>?> place})
       : _type = type,
         _style = style,
         _place = place;
@@ -752,9 +752,9 @@ class _$_Itinerary implements _Itinerary {
   final DateTime startDate;
   @override
   final DateTime endDate;
-  final Map<String, List<Place>> _place;
+  final Map<String, List<Place>?> _place;
   @override
-  Map<String, List<Place>> get place {
+  Map<String, List<Place>?> get place {
     if (_place is EqualUnmodifiableMapView) return _place;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_place);
@@ -822,7 +822,7 @@ abstract class _Itinerary implements Itinerary {
       required final String area,
       required final DateTime startDate,
       required final DateTime endDate,
-      required final Map<String, List<Place>> place}) = _$_Itinerary;
+      required final Map<String, List<Place>?> place}) = _$_Itinerary;
 
   factory _Itinerary.fromJson(Map<String, dynamic> json) =
       _$_Itinerary.fromJson;
@@ -844,7 +844,7 @@ abstract class _Itinerary implements Itinerary {
   @override
   DateTime get endDate;
   @override
-  Map<String, List<Place>> get place;
+  Map<String, List<Place>?> get place;
   @override
   @JsonKey(ignore: true)
   _$$_ItineraryCopyWith<_$_Itinerary> get copyWith =>
@@ -1232,9 +1232,9 @@ Review _$ReviewFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Review {
-  int get reviewId => throw _privateConstructorUsedError;
-  double get rating => throw _privateConstructorUsedError;
-  String get content => throw _privateConstructorUsedError;
+  int? get reviewId => throw _privateConstructorUsedError;
+  double? get rating => throw _privateConstructorUsedError;
+  String? get content => throw _privateConstructorUsedError;
   List<String>? get reviewPhotoURLList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1248,9 +1248,9 @@ abstract class $ReviewCopyWith<$Res> {
       _$ReviewCopyWithImpl<$Res, Review>;
   @useResult
   $Res call(
-      {int reviewId,
-      double rating,
-      String content,
+      {int? reviewId,
+      double? rating,
+      String? content,
       List<String>? reviewPhotoURLList});
 }
 
@@ -1267,24 +1267,24 @@ class _$ReviewCopyWithImpl<$Res, $Val extends Review>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reviewId = null,
-    Object? rating = null,
-    Object? content = null,
+    Object? reviewId = freezed,
+    Object? rating = freezed,
+    Object? content = freezed,
     Object? reviewPhotoURLList = freezed,
   }) {
     return _then(_value.copyWith(
-      reviewId: null == reviewId
+      reviewId: freezed == reviewId
           ? _value.reviewId
           : reviewId // ignore: cast_nullable_to_non_nullable
-              as int,
-      rating: null == rating
+              as int?,
+      rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as double,
-      content: null == content
+              as double?,
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       reviewPhotoURLList: freezed == reviewPhotoURLList
           ? _value.reviewPhotoURLList
           : reviewPhotoURLList // ignore: cast_nullable_to_non_nullable
@@ -1300,9 +1300,9 @@ abstract class _$$_ReviewCopyWith<$Res> implements $ReviewCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int reviewId,
-      double rating,
-      String content,
+      {int? reviewId,
+      double? rating,
+      String? content,
       List<String>? reviewPhotoURLList});
 }
 
@@ -1316,24 +1316,24 @@ class __$$_ReviewCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reviewId = null,
-    Object? rating = null,
-    Object? content = null,
+    Object? reviewId = freezed,
+    Object? rating = freezed,
+    Object? content = freezed,
     Object? reviewPhotoURLList = freezed,
   }) {
     return _then(_$_Review(
-      reviewId: null == reviewId
+      reviewId: freezed == reviewId
           ? _value.reviewId
           : reviewId // ignore: cast_nullable_to_non_nullable
-              as int,
-      rating: null == rating
+              as int?,
+      rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as double,
-      content: null == content
+              as double?,
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       reviewPhotoURLList: freezed == reviewPhotoURLList
           ? _value._reviewPhotoURLList
           : reviewPhotoURLList // ignore: cast_nullable_to_non_nullable
@@ -1356,11 +1356,11 @@ class _$_Review implements _Review {
       _$$_ReviewFromJson(json);
 
   @override
-  final int reviewId;
+  final int? reviewId;
   @override
-  final double rating;
+  final double? rating;
   @override
-  final String content;
+  final String? content;
   final List<String>? _reviewPhotoURLList;
   @override
   List<String>? get reviewPhotoURLList {
@@ -1411,19 +1411,19 @@ class _$_Review implements _Review {
 
 abstract class _Review implements Review {
   const factory _Review(
-      {required final int reviewId,
-      required final double rating,
-      required final String content,
+      {required final int? reviewId,
+      required final double? rating,
+      required final String? content,
       required final List<String>? reviewPhotoURLList}) = _$_Review;
 
   factory _Review.fromJson(Map<String, dynamic> json) = _$_Review.fromJson;
 
   @override
-  int get reviewId;
+  int? get reviewId;
   @override
-  double get rating;
+  double? get rating;
   @override
-  String get content;
+  String? get content;
   @override
   List<String>? get reviewPhotoURLList;
   @override

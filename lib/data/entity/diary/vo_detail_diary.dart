@@ -17,33 +17,80 @@ class DetailDiary with _$DetailDiary {
   }) = _DetailDiary;
 
   factory DetailDiary.fromJson(Map<String, dynamic> json) {
-    final Map<String, dynamic> jsonData = json['data'] as Map<String, dynamic>;
-    final accountJson = jsonData['account'] as Map<String, dynamic>;
-    final account = Account.fromJson(accountJson);
+    final Map<String, dynamic>? data = json as Map<String, dynamic>?;
 
-    final itineraryJson = jsonData['itinerary'] as Map<String, dynamic>;
-    final placeJson = itineraryJson['place'] as Map<String, dynamic>;
-    final places = <String, List<Place>>{};
-    placeJson.forEach((key, value) {
-      final placeList = (value as List<dynamic>).map((e) => Place.fromJson(e as Map<String, dynamic>)).toList();
-      places[key] = placeList;
+    if (data == null) {
+      throw Exception("Invalid JSON format: 'data' key is missing or null.");
+    }
+
+    final Map<String, dynamic>? itineraryMap = data['itinerary'] as Map<String, dynamic>?;
+
+    if (itineraryMap == null) {
+      throw Exception("Invalid JSON format: 'itinerary' key is missing or null.");
+    }
+
+    final List<String>? tag = (data['tag'] as List?)?.cast<String>();
+    final List<String>? type = (itineraryMap['type'] as List?)?.cast<String>();
+    final List<String>? style = (itineraryMap['style'] as List?)?.cast<String>();
+
+    // Ensure that 'place' is initialized as an empty map
+    // Ensure that 'place' is initialized as an empty map
+    final Map<String, dynamic> placeMap = itineraryMap['place'] ?? {};
+
+// Convert all places to Place objects
+    final List<Place> places = (placeMap.entries).expand((entry) {
+      final String day = entry.key;
+      final List<dynamic>? placesData = entry.value;
+
+      // Check if placesData is null or empty
+      if (placesData == null || placesData.isEmpty) {
+        // If placesData is null or empty, return an empty list
+        return <Place>[];
+      }
+
+      // Convert each placeJson to Place object
+      return placesData.cast<Map<String, dynamic>>().map((placeJson) {
+        return Place.fromJson(placeJson as Map<String, dynamic>);
+      });
+    }).toList();
+
+// Group places by day
+    final Map<String, List<Place>> placesByDay = {};
+    placeMap.forEach((key, value) {
+      // Check if value is null or empty
+      if (value == null || value.isEmpty) {
+        // If value is null or empty, assign an empty list to the key
+        placesByDay[key] = [];
+      } else {
+        // Otherwise, assign the list of places to the key
+        placesByDay[key] = places.where((place) => 'Day-${place.day}' == key).toList();
+      }
     });
-    final Map<String, dynamic> modifiedItineraryJson = Map<String, dynamic>.from(itineraryJson);
-    modifiedItineraryJson['place'] = places;
-    final itinerary = Itinerary.fromJson(modifiedItineraryJson);
 
+    final itinerary = Itinerary(
+      itineraryId: itineraryMap['itineraryId'],
+      type: type,
+      style: style,
+      name: itineraryMap['name'],
+      transportation: itineraryMap['transportation'],
+      area: itineraryMap['area'],
+      startDate: DateTime.parse(itineraryMap['startDate']),
+      endDate: DateTime.parse(itineraryMap['endDate']),
+      place: placesByDay,
+    );
 
     return DetailDiary(
-      id: jsonData['id'] as int,
-      tag: (jsonData['tag'] as List<dynamic>).map((e) => e.toString()).toList(),
-      date: jsonData['date'] as String,
-      title: jsonData['title'] as String,
-      content: jsonData['content'] as String,
-      photos: (jsonData['photos'] as List<dynamic>).map((e) => e.toString()).toList(),
-      account: account,
+      id: data['id'],
+      tag: tag,
+      date: data['date'],
+      title: data['title'],
+      content: data['content'],
+      photos: List<String>.from(data['photos']),
+      account: Account.fromJson(data['account']),
       itinerary: itinerary,
     );
   }
+
 }
 
 @freezed
@@ -70,7 +117,7 @@ class Itinerary with _$Itinerary {
     required String area,
     required DateTime startDate,
     required DateTime endDate,
-    required Map<String, List<Place>> place,
+    required Map<String, List<Place>?> place, // 키 타입을 String으로 변경
   }) = _Itinerary;
 
   factory Itinerary.fromJson(Map<String, dynamic> json) =>
@@ -100,11 +147,12 @@ class Place with _$Place {
 @freezed
 class Review with _$Review {
   const factory Review({
-    required int reviewId,
-    required double rating,
-    required String content,
+    required int? reviewId,
+    required double? rating,
+    required String? content,
     required List<String>? reviewPhotoURLList,
   }) = _Review;
 
-  factory Review.fromJson(Map<String, dynamic> json) => _$ReviewFromJson(json);
+  factory Review.fromJson(Map<String, dynamic> json) =>
+      _$ReviewFromJson(json);
 }
