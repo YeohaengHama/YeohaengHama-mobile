@@ -28,6 +28,7 @@ class ReviewApi {
     try {
       FormData formData = FormData.fromMap({
         'contentId': review.contentId,
+        'placeName' : review.placeName,
         'contentTypeId': review.contentType,
         'rating': review.rating,
         'content': review.content,

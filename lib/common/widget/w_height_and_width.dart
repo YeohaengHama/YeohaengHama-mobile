@@ -14,7 +14,6 @@ const loginWidth = 260.0;
 const loginHeight = 40.0;
 const eyeSize = 25.0;
 const contentLeftPadding = 30.0;
-
 const maxWidthSize = double.infinity;
 
 

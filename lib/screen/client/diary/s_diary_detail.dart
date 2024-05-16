@@ -1,13 +1,15 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_image_scroll_view.dart';
+import 'package:fast_app_base/common/widget/w_rounded_container.dart';
 import 'package:fast_app_base/data/memory/diary/diary_detail_proiver.dart';
-import 'package:fast_app_base/screen/client/diary/w_diary_review_list.dart';
+import 'package:fast_app_base/screen/client/diary/w_diary_place_holder_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
 import '../../../data/entity/diary/vo_detail_diary.dart';
 import '../../../data/memory/area/area_detail_provider.dart';
+
 class DetailDiaryScreen extends HookWidget {
   final DetailDiary detailDiary;
 
@@ -29,6 +31,7 @@ class DetailDiaryScreen extends HookWidget {
           shouldShowTitle.value = false;
         }
       }
+
       controller.addListener(scrollListener);
 
       return () {
@@ -61,7 +64,6 @@ class DetailDiaryScreen extends HookWidget {
           controller: customController,
           slivers: [
             SliverAppBar(
-
               floating: false,
               pinned: true,
               scrolledUnderElevation: 0,
@@ -99,7 +101,7 @@ class DetailDiaryScreen extends HookWidget {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
+                (BuildContext context, int index) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -107,22 +109,56 @@ class DetailDiaryScreen extends HookWidget {
                       detailDiary.title.text.bold
                           .size(24)
                           .color(AppColors.primaryGrey)
-                          .make().pSymmetric(h: 40),
-
+                          .make()
+                          .pSymmetric(h: contentLeftPadding),
                       detailDiary.content.text
                           .size(14)
                           .color(AppColors.secondGrey)
                           .make()
-                          .pSymmetric(h: 40, v: 30),
-                      const Line(color: AppColors.outline, height: 10),
-                      DiaryReviewList(reviews: detailDiary.reviews as Map<int, List<Review>>? ?? {}),
+                          .pSymmetric(h: contentLeftPadding, v: 30),
+                      DiaryPlaceHolderList(places: detailDiary.itinerary.place),
+                      Center(
+                        child: RoundedContainer(
+                          padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15),
+                          radius: 5,
+                          backgroundColor: AppColors.mainPurple,
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: 20,
+                            child: Center(
+                              child: '내 일정으로 담기'
+                                  .text
+                                  .size(15)
+                                  .color(Colors.white)
+                                  .bold
+                                  .make(),
+                            ),
+                          ),
+                        ).pSymmetric(h: 50),
+                      ),
+                      Height(20),
+                      Line(color: AppColors.outline,),
+
+                      Wrap(
+                        alignment: WrapAlignment.start,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: detailDiary.tag!.map((tag) {
+                          return '#${tag} '.text.bold.color(AppColors.secondGrey).make().pOnly(right: 2);
+                        }).toList(),
+                      ).pSymmetric(h:contentLeftPadding,v: 20),
+                      Row(
+                        children: [
+                          Image.network(detailDiary.account.photoUrl!)
+                        ],
+                      ),
+                      Container(
+                        height: 300,
+                      )
                     ],
                   );
                 },
                 childCount: 1,
               ),
-
-
             ),
           ],
         ),

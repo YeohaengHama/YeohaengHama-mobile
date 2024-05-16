@@ -267,7 +267,7 @@ class _$_CheckItinerary implements _CheckItinerary {
     final value = _style;
     if (value == null) return null;
     if (_style is EqualUnmodifiableListView) return _style;
-    // ignore: implicit_dynamic_type
+
     return EqualUnmodifiableListView(value);
   }
 
