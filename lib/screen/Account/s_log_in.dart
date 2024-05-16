@@ -39,7 +39,11 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
 
       // 다른 로직 추가
     } catch (e) {
-      print('예외가 발생했습니다: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            backgroundColor: AppColors.mainPurple,
+            content: Text('일치하는 회원정보를 찾을 수 없습니다.'),),
+      );
     }
   }
 
