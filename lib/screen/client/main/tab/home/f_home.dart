@@ -1,4 +1,6 @@
 
+import 'package:fast_app_base/data/entity/diary/vo_find_all_diary.dart';
+import 'package:fast_app_base/screen/client/main/tab/home/w/home_diary_holder.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_exist_schedule.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_hama_area.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_home_diary.dart';
@@ -26,12 +28,7 @@ class HomeFragment extends ConsumerStatefulWidget {
 }
 
 class _HomeFragmentState extends ConsumerState<HomeFragment> {
-  @override
-  void initState() {
-    super.initState();
-    final diaryApi = ref.read(diaryApiProvider);
-    diaryApi.showAllDiary(ref);
-  }
+
 
   @override
   void didChangeDependencies() {
@@ -59,7 +56,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
   @override
   Widget build(BuildContext context) {
     final createdItinerary = ref.watch(itineraryCheckProvider);
-    final allDiary = ref.watch(DiaryFindAllProvider);
+
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: AppColors.mainPurple,
       // Android에서 적용됨
@@ -182,24 +179,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
                         .pSymmetric(v: contentP, h: contentLeftPadding)
                         .pOnly(top: 6),
                   ),
-                  SizedBox(
-                    width: maxWidthSize,
-                    height: diaryContainerHeight + 20,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: allDiary.length,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              SizedBox(
-                                width: diaryContainerWidth,
-                                height: diaryContainerHeight,
-                                child: HomeDiaryWidget(allDiary[index]),
-                              ).pOnly(left: 5)
-                            ],
-                          ).pOnly(right: 15);
-                        }),
-                  ).pOnly(bottom: contentP),
+                  HomeDiaryHolder(),
                   const Height(30),
                 ],
               ),
@@ -214,3 +194,5 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
     Scaffold.of(context).openEndDrawer();
   }
 }
+
+

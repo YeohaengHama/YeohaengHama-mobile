@@ -32,13 +32,12 @@ class _MyTripScreenState extends ConsumerState<MyTripScreen> with SingleTickerPr
       appBar:AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {
+          onPressed: () async{
+            final diaryApi = ref.read(diaryApiProvider);
+            await diaryApi.showAllDiary(ref);
             Navigator.of(context).pop();
-            setState(() {
               // 데이터를 새로 고침하는 작업을 수행합니다.
-              final diaryApi = ref.read(diaryApiProvider);
-              diaryApi.showAllDiary(ref);
-            });// 뒤로 가기 기능 구현
+
           },
         ),
 

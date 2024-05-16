@@ -1,4 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/Account/s_log_in.dart';
 import 'package:fast_app_base/screen/manager/s_user_management.dart';
 import 'package:flutter/material.dart';
 
@@ -77,11 +78,14 @@ class ManagerScreen extends StatelessWidget {
               ),
             ).pOnly(top: 5),
             SizedBox(height: 20), // '로그아웃' 텍스트와의 간격을 설정합니다.
-            '로그아웃'
-                .text
-                .size(15)
-                .color(AppColors.thirdGrey)
-                .make(),
+            Tap(
+              onTap: () { Nav.push(LogInScreen()); },
+              child: '로그아웃'
+                  .text
+                  .size(15)
+                  .color(AppColors.thirdGrey)
+                  .make(),
+            ),
           ],
         ),
       ),

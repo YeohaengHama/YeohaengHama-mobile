@@ -1,5 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/memory/review/review_show_all_provider.dart';
+import 'package:fast_app_base/screen/client/post_detail/review/w_no_review_list.dart';
 import 'package:fast_app_base/screen/client/post_detail/review/w_simple_rivew_list.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -24,14 +25,7 @@ class _SimpleReviewWidgetState extends ConsumerState<SimpleReviewWidget> {
   bool _recentTripChecked = false;
   bool _showRecentTripMessage = false; // 메세지 창을 표시할지 여부를 나타내는 변수
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
 
-    final reviewApi = ref.read(reviewApiProvider);
-    reviewApi.showAllReview(widget.id, widget.type, ref);
-  }
   @override
   Widget build(BuildContext context) {
     final review = ref.watch(ReviewShowAllListProvider.notifier).state;
@@ -160,7 +154,7 @@ class _SimpleReviewWidgetState extends ConsumerState<SimpleReviewWidget> {
               ],
             )
           else
-            Container(), // 리뷰가 비어있을 때 빈 컨테이너 출력
+            NoReviewList(), // 리뷰가 비어있을 때 빈 컨테이너 출력
 
 
         ],

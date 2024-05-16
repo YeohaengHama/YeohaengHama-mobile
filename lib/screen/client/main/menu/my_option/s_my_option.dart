@@ -1,10 +1,16 @@
+
+
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/Account/s_log_in.dart';
 import 'package:fast_app_base/screen/client/main/menu/my_option/s/s_profile_setting.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../../common/widget/w_menu.dart';
-import '../../../../../data/network/diary_api.dart';
 
+import '../../../../../common/widget/w_menu.dart';
+import '../../../../../data/memory/itinerary/itinerary_check_provider.dart';
+import '../../../../../data/memory/user_provider.dart';
+
+import 'package:http/http.dart' as http;
 class MyOptionScreen extends ConsumerStatefulWidget {
   const MyOptionScreen({Key? key}) : super(key: key);
 
@@ -13,19 +19,19 @@ class MyOptionScreen extends ConsumerStatefulWidget {
 }
 
 class _MyOptionScreenState extends ConsumerState<MyOptionScreen> {
+
+
   @override
   Widget build(BuildContext context) {
+
+    final _account = ref.watch(accountProvider.notifier);
+    final _itinerary = ref.watch(itineraryCheckProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pop();
-            setState(() {
-              // 데이터를 새로 고침하는 작업을 수행합니다.
-              final diaryApi = ref.read(diaryApiProvider);
-              diaryApi.showAllDiary(ref);
-            });// 뒤로 가기 기능 구현
           },
         ),
         title: '설정'.text.size(18).make(),
@@ -67,7 +73,9 @@ class _MyOptionScreenState extends ConsumerState<MyOptionScreen> {
             textSize: 20,
             onTap: () async {
               Nav.pop(context);
-              Nav.push(const MyOptionScreen());
+              _itinerary.reset();
+              _account.reset();
+              Nav.push(const LogInScreen());
             },
           ).pSymmetric(v:5),
           const Line(),

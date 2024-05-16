@@ -27,7 +27,7 @@ class NonSecheduleFragment extends StatelessWidget {
                       color: AppColors.mainPurple, fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
-                  text: '여행을 추가해 볼까요?',
+                  text: '일정을 추가해 볼까요?',
                   style: TextStyle(color: AppColors.mainPurple),
                 ),
               ],

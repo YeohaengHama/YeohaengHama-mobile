@@ -29,9 +29,7 @@ class TourismSearchListFragment extends ConsumerWidget {
           );
         },
       )
-          : const Center(
-        child: CircularProgressIndicator(),
-      ).pOnly(bottom: 120),
+          : Container(),
     );
   }
 }

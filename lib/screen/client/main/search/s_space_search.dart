@@ -1,8 +1,9 @@
-
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/search/provider/is_loading_provider.dart';
 import 'package:fast_app_base/screen/client/main/search/w_search_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'content_type_provider.dart';
 import 'f_diary_search_list.dart';
@@ -34,6 +35,8 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       appBar: SearchAppBar(
         controller: searchController,
@@ -47,9 +50,9 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
             future: switchTabFragment(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return snapshot.data ?? CircularProgressIndicator();
+                return snapshot.data ?? Container(); // Return data or empty container
               } else {
-                return CircularProgressIndicator(); // 로딩 중 표시
+                return CircularProgressIndicator(); // Loading indicator
               }
             },
           ),
@@ -59,35 +62,34 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
   }
 
   Widget get tabBar => Column(
-        children: [
-          TabBar(
-            onTap: (index) {
-              switchTabContent(index); // index를 switchTabContent에 전달
-              setState(() {
-                currentIndex = index;
-              });
-            },
-            labelStyle:
-                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            labelColor: AppColors.primaryGrey,
-            controller: tabController,
-            indicatorColor: AppColors.mainPurple,
-            unselectedLabelStyle: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: AppColors.forthGrey),
-            indicatorSize: TabBarIndicatorSize.tab,
-            labelPadding: const EdgeInsets.symmetric(vertical: 5),
-            overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-            tabs: [
-              '여행일기'.text.make(),
-              '관광'.text.make(),
-              '맛집'.text.make(),
-            ],
-          )
+    children: [
+      TabBar(
+        onTap: (index) {
+          switchTabContent(index); // index를 switchTabContent에 전달
+          setState(() {
+            currentIndex = index;
+          });
+        },
+        labelStyle:
+        const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        labelColor: AppColors.primaryGrey,
+        controller: tabController,
+        indicatorColor: AppColors.mainPurple,
+        unselectedLabelStyle: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: AppColors.forthGrey),
+        indicatorSize: TabBarIndicatorSize.tab,
+        labelPadding: const EdgeInsets.symmetric(vertical: 5),
+        overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+        tabs: [
+          '여행일기'.text.make(),
+          '관광'.text.make(),
+          '맛집'.text.make(),
         ],
-      );
-
+      )
+    ],
+  );
 
   Future<void> switchTabContent(int index) async {
     switch (index) {

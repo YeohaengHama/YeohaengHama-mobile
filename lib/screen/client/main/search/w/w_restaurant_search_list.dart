@@ -8,7 +8,9 @@ import '../../../../../data/entity/open_api/open_api_detail.dart';
 import '../../../../../data/entity/open_api/open_api_image.dart';
 import '../../../../../data/memory/area/area_detail_provider.dart';
 import '../../../../../data/memory/area/area_image_provider.dart';
+import '../../../../../data/memory/review/review_show_all_provider.dart';
 import '../../../../../data/network/area_api.dart';
+import '../../../../../data/network/review_api.dart';
 import '../../../post_detail/s_post_detail.dart';
 
 class RestaurantSearchListWidget extends ConsumerWidget {
@@ -41,18 +43,25 @@ class RestaurantSearchListWidget extends ConsumerWidget {
       final areaApi = ref.read(areaApiProvider);
       await areaApi.postAreaImage(openApiImage, ref);
     }
+    Future<void> postAreaReview() async {
+      final reviewApi = ref.read(reviewApiProvider);
+      await reviewApi.showAllReview(int.parse(searchSimpleRestaurantResult.contentId),int.parse(searchSimpleRestaurantResult.contentTypeId) , ref);
+    }
 
     return Tap(
       //Nav.push(RestaurantDetailScreen(Restaurant.id, Restaurant: Restaurant,));
       onTap: () async {
         await postDetailArea();
         await postAreaImage();
+        await postAreaReview();
         final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;
         final searchImageResult = ref.read(AreaImageApiResponseProvider);
+
         if (searchDetailResult != null && searchImageResult != null) {
           Nav.push(postDetailScreen(
             searchDetailResult: searchDetailResult,
             searchImageResult: searchImageResult,
+
           ));
         } else {
           // Handle the case when either searchDetailResult or searchImageResult is null

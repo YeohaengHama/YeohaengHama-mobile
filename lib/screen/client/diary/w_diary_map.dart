@@ -102,11 +102,10 @@ class _DiaryMapWidgetState extends ConsumerState<DiaryMapWidget> {
       southWest: NLatLng(minLat, minLng),
       northEast: NLatLng(maxLat, maxLng), 
     );
-
     // 카메라를 경계 영역으로 이동시킵니다.
     _controller.updateCamera(
-      NCameraUpdate.fitBounds(bounds, padding:EdgeInsets.all(50.0)),
-        
+      NCameraUpdate.fitBounds(bounds, padding: EdgeInsets.symmetric(vertical: 50,horizontal: 50)),
+
     );
   }
 
