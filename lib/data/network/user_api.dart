@@ -75,10 +75,15 @@ class UserApi {
         final nickName = data['nickname'];
         final photoUrl = data['photoUrl'];
         print('로그인 성공: id=$id, nickName=$nickName, photoUrl=$photoUrl');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              backgroundColor: AppColors.mainPurple,
+              content: Text("'$nickName'님 반가워요 여행하마와 함께 떠나볼까요?💜")),
+        );
         final currentAccount = CurrentAccount(id: id, nickName: nickName, photoUrl: photoUrl);
         accountNotifier.addCurrentAccount(currentAccount);
 
-        data['accountRole'] != 'ACCOUNT' ? Nav.push(ManagerScreen()) : Navigator.push(
+        data['role'] != 'ACCOUNT' ? Nav.push(ManagerScreen()) : Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => MainScreen(),

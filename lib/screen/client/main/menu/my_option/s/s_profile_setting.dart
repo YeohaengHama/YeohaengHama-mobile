@@ -11,13 +11,14 @@ import 'package:http/http.dart' as http;
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../../../../../data/network/diary_api.dart';
 import '../../../../../../data/network/user_api.dart';
 
 import '../../../../../Account/w_text_widget.dart';
 import '../../../../dialog/d_select_image_source.dart';
 
 class ProfileSettingScreen extends ConsumerStatefulWidget {
-  const ProfileSettingScreen({super.key});
+  const ProfileSettingScreen({Key? key}) : super(key: key);
 
   @override
   ConsumerState<ProfileSettingScreen> createState() =>
@@ -76,49 +77,55 @@ class _ProfileSettingScreenState extends ConsumerState<ProfileSettingScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Stack(
-      children:[ Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: const Text('프로필 설정',
-              style: TextStyle(color: AppColors.primaryGrey, fontSize: 18)),
-          centerTitle: false,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back),
+      children: [
+        Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            title: const Text('프로필 설정',
+                style: TextStyle(color: AppColors.primaryGrey, fontSize: 18)),
+            centerTitle: false,
+            leading: IconButton(
+              onPressed: () async {
+                final diaryApi = ref.read(diaryApiProvider);
+                await diaryApi.showAllDiary(ref);
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back),
+            ),
           ),
-        ),
-        body: Stack(children: [
-          Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: 10),
-                Tap(
-                  onTap: () async {
-                    final selectedSource =
+          body: Stack(
+            children: [
+              Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 10),
+                    Tap(
+                      onTap: () async {
+                        final selectedSource =
                         await SelectImageSourceDialog().show();
 
-                    if (selectedSource == null) {
-                      return;
-                    }
-                    final file =
-                        await ImagePicker().pickImage(source: selectedSource);
-                    if (file == null) {
-                      return;
-                    }
-                    setState(() {
-                      profileFile = File(file.path);
-                    });
-                  },
-                  child: Stack(
-                    children:[CircleAvatar(
-                      radius: 50,
-                      backgroundColor: AppColors.mainPurple,
-                      child: profileFile != null
-                          ? Container(
+                        if (selectedSource == null) {
+                          return;
+                        }
+                        final file = await ImagePicker()
+                            .pickImage(source: selectedSource);
+                        if (file == null) {
+                          return;
+                        }
+                        setState(() {
+                          profileFile = File(file.path);
+                        });
+                      },
+                      child: Stack(
+                        children: [
+                          CircleAvatar(
+                            radius: 50,
+                            backgroundColor: AppColors.mainPurple,
+                            child: profileFile != null
+                                ? Container(
                               width: double.infinity,
                               height: double.infinity,
                               decoration: BoxDecoration(
@@ -129,82 +136,80 @@ class _ProfileSettingScreenState extends ConsumerState<ProfileSettingScreen> {
                                 ),
                               ),
                             )
-                          : ClipOval(
+                                : ClipOval(
                               child: Image.asset(
                                 '$basePath/icon/colorHama.png',
                                 width: 120,
                                 height: 120,
                               ),
                             ),
-                    ),
-                      const Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: CircleAvatar(
-                          radius: 17,
-                          backgroundColor: AppColors.secondGrey,
-                          child: Icon(
-                            Icons.camera_alt,
-                            color: Colors.white,
                           ),
-                        ),
+                          const Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: CircleAvatar(
+                              radius: 17,
+                              backgroundColor: AppColors.secondGrey,
+                              child: Icon(
+                                Icons.camera_alt,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                  ]
-                  ),
-                ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextWidget(
+                      textController: nameController,
+                      addText: '닉네임',
+                      boxWidth: loginWidth - 20,
+                      onChanged: (value) {},
+                    ),
+                    const Line(
+                      color: AppColors.forthGrey,
+                      height: 0.5,
+                      width: loginWidth - 20,
+                    ),
+                    const SizedBox(height: 20),
+                    Tap(
+                      onTap: () async {
+                        setState(() {
+                          _isLoading = true;
+                        });
 
-                const SizedBox(height: 20),
-                TextWidget(
-                  textController: nameController,
-                  addText: '닉네임',
-                  boxWidth: loginWidth - 20,
-                  onChanged: (value) {},
-                ),
-                const Line(
-                  color: AppColors.forthGrey,
-                  height: 0.5,
-                  width: loginWidth - 20,
-                ),
-                const SizedBox(height: 20),
-                Tap(
-                  onTap: () {
-                    _postData();
-                    setState(() {
-                      _isLoading = true;
-                    });
-                    Future.delayed(const Duration(seconds: 2), () {
-                      // 2초 후에 데이터를 새로 고침하는 작업을 수행합니다.
+                        await _postData();
 
-                      setState(() {
-                        _isLoading = false; // 로딩 상태 변경
-                      });
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        setState(() {
+                          _isLoading = false;
+                        });
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
                             backgroundColor: AppColors.mainPurple,
-                            content: Text('프로필 정보가 수정되었습니다.')),
-                      );
+                            content: Text('프로필 정보가 수정되었습니다.'),
+                          ),
+                        );
 
-                      Nav.pop(context);
-
-
-                    });
-                  },
-                  child: const RoundedContainer(
-                    backgroundColor: AppColors.mainPurple,
-                    padding: EdgeInsets.symmetric(horizontal: 120, vertical: 10),
-                    child: Text('완료',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24)),
-                  ),
+                        Navigator.pop(context);
+                      },
+                      child: RoundedContainer(
+                        backgroundColor: AppColors.mainPurple,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 120, vertical: 10),
+                        child: const Text('완료',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24)),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-
-        ]),
-      ),
+        ),
         if (_isLoading)
           Stack(
             children: [
@@ -214,11 +219,14 @@ class _ProfileSettingScreenState extends ConsumerState<ProfileSettingScreen> {
                 color: Colors.black.withOpacity(0.3),
               ),
               Center(
-                  child: LoadingAnimationWidget.fourRotatingDots(
-                      color: AppColors.mainPurple, size: 100)),
+                child: LoadingAnimationWidget.fourRotatingDots(
+                  color: AppColors.mainPurple,
+                  size: 100,
+                ),
+              ),
             ],
           ),
-    ]
+      ],
     );
   }
 }

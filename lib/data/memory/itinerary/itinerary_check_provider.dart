@@ -11,4 +11,8 @@ class ItineraryCheckNotifier extends StateNotifier<CheckItinerary?> {
   void setItinerary(CheckItinerary? checkItinerary) {
     state = checkItinerary;
   }
+
+  void reset() {
+    state = null;
+  }
 }

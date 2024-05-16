@@ -47,6 +47,11 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
   @override
   Widget build(BuildContext context) {
     final ItineraryApi = ref.watch(itineraryApiProvider);
+
+    Future<void> getItinerary() async {
+      await ItineraryApi.getItinerary(ref, widget.allItinerary.id.toString());
+
+    }
     return MouseRegion(
       onEnter: (_) {
         if (!_showIcons) _toggleIcons(true);
@@ -55,8 +60,8 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
         if (_showIcons) _toggleIcons(false);
       },
       child: Tap(
-        onTap: () {
-          ItineraryApi.getItinerary(ref, widget.allItinerary.id.toString());
+        onTap: () async {
+          await getItinerary();
           // ItineraryApi.PostAddNewEachPickPlace(ref);
           Nav.pop(context);
         },

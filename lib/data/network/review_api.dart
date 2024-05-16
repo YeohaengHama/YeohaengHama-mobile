@@ -6,6 +6,7 @@ import 'package:fast_app_base/data/memory/review/review_show_all_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../common/constants.dart';
+import '../../screen/client/main/search/provider/is_loading_provider.dart';
 import '../entity/review/a_review_post.dart';
 
 import '../entity/review/a_review_show_all.dart';
@@ -73,7 +74,9 @@ class ReviewApi {
       if (response.statusCode == 200) {
         final jsonData = response.data['data'] as List<dynamic>;
         if (jsonData.isEmpty) {
+
           ref.read(ReviewShowAllListProvider.notifier).clearReviews();
+
           print('리뷰 목록이 비어있습니다.');
         } else {
           final reviews = jsonData
@@ -81,7 +84,9 @@ class ReviewApi {
               ReviewShowAll.fromJson(json as Map<String, dynamic>))
               .toList();
           ref.read(ReviewShowAllListProvider.notifier).addReview(reviews);
+          ref.read(isLoadingProvider.notifier).setLoading(false);
           print('리뷰 불러오기 성공: $reviews');
+
         }
       } else if (response.statusCode == 401) {
         print('error');
@@ -91,6 +96,7 @@ class ReviewApi {
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
+      ref.watch(isLoadingProvider.notifier).setLoading(false);
       ref.read(ReviewShowAllListProvider.notifier).clearReviews();
       print('리뷰 목록이 비어있습니다.');
     }

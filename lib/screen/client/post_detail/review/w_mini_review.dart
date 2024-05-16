@@ -2,15 +2,17 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
 
+import '../../../../data/entity/review/a_review_show_all.dart';
 import '../../../../entity/area/vo_review.dart';
 
 class MiniReview extends StatelessWidget {
-  final Review review;
+  final ReviewShowAll review;
 
   const MiniReview(this.review, {super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return SizedBox(
       width: 250,
       height: 100,
@@ -22,7 +24,7 @@ class MiniReview extends StatelessWidget {
               Align(
                   alignment: Alignment.topLeft,
                   child: Icon(
-                    review.score >= 3
+                    review.rating >= 3
                         ? Icons.thumb_up_alt_outlined
                         : Icons.thumb_down_alt_outlined,
                     color: AppColors.secondGrey,
@@ -33,7 +35,7 @@ class MiniReview extends StatelessWidget {
                 child: SizedBox(
                   width: 190,
                   child: Text(
-                    review.contents,
+                    review.content,
                     style: const TextStyle(
                         color: AppColors.secondGrey, fontSize: 13),
                     maxLines: 3,

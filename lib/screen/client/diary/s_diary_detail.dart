@@ -146,11 +146,7 @@ class DetailDiaryScreen extends HookWidget {
                           return '#${tag} '.text.bold.color(AppColors.secondGrey).make().pOnly(right: 2);
                         }).toList(),
                       ).pSymmetric(h:contentLeftPadding,v: 20),
-                      Row(
-                        children: [
-                          Image.network(detailDiary.account.photoUrl!)
-                        ],
-                      ),
+
                       Container(
                         height: 300,
                       )

@@ -11,31 +11,47 @@ import 'package:fast_app_base/screen/client/post_detail/w_info_map.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
+import '../../../data/entity/review/a_review_show_all.dart';
 import '../../../data/memory/area/area_detail_provider.dart';
+import '../../../data/memory/review/review_show_all_provider.dart';
+import '../../../data/network/review_api.dart';
 
-class postDetailScreen extends ConsumerWidget {
+class postDetailScreen extends ConsumerStatefulWidget {
   final SearchDetailResult searchDetailResult;
   final SearchImageResult searchImageResult;
+
 
   const postDetailScreen({
     required this.searchDetailResult,
     required this.searchImageResult,
+
     super.key,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final postDetail = ref.read(DetailAreaApiResponseProvider);
+  ConsumerState<postDetailScreen> createState() => _postDetailScreenState();
+}
 
+class _postDetailScreenState extends ConsumerState<postDetailScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+
+
+  }
+  @override
+  Widget build(BuildContext context) {
+    final postDetail = ref.read(DetailAreaApiResponseProvider);
     return postDetail.when(
-      data: (data) => _PostDetail(searchDetailResult, searchImageResult),
+      data: (data) => _PostDetail(widget.searchDetailResult, widget.searchImageResult),
       error: (error, trace) => '에러발생'.text.make(),
       loading: () => const Center(
         child: CircularProgressIndicator(),
       ),
     );
   }
-
 }class _PostDetail extends HookWidget {
   final SearchDetailResult searchDetailResult;
   final SearchImageResult searchImageResult;
@@ -153,7 +169,7 @@ class postDetailScreen extends ConsumerWidget {
                         height: 1.5,
                       ).pSymmetric(h: 40),
                       const Height(20),
-                      MiniReviewList(controller: reviewController),
+                      MiniReviewList(controller: reviewController ),
                       const Height(20),
                       const Line(
                         width: maxWidthSize,
