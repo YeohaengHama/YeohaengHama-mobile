@@ -59,12 +59,15 @@ class _HomeDiaryHolderState extends  ConsumerState<HomeDiaryHolder> {
         scrollDirection: Axis.horizontal,
         itemCount: allDiary.length,
         itemBuilder: (context, index) {
+
+          final reversedIndex = allDiary.length - 1 - index;
+
           return Row(
             children: [
               SizedBox(
                 width: diaryContainerWidth,
                 height: diaryContainerHeight,
-                child: HomeDiaryWidget(allDiary[index]),
+                child: HomeDiaryWidget(allDiary[reversedIndex]),
               ).pOnly(left: 5)
             ],
           ).pOnly(right: 15);

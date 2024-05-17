@@ -55,7 +55,6 @@ class FloatingDaangnButton extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _floatItem('일정 추가하기', Icons.airplanemode_active,(){Nav.push(CalenderScreen());}),
-                        _floatItem('리뷰 작성하기', Icons.star, (){}),
                         _floatItem('일기 작성하기', Icons.edit_note, (){Nav.push(SelectItineraryScreen());}),
 
                       ],

@@ -11,7 +11,7 @@ import '../../../data/entity/diary/vo_detail_diary.dart';
 
 class DiaryMapWidget extends ConsumerStatefulWidget {
   const DiaryMapWidget(this.placeList, {Key? key}) : super(key: key);
-  final  List<Place> placeList;
+  final List<Place> placeList;
   @override
   ConsumerState<DiaryMapWidget> createState() => _DiaryMapWidgetState();
 }
@@ -100,13 +100,18 @@ class _DiaryMapWidgetState extends ConsumerState<DiaryMapWidget> {
     // 모든 마커를 포함하는 경계를 생성합니다.
     final bounds = NLatLngBounds(
       southWest: NLatLng(minLat, minLng),
-      northEast: NLatLng(maxLat, maxLng), 
+      northEast: NLatLng(maxLat, maxLng),
     );
+
+    // Calculate padding based on the number of items in the list
+    final padding = EdgeInsets.symmetric(
+      vertical: max(70, (placeCoordinates.length == 1 ? 140 : 70)), // Adjust the vertical padding dynamically
+      horizontal: max(70, (placeCoordinates.length == 1 ? 140 : 70)), // Adjust the horizontal padding dynamically
+    );
+
     // 카메라를 경계 영역으로 이동시킵니다.
     _controller.updateCamera(
-      NCameraUpdate.fitBounds(bounds, padding: EdgeInsets.symmetric(vertical: 50,horizontal: 50)),
-
+      NCameraUpdate.fitBounds(bounds, padding: padding),
     );
   }
-
 }

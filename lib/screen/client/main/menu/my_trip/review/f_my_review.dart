@@ -1,3 +1,4 @@
+import 'package:animation_list/animation_list.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/menu/my_trip/review/w_no_review_list.dart';
 import 'package:fast_app_base/screen/client/main/menu/my_trip/review/w_reviewList.dart';
@@ -53,16 +54,17 @@ class _MyReviewFragmentState extends ConsumerState<MyReviewFragment> {
               // 정상적으로 데이터를 받아왔을 때
               final allReview = ref.watch(reviewShowAccountProvider);
               if (allReview.isNotEmpty) {
-                return ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: allReview.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [ReviewList(allReview[index])],
-                    ).pSymmetric(v: 10);
-                  },
-                );
+                return Center(
+                    child: AnimationList(
+                    duration: 1100,
+                    reBounceDepth: 10.0,
+                    children: allReview.reversed.map((review) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: ReviewList(review),
+                  );
+                }).toList(),
+          ),);
               } else {
                 // 데이터가 비어있을 때
                 return NoReviewList();

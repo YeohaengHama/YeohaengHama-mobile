@@ -52,7 +52,7 @@ class _DiaryImageScrollViewState extends State<DiaryImageScrollView> {
               children: [
                 ...widget.accountDiary.photos.map((url) {
                   if (url.isNotEmpty) {
-                    return CachedNetworkImage(imageUrl: url, fit: BoxFit.fill);
+                    return CachedNetworkImage(imageUrl: url, fit: BoxFit.cover);
                   } else {
                     return Container(
                       color: Colors.grey, // 원하는 배경색 지정

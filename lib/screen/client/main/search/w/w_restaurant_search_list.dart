@@ -56,12 +56,12 @@ class RestaurantSearchListWidget extends ConsumerWidget {
         await postAreaReview();
         final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;
         final searchImageResult = ref.read(AreaImageApiResponseProvider);
-
+        final searchReviewResult =  ref.read(ReviewShowAllListProvider);
         if (searchDetailResult != null && searchImageResult != null) {
           Nav.push(postDetailScreen(
             searchDetailResult: searchDetailResult,
             searchImageResult: searchImageResult,
-
+            searchReviewResult: searchReviewResult,
           ));
         } else {
           // Handle the case when either searchDetailResult or searchImageResult is null

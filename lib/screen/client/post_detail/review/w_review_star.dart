@@ -1,19 +1,19 @@
+import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../data/entity/review/a_review_show_all.dart';
+import '../../../../data/memory/review/review_show_all_provider.dart';
 import '../../../../entity/area/vo_review.dart';
 
-
-
-
-class ReviewStar extends StatelessWidget  {
-  final List<Review> reviewList;
-  const ReviewStar(this.reviewList, {Key? key, this.starSize=20.0}) : super(key: key);
-  final starSize;
-
+class ReviewStar extends ConsumerWidget {
+  const ReviewStar({Key? key, this.starSize = 20.0}) : super(key: key);
+  final double starSize;
 
   @override
-  Widget build(BuildContext context) {
-    double averageScore = _calculateAverageScore();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final reviews = ref.watch(ReviewShowAllListProvider);
+    double averageScore = _calculateAverageScore(reviews);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -25,35 +25,34 @@ class ReviewStar extends StatelessWidget  {
         _buildStarIcon(averageScore, 5),
         Text(
           averageScore.toStringAsFixed(1),
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.grey),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+            color: Colors.grey,
+          ),
         ),
       ],
     );
   }
 
   Widget _buildStarIcon(double averageScore, int index) {
-
     if (averageScore >= index) {
-      return  Icon(Icons.star, color: Colors.orangeAccent,size: starSize,);
+      return Icon(Icons.star, color: Colors.orangeAccent, size: starSize);
     } else if (averageScore >= index - 0.5) {
-      // 별 반개인 경우
-      return const Icon(
-        Icons.star_half,
-        color: Colors.orangeAccent,
-          size: 20
-      );
+      return Icon(Icons.star_half, color: Colors.orangeAccent, size: starSize);
     } else {
-      // 일반적인 빈 별
-      return  Icon(Icons.star_border, color: Colors.orangeAccent,size: starSize);
+      return Icon(Icons.star_border, color: Colors.orangeAccent, size: starSize);
     }
   }
 
-  double _calculateAverageScore() {
-    if (reviewList.isEmpty) {
+  double _calculateAverageScore(List<ReviewShowAll> reviews) {
+    if (reviews.isEmpty) {
       return 0.0;
     }
-
-    double totalScore = reviewList.map((review) => review.score).reduce((value, element) => value + element).toDouble();
-    return totalScore / reviewList.length;
+    double totalScore = reviews
+        .map((review) => review.rating)
+        .reduce((value, element) => value + element)
+        .toDouble();
+    return totalScore / reviews.length;
   }
 }
