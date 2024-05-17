@@ -1,3 +1,4 @@
+import 'package:animation_list/animation_list.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/memory/diary/diary_show_account_all_provider.dart';
 import 'package:fast_app_base/screen/client/main/menu/my_trip/diary/w_diary_list.dart';
@@ -51,18 +52,17 @@ class _MyDiaryFragmentState extends ConsumerState<MyDiaryFragment> {
               // 정상적으로 데이터를 받아왔을 때
               final allDiary = ref.watch(DiaryFindAccountAllProvider);
               if (allDiary.isNotEmpty) {
-                return ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: allDiary.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        DiaryList(allDiary[index]),
-                      ],
-                    ).pSymmetric(v: 10);
-                  },
-                );
+                return Center(
+                  child: AnimationList(
+                    duration: 1000,
+                    reBounceDepth: 10.0,
+                    children: allDiary.reversed.map((diary) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: DiaryList(diary),
+                      );
+                    }).toList(),
+                  ),);
               } else {
                 // 데이터가 비어있을 때
                 return NoDiaryList();

@@ -59,37 +59,37 @@ class _DiaryWriteScreenState extends ConsumerState<DiaryWriteScreen> {
                 actions: [
                   IconButton(
                     icon: const Icon(Icons.upload),
-                    onPressed: () {
+                    onPressed: () async {
+                      setState(() {
+                        _isLoading = true; // 로딩 상태 시작
+                      });
                       List<String> photoNames = _controller.images
                           .map((image) => image.path!)
                           .toList();
 
-                      diaryApi.saveDiary(SaveDiary(
-                          itinerary: widget.itineraryId,
-                          date: DateTime.now().formattedDateTime,
-                          title: _textTitleController.text,
-                          content: _textFieldController.text,
-                          photos: photoNames));
-                      setState(() {
-                        _isLoading = true;
-                      });
-                      Future.delayed(const Duration(seconds: 2), () {
-                        diaryApi
-                            .showAccountAllDiary(int.parse(_accountProvider!.id), ref)
-                            .then((_) {
-                          setState(() {
-                            _isLoading = false; // 로딩 상태 변경
-                          });
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                backgroundColor: AppColors.mainPurple,
-                                content: Text('일기가 작성되었습니다.')),
-                          );
-                          Nav.pop(context);
-                          Nav.pop(context);
+                      try {
+                        await diaryApi.saveDiary(SaveDiary(
+                            itinerary: widget.itineraryId,
+                            date: DateTime.now().formattedDateTime,
+                            title: _textTitleController.text,
+                            content: _textFieldController.text,
+                            photos: photoNames));
+
+                        await diaryApi.showAccountAllDiary(int.parse(_accountProvider!.id), ref);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              backgroundColor: AppColors.mainPurple,
+                              content: Text('일기가 작성되었습니다.')),
+                        );
+                        Nav.pop(context);
+                        Nav.pop(context);
+                      } catch (e) {
+                        // 오류 처리 (예: 에러 메시지 표시)
+                      } finally {
+                        setState(() {
+                          _isLoading = false; // 로딩 상태 종료
                         });
-                        },
-                      );
+                      }
                     },
                   )
                 ],
@@ -125,7 +125,7 @@ class _DiaryWriteScreenState extends ConsumerState<DiaryWriteScreen> {
                           controller: _textFieldController,
                           decoration: const InputDecoration(
                             hintText:
-                                '이번 여행은 어떤 여행이었나요? 여행에 대한 한 줄 요약\n또는 여행 꿀팁을 남겨보세요.',
+                            '이번 여행은 어떤 여행이었나요? 여행에 대한 한 줄 요약\n또는 여행 꿀팁을 남겨보세요.',
                             border: InputBorder.none,
                           ),
                           maxLines: null,

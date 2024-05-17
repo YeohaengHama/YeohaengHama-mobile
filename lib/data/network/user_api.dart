@@ -78,7 +78,7 @@ class UserApi {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               backgroundColor: AppColors.mainPurple,
-              content: Text("'$nickName'님 반가워요 여행하마와 함께 떠나볼까요?💜")),
+              content: Text("$nickName님 반가워요 여행하마와 함께 떠나볼까요?💜",style:TextStyle(fontWeight: FontWeight.bold),)),
         );
         final currentAccount = CurrentAccount(id: id, nickName: nickName, photoUrl: photoUrl);
         accountNotifier.addCurrentAccount(currentAccount);

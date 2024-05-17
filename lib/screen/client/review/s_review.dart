@@ -64,45 +64,45 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                 actions: [
                   IconButton(
                     icon: const Icon(Icons.upload),
-                    onPressed: () {
+                    onPressed: () async {
+                      setState(() {
+                        _isLoading = true; // 로딩 상태 시작
+                      });
+
                       List<String> photoNames = _controller.images
                           .map((image) => image.path!)
                           .toList();
 
-                      reviewApi.postReview(
-                        ReviewPost(
-                          placeName: searchDetailResult.title,
-                          accountId: account!.id,
-                          contentId: int.parse(searchDetailResult.contentId),
-                          contentType:
-                              int.parse(searchDetailResult.contentTypeId),
-                          rating: _currentRating,
-                          content: _textFieldController.text,
-                          photos: photoNames,
-                        ),
-                        ref,
-                      );
+                      try {
+                        await reviewApi.postReview(
+                          ReviewPost(
+                            placeName: searchDetailResult.title,
+                            accountId: account!.id,
+                            contentId: int.parse(searchDetailResult.contentId),
+                            contentType:
+                            int.parse(searchDetailResult.contentTypeId),
+                            rating: _currentRating,
+                            content: _textFieldController.text,
+                            photos: photoNames,
+                          ),
+                          ref,
+                        );
 
-                      setState(() {
-                        _isLoading = true; // 로딩 인디케이터 표시
-                      });
+                        await reviewApi.showAllReview(widget.id, widget.type, ref);
 
-                      Future.delayed(const Duration(seconds: 2), () {
-                        // 2초 후에 데이터를 새로 고침하는 작업을 수행합니다.
-                        reviewApi
-                            .showAllReview(widget.id, widget.type, ref)
-                            .then((_) {
-                          setState(() {
-                            _isLoading = false; // 로딩 상태 변경
-                          });
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                backgroundColor: AppColors.mainPurple,
-                                content: Text('리뷰가 작성되었습니다.')),
-                          );
-                          Nav.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              backgroundColor: AppColors.mainPurple,
+                              content: Text('리뷰가 작성되었습니다.')),
+                        );
+                        Nav.pop(context);
+                      } catch (e) {
+                        // 오류 처리 (예: 에러 메시지 표시)
+                      } finally {
+                        setState(() {
+                          _isLoading = false; // 로딩 상태 종료
                         });
-                      });
+                      }
                     },
                   )
                 ],

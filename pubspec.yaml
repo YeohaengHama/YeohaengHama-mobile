@@ -35,7 +35,8 @@ dependencies:
   #image cut
   image_picker: ^1.0.7
   image_cropper: ^1.4.0
-  multi_image_picker: ^4.8.01
+
+
   multi_image_picker_view: ^1.0.0
   file_picker: ^8.0.0+1
   url_launcher: ^6.2.5
@@ -69,7 +70,7 @@ dependencies:
   google_fonts: ^4.0.4
   easy_localization: ^3.0.2
   flutter_cache_manager: ^3.3.0
-
+  animation_list: ^3.0.0
  #status
   riverpod: ^2.5.0
   hooks_riverpod: ^2.5.1

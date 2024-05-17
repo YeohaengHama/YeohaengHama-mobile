@@ -19,12 +19,12 @@ import '../../../data/network/review_api.dart';
 class postDetailScreen extends ConsumerStatefulWidget {
   final SearchDetailResult searchDetailResult;
   final SearchImageResult searchImageResult;
+  final List<ReviewShowAll> searchReviewResult;
 
-
-  const postDetailScreen({
+  const postDetailScreen( {
     required this.searchDetailResult,
     required this.searchImageResult,
-
+    required this.searchReviewResult,
     super.key,
   });
 
@@ -45,7 +45,7 @@ class _postDetailScreenState extends ConsumerState<postDetailScreen> {
   Widget build(BuildContext context) {
     final postDetail = ref.read(DetailAreaApiResponseProvider);
     return postDetail.when(
-      data: (data) => _PostDetail(widget.searchDetailResult, widget.searchImageResult),
+      data: (data) => _PostDetail(widget.searchDetailResult, widget.searchImageResult, widget.searchReviewResult),
       error: (error, trace) => '에러발생'.text.make(),
       loading: () => const Center(
         child: CircularProgressIndicator(),
@@ -55,9 +55,9 @@ class _postDetailScreenState extends ConsumerState<postDetailScreen> {
 }class _PostDetail extends HookWidget {
   final SearchDetailResult searchDetailResult;
   final SearchImageResult searchImageResult;
-
+  final List<ReviewShowAll> searchReviewResult;
   const _PostDetail(this.searchDetailResult,
-      this.searchImageResult, {
+      this.searchImageResult, this.searchReviewResult, {
         super.key,
       });
 
@@ -159,7 +159,7 @@ class _postDetailScreenState extends ConsumerState<postDetailScreen> {
                           .size(24)
                           .color(AppColors.primaryGrey)
                           .make(),
-                      ReviewStar(reviewList),
+                      ReviewStar(),
                       const Height(20),
                       IconsWidget(int.parse(searchDetailResult.contentId), int.parse(searchDetailResult.contentTypeId)),
                       const Height(20),
@@ -182,7 +182,7 @@ class _postDetailScreenState extends ConsumerState<postDetailScreen> {
                           .make()
                           .pSymmetric(h: 30, v: 30),
                       const Line(color: AppColors.outline, height: 10),
-                      InfoMapWidget(searchDetailResult: searchDetailResult, searchImageResult: searchImageResult,).pSymmetric(v:30 , h: 25),
+                      InfoMapWidget(searchDetailResult: searchDetailResult, searchImageResult: searchImageResult,searchReviewResult: searchReviewResult,).pSymmetric(v:30 , h: 25),
                       const Line(color: AppColors.outline, height: 10),
                       SimpleReviewWidget(int.parse(searchDetailResult.contentId), int.parse(searchDetailResult.contentTypeId)).pSymmetric(h:25, v: 30),
                       const Height(100),

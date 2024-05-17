@@ -139,11 +139,12 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                                 ),
                               ).pOnly(left: 10);
                             } else {
+                              final reversedIndex = pickPlaceList.length - 1 - index;
                               return SizedBox(
                                 width: 105,
                                 height: 100,
                                 child: PickAreaWidget(
-                                    pickPlaceList[index], widget.itinerary),
+                                    pickPlaceList[reversedIndex], widget.itinerary),
                               ).pOnly(left: 5);
                             }
                           },

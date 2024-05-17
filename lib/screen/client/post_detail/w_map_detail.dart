@@ -10,14 +10,15 @@ import 'package:flutter/widgets.dart';
 
 import '../../../data/entity/area/saerch_image_result.dart';
 import '../../../data/entity/area/serch_detail_result.dart';
+import '../../../data/entity/review/a_review_show_all.dart';
 import '../../../entity/dummies.dart';
 
 
 class MapDetailScreen extends StatefulWidget {
-  const MapDetailScreen( {Key? key, required this.searchDetailResult ,required this.searchImageResult, }) : super(key: key);
-
+  const MapDetailScreen( {Key? key, required this.searchDetailResult ,required this.searchImageResult, required this.searchReviewResult, }) : super(key: key);
   final SearchDetailResult searchDetailResult;
   final SearchImageResult searchImageResult;
+  final List<ReviewShowAll> searchReviewResult;
 
   @override
   State<MapDetailScreen> createState() => _MapDetailScreenState();
@@ -78,7 +79,7 @@ class _MapDetailScreenState extends State<MapDetailScreen> {
                             widget.searchDetailResult.title.text.bold.color(AppColors.primaryGrey).make(),
                             SizedBox(width: 250,child: overviewText.text.color(AppColors.secondGrey).make()),
                             widget.searchDetailResult.addr1.text.color(AppColors.thirdGrey).make(),
-                            ReviewStar(reviewList),
+                            ReviewStar(),
   
                           ],
                         ).pOnly(left: 10)

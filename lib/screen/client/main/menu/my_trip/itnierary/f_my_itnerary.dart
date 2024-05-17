@@ -1,3 +1,4 @@
+import 'package:animation_list/animation_list.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/menu/my_trip/itnierary/w_Itinerary_list.dart';
 import 'package:fast_app_base/screen/client/main/menu/my_trip/itnierary/w_no_itinerary_list.dart';
@@ -51,17 +52,17 @@ class _MyItneraryFragmentState extends ConsumerState<MyItneraryFragment> {
               // 정상적으로 데이터를 받아왔을 때
               final allItinerary = ref.watch(ItineraryShowAllListProvider);
               if (allItinerary.isNotEmpty) {
-                return ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: allItinerary.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        ItineraryList(allItinerary: allItinerary[index]),
-                      ],
-                    ).pSymmetric(v: 10, h: 15);
-                  },
-                );
+                return Center(
+                  child: AnimationList(
+                    duration: 1100,
+                    reBounceDepth: 10.0,
+                    children: allItinerary.reversed.map((itinerary) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: ItineraryList(allItinerary: itinerary,),
+                      );
+                    }).toList(),
+                  ),);
               } else {
                 // 데이터가 비어있을 때
                 return NoItnieraryListWidget();
