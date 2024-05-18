@@ -12,7 +12,7 @@ part of 'open_api_detail.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OpenApiDetail _$OpenApiDetailFromJson(Map<String, dynamic> json) {
   return _OpenApiDetail.fromJson(json);
@@ -91,11 +91,11 @@ class _$OpenApiDetailCopyWithImpl<$Res, $Val extends OpenApiDetail>
 }
 
 /// @nodoc
-abstract class _$$_OpenApiDetailCopyWith<$Res>
+abstract class _$$OpenApiDetailImplCopyWith<$Res>
     implements $OpenApiDetailCopyWith<$Res> {
-  factory _$$_OpenApiDetailCopyWith(
-          _$_OpenApiDetail value, $Res Function(_$_OpenApiDetail) then) =
-      __$$_OpenApiDetailCopyWithImpl<$Res>;
+  factory _$$OpenApiDetailImplCopyWith(
+          _$OpenApiDetailImpl value, $Res Function(_$OpenApiDetailImpl) then) =
+      __$$OpenApiDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +107,11 @@ abstract class _$$_OpenApiDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OpenApiDetailCopyWithImpl<$Res>
-    extends _$OpenApiDetailCopyWithImpl<$Res, _$_OpenApiDetail>
-    implements _$$_OpenApiDetailCopyWith<$Res> {
-  __$$_OpenApiDetailCopyWithImpl(
-      _$_OpenApiDetail _value, $Res Function(_$_OpenApiDetail) _then)
+class __$$OpenApiDetailImplCopyWithImpl<$Res>
+    extends _$OpenApiDetailCopyWithImpl<$Res, _$OpenApiDetailImpl>
+    implements _$$OpenApiDetailImplCopyWith<$Res> {
+  __$$OpenApiDetailImplCopyWithImpl(
+      _$OpenApiDetailImpl _value, $Res Function(_$OpenApiDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +123,7 @@ class __$$_OpenApiDetailCopyWithImpl<$Res>
     Object? page = null,
     Object? mobileOS = null,
   }) {
-    return _then(_$_OpenApiDetail(
+    return _then(_$OpenApiDetailImpl(
       contentId: null == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
@@ -150,16 +150,16 @@ class __$$_OpenApiDetailCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OpenApiDetail implements _OpenApiDetail {
-  const _$_OpenApiDetail(
+class _$OpenApiDetailImpl implements _OpenApiDetail {
+  const _$OpenApiDetailImpl(
       {required this.contentId,
       required this.contentTypeId,
       this.numOfRows = '1',
       this.page = '1',
       this.mobileOS = 'IOS'});
 
-  factory _$_OpenApiDetail.fromJson(Map<String, dynamic> json) =>
-      _$$_OpenApiDetailFromJson(json);
+  factory _$OpenApiDetailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OpenApiDetailImplFromJson(json);
 
   @override
   final String contentId;
@@ -181,10 +181,10 @@ class _$_OpenApiDetail implements _OpenApiDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OpenApiDetail &&
+            other is _$OpenApiDetailImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
             (identical(other.contentTypeId, contentTypeId) ||
@@ -204,12 +204,12 @@ class _$_OpenApiDetail implements _OpenApiDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OpenApiDetailCopyWith<_$_OpenApiDetail> get copyWith =>
-      __$$_OpenApiDetailCopyWithImpl<_$_OpenApiDetail>(this, _$identity);
+  _$$OpenApiDetailImplCopyWith<_$OpenApiDetailImpl> get copyWith =>
+      __$$OpenApiDetailImplCopyWithImpl<_$OpenApiDetailImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OpenApiDetailToJson(
+    return _$$OpenApiDetailImplToJson(
       this,
     );
   }
@@ -221,10 +221,10 @@ abstract class _OpenApiDetail implements OpenApiDetail {
       required final String contentTypeId,
       final String numOfRows,
       final String page,
-      required final String mobileOS}) = _$_OpenApiDetail;
+      required final String mobileOS}) = _$OpenApiDetailImpl;
 
   factory _OpenApiDetail.fromJson(Map<String, dynamic> json) =
-      _$_OpenApiDetail.fromJson;
+      _$OpenApiDetailImpl.fromJson;
 
   @override
   String get contentId;
@@ -238,6 +238,6 @@ abstract class _OpenApiDetail implements OpenApiDetail {
   String get mobileOS;
   @override
   @JsonKey(ignore: true)
-  _$$_OpenApiDetailCopyWith<_$_OpenApiDetail> get copyWith =>
+  _$$OpenApiDetailImplCopyWith<_$OpenApiDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

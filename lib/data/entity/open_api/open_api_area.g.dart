@@ -6,8 +6,8 @@ part of 'open_api_area.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OpenApiArea _$$_OpenApiAreaFromJson(Map<String, dynamic> json) =>
-    _$_OpenApiArea(
+_$OpenApiAreaImpl _$$OpenApiAreaImplFromJson(Map<String, dynamic> json) =>
+    _$OpenApiAreaImpl(
       numOfRows: json['numOfRows'] as String,
       page: json['page'] as String? ?? '1',
       keyword: json['keyword'] as String,
@@ -15,7 +15,7 @@ _$_OpenApiArea _$$_OpenApiAreaFromJson(Map<String, dynamic> json) =>
       mobileOS: json['mobileOS'] as String,
     );
 
-Map<String, dynamic> _$$_OpenApiAreaToJson(_$_OpenApiArea instance) =>
+Map<String, dynamic> _$$OpenApiAreaImplToJson(_$OpenApiAreaImpl instance) =>
     <String, dynamic>{
       'numOfRows': instance.numOfRows,
       'page': instance.page,

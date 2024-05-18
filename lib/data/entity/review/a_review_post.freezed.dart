@@ -12,7 +12,7 @@ part of 'a_review_post.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReviewPost {
@@ -100,11 +100,11 @@ class _$ReviewPostCopyWithImpl<$Res, $Val extends ReviewPost>
 }
 
 /// @nodoc
-abstract class _$$_ReviewPostCopyWith<$Res>
+abstract class _$$ReviewPostImplCopyWith<$Res>
     implements $ReviewPostCopyWith<$Res> {
-  factory _$$_ReviewPostCopyWith(
-          _$_ReviewPost value, $Res Function(_$_ReviewPost) then) =
-      __$$_ReviewPostCopyWithImpl<$Res>;
+  factory _$$ReviewPostImplCopyWith(
+          _$ReviewPostImpl value, $Res Function(_$ReviewPostImpl) then) =
+      __$$ReviewPostImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -118,11 +118,11 @@ abstract class _$$_ReviewPostCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReviewPostCopyWithImpl<$Res>
-    extends _$ReviewPostCopyWithImpl<$Res, _$_ReviewPost>
-    implements _$$_ReviewPostCopyWith<$Res> {
-  __$$_ReviewPostCopyWithImpl(
-      _$_ReviewPost _value, $Res Function(_$_ReviewPost) _then)
+class __$$ReviewPostImplCopyWithImpl<$Res>
+    extends _$ReviewPostCopyWithImpl<$Res, _$ReviewPostImpl>
+    implements _$$ReviewPostImplCopyWith<$Res> {
+  __$$ReviewPostImplCopyWithImpl(
+      _$ReviewPostImpl _value, $Res Function(_$ReviewPostImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -136,7 +136,7 @@ class __$$_ReviewPostCopyWithImpl<$Res>
     Object? accountId = null,
     Object? photos = freezed,
   }) {
-    return _then(_$_ReviewPost(
+    return _then(_$ReviewPostImpl(
       placeName: null == placeName
           ? _value.placeName
           : placeName // ignore: cast_nullable_to_non_nullable
@@ -171,8 +171,8 @@ class __$$_ReviewPostCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ReviewPost implements _ReviewPost {
-  _$_ReviewPost(
+class _$ReviewPostImpl implements _ReviewPost {
+  _$ReviewPostImpl(
       {required this.placeName,
       required this.contentId,
       required this.contentType,
@@ -211,10 +211,10 @@ class _$_ReviewPost implements _ReviewPost {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReviewPost &&
+            other is _$ReviewPostImpl &&
             (identical(other.placeName, placeName) ||
                 other.placeName == placeName) &&
             (identical(other.contentId, contentId) ||
@@ -242,8 +242,8 @@ class _$_ReviewPost implements _ReviewPost {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReviewPostCopyWith<_$_ReviewPost> get copyWith =>
-      __$$_ReviewPostCopyWithImpl<_$_ReviewPost>(this, _$identity);
+  _$$ReviewPostImplCopyWith<_$ReviewPostImpl> get copyWith =>
+      __$$ReviewPostImplCopyWithImpl<_$ReviewPostImpl>(this, _$identity);
 }
 
 abstract class _ReviewPost implements ReviewPost {
@@ -254,7 +254,7 @@ abstract class _ReviewPost implements ReviewPost {
       required final int rating,
       required final String content,
       required final String accountId,
-      final List<String>? photos}) = _$_ReviewPost;
+      final List<String>? photos}) = _$ReviewPostImpl;
 
   @override
   String get placeName;
@@ -272,6 +272,6 @@ abstract class _ReviewPost implements ReviewPost {
   List<String>? get photos;
   @override
   @JsonKey(ignore: true)
-  _$$_ReviewPostCopyWith<_$_ReviewPost> get copyWith =>
+  _$$ReviewPostImplCopyWith<_$ReviewPostImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

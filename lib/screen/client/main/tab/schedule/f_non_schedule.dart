@@ -22,7 +22,7 @@ class NonSecheduleFragment extends StatelessWidget {
             text: const TextSpan(
               children: [
                 TextSpan(
-                  text: '아직 예정된 여행 일정이 없어요.\n',
+                  text: '아직 선택된 여행 일정이 없어요.\n',
                   style: TextStyle(
                       color: AppColors.mainPurple, fontWeight: FontWeight.bold),
                 ),

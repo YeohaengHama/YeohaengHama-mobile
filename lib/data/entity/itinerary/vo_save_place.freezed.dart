@@ -12,7 +12,7 @@ part of 'vo_save_place.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SavePlace _$SavePlaceFromJson(Map<String, dynamic> json) {
   return _SavePlace.fromJson(json);
@@ -73,21 +73,22 @@ class _$SavePlaceCopyWithImpl<$Res, $Val extends SavePlace>
 }
 
 /// @nodoc
-abstract class _$$_SavePlaceCopyWith<$Res> implements $SavePlaceCopyWith<$Res> {
-  factory _$$_SavePlaceCopyWith(
-          _$_SavePlace value, $Res Function(_$_SavePlace) then) =
-      __$$_SavePlaceCopyWithImpl<$Res>;
+abstract class _$$SavePlaceImplCopyWith<$Res>
+    implements $SavePlaceCopyWith<$Res> {
+  factory _$$SavePlaceImplCopyWith(
+          _$SavePlaceImpl value, $Res Function(_$SavePlaceImpl) then) =
+      __$$SavePlaceImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int accountId, String placeNum, String contentTypeId});
 }
 
 /// @nodoc
-class __$$_SavePlaceCopyWithImpl<$Res>
-    extends _$SavePlaceCopyWithImpl<$Res, _$_SavePlace>
-    implements _$$_SavePlaceCopyWith<$Res> {
-  __$$_SavePlaceCopyWithImpl(
-      _$_SavePlace _value, $Res Function(_$_SavePlace) _then)
+class __$$SavePlaceImplCopyWithImpl<$Res>
+    extends _$SavePlaceCopyWithImpl<$Res, _$SavePlaceImpl>
+    implements _$$SavePlaceImplCopyWith<$Res> {
+  __$$SavePlaceImplCopyWithImpl(
+      _$SavePlaceImpl _value, $Res Function(_$SavePlaceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -97,7 +98,7 @@ class __$$_SavePlaceCopyWithImpl<$Res>
     Object? placeNum = null,
     Object? contentTypeId = null,
   }) {
-    return _then(_$_SavePlace(
+    return _then(_$SavePlaceImpl(
       accountId: null == accountId
           ? _value.accountId
           : accountId // ignore: cast_nullable_to_non_nullable
@@ -116,14 +117,14 @@ class __$$_SavePlaceCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SavePlace implements _SavePlace {
-  const _$_SavePlace(
+class _$SavePlaceImpl implements _SavePlace {
+  const _$SavePlaceImpl(
       {required this.accountId,
       required this.placeNum,
       required this.contentTypeId});
 
-  factory _$_SavePlace.fromJson(Map<String, dynamic> json) =>
-      _$$_SavePlaceFromJson(json);
+  factory _$SavePlaceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SavePlaceImplFromJson(json);
 
   @override
   final int accountId;
@@ -138,10 +139,10 @@ class _$_SavePlace implements _SavePlace {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SavePlace &&
+            other is _$SavePlaceImpl &&
             (identical(other.accountId, accountId) ||
                 other.accountId == accountId) &&
             (identical(other.placeNum, placeNum) ||
@@ -158,12 +159,12 @@ class _$_SavePlace implements _SavePlace {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SavePlaceCopyWith<_$_SavePlace> get copyWith =>
-      __$$_SavePlaceCopyWithImpl<_$_SavePlace>(this, _$identity);
+  _$$SavePlaceImplCopyWith<_$SavePlaceImpl> get copyWith =>
+      __$$SavePlaceImplCopyWithImpl<_$SavePlaceImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SavePlaceToJson(
+    return _$$SavePlaceImplToJson(
       this,
     );
   }
@@ -173,10 +174,10 @@ abstract class _SavePlace implements SavePlace {
   const factory _SavePlace(
       {required final int accountId,
       required final String placeNum,
-      required final String contentTypeId}) = _$_SavePlace;
+      required final String contentTypeId}) = _$SavePlaceImpl;
 
   factory _SavePlace.fromJson(Map<String, dynamic> json) =
-      _$_SavePlace.fromJson;
+      _$SavePlaceImpl.fromJson;
 
   @override
   int get accountId;
@@ -186,6 +187,6 @@ abstract class _SavePlace implements SavePlace {
   String get contentTypeId;
   @override
   @JsonKey(ignore: true)
-  _$$_SavePlaceCopyWith<_$_SavePlace> get copyWith =>
+  _$$SavePlaceImplCopyWith<_$SavePlaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

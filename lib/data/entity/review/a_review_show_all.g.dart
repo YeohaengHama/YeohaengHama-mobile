@@ -6,11 +6,11 @@ part of 'a_review_show_all.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReviewShowAll _$$_ReviewShowAllFromJson(Map<String, dynamic> json) =>
-    _$_ReviewShowAll(
-      contentId: json['contentId'] as int,
-      contentTypeId: json['contentTypeId'] as int,
-      rating: json['rating'] as int,
+_$ReviewShowAllImpl _$$ReviewShowAllImplFromJson(Map<String, dynamic> json) =>
+    _$ReviewShowAllImpl(
+      contentId: (json['contentId'] as num).toInt(),
+      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      rating: (json['rating'] as num).toInt(),
       content: json['content'] as String,
       reviewPhotoURLList: (json['reviewPhotoURLList'] as List<dynamic>)
           .map((e) => e as String)
@@ -18,7 +18,7 @@ _$_ReviewShowAll _$$_ReviewShowAllFromJson(Map<String, dynamic> json) =>
       account: Account.fromJson(json['account'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_ReviewShowAllToJson(_$_ReviewShowAll instance) =>
+Map<String, dynamic> _$$ReviewShowAllImplToJson(_$ReviewShowAllImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
       'contentTypeId': instance.contentTypeId,
@@ -28,13 +28,14 @@ Map<String, dynamic> _$$_ReviewShowAllToJson(_$_ReviewShowAll instance) =>
       'account': instance.account,
     };
 
-_$_Account _$$_AccountFromJson(Map<String, dynamic> json) => _$_Account(
-      id: json['id'] as int,
+_$AccountImpl _$$AccountImplFromJson(Map<String, dynamic> json) =>
+    _$AccountImpl(
+      id: (json['id'] as num).toInt(),
       nickname: json['nickname'] as String,
       photoUrl: json['photoUrl'] as String?,
     );
 
-Map<String, dynamic> _$$_AccountToJson(_$_Account instance) =>
+Map<String, dynamic> _$$AccountImplToJson(_$AccountImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'nickname': instance.nickname,

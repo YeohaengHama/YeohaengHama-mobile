@@ -12,7 +12,7 @@ part of 'serch_detail_result.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SearchDetailResult _$SearchDetailResultFromJson(Map<String, dynamic> json) {
   return _SearchDetailResult.fromJson(json);
@@ -112,11 +112,11 @@ class _$SearchDetailResultCopyWithImpl<$Res, $Val extends SearchDetailResult>
 }
 
 /// @nodoc
-abstract class _$$_SearchDetailResultCopyWith<$Res>
+abstract class _$$SearchDetailResultImplCopyWith<$Res>
     implements $SearchDetailResultCopyWith<$Res> {
-  factory _$$_SearchDetailResultCopyWith(_$_SearchDetailResult value,
-          $Res Function(_$_SearchDetailResult) then) =
-      __$$_SearchDetailResultCopyWithImpl<$Res>;
+  factory _$$SearchDetailResultImplCopyWith(_$SearchDetailResultImpl value,
+          $Res Function(_$SearchDetailResultImpl) then) =
+      __$$SearchDetailResultImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -131,11 +131,11 @@ abstract class _$$_SearchDetailResultCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchDetailResultCopyWithImpl<$Res>
-    extends _$SearchDetailResultCopyWithImpl<$Res, _$_SearchDetailResult>
-    implements _$$_SearchDetailResultCopyWith<$Res> {
-  __$$_SearchDetailResultCopyWithImpl(
-      _$_SearchDetailResult _value, $Res Function(_$_SearchDetailResult) _then)
+class __$$SearchDetailResultImplCopyWithImpl<$Res>
+    extends _$SearchDetailResultCopyWithImpl<$Res, _$SearchDetailResultImpl>
+    implements _$$SearchDetailResultImplCopyWith<$Res> {
+  __$$SearchDetailResultImplCopyWithImpl(_$SearchDetailResultImpl _value,
+      $Res Function(_$SearchDetailResultImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -150,7 +150,7 @@ class __$$_SearchDetailResultCopyWithImpl<$Res>
     Object? mapX = null,
     Object? mapY = null,
   }) {
-    return _then(_$_SearchDetailResult(
+    return _then(_$SearchDetailResultImpl(
       contentId: null == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
@@ -189,8 +189,8 @@ class __$$_SearchDetailResultCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SearchDetailResult implements _SearchDetailResult {
-  const _$_SearchDetailResult(
+class _$SearchDetailResultImpl implements _SearchDetailResult {
+  const _$SearchDetailResultImpl(
       {required this.contentId,
       required this.contentTypeId,
       required this.title,
@@ -200,8 +200,8 @@ class _$_SearchDetailResult implements _SearchDetailResult {
       required this.mapX,
       required this.mapY});
 
-  factory _$_SearchDetailResult.fromJson(Map<String, dynamic> json) =>
-      _$$_SearchDetailResultFromJson(json);
+  factory _$SearchDetailResultImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SearchDetailResultImplFromJson(json);
 
   @override
   final String contentId;
@@ -226,10 +226,10 @@ class _$_SearchDetailResult implements _SearchDetailResult {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchDetailResult &&
+            other is _$SearchDetailResultImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
             (identical(other.contentTypeId, contentTypeId) ||
@@ -251,13 +251,13 @@ class _$_SearchDetailResult implements _SearchDetailResult {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchDetailResultCopyWith<_$_SearchDetailResult> get copyWith =>
-      __$$_SearchDetailResultCopyWithImpl<_$_SearchDetailResult>(
+  _$$SearchDetailResultImplCopyWith<_$SearchDetailResultImpl> get copyWith =>
+      __$$SearchDetailResultImplCopyWithImpl<_$SearchDetailResultImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SearchDetailResultToJson(
+    return _$$SearchDetailResultImplToJson(
       this,
     );
   }
@@ -272,10 +272,10 @@ abstract class _SearchDetailResult implements SearchDetailResult {
       required final String addr2,
       required final String overView,
       required final String mapX,
-      required final String mapY}) = _$_SearchDetailResult;
+      required final String mapY}) = _$SearchDetailResultImpl;
 
   factory _SearchDetailResult.fromJson(Map<String, dynamic> json) =
-      _$_SearchDetailResult.fromJson;
+      _$SearchDetailResultImpl.fromJson;
 
   @override
   String get contentId;
@@ -295,6 +295,6 @@ abstract class _SearchDetailResult implements SearchDetailResult {
   String get mapY;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchDetailResultCopyWith<_$_SearchDetailResult> get copyWith =>
+  _$$SearchDetailResultImplCopyWith<_$SearchDetailResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

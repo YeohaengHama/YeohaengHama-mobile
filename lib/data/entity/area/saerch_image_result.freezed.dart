@@ -12,7 +12,7 @@ part of 'saerch_image_result.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SearchImageResult {
@@ -57,22 +57,22 @@ class _$SearchImageResultCopyWithImpl<$Res, $Val extends SearchImageResult>
 }
 
 /// @nodoc
-abstract class _$$_SearchImageResultCopyWith<$Res>
+abstract class _$$SearchImageResultImplCopyWith<$Res>
     implements $SearchImageResultCopyWith<$Res> {
-  factory _$$_SearchImageResultCopyWith(_$_SearchImageResult value,
-          $Res Function(_$_SearchImageResult) then) =
-      __$$_SearchImageResultCopyWithImpl<$Res>;
+  factory _$$SearchImageResultImplCopyWith(_$SearchImageResultImpl value,
+          $Res Function(_$SearchImageResultImpl) then) =
+      __$$SearchImageResultImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<String>? imagesUrl});
 }
 
 /// @nodoc
-class __$$_SearchImageResultCopyWithImpl<$Res>
-    extends _$SearchImageResultCopyWithImpl<$Res, _$_SearchImageResult>
-    implements _$$_SearchImageResultCopyWith<$Res> {
-  __$$_SearchImageResultCopyWithImpl(
-      _$_SearchImageResult _value, $Res Function(_$_SearchImageResult) _then)
+class __$$SearchImageResultImplCopyWithImpl<$Res>
+    extends _$SearchImageResultCopyWithImpl<$Res, _$SearchImageResultImpl>
+    implements _$$SearchImageResultImplCopyWith<$Res> {
+  __$$SearchImageResultImplCopyWithImpl(_$SearchImageResultImpl _value,
+      $Res Function(_$SearchImageResultImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_SearchImageResultCopyWithImpl<$Res>
   $Res call({
     Object? imagesUrl = freezed,
   }) {
-    return _then(_$_SearchImageResult(
+    return _then(_$SearchImageResultImpl(
       imagesUrl: freezed == imagesUrl
           ? _value._imagesUrl
           : imagesUrl // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$_SearchImageResultCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SearchImageResult implements _SearchImageResult {
-  const _$_SearchImageResult({final List<String>? imagesUrl})
+class _$SearchImageResultImpl implements _SearchImageResult {
+  const _$SearchImageResultImpl({final List<String>? imagesUrl})
       : _imagesUrl = imagesUrl;
 
   final List<String>? _imagesUrl;
@@ -111,10 +111,10 @@ class _$_SearchImageResult implements _SearchImageResult {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchImageResult &&
+            other is _$SearchImageResultImpl &&
             const DeepCollectionEquality()
                 .equals(other._imagesUrl, _imagesUrl));
   }
@@ -126,19 +126,19 @@ class _$_SearchImageResult implements _SearchImageResult {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchImageResultCopyWith<_$_SearchImageResult> get copyWith =>
-      __$$_SearchImageResultCopyWithImpl<_$_SearchImageResult>(
+  _$$SearchImageResultImplCopyWith<_$SearchImageResultImpl> get copyWith =>
+      __$$SearchImageResultImplCopyWithImpl<_$SearchImageResultImpl>(
           this, _$identity);
 }
 
 abstract class _SearchImageResult implements SearchImageResult {
   const factory _SearchImageResult({final List<String>? imagesUrl}) =
-      _$_SearchImageResult;
+      _$SearchImageResultImpl;
 
   @override
   List<String>? get imagesUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchImageResultCopyWith<_$_SearchImageResult> get copyWith =>
+  _$$SearchImageResultImplCopyWith<_$SearchImageResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

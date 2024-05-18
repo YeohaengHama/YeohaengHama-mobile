@@ -12,7 +12,7 @@ part of 'vo_current_account.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CurrentAccount {
@@ -69,22 +69,22 @@ class _$CurrentAccountCopyWithImpl<$Res, $Val extends CurrentAccount>
 }
 
 /// @nodoc
-abstract class _$$_CurrentAccountCopyWith<$Res>
+abstract class _$$CurrentAccountImplCopyWith<$Res>
     implements $CurrentAccountCopyWith<$Res> {
-  factory _$$_CurrentAccountCopyWith(
-          _$_CurrentAccount value, $Res Function(_$_CurrentAccount) then) =
-      __$$_CurrentAccountCopyWithImpl<$Res>;
+  factory _$$CurrentAccountImplCopyWith(_$CurrentAccountImpl value,
+          $Res Function(_$CurrentAccountImpl) then) =
+      __$$CurrentAccountImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String nickName, String? photoUrl});
 }
 
 /// @nodoc
-class __$$_CurrentAccountCopyWithImpl<$Res>
-    extends _$CurrentAccountCopyWithImpl<$Res, _$_CurrentAccount>
-    implements _$$_CurrentAccountCopyWith<$Res> {
-  __$$_CurrentAccountCopyWithImpl(
-      _$_CurrentAccount _value, $Res Function(_$_CurrentAccount) _then)
+class __$$CurrentAccountImplCopyWithImpl<$Res>
+    extends _$CurrentAccountCopyWithImpl<$Res, _$CurrentAccountImpl>
+    implements _$$CurrentAccountImplCopyWith<$Res> {
+  __$$CurrentAccountImplCopyWithImpl(
+      _$CurrentAccountImpl _value, $Res Function(_$CurrentAccountImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -94,7 +94,7 @@ class __$$_CurrentAccountCopyWithImpl<$Res>
     Object? nickName = null,
     Object? photoUrl = freezed,
   }) {
-    return _then(_$_CurrentAccount(
+    return _then(_$CurrentAccountImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -113,8 +113,8 @@ class __$$_CurrentAccountCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CurrentAccount implements _CurrentAccount {
-  const _$_CurrentAccount(
+class _$CurrentAccountImpl implements _CurrentAccount {
+  const _$CurrentAccountImpl(
       {required this.id, required this.nickName, this.photoUrl});
 
   @override
@@ -130,10 +130,10 @@ class _$_CurrentAccount implements _CurrentAccount {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CurrentAccount &&
+            other is _$CurrentAccountImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nickName, nickName) ||
                 other.nickName == nickName) &&
@@ -147,15 +147,16 @@ class _$_CurrentAccount implements _CurrentAccount {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CurrentAccountCopyWith<_$_CurrentAccount> get copyWith =>
-      __$$_CurrentAccountCopyWithImpl<_$_CurrentAccount>(this, _$identity);
+  _$$CurrentAccountImplCopyWith<_$CurrentAccountImpl> get copyWith =>
+      __$$CurrentAccountImplCopyWithImpl<_$CurrentAccountImpl>(
+          this, _$identity);
 }
 
 abstract class _CurrentAccount implements CurrentAccount {
   const factory _CurrentAccount(
       {required final String id,
       required final String nickName,
-      final String? photoUrl}) = _$_CurrentAccount;
+      final String? photoUrl}) = _$CurrentAccountImpl;
 
   @override
   String get id;
@@ -165,6 +166,6 @@ abstract class _CurrentAccount implements CurrentAccount {
   String? get photoUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_CurrentAccountCopyWith<_$_CurrentAccount> get copyWith =>
+  _$$CurrentAccountImplCopyWith<_$CurrentAccountImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

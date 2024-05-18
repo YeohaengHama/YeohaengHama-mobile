@@ -12,7 +12,7 @@ part of 'vo_tourism_detail.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$TourismDetail {
@@ -73,11 +73,11 @@ class _$TourismDetailCopyWithImpl<$Res, $Val extends TourismDetail>
 }
 
 /// @nodoc
-abstract class _$$_TourismDetailCopyWith<$Res>
+abstract class _$$TourismDetailImplCopyWith<$Res>
     implements $TourismDetailCopyWith<$Res> {
-  factory _$$_TourismDetailCopyWith(
-          _$_TourismDetail value, $Res Function(_$_TourismDetail) then) =
-      __$$_TourismDetailCopyWithImpl<$Res>;
+  factory _$$TourismDetailImplCopyWith(
+          _$TourismDetailImpl value, $Res Function(_$TourismDetailImpl) then) =
+      __$$TourismDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Tourism tourism, String content});
@@ -87,11 +87,11 @@ abstract class _$$_TourismDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TourismDetailCopyWithImpl<$Res>
-    extends _$TourismDetailCopyWithImpl<$Res, _$_TourismDetail>
-    implements _$$_TourismDetailCopyWith<$Res> {
-  __$$_TourismDetailCopyWithImpl(
-      _$_TourismDetail _value, $Res Function(_$_TourismDetail) _then)
+class __$$TourismDetailImplCopyWithImpl<$Res>
+    extends _$TourismDetailCopyWithImpl<$Res, _$TourismDetailImpl>
+    implements _$$TourismDetailImplCopyWith<$Res> {
+  __$$TourismDetailImplCopyWithImpl(
+      _$TourismDetailImpl _value, $Res Function(_$TourismDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +100,7 @@ class __$$_TourismDetailCopyWithImpl<$Res>
     Object? tourism = null,
     Object? content = null,
   }) {
-    return _then(_$_TourismDetail(
+    return _then(_$TourismDetailImpl(
       tourism: null == tourism
           ? _value.tourism
           : tourism // ignore: cast_nullable_to_non_nullable
@@ -115,8 +115,8 @@ class __$$_TourismDetailCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TourismDetail implements _TourismDetail {
-  const _$_TourismDetail({required this.tourism, required this.content});
+class _$TourismDetailImpl implements _TourismDetail {
+  const _$TourismDetailImpl({required this.tourism, required this.content});
 
   @override
   final Tourism tourism;
@@ -129,10 +129,10 @@ class _$_TourismDetail implements _TourismDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TourismDetail &&
+            other is _$TourismDetailImpl &&
             (identical(other.tourism, tourism) || other.tourism == tourism) &&
             (identical(other.content, content) || other.content == content));
   }
@@ -143,14 +143,14 @@ class _$_TourismDetail implements _TourismDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TourismDetailCopyWith<_$_TourismDetail> get copyWith =>
-      __$$_TourismDetailCopyWithImpl<_$_TourismDetail>(this, _$identity);
+  _$$TourismDetailImplCopyWith<_$TourismDetailImpl> get copyWith =>
+      __$$TourismDetailImplCopyWithImpl<_$TourismDetailImpl>(this, _$identity);
 }
 
 abstract class _TourismDetail implements TourismDetail {
   const factory _TourismDetail(
       {required final Tourism tourism,
-      required final String content}) = _$_TourismDetail;
+      required final String content}) = _$TourismDetailImpl;
 
   @override
   Tourism get tourism;
@@ -158,6 +158,6 @@ abstract class _TourismDetail implements TourismDetail {
   String get content;
   @override
   @JsonKey(ignore: true)
-  _$$_TourismDetailCopyWith<_$_TourismDetail> get copyWith =>
+  _$$TourismDetailImplCopyWith<_$TourismDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

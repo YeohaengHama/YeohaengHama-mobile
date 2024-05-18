@@ -12,7 +12,7 @@ part of 'vo_tourism.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Tourism {
@@ -84,10 +84,10 @@ class _$TourismCopyWithImpl<$Res, $Val extends Tourism>
 }
 
 /// @nodoc
-abstract class _$$_TourismCopyWith<$Res> implements $TourismCopyWith<$Res> {
-  factory _$$_TourismCopyWith(
-          _$_Tourism value, $Res Function(_$_Tourism) then) =
-      __$$_TourismCopyWithImpl<$Res>;
+abstract class _$$TourismImplCopyWith<$Res> implements $TourismCopyWith<$Res> {
+  factory _$$TourismImplCopyWith(
+          _$TourismImpl value, $Res Function(_$TourismImpl) then) =
+      __$$TourismImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -99,10 +99,11 @@ abstract class _$$_TourismCopyWith<$Res> implements $TourismCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TourismCopyWithImpl<$Res>
-    extends _$TourismCopyWithImpl<$Res, _$_Tourism>
-    implements _$$_TourismCopyWith<$Res> {
-  __$$_TourismCopyWithImpl(_$_Tourism _value, $Res Function(_$_Tourism) _then)
+class __$$TourismImplCopyWithImpl<$Res>
+    extends _$TourismCopyWithImpl<$Res, _$TourismImpl>
+    implements _$$TourismImplCopyWith<$Res> {
+  __$$TourismImplCopyWithImpl(
+      _$TourismImpl _value, $Res Function(_$TourismImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,7 +115,7 @@ class __$$_TourismCopyWithImpl<$Res>
     Object? tourismImages = null,
     Object? content = null,
   }) {
-    return _then(_$_Tourism(
+    return _then(_$TourismImpl(
       null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -141,8 +142,8 @@ class __$$_TourismCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Tourism implements _Tourism {
-  const _$_Tourism(this.id, this.tourismName, this.tourismArea,
+class _$TourismImpl implements _Tourism {
+  const _$TourismImpl(this.id, this.tourismName, this.tourismArea,
       final List<String> tourismImages, this.content)
       : _tourismImages = tourismImages;
 
@@ -169,10 +170,10 @@ class _$_Tourism implements _Tourism {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Tourism &&
+            other is _$TourismImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.tourismName, tourismName) ||
                 other.tourismName == tourismName) &&
@@ -190,8 +191,8 @@ class _$_Tourism implements _Tourism {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TourismCopyWith<_$_Tourism> get copyWith =>
-      __$$_TourismCopyWithImpl<_$_Tourism>(this, _$identity);
+  _$$TourismImplCopyWith<_$TourismImpl> get copyWith =>
+      __$$TourismImplCopyWithImpl<_$TourismImpl>(this, _$identity);
 }
 
 abstract class _Tourism implements Tourism {
@@ -200,7 +201,7 @@ abstract class _Tourism implements Tourism {
       final String tourismName,
       final String tourismArea,
       final List<String> tourismImages,
-      final String content) = _$_Tourism;
+      final String content) = _$TourismImpl;
 
   @override
   int get id;
@@ -214,6 +215,6 @@ abstract class _Tourism implements Tourism {
   String get content;
   @override
   @JsonKey(ignore: true)
-  _$$_TourismCopyWith<_$_Tourism> get copyWith =>
+  _$$TourismImplCopyWith<_$TourismImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -7,7 +7,7 @@ part of 'a_check_itinerary.dart';
 // **************************************************************************
 
 Account _$AccountFromJson(Map<String, dynamic> json) => Account(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       nickname: json['nickname'] as String,
       photoUrl: json['photoUrl'] as String?,
     );
@@ -25,7 +25,7 @@ PlaceByDay _$PlaceByDayFromJson(Map<String, dynamic> json) => PlaceByDay(
       placeNum: json['placeNum'] as String,
       placeName: json['placeName'] as String,
       memo: json['memo'] as String,
-      placeId: json['placeId'] as int,
+      placeId: (json['placeId'] as num).toInt(),
     );
 
 Map<String, dynamic> _$PlaceByDayToJson(PlaceByDay instance) =>
@@ -39,8 +39,8 @@ Map<String, dynamic> _$PlaceByDayToJson(PlaceByDay instance) =>
       'placeId': instance.placeId,
     };
 
-_$_CheckItinerary _$$_CheckItineraryFromJson(Map<String, dynamic> json) =>
-    _$_CheckItinerary(
+_$CheckItineraryImpl _$$CheckItineraryImplFromJson(Map<String, dynamic> json) =>
+    _$CheckItineraryImpl(
       itineraryId: json['itineraryId'] as String,
       type: (json['type'] as List<dynamic>?)?.map((e) => e as String).toList(),
       style:
@@ -61,7 +61,8 @@ _$_CheckItinerary _$$_CheckItineraryFromJson(Map<String, dynamic> json) =>
       ),
     );
 
-Map<String, dynamic> _$$_CheckItineraryToJson(_$_CheckItinerary instance) =>
+Map<String, dynamic> _$$CheckItineraryImplToJson(
+        _$CheckItineraryImpl instance) =>
     <String, dynamic>{
       'itineraryId': instance.itineraryId,
       'type': instance.type,

@@ -6,6 +6,7 @@ import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../data/entity/itinerary/a_add_pick_place.dart';
+import '../../../../../data/memory/area/selectedDayIndex_provider.dart';
 import '../../../../../data/memory/itinerary/add_pick_each_place_provider.dart';
 
 class ScheduleMapWidget extends ConsumerStatefulWidget {
@@ -25,9 +26,12 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        final selectedIndex = ref.watch(selectedDayIndexNotifierProvider);
         placeList = ref.watch(addPickEachPlaceProvider);
+
         if (_isControllerInitialized) {
-          _updatePlaceCoordinates();
+
+          _updatePlaceCoordinates(selectedIndex);
         }
         return Scaffold(
           body: NaverMap(
@@ -42,7 +46,7 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
             onMapReady: (controller) {
               _controller = controller;
               _isControllerInitialized = true; // Set the flag to true when controller is initialized
-              _updatePlaceCoordinates();
+              _updatePlaceCoordinates(selectedIndex);
               print("네이버 맵 로딩됨!");
             },
           ),
@@ -51,7 +55,7 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
     );
   }
 
-  void _updatePlaceCoordinates() {
+  void _updatePlaceCoordinates(int selectedIndex) {
     if (_controller == null) return;
     if (placeList.isEmpty) {
       // Logic to add default location when place list is empty
@@ -64,7 +68,9 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
       _controller!.clearOverlays();
       placeCoordinates.clear();
       for (final place in placeList) {
-        placeCoordinates.add(NLatLng(place.mapy, place.mapx));
+        if (place.day == selectedIndex + 1) {
+          placeCoordinates.add(NLatLng(place.mapy, place.mapx));
+        }
       }
       _addMarkers();
       _drawLines();
@@ -78,7 +84,7 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
     for (int i = 0; i < placeCoordinates.length; i++) {
       final markerId = 'marker$i';
       final marker = NMarker(
-        icon: const NOverlayImage.fromAssetImage('$basePath/icon/hama-2.png'),
+        icon: const NOverlayImage.fromAssetImage('$basePath/icon/hamaMarker.png'),
         id: markerId,
         position: placeCoordinates[i],
         caption: NOverlayCaption(text: (i + 1).toString()),

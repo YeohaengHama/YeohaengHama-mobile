@@ -14,6 +14,7 @@ import '../../../../common/theme/theme_util.dart';
 import '../../../../common/widget/w_mode_switch.dart';
 import '../../../../data/memory/user_provider.dart';
 import '../../dialog/d_message.dart';
+import 'my_option/s/s_profile_setting.dart';
 import 'my_option/s_my_option.dart';
 import 'my_trip/s_my_trip.dart';
 
@@ -113,7 +114,10 @@ class _MenuDrawerState extends ConsumerState<MenuDrawer> {
           ),
 
           Center(child: '${accountNotifier.nickName}'.text.color(AppColors.primaryGrey).size(24).bold.make()),
-          Center(child: '프로필 편집 >'.text.color(AppColors.forthGrey).size(12).make()),
+          Tap(onTap: () {
+            Nav.push(const ProfileSettingScreen());
+          },
+          child: Center(child: '프로필 편집 >'.text.color(AppColors.forthGrey).size(12).make())),
 
           const Height(10),
 

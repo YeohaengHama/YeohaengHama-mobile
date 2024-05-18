@@ -12,7 +12,7 @@ part of 'vo_save_diary.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SaveDiary {
@@ -85,10 +85,11 @@ class _$SaveDiaryCopyWithImpl<$Res, $Val extends SaveDiary>
 }
 
 /// @nodoc
-abstract class _$$_SaveDiaryCopyWith<$Res> implements $SaveDiaryCopyWith<$Res> {
-  factory _$$_SaveDiaryCopyWith(
-          _$_SaveDiary value, $Res Function(_$_SaveDiary) then) =
-      __$$_SaveDiaryCopyWithImpl<$Res>;
+abstract class _$$SaveDiaryImplCopyWith<$Res>
+    implements $SaveDiaryCopyWith<$Res> {
+  factory _$$SaveDiaryImplCopyWith(
+          _$SaveDiaryImpl value, $Res Function(_$SaveDiaryImpl) then) =
+      __$$SaveDiaryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -100,11 +101,11 @@ abstract class _$$_SaveDiaryCopyWith<$Res> implements $SaveDiaryCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SaveDiaryCopyWithImpl<$Res>
-    extends _$SaveDiaryCopyWithImpl<$Res, _$_SaveDiary>
-    implements _$$_SaveDiaryCopyWith<$Res> {
-  __$$_SaveDiaryCopyWithImpl(
-      _$_SaveDiary _value, $Res Function(_$_SaveDiary) _then)
+class __$$SaveDiaryImplCopyWithImpl<$Res>
+    extends _$SaveDiaryCopyWithImpl<$Res, _$SaveDiaryImpl>
+    implements _$$SaveDiaryImplCopyWith<$Res> {
+  __$$SaveDiaryImplCopyWithImpl(
+      _$SaveDiaryImpl _value, $Res Function(_$SaveDiaryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -116,7 +117,7 @@ class __$$_SaveDiaryCopyWithImpl<$Res>
     Object? content = null,
     Object? photos = freezed,
   }) {
-    return _then(_$_SaveDiary(
+    return _then(_$SaveDiaryImpl(
       itinerary: null == itinerary
           ? _value.itinerary
           : itinerary // ignore: cast_nullable_to_non_nullable
@@ -143,8 +144,8 @@ class __$$_SaveDiaryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SaveDiary implements _SaveDiary {
-  const _$_SaveDiary(
+class _$SaveDiaryImpl implements _SaveDiary {
+  const _$SaveDiaryImpl(
       {required this.itinerary,
       required this.date,
       required this.title,
@@ -177,10 +178,10 @@ class _$_SaveDiary implements _SaveDiary {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SaveDiary &&
+            other is _$SaveDiaryImpl &&
             (identical(other.itinerary, itinerary) ||
                 other.itinerary == itinerary) &&
             (identical(other.date, date) || other.date == date) &&
@@ -196,8 +197,8 @@ class _$_SaveDiary implements _SaveDiary {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SaveDiaryCopyWith<_$_SaveDiary> get copyWith =>
-      __$$_SaveDiaryCopyWithImpl<_$_SaveDiary>(this, _$identity);
+  _$$SaveDiaryImplCopyWith<_$SaveDiaryImpl> get copyWith =>
+      __$$SaveDiaryImplCopyWithImpl<_$SaveDiaryImpl>(this, _$identity);
 }
 
 abstract class _SaveDiary implements SaveDiary {
@@ -206,7 +207,7 @@ abstract class _SaveDiary implements SaveDiary {
       required final String date,
       required final String title,
       required final String content,
-      final List<String>? photos}) = _$_SaveDiary;
+      final List<String>? photos}) = _$SaveDiaryImpl;
 
   @override
   int get itinerary;
@@ -220,6 +221,6 @@ abstract class _SaveDiary implements SaveDiary {
   List<String>? get photos;
   @override
   @JsonKey(ignore: true)
-  _$$_SaveDiaryCopyWith<_$_SaveDiary> get copyWith =>
+  _$$SaveDiaryImplCopyWith<_$SaveDiaryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,13 +6,14 @@ part of 'a_check_save_place.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_CheckSavePlace _$$_CheckSavePlaceFromJson(Map<String, dynamic> json) =>
-    _$_CheckSavePlace(
+_$CheckSavePlaceImpl _$$CheckSavePlaceImplFromJson(Map<String, dynamic> json) =>
+    _$CheckSavePlaceImpl(
       placeNum: json['placeNum'] as String,
       contentTypeId: json['contentTypeId'] as String,
     );
 
-Map<String, dynamic> _$$_CheckSavePlaceToJson(_$_CheckSavePlace instance) =>
+Map<String, dynamic> _$$CheckSavePlaceImplToJson(
+        _$CheckSavePlaceImpl instance) =>
     <String, dynamic>{
       'placeNum': instance.placeNum,
       'contentTypeId': instance.contentTypeId,

@@ -12,7 +12,7 @@ part of 'vo_restaurants.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Restaurant {
@@ -86,11 +86,11 @@ class _$RestaurantCopyWithImpl<$Res, $Val extends Restaurant>
 }
 
 /// @nodoc
-abstract class _$$_RestaurantCopyWith<$Res>
+abstract class _$$RestaurantImplCopyWith<$Res>
     implements $RestaurantCopyWith<$Res> {
-  factory _$$_RestaurantCopyWith(
-          _$_Restaurant value, $Res Function(_$_Restaurant) then) =
-      __$$_RestaurantCopyWithImpl<$Res>;
+  factory _$$RestaurantImplCopyWith(
+          _$RestaurantImpl value, $Res Function(_$RestaurantImpl) then) =
+      __$$RestaurantImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -102,11 +102,11 @@ abstract class _$$_RestaurantCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_RestaurantCopyWithImpl<$Res>
-    extends _$RestaurantCopyWithImpl<$Res, _$_Restaurant>
-    implements _$$_RestaurantCopyWith<$Res> {
-  __$$_RestaurantCopyWithImpl(
-      _$_Restaurant _value, $Res Function(_$_Restaurant) _then)
+class __$$RestaurantImplCopyWithImpl<$Res>
+    extends _$RestaurantCopyWithImpl<$Res, _$RestaurantImpl>
+    implements _$$RestaurantImplCopyWith<$Res> {
+  __$$RestaurantImplCopyWithImpl(
+      _$RestaurantImpl _value, $Res Function(_$RestaurantImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_RestaurantCopyWithImpl<$Res>
     Object? retaurantImages = null,
     Object? content = null,
   }) {
-    return _then(_$_Restaurant(
+    return _then(_$RestaurantImpl(
       null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -145,8 +145,8 @@ class __$$_RestaurantCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Restaurant implements _Restaurant {
-  const _$_Restaurant(this.id, this.restaurantName, this.restaurantArea,
+class _$RestaurantImpl implements _Restaurant {
+  const _$RestaurantImpl(this.id, this.restaurantName, this.restaurantArea,
       final List<String> retaurantImages, this.content)
       : _retaurantImages = retaurantImages;
 
@@ -173,10 +173,10 @@ class _$_Restaurant implements _Restaurant {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Restaurant &&
+            other is _$RestaurantImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.restaurantName, restaurantName) ||
                 other.restaurantName == restaurantName) &&
@@ -199,8 +199,8 @@ class _$_Restaurant implements _Restaurant {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_RestaurantCopyWith<_$_Restaurant> get copyWith =>
-      __$$_RestaurantCopyWithImpl<_$_Restaurant>(this, _$identity);
+  _$$RestaurantImplCopyWith<_$RestaurantImpl> get copyWith =>
+      __$$RestaurantImplCopyWithImpl<_$RestaurantImpl>(this, _$identity);
 }
 
 abstract class _Restaurant implements Restaurant {
@@ -209,7 +209,7 @@ abstract class _Restaurant implements Restaurant {
       final String restaurantName,
       final String restaurantArea,
       final List<String> retaurantImages,
-      final String content) = _$_Restaurant;
+      final String content) = _$RestaurantImpl;
 
   @override
   int get id;
@@ -223,6 +223,6 @@ abstract class _Restaurant implements Restaurant {
   String get content;
   @override
   @JsonKey(ignore: true)
-  _$$_RestaurantCopyWith<_$_Restaurant> get copyWith =>
+  _$$RestaurantImplCopyWith<_$RestaurantImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

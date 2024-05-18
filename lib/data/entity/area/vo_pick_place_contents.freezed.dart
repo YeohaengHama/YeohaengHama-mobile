@@ -12,7 +12,7 @@ part of 'vo_pick_place_contents.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PickPlaceContents {
@@ -79,11 +79,11 @@ class _$PickPlaceContentsCopyWithImpl<$Res, $Val extends PickPlaceContents>
 }
 
 /// @nodoc
-abstract class _$$_PickPlaceContentsCopyWith<$Res>
+abstract class _$$PickPlaceContentsImplCopyWith<$Res>
     implements $PickPlaceContentsCopyWith<$Res> {
-  factory _$$_PickPlaceContentsCopyWith(_$_PickPlaceContents value,
-          $Res Function(_$_PickPlaceContents) then) =
-      __$$_PickPlaceContentsCopyWithImpl<$Res>;
+  factory _$$PickPlaceContentsImplCopyWith(_$PickPlaceContentsImpl value,
+          $Res Function(_$PickPlaceContentsImpl) then) =
+      __$$PickPlaceContentsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -94,11 +94,11 @@ abstract class _$$_PickPlaceContentsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PickPlaceContentsCopyWithImpl<$Res>
-    extends _$PickPlaceContentsCopyWithImpl<$Res, _$_PickPlaceContents>
-    implements _$$_PickPlaceContentsCopyWith<$Res> {
-  __$$_PickPlaceContentsCopyWithImpl(
-      _$_PickPlaceContents _value, $Res Function(_$_PickPlaceContents) _then)
+class __$$PickPlaceContentsImplCopyWithImpl<$Res>
+    extends _$PickPlaceContentsCopyWithImpl<$Res, _$PickPlaceContentsImpl>
+    implements _$$PickPlaceContentsImplCopyWith<$Res> {
+  __$$PickPlaceContentsImplCopyWithImpl(_$PickPlaceContentsImpl _value,
+      $Res Function(_$PickPlaceContentsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -109,7 +109,7 @@ class __$$_PickPlaceContentsCopyWithImpl<$Res>
     Object? title = null,
     Object? firstImage = null,
   }) {
-    return _then(_$_PickPlaceContents(
+    return _then(_$PickPlaceContentsImpl(
       contentId: null == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
@@ -132,8 +132,8 @@ class __$$_PickPlaceContentsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PickPlaceContents implements _PickPlaceContents {
-  const _$_PickPlaceContents(
+class _$PickPlaceContentsImpl implements _PickPlaceContents {
+  const _$PickPlaceContentsImpl(
       {required this.contentId,
       required this.contentTypeId,
       required this.title,
@@ -154,10 +154,10 @@ class _$_PickPlaceContents implements _PickPlaceContents {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PickPlaceContents &&
+            other is _$PickPlaceContentsImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
             (identical(other.contentTypeId, contentTypeId) ||
@@ -174,8 +174,8 @@ class _$_PickPlaceContents implements _PickPlaceContents {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PickPlaceContentsCopyWith<_$_PickPlaceContents> get copyWith =>
-      __$$_PickPlaceContentsCopyWithImpl<_$_PickPlaceContents>(
+  _$$PickPlaceContentsImplCopyWith<_$PickPlaceContentsImpl> get copyWith =>
+      __$$PickPlaceContentsImplCopyWithImpl<_$PickPlaceContentsImpl>(
           this, _$identity);
 }
 
@@ -184,7 +184,7 @@ abstract class _PickPlaceContents implements PickPlaceContents {
       {required final String contentId,
       required final String contentTypeId,
       required final String title,
-      required final String firstImage}) = _$_PickPlaceContents;
+      required final String firstImage}) = _$PickPlaceContentsImpl;
 
   @override
   String get contentId;
@@ -196,6 +196,6 @@ abstract class _PickPlaceContents implements PickPlaceContents {
   String get firstImage;
   @override
   @JsonKey(ignore: true)
-  _$$_PickPlaceContentsCopyWith<_$_PickPlaceContents> get copyWith =>
+  _$$PickPlaceContentsImplCopyWith<_$PickPlaceContentsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

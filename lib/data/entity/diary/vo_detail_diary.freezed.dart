@@ -12,7 +12,7 @@ part of 'vo_detail_diary.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$DetailDiary {
@@ -126,11 +126,11 @@ class _$DetailDiaryCopyWithImpl<$Res, $Val extends DetailDiary>
 }
 
 /// @nodoc
-abstract class _$$_DetailDiaryCopyWith<$Res>
+abstract class _$$DetailDiaryImplCopyWith<$Res>
     implements $DetailDiaryCopyWith<$Res> {
-  factory _$$_DetailDiaryCopyWith(
-          _$_DetailDiary value, $Res Function(_$_DetailDiary) then) =
-      __$$_DetailDiaryCopyWithImpl<$Res>;
+  factory _$$DetailDiaryImplCopyWith(
+          _$DetailDiaryImpl value, $Res Function(_$DetailDiaryImpl) then) =
+      __$$DetailDiaryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -150,11 +150,11 @@ abstract class _$$_DetailDiaryCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DetailDiaryCopyWithImpl<$Res>
-    extends _$DetailDiaryCopyWithImpl<$Res, _$_DetailDiary>
-    implements _$$_DetailDiaryCopyWith<$Res> {
-  __$$_DetailDiaryCopyWithImpl(
-      _$_DetailDiary _value, $Res Function(_$_DetailDiary) _then)
+class __$$DetailDiaryImplCopyWithImpl<$Res>
+    extends _$DetailDiaryCopyWithImpl<$Res, _$DetailDiaryImpl>
+    implements _$$DetailDiaryImplCopyWith<$Res> {
+  __$$DetailDiaryImplCopyWithImpl(
+      _$DetailDiaryImpl _value, $Res Function(_$DetailDiaryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -169,7 +169,7 @@ class __$$_DetailDiaryCopyWithImpl<$Res>
     Object? account = null,
     Object? itinerary = null,
   }) {
-    return _then(_$_DetailDiary(
+    return _then(_$DetailDiaryImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -208,8 +208,8 @@ class __$$_DetailDiaryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DetailDiary implements _DetailDiary {
-  const _$_DetailDiary(
+class _$DetailDiaryImpl implements _DetailDiary {
+  const _$DetailDiaryImpl(
       {required this.id,
       required final List<String>? tag,
       required this.date,
@@ -258,10 +258,10 @@ class _$_DetailDiary implements _DetailDiary {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DetailDiary &&
+            other is _$DetailDiaryImpl &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._tag, _tag) &&
             (identical(other.date, date) || other.date == date) &&
@@ -288,8 +288,8 @@ class _$_DetailDiary implements _DetailDiary {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DetailDiaryCopyWith<_$_DetailDiary> get copyWith =>
-      __$$_DetailDiaryCopyWithImpl<_$_DetailDiary>(this, _$identity);
+  _$$DetailDiaryImplCopyWith<_$DetailDiaryImpl> get copyWith =>
+      __$$DetailDiaryImplCopyWithImpl<_$DetailDiaryImpl>(this, _$identity);
 }
 
 abstract class _DetailDiary implements DetailDiary {
@@ -301,7 +301,7 @@ abstract class _DetailDiary implements DetailDiary {
       required final String content,
       required final List<String> photos,
       required final Account account,
-      required final Itinerary itinerary}) = _$_DetailDiary;
+      required final Itinerary itinerary}) = _$DetailDiaryImpl;
 
   @override
   int get id;
@@ -321,7 +321,7 @@ abstract class _DetailDiary implements DetailDiary {
   Itinerary get itinerary;
   @override
   @JsonKey(ignore: true)
-  _$$_DetailDiaryCopyWith<_$_DetailDiary> get copyWith =>
+  _$$DetailDiaryImplCopyWith<_$DetailDiaryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -389,20 +389,21 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
 }
 
 /// @nodoc
-abstract class _$$_AccountCopyWith<$Res> implements $AccountCopyWith<$Res> {
-  factory _$$_AccountCopyWith(
-          _$_Account value, $Res Function(_$_Account) then) =
-      __$$_AccountCopyWithImpl<$Res>;
+abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
+  factory _$$AccountImplCopyWith(
+          _$AccountImpl value, $Res Function(_$AccountImpl) then) =
+      __$$AccountImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, String nickname, String? photoUrl, String accountRole});
 }
 
 /// @nodoc
-class __$$_AccountCopyWithImpl<$Res>
-    extends _$AccountCopyWithImpl<$Res, _$_Account>
-    implements _$$_AccountCopyWith<$Res> {
-  __$$_AccountCopyWithImpl(_$_Account _value, $Res Function(_$_Account) _then)
+class __$$AccountImplCopyWithImpl<$Res>
+    extends _$AccountCopyWithImpl<$Res, _$AccountImpl>
+    implements _$$AccountImplCopyWith<$Res> {
+  __$$AccountImplCopyWithImpl(
+      _$AccountImpl _value, $Res Function(_$AccountImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -413,7 +414,7 @@ class __$$_AccountCopyWithImpl<$Res>
     Object? photoUrl = freezed,
     Object? accountRole = null,
   }) {
-    return _then(_$_Account(
+    return _then(_$AccountImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -436,15 +437,15 @@ class __$$_AccountCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Account implements _Account {
-  const _$_Account(
+class _$AccountImpl implements _Account {
+  const _$AccountImpl(
       {required this.id,
       required this.nickname,
       required this.photoUrl,
       required this.accountRole});
 
-  factory _$_Account.fromJson(Map<String, dynamic> json) =>
-      _$$_AccountFromJson(json);
+  factory _$AccountImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AccountImplFromJson(json);
 
   @override
   final int id;
@@ -461,10 +462,10 @@ class _$_Account implements _Account {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Account &&
+            other is _$AccountImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
@@ -482,12 +483,12 @@ class _$_Account implements _Account {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccountCopyWith<_$_Account> get copyWith =>
-      __$$_AccountCopyWithImpl<_$_Account>(this, _$identity);
+  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
+      __$$AccountImplCopyWithImpl<_$AccountImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AccountToJson(
+    return _$$AccountImplToJson(
       this,
     );
   }
@@ -498,9 +499,9 @@ abstract class _Account implements Account {
       {required final int id,
       required final String nickname,
       required final String? photoUrl,
-      required final String accountRole}) = _$_Account;
+      required final String accountRole}) = _$AccountImpl;
 
-  factory _Account.fromJson(Map<String, dynamic> json) = _$_Account.fromJson;
+  factory _Account.fromJson(Map<String, dynamic> json) = _$AccountImpl.fromJson;
 
   @override
   int get id;
@@ -512,7 +513,7 @@ abstract class _Account implements Account {
   String get accountRole;
   @override
   @JsonKey(ignore: true)
-  _$$_AccountCopyWith<_$_Account> get copyWith =>
+  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -620,10 +621,11 @@ class _$ItineraryCopyWithImpl<$Res, $Val extends Itinerary>
 }
 
 /// @nodoc
-abstract class _$$_ItineraryCopyWith<$Res> implements $ItineraryCopyWith<$Res> {
-  factory _$$_ItineraryCopyWith(
-          _$_Itinerary value, $Res Function(_$_Itinerary) then) =
-      __$$_ItineraryCopyWithImpl<$Res>;
+abstract class _$$ItineraryImplCopyWith<$Res>
+    implements $ItineraryCopyWith<$Res> {
+  factory _$$ItineraryImplCopyWith(
+          _$ItineraryImpl value, $Res Function(_$ItineraryImpl) then) =
+      __$$ItineraryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -639,11 +641,11 @@ abstract class _$$_ItineraryCopyWith<$Res> implements $ItineraryCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ItineraryCopyWithImpl<$Res>
-    extends _$ItineraryCopyWithImpl<$Res, _$_Itinerary>
-    implements _$$_ItineraryCopyWith<$Res> {
-  __$$_ItineraryCopyWithImpl(
-      _$_Itinerary _value, $Res Function(_$_Itinerary) _then)
+class __$$ItineraryImplCopyWithImpl<$Res>
+    extends _$ItineraryCopyWithImpl<$Res, _$ItineraryImpl>
+    implements _$$ItineraryImplCopyWith<$Res> {
+  __$$ItineraryImplCopyWithImpl(
+      _$ItineraryImpl _value, $Res Function(_$ItineraryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -659,7 +661,7 @@ class __$$_ItineraryCopyWithImpl<$Res>
     Object? endDate = null,
     Object? place = null,
   }) {
-    return _then(_$_Itinerary(
+    return _then(_$ItineraryImpl(
       itineraryId: null == itineraryId
           ? _value.itineraryId
           : itineraryId // ignore: cast_nullable_to_non_nullable
@@ -702,8 +704,8 @@ class __$$_ItineraryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Itinerary implements _Itinerary {
-  const _$_Itinerary(
+class _$ItineraryImpl implements _Itinerary {
+  const _$ItineraryImpl(
       {required this.itineraryId,
       required final List<String>? type,
       required final List<String>? style,
@@ -717,8 +719,8 @@ class _$_Itinerary implements _Itinerary {
         _style = style,
         _place = place;
 
-  factory _$_Itinerary.fromJson(Map<String, dynamic> json) =>
-      _$$_ItineraryFromJson(json);
+  factory _$ItineraryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ItineraryImplFromJson(json);
 
   @override
   final int itineraryId;
@@ -766,10 +768,10 @@ class _$_Itinerary implements _Itinerary {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Itinerary &&
+            other is _$ItineraryImpl &&
             (identical(other.itineraryId, itineraryId) ||
                 other.itineraryId == itineraryId) &&
             const DeepCollectionEquality().equals(other._type, _type) &&
@@ -801,12 +803,12 @@ class _$_Itinerary implements _Itinerary {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ItineraryCopyWith<_$_Itinerary> get copyWith =>
-      __$$_ItineraryCopyWithImpl<_$_Itinerary>(this, _$identity);
+  _$$ItineraryImplCopyWith<_$ItineraryImpl> get copyWith =>
+      __$$ItineraryImplCopyWithImpl<_$ItineraryImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ItineraryToJson(
+    return _$$ItineraryImplToJson(
       this,
     );
   }
@@ -822,10 +824,10 @@ abstract class _Itinerary implements Itinerary {
       required final String area,
       required final DateTime startDate,
       required final DateTime endDate,
-      required final Map<String, List<Place>?> place}) = _$_Itinerary;
+      required final Map<String, List<Place>?> place}) = _$ItineraryImpl;
 
   factory _Itinerary.fromJson(Map<String, dynamic> json) =
-      _$_Itinerary.fromJson;
+      _$ItineraryImpl.fromJson;
 
   @override
   int get itineraryId;
@@ -847,7 +849,7 @@ abstract class _Itinerary implements Itinerary {
   Map<String, List<Place>?> get place;
   @override
   @JsonKey(ignore: true)
-  _$$_ItineraryCopyWith<_$_Itinerary> get copyWith =>
+  _$$ItineraryImplCopyWith<_$ItineraryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -989,9 +991,10 @@ class _$PlaceCopyWithImpl<$Res, $Val extends Place>
 }
 
 /// @nodoc
-abstract class _$$_PlaceCopyWith<$Res> implements $PlaceCopyWith<$Res> {
-  factory _$$_PlaceCopyWith(_$_Place value, $Res Function(_$_Place) then) =
-      __$$_PlaceCopyWithImpl<$Res>;
+abstract class _$$PlaceImplCopyWith<$Res> implements $PlaceCopyWith<$Res> {
+  factory _$$PlaceImplCopyWith(
+          _$PlaceImpl value, $Res Function(_$PlaceImpl) then) =
+      __$$PlaceImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1013,9 +1016,11 @@ abstract class _$$_PlaceCopyWith<$Res> implements $PlaceCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PlaceCopyWithImpl<$Res> extends _$PlaceCopyWithImpl<$Res, _$_Place>
-    implements _$$_PlaceCopyWith<$Res> {
-  __$$_PlaceCopyWithImpl(_$_Place _value, $Res Function(_$_Place) _then)
+class __$$PlaceImplCopyWithImpl<$Res>
+    extends _$PlaceCopyWithImpl<$Res, _$PlaceImpl>
+    implements _$$PlaceImplCopyWith<$Res> {
+  __$$PlaceImplCopyWithImpl(
+      _$PlaceImpl _value, $Res Function(_$PlaceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1034,7 +1039,7 @@ class __$$_PlaceCopyWithImpl<$Res> extends _$PlaceCopyWithImpl<$Res, _$_Place>
     Object? review = freezed,
     Object? placeId = null,
   }) {
-    return _then(_$_Place(
+    return _then(_$PlaceImpl(
       day: null == day
           ? _value.day
           : day // ignore: cast_nullable_to_non_nullable
@@ -1089,8 +1094,8 @@ class __$$_PlaceCopyWithImpl<$Res> extends _$PlaceCopyWithImpl<$Res, _$_Place>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Place implements _Place {
-  const _$_Place(
+class _$PlaceImpl implements _Place {
+  const _$PlaceImpl(
       {required this.day,
       required this.startTime,
       required this.endTime,
@@ -1104,8 +1109,8 @@ class _$_Place implements _Place {
       required this.review,
       required this.placeId});
 
-  factory _$_Place.fromJson(Map<String, dynamic> json) =>
-      _$$_PlaceFromJson(json);
+  factory _$PlaceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PlaceImplFromJson(json);
 
   @override
   final int day;
@@ -1138,10 +1143,10 @@ class _$_Place implements _Place {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Place &&
+            other is _$PlaceImpl &&
             (identical(other.day, day) || other.day == day) &&
             (identical(other.startTime, startTime) ||
                 other.startTime == startTime) &&
@@ -1168,12 +1173,12 @@ class _$_Place implements _Place {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PlaceCopyWith<_$_Place> get copyWith =>
-      __$$_PlaceCopyWithImpl<_$_Place>(this, _$identity);
+  _$$PlaceImplCopyWith<_$PlaceImpl> get copyWith =>
+      __$$PlaceImplCopyWithImpl<_$PlaceImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PlaceToJson(
+    return _$$PlaceImplToJson(
       this,
     );
   }
@@ -1192,9 +1197,9 @@ abstract class _Place implements Place {
       required final double mapy,
       required final String? memo,
       required final Review? review,
-      required final int placeId}) = _$_Place;
+      required final int placeId}) = _$PlaceImpl;
 
-  factory _Place.fromJson(Map<String, dynamic> json) = _$_Place.fromJson;
+  factory _Place.fromJson(Map<String, dynamic> json) = _$PlaceImpl.fromJson;
 
   @override
   int get day;
@@ -1222,7 +1227,7 @@ abstract class _Place implements Place {
   int get placeId;
   @override
   @JsonKey(ignore: true)
-  _$$_PlaceCopyWith<_$_Place> get copyWith =>
+  _$$PlaceImplCopyWith<_$PlaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1294,9 +1299,10 @@ class _$ReviewCopyWithImpl<$Res, $Val extends Review>
 }
 
 /// @nodoc
-abstract class _$$_ReviewCopyWith<$Res> implements $ReviewCopyWith<$Res> {
-  factory _$$_ReviewCopyWith(_$_Review value, $Res Function(_$_Review) then) =
-      __$$_ReviewCopyWithImpl<$Res>;
+abstract class _$$ReviewImplCopyWith<$Res> implements $ReviewCopyWith<$Res> {
+  factory _$$ReviewImplCopyWith(
+          _$ReviewImpl value, $Res Function(_$ReviewImpl) then) =
+      __$$ReviewImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1307,10 +1313,11 @@ abstract class _$$_ReviewCopyWith<$Res> implements $ReviewCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ReviewCopyWithImpl<$Res>
-    extends _$ReviewCopyWithImpl<$Res, _$_Review>
-    implements _$$_ReviewCopyWith<$Res> {
-  __$$_ReviewCopyWithImpl(_$_Review _value, $Res Function(_$_Review) _then)
+class __$$ReviewImplCopyWithImpl<$Res>
+    extends _$ReviewCopyWithImpl<$Res, _$ReviewImpl>
+    implements _$$ReviewImplCopyWith<$Res> {
+  __$$ReviewImplCopyWithImpl(
+      _$ReviewImpl _value, $Res Function(_$ReviewImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1321,7 +1328,7 @@ class __$$_ReviewCopyWithImpl<$Res>
     Object? content = freezed,
     Object? reviewPhotoURLList = freezed,
   }) {
-    return _then(_$_Review(
+    return _then(_$ReviewImpl(
       reviewId: freezed == reviewId
           ? _value.reviewId
           : reviewId // ignore: cast_nullable_to_non_nullable
@@ -1344,16 +1351,16 @@ class __$$_ReviewCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Review implements _Review {
-  const _$_Review(
+class _$ReviewImpl implements _Review {
+  const _$ReviewImpl(
       {required this.reviewId,
       required this.rating,
       required this.content,
       required final List<String>? reviewPhotoURLList})
       : _reviewPhotoURLList = reviewPhotoURLList;
 
-  factory _$_Review.fromJson(Map<String, dynamic> json) =>
-      _$$_ReviewFromJson(json);
+  factory _$ReviewImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReviewImplFromJson(json);
 
   @override
   final int? reviewId;
@@ -1378,10 +1385,10 @@ class _$_Review implements _Review {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Review &&
+            other is _$ReviewImpl &&
             (identical(other.reviewId, reviewId) ||
                 other.reviewId == reviewId) &&
             (identical(other.rating, rating) || other.rating == rating) &&
@@ -1398,12 +1405,12 @@ class _$_Review implements _Review {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReviewCopyWith<_$_Review> get copyWith =>
-      __$$_ReviewCopyWithImpl<_$_Review>(this, _$identity);
+  _$$ReviewImplCopyWith<_$ReviewImpl> get copyWith =>
+      __$$ReviewImplCopyWithImpl<_$ReviewImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReviewToJson(
+    return _$$ReviewImplToJson(
       this,
     );
   }
@@ -1414,9 +1421,9 @@ abstract class _Review implements Review {
       {required final int? reviewId,
       required final double? rating,
       required final String? content,
-      required final List<String>? reviewPhotoURLList}) = _$_Review;
+      required final List<String>? reviewPhotoURLList}) = _$ReviewImpl;
 
-  factory _Review.fromJson(Map<String, dynamic> json) = _$_Review.fromJson;
+  factory _Review.fromJson(Map<String, dynamic> json) = _$ReviewImpl.fromJson;
 
   @override
   int? get reviewId;
@@ -1428,6 +1435,6 @@ abstract class _Review implements Review {
   List<String>? get reviewPhotoURLList;
   @override
   @JsonKey(ignore: true)
-  _$$_ReviewCopyWith<_$_Review> get copyWith =>
+  _$$ReviewImplCopyWith<_$ReviewImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'vo_diary.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Diary {
@@ -101,9 +101,10 @@ class _$DiaryCopyWithImpl<$Res, $Val extends Diary>
 }
 
 /// @nodoc
-abstract class _$$_DiaryCopyWith<$Res> implements $DiaryCopyWith<$Res> {
-  factory _$$_DiaryCopyWith(_$_Diary value, $Res Function(_$_Diary) then) =
-      __$$_DiaryCopyWithImpl<$Res>;
+abstract class _$$DiaryImplCopyWith<$Res> implements $DiaryCopyWith<$Res> {
+  factory _$$DiaryImplCopyWith(
+          _$DiaryImpl value, $Res Function(_$DiaryImpl) then) =
+      __$$DiaryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -119,9 +120,11 @@ abstract class _$$_DiaryCopyWith<$Res> implements $DiaryCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DiaryCopyWithImpl<$Res> extends _$DiaryCopyWithImpl<$Res, _$_Diary>
-    implements _$$_DiaryCopyWith<$Res> {
-  __$$_DiaryCopyWithImpl(_$_Diary _value, $Res Function(_$_Diary) _then)
+class __$$DiaryImplCopyWithImpl<$Res>
+    extends _$DiaryCopyWithImpl<$Res, _$DiaryImpl>
+    implements _$$DiaryImplCopyWith<$Res> {
+  __$$DiaryImplCopyWithImpl(
+      _$DiaryImpl _value, $Res Function(_$DiaryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -134,7 +137,7 @@ class __$$_DiaryCopyWithImpl<$Res> extends _$DiaryCopyWithImpl<$Res, _$_Diary>
     Object? diaryImages = null,
     Object? diaryTag = null,
   }) {
-    return _then(_$_Diary(
+    return _then(_$DiaryImpl(
       null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -165,8 +168,8 @@ class __$$_DiaryCopyWithImpl<$Res> extends _$DiaryCopyWithImpl<$Res, _$_Diary>
 
 /// @nodoc
 
-class _$_Diary implements _Diary {
-  const _$_Diary(this.user, this.diaryId, this.diaryTitle, this.diaryContent,
+class _$DiaryImpl implements _Diary {
+  const _$DiaryImpl(this.user, this.diaryId, this.diaryTitle, this.diaryContent,
       final List<String> diaryImages, final List<String> diaryTag)
       : _diaryImages = diaryImages,
         _diaryTag = diaryTag;
@@ -201,10 +204,10 @@ class _$_Diary implements _Diary {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Diary &&
+            other is _$DiaryImpl &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.diaryId, diaryId) || other.diaryId == diaryId) &&
             (identical(other.diaryTitle, diaryTitle) ||
@@ -229,8 +232,8 @@ class _$_Diary implements _Diary {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DiaryCopyWith<_$_Diary> get copyWith =>
-      __$$_DiaryCopyWithImpl<_$_Diary>(this, _$identity);
+  _$$DiaryImplCopyWith<_$DiaryImpl> get copyWith =>
+      __$$DiaryImplCopyWithImpl<_$DiaryImpl>(this, _$identity);
 }
 
 abstract class _Diary implements Diary {
@@ -240,7 +243,7 @@ abstract class _Diary implements Diary {
       final String diaryTitle,
       final String diaryContent,
       final List<String> diaryImages,
-      final List<String> diaryTag) = _$_Diary;
+      final List<String> diaryTag) = _$DiaryImpl;
 
   @override
   User get user;
@@ -256,6 +259,6 @@ abstract class _Diary implements Diary {
   List<String> get diaryTag;
   @override
   @JsonKey(ignore: true)
-  _$$_DiaryCopyWith<_$_Diary> get copyWith =>
+  _$$DiaryImplCopyWith<_$DiaryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
