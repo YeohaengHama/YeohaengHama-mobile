@@ -6,10 +6,10 @@ part of 'vo_find_all_diary.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_FindAllDiary _$$_FindAllDiaryFromJson(Map<String, dynamic> json) =>
-    _$_FindAllDiary(
-      itineraryId: json['itineraryId'] as int,
-      diaryId: json['diaryId'] as int,
+_$FindAllDiaryImpl _$$FindAllDiaryImplFromJson(Map<String, dynamic> json) =>
+    _$FindAllDiaryImpl(
+      itineraryId: (json['itineraryId'] as num).toInt(),
+      diaryId: (json['diaryId'] as num).toInt(),
       tag: (json['tag'] as List<dynamic>).map((e) => e as String).toList(),
       date: json['date'] as String,
       title: json['title'] as String,
@@ -20,7 +20,7 @@ _$_FindAllDiary _$$_FindAllDiaryFromJson(Map<String, dynamic> json) =>
           json['accountShowDTO'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_FindAllDiaryToJson(_$_FindAllDiary instance) =>
+Map<String, dynamic> _$$FindAllDiaryImplToJson(_$FindAllDiaryImpl instance) =>
     <String, dynamic>{
       'itineraryId': instance.itineraryId,
       'diaryId': instance.diaryId,
@@ -32,14 +32,15 @@ Map<String, dynamic> _$$_FindAllDiaryToJson(_$_FindAllDiary instance) =>
       'accountShowDTO': instance.accountShowDTO,
     };
 
-_$_AccountShowDTO _$$_AccountShowDTOFromJson(Map<String, dynamic> json) =>
-    _$_AccountShowDTO(
-      id: json['id'] as int,
+_$AccountShowDTOImpl _$$AccountShowDTOImplFromJson(Map<String, dynamic> json) =>
+    _$AccountShowDTOImpl(
+      id: (json['id'] as num).toInt(),
       nickname: json['nickname'] as String,
       photoUrl: json['photoUrl'] as String?,
     );
 
-Map<String, dynamic> _$$_AccountShowDTOToJson(_$_AccountShowDTO instance) =>
+Map<String, dynamic> _$$AccountShowDTOImplToJson(
+        _$AccountShowDTOImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'nickname': instance.nickname,

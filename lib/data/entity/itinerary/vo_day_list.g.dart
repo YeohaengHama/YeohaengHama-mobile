@@ -6,14 +6,15 @@ part of 'vo_day_list.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DayList _$$_DayListFromJson(Map<String, dynamic> json) => _$_DayList(
+_$DayListImpl _$$DayListImplFromJson(Map<String, dynamic> json) =>
+    _$DayListImpl(
       day: json['day'] as String,
       place: (json['place'] as List<dynamic>)
           .map((e) => Place.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$_DayListToJson(_$_DayList instance) =>
+Map<String, dynamic> _$$DayListImplToJson(_$DayListImpl instance) =>
     <String, dynamic>{
       'day': instance.day,
       'place': instance.place,

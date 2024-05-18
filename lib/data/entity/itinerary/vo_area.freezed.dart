@@ -12,7 +12,7 @@ part of 'vo_area.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Area _$AreaFromJson(Map<String, dynamic> json) {
   return _Area.fromJson(json);
@@ -89,9 +89,10 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
 }
 
 /// @nodoc
-abstract class _$$_AreaCopyWith<$Res> implements $AreaCopyWith<$Res> {
-  factory _$$_AreaCopyWith(_$_Area value, $Res Function(_$_Area) then) =
-      __$$_AreaCopyWithImpl<$Res>;
+abstract class _$$AreaImplCopyWith<$Res> implements $AreaCopyWith<$Res> {
+  factory _$$AreaImplCopyWith(
+          _$AreaImpl value, $Res Function(_$AreaImpl) then) =
+      __$$AreaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,9 +104,10 @@ abstract class _$$_AreaCopyWith<$Res> implements $AreaCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_AreaCopyWithImpl<$Res> extends _$AreaCopyWithImpl<$Res, _$_Area>
-    implements _$$_AreaCopyWith<$Res> {
-  __$$_AreaCopyWithImpl(_$_Area _value, $Res Function(_$_Area) _then)
+class __$$AreaImplCopyWithImpl<$Res>
+    extends _$AreaCopyWithImpl<$Res, _$AreaImpl>
+    implements _$$AreaImplCopyWith<$Res> {
+  __$$AreaImplCopyWithImpl(_$AreaImpl _value, $Res Function(_$AreaImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -117,7 +119,7 @@ class __$$_AreaCopyWithImpl<$Res> extends _$AreaCopyWithImpl<$Res, _$_Area>
     Object? contentTypeId = null,
     Object? mobileOs = null,
   }) {
-    return _then(_$_Area(
+    return _then(_$AreaImpl(
       null == numOfRows
           ? _value.numOfRows
           : numOfRows // ignore: cast_nullable_to_non_nullable
@@ -144,11 +146,12 @@ class __$$_AreaCopyWithImpl<$Res> extends _$AreaCopyWithImpl<$Res, _$_Area>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Area implements _Area {
-  const _$_Area(this.numOfRows, this.page, this.keyword, this.contentTypeId,
+class _$AreaImpl implements _Area {
+  const _$AreaImpl(this.numOfRows, this.page, this.keyword, this.contentTypeId,
       this.mobileOs);
 
-  factory _$_Area.fromJson(Map<String, dynamic> json) => _$$_AreaFromJson(json);
+  factory _$AreaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AreaImplFromJson(json);
 
   @override
   final String numOfRows;
@@ -167,10 +170,10 @@ class _$_Area implements _Area {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Area &&
+            other is _$AreaImpl &&
             (identical(other.numOfRows, numOfRows) ||
                 other.numOfRows == numOfRows) &&
             (identical(other.page, page) || other.page == page) &&
@@ -189,12 +192,12 @@ class _$_Area implements _Area {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AreaCopyWith<_$_Area> get copyWith =>
-      __$$_AreaCopyWithImpl<_$_Area>(this, _$identity);
+  _$$AreaImplCopyWith<_$AreaImpl> get copyWith =>
+      __$$AreaImplCopyWithImpl<_$AreaImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AreaToJson(
+    return _$$AreaImplToJson(
       this,
     );
   }
@@ -206,9 +209,9 @@ abstract class _Area implements Area {
       final String page,
       final String keyword,
       final String contentTypeId,
-      final String mobileOs) = _$_Area;
+      final String mobileOs) = _$AreaImpl;
 
-  factory _Area.fromJson(Map<String, dynamic> json) = _$_Area.fromJson;
+  factory _Area.fromJson(Map<String, dynamic> json) = _$AreaImpl.fromJson;
 
   @override
   String get numOfRows;
@@ -222,5 +225,6 @@ abstract class _Area implements Area {
   String get mobileOs;
   @override
   @JsonKey(ignore: true)
-  _$$_AreaCopyWith<_$_Area> get copyWith => throw _privateConstructorUsedError;
+  _$$AreaImplCopyWith<_$AreaImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

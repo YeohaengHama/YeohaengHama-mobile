@@ -6,9 +6,10 @@ part of 'vo_review_show_account_.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReviewShowAccount _$$_ReviewShowAccountFromJson(Map<String, dynamic> json) =>
-    _$_ReviewShowAccount(
-      reviewId: json['reviewId'] as int,
+_$ReviewShowAccountImpl _$$ReviewShowAccountImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ReviewShowAccountImpl(
+      reviewId: (json['reviewId'] as num).toInt(),
       placeName: json['placeName'] as String,
       rating: (json['rating'] as num).toDouble(),
       content: json['content'] as String,
@@ -18,8 +19,8 @@ _$_ReviewShowAccount _$$_ReviewShowAccountFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_ReviewShowAccountToJson(
-        _$_ReviewShowAccount instance) =>
+Map<String, dynamic> _$$ReviewShowAccountImplToJson(
+        _$ReviewShowAccountImpl instance) =>
     <String, dynamic>{
       'reviewId': instance.reviewId,
       'placeName': instance.placeName,

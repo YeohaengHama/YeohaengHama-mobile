@@ -12,7 +12,7 @@ part of 'vo_who_tag.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$WhoTag {
@@ -55,19 +55,21 @@ class _$WhoTagCopyWithImpl<$Res, $Val extends WhoTag>
 }
 
 /// @nodoc
-abstract class _$$_WhoTagCopyWith<$Res> implements $WhoTagCopyWith<$Res> {
-  factory _$$_WhoTagCopyWith(_$_WhoTag value, $Res Function(_$_WhoTag) then) =
-      __$$_WhoTagCopyWithImpl<$Res>;
+abstract class _$$WhoTagImplCopyWith<$Res> implements $WhoTagCopyWith<$Res> {
+  factory _$$WhoTagImplCopyWith(
+          _$WhoTagImpl value, $Res Function(_$WhoTagImpl) then) =
+      __$$WhoTagImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String who});
 }
 
 /// @nodoc
-class __$$_WhoTagCopyWithImpl<$Res>
-    extends _$WhoTagCopyWithImpl<$Res, _$_WhoTag>
-    implements _$$_WhoTagCopyWith<$Res> {
-  __$$_WhoTagCopyWithImpl(_$_WhoTag _value, $Res Function(_$_WhoTag) _then)
+class __$$WhoTagImplCopyWithImpl<$Res>
+    extends _$WhoTagCopyWithImpl<$Res, _$WhoTagImpl>
+    implements _$$WhoTagImplCopyWith<$Res> {
+  __$$WhoTagImplCopyWithImpl(
+      _$WhoTagImpl _value, $Res Function(_$WhoTagImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -75,7 +77,7 @@ class __$$_WhoTagCopyWithImpl<$Res>
   $Res call({
     Object? who = null,
   }) {
-    return _then(_$_WhoTag(
+    return _then(_$WhoTagImpl(
       null == who
           ? _value.who
           : who // ignore: cast_nullable_to_non_nullable
@@ -86,8 +88,8 @@ class __$$_WhoTagCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_WhoTag implements _WhoTag {
-  const _$_WhoTag(this.who);
+class _$WhoTagImpl implements _WhoTag {
+  const _$WhoTagImpl(this.who);
 
   @override
   final String who;
@@ -98,10 +100,10 @@ class _$_WhoTag implements _WhoTag {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_WhoTag &&
+            other is _$WhoTagImpl &&
             (identical(other.who, who) || other.who == who));
   }
 
@@ -111,17 +113,17 @@ class _$_WhoTag implements _WhoTag {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_WhoTagCopyWith<_$_WhoTag> get copyWith =>
-      __$$_WhoTagCopyWithImpl<_$_WhoTag>(this, _$identity);
+  _$$WhoTagImplCopyWith<_$WhoTagImpl> get copyWith =>
+      __$$WhoTagImplCopyWithImpl<_$WhoTagImpl>(this, _$identity);
 }
 
 abstract class _WhoTag implements WhoTag {
-  const factory _WhoTag(final String who) = _$_WhoTag;
+  const factory _WhoTag(final String who) = _$WhoTagImpl;
 
   @override
   String get who;
   @override
   @JsonKey(ignore: true)
-  _$$_WhoTagCopyWith<_$_WhoTag> get copyWith =>
+  _$$WhoTagImplCopyWith<_$WhoTagImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

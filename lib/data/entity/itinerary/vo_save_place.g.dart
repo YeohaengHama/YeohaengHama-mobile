@@ -6,13 +6,14 @@ part of 'vo_save_place.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SavePlace _$$_SavePlaceFromJson(Map<String, dynamic> json) => _$_SavePlace(
-      accountId: json['accountId'] as int,
+_$SavePlaceImpl _$$SavePlaceImplFromJson(Map<String, dynamic> json) =>
+    _$SavePlaceImpl(
+      accountId: (json['accountId'] as num).toInt(),
       placeNum: json['placeNum'] as String,
       contentTypeId: json['contentTypeId'] as String,
     );
 
-Map<String, dynamic> _$$_SavePlaceToJson(_$_SavePlace instance) =>
+Map<String, dynamic> _$$SavePlaceImplToJson(_$SavePlaceImpl instance) =>
     <String, dynamic>{
       'accountId': instance.accountId,
       'placeNum': instance.placeNum,

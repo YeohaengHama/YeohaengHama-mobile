@@ -12,7 +12,7 @@ part of 'vo_review.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Review {
@@ -117,9 +117,10 @@ class _$ReviewCopyWithImpl<$Res, $Val extends Review>
 }
 
 /// @nodoc
-abstract class _$$_ReviewCopyWith<$Res> implements $ReviewCopyWith<$Res> {
-  factory _$$_ReviewCopyWith(_$_Review value, $Res Function(_$_Review) then) =
-      __$$_ReviewCopyWithImpl<$Res>;
+abstract class _$$ReviewImplCopyWith<$Res> implements $ReviewCopyWith<$Res> {
+  factory _$$ReviewImplCopyWith(
+          _$ReviewImpl value, $Res Function(_$ReviewImpl) then) =
+      __$$ReviewImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -138,10 +139,11 @@ abstract class _$$_ReviewCopyWith<$Res> implements $ReviewCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ReviewCopyWithImpl<$Res>
-    extends _$ReviewCopyWithImpl<$Res, _$_Review>
-    implements _$$_ReviewCopyWith<$Res> {
-  __$$_ReviewCopyWithImpl(_$_Review _value, $Res Function(_$_Review) _then)
+class __$$ReviewImplCopyWithImpl<$Res>
+    extends _$ReviewCopyWithImpl<$Res, _$ReviewImpl>
+    implements _$$ReviewImplCopyWith<$Res> {
+  __$$ReviewImplCopyWithImpl(
+      _$ReviewImpl _value, $Res Function(_$ReviewImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -155,7 +157,7 @@ class __$$_ReviewCopyWithImpl<$Res>
     Object? Images = freezed,
     Object? contents = null,
   }) {
-    return _then(_$_Review(
+    return _then(_$ReviewImpl(
       tourism: null == tourism
           ? _value.tourism
           : tourism // ignore: cast_nullable_to_non_nullable
@@ -190,8 +192,8 @@ class __$$_ReviewCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Review implements _Review {
-  const _$_Review(
+class _$ReviewImpl implements _Review {
+  const _$ReviewImpl(
       {required this.tourism,
       required this.id,
       required this.user,
@@ -231,10 +233,10 @@ class _$_Review implements _Review {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Review &&
+            other is _$ReviewImpl &&
             (identical(other.tourism, tourism) || other.tourism == tourism) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.user, user) || other.user == user) &&
@@ -253,8 +255,8 @@ class _$_Review implements _Review {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReviewCopyWith<_$_Review> get copyWith =>
-      __$$_ReviewCopyWithImpl<_$_Review>(this, _$identity);
+  _$$ReviewImplCopyWith<_$ReviewImpl> get copyWith =>
+      __$$ReviewImplCopyWithImpl<_$ReviewImpl>(this, _$identity);
 }
 
 abstract class _Review implements Review {
@@ -265,7 +267,7 @@ abstract class _Review implements Review {
       required final double score,
       required final DateTime wirteTime,
       final List<String>? Images,
-      required final String contents}) = _$_Review;
+      required final String contents}) = _$ReviewImpl;
 
   @override
   Tourism get tourism;
@@ -283,6 +285,6 @@ abstract class _Review implements Review {
   String get contents;
   @override
   @JsonKey(ignore: true)
-  _$$_ReviewCopyWith<_$_Review> get copyWith =>
+  _$$ReviewImplCopyWith<_$ReviewImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

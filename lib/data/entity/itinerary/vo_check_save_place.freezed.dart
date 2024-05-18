@@ -12,7 +12,7 @@ part of 'vo_check_save_place.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CheckSavePlaceVo {
@@ -57,22 +57,22 @@ class _$CheckSavePlaceVoCopyWithImpl<$Res, $Val extends CheckSavePlaceVo>
 }
 
 /// @nodoc
-abstract class _$$_CheckSavePlaceVoCopyWith<$Res>
+abstract class _$$CheckSavePlaceVoImplCopyWith<$Res>
     implements $CheckSavePlaceVoCopyWith<$Res> {
-  factory _$$_CheckSavePlaceVoCopyWith(
-          _$_CheckSavePlaceVo value, $Res Function(_$_CheckSavePlaceVo) then) =
-      __$$_CheckSavePlaceVoCopyWithImpl<$Res>;
+  factory _$$CheckSavePlaceVoImplCopyWith(_$CheckSavePlaceVoImpl value,
+          $Res Function(_$CheckSavePlaceVoImpl) then) =
+      __$$CheckSavePlaceVoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool isPick});
 }
 
 /// @nodoc
-class __$$_CheckSavePlaceVoCopyWithImpl<$Res>
-    extends _$CheckSavePlaceVoCopyWithImpl<$Res, _$_CheckSavePlaceVo>
-    implements _$$_CheckSavePlaceVoCopyWith<$Res> {
-  __$$_CheckSavePlaceVoCopyWithImpl(
-      _$_CheckSavePlaceVo _value, $Res Function(_$_CheckSavePlaceVo) _then)
+class __$$CheckSavePlaceVoImplCopyWithImpl<$Res>
+    extends _$CheckSavePlaceVoCopyWithImpl<$Res, _$CheckSavePlaceVoImpl>
+    implements _$$CheckSavePlaceVoImplCopyWith<$Res> {
+  __$$CheckSavePlaceVoImplCopyWithImpl(_$CheckSavePlaceVoImpl _value,
+      $Res Function(_$CheckSavePlaceVoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_CheckSavePlaceVoCopyWithImpl<$Res>
   $Res call({
     Object? isPick = null,
   }) {
-    return _then(_$_CheckSavePlaceVo(
+    return _then(_$CheckSavePlaceVoImpl(
       null == isPick
           ? _value.isPick
           : isPick // ignore: cast_nullable_to_non_nullable
@@ -91,8 +91,8 @@ class __$$_CheckSavePlaceVoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CheckSavePlaceVo implements _CheckSavePlaceVo {
-  const _$_CheckSavePlaceVo(this.isPick);
+class _$CheckSavePlaceVoImpl implements _CheckSavePlaceVo {
+  const _$CheckSavePlaceVoImpl(this.isPick);
 
   @override
   final bool isPick;
@@ -103,10 +103,10 @@ class _$_CheckSavePlaceVo implements _CheckSavePlaceVo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CheckSavePlaceVo &&
+            other is _$CheckSavePlaceVoImpl &&
             (identical(other.isPick, isPick) || other.isPick == isPick));
   }
 
@@ -116,17 +116,18 @@ class _$_CheckSavePlaceVo implements _CheckSavePlaceVo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CheckSavePlaceVoCopyWith<_$_CheckSavePlaceVo> get copyWith =>
-      __$$_CheckSavePlaceVoCopyWithImpl<_$_CheckSavePlaceVo>(this, _$identity);
+  _$$CheckSavePlaceVoImplCopyWith<_$CheckSavePlaceVoImpl> get copyWith =>
+      __$$CheckSavePlaceVoImplCopyWithImpl<_$CheckSavePlaceVoImpl>(
+          this, _$identity);
 }
 
 abstract class _CheckSavePlaceVo implements CheckSavePlaceVo {
-  const factory _CheckSavePlaceVo(final bool isPick) = _$_CheckSavePlaceVo;
+  const factory _CheckSavePlaceVo(final bool isPick) = _$CheckSavePlaceVoImpl;
 
   @override
   bool get isPick;
   @override
   @JsonKey(ignore: true)
-  _$$_CheckSavePlaceVoCopyWith<_$_CheckSavePlaceVo> get copyWith =>
+  _$$CheckSavePlaceVoImplCopyWith<_$CheckSavePlaceVoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

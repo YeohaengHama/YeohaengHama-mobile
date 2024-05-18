@@ -12,7 +12,7 @@ part of 'vo_account.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Account _$AccountFromJson(Map<String, dynamic> json) {
   return _Account.fromJson(json);
@@ -78,20 +78,21 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
 }
 
 /// @nodoc
-abstract class _$$_AccountCopyWith<$Res> implements $AccountCopyWith<$Res> {
-  factory _$$_AccountCopyWith(
-          _$_Account value, $Res Function(_$_Account) then) =
-      __$$_AccountCopyWithImpl<$Res>;
+abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
+  factory _$$AccountImplCopyWith(
+          _$AccountImpl value, $Res Function(_$AccountImpl) then) =
+      __$$AccountImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String email, String pw, String nickname, String? file});
 }
 
 /// @nodoc
-class __$$_AccountCopyWithImpl<$Res>
-    extends _$AccountCopyWithImpl<$Res, _$_Account>
-    implements _$$_AccountCopyWith<$Res> {
-  __$$_AccountCopyWithImpl(_$_Account _value, $Res Function(_$_Account) _then)
+class __$$AccountImplCopyWithImpl<$Res>
+    extends _$AccountCopyWithImpl<$Res, _$AccountImpl>
+    implements _$$AccountImplCopyWith<$Res> {
+  __$$AccountImplCopyWithImpl(
+      _$AccountImpl _value, $Res Function(_$AccountImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -102,7 +103,7 @@ class __$$_AccountCopyWithImpl<$Res>
     Object? nickname = null,
     Object? file = freezed,
   }) {
-    return _then(_$_Account(
+    return _then(_$AccountImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -125,15 +126,15 @@ class __$$_AccountCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Account implements _Account {
-  const _$_Account(
+class _$AccountImpl implements _Account {
+  const _$AccountImpl(
       {required this.email,
       required this.pw,
       required this.nickname,
       this.file});
 
-  factory _$_Account.fromJson(Map<String, dynamic> json) =>
-      _$$_AccountFromJson(json);
+  factory _$AccountImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AccountImplFromJson(json);
 
   @override
   final String email;
@@ -150,10 +151,10 @@ class _$_Account implements _Account {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Account &&
+            other is _$AccountImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.pw, pw) || other.pw == pw) &&
             (identical(other.nickname, nickname) ||
@@ -168,12 +169,12 @@ class _$_Account implements _Account {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccountCopyWith<_$_Account> get copyWith =>
-      __$$_AccountCopyWithImpl<_$_Account>(this, _$identity);
+  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
+      __$$AccountImplCopyWithImpl<_$AccountImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AccountToJson(
+    return _$$AccountImplToJson(
       this,
     );
   }
@@ -184,9 +185,9 @@ abstract class _Account implements Account {
       {required final String email,
       required final String pw,
       required final String nickname,
-      final String? file}) = _$_Account;
+      final String? file}) = _$AccountImpl;
 
-  factory _Account.fromJson(Map<String, dynamic> json) = _$_Account.fromJson;
+  factory _Account.fromJson(Map<String, dynamic> json) = _$AccountImpl.fromJson;
 
   @override
   String get email;
@@ -198,6 +199,6 @@ abstract class _Account implements Account {
   String? get file;
   @override
   @JsonKey(ignore: true)
-  _$$_AccountCopyWith<_$_Account> get copyWith =>
+  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

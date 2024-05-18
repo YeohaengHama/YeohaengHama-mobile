@@ -147,9 +147,7 @@ class DetailDiaryScreen extends HookWidget {
                         }).toList(),
                       ).pSymmetric(h:contentLeftPadding,v: 20),
 
-                      Container(
-                        height: 300,
-                      )
+                      Height(30)
                     ],
                   );
                 },

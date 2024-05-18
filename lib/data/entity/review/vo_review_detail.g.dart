@@ -6,18 +6,18 @@ part of 'vo_review_detail.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReviewDetail _$$_ReviewDetailFromJson(Map<String, dynamic> json) =>
-    _$_ReviewDetail(
-      contentId: json['contentId'] as int,
-      contentTypeId: json['contentTypeId'] as int,
-      rating: json['rating'] as int,
+_$ReviewDetailImpl _$$ReviewDetailImplFromJson(Map<String, dynamic> json) =>
+    _$ReviewDetailImpl(
+      contentId: (json['contentId'] as num).toInt(),
+      contentTypeId: (json['contentTypeId'] as num).toInt(),
+      rating: (json['rating'] as num).toInt(),
       content: json['content'] as String,
       reviewPhotoURLList: (json['reviewPhotoURLList'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
     );
 
-Map<String, dynamic> _$$_ReviewDetailToJson(_$_ReviewDetail instance) =>
+Map<String, dynamic> _$$ReviewDetailImplToJson(_$ReviewDetailImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
       'contentTypeId': instance.contentTypeId,

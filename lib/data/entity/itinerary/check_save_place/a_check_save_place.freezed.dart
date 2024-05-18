@@ -12,7 +12,7 @@ part of 'a_check_save_place.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CheckSavePlace _$CheckSavePlaceFromJson(Map<String, dynamic> json) {
   return _CheckSavePlace.fromJson(json);
@@ -68,22 +68,22 @@ class _$CheckSavePlaceCopyWithImpl<$Res, $Val extends CheckSavePlace>
 }
 
 /// @nodoc
-abstract class _$$_CheckSavePlaceCopyWith<$Res>
+abstract class _$$CheckSavePlaceImplCopyWith<$Res>
     implements $CheckSavePlaceCopyWith<$Res> {
-  factory _$$_CheckSavePlaceCopyWith(
-          _$_CheckSavePlace value, $Res Function(_$_CheckSavePlace) then) =
-      __$$_CheckSavePlaceCopyWithImpl<$Res>;
+  factory _$$CheckSavePlaceImplCopyWith(_$CheckSavePlaceImpl value,
+          $Res Function(_$CheckSavePlaceImpl) then) =
+      __$$CheckSavePlaceImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String placeNum, String contentTypeId});
 }
 
 /// @nodoc
-class __$$_CheckSavePlaceCopyWithImpl<$Res>
-    extends _$CheckSavePlaceCopyWithImpl<$Res, _$_CheckSavePlace>
-    implements _$$_CheckSavePlaceCopyWith<$Res> {
-  __$$_CheckSavePlaceCopyWithImpl(
-      _$_CheckSavePlace _value, $Res Function(_$_CheckSavePlace) _then)
+class __$$CheckSavePlaceImplCopyWithImpl<$Res>
+    extends _$CheckSavePlaceCopyWithImpl<$Res, _$CheckSavePlaceImpl>
+    implements _$$CheckSavePlaceImplCopyWith<$Res> {
+  __$$CheckSavePlaceImplCopyWithImpl(
+      _$CheckSavePlaceImpl _value, $Res Function(_$CheckSavePlaceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_CheckSavePlaceCopyWithImpl<$Res>
     Object? placeNum = null,
     Object? contentTypeId = null,
   }) {
-    return _then(_$_CheckSavePlace(
+    return _then(_$CheckSavePlaceImpl(
       placeNum: null == placeNum
           ? _value.placeNum
           : placeNum // ignore: cast_nullable_to_non_nullable
@@ -107,12 +107,12 @@ class __$$_CheckSavePlaceCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CheckSavePlace implements _CheckSavePlace {
-  const _$_CheckSavePlace(
+class _$CheckSavePlaceImpl implements _CheckSavePlace {
+  const _$CheckSavePlaceImpl(
       {required this.placeNum, required this.contentTypeId});
 
-  factory _$_CheckSavePlace.fromJson(Map<String, dynamic> json) =>
-      _$$_CheckSavePlaceFromJson(json);
+  factory _$CheckSavePlaceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CheckSavePlaceImplFromJson(json);
 
   @override
   final String placeNum;
@@ -125,10 +125,10 @@ class _$_CheckSavePlace implements _CheckSavePlace {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CheckSavePlace &&
+            other is _$CheckSavePlaceImpl &&
             (identical(other.placeNum, placeNum) ||
                 other.placeNum == placeNum) &&
             (identical(other.contentTypeId, contentTypeId) ||
@@ -142,12 +142,13 @@ class _$_CheckSavePlace implements _CheckSavePlace {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CheckSavePlaceCopyWith<_$_CheckSavePlace> get copyWith =>
-      __$$_CheckSavePlaceCopyWithImpl<_$_CheckSavePlace>(this, _$identity);
+  _$$CheckSavePlaceImplCopyWith<_$CheckSavePlaceImpl> get copyWith =>
+      __$$CheckSavePlaceImplCopyWithImpl<_$CheckSavePlaceImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CheckSavePlaceToJson(
+    return _$$CheckSavePlaceImplToJson(
       this,
     );
   }
@@ -156,10 +157,10 @@ class _$_CheckSavePlace implements _CheckSavePlace {
 abstract class _CheckSavePlace implements CheckSavePlace {
   const factory _CheckSavePlace(
       {required final String placeNum,
-      required final String contentTypeId}) = _$_CheckSavePlace;
+      required final String contentTypeId}) = _$CheckSavePlaceImpl;
 
   factory _CheckSavePlace.fromJson(Map<String, dynamic> json) =
-      _$_CheckSavePlace.fromJson;
+      _$CheckSavePlaceImpl.fromJson;
 
   @override
   String get placeNum;
@@ -167,6 +168,6 @@ abstract class _CheckSavePlace implements CheckSavePlace {
   String get contentTypeId;
   @override
   @JsonKey(ignore: true)
-  _$$_CheckSavePlaceCopyWith<_$_CheckSavePlace> get copyWith =>
+  _$$CheckSavePlaceImplCopyWith<_$CheckSavePlaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

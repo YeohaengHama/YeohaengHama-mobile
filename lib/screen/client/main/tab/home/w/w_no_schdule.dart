@@ -22,12 +22,12 @@ class NoScheduleWidget extends StatelessWidget {
             text: const TextSpan(
               children: [
                 TextSpan(
-                  text: '아직 예정된 여행 일정이 없어요.\n',
+                  text: '아직 선택된 여행 일정이 없어요.\n',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
-                  text: '여행을 추가해 볼까요?',
+                  text: '일정을 추가해 볼까요?',
                   style: TextStyle(color: Colors.white),
                 ),
               ],

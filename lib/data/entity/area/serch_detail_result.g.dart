@@ -6,9 +6,9 @@ part of 'serch_detail_result.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SearchDetailResult _$$_SearchDetailResultFromJson(
+_$SearchDetailResultImpl _$$SearchDetailResultImplFromJson(
         Map<String, dynamic> json) =>
-    _$_SearchDetailResult(
+    _$SearchDetailResultImpl(
       contentId: json['contentId'] as String,
       contentTypeId: json['contentTypeId'] as String,
       title: json['title'] as String,
@@ -19,8 +19,8 @@ _$_SearchDetailResult _$$_SearchDetailResultFromJson(
       mapY: json['mapY'] as String,
     );
 
-Map<String, dynamic> _$$_SearchDetailResultToJson(
-        _$_SearchDetailResult instance) =>
+Map<String, dynamic> _$$SearchDetailResultImplToJson(
+        _$SearchDetailResultImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
       'contentTypeId': instance.contentTypeId,

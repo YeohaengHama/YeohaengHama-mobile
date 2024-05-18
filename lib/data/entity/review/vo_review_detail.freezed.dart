@@ -12,7 +12,7 @@ part of 'vo_review_detail.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReviewDetail _$ReviewDetailFromJson(Map<String, dynamic> json) {
   return _ReviewDetail.fromJson(json);
@@ -91,11 +91,11 @@ class _$ReviewDetailCopyWithImpl<$Res, $Val extends ReviewDetail>
 }
 
 /// @nodoc
-abstract class _$$_ReviewDetailCopyWith<$Res>
+abstract class _$$ReviewDetailImplCopyWith<$Res>
     implements $ReviewDetailCopyWith<$Res> {
-  factory _$$_ReviewDetailCopyWith(
-          _$_ReviewDetail value, $Res Function(_$_ReviewDetail) then) =
-      __$$_ReviewDetailCopyWithImpl<$Res>;
+  factory _$$ReviewDetailImplCopyWith(
+          _$ReviewDetailImpl value, $Res Function(_$ReviewDetailImpl) then) =
+      __$$ReviewDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +107,11 @@ abstract class _$$_ReviewDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReviewDetailCopyWithImpl<$Res>
-    extends _$ReviewDetailCopyWithImpl<$Res, _$_ReviewDetail>
-    implements _$$_ReviewDetailCopyWith<$Res> {
-  __$$_ReviewDetailCopyWithImpl(
-      _$_ReviewDetail _value, $Res Function(_$_ReviewDetail) _then)
+class __$$ReviewDetailImplCopyWithImpl<$Res>
+    extends _$ReviewDetailCopyWithImpl<$Res, _$ReviewDetailImpl>
+    implements _$$ReviewDetailImplCopyWith<$Res> {
+  __$$ReviewDetailImplCopyWithImpl(
+      _$ReviewDetailImpl _value, $Res Function(_$ReviewDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +123,7 @@ class __$$_ReviewDetailCopyWithImpl<$Res>
     Object? content = null,
     Object? reviewPhotoURLList = null,
   }) {
-    return _then(_$_ReviewDetail(
+    return _then(_$ReviewDetailImpl(
       contentId: null == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
@@ -150,8 +150,8 @@ class __$$_ReviewDetailCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReviewDetail implements _ReviewDetail {
-  _$_ReviewDetail(
+class _$ReviewDetailImpl implements _ReviewDetail {
+  _$ReviewDetailImpl(
       {required this.contentId,
       required this.contentTypeId,
       required this.rating,
@@ -159,8 +159,8 @@ class _$_ReviewDetail implements _ReviewDetail {
       required final List<String> reviewPhotoURLList})
       : _reviewPhotoURLList = reviewPhotoURLList;
 
-  factory _$_ReviewDetail.fromJson(Map<String, dynamic> json) =>
-      _$$_ReviewDetailFromJson(json);
+  factory _$ReviewDetailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReviewDetailImplFromJson(json);
 
   @override
   final int contentId;
@@ -185,10 +185,10 @@ class _$_ReviewDetail implements _ReviewDetail {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReviewDetail &&
+            other is _$ReviewDetailImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
             (identical(other.contentTypeId, contentTypeId) ||
@@ -207,12 +207,12 @@ class _$_ReviewDetail implements _ReviewDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReviewDetailCopyWith<_$_ReviewDetail> get copyWith =>
-      __$$_ReviewDetailCopyWithImpl<_$_ReviewDetail>(this, _$identity);
+  _$$ReviewDetailImplCopyWith<_$ReviewDetailImpl> get copyWith =>
+      __$$ReviewDetailImplCopyWithImpl<_$ReviewDetailImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReviewDetailToJson(
+    return _$$ReviewDetailImplToJson(
       this,
     );
   }
@@ -224,10 +224,10 @@ abstract class _ReviewDetail implements ReviewDetail {
       required final int contentTypeId,
       required final int rating,
       required final String content,
-      required final List<String> reviewPhotoURLList}) = _$_ReviewDetail;
+      required final List<String> reviewPhotoURLList}) = _$ReviewDetailImpl;
 
   factory _ReviewDetail.fromJson(Map<String, dynamic> json) =
-      _$_ReviewDetail.fromJson;
+      _$ReviewDetailImpl.fromJson;
 
   @override
   int get contentId;
@@ -241,6 +241,6 @@ abstract class _ReviewDetail implements ReviewDetail {
   List<String> get reviewPhotoURLList;
   @override
   @JsonKey(ignore: true)
-  _$$_ReviewDetailCopyWith<_$_ReviewDetail> get copyWith =>
+  _$$ReviewDetailImplCopyWith<_$ReviewDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

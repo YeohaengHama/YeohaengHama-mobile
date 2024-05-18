@@ -12,7 +12,7 @@ part of 'open_api_image.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OpenApiImage _$OpenApiImageFromJson(Map<String, dynamic> json) {
   return _OpenApiImage.fromJson(json);
@@ -81,11 +81,11 @@ class _$OpenApiImageCopyWithImpl<$Res, $Val extends OpenApiImage>
 }
 
 /// @nodoc
-abstract class _$$_OpenApiImageCopyWith<$Res>
+abstract class _$$OpenApiImageImplCopyWith<$Res>
     implements $OpenApiImageCopyWith<$Res> {
-  factory _$$_OpenApiImageCopyWith(
-          _$_OpenApiImage value, $Res Function(_$_OpenApiImage) then) =
-      __$$_OpenApiImageCopyWithImpl<$Res>;
+  factory _$$OpenApiImageImplCopyWith(
+          _$OpenApiImageImpl value, $Res Function(_$OpenApiImageImpl) then) =
+      __$$OpenApiImageImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -93,11 +93,11 @@ abstract class _$$_OpenApiImageCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OpenApiImageCopyWithImpl<$Res>
-    extends _$OpenApiImageCopyWithImpl<$Res, _$_OpenApiImage>
-    implements _$$_OpenApiImageCopyWith<$Res> {
-  __$$_OpenApiImageCopyWithImpl(
-      _$_OpenApiImage _value, $Res Function(_$_OpenApiImage) _then)
+class __$$OpenApiImageImplCopyWithImpl<$Res>
+    extends _$OpenApiImageCopyWithImpl<$Res, _$OpenApiImageImpl>
+    implements _$$OpenApiImageImplCopyWith<$Res> {
+  __$$OpenApiImageImplCopyWithImpl(
+      _$OpenApiImageImpl _value, $Res Function(_$OpenApiImageImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -108,7 +108,7 @@ class __$$_OpenApiImageCopyWithImpl<$Res>
     Object? pageNo = null,
     Object? mobileOS = null,
   }) {
-    return _then(_$_OpenApiImage(
+    return _then(_$OpenApiImageImpl(
       contentId: null == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
@@ -131,15 +131,15 @@ class __$$_OpenApiImageCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OpenApiImage implements _OpenApiImage {
-  const _$_OpenApiImage(
+class _$OpenApiImageImpl implements _OpenApiImage {
+  const _$OpenApiImageImpl(
       {required this.contentId,
       required this.numOfRows,
       required this.pageNo,
       required this.mobileOS});
 
-  factory _$_OpenApiImage.fromJson(Map<String, dynamic> json) =>
-      _$$_OpenApiImageFromJson(json);
+  factory _$OpenApiImageImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OpenApiImageImplFromJson(json);
 
   @override
   final String contentId;
@@ -156,10 +156,10 @@ class _$_OpenApiImage implements _OpenApiImage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OpenApiImage &&
+            other is _$OpenApiImageImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
             (identical(other.numOfRows, numOfRows) ||
@@ -177,12 +177,12 @@ class _$_OpenApiImage implements _OpenApiImage {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OpenApiImageCopyWith<_$_OpenApiImage> get copyWith =>
-      __$$_OpenApiImageCopyWithImpl<_$_OpenApiImage>(this, _$identity);
+  _$$OpenApiImageImplCopyWith<_$OpenApiImageImpl> get copyWith =>
+      __$$OpenApiImageImplCopyWithImpl<_$OpenApiImageImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OpenApiImageToJson(
+    return _$$OpenApiImageImplToJson(
       this,
     );
   }
@@ -193,10 +193,10 @@ abstract class _OpenApiImage implements OpenApiImage {
       {required final String contentId,
       required final String numOfRows,
       required final String pageNo,
-      required final String mobileOS}) = _$_OpenApiImage;
+      required final String mobileOS}) = _$OpenApiImageImpl;
 
   factory _OpenApiImage.fromJson(Map<String, dynamic> json) =
-      _$_OpenApiImage.fromJson;
+      _$OpenApiImageImpl.fromJson;
 
   @override
   String get contentId;
@@ -208,6 +208,6 @@ abstract class _OpenApiImage implements OpenApiImage {
   String get mobileOS;
   @override
   @JsonKey(ignore: true)
-  _$$_OpenApiImageCopyWith<_$_OpenApiImage> get copyWith =>
+  _$$OpenApiImageImplCopyWith<_$OpenApiImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

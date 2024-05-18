@@ -12,7 +12,7 @@ part of 'a_review_show_all.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ReviewShowAll _$ReviewShowAllFromJson(Map<String, dynamic> json) {
   return _ReviewShowAll.fromJson(json);
@@ -108,11 +108,11 @@ class _$ReviewShowAllCopyWithImpl<$Res, $Val extends ReviewShowAll>
 }
 
 /// @nodoc
-abstract class _$$_ReviewShowAllCopyWith<$Res>
+abstract class _$$ReviewShowAllImplCopyWith<$Res>
     implements $ReviewShowAllCopyWith<$Res> {
-  factory _$$_ReviewShowAllCopyWith(
-          _$_ReviewShowAll value, $Res Function(_$_ReviewShowAll) then) =
-      __$$_ReviewShowAllCopyWithImpl<$Res>;
+  factory _$$ReviewShowAllImplCopyWith(
+          _$ReviewShowAllImpl value, $Res Function(_$ReviewShowAllImpl) then) =
+      __$$ReviewShowAllImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -128,11 +128,11 @@ abstract class _$$_ReviewShowAllCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReviewShowAllCopyWithImpl<$Res>
-    extends _$ReviewShowAllCopyWithImpl<$Res, _$_ReviewShowAll>
-    implements _$$_ReviewShowAllCopyWith<$Res> {
-  __$$_ReviewShowAllCopyWithImpl(
-      _$_ReviewShowAll _value, $Res Function(_$_ReviewShowAll) _then)
+class __$$ReviewShowAllImplCopyWithImpl<$Res>
+    extends _$ReviewShowAllCopyWithImpl<$Res, _$ReviewShowAllImpl>
+    implements _$$ReviewShowAllImplCopyWith<$Res> {
+  __$$ReviewShowAllImplCopyWithImpl(
+      _$ReviewShowAllImpl _value, $Res Function(_$ReviewShowAllImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -145,7 +145,7 @@ class __$$_ReviewShowAllCopyWithImpl<$Res>
     Object? reviewPhotoURLList = null,
     Object? account = null,
   }) {
-    return _then(_$_ReviewShowAll(
+    return _then(_$ReviewShowAllImpl(
       contentId: null == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
@@ -176,8 +176,8 @@ class __$$_ReviewShowAllCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReviewShowAll implements _ReviewShowAll {
-  _$_ReviewShowAll(
+class _$ReviewShowAllImpl implements _ReviewShowAll {
+  _$ReviewShowAllImpl(
       {required this.contentId,
       required this.contentTypeId,
       required this.rating,
@@ -186,8 +186,8 @@ class _$_ReviewShowAll implements _ReviewShowAll {
       required this.account})
       : _reviewPhotoURLList = reviewPhotoURLList;
 
-  factory _$_ReviewShowAll.fromJson(Map<String, dynamic> json) =>
-      _$$_ReviewShowAllFromJson(json);
+  factory _$ReviewShowAllImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReviewShowAllImplFromJson(json);
 
   @override
   final int contentId;
@@ -215,10 +215,10 @@ class _$_ReviewShowAll implements _ReviewShowAll {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReviewShowAll &&
+            other is _$ReviewShowAllImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
             (identical(other.contentTypeId, contentTypeId) ||
@@ -244,12 +244,12 @@ class _$_ReviewShowAll implements _ReviewShowAll {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReviewShowAllCopyWith<_$_ReviewShowAll> get copyWith =>
-      __$$_ReviewShowAllCopyWithImpl<_$_ReviewShowAll>(this, _$identity);
+  _$$ReviewShowAllImplCopyWith<_$ReviewShowAllImpl> get copyWith =>
+      __$$ReviewShowAllImplCopyWithImpl<_$ReviewShowAllImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReviewShowAllToJson(
+    return _$$ReviewShowAllImplToJson(
       this,
     );
   }
@@ -262,10 +262,10 @@ abstract class _ReviewShowAll implements ReviewShowAll {
       required final int rating,
       required final String content,
       required final List<String> reviewPhotoURLList,
-      required final Account account}) = _$_ReviewShowAll;
+      required final Account account}) = _$ReviewShowAllImpl;
 
   factory _ReviewShowAll.fromJson(Map<String, dynamic> json) =
-      _$_ReviewShowAll.fromJson;
+      _$ReviewShowAllImpl.fromJson;
 
   @override
   int get contentId;
@@ -281,7 +281,7 @@ abstract class _ReviewShowAll implements ReviewShowAll {
   Account get account;
   @override
   @JsonKey(ignore: true)
-  _$$_ReviewShowAllCopyWith<_$_ReviewShowAll> get copyWith =>
+  _$$ReviewShowAllImplCopyWith<_$ReviewShowAllImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -343,20 +343,21 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
 }
 
 /// @nodoc
-abstract class _$$_AccountCopyWith<$Res> implements $AccountCopyWith<$Res> {
-  factory _$$_AccountCopyWith(
-          _$_Account value, $Res Function(_$_Account) then) =
-      __$$_AccountCopyWithImpl<$Res>;
+abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
+  factory _$$AccountImplCopyWith(
+          _$AccountImpl value, $Res Function(_$AccountImpl) then) =
+      __$$AccountImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, String nickname, String? photoUrl});
 }
 
 /// @nodoc
-class __$$_AccountCopyWithImpl<$Res>
-    extends _$AccountCopyWithImpl<$Res, _$_Account>
-    implements _$$_AccountCopyWith<$Res> {
-  __$$_AccountCopyWithImpl(_$_Account _value, $Res Function(_$_Account) _then)
+class __$$AccountImplCopyWithImpl<$Res>
+    extends _$AccountCopyWithImpl<$Res, _$AccountImpl>
+    implements _$$AccountImplCopyWith<$Res> {
+  __$$AccountImplCopyWithImpl(
+      _$AccountImpl _value, $Res Function(_$AccountImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -366,7 +367,7 @@ class __$$_AccountCopyWithImpl<$Res>
     Object? nickname = null,
     Object? photoUrl = freezed,
   }) {
-    return _then(_$_Account(
+    return _then(_$AccountImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -385,11 +386,11 @@ class __$$_AccountCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Account implements _Account {
-  _$_Account({required this.id, required this.nickname, this.photoUrl});
+class _$AccountImpl implements _Account {
+  _$AccountImpl({required this.id, required this.nickname, this.photoUrl});
 
-  factory _$_Account.fromJson(Map<String, dynamic> json) =>
-      _$$_AccountFromJson(json);
+  factory _$AccountImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AccountImplFromJson(json);
 
   @override
   final int id;
@@ -404,10 +405,10 @@ class _$_Account implements _Account {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Account &&
+            other is _$AccountImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
@@ -422,12 +423,12 @@ class _$_Account implements _Account {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccountCopyWith<_$_Account> get copyWith =>
-      __$$_AccountCopyWithImpl<_$_Account>(this, _$identity);
+  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
+      __$$AccountImplCopyWithImpl<_$AccountImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AccountToJson(
+    return _$$AccountImplToJson(
       this,
     );
   }
@@ -437,9 +438,9 @@ abstract class _Account implements Account {
   factory _Account(
       {required final int id,
       required final String nickname,
-      final String? photoUrl}) = _$_Account;
+      final String? photoUrl}) = _$AccountImpl;
 
-  factory _Account.fromJson(Map<String, dynamic> json) = _$_Account.fromJson;
+  factory _Account.fromJson(Map<String, dynamic> json) = _$AccountImpl.fromJson;
 
   @override
   int get id;
@@ -449,6 +450,6 @@ abstract class _Account implements Account {
   String? get photoUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_AccountCopyWith<_$_Account> get copyWith =>
+  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

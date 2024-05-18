@@ -12,7 +12,7 @@ part of 'open_api_area.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 OpenApiArea _$OpenApiAreaFromJson(Map<String, dynamic> json) {
   return _OpenApiArea.fromJson(json);
@@ -91,11 +91,11 @@ class _$OpenApiAreaCopyWithImpl<$Res, $Val extends OpenApiArea>
 }
 
 /// @nodoc
-abstract class _$$_OpenApiAreaCopyWith<$Res>
+abstract class _$$OpenApiAreaImplCopyWith<$Res>
     implements $OpenApiAreaCopyWith<$Res> {
-  factory _$$_OpenApiAreaCopyWith(
-          _$_OpenApiArea value, $Res Function(_$_OpenApiArea) then) =
-      __$$_OpenApiAreaCopyWithImpl<$Res>;
+  factory _$$OpenApiAreaImplCopyWith(
+          _$OpenApiAreaImpl value, $Res Function(_$OpenApiAreaImpl) then) =
+      __$$OpenApiAreaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +107,11 @@ abstract class _$$_OpenApiAreaCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_OpenApiAreaCopyWithImpl<$Res>
-    extends _$OpenApiAreaCopyWithImpl<$Res, _$_OpenApiArea>
-    implements _$$_OpenApiAreaCopyWith<$Res> {
-  __$$_OpenApiAreaCopyWithImpl(
-      _$_OpenApiArea _value, $Res Function(_$_OpenApiArea) _then)
+class __$$OpenApiAreaImplCopyWithImpl<$Res>
+    extends _$OpenApiAreaCopyWithImpl<$Res, _$OpenApiAreaImpl>
+    implements _$$OpenApiAreaImplCopyWith<$Res> {
+  __$$OpenApiAreaImplCopyWithImpl(
+      _$OpenApiAreaImpl _value, $Res Function(_$OpenApiAreaImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -123,7 +123,7 @@ class __$$_OpenApiAreaCopyWithImpl<$Res>
     Object? contentTypeId = null,
     Object? mobileOS = null,
   }) {
-    return _then(_$_OpenApiArea(
+    return _then(_$OpenApiAreaImpl(
       numOfRows: null == numOfRows
           ? _value.numOfRows
           : numOfRows // ignore: cast_nullable_to_non_nullable
@@ -150,16 +150,16 @@ class __$$_OpenApiAreaCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OpenApiArea implements _OpenApiArea {
-  const _$_OpenApiArea(
+class _$OpenApiAreaImpl implements _OpenApiArea {
+  const _$OpenApiAreaImpl(
       {required this.numOfRows,
       this.page = '1',
       required this.keyword,
       required this.contentTypeId,
       required this.mobileOS});
 
-  factory _$_OpenApiArea.fromJson(Map<String, dynamic> json) =>
-      _$$_OpenApiAreaFromJson(json);
+  factory _$OpenApiAreaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OpenApiAreaImplFromJson(json);
 
   @override
   final String numOfRows;
@@ -179,10 +179,10 @@ class _$_OpenApiArea implements _OpenApiArea {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OpenApiArea &&
+            other is _$OpenApiAreaImpl &&
             (identical(other.numOfRows, numOfRows) ||
                 other.numOfRows == numOfRows) &&
             (identical(other.page, page) || other.page == page) &&
@@ -201,12 +201,12 @@ class _$_OpenApiArea implements _OpenApiArea {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OpenApiAreaCopyWith<_$_OpenApiArea> get copyWith =>
-      __$$_OpenApiAreaCopyWithImpl<_$_OpenApiArea>(this, _$identity);
+  _$$OpenApiAreaImplCopyWith<_$OpenApiAreaImpl> get copyWith =>
+      __$$OpenApiAreaImplCopyWithImpl<_$OpenApiAreaImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OpenApiAreaToJson(
+    return _$$OpenApiAreaImplToJson(
       this,
     );
   }
@@ -218,10 +218,10 @@ abstract class _OpenApiArea implements OpenApiArea {
       required final String page,
       required final String keyword,
       required final String contentTypeId,
-      required final String mobileOS}) = _$_OpenApiArea;
+      required final String mobileOS}) = _$OpenApiAreaImpl;
 
   factory _OpenApiArea.fromJson(Map<String, dynamic> json) =
-      _$_OpenApiArea.fromJson;
+      _$OpenApiAreaImpl.fromJson;
 
   @override
   String get numOfRows;
@@ -235,6 +235,6 @@ abstract class _OpenApiArea implements OpenApiArea {
   String get mobileOS;
   @override
   @JsonKey(ignore: true)
-  _$$_OpenApiAreaCopyWith<_$_OpenApiArea> get copyWith =>
+  _$$OpenApiAreaImplCopyWith<_$OpenApiAreaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

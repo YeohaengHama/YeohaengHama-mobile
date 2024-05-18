@@ -12,7 +12,7 @@ part of 'vo_style_tag.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$StyleTag {
@@ -56,21 +56,22 @@ class _$StyleTagCopyWithImpl<$Res, $Val extends StyleTag>
 }
 
 /// @nodoc
-abstract class _$$_StyleTagCopyWith<$Res> implements $StyleTagCopyWith<$Res> {
-  factory _$$_StyleTagCopyWith(
-          _$_StyleTag value, $Res Function(_$_StyleTag) then) =
-      __$$_StyleTagCopyWithImpl<$Res>;
+abstract class _$$StyleTagImplCopyWith<$Res>
+    implements $StyleTagCopyWith<$Res> {
+  factory _$$StyleTagImplCopyWith(
+          _$StyleTagImpl value, $Res Function(_$StyleTagImpl) then) =
+      __$$StyleTagImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String style});
 }
 
 /// @nodoc
-class __$$_StyleTagCopyWithImpl<$Res>
-    extends _$StyleTagCopyWithImpl<$Res, _$_StyleTag>
-    implements _$$_StyleTagCopyWith<$Res> {
-  __$$_StyleTagCopyWithImpl(
-      _$_StyleTag _value, $Res Function(_$_StyleTag) _then)
+class __$$StyleTagImplCopyWithImpl<$Res>
+    extends _$StyleTagCopyWithImpl<$Res, _$StyleTagImpl>
+    implements _$$StyleTagImplCopyWith<$Res> {
+  __$$StyleTagImplCopyWithImpl(
+      _$StyleTagImpl _value, $Res Function(_$StyleTagImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -78,7 +79,7 @@ class __$$_StyleTagCopyWithImpl<$Res>
   $Res call({
     Object? style = null,
   }) {
-    return _then(_$_StyleTag(
+    return _then(_$StyleTagImpl(
       null == style
           ? _value.style
           : style // ignore: cast_nullable_to_non_nullable
@@ -89,8 +90,8 @@ class __$$_StyleTagCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_StyleTag implements _StyleTag {
-  const _$_StyleTag(this.style);
+class _$StyleTagImpl implements _StyleTag {
+  const _$StyleTagImpl(this.style);
 
   @override
   final String style;
@@ -101,10 +102,10 @@ class _$_StyleTag implements _StyleTag {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StyleTag &&
+            other is _$StyleTagImpl &&
             (identical(other.style, style) || other.style == style));
   }
 
@@ -114,17 +115,17 @@ class _$_StyleTag implements _StyleTag {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StyleTagCopyWith<_$_StyleTag> get copyWith =>
-      __$$_StyleTagCopyWithImpl<_$_StyleTag>(this, _$identity);
+  _$$StyleTagImplCopyWith<_$StyleTagImpl> get copyWith =>
+      __$$StyleTagImplCopyWithImpl<_$StyleTagImpl>(this, _$identity);
 }
 
 abstract class _StyleTag implements StyleTag {
-  const factory _StyleTag(final String style) = _$_StyleTag;
+  const factory _StyleTag(final String style) = _$StyleTagImpl;
 
   @override
   String get style;
   @override
   @JsonKey(ignore: true)
-  _$$_StyleTagCopyWith<_$_StyleTag> get copyWith =>
+  _$$StyleTagImplCopyWith<_$StyleTagImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

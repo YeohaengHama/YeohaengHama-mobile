@@ -12,7 +12,7 @@ part of 'vo_itinerary.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Itinerary _$ItineraryFromJson(Map<String, dynamic> json) {
   return _Itinerary.fromJson(json);
@@ -111,10 +111,11 @@ class _$ItineraryCopyWithImpl<$Res, $Val extends Itinerary>
 }
 
 /// @nodoc
-abstract class _$$_ItineraryCopyWith<$Res> implements $ItineraryCopyWith<$Res> {
-  factory _$$_ItineraryCopyWith(
-          _$_Itinerary value, $Res Function(_$_Itinerary) then) =
-      __$$_ItineraryCopyWithImpl<$Res>;
+abstract class _$$ItineraryImplCopyWith<$Res>
+    implements $ItineraryCopyWith<$Res> {
+  factory _$$ItineraryImplCopyWith(
+          _$ItineraryImpl value, $Res Function(_$ItineraryImpl) then) =
+      __$$ItineraryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -129,11 +130,11 @@ abstract class _$$_ItineraryCopyWith<$Res> implements $ItineraryCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ItineraryCopyWithImpl<$Res>
-    extends _$ItineraryCopyWithImpl<$Res, _$_Itinerary>
-    implements _$$_ItineraryCopyWith<$Res> {
-  __$$_ItineraryCopyWithImpl(
-      _$_Itinerary _value, $Res Function(_$_Itinerary) _then)
+class __$$ItineraryImplCopyWithImpl<$Res>
+    extends _$ItineraryCopyWithImpl<$Res, _$ItineraryImpl>
+    implements _$$ItineraryImplCopyWith<$Res> {
+  __$$ItineraryImplCopyWithImpl(
+      _$ItineraryImpl _value, $Res Function(_$ItineraryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -148,7 +149,7 @@ class __$$_ItineraryCopyWithImpl<$Res>
     Object? endDate = null,
     Object? expense = freezed,
   }) {
-    return _then(_$_Itinerary(
+    return _then(_$ItineraryImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -187,8 +188,8 @@ class __$$_ItineraryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Itinerary implements _Itinerary {
-  const _$_Itinerary(
+class _$ItineraryImpl implements _Itinerary {
+  const _$ItineraryImpl(
       {required this.name,
       required final List<String> type,
       required final List<String> itineraryStyle,
@@ -200,8 +201,8 @@ class _$_Itinerary implements _Itinerary {
       : _type = type,
         _itineraryStyle = itineraryStyle;
 
-  factory _$_Itinerary.fromJson(Map<String, dynamic> json) =>
-      _$$_ItineraryFromJson(json);
+  factory _$ItineraryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ItineraryImplFromJson(json);
 
   @override
   final String name;
@@ -240,10 +241,10 @@ class _$_Itinerary implements _Itinerary {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Itinerary &&
+            other is _$ItineraryImpl &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._type, _type) &&
             const DeepCollectionEquality()
@@ -273,12 +274,12 @@ class _$_Itinerary implements _Itinerary {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ItineraryCopyWith<_$_Itinerary> get copyWith =>
-      __$$_ItineraryCopyWithImpl<_$_Itinerary>(this, _$identity);
+  _$$ItineraryImplCopyWith<_$ItineraryImpl> get copyWith =>
+      __$$ItineraryImplCopyWithImpl<_$ItineraryImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ItineraryToJson(
+    return _$$ItineraryImplToJson(
       this,
     );
   }
@@ -293,10 +294,10 @@ abstract class _Itinerary implements Itinerary {
       required final String area,
       required final String startDate,
       required final String endDate,
-      final String? expense}) = _$_Itinerary;
+      final String? expense}) = _$ItineraryImpl;
 
   factory _Itinerary.fromJson(Map<String, dynamic> json) =
-      _$_Itinerary.fromJson;
+      _$ItineraryImpl.fromJson;
 
   @override
   String get name;
@@ -316,6 +317,6 @@ abstract class _Itinerary implements Itinerary {
   String? get expense;
   @override
   @JsonKey(ignore: true)
-  _$$_ItineraryCopyWith<_$_Itinerary> get copyWith =>
+  _$$ItineraryImplCopyWith<_$ItineraryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

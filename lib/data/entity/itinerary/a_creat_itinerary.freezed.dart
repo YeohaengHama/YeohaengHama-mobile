@@ -12,7 +12,7 @@ part of 'a_creat_itinerary.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CreateItinerary {
@@ -114,11 +114,11 @@ class _$CreateItineraryCopyWithImpl<$Res, $Val extends CreateItinerary>
 }
 
 /// @nodoc
-abstract class _$$_CreateItineraryCopyWith<$Res>
+abstract class _$$CreateItineraryImplCopyWith<$Res>
     implements $CreateItineraryCopyWith<$Res> {
-  factory _$$_CreateItineraryCopyWith(
-          _$_CreateItinerary value, $Res Function(_$_CreateItinerary) then) =
-      __$$_CreateItineraryCopyWithImpl<$Res>;
+  factory _$$CreateItineraryImplCopyWith(_$CreateItineraryImpl value,
+          $Res Function(_$CreateItineraryImpl) then) =
+      __$$CreateItineraryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -134,11 +134,11 @@ abstract class _$$_CreateItineraryCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CreateItineraryCopyWithImpl<$Res>
-    extends _$CreateItineraryCopyWithImpl<$Res, _$_CreateItinerary>
-    implements _$$_CreateItineraryCopyWith<$Res> {
-  __$$_CreateItineraryCopyWithImpl(
-      _$_CreateItinerary _value, $Res Function(_$_CreateItinerary) _then)
+class __$$CreateItineraryImplCopyWithImpl<$Res>
+    extends _$CreateItineraryCopyWithImpl<$Res, _$CreateItineraryImpl>
+    implements _$$CreateItineraryImplCopyWith<$Res> {
+  __$$CreateItineraryImplCopyWithImpl(
+      _$CreateItineraryImpl _value, $Res Function(_$CreateItineraryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -154,7 +154,7 @@ class __$$_CreateItineraryCopyWithImpl<$Res>
     Object? endDate = null,
     Object? expense = freezed,
   }) {
-    return _then(_$_CreateItinerary(
+    return _then(_$CreateItineraryImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,8 @@ class __$$_CreateItineraryCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CreateItinerary implements _CreateItinerary {
-  const _$_CreateItinerary(
+class _$CreateItineraryImpl implements _CreateItinerary {
+  const _$CreateItineraryImpl(
       {required this.id,
       required this.name,
       required final List<String> type,
@@ -250,10 +250,10 @@ class _$_CreateItinerary implements _CreateItinerary {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreateItinerary &&
+            other is _$CreateItineraryImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._type, _type) &&
@@ -283,8 +283,9 @@ class _$_CreateItinerary implements _CreateItinerary {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreateItineraryCopyWith<_$_CreateItinerary> get copyWith =>
-      __$$_CreateItineraryCopyWithImpl<_$_CreateItinerary>(this, _$identity);
+  _$$CreateItineraryImplCopyWith<_$CreateItineraryImpl> get copyWith =>
+      __$$CreateItineraryImplCopyWithImpl<_$CreateItineraryImpl>(
+          this, _$identity);
 }
 
 abstract class _CreateItinerary implements CreateItinerary {
@@ -297,7 +298,7 @@ abstract class _CreateItinerary implements CreateItinerary {
       required final String area,
       required final String startDate,
       required final String endDate,
-      final String? expense}) = _$_CreateItinerary;
+      final String? expense}) = _$CreateItineraryImpl;
 
   @override
   int get id;
@@ -319,6 +320,6 @@ abstract class _CreateItinerary implements CreateItinerary {
   String? get expense;
   @override
   @JsonKey(ignore: true)
-  _$$_CreateItineraryCopyWith<_$_CreateItinerary> get copyWith =>
+  _$$CreateItineraryImplCopyWith<_$CreateItineraryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

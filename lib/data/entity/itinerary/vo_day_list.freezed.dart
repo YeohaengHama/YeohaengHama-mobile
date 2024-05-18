@@ -12,7 +12,7 @@ part of 'vo_day_list.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DayList _$DayListFromJson(Map<String, dynamic> json) {
   return _DayList.fromJson(json);
@@ -66,20 +66,21 @@ class _$DayListCopyWithImpl<$Res, $Val extends DayList>
 }
 
 /// @nodoc
-abstract class _$$_DayListCopyWith<$Res> implements $DayListCopyWith<$Res> {
-  factory _$$_DayListCopyWith(
-          _$_DayList value, $Res Function(_$_DayList) then) =
-      __$$_DayListCopyWithImpl<$Res>;
+abstract class _$$DayListImplCopyWith<$Res> implements $DayListCopyWith<$Res> {
+  factory _$$DayListImplCopyWith(
+          _$DayListImpl value, $Res Function(_$DayListImpl) then) =
+      __$$DayListImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String day, List<Place> place});
 }
 
 /// @nodoc
-class __$$_DayListCopyWithImpl<$Res>
-    extends _$DayListCopyWithImpl<$Res, _$_DayList>
-    implements _$$_DayListCopyWith<$Res> {
-  __$$_DayListCopyWithImpl(_$_DayList _value, $Res Function(_$_DayList) _then)
+class __$$DayListImplCopyWithImpl<$Res>
+    extends _$DayListCopyWithImpl<$Res, _$DayListImpl>
+    implements _$$DayListImplCopyWith<$Res> {
+  __$$DayListImplCopyWithImpl(
+      _$DayListImpl _value, $Res Function(_$DayListImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +89,7 @@ class __$$_DayListCopyWithImpl<$Res>
     Object? day = null,
     Object? place = null,
   }) {
-    return _then(_$_DayList(
+    return _then(_$DayListImpl(
       day: null == day
           ? _value.day
           : day // ignore: cast_nullable_to_non_nullable
@@ -103,12 +104,12 @@ class __$$_DayListCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DayList implements _DayList {
-  const _$_DayList({required this.day, required final List<Place> place})
+class _$DayListImpl implements _DayList {
+  const _$DayListImpl({required this.day, required final List<Place> place})
       : _place = place;
 
-  factory _$_DayList.fromJson(Map<String, dynamic> json) =>
-      _$$_DayListFromJson(json);
+  factory _$DayListImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DayListImplFromJson(json);
 
   @override
   final String day;
@@ -126,10 +127,10 @@ class _$_DayList implements _DayList {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DayList &&
+            other is _$DayListImpl &&
             (identical(other.day, day) || other.day == day) &&
             const DeepCollectionEquality().equals(other._place, _place));
   }
@@ -142,12 +143,12 @@ class _$_DayList implements _DayList {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DayListCopyWith<_$_DayList> get copyWith =>
-      __$$_DayListCopyWithImpl<_$_DayList>(this, _$identity);
+  _$$DayListImplCopyWith<_$DayListImpl> get copyWith =>
+      __$$DayListImplCopyWithImpl<_$DayListImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DayListToJson(
+    return _$$DayListImplToJson(
       this,
     );
   }
@@ -156,9 +157,9 @@ class _$_DayList implements _DayList {
 abstract class _DayList implements DayList {
   const factory _DayList(
       {required final String day,
-      required final List<Place> place}) = _$_DayList;
+      required final List<Place> place}) = _$DayListImpl;
 
-  factory _DayList.fromJson(Map<String, dynamic> json) = _$_DayList.fromJson;
+  factory _DayList.fromJson(Map<String, dynamic> json) = _$DayListImpl.fromJson;
 
   @override
   String get day;
@@ -166,6 +167,6 @@ abstract class _DayList implements DayList {
   List<Place> get place;
   @override
   @JsonKey(ignore: true)
-  _$$_DayListCopyWith<_$_DayList> get copyWith =>
+  _$$DayListImplCopyWith<_$DayListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,14 +6,15 @@ part of 'vo_detail_diary.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Account _$$_AccountFromJson(Map<String, dynamic> json) => _$_Account(
-      id: json['id'] as int,
+_$AccountImpl _$$AccountImplFromJson(Map<String, dynamic> json) =>
+    _$AccountImpl(
+      id: (json['id'] as num).toInt(),
       nickname: json['nickname'] as String,
       photoUrl: json['photoUrl'] as String?,
       accountRole: json['accountRole'] as String,
     );
 
-Map<String, dynamic> _$$_AccountToJson(_$_Account instance) =>
+Map<String, dynamic> _$$AccountImplToJson(_$AccountImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'nickname': instance.nickname,
@@ -21,8 +22,9 @@ Map<String, dynamic> _$$_AccountToJson(_$_Account instance) =>
       'accountRole': instance.accountRole,
     };
 
-_$_Itinerary _$$_ItineraryFromJson(Map<String, dynamic> json) => _$_Itinerary(
-      itineraryId: json['itineraryId'] as int,
+_$ItineraryImpl _$$ItineraryImplFromJson(Map<String, dynamic> json) =>
+    _$ItineraryImpl(
+      itineraryId: (json['itineraryId'] as num).toInt(),
       type: (json['type'] as List<dynamic>?)?.map((e) => e as String).toList(),
       style:
           (json['style'] as List<dynamic>?)?.map((e) => e as String).toList(),
@@ -40,7 +42,7 @@ _$_Itinerary _$$_ItineraryFromJson(Map<String, dynamic> json) => _$_Itinerary(
       ),
     );
 
-Map<String, dynamic> _$$_ItineraryToJson(_$_Itinerary instance) =>
+Map<String, dynamic> _$$ItineraryImplToJson(_$ItineraryImpl instance) =>
     <String, dynamic>{
       'itineraryId': instance.itineraryId,
       'type': instance.type,
@@ -53,8 +55,8 @@ Map<String, dynamic> _$$_ItineraryToJson(_$_Itinerary instance) =>
       'place': instance.place,
     };
 
-_$_Place _$$_PlaceFromJson(Map<String, dynamic> json) => _$_Place(
-      day: json['day'] as int,
+_$PlaceImpl _$$PlaceImplFromJson(Map<String, dynamic> json) => _$PlaceImpl(
+      day: (json['day'] as num).toInt(),
       startTime: json['startTime'] as String,
       endTime: json['endTime'] as String,
       placeType: json['placeType'] as String,
@@ -67,10 +69,11 @@ _$_Place _$$_PlaceFromJson(Map<String, dynamic> json) => _$_Place(
       review: json['review'] == null
           ? null
           : Review.fromJson(json['review'] as Map<String, dynamic>),
-      placeId: json['placeId'] as int,
+      placeId: (json['placeId'] as num).toInt(),
     );
 
-Map<String, dynamic> _$$_PlaceToJson(_$_Place instance) => <String, dynamic>{
+Map<String, dynamic> _$$PlaceImplToJson(_$PlaceImpl instance) =>
+    <String, dynamic>{
       'day': instance.day,
       'startTime': instance.startTime,
       'endTime': instance.endTime,
@@ -85,8 +88,8 @@ Map<String, dynamic> _$$_PlaceToJson(_$_Place instance) => <String, dynamic>{
       'placeId': instance.placeId,
     };
 
-_$_Review _$$_ReviewFromJson(Map<String, dynamic> json) => _$_Review(
-      reviewId: json['reviewId'] as int?,
+_$ReviewImpl _$$ReviewImplFromJson(Map<String, dynamic> json) => _$ReviewImpl(
+      reviewId: (json['reviewId'] as num?)?.toInt(),
       rating: (json['rating'] as num?)?.toDouble(),
       content: json['content'] as String?,
       reviewPhotoURLList: (json['reviewPhotoURLList'] as List<dynamic>?)
@@ -94,7 +97,8 @@ _$_Review _$$_ReviewFromJson(Map<String, dynamic> json) => _$_Review(
           .toList(),
     );
 
-Map<String, dynamic> _$$_ReviewToJson(_$_Review instance) => <String, dynamic>{
+Map<String, dynamic> _$$ReviewImplToJson(_$ReviewImpl instance) =>
+    <String, dynamic>{
       'reviewId': instance.reviewId,
       'rating': instance.rating,
       'content': instance.content,

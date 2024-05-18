@@ -6,15 +6,15 @@ part of 'open_api_image.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_OpenApiImage _$$_OpenApiImageFromJson(Map<String, dynamic> json) =>
-    _$_OpenApiImage(
+_$OpenApiImageImpl _$$OpenApiImageImplFromJson(Map<String, dynamic> json) =>
+    _$OpenApiImageImpl(
       contentId: json['contentId'] as String,
       numOfRows: json['numOfRows'] as String,
       pageNo: json['pageNo'] as String,
       mobileOS: json['mobileOS'] as String,
     );
 
-Map<String, dynamic> _$$_OpenApiImageToJson(_$_OpenApiImage instance) =>
+Map<String, dynamic> _$$OpenApiImageImplToJson(_$OpenApiImageImpl instance) =>
     <String, dynamic>{
       'contentId': instance.contentId,
       'numOfRows': instance.numOfRows,

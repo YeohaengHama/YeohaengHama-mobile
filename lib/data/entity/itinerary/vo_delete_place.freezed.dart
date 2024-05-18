@@ -12,7 +12,7 @@ part of 'vo_delete_place.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 DeletePlace _$DeletePlaceFromJson(Map<String, dynamic> json) {
   return _DeletePlace.fromJson(json);
@@ -74,22 +74,22 @@ class _$DeletePlaceCopyWithImpl<$Res, $Val extends DeletePlace>
 }
 
 /// @nodoc
-abstract class _$$_DeletePlaceCopyWith<$Res>
+abstract class _$$DeletePlaceImplCopyWith<$Res>
     implements $DeletePlaceCopyWith<$Res> {
-  factory _$$_DeletePlaceCopyWith(
-          _$_DeletePlace value, $Res Function(_$_DeletePlace) then) =
-      __$$_DeletePlaceCopyWithImpl<$Res>;
+  factory _$$DeletePlaceImplCopyWith(
+          _$DeletePlaceImpl value, $Res Function(_$DeletePlaceImpl) then) =
+      __$$DeletePlaceImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int accountId, String placeNum, String contentTypeId});
 }
 
 /// @nodoc
-class __$$_DeletePlaceCopyWithImpl<$Res>
-    extends _$DeletePlaceCopyWithImpl<$Res, _$_DeletePlace>
-    implements _$$_DeletePlaceCopyWith<$Res> {
-  __$$_DeletePlaceCopyWithImpl(
-      _$_DeletePlace _value, $Res Function(_$_DeletePlace) _then)
+class __$$DeletePlaceImplCopyWithImpl<$Res>
+    extends _$DeletePlaceCopyWithImpl<$Res, _$DeletePlaceImpl>
+    implements _$$DeletePlaceImplCopyWith<$Res> {
+  __$$DeletePlaceImplCopyWithImpl(
+      _$DeletePlaceImpl _value, $Res Function(_$DeletePlaceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_DeletePlaceCopyWithImpl<$Res>
     Object? placeNum = null,
     Object? contentTypeId = null,
   }) {
-    return _then(_$_DeletePlace(
+    return _then(_$DeletePlaceImpl(
       accountId: null == accountId
           ? _value.accountId
           : accountId // ignore: cast_nullable_to_non_nullable
@@ -118,14 +118,14 @@ class __$$_DeletePlaceCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_DeletePlace implements _DeletePlace {
-  const _$_DeletePlace(
+class _$DeletePlaceImpl implements _DeletePlace {
+  const _$DeletePlaceImpl(
       {required this.accountId,
       required this.placeNum,
       required this.contentTypeId});
 
-  factory _$_DeletePlace.fromJson(Map<String, dynamic> json) =>
-      _$$_DeletePlaceFromJson(json);
+  factory _$DeletePlaceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DeletePlaceImplFromJson(json);
 
   @override
   final int accountId;
@@ -140,10 +140,10 @@ class _$_DeletePlace implements _DeletePlace {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeletePlace &&
+            other is _$DeletePlaceImpl &&
             (identical(other.accountId, accountId) ||
                 other.accountId == accountId) &&
             (identical(other.placeNum, placeNum) ||
@@ -160,12 +160,12 @@ class _$_DeletePlace implements _DeletePlace {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeletePlaceCopyWith<_$_DeletePlace> get copyWith =>
-      __$$_DeletePlaceCopyWithImpl<_$_DeletePlace>(this, _$identity);
+  _$$DeletePlaceImplCopyWith<_$DeletePlaceImpl> get copyWith =>
+      __$$DeletePlaceImplCopyWithImpl<_$DeletePlaceImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DeletePlaceToJson(
+    return _$$DeletePlaceImplToJson(
       this,
     );
   }
@@ -175,10 +175,10 @@ abstract class _DeletePlace implements DeletePlace {
   const factory _DeletePlace(
       {required final int accountId,
       required final String placeNum,
-      required final String contentTypeId}) = _$_DeletePlace;
+      required final String contentTypeId}) = _$DeletePlaceImpl;
 
   factory _DeletePlace.fromJson(Map<String, dynamic> json) =
-      _$_DeletePlace.fromJson;
+      _$DeletePlaceImpl.fromJson;
 
   @override
   int get accountId;
@@ -188,6 +188,6 @@ abstract class _DeletePlace implements DeletePlace {
   String get contentTypeId;
   @override
   @JsonKey(ignore: true)
-  _$$_DeletePlaceCopyWith<_$_DeletePlace> get copyWith =>
+  _$$DeletePlaceImplCopyWith<_$DeletePlaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

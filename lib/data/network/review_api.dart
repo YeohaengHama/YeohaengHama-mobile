@@ -10,6 +10,7 @@ import '../../screen/client/main/search/provider/is_loading_provider.dart';
 import '../entity/review/a_review_post.dart';
 
 import '../entity/review/a_review_show_all.dart';
+import '../entity/review/vo_check_write_review.dart';
 import '../entity/review/vo_review_show_account_.dart';
 import '../memory/review/review_show_account.dart';
 import '../memory/user_provider.dart';
@@ -58,7 +59,37 @@ class ReviewApi {
       throw e;
     }
   }
+  Future<bool> checkWriteReivew(
+      CheckWriteReview checkWriteReivew, WidgetRef ref) async {
+    try {
+      final accountNotifier = ref.read(accountProvider.notifier);
 
+      final response = await _dio.post(
+          '$baseUrl/review/check?accountId=${accountNotifier.state!.id}',
+          data: {
+            'accountId': accountNotifier.state!.id,
+            'contentId': checkWriteReivew.placeNum,
+            'contentTypeId': checkWriteReivew.contentTypeId
+          });
+
+      if (response.statusCode == 200) {
+        final responseData = response.data as Map<String, dynamic>;
+        final bool isWrited = responseData['data'] ?? false;
+        return isWrited;
+      } else if (response.statusCode == 401) {
+        print('error');
+        return false;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    } finally {
+      // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
+    }
+  }
   Future<void> showAllReview( int id, int type, WidgetRef ref) async {
     final url = '$baseUrl/review/showAll';
 

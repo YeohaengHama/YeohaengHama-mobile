@@ -12,7 +12,7 @@ part of 'vo_pick_place.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PickPlace {
@@ -99,10 +99,11 @@ class _$PickPlaceCopyWithImpl<$Res, $Val extends PickPlace>
 }
 
 /// @nodoc
-abstract class _$$_PickPlaceCopyWith<$Res> implements $PickPlaceCopyWith<$Res> {
-  factory _$$_PickPlaceCopyWith(
-          _$_PickPlace value, $Res Function(_$_PickPlace) then) =
-      __$$_PickPlaceCopyWithImpl<$Res>;
+abstract class _$$PickPlaceImplCopyWith<$Res>
+    implements $PickPlaceCopyWith<$Res> {
+  factory _$$PickPlaceImplCopyWith(
+          _$PickPlaceImpl value, $Res Function(_$PickPlaceImpl) then) =
+      __$$PickPlaceImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -116,11 +117,11 @@ abstract class _$$_PickPlaceCopyWith<$Res> implements $PickPlaceCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PickPlaceCopyWithImpl<$Res>
-    extends _$PickPlaceCopyWithImpl<$Res, _$_PickPlace>
-    implements _$$_PickPlaceCopyWith<$Res> {
-  __$$_PickPlaceCopyWithImpl(
-      _$_PickPlace _value, $Res Function(_$_PickPlace) _then)
+class __$$PickPlaceImplCopyWithImpl<$Res>
+    extends _$PickPlaceCopyWithImpl<$Res, _$PickPlaceImpl>
+    implements _$$PickPlaceImplCopyWith<$Res> {
+  __$$PickPlaceImplCopyWithImpl(
+      _$PickPlaceImpl _value, $Res Function(_$PickPlaceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -134,7 +135,7 @@ class __$$_PickPlaceCopyWithImpl<$Res>
     Object? mapy = null,
     Object? firstImage = null,
   }) {
-    return _then(_$_PickPlace(
+    return _then(_$PickPlaceImpl(
       contentId: null == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
@@ -169,8 +170,8 @@ class __$$_PickPlaceCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PickPlace implements _PickPlace {
-  const _$_PickPlace(
+class _$PickPlaceImpl implements _PickPlace {
+  const _$PickPlaceImpl(
       {required this.contentId,
       required this.contentTypeId,
       required this.title,
@@ -200,10 +201,10 @@ class _$_PickPlace implements _PickPlace {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PickPlace &&
+            other is _$PickPlaceImpl &&
             (identical(other.contentId, contentId) ||
                 other.contentId == contentId) &&
             (identical(other.contentTypeId, contentTypeId) ||
@@ -223,8 +224,8 @@ class _$_PickPlace implements _PickPlace {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PickPlaceCopyWith<_$_PickPlace> get copyWith =>
-      __$$_PickPlaceCopyWithImpl<_$_PickPlace>(this, _$identity);
+  _$$PickPlaceImplCopyWith<_$PickPlaceImpl> get copyWith =>
+      __$$PickPlaceImplCopyWithImpl<_$PickPlaceImpl>(this, _$identity);
 }
 
 abstract class _PickPlace implements PickPlace {
@@ -235,7 +236,7 @@ abstract class _PickPlace implements PickPlace {
       required final String addr1,
       required final String mapx,
       required final String mapy,
-      required final String firstImage}) = _$_PickPlace;
+      required final String firstImage}) = _$PickPlaceImpl;
 
   @override
   String get contentId;
@@ -253,6 +254,6 @@ abstract class _PickPlace implements PickPlace {
   String get firstImage;
   @override
   @JsonKey(ignore: true)
-  _$$_PickPlaceCopyWith<_$_PickPlace> get copyWith =>
+  _$$PickPlaceImplCopyWith<_$PickPlaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

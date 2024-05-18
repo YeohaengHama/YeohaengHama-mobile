@@ -6,9 +6,9 @@ part of 'a_add_pick_place.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AddPickPlace _$$_AddPickPlaceFromJson(Map<String, dynamic> json) =>
-    _$_AddPickPlace(
-      day: json['day'] as int,
+_$AddPickPlaceImpl _$$AddPickPlaceImplFromJson(Map<String, dynamic> json) =>
+    _$AddPickPlaceImpl(
+      day: (json['day'] as num).toInt(),
       placeType: json['placeType'] as String,
       placeNum: json['placeNum'] as String,
       placeName: json['placeName'] as String?,
@@ -20,7 +20,7 @@ _$_AddPickPlace _$$_AddPickPlaceFromJson(Map<String, dynamic> json) =>
       memo: json['memo'] as String?,
     );
 
-Map<String, dynamic> _$$_AddPickPlaceToJson(_$_AddPickPlace instance) =>
+Map<String, dynamic> _$$AddPickPlaceImplToJson(_$AddPickPlaceImpl instance) =>
     <String, dynamic>{
       'day': instance.day,
       'placeType': instance.placeType,

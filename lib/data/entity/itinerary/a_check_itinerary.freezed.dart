@@ -12,7 +12,7 @@ part of 'a_check_itinerary.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 CheckItinerary _$CheckItineraryFromJson(Map<String, dynamic> json) {
   return _CheckItinerary.fromJson(json);
@@ -134,11 +134,11 @@ class _$CheckItineraryCopyWithImpl<$Res, $Val extends CheckItinerary>
 }
 
 /// @nodoc
-abstract class _$$_CheckItineraryCopyWith<$Res>
+abstract class _$$CheckItineraryImplCopyWith<$Res>
     implements $CheckItineraryCopyWith<$Res> {
-  factory _$$_CheckItineraryCopyWith(
-          _$_CheckItinerary value, $Res Function(_$_CheckItinerary) then) =
-      __$$_CheckItineraryCopyWithImpl<$Res>;
+  factory _$$CheckItineraryImplCopyWith(_$CheckItineraryImpl value,
+          $Res Function(_$CheckItineraryImpl) then) =
+      __$$CheckItineraryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -156,11 +156,11 @@ abstract class _$$_CheckItineraryCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_CheckItineraryCopyWithImpl<$Res>
-    extends _$CheckItineraryCopyWithImpl<$Res, _$_CheckItinerary>
-    implements _$$_CheckItineraryCopyWith<$Res> {
-  __$$_CheckItineraryCopyWithImpl(
-      _$_CheckItinerary _value, $Res Function(_$_CheckItinerary) _then)
+class __$$CheckItineraryImplCopyWithImpl<$Res>
+    extends _$CheckItineraryCopyWithImpl<$Res, _$CheckItineraryImpl>
+    implements _$$CheckItineraryImplCopyWith<$Res> {
+  __$$CheckItineraryImplCopyWithImpl(
+      _$CheckItineraryImpl _value, $Res Function(_$CheckItineraryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -178,7 +178,7 @@ class __$$_CheckItineraryCopyWithImpl<$Res>
     Object? account = null,
     Object? placesByDay = null,
   }) {
-    return _then(_$_CheckItinerary(
+    return _then(_$CheckItineraryImpl(
       itineraryId: null == itineraryId
           ? _value.itineraryId
           : itineraryId // ignore: cast_nullable_to_non_nullable
@@ -229,8 +229,8 @@ class __$$_CheckItineraryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CheckItinerary implements _CheckItinerary {
-  const _$_CheckItinerary(
+class _$CheckItineraryImpl implements _CheckItinerary {
+  const _$CheckItineraryImpl(
       {required this.itineraryId,
       required final List<String>? type,
       required final List<String>? style,
@@ -246,8 +246,8 @@ class _$_CheckItinerary implements _CheckItinerary {
         _style = style,
         _placesByDay = placesByDay;
 
-  factory _$_CheckItinerary.fromJson(Map<String, dynamic> json) =>
-      _$$_CheckItineraryFromJson(json);
+  factory _$CheckItineraryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CheckItineraryImplFromJson(json);
 
   @override
   final String itineraryId;
@@ -267,7 +267,7 @@ class _$_CheckItinerary implements _CheckItinerary {
     final value = _style;
     if (value == null) return null;
     if (_style is EqualUnmodifiableListView) return _style;
-
+    // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
@@ -302,10 +302,10 @@ class _$_CheckItinerary implements _CheckItinerary {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CheckItinerary &&
+            other is _$CheckItineraryImpl &&
             (identical(other.itineraryId, itineraryId) ||
                 other.itineraryId == itineraryId) &&
             const DeepCollectionEquality().equals(other._type, _type) &&
@@ -342,12 +342,13 @@ class _$_CheckItinerary implements _CheckItinerary {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CheckItineraryCopyWith<_$_CheckItinerary> get copyWith =>
-      __$$_CheckItineraryCopyWithImpl<_$_CheckItinerary>(this, _$identity);
+  _$$CheckItineraryImplCopyWith<_$CheckItineraryImpl> get copyWith =>
+      __$$CheckItineraryImplCopyWithImpl<_$CheckItineraryImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CheckItineraryToJson(
+    return _$$CheckItineraryImplToJson(
       this,
     );
   }
@@ -366,10 +367,10 @@ abstract class _CheckItinerary implements CheckItinerary {
           required final String endDate,
           required final Account account,
           required final Map<String, List<PlaceByDay>> placesByDay}) =
-      _$_CheckItinerary;
+      _$CheckItineraryImpl;
 
   factory _CheckItinerary.fromJson(Map<String, dynamic> json) =
-      _$_CheckItinerary.fromJson;
+      _$CheckItineraryImpl.fromJson;
 
   @override
   String get itineraryId;
@@ -395,6 +396,6 @@ abstract class _CheckItinerary implements CheckItinerary {
   Map<String, List<PlaceByDay>> get placesByDay;
   @override
   @JsonKey(ignore: true)
-  _$$_CheckItineraryCopyWith<_$_CheckItinerary> get copyWith =>
+  _$$CheckItineraryImplCopyWith<_$CheckItineraryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

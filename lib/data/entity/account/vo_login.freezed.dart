@@ -12,7 +12,7 @@ part of 'vo_login.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 LogIn _$LogInFromJson(Map<String, dynamic> json) {
   return _logIn.fromJson(json);
@@ -66,18 +66,21 @@ class _$LogInCopyWithImpl<$Res, $Val extends LogIn>
 }
 
 /// @nodoc
-abstract class _$$_logInCopyWith<$Res> implements $LogInCopyWith<$Res> {
-  factory _$$_logInCopyWith(_$_logIn value, $Res Function(_$_logIn) then) =
-      __$$_logInCopyWithImpl<$Res>;
+abstract class _$$logInImplCopyWith<$Res> implements $LogInCopyWith<$Res> {
+  factory _$$logInImplCopyWith(
+          _$logInImpl value, $Res Function(_$logInImpl) then) =
+      __$$logInImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String email, String pw});
 }
 
 /// @nodoc
-class __$$_logInCopyWithImpl<$Res> extends _$LogInCopyWithImpl<$Res, _$_logIn>
-    implements _$$_logInCopyWith<$Res> {
-  __$$_logInCopyWithImpl(_$_logIn _value, $Res Function(_$_logIn) _then)
+class __$$logInImplCopyWithImpl<$Res>
+    extends _$LogInCopyWithImpl<$Res, _$logInImpl>
+    implements _$$logInImplCopyWith<$Res> {
+  __$$logInImplCopyWithImpl(
+      _$logInImpl _value, $Res Function(_$logInImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -86,7 +89,7 @@ class __$$_logInCopyWithImpl<$Res> extends _$LogInCopyWithImpl<$Res, _$_logIn>
     Object? email = null,
     Object? pw = null,
   }) {
-    return _then(_$_logIn(
+    return _then(_$logInImpl(
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -101,11 +104,11 @@ class __$$_logInCopyWithImpl<$Res> extends _$LogInCopyWithImpl<$Res, _$_logIn>
 
 /// @nodoc
 @JsonSerializable()
-class _$_logIn implements _logIn {
-  const _$_logIn({required this.email, required this.pw});
+class _$logInImpl implements _logIn {
+  const _$logInImpl({required this.email, required this.pw});
 
-  factory _$_logIn.fromJson(Map<String, dynamic> json) =>
-      _$$_logInFromJson(json);
+  factory _$logInImpl.fromJson(Map<String, dynamic> json) =>
+      _$$logInImplFromJson(json);
 
   @override
   final String email;
@@ -118,10 +121,10 @@ class _$_logIn implements _logIn {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_logIn &&
+            other is _$logInImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.pw, pw) || other.pw == pw));
   }
@@ -133,12 +136,12 @@ class _$_logIn implements _logIn {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_logInCopyWith<_$_logIn> get copyWith =>
-      __$$_logInCopyWithImpl<_$_logIn>(this, _$identity);
+  _$$logInImplCopyWith<_$logInImpl> get copyWith =>
+      __$$logInImplCopyWithImpl<_$logInImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_logInToJson(
+    return _$$logInImplToJson(
       this,
     );
   }
@@ -146,9 +149,9 @@ class _$_logIn implements _logIn {
 
 abstract class _logIn implements LogIn {
   const factory _logIn(
-      {required final String email, required final String pw}) = _$_logIn;
+      {required final String email, required final String pw}) = _$logInImpl;
 
-  factory _logIn.fromJson(Map<String, dynamic> json) = _$_logIn.fromJson;
+  factory _logIn.fromJson(Map<String, dynamic> json) = _$logInImpl.fromJson;
 
   @override
   String get email;
@@ -156,6 +159,6 @@ abstract class _logIn implements LogIn {
   String get pw;
   @override
   @JsonKey(ignore: true)
-  _$$_logInCopyWith<_$_logIn> get copyWith =>
+  _$$logInImplCopyWith<_$logInImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

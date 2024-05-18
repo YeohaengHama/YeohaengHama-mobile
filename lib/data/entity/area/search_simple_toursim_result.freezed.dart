@@ -12,7 +12,7 @@ part of 'search_simple_toursim_result.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$SearchSimpleTourismResult {
@@ -94,12 +94,12 @@ class _$SearchSimpleTourismResultCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_SearchSimpleTourismResultCopyWith<$Res>
+abstract class _$$SearchSimpleTourismResultImplCopyWith<$Res>
     implements $SearchSimpleTourismResultCopyWith<$Res> {
-  factory _$$_SearchSimpleTourismResultCopyWith(
-          _$_SearchSimpleTourismResult value,
-          $Res Function(_$_SearchSimpleTourismResult) then) =
-      __$$_SearchSimpleTourismResultCopyWithImpl<$Res>;
+  factory _$$SearchSimpleTourismResultImplCopyWith(
+          _$SearchSimpleTourismResultImpl value,
+          $Res Function(_$SearchSimpleTourismResultImpl) then) =
+      __$$SearchSimpleTourismResultImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -112,13 +112,13 @@ abstract class _$$_SearchSimpleTourismResultCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchSimpleTourismResultCopyWithImpl<$Res>
+class __$$SearchSimpleTourismResultImplCopyWithImpl<$Res>
     extends _$SearchSimpleTourismResultCopyWithImpl<$Res,
-        _$_SearchSimpleTourismResult>
-    implements _$$_SearchSimpleTourismResultCopyWith<$Res> {
-  __$$_SearchSimpleTourismResultCopyWithImpl(
-      _$_SearchSimpleTourismResult _value,
-      $Res Function(_$_SearchSimpleTourismResult) _then)
+        _$SearchSimpleTourismResultImpl>
+    implements _$$SearchSimpleTourismResultImplCopyWith<$Res> {
+  __$$SearchSimpleTourismResultImplCopyWithImpl(
+      _$SearchSimpleTourismResultImpl _value,
+      $Res Function(_$SearchSimpleTourismResultImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -131,7 +131,7 @@ class __$$_SearchSimpleTourismResultCopyWithImpl<$Res>
     Object? addr2 = null,
     Object? firstimage = null,
   }) {
-    return _then(_$_SearchSimpleTourismResult(
+    return _then(_$SearchSimpleTourismResultImpl(
       contentTypeId: null == contentTypeId
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
@@ -162,8 +162,8 @@ class __$$_SearchSimpleTourismResultCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SearchSimpleTourismResult implements _SearchSimpleTourismResult {
-  const _$_SearchSimpleTourismResult(
+class _$SearchSimpleTourismResultImpl implements _SearchSimpleTourismResult {
+  const _$SearchSimpleTourismResultImpl(
       {required this.contentTypeId,
       required this.contentId,
       required this.title,
@@ -190,10 +190,10 @@ class _$_SearchSimpleTourismResult implements _SearchSimpleTourismResult {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchSimpleTourismResult &&
+            other is _$SearchSimpleTourismResultImpl &&
             (identical(other.contentTypeId, contentTypeId) ||
                 other.contentTypeId == contentTypeId) &&
             (identical(other.contentId, contentId) ||
@@ -212,9 +212,9 @@ class _$_SearchSimpleTourismResult implements _SearchSimpleTourismResult {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchSimpleTourismResultCopyWith<_$_SearchSimpleTourismResult>
-      get copyWith => __$$_SearchSimpleTourismResultCopyWithImpl<
-          _$_SearchSimpleTourismResult>(this, _$identity);
+  _$$SearchSimpleTourismResultImplCopyWith<_$SearchSimpleTourismResultImpl>
+      get copyWith => __$$SearchSimpleTourismResultImplCopyWithImpl<
+          _$SearchSimpleTourismResultImpl>(this, _$identity);
 }
 
 abstract class _SearchSimpleTourismResult implements SearchSimpleTourismResult {
@@ -224,7 +224,7 @@ abstract class _SearchSimpleTourismResult implements SearchSimpleTourismResult {
       required final String title,
       required final String addr1,
       required final String addr2,
-      required final String firstimage}) = _$_SearchSimpleTourismResult;
+      required final String firstimage}) = _$SearchSimpleTourismResultImpl;
 
   @override
   String get contentTypeId;
@@ -240,6 +240,6 @@ abstract class _SearchSimpleTourismResult implements SearchSimpleTourismResult {
   String get firstimage;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchSimpleTourismResultCopyWith<_$_SearchSimpleTourismResult>
+  _$$SearchSimpleTourismResultImplCopyWith<_$SearchSimpleTourismResultImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'a_add_pick_place.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AddPickPlace _$AddPickPlaceFromJson(Map<String, dynamic> json) {
   return _AddPickPlace.fromJson(json);
@@ -126,11 +126,11 @@ class _$AddPickPlaceCopyWithImpl<$Res, $Val extends AddPickPlace>
 }
 
 /// @nodoc
-abstract class _$$_AddPickPlaceCopyWith<$Res>
+abstract class _$$AddPickPlaceImplCopyWith<$Res>
     implements $AddPickPlaceCopyWith<$Res> {
-  factory _$$_AddPickPlaceCopyWith(
-          _$_AddPickPlace value, $Res Function(_$_AddPickPlace) then) =
-      __$$_AddPickPlaceCopyWithImpl<$Res>;
+  factory _$$AddPickPlaceImplCopyWith(
+          _$AddPickPlaceImpl value, $Res Function(_$AddPickPlaceImpl) then) =
+      __$$AddPickPlaceImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -147,11 +147,11 @@ abstract class _$$_AddPickPlaceCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AddPickPlaceCopyWithImpl<$Res>
-    extends _$AddPickPlaceCopyWithImpl<$Res, _$_AddPickPlace>
-    implements _$$_AddPickPlaceCopyWith<$Res> {
-  __$$_AddPickPlaceCopyWithImpl(
-      _$_AddPickPlace _value, $Res Function(_$_AddPickPlace) _then)
+class __$$AddPickPlaceImplCopyWithImpl<$Res>
+    extends _$AddPickPlaceCopyWithImpl<$Res, _$AddPickPlaceImpl>
+    implements _$$AddPickPlaceImplCopyWith<$Res> {
+  __$$AddPickPlaceImplCopyWithImpl(
+      _$AddPickPlaceImpl _value, $Res Function(_$AddPickPlaceImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -168,7 +168,7 @@ class __$$_AddPickPlaceCopyWithImpl<$Res>
     Object? endTime = freezed,
     Object? memo = freezed,
   }) {
-    return _then(_$_AddPickPlace(
+    return _then(_$AddPickPlaceImpl(
       day: null == day
           ? _value.day
           : day // ignore: cast_nullable_to_non_nullable
@@ -215,8 +215,8 @@ class __$$_AddPickPlaceCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AddPickPlace implements _AddPickPlace {
-  const _$_AddPickPlace(
+class _$AddPickPlaceImpl implements _AddPickPlace {
+  const _$AddPickPlaceImpl(
       {required this.day,
       required this.placeType,
       required this.placeNum,
@@ -228,8 +228,8 @@ class _$_AddPickPlace implements _AddPickPlace {
       this.endTime,
       this.memo});
 
-  factory _$_AddPickPlace.fromJson(Map<String, dynamic> json) =>
-      _$$_AddPickPlaceFromJson(json);
+  factory _$AddPickPlaceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AddPickPlaceImplFromJson(json);
 
   @override
   final int day;
@@ -258,10 +258,10 @@ class _$_AddPickPlace implements _AddPickPlace {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AddPickPlace &&
+            other is _$AddPickPlaceImpl &&
             (identical(other.day, day) || other.day == day) &&
             (identical(other.placeType, placeType) ||
                 other.placeType == placeType) &&
@@ -286,12 +286,12 @@ class _$_AddPickPlace implements _AddPickPlace {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AddPickPlaceCopyWith<_$_AddPickPlace> get copyWith =>
-      __$$_AddPickPlaceCopyWithImpl<_$_AddPickPlace>(this, _$identity);
+  _$$AddPickPlaceImplCopyWith<_$AddPickPlaceImpl> get copyWith =>
+      __$$AddPickPlaceImplCopyWithImpl<_$AddPickPlaceImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AddPickPlaceToJson(
+    return _$$AddPickPlaceImplToJson(
       this,
     );
   }
@@ -308,10 +308,10 @@ abstract class _AddPickPlace implements AddPickPlace {
       required final double mapy,
       final String? startTime,
       final String? endTime,
-      final String? memo}) = _$_AddPickPlace;
+      final String? memo}) = _$AddPickPlaceImpl;
 
   factory _AddPickPlace.fromJson(Map<String, dynamic> json) =
-      _$_AddPickPlace.fromJson;
+      _$AddPickPlaceImpl.fromJson;
 
   @override
   int get day;
@@ -335,6 +335,6 @@ abstract class _AddPickPlace implements AddPickPlace {
   String? get memo;
   @override
   @JsonKey(ignore: true)
-  _$$_AddPickPlaceCopyWith<_$_AddPickPlace> get copyWith =>
+  _$$AddPickPlaceImplCopyWith<_$AddPickPlaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -6,14 +6,14 @@ part of 'vo_delete_place.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DeletePlace _$$_DeletePlaceFromJson(Map<String, dynamic> json) =>
-    _$_DeletePlace(
-      accountId: json['accountId'] as int,
+_$DeletePlaceImpl _$$DeletePlaceImplFromJson(Map<String, dynamic> json) =>
+    _$DeletePlaceImpl(
+      accountId: (json['accountId'] as num).toInt(),
       placeNum: json['placeNum'] as String,
       contentTypeId: json['contentTypeId'] as String,
     );
 
-Map<String, dynamic> _$$_DeletePlaceToJson(_$_DeletePlace instance) =>
+Map<String, dynamic> _$$DeletePlaceImplToJson(_$DeletePlaceImpl instance) =>
     <String, dynamic>{
       'accountId': instance.accountId,
       'placeNum': instance.placeNum,

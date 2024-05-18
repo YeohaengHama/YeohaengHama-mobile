@@ -12,7 +12,7 @@ part of 'all_itinerary.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 AllItinerary _$AllItineraryFromJson(Map<String, dynamic> json) {
   return _AllItinerary.fromJson(json);
@@ -87,11 +87,11 @@ class _$AllItineraryCopyWithImpl<$Res, $Val extends AllItinerary>
 }
 
 /// @nodoc
-abstract class _$$_AllItineraryCopyWith<$Res>
+abstract class _$$AllItineraryImplCopyWith<$Res>
     implements $AllItineraryCopyWith<$Res> {
-  factory _$$_AllItineraryCopyWith(
-          _$_AllItinerary value, $Res Function(_$_AllItinerary) then) =
-      __$$_AllItineraryCopyWithImpl<$Res>;
+  factory _$$AllItineraryImplCopyWith(
+          _$AllItineraryImpl value, $Res Function(_$AllItineraryImpl) then) =
+      __$$AllItineraryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -99,11 +99,11 @@ abstract class _$$_AllItineraryCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AllItineraryCopyWithImpl<$Res>
-    extends _$AllItineraryCopyWithImpl<$Res, _$_AllItinerary>
-    implements _$$_AllItineraryCopyWith<$Res> {
-  __$$_AllItineraryCopyWithImpl(
-      _$_AllItinerary _value, $Res Function(_$_AllItinerary) _then)
+class __$$AllItineraryImplCopyWithImpl<$Res>
+    extends _$AllItineraryCopyWithImpl<$Res, _$AllItineraryImpl>
+    implements _$$AllItineraryImplCopyWith<$Res> {
+  __$$AllItineraryImplCopyWithImpl(
+      _$AllItineraryImpl _value, $Res Function(_$AllItineraryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -115,7 +115,7 @@ class __$$_AllItineraryCopyWithImpl<$Res>
     Object? name = null,
     Object? placeLength = null,
   }) {
-    return _then(_$_AllItinerary(
+    return _then(_$AllItineraryImpl(
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -142,16 +142,16 @@ class __$$_AllItineraryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AllItinerary implements _AllItinerary {
-  const _$_AllItinerary(
+class _$AllItineraryImpl implements _AllItinerary {
+  const _$AllItineraryImpl(
       {required this.startDate,
       required this.endDate,
       required this.id,
       required this.name,
       required this.placeLength});
 
-  factory _$_AllItinerary.fromJson(Map<String, dynamic> json) =>
-      _$$_AllItineraryFromJson(json);
+  factory _$AllItineraryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AllItineraryImplFromJson(json);
 
   @override
   final String startDate;
@@ -170,10 +170,10 @@ class _$_AllItinerary implements _AllItinerary {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AllItinerary &&
+            other is _$AllItineraryImpl &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
@@ -191,12 +191,12 @@ class _$_AllItinerary implements _AllItinerary {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AllItineraryCopyWith<_$_AllItinerary> get copyWith =>
-      __$$_AllItineraryCopyWithImpl<_$_AllItinerary>(this, _$identity);
+  _$$AllItineraryImplCopyWith<_$AllItineraryImpl> get copyWith =>
+      __$$AllItineraryImplCopyWithImpl<_$AllItineraryImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AllItineraryToJson(
+    return _$$AllItineraryImplToJson(
       this,
     );
   }
@@ -208,10 +208,10 @@ abstract class _AllItinerary implements AllItinerary {
       required final String endDate,
       required final int id,
       required final String name,
-      required final int placeLength}) = _$_AllItinerary;
+      required final int placeLength}) = _$AllItineraryImpl;
 
   factory _AllItinerary.fromJson(Map<String, dynamic> json) =
-      _$_AllItinerary.fromJson;
+      _$AllItineraryImpl.fromJson;
 
   @override
   String get startDate;
@@ -225,6 +225,6 @@ abstract class _AllItinerary implements AllItinerary {
   int get placeLength;
   @override
   @JsonKey(ignore: true)
-  _$$_AllItineraryCopyWith<_$_AllItinerary> get copyWith =>
+  _$$AllItineraryImplCopyWith<_$AllItineraryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'vo_search_diary_area.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 SearchDiaryArea _$SearchDiaryAreaFromJson(Map<String, dynamic> json) {
   return _SearchDiaryArea.fromJson(json);
@@ -122,11 +122,11 @@ class _$SearchDiaryAreaCopyWithImpl<$Res, $Val extends SearchDiaryArea>
 }
 
 /// @nodoc
-abstract class _$$_SearchDiaryAreaCopyWith<$Res>
+abstract class _$$SearchDiaryAreaImplCopyWith<$Res>
     implements $SearchDiaryAreaCopyWith<$Res> {
-  factory _$$_SearchDiaryAreaCopyWith(
-          _$_SearchDiaryArea value, $Res Function(_$_SearchDiaryArea) then) =
-      __$$_SearchDiaryAreaCopyWithImpl<$Res>;
+  factory _$$SearchDiaryAreaImplCopyWith(_$SearchDiaryAreaImpl value,
+          $Res Function(_$SearchDiaryAreaImpl) then) =
+      __$$SearchDiaryAreaImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -144,11 +144,11 @@ abstract class _$$_SearchDiaryAreaCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchDiaryAreaCopyWithImpl<$Res>
-    extends _$SearchDiaryAreaCopyWithImpl<$Res, _$_SearchDiaryArea>
-    implements _$$_SearchDiaryAreaCopyWith<$Res> {
-  __$$_SearchDiaryAreaCopyWithImpl(
-      _$_SearchDiaryArea _value, $Res Function(_$_SearchDiaryArea) _then)
+class __$$SearchDiaryAreaImplCopyWithImpl<$Res>
+    extends _$SearchDiaryAreaCopyWithImpl<$Res, _$SearchDiaryAreaImpl>
+    implements _$$SearchDiaryAreaImplCopyWith<$Res> {
+  __$$SearchDiaryAreaImplCopyWithImpl(
+      _$SearchDiaryAreaImpl _value, $Res Function(_$SearchDiaryAreaImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -163,7 +163,7 @@ class __$$_SearchDiaryAreaCopyWithImpl<$Res>
     Object? photos = null,
     Object? accountShowDTO = null,
   }) {
-    return _then(_$_SearchDiaryArea(
+    return _then(_$SearchDiaryAreaImpl(
       diary: null == diary
           ? _value.diary
           : diary // ignore: cast_nullable_to_non_nullable
@@ -202,8 +202,8 @@ class __$$_SearchDiaryAreaCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SearchDiaryArea implements _SearchDiaryArea {
-  const _$_SearchDiaryArea(
+class _$SearchDiaryAreaImpl implements _SearchDiaryArea {
+  const _$SearchDiaryAreaImpl(
       {required this.diary,
       required this.itinerary,
       required final List<String> tag,
@@ -215,8 +215,8 @@ class _$_SearchDiaryArea implements _SearchDiaryArea {
       : _tag = tag,
         _photos = photos;
 
-  factory _$_SearchDiaryArea.fromJson(Map<String, dynamic> json) =>
-      _$$_SearchDiaryAreaFromJson(json);
+  factory _$SearchDiaryAreaImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SearchDiaryAreaImplFromJson(json);
 
   @override
   final int diary;
@@ -253,10 +253,10 @@ class _$_SearchDiaryArea implements _SearchDiaryArea {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchDiaryArea &&
+            other is _$SearchDiaryAreaImpl &&
             (identical(other.diary, diary) || other.diary == diary) &&
             (identical(other.itinerary, itinerary) ||
                 other.itinerary == itinerary) &&
@@ -285,12 +285,13 @@ class _$_SearchDiaryArea implements _SearchDiaryArea {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchDiaryAreaCopyWith<_$_SearchDiaryArea> get copyWith =>
-      __$$_SearchDiaryAreaCopyWithImpl<_$_SearchDiaryArea>(this, _$identity);
+  _$$SearchDiaryAreaImplCopyWith<_$SearchDiaryAreaImpl> get copyWith =>
+      __$$SearchDiaryAreaImplCopyWithImpl<_$SearchDiaryAreaImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SearchDiaryAreaToJson(
+    return _$$SearchDiaryAreaImplToJson(
       this,
     );
   }
@@ -305,10 +306,10 @@ abstract class _SearchDiaryArea implements SearchDiaryArea {
       required final String title,
       required final String content,
       required final List<String> photos,
-      required final AccountShowDTO accountShowDTO}) = _$_SearchDiaryArea;
+      required final AccountShowDTO accountShowDTO}) = _$SearchDiaryAreaImpl;
 
   factory _SearchDiaryArea.fromJson(Map<String, dynamic> json) =
-      _$_SearchDiaryArea.fromJson;
+      _$SearchDiaryAreaImpl.fromJson;
 
   @override
   int get diary;
@@ -328,7 +329,7 @@ abstract class _SearchDiaryArea implements SearchDiaryArea {
   AccountShowDTO get accountShowDTO;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchDiaryAreaCopyWith<_$_SearchDiaryArea> get copyWith =>
+  _$$SearchDiaryAreaImplCopyWith<_$SearchDiaryAreaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -392,22 +393,22 @@ class _$AccountShowDTOCopyWithImpl<$Res, $Val extends AccountShowDTO>
 }
 
 /// @nodoc
-abstract class _$$_AccountShowDTOCopyWith<$Res>
+abstract class _$$AccountShowDTOImplCopyWith<$Res>
     implements $AccountShowDTOCopyWith<$Res> {
-  factory _$$_AccountShowDTOCopyWith(
-          _$_AccountShowDTO value, $Res Function(_$_AccountShowDTO) then) =
-      __$$_AccountShowDTOCopyWithImpl<$Res>;
+  factory _$$AccountShowDTOImplCopyWith(_$AccountShowDTOImpl value,
+          $Res Function(_$AccountShowDTOImpl) then) =
+      __$$AccountShowDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, String nickname, String? photoUrl});
 }
 
 /// @nodoc
-class __$$_AccountShowDTOCopyWithImpl<$Res>
-    extends _$AccountShowDTOCopyWithImpl<$Res, _$_AccountShowDTO>
-    implements _$$_AccountShowDTOCopyWith<$Res> {
-  __$$_AccountShowDTOCopyWithImpl(
-      _$_AccountShowDTO _value, $Res Function(_$_AccountShowDTO) _then)
+class __$$AccountShowDTOImplCopyWithImpl<$Res>
+    extends _$AccountShowDTOCopyWithImpl<$Res, _$AccountShowDTOImpl>
+    implements _$$AccountShowDTOImplCopyWith<$Res> {
+  __$$AccountShowDTOImplCopyWithImpl(
+      _$AccountShowDTOImpl _value, $Res Function(_$AccountShowDTOImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -417,7 +418,7 @@ class __$$_AccountShowDTOCopyWithImpl<$Res>
     Object? nickname = null,
     Object? photoUrl = freezed,
   }) {
-    return _then(_$_AccountShowDTO(
+    return _then(_$AccountShowDTOImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -436,12 +437,12 @@ class __$$_AccountShowDTOCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AccountShowDTO implements _AccountShowDTO {
-  const _$_AccountShowDTO(
+class _$AccountShowDTOImpl implements _AccountShowDTO {
+  const _$AccountShowDTOImpl(
       {required this.id, required this.nickname, this.photoUrl});
 
-  factory _$_AccountShowDTO.fromJson(Map<String, dynamic> json) =>
-      _$$_AccountShowDTOFromJson(json);
+  factory _$AccountShowDTOImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AccountShowDTOImplFromJson(json);
 
   @override
   final int id;
@@ -456,10 +457,10 @@ class _$_AccountShowDTO implements _AccountShowDTO {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AccountShowDTO &&
+            other is _$AccountShowDTOImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
@@ -474,12 +475,13 @@ class _$_AccountShowDTO implements _AccountShowDTO {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AccountShowDTOCopyWith<_$_AccountShowDTO> get copyWith =>
-      __$$_AccountShowDTOCopyWithImpl<_$_AccountShowDTO>(this, _$identity);
+  _$$AccountShowDTOImplCopyWith<_$AccountShowDTOImpl> get copyWith =>
+      __$$AccountShowDTOImplCopyWithImpl<_$AccountShowDTOImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AccountShowDTOToJson(
+    return _$$AccountShowDTOImplToJson(
       this,
     );
   }
@@ -489,10 +491,10 @@ abstract class _AccountShowDTO implements AccountShowDTO {
   const factory _AccountShowDTO(
       {required final int id,
       required final String nickname,
-      final String? photoUrl}) = _$_AccountShowDTO;
+      final String? photoUrl}) = _$AccountShowDTOImpl;
 
   factory _AccountShowDTO.fromJson(Map<String, dynamic> json) =
-      _$_AccountShowDTO.fromJson;
+      _$AccountShowDTOImpl.fromJson;
 
   @override
   int get id;
@@ -502,6 +504,6 @@ abstract class _AccountShowDTO implements AccountShowDTO {
   String? get photoUrl;
   @override
   @JsonKey(ignore: true)
-  _$$_AccountShowDTOCopyWith<_$_AccountShowDTO> get copyWith =>
+  _$$AccountShowDTOImplCopyWith<_$AccountShowDTOImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
