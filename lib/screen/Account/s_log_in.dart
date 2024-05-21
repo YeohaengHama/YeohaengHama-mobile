@@ -1,5 +1,4 @@
 import 'package:fast_app_base/screen/Account/s_join.dart';
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
@@ -8,7 +7,6 @@ import '../../common/common.dart';
 import '../../data/entity/account/vo_login.dart';
 import '../../data/network/user_api.dart';
 import 'w_text_widget.dart'; // TextWidget 파일이 있는 경로에 맞게 수정
-
 
 final userApiProvider = Provider<UserApi>((ref) => UserApi());
 
@@ -41,169 +39,180 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            backgroundColor: AppColors.mainPurple,
-            content: Text('일치하는 회원정보를 찾을 수 없습니다.'),),
+          backgroundColor: AppColors.mainPurple,
+          content: Text('일치하는 회원정보를 찾을 수 없습니다.'),
+        ),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 140),
-            Image.asset(
-              '$basePath/icon/hama.png',
-              width: 200,
-              height: 100,
-            ),
-            '여행하마'.text.bold.size(24).color(AppColors.mainPurple).make(),
-            const SizedBox(height: 30),
-            TextWidget(
-              textController: idController,
-              addText: '아이디 입력',
-              onChanged: (value) {},
-            ),
-            const SizedBox(
-              width: loginWidth,
-              child: Divider(
-                color: AppColors.forthGrey,
-                thickness: 0.5,
-              ),
-            ),
-            SizedBox(
-              height: loginHeight,
-              width: loginWidth,
-              child: Stack(
-                children: [
-                  Positioned(
-                    right: 10,
-                    top: (loginHeight - 30) / 2,
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          obscureText = !obscureText;
-                        });
-                      },
-                      child: Icon(
-                        obscureText ? Icons.visibility_off : Icons.visibility,
-                        color: AppColors.forthGrey,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                const SizedBox(height: 140),
+                Image.asset(
+                  '$basePath/icon/hama.png',
+                  width: 200,
+                  height: 100,
+                ),
+                '여행하마'.text.bold.size(24).color(AppColors.mainPurple).make(),
+                const SizedBox(height: 30),
+                TextWidget(
+                  textController: idController,
+                  addText: '아이디 입력',
+                  onChanged: (value) {},
+                ),
+                const SizedBox(
+                  width: loginWidth,
+                  child: Divider(
+                    color: AppColors.forthGrey,
+                    thickness: 0.5,
+                  ),
+                ),
+                SizedBox(
+                  height: loginHeight,
+                  width: loginWidth,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        right: 10,
+                        top: (loginHeight - 30) / 2,
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              obscureText = !obscureText;
+                            });
+                          },
+                          child: Icon(
+                            obscureText ? Icons.visibility_off : Icons.visibility,
+                            color: AppColors.forthGrey,
+                          ),
+                        ),
+                      ),
+                      TextWidget(
+                        textController: pwController,
+                        addText: '비밀번호 입력',
+                        boxWidth: 200,
+                        pw: obscureText,
+                        onChanged: (value) {},
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Tap(
+                  onTap: () {
+                    _loginUser();
+                  },
+                  child: Container(
+                    height: loginHeight + 8,
+                    width: loginWidth,
+                    decoration: BoxDecoration(
+                      color: AppColors.mainPurple,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        '로그인',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                  TextWidget(
-                    textController: pwController,
-                    addText: '비밀번호 입력',
-                    boxWidth: 200,
-                    pw: obscureText,
-                    onChanged: (value) {},
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Tap(
-              onTap: (){_loginUser();},
-              child: Container(
-                height: loginHeight + 8,
-                width: loginWidth,
-                decoration: BoxDecoration(
-                  color: AppColors.mainPurple,
-                  borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    '로그인',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: 'Pretendard',
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            SizedBox(
-              width: loginWidth,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const JoinScreen()),
-                          );
-
-                        },
-                        child: ('회원가입')
-                            .text
-                            .color(AppColors.forthGrey)
-                            .size(12)
-                            .make(),
+                const SizedBox(height: 10),
+                SizedBox(
+                  width: loginWidth,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const JoinScreen(),
+                                ),
+                              );
+                            },
+                            child: ('회원가입')
+                                .text
+                                .color(AppColors.forthGrey)
+                                .size(12)
+                                .make(),
+                          ),
+                        ),
                       ),
-                    ),
+                      const Text(
+                        '|',
+                        style: TextStyle(
+                          color: AppColors.forthGrey,
+                          fontSize: 12,
+                        ),
+                      ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: ('비밀번호 찾기')
+                              .text
+                              .color(AppColors.forthGrey)
+                              .size(12)
+                              .make(),
+                        ),
+                      ),
+                    ],
                   ),
-                  const Text(
-                    '|',
-                    style: TextStyle(
-                      color: AppColors.forthGrey,
-                      fontSize: 12,
-                    ),
-                  ),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: ('비밀번호 찾기')
-                          .text
-                          .color(AppColors.forthGrey)
-                          .size(12)
-                          .make(),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 40),
-            SizedBox(
-              width: loginWidth,
-              child: Row(
-                children: [
-                  Expanded(
-                      child: Tap(
-                        onTap: () { _launchURL(); },
+                ),
+                const SizedBox(height: 40),
+                SizedBox(
+                  width: loginWidth,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Tap(
+                          onTap: () {
+                            _launchURL();
+                          },
+                          child: Image.asset(
+                            '$basePath/icon/kakao.png',
+                            width: 75,
+                            height: 75,
+                          ),
+                        ),
+                      ),
+                      Expanded(
                         child: Image.asset(
-                          '$basePath/icon/kakao.png',
+                          '$basePath/icon/google.png',
                           width: 75,
                           height: 75,
                         ),
-                      )),
-                  Expanded(
-                      child: Image.asset(
-                        '$basePath/icon/google.png',
-                        width: 75,
-                        height: 75,
-                      )),
-                  Expanded(
-                      child: Image.asset(
-                        '$basePath/icon/apple.png',
-                        width: 75,
-                        height: 75,
-                      )),
-                ],
-              ),
-            )
-          ],
+                      ),
+                      Expanded(
+                        child: Image.asset(
+                          '$basePath/icon/apple.png',
+                          width: 75,
+                          height: 75,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -211,7 +220,8 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
 }
 
 void _launchURL() async {
-  final Uri url = Uri.parse('https://kauth.kakao.com/oauth/authorize?client_id=a9d1711e66ed62d5be76957294ab0a9f&redirect_uri=https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api/kakao/login&response_type=code');
+  final Uri url = Uri.parse(
+      'https://kauth.kakao.com/oauth/authorize?client_id=a9d1711e66ed62d5be76957294ab0a9f&redirect_uri=https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api/kakao/login&response_type=code');
   if (await canLaunchUrl(url)) {
     await launchUrl(url);
   } else {

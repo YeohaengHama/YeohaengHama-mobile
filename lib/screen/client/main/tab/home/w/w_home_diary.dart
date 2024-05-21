@@ -62,7 +62,7 @@ class HomeDiaryWidget extends ConsumerWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.only(
                         topLeft: i == 0 ? Radius.circular(10) : Radius.zero,
-                        topRight: i == diary.photos.length - 1 ? Radius.circular(10) : Radius.zero,
+                        topRight: i == min(3, diary.photos.length) - 1 ? Radius.circular(10) : Radius.zero,
                       ),
                       child: CachedNetworkImage(
                         imageUrl: diary.photos[i]!,

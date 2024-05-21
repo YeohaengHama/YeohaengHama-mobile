@@ -14,7 +14,7 @@ class NoDiaryList extends StatelessWidget {
       children: [
         Container(
             width: maxWidthSize,
-            color: Colors.white,
+
             child: RichText(
               textAlign: TextAlign.center,
               text: const TextSpan(
