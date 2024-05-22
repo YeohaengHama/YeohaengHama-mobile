@@ -22,6 +22,10 @@ class PickPlaceNotifier extends StateNotifier<List<PickPlace>> {
     }
 
   }
+
+  void addAllPickPlace(List<PickPlace> pickPlace){
+    state = pickPlace;
+  }
   void addPickPlace(PickPlace newPickPlace) {
     final isDuplicate = state.any((pickPlace) => pickPlace.contentId == newPickPlace.contentId);
     // 이미 있다면 더 이상 진행하지 않고 종료합니다.

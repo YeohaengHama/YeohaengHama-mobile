@@ -30,6 +30,7 @@ mixin _$AddPickPlace {
   String? get startTime => throw _privateConstructorUsedError;
   String? get endTime => throw _privateConstructorUsedError;
   String? get memo => throw _privateConstructorUsedError;
+  int? get placeId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,7 +54,8 @@ abstract class $AddPickPlaceCopyWith<$Res> {
       double mapy,
       String? startTime,
       String? endTime,
-      String? memo});
+      String? memo,
+      int? placeId});
 }
 
 /// @nodoc
@@ -79,6 +81,7 @@ class _$AddPickPlaceCopyWithImpl<$Res, $Val extends AddPickPlace>
     Object? startTime = freezed,
     Object? endTime = freezed,
     Object? memo = freezed,
+    Object? placeId = freezed,
   }) {
     return _then(_value.copyWith(
       day: null == day
@@ -121,6 +124,10 @@ class _$AddPickPlaceCopyWithImpl<$Res, $Val extends AddPickPlace>
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String?,
+      placeId: freezed == placeId
+          ? _value.placeId
+          : placeId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -143,7 +150,8 @@ abstract class _$$AddPickPlaceImplCopyWith<$Res>
       double mapy,
       String? startTime,
       String? endTime,
-      String? memo});
+      String? memo,
+      int? placeId});
 }
 
 /// @nodoc
@@ -167,6 +175,7 @@ class __$$AddPickPlaceImplCopyWithImpl<$Res>
     Object? startTime = freezed,
     Object? endTime = freezed,
     Object? memo = freezed,
+    Object? placeId = freezed,
   }) {
     return _then(_$AddPickPlaceImpl(
       day: null == day
@@ -209,6 +218,10 @@ class __$$AddPickPlaceImplCopyWithImpl<$Res>
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String?,
+      placeId: freezed == placeId
+          ? _value.placeId
+          : placeId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -226,7 +239,8 @@ class _$AddPickPlaceImpl implements _AddPickPlace {
       required this.mapy,
       this.startTime,
       this.endTime,
-      this.memo});
+      this.memo,
+      this.placeId});
 
   factory _$AddPickPlaceImpl.fromJson(Map<String, dynamic> json) =>
       _$$AddPickPlaceImplFromJson(json);
@@ -251,10 +265,12 @@ class _$AddPickPlaceImpl implements _AddPickPlace {
   final String? endTime;
   @override
   final String? memo;
+  @override
+  final int? placeId;
 
   @override
   String toString() {
-    return 'AddPickPlace(day: $day, placeType: $placeType, placeNum: $placeNum, placeName: $placeName, addr1: $addr1, mapx: $mapx, mapy: $mapy, startTime: $startTime, endTime: $endTime, memo: $memo)';
+    return 'AddPickPlace(day: $day, placeType: $placeType, placeNum: $placeNum, placeName: $placeName, addr1: $addr1, mapx: $mapx, mapy: $mapy, startTime: $startTime, endTime: $endTime, memo: $memo, placeId: $placeId)';
   }
 
   @override
@@ -275,13 +291,14 @@ class _$AddPickPlaceImpl implements _AddPickPlace {
             (identical(other.startTime, startTime) ||
                 other.startTime == startTime) &&
             (identical(other.endTime, endTime) || other.endTime == endTime) &&
-            (identical(other.memo, memo) || other.memo == memo));
+            (identical(other.memo, memo) || other.memo == memo) &&
+            (identical(other.placeId, placeId) || other.placeId == placeId));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, day, placeType, placeNum,
-      placeName, addr1, mapx, mapy, startTime, endTime, memo);
+      placeName, addr1, mapx, mapy, startTime, endTime, memo, placeId);
 
   @JsonKey(ignore: true)
   @override
@@ -308,7 +325,8 @@ abstract class _AddPickPlace implements AddPickPlace {
       required final double mapy,
       final String? startTime,
       final String? endTime,
-      final String? memo}) = _$AddPickPlaceImpl;
+      final String? memo,
+      final int? placeId}) = _$AddPickPlaceImpl;
 
   factory _AddPickPlace.fromJson(Map<String, dynamic> json) =
       _$AddPickPlaceImpl.fromJson;
@@ -333,6 +351,8 @@ abstract class _AddPickPlace implements AddPickPlace {
   String? get endTime;
   @override
   String? get memo;
+  @override
+  int? get placeId;
   @override
   @JsonKey(ignore: true)
   _$$AddPickPlaceImplCopyWith<_$AddPickPlaceImpl> get copyWith =>

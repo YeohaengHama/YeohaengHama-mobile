@@ -8,6 +8,7 @@ import 'package:fast_app_base/screen/client/post_detail/review/w_simple_review.d
 import 'package:fast_app_base/screen/client/post_detail/w_icons.dart';
 import 'package:fast_app_base/screen/client/post_detail/w_image_scroll_view.dart';
 import 'package:fast_app_base/screen/client/post_detail/w_info_map.dart';
+import 'package:fast_app_base/screen/client/post_detail/w_map_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
@@ -118,19 +119,25 @@ class _postDetailScreenState extends ConsumerState<postDetailScreen> {
               scrolledUnderElevation: 0,
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Nav.push(MapDetailScreen(
+                      searchDetailResult: searchDetailResult,
+                      searchImageResult: searchImageResult,
+                      searchReviewResult: searchReviewResult,
+                    ));
+                  },
                   icon: const Icon(
                     Icons.map_outlined,
                     color: Colors.black,
                   ),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.more_horiz,
-                    color: Colors.black,
-                  ),
-                ),
+                // IconButton(
+                //   onPressed: () {},
+                //   icon: const Icon(
+                //     Icons.more_horiz,
+                //     color: Colors.black,
+                //   ),
+                // ),
               ],
               flexibleSpace: FlexibleSpaceBar(
                 centerTitle: true,
