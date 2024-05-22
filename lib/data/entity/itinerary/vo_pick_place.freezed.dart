@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+PickPlace _$PickPlaceFromJson(Map<String, dynamic> json) {
+  return _PickPlace.fromJson(json);
+}
+
 /// @nodoc
 mixin _$PickPlace {
   String get contentId => throw _privateConstructorUsedError;
@@ -24,6 +28,7 @@ mixin _$PickPlace {
   String get mapy => throw _privateConstructorUsedError;
   String get firstImage => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $PickPlaceCopyWith<PickPlace> get copyWith =>
       throw _privateConstructorUsedError;
@@ -169,7 +174,7 @@ class __$$PickPlaceImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$PickPlaceImpl implements _PickPlace {
   const _$PickPlaceImpl(
       {required this.contentId,
@@ -179,6 +184,9 @@ class _$PickPlaceImpl implements _PickPlace {
       required this.mapx,
       required this.mapy,
       required this.firstImage});
+
+  factory _$PickPlaceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PickPlaceImplFromJson(json);
 
   @override
   final String contentId;
@@ -217,6 +225,7 @@ class _$PickPlaceImpl implements _PickPlace {
                 other.firstImage == firstImage));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, contentId, contentTypeId, title,
       addr1, mapx, mapy, firstImage);
@@ -226,6 +235,13 @@ class _$PickPlaceImpl implements _PickPlace {
   @pragma('vm:prefer-inline')
   _$$PickPlaceImplCopyWith<_$PickPlaceImpl> get copyWith =>
       __$$PickPlaceImplCopyWithImpl<_$PickPlaceImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PickPlaceImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _PickPlace implements PickPlace {
@@ -237,6 +253,9 @@ abstract class _PickPlace implements PickPlace {
       required final String mapx,
       required final String mapy,
       required final String firstImage}) = _$PickPlaceImpl;
+
+  factory _PickPlace.fromJson(Map<String, dynamic> json) =
+      _$PickPlaceImpl.fromJson;
 
   @override
   String get contentId;

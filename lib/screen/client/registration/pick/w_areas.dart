@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_height_and_width.dart';
+import 'package:fast_app_base/data/network/budget_api.dart';
 import 'package:fast_app_base/entity/area/vo_area.dart';
 
 
@@ -64,7 +65,6 @@ class AreasWidget extends ConsumerWidget {
               );
               await itineraryApi.postJoinItinerary(newItinerary, ref);
               itineraryProviderNotifier.addItinerary(newItinerary);
-
               await itineraryApi.showSavePlace(ref);
 
               // 현재까지 쌓인 창을 pop하고 MainScreen으로 이동

@@ -16,7 +16,8 @@ class AddPickPlace with _$AddPickPlace {
     required double mapy,
     String? startTime,
     String? endTime,
-    String? memo
+    String? memo,
+    int? placeId
 
 
 }

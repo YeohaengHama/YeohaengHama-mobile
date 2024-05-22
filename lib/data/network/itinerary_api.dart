@@ -7,6 +7,7 @@ import 'package:fast_app_base/data/entity/itinerary/vo_itinerary.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_pick_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_save_place.dart';
 import 'package:fast_app_base/data/entity/menu/all_itinerary.dart';
+import 'package:fast_app_base/data/network/budget_api.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/s_schedule.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nav_hooks/nav.dart';
@@ -55,7 +56,7 @@ class ItineraryApi {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = response.data['data'];
-        print('일정 생성 완료');
+        final budgetApi = BudgetApi();
 
         final CreateItinerary createItinerary = CreateItinerary(
           id: responseData['id'] as int,
@@ -70,6 +71,8 @@ class ItineraryApi {
         );
 
         ref.read(itineraryCreatedProvider.notifier).addItinerary(createItinerary);
+        budgetApi.createBudget(createItinerary.id, ref);
+        print('일정 생성 완료');
         getItinerary(ref, createItinerary.id.toString());
         print(createItinerary);
 
@@ -252,6 +255,16 @@ class ItineraryApi {
         '$baseUrl/account/${accountNotifier.state!.id}',
       );
       if (response.statusCode == 200) {
+        // final jsonData = response.data['data'] as List<dynamic>;
+        //
+        // final pickPlace = jsonData
+        //       .map((json) =>
+        //     PickPlace.fromJson(json as Map<String, dynamic>))
+        //       .toList();
+        // ref.read(showPickPlaceApiResponseProvider.notifier)
+        //     .addOrRemovePickPlace(pickPlace);
+        //
+        // }
         Map<String, dynamic> responseData = response.data; // 응답 데이터를 Map으로 가져옴
         List<dynamic> dataList = responseData['data'] as List<dynamic>;
         for (var data in dataList) {
@@ -282,8 +295,7 @@ class ItineraryApi {
               mapx: mapx,
               mapy: mapy,
               firstImage: firstImage);
-          ref
-              .read(showPickPlaceApiResponseProvider.notifier)
+          ref.read(showPickPlaceApiResponseProvider.notifier)
               .addOrRemovePickPlace(pickPlace);
         }
         return response;
@@ -490,6 +502,7 @@ class ItineraryApi {
           'mapx': addPickPlace.mapx.toString(),
           'mapy': addPickPlace.mapy.toString(),
           'memo': addPickPlace.memo,
+
         };
 
         response = await _dio.post(
@@ -526,6 +539,7 @@ class ItineraryApi {
       throw e;
     }
   }
+
   Future<Response?> PostAddNewEachPickPlace(WidgetRef ref) async {
     try {
       final itineraryCheckNotifier = ref.read(itineraryCheckProvider.notifier);
@@ -562,6 +576,51 @@ class ItineraryApi {
     } catch (e) {
       ref.read(addPickEachPlaceProvider.notifier).clearPlace();
       return null; // 여기에 null 반환
+    }
+  }
+
+  Future<Response> PostDeleteEachPickPlace(WidgetRef ref, int placeId) async {
+    try {
+      final itineraryCheckNotifier = ref.read(itineraryCheckProvider.notifier);
+      Response response;
+
+      final data = {
+        'itineraryId' : itineraryCheckNotifier.state!.itineraryId,
+        'placeId':placeId
+      };
+
+      response = await _dio.post(
+        '$baseUrl/itinerary/deletePlace',
+        data: data,
+      );
+
+
+      if (response.statusCode == 200) {
+        final jsonDataList = response.data['data'] as List<dynamic>;
+        final List<AddPickPlace> addPickPlaces = jsonDataList
+            .map((json) => AddPickPlace.fromJson(json))
+            .toList();
+
+        if (addPickPlaces.isEmpty) {
+          ref.read(addPickEachPlaceProvider.notifier).clearPlace();
+          print('장소 목록이 비어있습니다.');
+        } else {
+          ref.read(addPickEachPlaceProvider.notifier).setAddPickPlace(addPickPlaces);
+          print('장소 삭제 성공: $addPickPlaces');
+        }
+
+        print('일정에 장소 삭제 완료');
+        return response;
+      } else if (response.statusCode == 401) {
+        print('error');
+        return response;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
     }
   }
 

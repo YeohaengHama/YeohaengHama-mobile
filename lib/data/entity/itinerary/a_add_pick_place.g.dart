@@ -18,6 +18,7 @@ _$AddPickPlaceImpl _$$AddPickPlaceImplFromJson(Map<String, dynamic> json) =>
       startTime: json['startTime'] as String?,
       endTime: json['endTime'] as String?,
       memo: json['memo'] as String?,
+      placeId: (json['placeId'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$AddPickPlaceImplToJson(_$AddPickPlaceImpl instance) =>
@@ -32,4 +33,5 @@ Map<String, dynamic> _$$AddPickPlaceImplToJson(_$AddPickPlaceImpl instance) =>
       'startTime': instance.startTime,
       'endTime': instance.endTime,
       'memo': instance.memo,
+      'placeId': instance.placeId,
     };

@@ -32,11 +32,10 @@ class PickAreaWidget extends ConsumerWidget {
         contentTypeId: pickPlace.contentTypeId
     );
     return Tap(
-      onTap: () {
-        itineraryApi.PostAddEachPickPlace(ref, addPickPlace);
-        itineraryApi.postDeletePlace(deletePlace, ref);
+      onTap: () async{
+        await itineraryApi.postDeletePlace(deletePlace, ref);
+        await itineraryApi.PostAddEachPickPlace(ref, addPickPlace);
       },
-
       child: Container(
         width: 105,
         height: 100,

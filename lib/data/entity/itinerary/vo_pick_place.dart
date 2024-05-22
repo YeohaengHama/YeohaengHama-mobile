@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'vo_pick_place.freezed.dart';
+part 'vo_pick_place.g.dart';
+
 
 @freezed
 class PickPlace with _$PickPlace {
@@ -16,5 +18,6 @@ class PickPlace with _$PickPlace {
 }
       ) = _PickPlace;
 
-
+  factory PickPlace.fromJson(Map<String, dynamic> json) =>
+      _$PickPlaceFromJson(json);
 }

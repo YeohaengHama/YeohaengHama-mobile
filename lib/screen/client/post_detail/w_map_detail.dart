@@ -66,18 +66,18 @@ class _MapDetailScreenState extends State<MapDetailScreen> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(5), // 테두리를 둥글게 처리
-                          child: CachedNetworkImage(
+                          child: widget.searchImageResult.imagesUrl != null ? CachedNetworkImage(
                             imageUrl: widget.searchImageResult.imagesUrl!.first,
                             width: 100, // 이미지의 너비
                             height: 120, // 이미지의 높이
                             fit: BoxFit.cover, // 이미지를 적절히 자르고 크기를 맞춤
-                          ),
+                          ): Image.asset('$basePath/icon/colorHama.png', width: 100,height: 120, fit: BoxFit.cover),
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             widget.searchDetailResult.title.text.bold.color(AppColors.primaryGrey).make(),
-                            SizedBox(width: 250,child: overviewText.text.color(AppColors.secondGrey).make()),
+                            SizedBox(width: 240,child: overviewText.text.maxLines(2).color(AppColors.secondGrey).make()),
                             widget.searchDetailResult.addr1.text.color(AppColors.thirdGrey).make(),
                             ReviewStar(),
   

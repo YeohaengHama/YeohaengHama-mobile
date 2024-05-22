@@ -1,3 +1,4 @@
+import 'package:fast_app_base/data/entity/budget/vo_category.dart';
 import 'package:fast_app_base/entity/area/vo_area.dart';
 import 'package:fast_app_base/entity/area/vo_restaurants.dart';
 import 'package:fast_app_base/entity/area/vo_review.dart';
@@ -6,6 +7,8 @@ import 'package:fast_app_base/entity/diary/vo_diary.dart';
 import 'package:fast_app_base/entity/schedule/vo_schedule.dart';
 import 'package:fast_app_base/entity/tag/vo_who_tag.dart';
 import 'package:fast_app_base/entity/user/vo_user.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 import 'area/vo_tourism.dart';
 
@@ -129,7 +132,15 @@ final restaurant9 = Restaurant(9,'해피스토리', '부산', [picSum(694)],"'�
 
 final schedule1 = Schedule(days: [DateTime.now().add(const Duration(days: 3)),
   DateTime.now().add(const Duration(days: 5)),], area: hamaArea7, pickTourism: [tourism3,tourism4,tourism5] ,pickRestaurant:[restaurant2,restaurant3,restaurant4],pickMyArea: [tourism3,restaurant2,tourism4,restaurant3,tourism5,restaurant4]);
+final category1 = CategoryIcon(icon: Icons.home, category: '숙소');
+final category2 = CategoryIcon(icon: Icons.airplanemode_active_rounded, category: '항공');
+final category3 = CategoryIcon(icon: Icons.directions_car, category: '항공');
+final category4 = CategoryIcon(icon: Icons.confirmation_num, category: '관광');
+final category5 = CategoryIcon(icon: Icons.restaurant, category: '식비');
+final category6 = CategoryIcon(icon: Icons.shopping_bag, category: '쇼핑');
+final category7 = CategoryIcon(icon: Icons.category, category: '기타');
 
+final categoryList = [category1,category2,category3,category4,category5,category6,category7];
 final areaList = [hamaArea1,hamaArea2,hamaArea3,hamaArea4,hamaArea5,hamaArea6,hamaArea7,hamaArea8, hamaArea1,hamaArea2,hamaArea3,hamaArea4,hamaArea5,hamaArea6,hamaArea7,hamaArea8,];
 final diaryList=[diary1,diary2,diary3,diary1,diary2,diary3,diary1,diary2,diary3,diary1,diary2,diary3];
 final tourismList=[tourism1,tourism2,tourism3,tourism4,tourism5,tourism6,tourism7,tourism8,tourism9,tourism1,tourism2,tourism3,tourism4,tourism5,tourism6,tourism7,tourism8,tourism9];

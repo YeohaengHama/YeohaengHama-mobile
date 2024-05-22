@@ -15,6 +15,7 @@ class AccountNotifier extends StateNotifier<CurrentAccount?> {
   void addCurrentAccount(CurrentAccount currentAccount) {
     state = currentAccount;
   }
+  
   void reset() {
     state = null;
   }

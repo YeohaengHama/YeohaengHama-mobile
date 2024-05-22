@@ -2,10 +2,10 @@ import 'dart:math';
 
 
 import 'package:fast_app_base/common/theme/text_size.dart';
+import 'package:fast_app_base/data/network/budget_api.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/w_pickArea.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/w_schedule_map.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/w_show_pick_day.dart';
-import 'package:fast_app_base/screen/client/main/tab/schedule/wallet/s_wallet.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,6 +16,7 @@ import '../../../../../data/entity/itinerary/a_check_itinerary.dart';
 import '../../../../../data/memory/itinerary/show_save_place_provider.dart';
 import '../../../../../data/network/itinerary_api.dart';
 import '../../search/s_space_search.dart';
+import 'budget/s_budget.dart';
 
 class ScheduleScreen extends ConsumerStatefulWidget {
   const ScheduleScreen(this.itinerary, {super.key});
@@ -27,7 +28,7 @@ class ScheduleScreen extends ConsumerStatefulWidget {
 
 class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
   ItineraryApi itineraryApi = ItineraryApi(); // itineraryApi를 초기화하는 코드 추가
-
+  BudgetApi budgetApi = BudgetApi();
   @override
   Widget build(BuildContext context) {
     final pickPlaceList = ref.watch(showPickPlaceApiResponseProvider);
@@ -57,8 +58,9 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                   Nav.push(const SpaceSearchFragment());
                 }),
             actions: [
-              IconButton(onPressed: () {
-                Nav.push(WalletScreen(widget.itinerary));
+              IconButton(onPressed: () async{
+                await budgetApi.showBudget(int.parse(widget.itinerary.itineraryId), ref);
+                Nav.push(BudgetScreen(widget.itinerary));
               }, icon: const Icon(Icons.wallet)),
               IconButton(
                   onPressed: () {}, icon: const Icon(Icons.ios_share_outlined)),
@@ -123,21 +125,24 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                             ref.watch(showPickPlaceApiResponseProvider);
                             if (pickPlaceList.isEmpty ||
                                 index == pickPlaceList.length) {
-                              return SizedBox(
-                                width: 105,
-                                height: 100,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: AppColors.thirdGrey,
-                                      width: 0.5,
+                              return Tap(
+                                onTap: () { Nav.push(const SpaceSearchFragment()); },
+                                child: SizedBox(
+                                  width: 105,
+                                  height: 100,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: AppColors.thirdGrey,
+                                        width: 0.5,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10.0),
                                     ),
-                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: const Icon(Icons.add,
+                                        color: AppColors.forthGrey),
                                   ),
-                                  child: const Icon(Icons.add,
-                                      color: AppColors.forthGrey),
-                                ),
-                              ).pOnly(left: 10);
+                                ).pOnly(left: 10),
+                              );
                             } else {
                               final reversedIndex = pickPlaceList.length - 1 - index;
                               return SizedBox(
