@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CategoryIcon {
   IconData get icon => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
+  Color get color => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CategoryIconCopyWith<CategoryIcon> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $CategoryIconCopyWith<$Res> {
           CategoryIcon value, $Res Function(CategoryIcon) then) =
       _$CategoryIconCopyWithImpl<$Res, CategoryIcon>;
   @useResult
-  $Res call({IconData icon, String category});
+  $Res call({IconData icon, String category, Color color});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$CategoryIconCopyWithImpl<$Res, $Val extends CategoryIcon>
   $Res call({
     Object? icon = null,
     Object? category = null,
+    Object? color = null,
   }) {
     return _then(_value.copyWith(
       icon: null == icon
@@ -58,6 +60,10 @@ class _$CategoryIconCopyWithImpl<$Res, $Val extends CategoryIcon>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$CategoryIconImplCopyWith<$Res>
       __$$CategoryIconImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({IconData icon, String category});
+  $Res call({IconData icon, String category, Color color});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$CategoryIconImplCopyWithImpl<$Res>
   $Res call({
     Object? icon = null,
     Object? category = null,
+    Object? color = null,
   }) {
     return _then(_$CategoryIconImpl(
       icon: null == icon
@@ -96,6 +103,10 @@ class __$$CategoryIconImplCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
     ));
   }
 }
@@ -103,16 +114,19 @@ class __$$CategoryIconImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CategoryIconImpl implements _CategoryIcon {
-  const _$CategoryIconImpl({required this.icon, required this.category});
+  const _$CategoryIconImpl(
+      {required this.icon, required this.category, required this.color});
 
   @override
   final IconData icon;
   @override
   final String category;
+  @override
+  final Color color;
 
   @override
   String toString() {
-    return 'CategoryIcon(icon: $icon, category: $category)';
+    return 'CategoryIcon(icon: $icon, category: $category, color: $color)';
   }
 
   @override
@@ -122,11 +136,12 @@ class _$CategoryIconImpl implements _CategoryIcon {
             other is _$CategoryIconImpl &&
             (identical(other.icon, icon) || other.icon == icon) &&
             (identical(other.category, category) ||
-                other.category == category));
+                other.category == category) &&
+            (identical(other.color, color) || other.color == color));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, icon, category);
+  int get hashCode => Object.hash(runtimeType, icon, category, color);
 
   @JsonKey(ignore: true)
   @override
@@ -138,12 +153,15 @@ class _$CategoryIconImpl implements _CategoryIcon {
 abstract class _CategoryIcon implements CategoryIcon {
   const factory _CategoryIcon(
       {required final IconData icon,
-      required final String category}) = _$CategoryIconImpl;
+      required final String category,
+      required final Color color}) = _$CategoryIconImpl;
 
   @override
   IconData get icon;
   @override
   String get category;
+  @override
+  Color get color;
   @override
   @JsonKey(ignore: true)
   _$$CategoryIconImplCopyWith<_$CategoryIconImpl> get copyWith =>

@@ -4,6 +4,7 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_arrow.dart';
 import 'package:fast_app_base/common/widget/w_rounded_container.dart';
 import 'package:fast_app_base/common/widget/w_tap.dart';
+import 'package:fast_app_base/data/memory/budget/seleted_day_provider.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/budget/d_pick_pament.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/budget/s_budget_pick_area.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,10 @@ import '../../../../../../common/widget/scaffold/modal_bottom_sheet.dart';
 import '../../../../../../common/widget/scaffold/show_bottom_dialog.dart';
 import '../../../../../../data/entity/budget/vo_current_budget.dart';
 import '../../../../../../data/entity/itinerary/a_check_itinerary.dart';
+import '../../../../../../data/memory/budget/add_budget_provider.dart';
 import '../../../../../../data/memory/budget/current_budget_provider.dart';
+import '../../../../../../data/memory/itinerary/itinerary_check_provider.dart';
+import '../../../../../../data/network/budget_api.dart';
 import '../../../../../../entity/dummies.dart';
 import '../../../../dialog/d_confirm.dart';
 import '../../../search/s_space_search.dart';
@@ -35,7 +39,7 @@ class AddAmountScreen extends ConsumerStatefulWidget {
 class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
   late TextEditingController _amountController;
   late TextEditingController _contentController;
-  late TextEditingController _palceController;
+
   final titleTxtSize = 15.0;
   final contentTxtSize = 16.0;
   int selectedIndex = -1;
@@ -45,7 +49,6 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
     super.initState();
     _amountController = TextEditingController();
     _contentController = TextEditingController();
-    _palceController = TextEditingController();
   }
 
   @override
@@ -57,7 +60,13 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final budgetApi = ref.read(budgetApiProvider);
     final budget = ref.watch(currentBudgetProvider);
+
+    final addBudget = ref.watch(addBudgetProvider);
+    final addBudgetNotifier = ref.watch(addBudgetProvider.notifier);
+    final seletedDay = ref.watch(selectedDayProvider);
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -73,6 +82,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
               icon: const Icon(Icons.close),
               onPressed: () {
                 Navigator.pop(context);
+                addBudgetNotifier.removeAddBudget();
               },
             ),
           ),
@@ -105,12 +115,12 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                           textAlign: TextAlign.start,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: _amountController.text.isEmpty ? '0' : '금액입력',
+                            hintText:
+                                _amountController.text.isEmpty ? '0' : '금액입력',
                             hintStyle: TextStyle(
                               color: AppColors.forthGrey,
                             ),
                           ),
-
                         ).pSymmetric(h: contentLeftPadding),
                       ),
                     ],
@@ -137,7 +147,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                '여행준비'
+                                'Day-${addBudget.day}'
                                     .text
                                     .size(contentTxtSize)
                                     .color(AppColors.primaryGrey)
@@ -173,7 +183,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                '현금'
+                                '${addBudget.paymentMethod}'
                                     .text
                                     .bold
                                     .size(contentTxtSize)
@@ -251,6 +261,9 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                             setState(() {
                               selectedIndex = index;
                             });
+
+                            addBudgetNotifier
+                                .setCategory(categoryIcon.category);
                           },
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
@@ -258,15 +271,17 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                               Icon(
                                 categoryIcon.icon,
                                 size: 35.0,
-                                color:
-                                    isSelected ? AppColors.mainPurple : AppColors.forthGrey,
+                                color: isSelected
+                                    ? categoryIcon.color
+                                    : AppColors.forthGrey,
                               ),
                               SizedBox(height: 8.0),
                               Text(
                                 categoryIcon.category,
                                 style: TextStyle(
-                                  color:
-                                      isSelected ? AppColors.mainPurple : AppColors.forthGrey,
+                                  color: isSelected
+                                      ? categoryIcon.color
+                                      : AppColors.forthGrey,
                                 ),
                               ),
                             ],
@@ -278,7 +293,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                   width: double.maxFinite,
                   color: AppColors.outline,
                   height: 1,
-                ).pSymmetric(v:20, h:30),
+                ).pSymmetric(v: 20, h: 30),
                 '장소(선택)'
                     .text
                     .size(titleTxtSize)
@@ -286,10 +301,26 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                     .make()
                     .pSymmetric(h: contentLeftPadding),
                 Tap(
-                  onTap: (){Nav.push(BudgetPickArea());},
+                  onTap: () {
+                    Nav.push(BudgetPickArea());
+                  },
                   child: Container(
-                    child: '내용을 입력해주세요.'.text.size(contentTxtSize).bold.color(AppColors.forthGrey).make().pSymmetric(h: contentLeftPadding),
-                  ).pSymmetric(v: 15),
+                          child: addBudget.placeName != ''
+                              ? '${addBudget.placeName}'
+                                  .text
+                                  .size(contentTxtSize)
+                                  .bold
+                                  .color(AppColors.primaryGrey)
+                                  .make()
+                                  .pSymmetric(h: contentLeftPadding)
+                              : '장소를 선택 해주세요'
+                                  .text
+                                  .size(contentTxtSize)
+                                  .bold
+                                  .color(AppColors.forthGrey)
+                                  .make()
+                                  .pSymmetric(h: contentLeftPadding))
+                      .pSymmetric(v: 15),
                 ),
                 Line(
                   width: double.maxFinite,
@@ -297,13 +328,31 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                   height: 1,
                 ).pSymmetric(h: 30, v: 15),
                 Height(50),
-                RoundedContainer(
-                    radius:5,
-                    backgroundColor: AppColors.mainPurple,
-                    child: SizedBox(
-                      width: double.maxFinite,
-                        child: Center(child: '완료'.text.bold.color(AppColors.white).make()))).pSymmetric(h:30)
+                Tap(
+                  onTap: () async {
 
+                    addBudgetNotifier.setAmount(int.parse(_amountController.text.replaceAll(',', '')));
+                    addBudgetNotifier.setContent(_contentController.text);
+                    final addBudget = addBudgetNotifier.state;
+                    budgetApi.addBudget(addBudget, ref);
+                    addBudgetNotifier.removeAddBudget();
+                    Nav.pop(context);
+
+
+                  },
+                  child: RoundedContainer(
+                          radius: 5,
+                          backgroundColor: AppColors.mainPurple,
+                          child: SizedBox(
+                              width: double.maxFinite,
+                              child: Center(
+                                  child: '완료'
+                                      .text
+                                      .bold
+                                      .color(AppColors.white)
+                                      .make())))
+                      .pSymmetric(h: 30),
+                )
               ],
             ),
           ),

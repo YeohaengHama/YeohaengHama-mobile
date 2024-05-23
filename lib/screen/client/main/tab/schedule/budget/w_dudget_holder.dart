@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/data/memory/budget/add_budget_provider.dart';
 import 'package:fast_app_base/data/memory/budget/seleted_day_provider.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/budget/s_add_amount.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../common/dart/extension/day_parser.dart';
 import '../../../../../../data/entity/budget/vo_current_budget.dart';
+import '../../../../../../data/memory/itinerary/itinerary_check_provider.dart';
+import '../../../../../../entity/dummies.dart';
 
 class BudgetHolderList extends ConsumerWidget {
   final CurrentBudget budget;
@@ -18,6 +21,8 @@ class BudgetHolderList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final seletedDay = ref.read(selectedDayProvider.notifier);
+    final addBudget = ref.read(addBudgetProvider.notifier);
+    final checkItinerary = ref.read(itineraryCheckProvider);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,8 +46,9 @@ class BudgetHolderList extends ConsumerWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       seletedDay.setSelectedDay(getIndexFromDayString(title));
+                      addBudget.setDay(getIndexFromDayString(title));
+                      addBudget.setItineraryId(int.parse(checkItinerary!.itineraryId));
                       Nav.push(AddAmountScreen(budget));
-
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.white,
@@ -79,22 +85,26 @@ class BudgetHolderList extends ConsumerWidget {
                 itemCount: expenditureList.length,
                 itemBuilder: (BuildContext context, int index) {
                   final expenditure = expenditureList[index];
+                  final category = categoryList.where((item) => item.category == expenditure.category);
                   return Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Column(
+                      Icon(category.first.icon,size: 33,color: category.first.color,).pOnly(right: 10),
+                  Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          expenditure.name.text
+                          expenditure.content.text
                               .color(AppColors.primaryGrey)
                               .bold
-                              .make(),
-                          '장소명'.text.color(AppColors.secondGrey).make()
+                              .make().pSymmetric(v: 5),
+                          expenditure.place.placeName.text.color(AppColors.secondGrey).make()
                         ],
                       ),
                       spacer,
                       Column(
                         children: [
-                          '₩ ${expenditure.amount}'
+                          '₩ ${NumberFormat('#,##0', 'en_US').format(expenditure.amount)}'
                               .text
                               .color(AppColors.primaryGrey)
                               .bold
@@ -105,10 +115,14 @@ class BudgetHolderList extends ConsumerWidget {
                   ).pSymmetric(v: 10);
                 },
               ),
-              const SizedBox(height: 10),
+
               SizedBox(
+                width: double.maxFinite,
                 child: ElevatedButton(
                   onPressed: () {
+                    seletedDay.setSelectedDay(getIndexFromDayString(title));
+                    addBudget.setDay(getIndexFromDayString(title));
+                    addBudget.setItineraryId(int.parse(checkItinerary!.itineraryId));
                     Nav.push(AddAmountScreen(budget));
                   },
                   style: ElevatedButton.styleFrom(
@@ -126,7 +140,7 @@ class BudgetHolderList extends ConsumerWidget {
                         color: AppColors.primaryGrey, fontWeight: FontWeight.bold),
                   ),
                 ),
-              ),
+              ).pSymmetric(v:25),
             ],
           );
         }).toList(),

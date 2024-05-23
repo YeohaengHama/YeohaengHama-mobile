@@ -11,16 +11,17 @@ class AddBudgetNotifier extends StateNotifier<AddBudget> {
       : super(AddBudget(
     itineraryId: 0,
     place: 0,
+    placeName: '',
     day: 0,
-    paymentMethod: '',
+    paymentMethod: '현금',
     content: '',
     category: '',
     name: '',
     amount: 0,
   ));
 
-  void setItineraryId(int id) {
-    state = state.copyWith(itineraryId: id);
+  void setItineraryId(int itineraryId) {
+    state = state.copyWith(itineraryId: itineraryId);
   }
 
   void setPlace(int place) {
@@ -50,8 +51,25 @@ class AddBudgetNotifier extends StateNotifier<AddBudget> {
   void setAmount(int amount) {
     state = state.copyWith(amount: amount);
   }
+  void setPlaceName(String placeName) {
+    state = state.copyWith(placeName: placeName);
+  }
+
 
   void setAddBudget(AddBudget item) {
     state = item;
+  }
+  void removeAddBudget() {
+    state = AddBudget(
+      itineraryId: 0,
+      place: 0,
+      placeName: '',
+      day: 0,
+      paymentMethod: '현금',
+      content: '',
+      category: '',
+      name: '',
+      amount: 0,
+    );
   }
 }

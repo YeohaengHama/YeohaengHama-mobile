@@ -82,7 +82,7 @@ class _WalletScreenState extends ConsumerState<BudgetScreen> {
           ),
           textAlign: TextAlign.center,
         ),
-      ),
+      ).pOnly(bottom: 30),
     );
   }
 }

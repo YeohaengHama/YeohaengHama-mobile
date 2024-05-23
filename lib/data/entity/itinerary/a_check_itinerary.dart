@@ -22,7 +22,7 @@ class CheckItinerary with _$CheckItinerary {
                     PlaceByDay>> placesByDay, // Map<String, List<PlaceByDay>>로 수정
       }) = _CheckItinerary;
 
-// // //
+// // // //
 //       factory CheckItinerary.fromJson(Map<String, dynamic> json) =>
 // _$CheckItineraryFromJson(json);
   factory CheckItinerary.fromJson(Map<String, dynamic> json) {

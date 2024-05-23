@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class AddBudget {
   final int itineraryId;
   final int place;
+  final String placeName;
   final int day;
   final String paymentMethod;
   final String content;
@@ -14,6 +15,7 @@ class AddBudget {
   AddBudget({
     required this.itineraryId,
     required this.place,
+    required this.placeName,
     required this.day,
     required this.paymentMethod,
     required this.content,
@@ -25,6 +27,7 @@ class AddBudget {
   AddBudget copyWith({
     int? itineraryId,
     int? place,
+    String? placeName,
     int? day,
     String? paymentMethod,
     String? content,
@@ -35,6 +38,7 @@ class AddBudget {
     return AddBudget(
       itineraryId: itineraryId ?? this.itineraryId,
       place: place ?? this.place,
+      placeName: placeName ?? this.placeName,
       day: day ?? this.day,
       paymentMethod: paymentMethod ?? this.paymentMethod,
       content: content ?? this.content,

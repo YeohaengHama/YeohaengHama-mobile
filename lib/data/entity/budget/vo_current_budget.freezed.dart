@@ -215,11 +215,12 @@ Expenditure _$ExpenditureFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Expenditure {
   int get id => throw _privateConstructorUsedError;
-  int get place => throw _privateConstructorUsedError;
+  Place get place => throw _privateConstructorUsedError;
   int get day => throw _privateConstructorUsedError;
   String get paymentMethod => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
+  String get content => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   int get amount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -236,12 +237,15 @@ abstract class $ExpenditureCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int place,
+      Place place,
       int day,
       String paymentMethod,
       String category,
-      String name,
+      String content,
+      String? name,
       int amount});
+
+  $PlaceCopyWith<$Res> get place;
 }
 
 /// @nodoc
@@ -262,7 +266,8 @@ class _$ExpenditureCopyWithImpl<$Res, $Val extends Expenditure>
     Object? day = null,
     Object? paymentMethod = null,
     Object? category = null,
-    Object? name = null,
+    Object? content = null,
+    Object? name = freezed,
     Object? amount = null,
   }) {
     return _then(_value.copyWith(
@@ -273,7 +278,7 @@ class _$ExpenditureCopyWithImpl<$Res, $Val extends Expenditure>
       place: null == place
           ? _value.place
           : place // ignore: cast_nullable_to_non_nullable
-              as int,
+              as Place,
       day: null == day
           ? _value.day
           : day // ignore: cast_nullable_to_non_nullable
@@ -286,15 +291,27 @@ class _$ExpenditureCopyWithImpl<$Res, $Val extends Expenditure>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PlaceCopyWith<$Res> get place {
+    return $PlaceCopyWith<$Res>(_value.place, (value) {
+      return _then(_value.copyWith(place: value) as $Val);
+    });
   }
 }
 
@@ -308,12 +325,16 @@ abstract class _$$ExpenditureImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      int place,
+      Place place,
       int day,
       String paymentMethod,
       String category,
-      String name,
+      String content,
+      String? name,
       int amount});
+
+  @override
+  $PlaceCopyWith<$Res> get place;
 }
 
 /// @nodoc
@@ -332,7 +353,8 @@ class __$$ExpenditureImplCopyWithImpl<$Res>
     Object? day = null,
     Object? paymentMethod = null,
     Object? category = null,
-    Object? name = null,
+    Object? content = null,
+    Object? name = freezed,
     Object? amount = null,
   }) {
     return _then(_$ExpenditureImpl(
@@ -343,7 +365,7 @@ class __$$ExpenditureImplCopyWithImpl<$Res>
       place: null == place
           ? _value.place
           : place // ignore: cast_nullable_to_non_nullable
-              as int,
+              as Place,
       day: null == day
           ? _value.day
           : day // ignore: cast_nullable_to_non_nullable
@@ -356,10 +378,14 @@ class __$$ExpenditureImplCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
+      content: null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -377,7 +403,8 @@ class _$ExpenditureImpl implements _Expenditure {
       required this.day,
       required this.paymentMethod,
       required this.category,
-      required this.name,
+      required this.content,
+      this.name,
       required this.amount});
 
   factory _$ExpenditureImpl.fromJson(Map<String, dynamic> json) =>
@@ -386,7 +413,7 @@ class _$ExpenditureImpl implements _Expenditure {
   @override
   final int id;
   @override
-  final int place;
+  final Place place;
   @override
   final int day;
   @override
@@ -394,13 +421,15 @@ class _$ExpenditureImpl implements _Expenditure {
   @override
   final String category;
   @override
-  final String name;
+  final String content;
+  @override
+  final String? name;
   @override
   final int amount;
 
   @override
   String toString() {
-    return 'Expenditure(id: $id, place: $place, day: $day, paymentMethod: $paymentMethod, category: $category, name: $name, amount: $amount)';
+    return 'Expenditure(id: $id, place: $place, day: $day, paymentMethod: $paymentMethod, category: $category, content: $content, name: $name, amount: $amount)';
   }
 
   @override
@@ -415,14 +444,15 @@ class _$ExpenditureImpl implements _Expenditure {
                 other.paymentMethod == paymentMethod) &&
             (identical(other.category, category) ||
                 other.category == category) &&
+            (identical(other.content, content) || other.content == content) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.amount, amount) || other.amount == amount));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, place, day, paymentMethod, category, name, amount);
+  int get hashCode => Object.hash(runtimeType, id, place, day, paymentMethod,
+      category, content, name, amount);
 
   @JsonKey(ignore: true)
   @override
@@ -441,11 +471,12 @@ class _$ExpenditureImpl implements _Expenditure {
 abstract class _Expenditure implements Expenditure {
   factory _Expenditure(
       {required final int id,
-      required final int place,
+      required final Place place,
       required final int day,
       required final String paymentMethod,
       required final String category,
-      required final String name,
+      required final String content,
+      final String? name,
       required final int amount}) = _$ExpenditureImpl;
 
   factory _Expenditure.fromJson(Map<String, dynamic> json) =
@@ -454,7 +485,7 @@ abstract class _Expenditure implements Expenditure {
   @override
   int get id;
   @override
-  int get place;
+  Place get place;
   @override
   int get day;
   @override
@@ -462,11 +493,205 @@ abstract class _Expenditure implements Expenditure {
   @override
   String get category;
   @override
-  String get name;
+  String get content;
+  @override
+  String? get name;
   @override
   int get amount;
   @override
   @JsonKey(ignore: true)
   _$$ExpenditureImplCopyWith<_$ExpenditureImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Place _$PlaceFromJson(Map<String, dynamic> json) {
+  return _Place.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Place {
+  int get id => throw _privateConstructorUsedError;
+  String get placeName => throw _privateConstructorUsedError;
+  String get placeNum => throw _privateConstructorUsedError;
+  String get placeType => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $PlaceCopyWith<Place> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PlaceCopyWith<$Res> {
+  factory $PlaceCopyWith(Place value, $Res Function(Place) then) =
+      _$PlaceCopyWithImpl<$Res, Place>;
+  @useResult
+  $Res call({int id, String placeName, String placeNum, String placeType});
+}
+
+/// @nodoc
+class _$PlaceCopyWithImpl<$Res, $Val extends Place>
+    implements $PlaceCopyWith<$Res> {
+  _$PlaceCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? placeName = null,
+    Object? placeNum = null,
+    Object? placeType = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      placeName: null == placeName
+          ? _value.placeName
+          : placeName // ignore: cast_nullable_to_non_nullable
+              as String,
+      placeNum: null == placeNum
+          ? _value.placeNum
+          : placeNum // ignore: cast_nullable_to_non_nullable
+              as String,
+      placeType: null == placeType
+          ? _value.placeType
+          : placeType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$PlaceImplCopyWith<$Res> implements $PlaceCopyWith<$Res> {
+  factory _$$PlaceImplCopyWith(
+          _$PlaceImpl value, $Res Function(_$PlaceImpl) then) =
+      __$$PlaceImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int id, String placeName, String placeNum, String placeType});
+}
+
+/// @nodoc
+class __$$PlaceImplCopyWithImpl<$Res>
+    extends _$PlaceCopyWithImpl<$Res, _$PlaceImpl>
+    implements _$$PlaceImplCopyWith<$Res> {
+  __$$PlaceImplCopyWithImpl(
+      _$PlaceImpl _value, $Res Function(_$PlaceImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? placeName = null,
+    Object? placeNum = null,
+    Object? placeType = null,
+  }) {
+    return _then(_$PlaceImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      placeName: null == placeName
+          ? _value.placeName
+          : placeName // ignore: cast_nullable_to_non_nullable
+              as String,
+      placeNum: null == placeNum
+          ? _value.placeNum
+          : placeNum // ignore: cast_nullable_to_non_nullable
+              as String,
+      placeType: null == placeType
+          ? _value.placeType
+          : placeType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PlaceImpl implements _Place {
+  const _$PlaceImpl(
+      {required this.id,
+      required this.placeName,
+      required this.placeNum,
+      required this.placeType});
+
+  factory _$PlaceImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PlaceImplFromJson(json);
+
+  @override
+  final int id;
+  @override
+  final String placeName;
+  @override
+  final String placeNum;
+  @override
+  final String placeType;
+
+  @override
+  String toString() {
+    return 'Place(id: $id, placeName: $placeName, placeNum: $placeNum, placeType: $placeType)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PlaceImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.placeName, placeName) ||
+                other.placeName == placeName) &&
+            (identical(other.placeNum, placeNum) ||
+                other.placeNum == placeNum) &&
+            (identical(other.placeType, placeType) ||
+                other.placeType == placeType));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, placeName, placeNum, placeType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PlaceImplCopyWith<_$PlaceImpl> get copyWith =>
+      __$$PlaceImplCopyWithImpl<_$PlaceImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PlaceImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Place implements Place {
+  const factory _Place(
+      {required final int id,
+      required final String placeName,
+      required final String placeNum,
+      required final String placeType}) = _$PlaceImpl;
+
+  factory _Place.fromJson(Map<String, dynamic> json) = _$PlaceImpl.fromJson;
+
+  @override
+  int get id;
+  @override
+  String get placeName;
+  @override
+  String get placeNum;
+  @override
+  String get placeType;
+  @override
+  @JsonKey(ignore: true)
+  _$$PlaceImplCopyWith<_$PlaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
