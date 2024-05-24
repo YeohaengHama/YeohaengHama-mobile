@@ -334,7 +334,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                     addBudgetNotifier.setAmount(int.parse(_amountController.text.replaceAll(',', '')));
                     addBudgetNotifier.setContent(_contentController.text);
                     final addBudget = addBudgetNotifier.state;
-                    budgetApi.addBudget(addBudget, ref);
+                    await budgetApi.addBudget(addBudget, ref);
                     addBudgetNotifier.removeAddBudget();
                     Nav.pop(context);
 
