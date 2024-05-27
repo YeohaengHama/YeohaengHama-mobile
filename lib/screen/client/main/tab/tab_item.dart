@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'home/f_home.dart';
 import 'information /f_information.dart';
-import 'meeting/f_meeting.dart';
+import 'meeting/s_meeting.dart';
 
 enum TabItem {
   home(Icons.location_on_outlined, '홈', HomeFragment()),
