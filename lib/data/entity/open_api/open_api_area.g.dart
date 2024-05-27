@@ -12,7 +12,7 @@ _$OpenApiAreaImpl _$$OpenApiAreaImplFromJson(Map<String, dynamic> json) =>
       page: json['page'] as String? ?? '1',
       keyword: json['keyword'] as String,
       contentTypeId: json['contentTypeId'] as String,
-      mobileOS: json['mobileOS'] as String,
+      mobileOS: json['mobileOS'] as String? ?? 'IOS',
     );
 
 Map<String, dynamic> _$$OpenApiAreaImplToJson(_$OpenApiAreaImpl instance) =>

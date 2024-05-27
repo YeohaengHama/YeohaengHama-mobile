@@ -10,7 +10,7 @@ class OpenApiDetail with _$OpenApiDetail {
       required String contentTypeId,
     @Default('1')String numOfRows,
     @Default('1') String page,
-    @Default('IOS')required String mobileOS
+    @Default('IOS') String mobileOS
   }
       ) = _OpenApiDetail;
 

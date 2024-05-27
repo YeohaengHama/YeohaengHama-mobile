@@ -10,10 +10,10 @@ class OpenApiArea with _$OpenApiArea {
   const factory OpenApiArea(
   {
     required String numOfRows,
-  @Default('1') required String page,
+  @Default('1')  String page,
     required String keyword,
     required String contentTypeId,
-    required String mobileOS
+    @Default('IOS') String mobileOS
 }
       ) = _OpenApiArea;
 

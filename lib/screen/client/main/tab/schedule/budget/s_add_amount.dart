@@ -43,6 +43,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
   final titleTxtSize = 15.0;
   final contentTxtSize = 16.0;
   int selectedIndex = -1;
+  Color seletedColor = AppColors.mainPurple;
 
   @override
   void initState() {
@@ -260,6 +261,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                           onTap: () {
                             setState(() {
                               selectedIndex = index;
+                              seletedColor = categoryIcon.color;
                             });
 
                             addBudgetNotifier
@@ -336,7 +338,17 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                     final addBudget = addBudgetNotifier.state;
                     await budgetApi.addBudget(addBudget, ref);
                     addBudgetNotifier.removeAddBudget();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: seletedColor,
+                        content: Text(
+                          "지출을 추가하였습니다.",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    );
                     Nav.pop(context);
+
 
 
                   },

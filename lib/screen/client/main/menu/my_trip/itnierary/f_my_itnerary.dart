@@ -25,6 +25,7 @@ class _MyItneraryFragmentState extends ConsumerState<MyItneraryFragment> {
   void initState() {
     super.initState();
     _loadItineraryFuture = _loadItinerary();
+
   }
 
   Future<void> _loadItinerary() async {

@@ -29,6 +29,7 @@ class _WalletScreenState extends ConsumerState<BudgetScreen> {
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
+        backgroundColor: AppColors.white,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -66,7 +67,7 @@ class _WalletScreenState extends ConsumerState<BudgetScreen> {
           ]),
           Expanded(
             child: BudgetHolderList(budget)
-                .pSymmetric(h: contentLeftPadding, v: contentLeftPadding),
+                .pSymmetric(h: 0, v: contentLeftPadding),
           ),
         ],
       ),
