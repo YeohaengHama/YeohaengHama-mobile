@@ -8,5 +8,6 @@ class CategoryIcon with _$CategoryIcon {
   const factory CategoryIcon({
     required IconData icon,
     required String category,
+    required Color color,
   }) = _CategoryIcon;
 }

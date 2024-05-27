@@ -221,7 +221,7 @@ abstract class _OpenApiDetail implements OpenApiDetail {
       required final String contentTypeId,
       final String numOfRows,
       final String page,
-      required final String mobileOS}) = _$OpenApiDetailImpl;
+      final String mobileOS}) = _$OpenApiDetailImpl;
 
   factory _OpenApiDetail.fromJson(Map<String, dynamic> json) =
       _$OpenApiDetailImpl.fromJson;

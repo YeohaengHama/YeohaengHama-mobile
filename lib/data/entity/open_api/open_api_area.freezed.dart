@@ -156,7 +156,7 @@ class _$OpenApiAreaImpl implements _OpenApiArea {
       this.page = '1',
       required this.keyword,
       required this.contentTypeId,
-      required this.mobileOS});
+      this.mobileOS = 'IOS'});
 
   factory _$OpenApiAreaImpl.fromJson(Map<String, dynamic> json) =>
       _$$OpenApiAreaImplFromJson(json);
@@ -171,6 +171,7 @@ class _$OpenApiAreaImpl implements _OpenApiArea {
   @override
   final String contentTypeId;
   @override
+  @JsonKey()
   final String mobileOS;
 
   @override
@@ -215,10 +216,10 @@ class _$OpenApiAreaImpl implements _OpenApiArea {
 abstract class _OpenApiArea implements OpenApiArea {
   const factory _OpenApiArea(
       {required final String numOfRows,
-      required final String page,
+      final String page,
       required final String keyword,
       required final String contentTypeId,
-      required final String mobileOS}) = _$OpenApiAreaImpl;
+      final String mobileOS}) = _$OpenApiAreaImpl;
 
   factory _OpenApiArea.fromJson(Map<String, dynamic> json) =
       _$OpenApiAreaImpl.fromJson;

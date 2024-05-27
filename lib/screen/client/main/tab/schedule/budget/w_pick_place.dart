@@ -13,8 +13,10 @@ class PickPlaceWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final addBudget = ref.read(addBudgetProvider.notifier);
+
     void updateAddBudgetPlace() {
       addBudget.setPlace(addPickPlace.placeId!);
+      addBudget.setPlaceName(addPickPlace.placeName!);
       Nav.pop(context);
     }
 

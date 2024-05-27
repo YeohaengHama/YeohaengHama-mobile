@@ -9,6 +9,7 @@ import 'package:fast_app_base/data/entity/itinerary/vo_save_place.dart';
 import 'package:fast_app_base/data/entity/menu/all_itinerary.dart';
 import 'package:fast_app_base/data/network/budget_api.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/s_schedule.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nav_hooks/nav.dart';
 import 'package:riverpod/riverpod.dart';
@@ -104,6 +105,11 @@ class ItineraryApi {
 
       if (response.statusCode == 200) {
         await addShowSavePlace(ref);
+        const snackBar = SnackBar(
+          content: Text('장소가 저장되었습니다..'),
+          duration: Duration(seconds: 2),
+          backgroundColor: AppColors.mainPurple,
+        );
         print('장소 저장 완료');
         return response;
       } else if (response.statusCode == 401) {
