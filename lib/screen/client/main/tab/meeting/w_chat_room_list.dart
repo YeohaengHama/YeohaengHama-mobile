@@ -1,4 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/tab/meeting/s_chat.dart';
 import 'package:fast_app_base/screen/client/main/tab/meeting/s_chat_room.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -25,7 +26,7 @@ class _ChatRoomsListWidgetState extends ConsumerState<ChatRoomsListWidget> {
   Widget build(BuildContext context) {
     final currentAccount = ref.read(accountProvider);
     return Tap(
-      onTap: () { Nav.push(ChatRoomScreen(int.parse(widget.chatRoom.roomId),currentAccount!)); },
+      onTap: () { Nav.push(ChatScreen(widget.chatRoom, currentAccount!.nickName)); },
       child: Column(children: [
         Row(
           children: [

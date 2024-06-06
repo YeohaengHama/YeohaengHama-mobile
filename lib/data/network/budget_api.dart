@@ -9,6 +9,7 @@ import '../entity/budget/vo_add_budget.dart';
 import '../entity/budget/vo_current_budget.dart';
 
 import '../memory/budget/current_budget_provider.dart';
+import '../memory/user_provider.dart';
 
 final budgetApiProvider = Provider<BudgetApi>((ref) => BudgetApi());
 
@@ -77,11 +78,13 @@ class BudgetApi {
   }
   Future<void> addBudget(AddBudget addBudget,WidgetRef ref) async {
     final url = '$baseUrl/Budget/addExpenditures';
+    final account = ref.read(accountProvider);
     try {
       final response = await _dio.post(
         url,
         data: {
           "itineraryId": addBudget.itineraryId,
+          "accountId" : account!.id,
           "place": addBudget.place,
           "day": addBudget.day,
           "paymentMethod": addBudget.paymentMethod,

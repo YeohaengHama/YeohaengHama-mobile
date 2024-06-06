@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'area_search_app_bar.dart';
 
 class AreaPick extends StatefulWidget {
-  const AreaPick({super.key});
+  const AreaPick({super.key, this.isEditMode = false});
+  final bool isEditMode;
 
 
   @override
@@ -32,7 +33,7 @@ class _AreaPickState extends State<AreaPick> {
                 itemCount: diaryList.length,
                 itemBuilder: (context, index) {
                   return Row(
-                    children: [AreasWidget(areaList[index])],
+                    children: [AreasWidget(areaList[index],  widget.isEditMode,)],
                   );
                 }),
           ),

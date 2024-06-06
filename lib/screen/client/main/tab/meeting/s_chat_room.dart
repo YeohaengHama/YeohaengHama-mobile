@@ -1,30 +1,27 @@
-import 'dart:async';
 import 'dart:convert';
-import 'package:fast_app_base/data/entity/account/vo_current_account.dart';
-import 'package:fast_app_base/data/network/user_api.dart';
+
+import 'package:fast_app_base/common/dart/kotlin_style/kotlin_style_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:web_socket_channel/status.dart' as status;  // 추가된 부분
 
-import '../../../../../common/constants.dart';
-import '../../../../../data/entity/chat/message.dart';
-import '../../../../../data/memory/user_provider.dart';
+import 'package:stomp_dart_client/stomp_dart_client.dart';
 
-class ChatRoomScreen extends ConsumerStatefulWidget {
-  const ChatRoomScreen(this.roomId,this.currentAccount, {super.key});
+import '../../../../../data/entity/account/vo_current_account.dart';
+
+class ChatRoomScreen extends StatefulWidget {
+  const ChatRoomScreen(this.roomId, this.currentAccount, {Key? key})
+      : super(key: key);
+
   final int roomId;
   final CurrentAccount currentAccount;
 
   @override
-  ConsumerState<ChatRoomScreen> createState() => _ChatRoomScreenState();
+  _ChatRoomScreenState createState() => _ChatRoomScreenState();
 }
 
-class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
-
+class _ChatRoomScreenState extends State<ChatRoomScreen> {
   final TextEditingController _messageController = TextEditingController();
-  final List<Message> _messages = [];
-  WebSocketChannel? _channel;
+  final List<String> _messages = [];
+  late StompClient stompClient;
 
   @override
   void initState() {
@@ -32,38 +29,47 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
     _connectWebSocket();
   }
 
-  void _connectWebSocket()  {
-    final uri = Uri.parse('$socketUrl/ws-stomp');
-    print(uri);
-    _channel = WebSocketChannel.connect(uri);
+  void _connectWebSocket() async {
+    stompClient = StompClient(
+      config: StompConfig(
+        url: 'ws://172.16.111.225:8080/ws-stomp',
+        onConnect: (_) {
+          print('Connected to WebSocket');
+          _sendMessage('ENTER', 'joined the chat');
+        },
+        onWebSocketError: (dynamic error) => print('WebSocket error: $error'),
+      ),
 
-    _channel?.stream.listen((message) {
-      final decodedMessage = json.decode(message);
-      setState(() {
-        _messages.add(Message.fromJson(decodedMessage));
-      });
-    });
+    );
 
-    _sendMessage(type: 'ENTER', message: 'joined the chat');
+    stompClient.activate();
+    if (stompClient.connected) {
+      print('웹소켓에 연결되었습니다.');
+      stompClient.subscribe(
+        destination: '/topic/chat/${widget.roomId}',
+        callback: (StompFrame frame) {
+          setState(() {
+            _messages.add(frame.body!);
+          });
+        },
+      );
+    } else{
+      print('웹소켓 연결에 실패했습니다.');}
+
+
+
   }
 
-
-  void _sendMessage({required String type, required String message}) {
-    if (_channel != null) {
-      final msg = json.encode({
+  void _sendMessage(String type, String message) {
+    stompClient.send(
+      destination: '/app/chat',
+      body: json.encode({
         'type': type,
         'roomId': widget.roomId,
-        'sender': widget.currentAccount.id, // Replace with actual sender
+        'sender': widget.currentAccount.id,
         'message': message,
-      });
-      _channel?.sink.add(msg);
-    }
-  }
-
-  @override
-  void dispose() {
-    _channel?.sink.close(status.goingAway);
-    super.dispose();
+      }),
+    );
   }
 
   @override
@@ -79,7 +85,7 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
               itemCount: _messages.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(_messages[index].message),
+                  title: Text(_messages[index]),
                 );
               },
             ),
@@ -93,17 +99,14 @@ class _ChatRoomScreenState extends ConsumerState<ChatRoomScreen> {
                     controller: _messageController,
                     decoration: InputDecoration(labelText: 'Message'),
                     onSubmitted: (value) {
-                      _sendMessage(type: 'TALK', message: value);
+                      _sendMessage('TALK', value);
                       _messageController.clear();
                     },
                   ),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    _sendMessage(
-                      type: 'TALK',
-                      message: _messageController.text,
-                    );
+                    _sendMessage('TALK', _messageController.text);
                     _messageController.clear();
                   },
                   child: Text('Send'),

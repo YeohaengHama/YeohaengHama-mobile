@@ -153,12 +153,14 @@ class BudgetHolderList extends ConsumerWidget {
                         ),
                         Spacer(),
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             '₩ ${NumberFormat('#,##0', 'en_US').format(expenditure.amount)}'
                                 .text
                                 .color(AppColors.primaryGrey)
                                 .bold
                                 .make(),
+                            '${expenditure.account.nickname}'.text.color(AppColors.thirdGrey).size(8).make()
                           ],
                         ),
                       ],

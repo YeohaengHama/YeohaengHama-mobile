@@ -134,7 +134,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                       flex: 2, // 첫 번째 자식 위젯이 2의 가중치를 가지도록 설정
                       child: Tap(
                         onTap: () {
-                          showDatePickerDialog(context, PickDayDialog(budget!));
+                          ShowBottomDialog(context, PickDayDialog(budget!));
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,7 +171,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                       flex: 1, // 두 번째 자식 위젯이 1의 가중치를 가지도록 설정
                       child: Tap(
                         onTap: () {
-                          showDatePickerDialog(context, PickPaymentDialog());
+                          ShowBottomDialog(context, PickPaymentDialog());
                         },
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -329,7 +329,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                   color: AppColors.outline,
                   height: 1,
                 ).pSymmetric(h: 30, v: 15),
-                Height(50),
+                Height(20),
                 Tap(
                   onTap: () async {
 

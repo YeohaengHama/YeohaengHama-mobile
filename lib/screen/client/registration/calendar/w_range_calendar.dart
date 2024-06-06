@@ -6,25 +6,34 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
 
+import '../../../../data/entity/itinerary/vo_itinerary.dart';
 import '../../../../data/memory/itinerary/Itinerary_provider.dart';
+import '../../../../data/memory/itinerary/itinerary_check_provider.dart';
+import '../../../../data/network/itinerary_api.dart';
 import '../tag/s_tag.dart';
 
 class RangeCalendar extends ConsumerStatefulWidget {
-  const RangeCalendar({super.key});
+  const RangeCalendar({Key? key, this.isEditMode}) : super(key: key);
 
+  final bool?  isEditMode;
   @override
   ConsumerState<RangeCalendar> createState() => _RangeCalendarState();
 }
 
 class _RangeCalendarState extends ConsumerState<RangeCalendar> {
 
-  List<DateTime?> _rangeDatePickerValueWithDefaultValue = [
-    DateTime.now(),
-    DateTime.now().add(const Duration(days: 2)),
-  ];
+  late List<DateTime?> _rangeDatePickerValueWithDefaultValue;
+  @override
+  void initState() {
+    super.initState();
+    final currentItinerary = ref.read(itineraryCheckProvider);
+    // 생성자로 받은 startDay와 endDay가 null이면 현재 날짜를 기본값으로 사용
+    final startDay = widget.isEditMode! ? DateTime.parse(currentItinerary!.startDate) : DateTime.now();
+    final endDay = widget.isEditMode! ? DateTime.parse(currentItinerary!.endDate) : DateTime.now().add(const Duration(days: 2));
 
+    _rangeDatePickerValueWithDefaultValue = [startDay, endDay];
 
-
+  }
 
   String _getValueText(
       CalendarDatePicker2Type datePickerType,
@@ -75,6 +84,8 @@ class _RangeCalendarState extends ConsumerState<RangeCalendar> {
 
   @override
   Widget build(BuildContext context) {
+    final itineraryProviderNotifier = ref.read(itineraryProvider.notifier);
+
     final config = CalendarDatePicker2Config(
       calendarType: CalendarDatePicker2Type.range,
       selectedDayHighlightColor: AppColors.mainPurple,
@@ -97,19 +108,25 @@ class _RangeCalendarState extends ConsumerState<RangeCalendar> {
           config: config,
           value: _rangeDatePickerValueWithDefaultValue,
           onValueChanged: (dates) {
-            final itineraryProviderNotifier = ref.read(itineraryProvider.notifier);
+            // 선택한 날짜가 없으면 생성자로 받은 startDay와 endDay를 사용하여 업데이트
+            if (dates.isEmpty) {
+              itineraryProviderNotifier.setSelectedDates(
+                _rangeDatePickerValueWithDefaultValue[0],
+                _rangeDatePickerValueWithDefaultValue[1],
+              );
+            } else {
+              // 선택한 날짜가 있으면 업데이트
+              itineraryProviderNotifier.setSelectedDates(
+                dates.isNotEmpty ? dates[0] : null,
+                dates.length > 1 ? dates[1] : null,
+              );
 
-            // 선택한 날짜가 있으면 업데이트, 없으면 null로 설정
-            itineraryProviderNotifier.setSelectedDates(
-              dates.isNotEmpty ? dates[0] : null,
-              dates.length > 1 ? dates[1] : null,
-            );
-
-            // 시작 날짜와 종료 날짜가 같은 경우에 대한 처리
-            if (dates.length > 1 && dates[0] == dates[1]) {
-              // 시작 날짜와 종료 날짜가 같으면, 종료 날짜를 시작 날짜로 설정
-              itineraryProviderNotifier.setSelectedDates(dates[0], dates[0]);
-              dates[1] = dates[0];
+              // 시작 날짜와 종료 날짜가 같은 경우에 대한 처리
+              if (dates.length > 1 && dates[0] == dates[1]) {
+                // 시작 날짜와 종료 날짜가 같으면, 종료 날짜를 시작 날짜로 설정
+                itineraryProviderNotifier.setSelectedDates(dates[0], dates[0]);
+                dates[1] = dates[0];
+              }
             }
 
             setState(() => _rangeDatePickerValueWithDefaultValue = dates);
@@ -119,28 +136,28 @@ class _RangeCalendarState extends ConsumerState<RangeCalendar> {
         ),
         const SizedBox(height: 50),
         Tap(
-          onTap: () {
-            // final itineraryProviderNotifier = ref.read(itineraryProvider.notifier);
-            // final selectedStartDate = itineraryProviderNotifier.selectedStartDate;
-            // final selectedEndDate = itineraryProviderNotifier.selectedEndDate;
-            //
-            // final newItinerary = Itinerary(
-            //   id: 0,
-            //   name: '새로운 일정',
-            //   type: [],
-            //   itineraryStyle: [],
-            //   account: Account(),
-            //   transportation: 'bus',
-            //   area: '지역',
-            //   startDate: selectedStartDate ?? DateTime.now(),
-            //   endDate: selectedEndDate ?? DateTime.now(),
-            //   places: [],
-            //   expense: null,
-            // );
-            //
-            // itineraryProviderNotifier.addItinerary(newItinerary);
-// itineraryProviderNotifier.setSelectedDates(selectedStartDate, selectedEndDate);
-            Nav.push(TagScreen());
+          onTap: () async {
+            if(widget.isEditMode == false){
+              Nav.push(TagScreen());
+            } else {
+
+              final itineraryApi = ItineraryApi();
+              final currentItinerary = ref.read(itineraryCheckProvider);
+              final editItinerary = Itinerary(
+                name: '${currentItinerary!.name}',
+                type: currentItinerary.type!,
+                itineraryStyle: currentItinerary.style!,
+                transportation: 'bus',
+                area: currentItinerary.area,
+                startDate: itineraryProviderNotifier.getSelectedStartDate()!,
+                endDate:itineraryProviderNotifier.getSelectedEndDate()!!,
+                expense: '',
+              );
+              await itineraryApi.editItinerary(editItinerary, ref);
+              Nav.pop(context);
+            }
+
+
           },
 
           child: RoundedContainer(
@@ -164,7 +181,7 @@ class _RangeCalendarState extends ConsumerState<RangeCalendar> {
                     ),
 
                   ),
-                  '/ 등록 완료'.text.bold.white.make(),
+                  widget.isEditMode! ? '/ 수정 완료'.text.bold.white.make() :  '/ 등록 완료'.text.bold.white.make(),
                 ],
               ),
             ),

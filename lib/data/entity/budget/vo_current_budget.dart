@@ -47,6 +47,7 @@ class CurrentBudget with _$CurrentBudget {
 class Expenditure with _$Expenditure {
   factory Expenditure({
     required int id,
+    required Account account,
     required Place place,
     required int day,
     required String paymentMethod,
@@ -58,6 +59,20 @@ class Expenditure with _$Expenditure {
 
   factory Expenditure.fromJson(Map<String, dynamic> json) =>
       _$ExpenditureFromJson(json);
+}
+
+@freezed
+class Account with _$Account {
+  const factory Account(
+  {
+    required int id,
+    required String nickname,
+    String? photoUrl,
+}
+      ) = _Account;
+
+  factory Account.fromJson(Map<String, dynamic> json) =>
+      _$AccountFromJson(json);
 }
 
 @freezed

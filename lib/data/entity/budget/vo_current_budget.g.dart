@@ -9,6 +9,7 @@ part of 'vo_current_budget.dart';
 _$ExpenditureImpl _$$ExpenditureImplFromJson(Map<String, dynamic> json) =>
     _$ExpenditureImpl(
       id: (json['id'] as num).toInt(),
+      account: Account.fromJson(json['account'] as Map<String, dynamic>),
       place: Place.fromJson(json['place'] as Map<String, dynamic>),
       day: (json['day'] as num).toInt(),
       paymentMethod: json['paymentMethod'] as String,
@@ -21,6 +22,7 @@ _$ExpenditureImpl _$$ExpenditureImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$ExpenditureImplToJson(_$ExpenditureImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'account': instance.account,
       'place': instance.place,
       'day': instance.day,
       'paymentMethod': instance.paymentMethod,
@@ -28,6 +30,20 @@ Map<String, dynamic> _$$ExpenditureImplToJson(_$ExpenditureImpl instance) =>
       'content': instance.content,
       'name': instance.name,
       'amount': instance.amount,
+    };
+
+_$AccountImpl _$$AccountImplFromJson(Map<String, dynamic> json) =>
+    _$AccountImpl(
+      id: (json['id'] as num).toInt(),
+      nickname: json['nickname'] as String,
+      photoUrl: json['photoUrl'] as String?,
+    );
+
+Map<String, dynamic> _$$AccountImplToJson(_$AccountImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'nickname': instance.nickname,
+      'photoUrl': instance.photoUrl,
     };
 
 _$PlaceImpl _$$PlaceImplFromJson(Map<String, dynamic> json) => _$PlaceImpl(

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../data/entity/itinerary/vo_itinerary.dart';
 import '../../../../data/memory/itinerary/Itinerary_provider.dart';
+import '../../../../data/memory/itinerary/itinerary_check_provider.dart';
 import '../../../../data/network/itinerary_api.dart';
 import '../../main/s_main.dart';
 import '../../main/tab/tab_item.dart';
@@ -17,11 +18,12 @@ import '../../main/tab/tab_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AreasWidget extends ConsumerWidget {
-  const AreasWidget(this.area, {Key? key}) : super(key: key);
+  const AreasWidget(this.area, this.isEditMode, {Key? key,}) : super(key: key);
   final HamaArea area;
-
+  final bool isEditMode;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final itineraryApi = ItineraryApi();
 
     return Container(
@@ -49,27 +51,44 @@ class AreasWidget extends ConsumerWidget {
           RoundButton(
             text: '선택',
             onTap: () async{
-              // 선택한 지역 정보를 ItineraryProvider에 저장
-              final itineraryProviderNotifier = ref.watch(itineraryProvider.notifier);
-              itineraryProviderNotifier.setSelectedArea(area.area);
+              if( isEditMode! == false ){
+                // 선택한 지역 정보를 ItineraryProvider에 저장
+                final itineraryProviderNotifier = ref.watch(itineraryProvider.notifier);
+                itineraryProviderNotifier.setSelectedArea(area.area);
 
-              final newItinerary = Itinerary(
-                name: '${itineraryProviderNotifier.selectedArea} 여행',
-                type: itineraryProviderNotifier.selectedWhoTags,
-                itineraryStyle: itineraryProviderNotifier.selectedStyleTags,
-                transportation: 'bus',
-                area: itineraryProviderNotifier.selectedArea!,
-                startDate: itineraryProviderNotifier.selectedStartDate!,
-                endDate: itineraryProviderNotifier.selectedEndDate!,
-                expense: '',
-              );
-              await itineraryApi.postJoinItinerary(newItinerary, ref);
-              itineraryProviderNotifier.addItinerary(newItinerary);
-              await itineraryApi.showSavePlace(ref);
+                final newItinerary = Itinerary(
+                  name: '${itineraryProviderNotifier.selectedArea} 여행',
+                  type: itineraryProviderNotifier.selectedWhoTags,
+                  itineraryStyle: itineraryProviderNotifier.selectedStyleTags,
+                  transportation: 'bus',
+                  area: itineraryProviderNotifier.selectedArea!,
+                  startDate: itineraryProviderNotifier.selectedStartDate!,
+                  endDate: itineraryProviderNotifier.selectedEndDate!,
+                  expense: '',
+                );
+                await itineraryApi.postJoinItinerary(newItinerary, ref);
+                itineraryProviderNotifier.addItinerary(newItinerary);
+                await itineraryApi.showSavePlace(ref);
 
-              // 현재까지 쌓인 창을 pop하고 MainScreen으로 이동
-              Navigator.popUntil(context, (route) => route.isFirst);
-              Nav.push(MainScreen(initialTab: TabItem.schedule,));
+                // 현재까지 쌓인 창을 pop하고 MainScreen으로 이동
+                Navigator.popUntil(context, (route) => route.isFirst);
+                Nav.push(MainScreen(initialTab: TabItem.schedule,));
+              } else {
+                final currentItinerary = ref.read(itineraryCheckProvider);
+                final editItinerary = Itinerary(
+                  name: '${currentItinerary!.name}',
+                  type: currentItinerary.type!,
+                  itineraryStyle: currentItinerary.style!,
+                  transportation: 'bus',
+                  area: area.area,
+                  startDate: currentItinerary.startDate,
+                  endDate: currentItinerary.endDate!,
+                  expense: '',
+                );
+                await itineraryApi.editItinerary(editItinerary, ref);
+                Nav.pop(context);
+              }
+
 
             },
             bgColor: AppColors.outline,

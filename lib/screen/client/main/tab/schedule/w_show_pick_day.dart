@@ -41,8 +41,10 @@ class _ShowPickAreaState extends ConsumerState<ShowPickDay> {
                   return DropdownMenuItem<int>(
                     value: index,
                     child: Text(day),
+
                   );
-                }),
+                }
+                ), underline: SizedBox(),
               );
             },
           ),

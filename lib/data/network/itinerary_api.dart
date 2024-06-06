@@ -91,6 +91,43 @@ class ItineraryApi {
     }
   }
 
+  Future<void> editItinerary(Itinerary itinerary,WidgetRef ref) async {
+    try {
+      final accountNotifier = ref.read(accountProvider.notifier);
+      final itineraryProvider = ref.read(itineraryCheckProvider);
+      final response = await _dio.post(
+        '$baseUrl/itinerary/update?accountId=${accountNotifier.state!.id}&itineraryId=${itineraryProvider!.itineraryId}',
+        data: {
+          'name': itinerary.name,
+          'type': itinerary.type,
+          'style': itinerary.itineraryStyle,
+          'transportation': itinerary.transportation,
+          'area': itinerary.area,
+          'startDate': itinerary.startDate,
+          'endDate': itinerary.endDate,
+          'expense': itinerary.expense,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        await getItinerary(ref, itineraryProvider!.itineraryId);
+        print('일정 수정 완료');
+
+
+      } else if (response.statusCode == 401) {
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    } finally {
+      // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
+    }
+  }
+
 
   Future<Response> postSavePlace(SavePlace savePlace, WidgetRef ref) async {
     try {

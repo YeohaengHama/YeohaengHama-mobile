@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'modal_bottom_sheet.dart';
 
-void showDatePickerDialog(BuildContext context, Widget body) {
+void ShowBottomDialog(BuildContext context, Widget body) {
   showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {

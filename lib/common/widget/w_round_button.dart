@@ -173,7 +173,7 @@ class RoundButtonState extends State<RoundButton> with RefreshEverySecond {
 
           if (widget.rightWidget != null)
             Positioned.fill(
-              left: 18,
+              left: 20,
               child: Container(
                 alignment: Alignment.centerRight,
                 child: widget.rightWidget,

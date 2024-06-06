@@ -215,6 +215,7 @@ Expenditure _$ExpenditureFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Expenditure {
   int get id => throw _privateConstructorUsedError;
+  Account get account => throw _privateConstructorUsedError;
   Place get place => throw _privateConstructorUsedError;
   int get day => throw _privateConstructorUsedError;
   String get paymentMethod => throw _privateConstructorUsedError;
@@ -237,6 +238,7 @@ abstract class $ExpenditureCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
+      Account account,
       Place place,
       int day,
       String paymentMethod,
@@ -245,6 +247,7 @@ abstract class $ExpenditureCopyWith<$Res> {
       String? name,
       int amount});
 
+  $AccountCopyWith<$Res> get account;
   $PlaceCopyWith<$Res> get place;
 }
 
@@ -262,6 +265,7 @@ class _$ExpenditureCopyWithImpl<$Res, $Val extends Expenditure>
   @override
   $Res call({
     Object? id = null,
+    Object? account = null,
     Object? place = null,
     Object? day = null,
     Object? paymentMethod = null,
@@ -275,6 +279,10 @@ class _$ExpenditureCopyWithImpl<$Res, $Val extends Expenditure>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      account: null == account
+          ? _value.account
+          : account // ignore: cast_nullable_to_non_nullable
+              as Account,
       place: null == place
           ? _value.place
           : place // ignore: cast_nullable_to_non_nullable
@@ -308,6 +316,14 @@ class _$ExpenditureCopyWithImpl<$Res, $Val extends Expenditure>
 
   @override
   @pragma('vm:prefer-inline')
+  $AccountCopyWith<$Res> get account {
+    return $AccountCopyWith<$Res>(_value.account, (value) {
+      return _then(_value.copyWith(account: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
   $PlaceCopyWith<$Res> get place {
     return $PlaceCopyWith<$Res>(_value.place, (value) {
       return _then(_value.copyWith(place: value) as $Val);
@@ -325,6 +341,7 @@ abstract class _$$ExpenditureImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
+      Account account,
       Place place,
       int day,
       String paymentMethod,
@@ -333,6 +350,8 @@ abstract class _$$ExpenditureImplCopyWith<$Res>
       String? name,
       int amount});
 
+  @override
+  $AccountCopyWith<$Res> get account;
   @override
   $PlaceCopyWith<$Res> get place;
 }
@@ -349,6 +368,7 @@ class __$$ExpenditureImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? account = null,
     Object? place = null,
     Object? day = null,
     Object? paymentMethod = null,
@@ -362,6 +382,10 @@ class __$$ExpenditureImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      account: null == account
+          ? _value.account
+          : account // ignore: cast_nullable_to_non_nullable
+              as Account,
       place: null == place
           ? _value.place
           : place // ignore: cast_nullable_to_non_nullable
@@ -399,6 +423,7 @@ class __$$ExpenditureImplCopyWithImpl<$Res>
 class _$ExpenditureImpl implements _Expenditure {
   _$ExpenditureImpl(
       {required this.id,
+      required this.account,
       required this.place,
       required this.day,
       required this.paymentMethod,
@@ -412,6 +437,8 @@ class _$ExpenditureImpl implements _Expenditure {
 
   @override
   final int id;
+  @override
+  final Account account;
   @override
   final Place place;
   @override
@@ -429,7 +456,7 @@ class _$ExpenditureImpl implements _Expenditure {
 
   @override
   String toString() {
-    return 'Expenditure(id: $id, place: $place, day: $day, paymentMethod: $paymentMethod, category: $category, content: $content, name: $name, amount: $amount)';
+    return 'Expenditure(id: $id, account: $account, place: $place, day: $day, paymentMethod: $paymentMethod, category: $category, content: $content, name: $name, amount: $amount)';
   }
 
   @override
@@ -438,6 +465,7 @@ class _$ExpenditureImpl implements _Expenditure {
         (other.runtimeType == runtimeType &&
             other is _$ExpenditureImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.account, account) || other.account == account) &&
             (identical(other.place, place) || other.place == place) &&
             (identical(other.day, day) || other.day == day) &&
             (identical(other.paymentMethod, paymentMethod) ||
@@ -451,8 +479,8 @@ class _$ExpenditureImpl implements _Expenditure {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, place, day, paymentMethod,
-      category, content, name, amount);
+  int get hashCode => Object.hash(runtimeType, id, account, place, day,
+      paymentMethod, category, content, name, amount);
 
   @JsonKey(ignore: true)
   @override
@@ -471,6 +499,7 @@ class _$ExpenditureImpl implements _Expenditure {
 abstract class _Expenditure implements Expenditure {
   factory _Expenditure(
       {required final int id,
+      required final Account account,
       required final Place place,
       required final int day,
       required final String paymentMethod,
@@ -484,6 +513,8 @@ abstract class _Expenditure implements Expenditure {
 
   @override
   int get id;
+  @override
+  Account get account;
   @override
   Place get place;
   @override
@@ -501,6 +532,176 @@ abstract class _Expenditure implements Expenditure {
   @override
   @JsonKey(ignore: true)
   _$$ExpenditureImplCopyWith<_$ExpenditureImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Account _$AccountFromJson(Map<String, dynamic> json) {
+  return _Account.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Account {
+  int get id => throw _privateConstructorUsedError;
+  String get nickname => throw _privateConstructorUsedError;
+  String? get photoUrl => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AccountCopyWith<Account> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AccountCopyWith<$Res> {
+  factory $AccountCopyWith(Account value, $Res Function(Account) then) =
+      _$AccountCopyWithImpl<$Res, Account>;
+  @useResult
+  $Res call({int id, String nickname, String? photoUrl});
+}
+
+/// @nodoc
+class _$AccountCopyWithImpl<$Res, $Val extends Account>
+    implements $AccountCopyWith<$Res> {
+  _$AccountCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? nickname = null,
+    Object? photoUrl = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      nickname: null == nickname
+          ? _value.nickname
+          : nickname // ignore: cast_nullable_to_non_nullable
+              as String,
+      photoUrl: freezed == photoUrl
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
+  factory _$$AccountImplCopyWith(
+          _$AccountImpl value, $Res Function(_$AccountImpl) then) =
+      __$$AccountImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int id, String nickname, String? photoUrl});
+}
+
+/// @nodoc
+class __$$AccountImplCopyWithImpl<$Res>
+    extends _$AccountCopyWithImpl<$Res, _$AccountImpl>
+    implements _$$AccountImplCopyWith<$Res> {
+  __$$AccountImplCopyWithImpl(
+      _$AccountImpl _value, $Res Function(_$AccountImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? nickname = null,
+    Object? photoUrl = freezed,
+  }) {
+    return _then(_$AccountImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      nickname: null == nickname
+          ? _value.nickname
+          : nickname // ignore: cast_nullable_to_non_nullable
+              as String,
+      photoUrl: freezed == photoUrl
+          ? _value.photoUrl
+          : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AccountImpl implements _Account {
+  const _$AccountImpl(
+      {required this.id, required this.nickname, this.photoUrl});
+
+  factory _$AccountImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AccountImplFromJson(json);
+
+  @override
+  final int id;
+  @override
+  final String nickname;
+  @override
+  final String? photoUrl;
+
+  @override
+  String toString() {
+    return 'Account(id: $id, nickname: $nickname, photoUrl: $photoUrl)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AccountImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.nickname, nickname) ||
+                other.nickname == nickname) &&
+            (identical(other.photoUrl, photoUrl) ||
+                other.photoUrl == photoUrl));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, nickname, photoUrl);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
+      __$$AccountImplCopyWithImpl<_$AccountImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AccountImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Account implements Account {
+  const factory _Account(
+      {required final int id,
+      required final String nickname,
+      final String? photoUrl}) = _$AccountImpl;
+
+  factory _Account.fromJson(Map<String, dynamic> json) = _$AccountImpl.fromJson;
+
+  @override
+  int get id;
+  @override
+  String get nickname;
+  @override
+  String? get photoUrl;
+  @override
+  @JsonKey(ignore: true)
+  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
