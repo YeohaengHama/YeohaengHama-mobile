@@ -19,7 +19,7 @@ mixin _$CurrentBudget {
   int get budgetId => throw _privateConstructorUsedError;
   int get totalAmount => throw _privateConstructorUsedError;
   int get itineraryId => throw _privateConstructorUsedError;
-  Map<String, List<Expenditure>> get expendituresList =>
+  Map<int, List<Expenditure>> get expenditures =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $CurrentBudgetCopyWith<$Res> {
       {int budgetId,
       int totalAmount,
       int itineraryId,
-      Map<String, List<Expenditure>> expendituresList});
+      Map<int, List<Expenditure>> expenditures});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$CurrentBudgetCopyWithImpl<$Res, $Val extends CurrentBudget>
     Object? budgetId = null,
     Object? totalAmount = null,
     Object? itineraryId = null,
-    Object? expendituresList = null,
+    Object? expenditures = null,
   }) {
     return _then(_value.copyWith(
       budgetId: null == budgetId
@@ -71,10 +71,10 @@ class _$CurrentBudgetCopyWithImpl<$Res, $Val extends CurrentBudget>
           ? _value.itineraryId
           : itineraryId // ignore: cast_nullable_to_non_nullable
               as int,
-      expendituresList: null == expendituresList
-          ? _value.expendituresList
-          : expendituresList // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<Expenditure>>,
+      expenditures: null == expenditures
+          ? _value.expenditures
+          : expenditures // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Expenditure>>,
     ) as $Val);
   }
 }
@@ -91,7 +91,7 @@ abstract class _$$CurrentBudgetImplCopyWith<$Res>
       {int budgetId,
       int totalAmount,
       int itineraryId,
-      Map<String, List<Expenditure>> expendituresList});
+      Map<int, List<Expenditure>> expenditures});
 }
 
 /// @nodoc
@@ -108,7 +108,7 @@ class __$$CurrentBudgetImplCopyWithImpl<$Res>
     Object? budgetId = null,
     Object? totalAmount = null,
     Object? itineraryId = null,
-    Object? expendituresList = null,
+    Object? expenditures = null,
   }) {
     return _then(_$CurrentBudgetImpl(
       budgetId: null == budgetId
@@ -123,10 +123,10 @@ class __$$CurrentBudgetImplCopyWithImpl<$Res>
           ? _value.itineraryId
           : itineraryId // ignore: cast_nullable_to_non_nullable
               as int,
-      expendituresList: null == expendituresList
-          ? _value._expendituresList
-          : expendituresList // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<Expenditure>>,
+      expenditures: null == expenditures
+          ? _value._expenditures
+          : expenditures // ignore: cast_nullable_to_non_nullable
+              as Map<int, List<Expenditure>>,
     ));
   }
 }
@@ -138,8 +138,8 @@ class _$CurrentBudgetImpl implements _CurrentBudget {
       {required this.budgetId,
       required this.totalAmount,
       required this.itineraryId,
-      required final Map<String, List<Expenditure>> expendituresList})
-      : _expendituresList = expendituresList;
+      required final Map<int, List<Expenditure>> expenditures})
+      : _expenditures = expenditures;
 
   @override
   final int budgetId;
@@ -147,17 +147,17 @@ class _$CurrentBudgetImpl implements _CurrentBudget {
   final int totalAmount;
   @override
   final int itineraryId;
-  final Map<String, List<Expenditure>> _expendituresList;
+  final Map<int, List<Expenditure>> _expenditures;
   @override
-  Map<String, List<Expenditure>> get expendituresList {
-    if (_expendituresList is EqualUnmodifiableMapView) return _expendituresList;
+  Map<int, List<Expenditure>> get expenditures {
+    if (_expenditures is EqualUnmodifiableMapView) return _expenditures;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_expendituresList);
+    return EqualUnmodifiableMapView(_expenditures);
   }
 
   @override
   String toString() {
-    return 'CurrentBudget(budgetId: $budgetId, totalAmount: $totalAmount, itineraryId: $itineraryId, expendituresList: $expendituresList)';
+    return 'CurrentBudget(budgetId: $budgetId, totalAmount: $totalAmount, itineraryId: $itineraryId, expenditures: $expenditures)';
   }
 
   @override
@@ -172,12 +172,12 @@ class _$CurrentBudgetImpl implements _CurrentBudget {
             (identical(other.itineraryId, itineraryId) ||
                 other.itineraryId == itineraryId) &&
             const DeepCollectionEquality()
-                .equals(other._expendituresList, _expendituresList));
+                .equals(other._expenditures, _expenditures));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, budgetId, totalAmount,
-      itineraryId, const DeepCollectionEquality().hash(_expendituresList));
+      itineraryId, const DeepCollectionEquality().hash(_expenditures));
 
   @JsonKey(ignore: true)
   @override
@@ -191,7 +191,7 @@ abstract class _CurrentBudget implements CurrentBudget {
           {required final int budgetId,
           required final int totalAmount,
           required final int itineraryId,
-          required final Map<String, List<Expenditure>> expendituresList}) =
+          required final Map<int, List<Expenditure>> expenditures}) =
       _$CurrentBudgetImpl;
 
   @override
@@ -201,7 +201,7 @@ abstract class _CurrentBudget implements CurrentBudget {
   @override
   int get itineraryId;
   @override
-  Map<String, List<Expenditure>> get expendituresList;
+  Map<int, List<Expenditure>> get expenditures;
   @override
   @JsonKey(ignore: true)
   _$$CurrentBudgetImplCopyWith<_$CurrentBudgetImpl> get copyWith =>
@@ -215,14 +215,14 @@ Expenditure _$ExpenditureFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Expenditure {
   int get id => throw _privateConstructorUsedError;
-  Account get account => throw _privateConstructorUsedError;
+  int get expendituresTotalAmount => throw _privateConstructorUsedError;
   Place get place => throw _privateConstructorUsedError;
   int get day => throw _privateConstructorUsedError;
   String get paymentMethod => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  int get amount => throw _privateConstructorUsedError;
+  bool get individual => throw _privateConstructorUsedError;
+  List<Calculation> get calculate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -238,16 +238,15 @@ abstract class $ExpenditureCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      Account account,
+      int expendituresTotalAmount,
       Place place,
       int day,
       String paymentMethod,
       String category,
       String content,
-      String? name,
-      int amount});
+      bool individual,
+      List<Calculation> calculate});
 
-  $AccountCopyWith<$Res> get account;
   $PlaceCopyWith<$Res> get place;
 }
 
@@ -265,24 +264,24 @@ class _$ExpenditureCopyWithImpl<$Res, $Val extends Expenditure>
   @override
   $Res call({
     Object? id = null,
-    Object? account = null,
+    Object? expendituresTotalAmount = null,
     Object? place = null,
     Object? day = null,
     Object? paymentMethod = null,
     Object? category = null,
     Object? content = null,
-    Object? name = freezed,
-    Object? amount = null,
+    Object? individual = null,
+    Object? calculate = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      account: null == account
-          ? _value.account
-          : account // ignore: cast_nullable_to_non_nullable
-              as Account,
+      expendituresTotalAmount: null == expendituresTotalAmount
+          ? _value.expendituresTotalAmount
+          : expendituresTotalAmount // ignore: cast_nullable_to_non_nullable
+              as int,
       place: null == place
           ? _value.place
           : place // ignore: cast_nullable_to_non_nullable
@@ -303,23 +302,15 @@ class _$ExpenditureCopyWithImpl<$Res, $Val extends Expenditure>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as int,
+      individual: null == individual
+          ? _value.individual
+          : individual // ignore: cast_nullable_to_non_nullable
+              as bool,
+      calculate: null == calculate
+          ? _value.calculate
+          : calculate // ignore: cast_nullable_to_non_nullable
+              as List<Calculation>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AccountCopyWith<$Res> get account {
-    return $AccountCopyWith<$Res>(_value.account, (value) {
-      return _then(_value.copyWith(account: value) as $Val);
-    });
   }
 
   @override
@@ -341,17 +332,15 @@ abstract class _$$ExpenditureImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      Account account,
+      int expendituresTotalAmount,
       Place place,
       int day,
       String paymentMethod,
       String category,
       String content,
-      String? name,
-      int amount});
+      bool individual,
+      List<Calculation> calculate});
 
-  @override
-  $AccountCopyWith<$Res> get account;
   @override
   $PlaceCopyWith<$Res> get place;
 }
@@ -368,24 +357,24 @@ class __$$ExpenditureImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? account = null,
+    Object? expendituresTotalAmount = null,
     Object? place = null,
     Object? day = null,
     Object? paymentMethod = null,
     Object? category = null,
     Object? content = null,
-    Object? name = freezed,
-    Object? amount = null,
+    Object? individual = null,
+    Object? calculate = null,
   }) {
     return _then(_$ExpenditureImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      account: null == account
-          ? _value.account
-          : account // ignore: cast_nullable_to_non_nullable
-              as Account,
+      expendituresTotalAmount: null == expendituresTotalAmount
+          ? _value.expendituresTotalAmount
+          : expendituresTotalAmount // ignore: cast_nullable_to_non_nullable
+              as int,
       place: null == place
           ? _value.place
           : place // ignore: cast_nullable_to_non_nullable
@@ -406,14 +395,14 @@ class __$$ExpenditureImplCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as int,
+      individual: null == individual
+          ? _value.individual
+          : individual // ignore: cast_nullable_to_non_nullable
+              as bool,
+      calculate: null == calculate
+          ? _value._calculate
+          : calculate // ignore: cast_nullable_to_non_nullable
+              as List<Calculation>,
     ));
   }
 }
@@ -423,14 +412,15 @@ class __$$ExpenditureImplCopyWithImpl<$Res>
 class _$ExpenditureImpl implements _Expenditure {
   _$ExpenditureImpl(
       {required this.id,
-      required this.account,
+      required this.expendituresTotalAmount,
       required this.place,
       required this.day,
       required this.paymentMethod,
       required this.category,
       required this.content,
-      this.name,
-      required this.amount});
+      required this.individual,
+      required final List<Calculation> calculate})
+      : _calculate = calculate;
 
   factory _$ExpenditureImpl.fromJson(Map<String, dynamic> json) =>
       _$$ExpenditureImplFromJson(json);
@@ -438,7 +428,7 @@ class _$ExpenditureImpl implements _Expenditure {
   @override
   final int id;
   @override
-  final Account account;
+  final int expendituresTotalAmount;
   @override
   final Place place;
   @override
@@ -450,13 +440,18 @@ class _$ExpenditureImpl implements _Expenditure {
   @override
   final String content;
   @override
-  final String? name;
+  final bool individual;
+  final List<Calculation> _calculate;
   @override
-  final int amount;
+  List<Calculation> get calculate {
+    if (_calculate is EqualUnmodifiableListView) return _calculate;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_calculate);
+  }
 
   @override
   String toString() {
-    return 'Expenditure(id: $id, account: $account, place: $place, day: $day, paymentMethod: $paymentMethod, category: $category, content: $content, name: $name, amount: $amount)';
+    return 'Expenditure(id: $id, expendituresTotalAmount: $expendituresTotalAmount, place: $place, day: $day, paymentMethod: $paymentMethod, category: $category, content: $content, individual: $individual, calculate: $calculate)';
   }
 
   @override
@@ -465,7 +460,9 @@ class _$ExpenditureImpl implements _Expenditure {
         (other.runtimeType == runtimeType &&
             other is _$ExpenditureImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.account, account) || other.account == account) &&
+            (identical(
+                    other.expendituresTotalAmount, expendituresTotalAmount) ||
+                other.expendituresTotalAmount == expendituresTotalAmount) &&
             (identical(other.place, place) || other.place == place) &&
             (identical(other.day, day) || other.day == day) &&
             (identical(other.paymentMethod, paymentMethod) ||
@@ -473,14 +470,25 @@ class _$ExpenditureImpl implements _Expenditure {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.content, content) || other.content == content) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.amount, amount) || other.amount == amount));
+            (identical(other.individual, individual) ||
+                other.individual == individual) &&
+            const DeepCollectionEquality()
+                .equals(other._calculate, _calculate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, account, place, day,
-      paymentMethod, category, content, name, amount);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      expendituresTotalAmount,
+      place,
+      day,
+      paymentMethod,
+      category,
+      content,
+      individual,
+      const DeepCollectionEquality().hash(_calculate));
 
   @JsonKey(ignore: true)
   @override
@@ -499,14 +507,14 @@ class _$ExpenditureImpl implements _Expenditure {
 abstract class _Expenditure implements Expenditure {
   factory _Expenditure(
       {required final int id,
-      required final Account account,
+      required final int expendituresTotalAmount,
       required final Place place,
       required final int day,
       required final String paymentMethod,
       required final String category,
       required final String content,
-      final String? name,
-      required final int amount}) = _$ExpenditureImpl;
+      required final bool individual,
+      required final List<Calculation> calculate}) = _$ExpenditureImpl;
 
   factory _Expenditure.fromJson(Map<String, dynamic> json) =
       _$ExpenditureImpl.fromJson;
@@ -514,7 +522,7 @@ abstract class _Expenditure implements Expenditure {
   @override
   int get id;
   @override
-  Account get account;
+  int get expendituresTotalAmount;
   @override
   Place get place;
   @override
@@ -526,12 +534,198 @@ abstract class _Expenditure implements Expenditure {
   @override
   String get content;
   @override
-  String? get name;
+  bool get individual;
+  @override
+  List<Calculation> get calculate;
+  @override
+  @JsonKey(ignore: true)
+  _$$ExpenditureImplCopyWith<_$ExpenditureImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Calculation _$CalculationFromJson(Map<String, dynamic> json) {
+  return _Calculation.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Calculation {
+  int get id => throw _privateConstructorUsedError;
+  Account get accountShowDTO => throw _privateConstructorUsedError;
+  int get amount => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CalculationCopyWith<Calculation> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CalculationCopyWith<$Res> {
+  factory $CalculationCopyWith(
+          Calculation value, $Res Function(Calculation) then) =
+      _$CalculationCopyWithImpl<$Res, Calculation>;
+  @useResult
+  $Res call({int id, Account accountShowDTO, int amount});
+
+  $AccountCopyWith<$Res> get accountShowDTO;
+}
+
+/// @nodoc
+class _$CalculationCopyWithImpl<$Res, $Val extends Calculation>
+    implements $CalculationCopyWith<$Res> {
+  _$CalculationCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? accountShowDTO = null,
+    Object? amount = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      accountShowDTO: null == accountShowDTO
+          ? _value.accountShowDTO
+          : accountShowDTO // ignore: cast_nullable_to_non_nullable
+              as Account,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AccountCopyWith<$Res> get accountShowDTO {
+    return $AccountCopyWith<$Res>(_value.accountShowDTO, (value) {
+      return _then(_value.copyWith(accountShowDTO: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$CalculationImplCopyWith<$Res>
+    implements $CalculationCopyWith<$Res> {
+  factory _$$CalculationImplCopyWith(
+          _$CalculationImpl value, $Res Function(_$CalculationImpl) then) =
+      __$$CalculationImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int id, Account accountShowDTO, int amount});
+
+  @override
+  $AccountCopyWith<$Res> get accountShowDTO;
+}
+
+/// @nodoc
+class __$$CalculationImplCopyWithImpl<$Res>
+    extends _$CalculationCopyWithImpl<$Res, _$CalculationImpl>
+    implements _$$CalculationImplCopyWith<$Res> {
+  __$$CalculationImplCopyWithImpl(
+      _$CalculationImpl _value, $Res Function(_$CalculationImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? accountShowDTO = null,
+    Object? amount = null,
+  }) {
+    return _then(_$CalculationImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      accountShowDTO: null == accountShowDTO
+          ? _value.accountShowDTO
+          : accountShowDTO // ignore: cast_nullable_to_non_nullable
+              as Account,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CalculationImpl implements _Calculation {
+  _$CalculationImpl(
+      {required this.id, required this.accountShowDTO, required this.amount});
+
+  factory _$CalculationImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CalculationImplFromJson(json);
+
+  @override
+  final int id;
+  @override
+  final Account accountShowDTO;
+  @override
+  final int amount;
+
+  @override
+  String toString() {
+    return 'Calculation(id: $id, accountShowDTO: $accountShowDTO, amount: $amount)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CalculationImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.accountShowDTO, accountShowDTO) ||
+                other.accountShowDTO == accountShowDTO) &&
+            (identical(other.amount, amount) || other.amount == amount));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, accountShowDTO, amount);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CalculationImplCopyWith<_$CalculationImpl> get copyWith =>
+      __$$CalculationImplCopyWithImpl<_$CalculationImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CalculationImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Calculation implements Calculation {
+  factory _Calculation(
+      {required final int id,
+      required final Account accountShowDTO,
+      required final int amount}) = _$CalculationImpl;
+
+  factory _Calculation.fromJson(Map<String, dynamic> json) =
+      _$CalculationImpl.fromJson;
+
+  @override
+  int get id;
+  @override
+  Account get accountShowDTO;
   @override
   int get amount;
   @override
   @JsonKey(ignore: true)
-  _$$ExpenditureImplCopyWith<_$ExpenditureImpl> get copyWith =>
+  _$$CalculationImplCopyWith<_$CalculationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -544,6 +738,7 @@ mixin _$Account {
   int get id => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
+  String? get accountRole => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -555,7 +750,7 @@ abstract class $AccountCopyWith<$Res> {
   factory $AccountCopyWith(Account value, $Res Function(Account) then) =
       _$AccountCopyWithImpl<$Res, Account>;
   @useResult
-  $Res call({int id, String nickname, String? photoUrl});
+  $Res call({int id, String nickname, String? photoUrl, String? accountRole});
 }
 
 /// @nodoc
@@ -574,6 +769,7 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
     Object? id = null,
     Object? nickname = null,
     Object? photoUrl = freezed,
+    Object? accountRole = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -588,6 +784,10 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      accountRole: freezed == accountRole
+          ? _value.accountRole
+          : accountRole // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -599,7 +799,7 @@ abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
       __$$AccountImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String nickname, String? photoUrl});
+  $Res call({int id, String nickname, String? photoUrl, String? accountRole});
 }
 
 /// @nodoc
@@ -616,6 +816,7 @@ class __$$AccountImplCopyWithImpl<$Res>
     Object? id = null,
     Object? nickname = null,
     Object? photoUrl = freezed,
+    Object? accountRole = freezed,
   }) {
     return _then(_$AccountImpl(
       id: null == id
@@ -630,6 +831,10 @@ class __$$AccountImplCopyWithImpl<$Res>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      accountRole: freezed == accountRole
+          ? _value.accountRole
+          : accountRole // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -638,7 +843,10 @@ class __$$AccountImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AccountImpl implements _Account {
   const _$AccountImpl(
-      {required this.id, required this.nickname, this.photoUrl});
+      {required this.id,
+      required this.nickname,
+      this.photoUrl,
+      this.accountRole});
 
   factory _$AccountImpl.fromJson(Map<String, dynamic> json) =>
       _$$AccountImplFromJson(json);
@@ -649,10 +857,12 @@ class _$AccountImpl implements _Account {
   final String nickname;
   @override
   final String? photoUrl;
+  @override
+  final String? accountRole;
 
   @override
   String toString() {
-    return 'Account(id: $id, nickname: $nickname, photoUrl: $photoUrl)';
+    return 'Account(id: $id, nickname: $nickname, photoUrl: $photoUrl, accountRole: $accountRole)';
   }
 
   @override
@@ -664,12 +874,15 @@ class _$AccountImpl implements _Account {
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.photoUrl, photoUrl) ||
-                other.photoUrl == photoUrl));
+                other.photoUrl == photoUrl) &&
+            (identical(other.accountRole, accountRole) ||
+                other.accountRole == accountRole));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, nickname, photoUrl);
+  int get hashCode =>
+      Object.hash(runtimeType, id, nickname, photoUrl, accountRole);
 
   @JsonKey(ignore: true)
   @override
@@ -689,7 +902,8 @@ abstract class _Account implements Account {
   const factory _Account(
       {required final int id,
       required final String nickname,
-      final String? photoUrl}) = _$AccountImpl;
+      final String? photoUrl,
+      final String? accountRole}) = _$AccountImpl;
 
   factory _Account.fromJson(Map<String, dynamic> json) = _$AccountImpl.fromJson;
 
@@ -699,6 +913,8 @@ abstract class _Account implements Account {
   String get nickname;
   @override
   String? get photoUrl;
+  @override
+  String? get accountRole;
   @override
   @JsonKey(ignore: true)
   _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>

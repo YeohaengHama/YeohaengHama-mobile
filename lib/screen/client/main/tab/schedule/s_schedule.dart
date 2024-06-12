@@ -21,7 +21,7 @@ import '../../../../../data/entity/itinerary/a_check_itinerary.dart';
 import '../../../../../data/memory/itinerary/show_save_place_provider.dart';
 import '../../../../../data/network/itinerary_api.dart';
 import '../../search/s_space_search.dart';
-import 'budget/s_budget.dart';
+import 'budget/main_screen/s_budget.dart';
 import 'edit/d_edit_schedule.dart';
 
 class ScheduleScreen extends ConsumerStatefulWidget {
@@ -74,7 +74,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                 }),
             actions: [
               IconButton(onPressed: () async{
-                await budgetApi.showBudget(int.parse(widget.itinerary.itineraryId), ref);
+                await budgetApi.showBudget(widget.itinerary, ref);
                 Nav.push(BudgetScreen(widget.itinerary));
               }, icon: const Icon(Icons.wallet)),
               IconButton(

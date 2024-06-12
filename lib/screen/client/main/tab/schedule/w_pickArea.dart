@@ -46,12 +46,16 @@ class PickAreaWidget extends ConsumerWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
-              child: CachedNetworkImage(
+              child: pickPlace.firstImage != "null" &&  pickPlace.firstImage.isNotEmpty ? CachedNetworkImage(
                 imageUrl: pickPlace.firstImage,
                 width: 105,
                 height: 100,
                 fit: BoxFit.cover,
-              ),
+              ) : Container(
+                color: AppColors.forthGrey,
+                width: 105,
+                height: 100,
+              )
             ),
             Align(
               alignment: Alignment.bottomLeft,

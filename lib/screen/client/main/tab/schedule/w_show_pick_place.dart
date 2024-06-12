@@ -29,7 +29,7 @@ class ShowPickPlace extends ConsumerWidget {
     List<AddPickPlace> filteredList = addPickPlaceListNotifier
         .where((element) => element.day == currentDay)
         .toList();
-    print(filteredList);
+    print('필터리스트:$filteredList');
 
     _pageController.addListener(() {
       int nextPage = _pageController.page?.round() ?? 0;
@@ -42,7 +42,16 @@ class ShowPickPlace extends ConsumerWidget {
       children: [
         Container(
           height: 70,
-          child: filteredList.length == 1
+          child: filteredList.isEmpty? SizedBox(
+              child: Center(child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  '아직 추가 된 장소가 없어요'.text.color(AppColors.thirdGrey).bold.make(),
+                  '장소를 추가해 볼까요?'.text.color(AppColors.thirdGrey).make(),
+                ],
+              ))
+          ).pSymmetric(h: 70) : filteredList.length == 1
               ? Center(
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -60,9 +69,11 @@ class ShowPickPlace extends ConsumerWidget {
                         filteredList, radiusBold, index);
                   },
                 ),
-        ),
+        ).pOnly(bottom: filteredList.isEmpty? 12: 0),
         SizedBox(height: 16),
-        ValueListenableBuilder<int>(
+        filteredList.isEmpty
+            ? Container()
+            : ValueListenableBuilder<int>(
           valueListenable: currentPageNotifier,
           builder: (context, currentPage, child) {
             return SmoothPageIndicator(

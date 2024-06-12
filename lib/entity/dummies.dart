@@ -194,30 +194,38 @@ final schedule1 = Schedule(
 const category1 = CategoryIcon(
     icon: Icons.home,
     category: '숙소',
+    engCategory: 'lodging',
+
     color: Color.fromARGB(255, 232, 52, 52));
 const category2 = CategoryIcon(
     icon: Icons.airplanemode_active_rounded,
     category: '항공',
+    engCategory: 'flight',
     color: Color.fromARGB(255, 52, 205, 232));
 const category3 = CategoryIcon(
     icon: Icons.directions_car,
     category: '교통',
+    engCategory: 'traffic',
     color: Color.fromARGB(255, 52, 232, 76));
 const category4 = CategoryIcon(
     icon: Icons.confirmation_num,
     category: '관광',
+    engCategory: 'tour',
     color: Color.fromARGB(255, 85, 52, 232));
 const category5 = CategoryIcon(
     icon: Icons.restaurant,
     category: '식비',
+    engCategory: 'food',
     color: Color.fromARGB(255, 255, 218, 0));
 const category6 = CategoryIcon(
     icon: Icons.shopping_bag,
     category: '쇼핑',
+    engCategory: 'shopping',
     color: Color.fromARGB(255, 255, 134, 46));
 const category7 = CategoryIcon(
     icon: Icons.category,
     category: '기타',
+    engCategory: 'other',
     color: Color.fromARGB(255, 74, 126, 145));
 
 final categoryList = [

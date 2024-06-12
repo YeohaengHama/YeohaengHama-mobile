@@ -3,7 +3,7 @@ import 'package:fast_app_base/data/entity/budget/vo_current_budget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../data/memory/budget/add_budget_provider.dart';
+import '../../../../../../../data/memory/budget/add_budget_provider.dart';
 
 class PickPaymentDialog extends ConsumerWidget {
   const PickPaymentDialog({super.key});

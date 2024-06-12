@@ -1,3 +1,4 @@
+import 'package:fast_app_base/screen/client/main/tab/schedule/s_invite_schedule.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,6 +39,7 @@ class EditScheduleDialog extends StatelessWidget {
             child: '여행날짜 수정'.text.bold.color(AppColors.primaryGrey).make().pSymmetric(v: columnP)),
         Tap(
             onTap: () {
+              Nav.push(InvateSchedule());
               Nav.pop(context);
             },
             child: '일정에 일행 초대'.text.bold.color(AppColors.primaryGrey).make().pSymmetric(v: columnP)),

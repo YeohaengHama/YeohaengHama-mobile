@@ -1,4 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/tab/home/w/w_no_pick_place.dart';
+import 'package:fast_app_base/screen/client/main/tab/home/w/w_no_schdule.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -40,6 +42,7 @@ class ShowPickPlace extends ConsumerWidget {
 
     return Column(
       children: [
+        filteredList.isNotEmpty?
         Container(
           height: 70,
           child: filteredList.length == 1
@@ -56,9 +59,10 @@ class ShowPickPlace extends ConsumerWidget {
               return buildPickPlaceItem(context, ref, itineraryApi, filteredList, radiusBold, index);
             },
           ),
-        ),
-        SizedBox(height: 10),
-        ValueListenableBuilder<int>(
+        ): NoPickPlace(),
+        SizedBox(height:filteredList.isNotEmpty? 10 : 0),
+        filteredList.isEmpty
+            ? Container(): ValueListenableBuilder<int>(
           valueListenable: currentPageNotifier,
           builder: (context, currentPage, child) {
             return SmoothPageIndicator(
@@ -80,7 +84,7 @@ class ShowPickPlace extends ConsumerWidget {
             );
           },
         ),
-        Height(10)
+        Height(filteredList.isNotEmpty? 22:10 )
       ],
     );
   }

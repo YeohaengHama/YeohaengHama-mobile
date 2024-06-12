@@ -8,8 +8,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../common/widget/scaffold/show_bottom_dialog.dart';
 import '../../../../../../data/memory/area/selectedDayIndex_provider.dart';
 import '../../../../../../data/memory/itinerary/itinerary_check_provider.dart';
-import '../../../../registration/calendar/s_calendar.dart';
-import '../../schedule/budget/d_pick_pament.dart';
 import '../../schedule/edit/d_edit_schedule.dart';
 
 class ExistScheduleWidget extends ConsumerWidget {
@@ -36,6 +34,7 @@ class ExistScheduleWidget extends ConsumerWidget {
             .bold
             .center
             .make(),
+        
         Stack(
           children: [
             Row(

@@ -1,15 +1,15 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/screen/client/main/tab/schedule/budget/s_add_amount.dart';
-import 'package:fast_app_base/screen/client/main/tab/schedule/budget/s_dutch_treat.dart';
-import 'package:fast_app_base/screen/client/main/tab/schedule/budget/w_dudget_holder.dart';
+import 'package:fast_app_base/screen/client/main/tab/schedule/budget/calculate/s_calculate.dart';
+import 'package:fast_app_base/screen/client/main/tab/schedule/budget/statistics/s_statistics.dart';
+import 'package:fast_app_base/screen/client/main/tab/schedule/budget/main_screen/w_dudget_holder.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart'; // Import the intl package
 
-import '../../../../../../common/theme/text_size.dart';
-import '../../../../../../data/entity/itinerary/a_check_itinerary.dart';
-import '../../../../../../data/memory/budget/current_budget_provider.dart';
-import '../../../search/s_space_search.dart';
+import '../../../../../../../common/theme/text_size.dart';
+import '../../../../../../../data/entity/itinerary/a_check_itinerary.dart';
+import '../../../../../../../data/memory/budget/current_budget_provider.dart';
+import '../../../../search/s_space_search.dart';
 
 class BudgetScreen extends ConsumerStatefulWidget {
   const BudgetScreen(this.itinerary, {super.key});
@@ -51,10 +51,10 @@ class _WalletScreenState extends ConsumerState<BudgetScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                Nav.push(DutchTreatScreen());
+                Nav.push(StatisticsScreen());
               },
               icon: const Icon(Icons.percent_rounded)), //Colock Loader 10
-          IconButton(onPressed: () {}, icon: const Icon(Icons.more_horiz)),
+          IconButton(onPressed: () {Nav.push(CalcultateScreen());}, icon: const Icon(Icons.more_horiz)),
           IconButton(onPressed: () {}, icon: const Icon(Icons.list)),
         ],
       ),

@@ -4,8 +4,8 @@ import 'package:fast_app_base/data/memory/budget/seleted_day_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../common/dart/extension/day_parser.dart';
-import '../../../../../../data/entity/budget/vo_current_budget.dart';
+import '../../../../../../../data/entity/budget/vo_current_budget.dart';
+
 
 class PickDayDialog extends ConsumerWidget {
   final CurrentBudget budget;
@@ -17,16 +17,16 @@ class PickDayDialog extends ConsumerWidget {
     final seletedDay = ref.read(selectedDayProvider.notifier);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: budget.expendituresList.keys.map((key) {
+      children: budget.expenditures.keys.map((key) {
         return Tap(
-          onTap: () { addBudget.setDay(getIndexFromDayString(key));
-          seletedDay.setSelectedDay(getIndexFromDayString(key));
+          onTap: () { addBudget.setDay(key);
+          seletedDay.setSelectedDay(key);
 
           Nav.pop(context);},
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              key.text.make().pSymmetric(v:10), // key 출력
+              'Day-$key'.text.make().pSymmetric(v:10), // key 출력
               // 해당 키에 해당하는 Expenditure 리스트 출력
             ],
           ),

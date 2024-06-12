@@ -29,9 +29,11 @@ mixin _$CheckItinerary {
   String get startDate => throw _privateConstructorUsedError;
   String? get expense => throw _privateConstructorUsedError;
   String get endDate => throw _privateConstructorUsedError;
+  int get budgetId => throw _privateConstructorUsedError;
   Account get account => throw _privateConstructorUsedError; // Account 객체로 수정
   Map<String, List<PlaceByDay>> get placesByDay =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // Map<String, List<PlaceByDay>>로 수정
+  List<SharedAccount> get sharedAccount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,8 +57,10 @@ abstract class $CheckItineraryCopyWith<$Res> {
       String startDate,
       String? expense,
       String endDate,
+      int budgetId,
       Account account,
-      Map<String, List<PlaceByDay>> placesByDay});
+      Map<String, List<PlaceByDay>> placesByDay,
+      List<SharedAccount> sharedAccount});
 }
 
 /// @nodoc
@@ -81,8 +85,10 @@ class _$CheckItineraryCopyWithImpl<$Res, $Val extends CheckItinerary>
     Object? startDate = null,
     Object? expense = freezed,
     Object? endDate = null,
+    Object? budgetId = null,
     Object? account = null,
     Object? placesByDay = null,
+    Object? sharedAccount = null,
   }) {
     return _then(_value.copyWith(
       itineraryId: null == itineraryId
@@ -121,6 +127,10 @@ class _$CheckItineraryCopyWithImpl<$Res, $Val extends CheckItinerary>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as String,
+      budgetId: null == budgetId
+          ? _value.budgetId
+          : budgetId // ignore: cast_nullable_to_non_nullable
+              as int,
       account: null == account
           ? _value.account
           : account // ignore: cast_nullable_to_non_nullable
@@ -129,6 +139,10 @@ class _$CheckItineraryCopyWithImpl<$Res, $Val extends CheckItinerary>
           ? _value.placesByDay
           : placesByDay // ignore: cast_nullable_to_non_nullable
               as Map<String, List<PlaceByDay>>,
+      sharedAccount: null == sharedAccount
+          ? _value.sharedAccount
+          : sharedAccount // ignore: cast_nullable_to_non_nullable
+              as List<SharedAccount>,
     ) as $Val);
   }
 }
@@ -151,8 +165,10 @@ abstract class _$$CheckItineraryImplCopyWith<$Res>
       String startDate,
       String? expense,
       String endDate,
+      int budgetId,
       Account account,
-      Map<String, List<PlaceByDay>> placesByDay});
+      Map<String, List<PlaceByDay>> placesByDay,
+      List<SharedAccount> sharedAccount});
 }
 
 /// @nodoc
@@ -175,8 +191,10 @@ class __$$CheckItineraryImplCopyWithImpl<$Res>
     Object? startDate = null,
     Object? expense = freezed,
     Object? endDate = null,
+    Object? budgetId = null,
     Object? account = null,
     Object? placesByDay = null,
+    Object? sharedAccount = null,
   }) {
     return _then(_$CheckItineraryImpl(
       itineraryId: null == itineraryId
@@ -215,6 +233,10 @@ class __$$CheckItineraryImplCopyWithImpl<$Res>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as String,
+      budgetId: null == budgetId
+          ? _value.budgetId
+          : budgetId // ignore: cast_nullable_to_non_nullable
+              as int,
       account: null == account
           ? _value.account
           : account // ignore: cast_nullable_to_non_nullable
@@ -223,6 +245,10 @@ class __$$CheckItineraryImplCopyWithImpl<$Res>
           ? _value._placesByDay
           : placesByDay // ignore: cast_nullable_to_non_nullable
               as Map<String, List<PlaceByDay>>,
+      sharedAccount: null == sharedAccount
+          ? _value._sharedAccount
+          : sharedAccount // ignore: cast_nullable_to_non_nullable
+              as List<SharedAccount>,
     ));
   }
 }
@@ -240,11 +266,14 @@ class _$CheckItineraryImpl implements _CheckItinerary {
       required this.startDate,
       this.expense = '',
       required this.endDate,
+      required this.budgetId,
       required this.account,
-      required final Map<String, List<PlaceByDay>> placesByDay})
+      required final Map<String, List<PlaceByDay>> placesByDay,
+      required final List<SharedAccount> sharedAccount})
       : _type = type,
         _style = style,
-        _placesByDay = placesByDay;
+        _placesByDay = placesByDay,
+        _sharedAccount = sharedAccount;
 
   factory _$CheckItineraryImpl.fromJson(Map<String, dynamic> json) =>
       _$$CheckItineraryImplFromJson(json);
@@ -285,6 +314,8 @@ class _$CheckItineraryImpl implements _CheckItinerary {
   @override
   final String endDate;
   @override
+  final int budgetId;
+  @override
   final Account account;
 // Account 객체로 수정
   final Map<String, List<PlaceByDay>> _placesByDay;
@@ -296,9 +327,19 @@ class _$CheckItineraryImpl implements _CheckItinerary {
     return EqualUnmodifiableMapView(_placesByDay);
   }
 
+// Map<String, List<PlaceByDay>>로 수정
+  final List<SharedAccount> _sharedAccount;
+// Map<String, List<PlaceByDay>>로 수정
+  @override
+  List<SharedAccount> get sharedAccount {
+    if (_sharedAccount is EqualUnmodifiableListView) return _sharedAccount;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_sharedAccount);
+  }
+
   @override
   String toString() {
-    return 'CheckItinerary(itineraryId: $itineraryId, type: $type, style: $style, name: $name, transportation: $transportation, area: $area, startDate: $startDate, expense: $expense, endDate: $endDate, account: $account, placesByDay: $placesByDay)';
+    return 'CheckItinerary(itineraryId: $itineraryId, type: $type, style: $style, name: $name, transportation: $transportation, area: $area, startDate: $startDate, expense: $expense, endDate: $endDate, budgetId: $budgetId, account: $account, placesByDay: $placesByDay, sharedAccount: $sharedAccount)';
   }
 
   @override
@@ -318,9 +359,13 @@ class _$CheckItineraryImpl implements _CheckItinerary {
                 other.startDate == startDate) &&
             (identical(other.expense, expense) || other.expense == expense) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.budgetId, budgetId) ||
+                other.budgetId == budgetId) &&
             (identical(other.account, account) || other.account == account) &&
             const DeepCollectionEquality()
-                .equals(other._placesByDay, _placesByDay));
+                .equals(other._placesByDay, _placesByDay) &&
+            const DeepCollectionEquality()
+                .equals(other._sharedAccount, _sharedAccount));
   }
 
   @JsonKey(ignore: true)
@@ -336,8 +381,10 @@ class _$CheckItineraryImpl implements _CheckItinerary {
       startDate,
       expense,
       endDate,
+      budgetId,
       account,
-      const DeepCollectionEquality().hash(_placesByDay));
+      const DeepCollectionEquality().hash(_placesByDay),
+      const DeepCollectionEquality().hash(_sharedAccount));
 
   @JsonKey(ignore: true)
   @override
@@ -356,18 +403,19 @@ class _$CheckItineraryImpl implements _CheckItinerary {
 
 abstract class _CheckItinerary implements CheckItinerary {
   const factory _CheckItinerary(
-          {required final String itineraryId,
-          required final List<String>? type,
-          required final List<String>? style,
-          required final String name,
-          required final String transportation,
-          required final String area,
-          required final String startDate,
-          final String? expense,
-          required final String endDate,
-          required final Account account,
-          required final Map<String, List<PlaceByDay>> placesByDay}) =
-      _$CheckItineraryImpl;
+      {required final String itineraryId,
+      required final List<String>? type,
+      required final List<String>? style,
+      required final String name,
+      required final String transportation,
+      required final String area,
+      required final String startDate,
+      final String? expense,
+      required final String endDate,
+      required final int budgetId,
+      required final Account account,
+      required final Map<String, List<PlaceByDay>> placesByDay,
+      required final List<SharedAccount> sharedAccount}) = _$CheckItineraryImpl;
 
   factory _CheckItinerary.fromJson(Map<String, dynamic> json) =
       _$CheckItineraryImpl.fromJson;
@@ -391,9 +439,13 @@ abstract class _CheckItinerary implements CheckItinerary {
   @override
   String get endDate;
   @override
+  int get budgetId;
+  @override
   Account get account;
   @override // Account 객체로 수정
   Map<String, List<PlaceByDay>> get placesByDay;
+  @override // Map<String, List<PlaceByDay>>로 수정
+  List<SharedAccount> get sharedAccount;
   @override
   @JsonKey(ignore: true)
   _$$CheckItineraryImplCopyWith<_$CheckItineraryImpl> get copyWith =>

@@ -33,7 +33,7 @@ class AreaApi {
       final response = await _dio.post(
         '$baseUrl/openApi/searchArea',
         data: {
-          'numOfRows': openApiArea.numOfRows,
+          'numOfRows':100,
           'page': openApiArea.page,
           'keyword': openApiArea.keyword,
           'contentTypeId': openApiArea.contentTypeId,
@@ -42,10 +42,8 @@ class AreaApi {
       );
 
       if (response.statusCode == 200) {
-        String responseDataString = response.data.toString().replaceAll('<xmp>', '').replaceAll('</xmp>', '');
-        Map<String, dynamic> responseData = json.decode(responseDataString);
-
-        final List<dynamic> items = responseData['response']['body']['items']['item'];
+        Map<String, dynamic> responseData = response.data; // 수정된 부분
+        final List<dynamic> items = responseData['data']['place'];
         for (var item in items) {
           final contentTypeId = item['contenttypeid'].toString();
           final contentId = item['contentid'].toString();
@@ -86,7 +84,7 @@ class AreaApi {
       final response = await _dio.post(
         '$baseUrl/openApi/searchArea',
         data: {
-          'numOfRows': openApiArea.numOfRows,
+          'numOfRows': 100,
           'page': openApiArea.page,
           'keyword': openApiArea.keyword,
           'contentTypeId': openApiArea.contentTypeId,
@@ -95,10 +93,9 @@ class AreaApi {
       );
 
       if (response.statusCode == 200) {
-        String responseDataString = response.data.toString().replaceAll('<xmp>', '').replaceAll('</xmp>', '');
-        Map<String, dynamic> responseData = json.decode(responseDataString);
 
-        final List<dynamic> items = responseData['response']['body']['items']['item'];
+        Map<String, dynamic> responseData = response.data; // 수정된 부분
+        final List<dynamic> items = responseData['data']['place'];
         for (var item in items) {
           final contentTypeId = item['contenttypeid'].toString();
           final contentId = item['contentid'].toString();
@@ -106,6 +103,7 @@ class AreaApi {
           final addr1 = item['addr1'].toString();
           final addr2 = item['addr2'].toString();
           final firstimage = item['firstimage'].toString();
+
 
           final searchSimpleRestaurantResult = SearchSimpleRestaurantResult(
             contentTypeId: contentTypeId,
@@ -203,11 +201,11 @@ class AreaApi {
       );
 
       if (response.statusCode == 200) {
-        String responseDataString = response.data.toString().replaceAll('<xmp>', '').replaceAll('</xmp>', '');
-        Map<String, dynamic> responseData = json.decode(responseDataString);
+        Map<String, dynamic> responseData = response.data;
 
-        final List<dynamic> items = responseData['response']['body']['items']['item'];
-        for (var item in items) {
+        final item = responseData['data'];
+
+
           final contentTypeId = item['contenttypeid'].toString();
           final contentId = item['contentid'].toString();
           final title = item['title'].toString();
@@ -229,7 +227,7 @@ class AreaApi {
           );
           detailAreaNotifier.addDetailArea(searchDetailResult);
           print(searchDetailResult);
-        }
+
         return response;
       } else if (response.statusCode == 401) {
         return response;
