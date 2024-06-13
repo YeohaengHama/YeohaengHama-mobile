@@ -20,11 +20,12 @@ ReviewShowAll _$ReviewShowAllFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ReviewShowAll {
-  int get contentId => throw _privateConstructorUsedError;
+  int? get contentId => throw _privateConstructorUsedError;
   int get contentTypeId => throw _privateConstructorUsedError;
-  int get rating => throw _privateConstructorUsedError;
+  int? get rating => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  List<String> get reviewPhotoURLList => throw _privateConstructorUsedError;
+  List<String>? get reviewPhotoURLList => throw _privateConstructorUsedError;
+  String? get blogURL => throw _privateConstructorUsedError;
   Account get account => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,11 +41,12 @@ abstract class $ReviewShowAllCopyWith<$Res> {
       _$ReviewShowAllCopyWithImpl<$Res, ReviewShowAll>;
   @useResult
   $Res call(
-      {int contentId,
+      {int? contentId,
       int contentTypeId,
-      int rating,
+      int? rating,
       String content,
-      List<String> reviewPhotoURLList,
+      List<String>? reviewPhotoURLList,
+      String? blogURL,
       Account account});
 
   $AccountCopyWith<$Res> get account;
@@ -63,34 +65,39 @@ class _$ReviewShowAllCopyWithImpl<$Res, $Val extends ReviewShowAll>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? contentId = null,
+    Object? contentId = freezed,
     Object? contentTypeId = null,
-    Object? rating = null,
+    Object? rating = freezed,
     Object? content = null,
-    Object? reviewPhotoURLList = null,
+    Object? reviewPhotoURLList = freezed,
+    Object? blogURL = freezed,
     Object? account = null,
   }) {
     return _then(_value.copyWith(
-      contentId: null == contentId
+      contentId: freezed == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       contentTypeId: null == contentTypeId
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
               as int,
-      rating: null == rating
+      rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      reviewPhotoURLList: null == reviewPhotoURLList
+      reviewPhotoURLList: freezed == reviewPhotoURLList
           ? _value.reviewPhotoURLList
           : reviewPhotoURLList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
+      blogURL: freezed == blogURL
+          ? _value.blogURL
+          : blogURL // ignore: cast_nullable_to_non_nullable
+              as String?,
       account: null == account
           ? _value.account
           : account // ignore: cast_nullable_to_non_nullable
@@ -116,11 +123,12 @@ abstract class _$$ReviewShowAllImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int contentId,
+      {int? contentId,
       int contentTypeId,
-      int rating,
+      int? rating,
       String content,
-      List<String> reviewPhotoURLList,
+      List<String>? reviewPhotoURLList,
+      String? blogURL,
       Account account});
 
   @override
@@ -138,34 +146,39 @@ class __$$ReviewShowAllImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? contentId = null,
+    Object? contentId = freezed,
     Object? contentTypeId = null,
-    Object? rating = null,
+    Object? rating = freezed,
     Object? content = null,
-    Object? reviewPhotoURLList = null,
+    Object? reviewPhotoURLList = freezed,
+    Object? blogURL = freezed,
     Object? account = null,
   }) {
     return _then(_$ReviewShowAllImpl(
-      contentId: null == contentId
+      contentId: freezed == contentId
           ? _value.contentId
           : contentId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       contentTypeId: null == contentTypeId
           ? _value.contentTypeId
           : contentTypeId // ignore: cast_nullable_to_non_nullable
               as int,
-      rating: null == rating
+      rating: freezed == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      reviewPhotoURLList: null == reviewPhotoURLList
+      reviewPhotoURLList: freezed == reviewPhotoURLList
           ? _value._reviewPhotoURLList
           : reviewPhotoURLList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
+      blogURL: freezed == blogURL
+          ? _value.blogURL
+          : blogURL // ignore: cast_nullable_to_non_nullable
+              as String?,
       account: null == account
           ? _value.account
           : account // ignore: cast_nullable_to_non_nullable
@@ -178,11 +191,12 @@ class __$$ReviewShowAllImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ReviewShowAllImpl implements _ReviewShowAll {
   _$ReviewShowAllImpl(
-      {required this.contentId,
+      {this.contentId,
       required this.contentTypeId,
-      required this.rating,
+      this.rating,
       required this.content,
-      required final List<String> reviewPhotoURLList,
+      final List<String>? reviewPhotoURLList,
+      this.blogURL,
       required this.account})
       : _reviewPhotoURLList = reviewPhotoURLList;
 
@@ -190,28 +204,32 @@ class _$ReviewShowAllImpl implements _ReviewShowAll {
       _$$ReviewShowAllImplFromJson(json);
 
   @override
-  final int contentId;
+  final int? contentId;
   @override
   final int contentTypeId;
   @override
-  final int rating;
+  final int? rating;
   @override
   final String content;
-  final List<String> _reviewPhotoURLList;
+  final List<String>? _reviewPhotoURLList;
   @override
-  List<String> get reviewPhotoURLList {
+  List<String>? get reviewPhotoURLList {
+    final value = _reviewPhotoURLList;
+    if (value == null) return null;
     if (_reviewPhotoURLList is EqualUnmodifiableListView)
       return _reviewPhotoURLList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_reviewPhotoURLList);
+    return EqualUnmodifiableListView(value);
   }
 
+  @override
+  final String? blogURL;
   @override
   final Account account;
 
   @override
   String toString() {
-    return 'ReviewShowAll(contentId: $contentId, contentTypeId: $contentTypeId, rating: $rating, content: $content, reviewPhotoURLList: $reviewPhotoURLList, account: $account)';
+    return 'ReviewShowAll(contentId: $contentId, contentTypeId: $contentTypeId, rating: $rating, content: $content, reviewPhotoURLList: $reviewPhotoURLList, blogURL: $blogURL, account: $account)';
   }
 
   @override
@@ -227,6 +245,7 @@ class _$ReviewShowAllImpl implements _ReviewShowAll {
             (identical(other.content, content) || other.content == content) &&
             const DeepCollectionEquality()
                 .equals(other._reviewPhotoURLList, _reviewPhotoURLList) &&
+            (identical(other.blogURL, blogURL) || other.blogURL == blogURL) &&
             (identical(other.account, account) || other.account == account));
   }
 
@@ -239,6 +258,7 @@ class _$ReviewShowAllImpl implements _ReviewShowAll {
       rating,
       content,
       const DeepCollectionEquality().hash(_reviewPhotoURLList),
+      blogURL,
       account);
 
   @JsonKey(ignore: true)
@@ -257,26 +277,29 @@ class _$ReviewShowAllImpl implements _ReviewShowAll {
 
 abstract class _ReviewShowAll implements ReviewShowAll {
   factory _ReviewShowAll(
-      {required final int contentId,
+      {final int? contentId,
       required final int contentTypeId,
-      required final int rating,
+      final int? rating,
       required final String content,
-      required final List<String> reviewPhotoURLList,
+      final List<String>? reviewPhotoURLList,
+      final String? blogURL,
       required final Account account}) = _$ReviewShowAllImpl;
 
   factory _ReviewShowAll.fromJson(Map<String, dynamic> json) =
       _$ReviewShowAllImpl.fromJson;
 
   @override
-  int get contentId;
+  int? get contentId;
   @override
   int get contentTypeId;
   @override
-  int get rating;
+  int? get rating;
   @override
   String get content;
   @override
-  List<String> get reviewPhotoURLList;
+  List<String>? get reviewPhotoURLList;
+  @override
+  String? get blogURL;
   @override
   Account get account;
   @override
@@ -291,9 +314,10 @@ Account _$AccountFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Account {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
+  String? get accountRole => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -305,7 +329,7 @@ abstract class $AccountCopyWith<$Res> {
   factory $AccountCopyWith(Account value, $Res Function(Account) then) =
       _$AccountCopyWithImpl<$Res, Account>;
   @useResult
-  $Res call({int id, String nickname, String? photoUrl});
+  $Res call({int? id, String nickname, String? photoUrl, String? accountRole});
 }
 
 /// @nodoc
@@ -321,15 +345,16 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? nickname = null,
     Object? photoUrl = freezed,
+    Object? accountRole = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -337,6 +362,10 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
       photoUrl: freezed == photoUrl
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      accountRole: freezed == accountRole
+          ? _value.accountRole
+          : accountRole // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -349,7 +378,7 @@ abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
       __$$AccountImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String nickname, String? photoUrl});
+  $Res call({int? id, String nickname, String? photoUrl, String? accountRole});
 }
 
 /// @nodoc
@@ -363,15 +392,16 @@ class __$$AccountImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? nickname = null,
     Object? photoUrl = freezed,
+    Object? accountRole = freezed,
   }) {
     return _then(_$AccountImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
@@ -380,6 +410,10 @@ class __$$AccountImplCopyWithImpl<$Res>
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      accountRole: freezed == accountRole
+          ? _value.accountRole
+          : accountRole // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -387,21 +421,24 @@ class __$$AccountImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AccountImpl implements _Account {
-  _$AccountImpl({required this.id, required this.nickname, this.photoUrl});
+  _$AccountImpl(
+      {this.id, required this.nickname, this.photoUrl, this.accountRole});
 
   factory _$AccountImpl.fromJson(Map<String, dynamic> json) =>
       _$$AccountImplFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final String nickname;
   @override
   final String? photoUrl;
+  @override
+  final String? accountRole;
 
   @override
   String toString() {
-    return 'Account(id: $id, nickname: $nickname, photoUrl: $photoUrl)';
+    return 'Account(id: $id, nickname: $nickname, photoUrl: $photoUrl, accountRole: $accountRole)';
   }
 
   @override
@@ -413,12 +450,15 @@ class _$AccountImpl implements _Account {
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.photoUrl, photoUrl) ||
-                other.photoUrl == photoUrl));
+                other.photoUrl == photoUrl) &&
+            (identical(other.accountRole, accountRole) ||
+                other.accountRole == accountRole));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, nickname, photoUrl);
+  int get hashCode =>
+      Object.hash(runtimeType, id, nickname, photoUrl, accountRole);
 
   @JsonKey(ignore: true)
   @override
@@ -436,18 +476,21 @@ class _$AccountImpl implements _Account {
 
 abstract class _Account implements Account {
   factory _Account(
-      {required final int id,
+      {final int? id,
       required final String nickname,
-      final String? photoUrl}) = _$AccountImpl;
+      final String? photoUrl,
+      final String? accountRole}) = _$AccountImpl;
 
   factory _Account.fromJson(Map<String, dynamic> json) = _$AccountImpl.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   String get nickname;
   @override
   String? get photoUrl;
+  @override
+  String? get accountRole;
   @override
   @JsonKey(ignore: true)
   _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>

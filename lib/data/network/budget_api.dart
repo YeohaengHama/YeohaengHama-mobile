@@ -2,13 +2,19 @@
 
 import 'package:dio/dio.dart';
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/data/entity/itinerary/a_check_itinerary.dart';
+import 'package:fast_app_base/data/entity/review/vo_check_write_review.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../common/constants.dart';
 import '../entity/budget/vo_add_budget.dart';
 import '../entity/budget/vo_current_budget.dart';
 
+import '../entity/budget/vo_statistics.dart';
 import '../memory/budget/current_budget_provider.dart';
+import '../memory/budget/statistics_provider.dart';
+import '../memory/itinerary/itinerary_check_provider.dart';
+import '../memory/user_provider.dart';
 
 final budgetApiProvider = Provider<BudgetApi>((ref) => BudgetApi());
 
@@ -47,14 +53,15 @@ class BudgetApi {
 
 
 
-  Future<void> showBudget(int itineraryId, WidgetRef ref) async {
+  Future<void> showBudget(CheckItinerary checkItinerary, WidgetRef ref) async {
     final url = '$baseUrl/Budget/budgetShow';
 
     try {
       final response = await _dio.post(
         url,
         data: {
-          "itinerary" : itineraryId
+          "budgetId" : checkItinerary.budgetId,
+          "accountId" : checkItinerary.account.id
         }
       );
 
@@ -77,26 +84,32 @@ class BudgetApi {
   }
   Future<void> addBudget(AddBudget addBudget,WidgetRef ref) async {
     final url = '$baseUrl/Budget/addExpenditures';
+    final account = ref.read(accountProvider);
     try {
       final response = await _dio.post(
         url,
         data: {
-          "itineraryId": addBudget.itineraryId,
+          "expendituresId": addBudget.expendituresId,
+          "budgetId": addBudget.budgetId,
+          "totalAmount": addBudget.totalAmount,
+          "payerId": addBudget.payerId,
+          "accountId": addBudget.accountId,
+          "amount": addBudget.amount,
           "place": addBudget.place,
           "day": addBudget.day,
           "paymentMethod": addBudget.paymentMethod,
           "content": addBudget.content,
           "category": addBudget.category,
-          "name": addBudget.name,
-          "amount": addBudget.amount,
+          "individual": addBudget.individual,
+          "divided" : addBudget.divided,
         },
       );
 
       if (response.statusCode == 200) {
-
+        final itinerary = ref.read(itineraryCheckProvider);
         print('가계부 추가 성공: ${response.data}');
         // 가계부 생성 성공 시 setCurrentBudget를 호출하여 데이터를 저장
-        await showBudget(addBudget.itineraryId,ref);
+        await showBudget(itinerary!,ref);
 
 
       } else if (response.statusCode == 401) {
@@ -113,24 +126,58 @@ class BudgetApi {
   }
 
 
-  Future<void> deleteBudgetOne(Expenditure budget,int itineraryId, WidgetRef ref) async {
+  Future<void> deleteBudgetOne(int expendituresId, WidgetRef ref) async {
     final url = '$baseUrl/Budget/expendituresDeleteOne';
 
     try {
       final response = await _dio.post(
           url,
           data: {
-            "id" : budget.id,
+            "expendituresId" : expendituresId
 
           }
       );
 
       if (response.statusCode == 200) {
         print('지출 삭제 성공: ${response.data}');
-        await showBudget(itineraryId, ref);
+        final itinerary = ref.read(itineraryCheckProvider);
+
+        await showBudget(itinerary!, ref);
         // 가계부 생성 성공 시 setCurrentBudget를 호출하여 데이터를 저장
         ref.read(currentBudgetProvider.notifier).setCurrentBudget(CurrentBudget.fromJson(response.data));
 
+      } else if (response.statusCode == 401) {
+        print('error');
+        return null;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    }
+  }
+
+
+
+  Future<void> budgetStatistics(CheckItinerary checkItinerary, WidgetRef ref) async {
+    final url = '$baseUrl/Budget/statistics';
+
+    try {
+      final response = await _dio.post(
+        url,
+        data: {
+          "budgetId": checkItinerary.budgetId,
+          "accountId": checkItinerary.account.id
+        },
+      );
+
+      if (response.statusCode == 200) {
+        print('가계부 불러오기 성공: ${response.data}');
+        // JSON 데이터를 Budget 객체로 변환하여 상태를 업데이트
+        final statisticsData = Statistics.fromJson(response.data['data']);
+        ref.read(statisticsProvider.notifier).updateStatistics(statisticsData); // updateBudget 호출하여 Budget 객체 업데이트
       } else if (response.statusCode == 401) {
         print('error');
         return null;

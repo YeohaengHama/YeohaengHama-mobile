@@ -1,11 +1,11 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/memory/budget/seleted_day_provider.dart';
 import 'package:fast_app_base/data/memory/itinerary/add_pick_each_place_provider.dart';
-import 'package:fast_app_base/screen/client/main/tab/schedule/budget/w_pick_place.dart';
+import 'package:fast_app_base/screen/client/main/tab/schedule/budget/main_screen/w_pick_place.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../data/memory/itinerary/add_pick_place_provider.dart';
+import '../../../../../../../data/memory/itinerary/add_pick_place_provider.dart';
 
 class BudgetPickArea extends ConsumerWidget {
   const BudgetPickArea({Key? key}) : super(key: key);

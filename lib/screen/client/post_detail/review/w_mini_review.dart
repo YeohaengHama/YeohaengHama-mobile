@@ -12,21 +12,22 @@ class MiniReview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SizedBox(
       width: 250,
       height: 100,
       child: RoundedContainer(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           backgroundColor: AppColors.outline,
           child: Row(
             children: [
               Align(
                   alignment: Alignment.topLeft,
                   child: Icon(
-                    review.rating >= 3
+                    review.rating == null
                         ? Icons.thumb_up_alt_outlined
-                        : Icons.thumb_down_alt_outlined,
+                        : (review.rating! >= 3
+                            ? Icons.thumb_up_alt_outlined
+                            : Icons.thumb_down_alt_outlined),
                     color: AppColors.secondGrey,
                     size: 23,
                   ).pOnly(right: 4)),

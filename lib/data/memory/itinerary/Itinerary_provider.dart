@@ -29,6 +29,13 @@ class ItineraryNotifier extends StateNotifier<List<Itinerary>> {
     }
   }
 
+  String? getSelectedStartDate() {
+    return selectedStartDate;
+  }
+
+  String? getSelectedEndDate() {
+    return selectedEndDate;
+  }
 
   void updateWhoTags(List<String> tags) {
     selectedWhoTags = tags;

@@ -1,15 +1,16 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/registration/calendar/w_range_calendar.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CalenderScreen extends StatefulWidget {
-  const CalenderScreen({super.key});
-
+class CalenderScreen extends ConsumerStatefulWidget {
+  const CalenderScreen({super.key, this.isEditMode = false });
+  final bool isEditMode;
   @override
-  State<CalenderScreen> createState() => _CalenderScreenState();
+  ConsumerState<CalenderScreen> createState() => _CalenderScreenState();
 }
 
-class _CalenderScreenState extends State<CalenderScreen> {
+class _CalenderScreenState extends ConsumerState<CalenderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,8 +27,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Height(55),
-                    '여행일정 등록'.text.bold.color(AppColors.primaryGrey).size(20).make(),
-                    '일정에 따른 날씨예보, 여행 정보를 알려드립니다.'.text.bold.color(AppColors.thirdGrey).size(15).make(),
+                    widget.isEditMode? '여행일정 수정'.text.bold.color(AppColors.primaryGrey).size(20).make() :'여행일정 등록'.text.bold.color(AppColors.primaryGrey).size(20).make(),
+                    '일정에 따른 여행 정보를 알려드립니다.'.text.bold.color(AppColors.thirdGrey).size(15).make(),
                   ],
                 ).pOnly(left: 30),
               )
@@ -40,7 +41,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                 Container(
                   color: AppColors.whiteGrey,
                   width: 375,
-                  child: RangeCalendar(),
+                  child: RangeCalendar(isEditMode: widget.isEditMode),
                 ),
               ],
             ),

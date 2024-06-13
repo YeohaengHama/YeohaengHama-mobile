@@ -105,8 +105,8 @@ class _DiaryMapWidgetState extends ConsumerState<DiaryMapWidget> {
 
     // Calculate padding based on the number of items in the list
     final padding = EdgeInsets.symmetric(
-      vertical: max(70, (placeCoordinates.length == 1 ? 140 : 70)), // Adjust the vertical padding dynamically
-      horizontal: max(70, (placeCoordinates.length == 1 ? 140 : 70)), // Adjust the horizontal padding dynamically
+      vertical: max(170, (placeCoordinates.length == 1 ? 140 : 170)), // Adjust the vertical padding dynamically
+      horizontal: max(100, (placeCoordinates.length == 1 ? 140 : 170)), // Adjust the horizontal padding dynamically
     );
 
     // 카메라를 경계 영역으로 이동시킵니다.

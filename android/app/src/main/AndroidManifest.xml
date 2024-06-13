@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.project.yeohaeng_hama">
+    <uses-permission android:name="android.permission.INTERNET"/> // 주의
 
     <application
+
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:label="fast_app_base">

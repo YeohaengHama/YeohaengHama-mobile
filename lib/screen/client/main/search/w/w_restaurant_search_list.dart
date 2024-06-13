@@ -17,11 +17,15 @@ class RestaurantSearchListWidget extends ConsumerWidget {
   const RestaurantSearchListWidget(this.searchSimpleRestaurantResult, {super.key});
 
   final SearchSimpleRestaurantResult searchSimpleRestaurantResult;
+  String truncateWithEllipsis(int cutoff, String myString) {
+    return (myString.length <= cutoff) ? myString : '${myString.substring(0, cutoff)}...';
+  }
+
 
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
+    String addr1Text = searchSimpleRestaurantResult.addr1.toString();
     Future<void> postDetailArea() async {
       final openApiDetail = OpenApiDetail(
         numOfRows: '1',
@@ -70,20 +74,20 @@ class RestaurantSearchListWidget extends ConsumerWidget {
       child: Container(
         child: Row(
           children: [
-            searchSimpleRestaurantResult.firstimage != ''
-                ? CachedNetworkImage(
+            searchSimpleRestaurantResult.firstimage == '' ||  searchSimpleRestaurantResult.firstimage =="null"
+                ?Container(
+              color: AppColors.whiteGrey,
+              width: 45,
+              height: 45,
+            ):CachedNetworkImage(
               imageUrl: searchSimpleRestaurantResult.firstimage,
               width: 45,
               height: 45,
               fit: BoxFit.cover,
-            )
-                : Container(
-              color: AppColors.whiteGrey,
-              width: 45,
-              height: 45,
             ),
             width10,
             SizedBox(
+
               height: 45,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,11 +98,15 @@ class RestaurantSearchListWidget extends ConsumerWidget {
                       .size(13)
                       .make()
                       .pOnly(top: 3),
-                  searchSimpleRestaurantResult.addr1.text.bold
-                      .color(AppColors.thirdGrey)
-                      .size(9)
-                      .make()
-                      .pOnly(bottom: 3)
+              Text(
+                truncateWithEllipsis(30, addr1Text),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.thirdGrey,
+                  fontSize: 12,
+                ),
+              ).pOnly(bottom: 3),
+
                 ],
               ),
             )

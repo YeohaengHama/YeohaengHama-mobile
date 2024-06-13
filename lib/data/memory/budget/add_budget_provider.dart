@@ -9,25 +9,64 @@ StateNotifierProvider<AddBudgetNotifier, AddBudget>((ref) {
 class AddBudgetNotifier extends StateNotifier<AddBudget> {
   AddBudgetNotifier()
       : super(AddBudget(
-    itineraryId: 0,
+    expendituresId: null,
+    budgetId: 0,
+    totalAmount: 0,
+    payerId: 0,
+    amount: [],
+    accounts: [],
+    accountId: [],
     place: 0,
-    placeName: '',
     day: 0,
     paymentMethod: '현금',
     content: '',
     category: '',
-    name: '',
-    amount: 0,
+    placeName: '',
+    divided: true,
+    individual: false,
   ));
 
-  void setItineraryId(int itineraryId) {
-    state = state.copyWith(itineraryId: itineraryId);
+  void setExpendituresId(int expendituresId) {
+    state = state.copyWith(expendituresId: expendituresId);
   }
 
+  void setBudgetId(int budgetId) {
+    state = state.copyWith(budgetId: budgetId);
+  }
   void setPlace(int place) {
     state = state.copyWith(place: place);
   }
+  void setTotalAmount(int totalAmount) {
+    state = state.copyWith(totalAmount: totalAmount);
+  }
+  int getTotalAmount() {
+    return state.totalAmount;
+  }
+  void setPayerId(int payerId) {
+    state = state.copyWith(payerId: payerId);
+  }
+  void removeAmount(){
+    state =state.copyWith(amount: []);
+  }
+  void setAmount(List<int> amount) {
+    state =state.copyWith(amount: amount);
+  }
+  void setAccounts(List<Accounts> accounts) {
+    state = state.copyWith(accounts: accounts ?? []);
+  }
 
+
+  void setAccountId(List<int> accountId) {
+    state = state.copyWith(accountId: accountId);
+  }
+  int getAccountListLength() {
+
+    return state.accountId!.length;
+  }
+
+  void setPlaceName(String placeName) {
+    state = state.copyWith(placeName: placeName);
+  }
   void setDay(int day) {
     state = state.copyWith(day: day);
   }
@@ -44,32 +83,38 @@ class AddBudgetNotifier extends StateNotifier<AddBudget> {
     state = state.copyWith(category: category);
   }
 
-  void setName(String name) {
-    state = state.copyWith(name: name);
+  void setDivided(bool divided) {
+    state = state.copyWith(divided: divided);
   }
-
-  void setAmount(int amount) {
-    state = state.copyWith(amount: amount);
+  void setIndividual(bool individual) {
+    state = state.copyWith(individual: individual);
   }
-  void setPlaceName(String placeName) {
-    state = state.copyWith(placeName: placeName);
-  }
-
 
   void setAddBudget(AddBudget item) {
     state = item;
   }
+  void removePayerAndAccounts(){
+    state = state.copyWith(payerId: 0);
+    state = state.copyWith(accounts: []);
+  }
+
   void removeAddBudget() {
     state = AddBudget(
-      itineraryId: 0,
+      expendituresId: null,
+      totalAmount: 0,
+      budgetId: 0,
+      payerId: 0,
       place: 0,
+      accounts: [],
+      amount: [],
+      accountId: [],
       placeName: '',
       day: 0,
       paymentMethod: '현금',
       content: '',
       category: '',
-      name: '',
-      amount: 0,
+      divided: true,
+      individual: false,
     );
   }
 }

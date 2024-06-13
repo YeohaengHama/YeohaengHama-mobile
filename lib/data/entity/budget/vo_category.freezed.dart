@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CategoryIcon {
   IconData get icon => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
+  String get engCategory => throw _privateConstructorUsedError;
   Color get color => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +32,7 @@ abstract class $CategoryIconCopyWith<$Res> {
           CategoryIcon value, $Res Function(CategoryIcon) then) =
       _$CategoryIconCopyWithImpl<$Res, CategoryIcon>;
   @useResult
-  $Res call({IconData icon, String category, Color color});
+  $Res call({IconData icon, String category, String engCategory, Color color});
 }
 
 /// @nodoc
@@ -49,6 +50,7 @@ class _$CategoryIconCopyWithImpl<$Res, $Val extends CategoryIcon>
   $Res call({
     Object? icon = null,
     Object? category = null,
+    Object? engCategory = null,
     Object? color = null,
   }) {
     return _then(_value.copyWith(
@@ -59,6 +61,10 @@ class _$CategoryIconCopyWithImpl<$Res, $Val extends CategoryIcon>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      engCategory: null == engCategory
+          ? _value.engCategory
+          : engCategory // ignore: cast_nullable_to_non_nullable
               as String,
       color: null == color
           ? _value.color
@@ -76,7 +82,7 @@ abstract class _$$CategoryIconImplCopyWith<$Res>
       __$$CategoryIconImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({IconData icon, String category, Color color});
+  $Res call({IconData icon, String category, String engCategory, Color color});
 }
 
 /// @nodoc
@@ -92,6 +98,7 @@ class __$$CategoryIconImplCopyWithImpl<$Res>
   $Res call({
     Object? icon = null,
     Object? category = null,
+    Object? engCategory = null,
     Object? color = null,
   }) {
     return _then(_$CategoryIconImpl(
@@ -102,6 +109,10 @@ class __$$CategoryIconImplCopyWithImpl<$Res>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      engCategory: null == engCategory
+          ? _value.engCategory
+          : engCategory // ignore: cast_nullable_to_non_nullable
               as String,
       color: null == color
           ? _value.color
@@ -115,18 +126,23 @@ class __$$CategoryIconImplCopyWithImpl<$Res>
 
 class _$CategoryIconImpl implements _CategoryIcon {
   const _$CategoryIconImpl(
-      {required this.icon, required this.category, required this.color});
+      {required this.icon,
+      required this.category,
+      required this.engCategory,
+      required this.color});
 
   @override
   final IconData icon;
   @override
   final String category;
   @override
+  final String engCategory;
+  @override
   final Color color;
 
   @override
   String toString() {
-    return 'CategoryIcon(icon: $icon, category: $category, color: $color)';
+    return 'CategoryIcon(icon: $icon, category: $category, engCategory: $engCategory, color: $color)';
   }
 
   @override
@@ -137,11 +153,14 @@ class _$CategoryIconImpl implements _CategoryIcon {
             (identical(other.icon, icon) || other.icon == icon) &&
             (identical(other.category, category) ||
                 other.category == category) &&
+            (identical(other.engCategory, engCategory) ||
+                other.engCategory == engCategory) &&
             (identical(other.color, color) || other.color == color));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, icon, category, color);
+  int get hashCode =>
+      Object.hash(runtimeType, icon, category, engCategory, color);
 
   @JsonKey(ignore: true)
   @override
@@ -154,12 +173,15 @@ abstract class _CategoryIcon implements CategoryIcon {
   const factory _CategoryIcon(
       {required final IconData icon,
       required final String category,
+      required final String engCategory,
       required final Color color}) = _$CategoryIconImpl;
 
   @override
   IconData get icon;
   @override
   String get category;
+  @override
+  String get engCategory;
   @override
   Color get color;
   @override

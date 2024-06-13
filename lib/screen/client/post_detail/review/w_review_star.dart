@@ -46,13 +46,22 @@ class ReviewStar extends ConsumerWidget {
   }
 
   double _calculateAverageScore(List<ReviewShowAll> reviews) {
-    if (reviews.isEmpty) {
+    if (reviews == null || reviews.isEmpty) {
       return 0.0;
+    } else {
+      // Null 값을 제외한 리뷰 리스트 생성
+      List<int> validRatings = reviews
+          .where((review) => review.rating != null)
+          .map((review) => review.rating!)
+          .toList();
+
+      if (validRatings.isEmpty) {
+        return 0.0;
+      }
+
+      double totalScore = validRatings.reduce((value, element) => value + element).toDouble();
+      return totalScore / validRatings.length;
     }
-    double totalScore = reviews
-        .map((review) => review.rating)
-        .reduce((value, element) => value + element)
-        .toDouble();
-    return totalScore / reviews.length;
   }
+
 }

@@ -8,10 +8,8 @@ import 'package:fast_app_base/data/entity/itinerary/vo_pick_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_save_place.dart';
 import 'package:fast_app_base/data/entity/menu/all_itinerary.dart';
 import 'package:fast_app_base/data/network/budget_api.dart';
-import 'package:fast_app_base/screen/client/main/tab/schedule/s_schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:nav_hooks/nav.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../../common/constants.dart';
@@ -91,14 +89,52 @@ class ItineraryApi {
     }
   }
 
+  Future<void> editItinerary(Itinerary itinerary,WidgetRef ref) async {
+    try {
+      final accountNotifier = ref.read(accountProvider.notifier);
+      final itineraryProvider = ref.read(itineraryCheckProvider);
+      final response = await _dio.post(
+        '$baseUrl/itinerary/update?accountId=${accountNotifier.state!.id}&itineraryId=${itineraryProvider!.itineraryId}',
+        data: {
+          'name': itinerary.name,
+          'type': itinerary.type,
+          'style': itinerary.itineraryStyle,
+          'transportation': itinerary.transportation,
+          'area': itinerary.area,
+          'startDate': itinerary.startDate,
+          'endDate': itinerary.endDate,
+          'expense': itinerary.expense,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        await getItinerary(ref, itineraryProvider!.itineraryId);
+        print('일정 수정 완료');
+
+
+      } else if (response.statusCode == 401) {
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    } finally {
+      // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
+    }
+  }
+
 
   Future<Response> postSavePlace(SavePlace savePlace, WidgetRef ref) async {
     try {
       print(savePlace.accountId.runtimeType);
-
+      final itinerary = ref.read(itineraryCheckProvider);
       final response = await _dio.post(
           '$baseUrl/account/savePlace?accountId=${savePlace.accountId}',
           data: {
+            'itineraryId': int.parse(itinerary!.itineraryId),
             'placeNum': savePlace.placeNum,
             'contentTypeId': savePlace.contentTypeId,
           });
@@ -162,12 +198,16 @@ class ItineraryApi {
 
   Future<bool> checkSavePlace(
       CheckSavePlace checkSavePlace, WidgetRef ref) async {
+
     try {
       final accountNotifier = ref.read(accountProvider.notifier);
+      final itinerary = ref.read(itineraryCheckProvider);
+
 
       final response = await _dio.post(
           '$baseUrl/account/checkSavePlace?accountId=${accountNotifier.state!.id}',
           data: {
+            'itineraryId' :  int.parse(itinerary!.itineraryId),
             'placeNum': checkSavePlace.placeNum,
             'contentTypeId': checkSavePlace.contentTypeId
           });
@@ -206,16 +246,12 @@ class ItineraryApi {
       );
 
       if (response.statusCode == 200) {
-        String responseDataString = response.data
-            .toString()
-            .replaceAll('<xmp>', '')
-            .replaceAll('</xmp>', '');
-        Map<String, dynamic> responseData = json.decode(responseDataString);
+        Map<String, dynamic> responseData = response.data;
 
-        final List<dynamic> items =
-            responseData['response']['body']['items']['item'];
-        if (items != null && items.isNotEmpty) {
-          var item = items.first;
+        final item = responseData['data'];
+
+
+        if (item != null && item.isNotEmpty) {
           final contentTypeId = item['contenttypeid'].toString();
           final contentId = item['contentid'].toString();
           final title = item['title'].toString();
@@ -256,9 +292,13 @@ class ItineraryApi {
   Future<Response> showSavePlace(WidgetRef ref) async {
     try {
       final accountNotifier = ref.read(accountProvider.notifier);
+      final itinerary = ref.read(itineraryCheckProvider);
 
-      final response = await _dio.get(
+      final response = await _dio.post(
         '$baseUrl/account/${accountNotifier.state!.id}',
+        data: {
+          "itineraryId" : itinerary!.itineraryId
+        }
       );
       if (response.statusCode == 200) {
         // final jsonData = response.data['data'] as List<dynamic>;
@@ -323,8 +363,14 @@ class ItineraryApi {
     try {
       final accountNotifier = ref.read(accountProvider.notifier);
 
-      final response = await _dio.get(
-        '$baseUrl/account/${accountNotifier.state!.id}',
+      final itinerary = ref.read(itineraryCheckProvider);
+
+      final response = await _dio.post(
+          '$baseUrl/account/${accountNotifier.state!.id}',
+          data: {
+            "itineraryId" : itinerary!.itineraryId
+          }
+
       );
       if (response.statusCode == 200) {
         Map<String, dynamic> responseData = response.data; // 응답 데이터를 Map으로 가져옴
@@ -379,9 +425,13 @@ class ItineraryApi {
   Future<Response> removeShowSavePlace(WidgetRef ref, String removeId) async {
     try {
       final accountNotifier = ref.read(accountProvider.notifier);
+      final itinerary = ref.read(itineraryCheckProvider);
 
-      final response = await _dio.get(
-        '$baseUrl/account/${accountNotifier.state!.id}',
+      final response = await _dio.post(
+          '$baseUrl/account/${accountNotifier.state!.id}',
+          data: {
+            "itineraryId" : itinerary!.itineraryId
+          }
       );
       if (response.statusCode == 200) {
         Map<String, dynamic> responseData = response.data; // 응답 데이터를 Map으로 가져옴
@@ -437,7 +487,7 @@ class ItineraryApi {
 
         final CheckItinerary checkItinerary = CheckItinerary.fromJson(data);
         ref.read(itineraryCheckProvider.notifier).setItinerary!(checkItinerary);
-        PostAddNewEachPickPlace(ref);
+        await PostAddNewEachPickPlace(ref);
 
         return response;
       } else if (response.statusCode == 401) {
@@ -643,14 +693,14 @@ class ItineraryApi {
         final jsonData = response.data['data'] as List<dynamic>;
         if (jsonData.isEmpty) {
           ref.read(ItineraryShowAllListProvider.notifier).clearItinerarys();
-          print('리뷰 목록이 비어있습니다.');
+          print('일정 목록이 비어있습니다.');
         } else {
           final itinerarys = jsonData
               .map((json) =>
               AllItinerary.fromJson(json as Map<String, dynamic>))
               .toList();
           ref.read(ItineraryShowAllListProvider.notifier).addItinerary(itinerarys);
-          print('리뷰 불러오기 성공: $itinerarys');
+          print('일정 불러오기 성공: $itinerarys');
         }
       } else if (response.statusCode == 401) {
         print('error');
@@ -674,8 +724,41 @@ class ItineraryApi {
       );
 
       if (response.statusCode == 200) {
-        showAllItinerary(ref);
+        await showAllItinerary(ref);
         print('일정삭제 완료');
+        return null;
+      } else if (response.statusCode == 401) {
+        print('error');
+        return null;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    }
+  }
+
+  Future<void> inviteItinerary(String accountId, String itineraryId,  BuildContext context, WidgetRef ref) async {
+    try {
+
+
+      final response = await _dio.post(
+        '$baseUrl/itinerary/addAccount?accountId=$accountId&itineraryId=$itineraryId'
+      );
+
+      if (response.statusCode == 200) {
+        await getItinerary(ref, itineraryId.toString());
+
+        print('일정 초대 완료');
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              backgroundColor: AppColors.mainPurple,
+              content: Text("이제부터 친구와 함께 여행하마! 💜",style:TextStyle(fontWeight: FontWeight.bold),)),
+        );
+
         return null;
       } else if (response.statusCode == 401) {
         print('error');

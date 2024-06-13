@@ -33,7 +33,7 @@ class AreaApi {
       final response = await _dio.post(
         '$baseUrl/openApi/searchArea',
         data: {
-          'numOfRows': openApiArea.numOfRows,
+          'numOfRows':100,
           'page': openApiArea.page,
           'keyword': openApiArea.keyword,
           'contentTypeId': openApiArea.contentTypeId,
@@ -42,10 +42,8 @@ class AreaApi {
       );
 
       if (response.statusCode == 200) {
-        String responseDataString = response.data.toString().replaceAll('<xmp>', '').replaceAll('</xmp>', '');
-        Map<String, dynamic> responseData = json.decode(responseDataString);
-
-        final List<dynamic> items = responseData['response']['body']['items']['item'];
+        Map<String, dynamic> responseData = response.data; // 수정된 부분
+        final List<dynamic> items = responseData['data']['place'];
         for (var item in items) {
           final contentTypeId = item['contenttypeid'].toString();
           final contentId = item['contentid'].toString();
@@ -80,6 +78,59 @@ class AreaApi {
     }
   }
   Future<Response> postSearchRestaurantArea(OpenApiArea openApiArea, WidgetRef ref) async {
+    final simpleAreaRestaurantNotifier = ref.read(simpleAreaRestaurantApiResponseProvider.notifier);
+
+    try {
+      final response = await _dio.post(
+        '$baseUrl/openApi/searchArea',
+        data: {
+          'numOfRows': 100,
+          'page': openApiArea.page,
+          'keyword': openApiArea.keyword,
+          'contentTypeId': openApiArea.contentTypeId,
+          'mobileOS': openApiArea.mobileOS,
+        },
+      );
+
+      if (response.statusCode == 200) {
+
+        Map<String, dynamic> responseData = response.data; // 수정된 부분
+        final List<dynamic> items = responseData['data']['place'];
+        for (var item in items) {
+          final contentTypeId = item['contenttypeid'].toString();
+          final contentId = item['contentid'].toString();
+          final title = item['title'].toString();
+          final addr1 = item['addr1'].toString();
+          final addr2 = item['addr2'].toString();
+          final firstimage = item['firstimage'].toString();
+
+
+          final searchSimpleRestaurantResult = SearchSimpleRestaurantResult(
+            contentTypeId: contentTypeId,
+            contentId: contentId,
+            title: title,
+            addr1: addr1,
+            addr2: addr2,
+            firstimage: firstimage,
+
+          );
+          simpleAreaRestaurantNotifier.addSimpleArea(searchSimpleRestaurantResult);
+        }
+        return response;
+      } else if (response.statusCode == 401) {
+        return response;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    } finally {
+      // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
+    }
+  }
+  Future<Response> postDiaryArea(OpenApiArea openApiArea, WidgetRef ref) async {
     final simpleAreaRestaurantNotifier = ref.read(simpleAreaRestaurantApiResponseProvider.notifier);
 
     try {
@@ -150,11 +201,11 @@ class AreaApi {
       );
 
       if (response.statusCode == 200) {
-        String responseDataString = response.data.toString().replaceAll('<xmp>', '').replaceAll('</xmp>', '');
-        Map<String, dynamic> responseData = json.decode(responseDataString);
+        Map<String, dynamic> responseData = response.data;
 
-        final List<dynamic> items = responseData['response']['body']['items']['item'];
-        for (var item in items) {
+        final item = responseData['data'];
+
+
           final contentTypeId = item['contenttypeid'].toString();
           final contentId = item['contentid'].toString();
           final title = item['title'].toString();
@@ -176,7 +227,7 @@ class AreaApi {
           );
           detailAreaNotifier.addDetailArea(searchDetailResult);
           print(searchDetailResult);
-        }
+
         return response;
       } else if (response.statusCode == 401) {
         return response;

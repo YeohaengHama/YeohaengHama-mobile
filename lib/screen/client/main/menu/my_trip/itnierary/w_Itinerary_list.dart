@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:isar/isar.dart';
 
+import '../../../../../../common/dart/extension/datetime_extension.dart';
+
 class ItineraryList extends ConsumerStatefulWidget {
   const ItineraryList({Key? key, required this.allItinerary}) : super(key: key);
   final AllItinerary allItinerary;
@@ -79,7 +81,8 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   '${widget.allItinerary.name}'.text.bold.color(AppColors.primaryGrey).make(),
-                  '${widget.allItinerary.startDate}'.text.color(AppColors.secondGrey).make(),
+                  '${formatDateRange(widget.allItinerary.startDate,widget.allItinerary.endDate)}'.text.color(AppColors.secondGrey).make(),
+
                 ],
               ),
             ),
@@ -99,8 +102,8 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
                       ),
                     if (_showIcons || _controller.isAnimating)
                       IconButton(
-                        onPressed: () {
-                          ItineraryApi.DeleteItinerary(widget.allItinerary.id, ref);
+                        onPressed: () async{
+                          await ItineraryApi.DeleteItinerary(widget.allItinerary.id, ref);
                           _toggleIcons(!_showIcons);
                           // 삭제 기능 실행
                         },

@@ -8,7 +8,7 @@ import 'package:fast_app_base/screen/client/post_detail/review/w_simple_review.d
 import 'package:fast_app_base/screen/client/post_detail/w_icons.dart';
 import 'package:fast_app_base/screen/client/post_detail/w_image_scroll_view.dart';
 import 'package:fast_app_base/screen/client/post_detail/w_info_map.dart';
-import 'package:fast_app_base/screen/client/post_detail/w_map_detail.dart';
+import 'package:fast_app_base/screen/client/post_detail/s_map_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 

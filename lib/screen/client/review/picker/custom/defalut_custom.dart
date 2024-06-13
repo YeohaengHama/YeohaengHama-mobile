@@ -1,4 +1,5 @@
 
+import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 
@@ -46,11 +47,11 @@ class _DefaultCustomExampleState extends State<DefaultCustomExample> {
         },
         initialWidget: DefaultInitialWidget(
           centerWidget: Icon(Icons.image_search_outlined,
-              color: Theme.of(context).colorScheme.secondary),
+              color: AppColors.mainPurple),
         ),
         addMoreButton: DefaultAddMoreWidget(
           icon: Icon(Icons.image_search_outlined,
-              color: Theme.of(context).colorScheme.secondary),
+              color:AppColors.mainPurple),
         ),
       ),
     );

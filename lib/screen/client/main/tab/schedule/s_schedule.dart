@@ -3,20 +3,26 @@ import 'dart:math';
 
 import 'package:fast_app_base/common/theme/text_size.dart';
 import 'package:fast_app_base/data/network/budget_api.dart';
+import 'package:fast_app_base/screen/client/main/tab/schedule/traffic/w_public_transport.dart';
+import 'package:fast_app_base/screen/client/main/tab/schedule/traffic/w_TransportationDropdown.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/w_pickArea.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/w_schedule_map.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/w_show_pick_day.dart';
+import 'package:fast_app_base/screen/client/main/tab/schedule/traffic/w_traffic.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../common/common.dart';
 
 import '../../../../../common/dart/extension/datetime_extension.dart';
+import '../../../../../common/widget/scaffold/show_bottom_dialog.dart';
 import '../../../../../data/entity/itinerary/a_check_itinerary.dart';
 import '../../../../../data/memory/itinerary/show_save_place_provider.dart';
 import '../../../../../data/network/itinerary_api.dart';
 import '../../search/s_space_search.dart';
-import 'budget/s_budget.dart';
+import 'budget/main_screen/s_budget.dart';
+import 'edit/d_edit_schedule.dart';
 
 class ScheduleScreen extends ConsumerStatefulWidget {
   const ScheduleScreen(this.itinerary, {super.key});
@@ -41,14 +47,23 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
             floating: false,
             pinned: true,
             backgroundColor: Colors.white,
+            scrolledUnderElevation: 0,
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              widget.itinerary.name.text
-                  .size(15)
-                  .bold
-                  .color(AppColors.primaryGrey)
-                  .make(),
+              Row(
+                children: [
+                  widget.itinerary.name.text
+                      .size(15)
+                      .bold
+                      .color(AppColors.primaryGrey)
+                      .make(),
+                  Tap(onTap: () {
+                    ShowBottomDialog(context, EditScheduleDialog());
+                  },
+                  child: '편집'.text.color(AppColors.thirdGrey).size(10).bold.make().pSymmetric(h: 5))
+                ],
+              ),
               formatDateRange(widget.itinerary.startDate, widget.itinerary.endDate).text.size(titleSize-2).color(AppColors.thirdGrey).make()
             ],) ,
             leading: IconButton(
@@ -59,7 +74,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                 }),
             actions: [
               IconButton(onPressed: () async{
-                await budgetApi.showBudget(int.parse(widget.itinerary.itineraryId), ref);
+                await budgetApi.showBudget(widget.itinerary, ref);
                 Nav.push(BudgetScreen(widget.itinerary));
               }, icon: const Icon(Icons.wallet)),
               IconButton(
@@ -76,7 +91,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                 onVerticalDragUpdate: (_) {
 
                 },
-                child: ScheduleMapWidget(),
+                child: const ScheduleMapWidget(),
               ),
             ),
           ),
@@ -161,10 +176,22 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                 const Height(15),
                 Container(
                   color: Colors.white,
-                  height: 200,
+                  height: 160,
                   child: ShowPickDay(widget.itinerary),
                 ),
-              ],
+                const Line(height: 15,
+                color: AppColors.outline,),
+                const TrafficWidget(),
+
+                Center(
+                  child: Container(
+                      color:Colors.white,
+                      width: double.maxFinite,
+                      child: Center(child: TrafficRouteDropDown())),
+                ),
+                SizedBox(
+                  height: 500,
+    child: PublicTransportWidget())],
             ),
           ),
         ],

@@ -1,0 +1,212 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/common/widget/w_tap.dart';
+import 'package:fast_app_base/screen/client/post_detail/review/w_review_star.dart';
+import 'package:fast_app_base/screen/client/post_detail/w_detail_map.dart';
+import 'package:fast_app_base/screen/client/post_detail/w_map.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../data/entity/area/saerch_image_result.dart';
+import '../../../data/entity/area/serch_detail_result.dart';
+import '../../../data/entity/itinerary/check_save_place/a_check_save_place.dart';
+import '../../../data/entity/itinerary/vo_delete_place.dart';
+import '../../../data/entity/itinerary/vo_save_place.dart';
+import '../../../data/entity/review/a_review_show_all.dart';
+import '../../../data/memory/area/area_detail_provider.dart';
+import '../../../data/memory/area/selectedDayIndex_provider.dart';
+import '../../../data/memory/itinerary/itinerary_check_provider.dart';
+import '../../../data/memory/user_provider.dart';
+import '../../../data/network/itinerary_api.dart';
+import '../../../entity/dummies.dart';
+
+class MapDetailScreen extends ConsumerStatefulWidget {
+  const MapDetailScreen({Key? key, required this.searchDetailResult, required this.searchImageResult, required this.searchReviewResult}) : super(key: key);
+  final SearchDetailResult searchDetailResult;
+  final SearchImageResult searchImageResult;
+  final List<ReviewShowAll> searchReviewResult;
+
+  @override
+  ConsumerState<MapDetailScreen> createState() => _MapDetailScreenState();
+}
+
+class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
+  int currentDay = 0;
+  bool isPickArea = false;
+  late ItineraryApi itineraryApi;
+
+  @override
+  void initState() {
+    super.initState();
+    itineraryApi = ItineraryApi(); // Initialize itineraryApi here
+    checkSavePlaceAndWriteReview();
+  }
+
+  void checkSavePlaceAndWriteReview() async {
+    final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;
+    if (searchDetailResult != null) {
+      final checkSavePlace = CheckSavePlace(
+        placeNum: searchDetailResult.contentId,
+        contentTypeId: searchDetailResult.contentTypeId,
+      );
+
+      try {
+        final bool isSaved = await itineraryApi.checkSavePlace(checkSavePlace, ref);
+        setState(() {
+          isPickArea = isSaved;
+        });
+      } catch (e) {
+        print('장소 확인 중 예외 발생: $e');
+        // 에러 처리
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    String overviewText = widget.searchDetailResult.overView;
+    if (overviewText.length > 20) {
+      overviewText = overviewText.substring(0, 45) + '...';
+    }
+    final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;
+    final selectedDayIndexNotifier = ref.read(selectedDayIndexNotifierProvider.notifier);
+    final selectedIndex = ref.watch(selectedDayIndexNotifierProvider);
+    final itinerary = ref.read(itineraryCheckProvider);
+    final accountNotifier = ref.read(accountProvider.notifier);
+    return Scaffold(
+      extendBodyBehindAppBar: true, // Extend the body behind the AppBar
+      appBar: AppBar(
+        backgroundColor: Colors.transparent, // Make AppBar transparent
+        elevation: 0, // Remove AppBar shadow
+        actions: [
+          IconButton(
+            padding: const EdgeInsets.all(0),
+            onPressed: () async {
+              if (itinerary != null) {
+                setState(() {
+                  isPickArea = !isPickArea;
+                });
+
+                final checkSavePlace = CheckSavePlace(
+                    placeNum: searchDetailResult!.contentId,
+                    contentTypeId: searchDetailResult.contentTypeId);
+                final savePlace = SavePlace(
+                  accountId: int.parse(accountNotifier.state!.id)!,
+                  placeNum: searchDetailResult!.contentId, // 여기에 장소 번호를 제공합니다.
+                  contentTypeId: searchDetailResult.contentTypeId, // 여기에 콘텐츠 유형 ID를 제공합니다.
+                );
+                final deletePlace = DeletePlace(
+                    accountId: int.parse(accountNotifier.state!.id),
+                    placeNum: searchDetailResult.contentId,
+                    contentTypeId: searchDetailResult.contentTypeId);
+                isPickArea
+                    ? itineraryApi.postSavePlace(savePlace, ref)
+                    : itineraryApi.postDeletePlace(deletePlace, ref);
+              } else {
+                const snackBar = SnackBar(
+                  content: Text('아직 일정이 추가 되지 않았습니다.'),
+                  duration: Duration(seconds: 2),
+                  backgroundColor: AppColors.mainPurple,
+                );
+
+                // 현재 화면의 Scaffold 위젯에 스낵바를 표시합니다.
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }
+            },
+            icon: Icon(
+              isPickArea ? Icons.favorite : Icons.favorite_outline,
+              color: isPickArea ? Colors.red : null,
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.more_vert),
+            onPressed: () async {
+              final int? picked = await showCupertinoModalPopup<int>(
+                context: context,
+                builder: (BuildContext context) {
+                  return Container(
+                    height: 200.0,
+                    color: CupertinoColors.white,
+                    child: CupertinoPicker(
+                      itemExtent: 32.0,
+                      onSelectedItemChanged: (int index) {
+                        selectedDayIndexNotifier.setSelectedDayIndex(index);
+                        setState(() {
+                          currentDay = index + 1;
+                        });
+                      },
+                      children: List<Widget>.generate(itinerary!.placesByDay.length, (int index) {
+                        return Center(
+                          child: Text('Day-${index + 1}'),
+                        );
+                      }),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
+      body: Stack(
+        children: [
+          itinerary != null
+              ? DetailMapWidget(
+            mapX: double.parse(widget.searchDetailResult.mapX),
+            mapY: double.parse(widget.searchDetailResult.mapY),
+          )
+              : MapWidget(
+              mapX: double.parse(widget.searchDetailResult.mapX),
+              mapY: double.parse(widget.searchDetailResult.mapY)),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Tap(
+              onTap: () {
+                Nav.pop(context);
+              },
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 150,
+                child: RoundedContainer(
+                  borderColor: Colors.white,
+                  backgroundColor: Colors.white,
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: widget.searchImageResult.imagesUrl != null
+                            ? CachedNetworkImage(
+                          imageUrl: widget.searchImageResult.imagesUrl!.first,
+                          width: 100,
+                          height: 120,
+                          fit: BoxFit.cover,
+                        )
+                            : Image.asset('$basePath/icon/colorHama.png', width: 100, height: 120, fit: BoxFit.cover),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          widget.searchDetailResult.title.text.bold.color(AppColors.primaryGrey).make(),
+                          Height(3),
+                          ReviewStar(),
+                          Height(5),
+                          SizedBox(width: 220, child: overviewText.text.maxLines(2).color(AppColors.secondGrey).make()),
+                          Height(5),
+                          widget.searchDetailResult.addr1.text.color(AppColors.thirdGrey).size(10).make(),
+                          Height(5),
+                        ],
+                      ).pOnly(left: 10),
+                    ],
+                  ),
+                ),
+              ),
+            ).pSymmetric(h: 10, v: 30),
+          ),
+        ],
+      ),
+    );
+  }
+}

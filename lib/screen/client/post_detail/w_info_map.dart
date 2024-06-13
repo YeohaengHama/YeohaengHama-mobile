@@ -1,5 +1,5 @@
 import 'package:fast_app_base/screen/client/post_detail/w_map.dart';
-import 'package:fast_app_base/screen/client/post_detail/w_map_detail.dart';
+import 'package:fast_app_base/screen/client/post_detail/s_map_detail.dart';
 import 'package:flutter/material.dart';
 import '../../../common/common.dart';
 import '../../../common/theme/text_size.dart';

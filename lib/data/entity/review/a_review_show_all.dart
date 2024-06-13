@@ -6,11 +6,12 @@ part 'a_review_show_all.g.dart';
 @freezed
 class ReviewShowAll with _$ReviewShowAll {
   factory ReviewShowAll({
-    required int contentId,
+    int? contentId,
     required int contentTypeId,
-    required int rating,
+    int? rating,
     required String content,
-    required List<String> reviewPhotoURLList,
+    List<String>? reviewPhotoURLList,
+    String? blogURL,
     required Account account,
   }) = _ReviewShowAll;
 
@@ -21,9 +22,10 @@ class ReviewShowAll with _$ReviewShowAll {
 @freezed
 class Account with _$Account {
   factory Account({
-    required int id,
+    int? id,
     required String nickname,
     String? photoUrl,
+    String? accountRole,
   }) = _Account;
 
   factory Account.fromJson(Map<String, dynamic> json) =>
