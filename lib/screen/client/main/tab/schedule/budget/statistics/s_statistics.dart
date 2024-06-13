@@ -60,6 +60,7 @@ class _StatisticsScreen extends ConsumerState<StatisticsScreen> {
               .size(20)
               .color(AppColors.primaryGrey)
               .make(),
+
           itinerary.name.text.size(20).color(AppColors.primaryGrey).bold.make(),
           '지출내역입니다.'.text.size(20).color(AppColors.primaryGrey).bold.make(),
           Height(30),

@@ -84,7 +84,7 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
     for (int i = 0; i < placeCoordinates.length; i++) {
       final markerId = 'marker$i';
       final marker = NMarker(
-        icon: const NOverlayImage.fromAssetImage('$basePath/icon/hamaMarker.png'),
+        icon: const NOverlayImage.fromAssetImage('$basePath/icon/hamaMiniMarker.png'),
         id: markerId,
         position: placeCoordinates[i],
         caption: NOverlayCaption(text: (i + 1).toString()),

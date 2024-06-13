@@ -21,6 +21,8 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.0.0 <4.0.0'
 
+
+
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -35,17 +37,17 @@ dependencies:
   #image cut
   image_picker: ^1.0.7
   image_cropper: ^1.4.0
-  image_picker_ios: ^0.8.11+2
+  image_picker_ios: ^0.8.0+2
   #audioplayers:
-  audioplayers: ^6.0.0
+  audioplayers: ^5.0.0
 
-  multi_image_picker_view: ^1.0.0
   file_picker: ^8.0.0+1
   url_launcher: ^6.2.5
   whatsapp_unilink: ^2.1.0
   #calendar_date_picker2:
   calendar_date_picker2: ^0.5.3
-  intl: ^0.18.1
+  intl: ">=0.17.0 <0.19.0"
+
   #splash creator
   flutter_native_splash: ^2.3.0
 
@@ -71,23 +73,24 @@ dependencies:
   #ui - resource
   eva_icons_flutter: ^3.1.0
   google_fonts: ^4.0.4
-  easy_localization: ^3.0.2
+  easy_localization: ^3.0.7
   flutter_cache_manager: ^3.3.0
   animation_list: ^3.0.0
   flutter_slidable: ^3.1.0
+  flutter_animator: ^3.1.0
  #status
   riverpod: ^2.5.0
   hooks_riverpod: ^2.5.1
 
   #naver map
-  flutter_naver_map: ^1.2.0
+  flutter_naver_map: ^1.1.0
 
 
   #goggle  map
-  google_maps_flutter: ^2.6.0
+  google_maps_flutter: ^2.5.0
 
   #http
-  http: ^1.2.1
+  http: ^1.2.0
 
   #ui - widget
   nav_hooks: ^1.4.5
@@ -112,9 +115,14 @@ dependencies:
   socket_io_client: ^2.0.3+1
   stomp_dart_client: ^2.0.0
   web_socket_channel: ^2.4.0
-  web_socket_client: ^0.1.2
+  web_socket_client: ^0.1.0
   flutter_local_notifications: ^17.1.2
-
+  fl_chart: ^0.68.0
+  webview_flutter: ^4.5.0
+  webview_flutter_android: ^3.16.3
+  webview_flutter_wkwebview: ^3.9.4
+  web: ^0.3.0
+  multi_image_picker_view: ^1.0.2
 
 dev_dependencies:
   flutter_test:

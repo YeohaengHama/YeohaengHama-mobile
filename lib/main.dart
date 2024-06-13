@@ -10,7 +10,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await AppPreferences.init();
-
+  WidgetsFlutterBinding.ensureInitialized();
+  // Ensure that plugins are registered.
   await NaverMapSdk.instance.initialize(
     clientId: '6on3fderol',
     onAuthFailed: (ex) {

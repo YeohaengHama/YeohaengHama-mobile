@@ -14,7 +14,7 @@ class App extends StatefulWidget {
   static const defaultTheme = CustomTheme.light;
   static bool isForeground = true;
 
-  const App({super.key});
+  const App({key});
 
   @override
   State<App> createState() => AppState();
