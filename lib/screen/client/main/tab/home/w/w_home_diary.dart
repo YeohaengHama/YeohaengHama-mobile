@@ -7,6 +7,7 @@ import 'package:fast_app_base/data/memory/diary/diary_detail_proiver.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../../data/memory/diary/diary_find_all_proiver.dart';
 import '../../../../../../data/network/diary_api.dart';
 import '../../../../diary/s_diary_detail.dart';
 
@@ -22,6 +23,7 @@ class HomeDiaryWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
    final diaryApi = ref.read(diaryApiProvider);
+   final diaryProvider =  ref.watch(DiaryFindAllProvider);
 
     return Container(
 

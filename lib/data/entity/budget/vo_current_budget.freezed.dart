@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CurrentBudget {
   int get budgetId => throw _privateConstructorUsedError;
+  int get budgetTotalAmount => throw _privateConstructorUsedError;
   int get totalAmount => throw _privateConstructorUsedError;
   int get itineraryId => throw _privateConstructorUsedError;
   Map<int, List<Expenditure>> get expenditures =>
@@ -35,6 +36,7 @@ abstract class $CurrentBudgetCopyWith<$Res> {
   @useResult
   $Res call(
       {int budgetId,
+      int budgetTotalAmount,
       int totalAmount,
       int itineraryId,
       Map<int, List<Expenditure>> expenditures});
@@ -54,6 +56,7 @@ class _$CurrentBudgetCopyWithImpl<$Res, $Val extends CurrentBudget>
   @override
   $Res call({
     Object? budgetId = null,
+    Object? budgetTotalAmount = null,
     Object? totalAmount = null,
     Object? itineraryId = null,
     Object? expenditures = null,
@@ -62,6 +65,10 @@ class _$CurrentBudgetCopyWithImpl<$Res, $Val extends CurrentBudget>
       budgetId: null == budgetId
           ? _value.budgetId
           : budgetId // ignore: cast_nullable_to_non_nullable
+              as int,
+      budgetTotalAmount: null == budgetTotalAmount
+          ? _value.budgetTotalAmount
+          : budgetTotalAmount // ignore: cast_nullable_to_non_nullable
               as int,
       totalAmount: null == totalAmount
           ? _value.totalAmount
@@ -89,6 +96,7 @@ abstract class _$$CurrentBudgetImplCopyWith<$Res>
   @useResult
   $Res call(
       {int budgetId,
+      int budgetTotalAmount,
       int totalAmount,
       int itineraryId,
       Map<int, List<Expenditure>> expenditures});
@@ -106,6 +114,7 @@ class __$$CurrentBudgetImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? budgetId = null,
+    Object? budgetTotalAmount = null,
     Object? totalAmount = null,
     Object? itineraryId = null,
     Object? expenditures = null,
@@ -114,6 +123,10 @@ class __$$CurrentBudgetImplCopyWithImpl<$Res>
       budgetId: null == budgetId
           ? _value.budgetId
           : budgetId // ignore: cast_nullable_to_non_nullable
+              as int,
+      budgetTotalAmount: null == budgetTotalAmount
+          ? _value.budgetTotalAmount
+          : budgetTotalAmount // ignore: cast_nullable_to_non_nullable
               as int,
       totalAmount: null == totalAmount
           ? _value.totalAmount
@@ -136,6 +149,7 @@ class __$$CurrentBudgetImplCopyWithImpl<$Res>
 class _$CurrentBudgetImpl implements _CurrentBudget {
   _$CurrentBudgetImpl(
       {required this.budgetId,
+      required this.budgetTotalAmount,
       required this.totalAmount,
       required this.itineraryId,
       required final Map<int, List<Expenditure>> expenditures})
@@ -143,6 +157,8 @@ class _$CurrentBudgetImpl implements _CurrentBudget {
 
   @override
   final int budgetId;
+  @override
+  final int budgetTotalAmount;
   @override
   final int totalAmount;
   @override
@@ -157,7 +173,7 @@ class _$CurrentBudgetImpl implements _CurrentBudget {
 
   @override
   String toString() {
-    return 'CurrentBudget(budgetId: $budgetId, totalAmount: $totalAmount, itineraryId: $itineraryId, expenditures: $expenditures)';
+    return 'CurrentBudget(budgetId: $budgetId, budgetTotalAmount: $budgetTotalAmount, totalAmount: $totalAmount, itineraryId: $itineraryId, expenditures: $expenditures)';
   }
 
   @override
@@ -167,6 +183,8 @@ class _$CurrentBudgetImpl implements _CurrentBudget {
             other is _$CurrentBudgetImpl &&
             (identical(other.budgetId, budgetId) ||
                 other.budgetId == budgetId) &&
+            (identical(other.budgetTotalAmount, budgetTotalAmount) ||
+                other.budgetTotalAmount == budgetTotalAmount) &&
             (identical(other.totalAmount, totalAmount) ||
                 other.totalAmount == totalAmount) &&
             (identical(other.itineraryId, itineraryId) ||
@@ -176,8 +194,13 @@ class _$CurrentBudgetImpl implements _CurrentBudget {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, budgetId, totalAmount,
-      itineraryId, const DeepCollectionEquality().hash(_expenditures));
+  int get hashCode => Object.hash(
+      runtimeType,
+      budgetId,
+      budgetTotalAmount,
+      totalAmount,
+      itineraryId,
+      const DeepCollectionEquality().hash(_expenditures));
 
   @JsonKey(ignore: true)
   @override
@@ -189,6 +212,7 @@ class _$CurrentBudgetImpl implements _CurrentBudget {
 abstract class _CurrentBudget implements CurrentBudget {
   factory _CurrentBudget(
           {required final int budgetId,
+          required final int budgetTotalAmount,
           required final int totalAmount,
           required final int itineraryId,
           required final Map<int, List<Expenditure>> expenditures}) =
@@ -196,6 +220,8 @@ abstract class _CurrentBudget implements CurrentBudget {
 
   @override
   int get budgetId;
+  @override
+  int get budgetTotalAmount;
   @override
   int get totalAmount;
   @override
@@ -219,6 +245,7 @@ mixin _$Expenditure {
   Place get place => throw _privateConstructorUsedError;
   int get day => throw _privateConstructorUsedError;
   String get paymentMethod => throw _privateConstructorUsedError;
+  Account get payerId => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   bool get individual => throw _privateConstructorUsedError;
@@ -242,12 +269,14 @@ abstract class $ExpenditureCopyWith<$Res> {
       Place place,
       int day,
       String paymentMethod,
+      Account payerId,
       String category,
       String content,
       bool individual,
       List<Calculation> calculate});
 
   $PlaceCopyWith<$Res> get place;
+  $AccountCopyWith<$Res> get payerId;
 }
 
 /// @nodoc
@@ -268,6 +297,7 @@ class _$ExpenditureCopyWithImpl<$Res, $Val extends Expenditure>
     Object? place = null,
     Object? day = null,
     Object? paymentMethod = null,
+    Object? payerId = null,
     Object? category = null,
     Object? content = null,
     Object? individual = null,
@@ -294,6 +324,10 @@ class _$ExpenditureCopyWithImpl<$Res, $Val extends Expenditure>
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
               as String,
+      payerId: null == payerId
+          ? _value.payerId
+          : payerId // ignore: cast_nullable_to_non_nullable
+              as Account,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -320,6 +354,14 @@ class _$ExpenditureCopyWithImpl<$Res, $Val extends Expenditure>
       return _then(_value.copyWith(place: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AccountCopyWith<$Res> get payerId {
+    return $AccountCopyWith<$Res>(_value.payerId, (value) {
+      return _then(_value.copyWith(payerId: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -336,6 +378,7 @@ abstract class _$$ExpenditureImplCopyWith<$Res>
       Place place,
       int day,
       String paymentMethod,
+      Account payerId,
       String category,
       String content,
       bool individual,
@@ -343,6 +386,8 @@ abstract class _$$ExpenditureImplCopyWith<$Res>
 
   @override
   $PlaceCopyWith<$Res> get place;
+  @override
+  $AccountCopyWith<$Res> get payerId;
 }
 
 /// @nodoc
@@ -361,6 +406,7 @@ class __$$ExpenditureImplCopyWithImpl<$Res>
     Object? place = null,
     Object? day = null,
     Object? paymentMethod = null,
+    Object? payerId = null,
     Object? category = null,
     Object? content = null,
     Object? individual = null,
@@ -387,6 +433,10 @@ class __$$ExpenditureImplCopyWithImpl<$Res>
           ? _value.paymentMethod
           : paymentMethod // ignore: cast_nullable_to_non_nullable
               as String,
+      payerId: null == payerId
+          ? _value.payerId
+          : payerId // ignore: cast_nullable_to_non_nullable
+              as Account,
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
@@ -416,6 +466,7 @@ class _$ExpenditureImpl implements _Expenditure {
       required this.place,
       required this.day,
       required this.paymentMethod,
+      required this.payerId,
       required this.category,
       required this.content,
       required this.individual,
@@ -436,6 +487,8 @@ class _$ExpenditureImpl implements _Expenditure {
   @override
   final String paymentMethod;
   @override
+  final Account payerId;
+  @override
   final String category;
   @override
   final String content;
@@ -451,7 +504,7 @@ class _$ExpenditureImpl implements _Expenditure {
 
   @override
   String toString() {
-    return 'Expenditure(id: $id, expendituresTotalAmount: $expendituresTotalAmount, place: $place, day: $day, paymentMethod: $paymentMethod, category: $category, content: $content, individual: $individual, calculate: $calculate)';
+    return 'Expenditure(id: $id, expendituresTotalAmount: $expendituresTotalAmount, place: $place, day: $day, paymentMethod: $paymentMethod, payerId: $payerId, category: $category, content: $content, individual: $individual, calculate: $calculate)';
   }
 
   @override
@@ -467,6 +520,7 @@ class _$ExpenditureImpl implements _Expenditure {
             (identical(other.day, day) || other.day == day) &&
             (identical(other.paymentMethod, paymentMethod) ||
                 other.paymentMethod == paymentMethod) &&
+            (identical(other.payerId, payerId) || other.payerId == payerId) &&
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.content, content) || other.content == content) &&
@@ -485,6 +539,7 @@ class _$ExpenditureImpl implements _Expenditure {
       place,
       day,
       paymentMethod,
+      payerId,
       category,
       content,
       individual,
@@ -511,6 +566,7 @@ abstract class _Expenditure implements Expenditure {
       required final Place place,
       required final int day,
       required final String paymentMethod,
+      required final Account payerId,
       required final String category,
       required final String content,
       required final bool individual,
@@ -529,6 +585,8 @@ abstract class _Expenditure implements Expenditure {
   int get day;
   @override
   String get paymentMethod;
+  @override
+  Account get payerId;
   @override
   String get category;
   @override

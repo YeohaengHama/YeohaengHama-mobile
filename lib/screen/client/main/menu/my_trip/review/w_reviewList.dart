@@ -17,6 +17,8 @@ class ReviewList extends HookWidget {
     final accounReview = accountReview;
     final pageController = usePageController();
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -28,7 +30,8 @@ class ReviewList extends HookWidget {
             const Height(5),
             '${accounReview.content}'.text.color(AppColors.secondGrey).size(15).make(),
             const Height(5),
-            ReviewImagesWidget(accounReview),
+
+            if(accountReview.reviewPhotoURLList.isNotEmpty)ReviewImagesWidget(accounReview),
           ],
         ).pSymmetric(v: 20,h: 35),
         const Line(color: AppColors.whiteGrey,height: 8)

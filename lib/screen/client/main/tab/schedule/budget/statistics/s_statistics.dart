@@ -36,14 +36,37 @@ class _StatisticsScreen extends ConsumerState<StatisticsScreen> {
     ref.read(budgetApiProvider).budgetStatistics(itinerary!, ref);
   }
 
+  String getMaxCategory(Statistics? budgetStatistics) {
+    if (budgetStatistics == null) return 'N/A';
+
+    final individual = budgetStatistics.individual;
+    final categoryAmounts = {
+      'lodging': individual.amount.lodging,
+      'flight': individual.amount.flight,
+      'traffic': individual.amount.traffic,
+      'tour': individual.amount.tour,
+      'food': individual.amount.food,
+      'shopping': individual.amount.shopping,
+      'other': individual.amount.other,
+    };
+
+    final maxCategory = categoryAmounts.entries.reduce((a, b) => a.value > b.value ? a : b).key;
+
+    return categoryList.firstWhere((category) => category.engCategory == maxCategory).category;
+  }
+
   @override
   Widget build(BuildContext context) {
     final itinerary = ref.read(itineraryCheckProvider);
     final budget = ref.read(currentBudgetProvider);
     final budgetStatistics = ref.watch(statisticsProvider);
 
+    final maxCategory = getMaxCategory(budgetStatistics);
+
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () {
             Nav.pop(context);
@@ -110,7 +133,7 @@ class _StatisticsScreen extends ConsumerState<StatisticsScreen> {
               painter: DottedLinePainter(),
             ),
           ),
-          '식비에서 가장 많이 썼어요.'
+          '$maxCategory에서 가장 많이 썼어요.'
               .text
               .size(15)
               .color(AppColors.primaryGrey)

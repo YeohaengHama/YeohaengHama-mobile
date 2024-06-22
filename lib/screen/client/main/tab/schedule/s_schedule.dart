@@ -70,7 +70,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                 icon: const Icon(Icons.add),
                 onPressed: () {
                   // 뒤로가기 버튼 클릭 시 동작
-                  Nav.push(const SpaceSearchFragment());
+                  Nav.push(const SpaceSearchFragment(null));
                 }),
             actions: [
               IconButton(onPressed: () async{
@@ -141,7 +141,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                             if (pickPlaceList.isEmpty ||
                                 index == pickPlaceList.length) {
                               return Tap(
-                                onTap: () { Nav.push(const SpaceSearchFragment()); },
+                                onTap: () { Nav.push(const SpaceSearchFragment(null)); },
                                 child: SizedBox(
                                   width: 105,
                                   height: 100,

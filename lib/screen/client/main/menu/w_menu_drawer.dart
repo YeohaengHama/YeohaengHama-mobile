@@ -17,6 +17,7 @@ import '../../dialog/d_message.dart';
 import 'my_option/s/s_profile_setting.dart';
 import 'my_option/s_my_option.dart';
 import 'my_trip/s_my_trip.dart';
+import 'notification/s_notification.dart';
 
 
 class MenuDrawer extends ConsumerStatefulWidget {
@@ -66,7 +67,8 @@ class _MenuDrawerState extends ConsumerState<MenuDrawer> {
       context.deviceHeight < MenuDrawer.minHeightForScrollView;
 
   Container getMenus(BuildContext context) {
-    final accountNotifier = ref.read(accountProvider.notifier).state!;
+    final accountNotifier = ref.watch(accountProvider.notifier).state!;
+    final _accountProvider = ref.watch(accountProvider);
     return Container(
       constraints: BoxConstraints(minHeight: context.deviceHeight),
       child: Column(
@@ -86,9 +88,14 @@ class _MenuDrawerState extends ConsumerState<MenuDrawer> {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 20),
-                child: Icon(
-                  Icons.notifications_none,
-                  color: context.appColors.drawerText,
+                child: IconButton(
+                  onPressed: () async{
+
+                    Nav.push(NotificationScreen()); },
+                  icon: Icon(
+                    Icons.notifications_none,
+                    color: context.appColors.drawerText,
+                  ),
                 ),
               ),
             ],

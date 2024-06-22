@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:fast_app_base/data/entity/open_api/open_api_area_location.dart';
 import 'package:fast_app_base/data/entity/open_api/open_api_image.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -11,8 +12,10 @@ import '../entity/area/search_simple_toursim_result.dart';
 import '../entity/area/serch_detail_result.dart';
 import '../entity/open_api/open_api_area.dart';
 import '../entity/open_api/open_api_detail.dart';
+import '../entity/open_api/search_location_result.dart';
 import '../memory/area/area_detail_provider.dart';
 import '../memory/area/area_image_provider.dart';
+import '../memory/area/search_location_result_provider.dart';
 import '../memory/search/search_simple_area_provider.dart';
 import '../memory/search/search_simple_restaurant_provider.dart';
 
@@ -292,6 +295,45 @@ class AreaApi {
           areaImageNotifier.addAreaImage(searchImageResult);
           print(searchImageResult);
         }
+
+        return response;
+      } else if (response.statusCode == 401) {
+        return response;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    } finally {
+      // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
+    }
+  }
+  Future<Response> searchLocationList(OpenApiAreaLocation openApiAreaLocation, WidgetRef ref) async {
+    final searchLocationNotifier = ref.read(searchLocationProvider.notifier);
+
+    try {
+      final response = await _dio.post(
+        '$baseUrl/openApi/searchLocation',
+        data: {
+          'numOfRows': openApiAreaLocation.numOfRows,
+          'page': openApiAreaLocation.page,
+          'mapx' : openApiAreaLocation.mapX,
+          'mapy': openApiAreaLocation.mapY,
+          'radius': openApiAreaLocation.radius,
+          'contentTypeId' : openApiAreaLocation.contentTypeId,
+          'mobileOS': openApiAreaLocation.mobileOS,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        String responseDataString = response.data.toString().replaceAll('<xmp>', '').replaceAll('</xmp>', '');
+        Map<String, dynamic> responseData = json.decode(responseDataString);
+
+        final List<dynamic> items = responseData['response']['body']['items']['item'];
+        List<SearchLocationResult> locations = items.map((item) => SearchLocationResult.fromJson(item)).toList();
+        searchLocationNotifier.setSearchLocations(locations);
 
         return response;
       } else if (response.statusCode == 401) {

@@ -26,7 +26,7 @@ class _ImageScrollViewState extends State<ImageScrollView> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 200,
-      width: 360,
+      width: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
           ClipRRect(
@@ -36,7 +36,7 @@ class _ImageScrollViewState extends State<ImageScrollView> {
               children: [
                 ...widget.searchImageResult.imagesUrl!.map((url) {
                   if (url.isNotEmpty) {
-                    return CachedNetworkImage(imageUrl: url, fit: BoxFit.fill);
+                    return CachedNetworkImage(imageUrl: url, fit: BoxFit.cover,);
                   } else {
                     return Container(
                       color: Colors.white,

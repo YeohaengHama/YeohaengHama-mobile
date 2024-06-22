@@ -1,6 +1,7 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_text_field_with_delete.dart';
 import 'package:fast_app_base/data/memory/search/search_simple_diary_provider.dart';
+import 'package:fast_app_base/screen/client/main/search/provider/is_loading_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -25,6 +26,8 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isLoading = ref.read(isLoadingProvider.notifier);
+
     Future<void> postSearchArea() async {
       final openApiArea = OpenApiArea(
         numOfRows: '100',
@@ -73,7 +76,8 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
             ).pOnly(top: 6),
           ),
           IconButton(
-                  onPressed: () {
+                  onPressed: () async{
+                    isLoading.setLoading(true);
                     postSearchArea();
                     postSearchRestaurantArea();
                     postDiarySearch();

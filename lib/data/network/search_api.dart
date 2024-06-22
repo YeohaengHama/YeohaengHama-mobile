@@ -4,6 +4,7 @@ import 'package:fast_app_base/data/memory/search/search_simple_diary_provider.da
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../common/constants.dart';
+import '../../screen/client/main/search/provider/is_loading_provider.dart';
 import '../entity/search/vo_search_diary_area.dart' as SearchDiaryArea;
 
 final SearchApiProvider = Provider<SearchApi>((ref) => SearchApi());
@@ -28,10 +29,12 @@ class SearchApi {
       );
 
       if (response.statusCode == 200) {
+        final isLoading = ref.read(isLoadingProvider.notifier);
         final jsonData = response.data['data']['searchDiaryDTOS'] as List<dynamic>;
         print(jsonData);
         if (jsonData.isEmpty) {
           ref.read(SearchDiaryAreaProvider.notifier).clearDiarys();
+          isLoading.setLoading(false);
           print('일기 목록이 비어있습니다.');
         } else {
           final diarys = jsonData.map((json) {
@@ -51,6 +54,8 @@ class SearchApi {
           }).toList();
 
           ref.read(SearchDiaryAreaProvider.notifier).addDiary(diarys);
+
+          isLoading.setLoading(false);
           print('일기 불러오기 성공: $diarys');
         }
       } else if (response.statusCode == 401) {

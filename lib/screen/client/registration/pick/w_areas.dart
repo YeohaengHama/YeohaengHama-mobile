@@ -72,7 +72,7 @@ class AreasWidget extends ConsumerWidget {
 
                 // 현재까지 쌓인 창을 pop하고 MainScreen으로 이동
                 Navigator.popUntil(context, (route) => route.isFirst);
-                Nav.push(MainScreen(initialTab: TabItem.schedule,));
+                Nav.push(MainScreen(initialTab: TabItem.schedule));
               } else {
                 final currentItinerary = ref.read(itineraryCheckProvider);
                 final editItinerary = Itinerary(

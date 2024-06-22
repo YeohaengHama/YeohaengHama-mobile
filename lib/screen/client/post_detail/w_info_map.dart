@@ -56,9 +56,9 @@ class InfoMapWidget extends StatelessWidget {
                 searchReviewResult: searchReviewResult,
               ));
             },
-            child: MapWidget(
+            child: searchDetailResult.mapX != null ? MapWidget(
                 mapX: double.parse(searchDetailResult.mapX),
-                mapY: double.parse(searchDetailResult.mapY))),
+                mapY: double.parse(searchDetailResult.mapY)): Container()),
       ),
       Height(10),
       RoundedContainer(
@@ -67,14 +67,14 @@ class InfoMapWidget extends StatelessWidget {
         child: Row(
           children: [
             '주소 '.text.color(AppColors.primaryGrey).bold.size(12).make(),
-            searchDetailResult.addr1.text
+            searchDetailResult.addr1 != "null" ? searchDetailResult.addr1.text
                 .color(AppColors.secondGrey)
                 .size(12)
-                .make(),
-            searchDetailResult.addr2.text
+                .make(): ''.text.size(12).make(),
+            searchDetailResult.addr2 != "null" ?searchDetailResult.addr2.text
                 .color(AppColors.secondGrey)
                 .size(12)
-                .make(),
+                .make(): ''.text.size(12).make(),
           ],
         ),
       ),
