@@ -61,7 +61,18 @@ class TestPostDetailScreen extends HookConsumerWidget {
       await areaApi.postDetailArea(openApiDetail, ref);
     }
 
-
+    Future<void> postAreaImage() async {
+      final openApiImage = OpenApiImage(
+        contentId: searchSimpleResult != null
+            ? searchSimpleResult.contentId
+            : place!.placeNum.toString(),
+        numOfRows: '1',
+        pageNo: '1',
+        mobileOS: 'IOS',
+      );
+      final areaApi = ref.read(areaApiProvider);
+      await areaApi.postAreaImage(openApiImage, ref);
+    }
 
     Future<void> postAreaReview() async {
       final reviewApi = ref.read(reviewApiProvider);
@@ -82,6 +93,7 @@ class TestPostDetailScreen extends HookConsumerWidget {
         isLoading.setLoading(true);
 
         await postDetailArea();
+        await postAreaImage();
         await postAreaReview();
 
         isLoading.setLoading(false);
