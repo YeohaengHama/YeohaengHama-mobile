@@ -12,6 +12,7 @@ import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 import '../../../../../../../data/memory/user_provider.dart';
 import '../../../../../../../data/network/diary_api.dart';
 import '../../../../../review/picker/picker.dart';
+import '../../../../search/provider/is_loading_provider.dart';
 
 
 class DiaryWriteScreen extends ConsumerStatefulWidget {
@@ -27,6 +28,7 @@ class _DiaryWriteScreenState extends ConsumerState<DiaryWriteScreen> {
   final TextEditingController _textFieldController = TextEditingController();
   late MultiImagePickerController _controller;
   late final images = _controller.images;
+
   bool _isLoading = false;
 
   @override

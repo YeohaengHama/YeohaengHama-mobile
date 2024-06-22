@@ -7,6 +7,7 @@ part 'vo_current_budget.g.dart';
 class CurrentBudget with _$CurrentBudget {
   factory CurrentBudget({
     required int budgetId,
+    required int budgetTotalAmount,
     required int totalAmount,
     required int itineraryId,
     required Map<int, List<Expenditure>> expenditures,
@@ -35,6 +36,7 @@ class CurrentBudget with _$CurrentBudget {
     // Return the constructed CurrentBudget instance
     return CurrentBudget(
       budgetId: data['budgetId'] as int,
+      budgetTotalAmount: data['budgetTotalAmount'] as int,
       totalAmount: data['totalAmount'] as int,
       itineraryId: data['itineraryId'] as int,
       expenditures: expenditures,
@@ -50,6 +52,7 @@ class Expenditure with _$Expenditure {
     required Place place,
     required int day,
     required String paymentMethod,
+    required Account payerId,
     required String category,
     required String content,
     required bool individual,

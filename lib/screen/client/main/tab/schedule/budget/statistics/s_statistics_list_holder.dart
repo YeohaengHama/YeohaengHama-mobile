@@ -1,3 +1,4 @@
+import 'package:animation_list/animation_list.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/memory/budget/add_budget_provider.dart';
 import 'package:fast_app_base/data/memory/budget/seleted_day_provider.dart';
@@ -106,11 +107,12 @@ class _StatisticsListHolderState extends ConsumerState<StatisticsListHolder> {
                     painter: DottedLinePainter(),
                   ),
                 ),
-                ListView.builder(
+                AnimationList(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: expenditureList.length,
-                  itemBuilder: (BuildContext context, int index) {
+                  duration: 1500,
+                  reBounceDepth: 0.5,
+                  children: List.generate(expenditureList.length, (index) {
                     final expenditure = expenditureList[index];
                     final category = categoryList.firstWhere((item) => item.engCategory == expenditure.category);
 
@@ -176,7 +178,7 @@ class _StatisticsListHolderState extends ConsumerState<StatisticsListHolder> {
                         ],
                       ).pSymmetric(v: 10),
                     );
-                  },
+                  }),
                 ),
               ],
             );

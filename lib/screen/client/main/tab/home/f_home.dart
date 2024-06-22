@@ -31,8 +31,8 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
 
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initStat() {
+    super.initState();
     final diaryApi = ref.read(diaryApiProvider);
     diaryApi.showAllDiary(ref);
   }
@@ -82,7 +82,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const SpaceSearchFragment()),
+                        builder: (context) => const SpaceSearchFragment(null)),
                   );
                 },
                 icon: const Icon(

@@ -115,7 +115,6 @@ class ReviewApi {
               ReviewShowAll.fromJson(json as Map<String, dynamic>))
               .toList();
           ref.read(ReviewShowAllListProvider.notifier).addReview(reviews);
-          ref.read(isLoadingProvider.notifier).setLoading(false);
           print('리뷰 불러오기 성공: $reviews');
 
         }
@@ -127,7 +126,6 @@ class ReviewApi {
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
-      ref.watch(isLoadingProvider.notifier).setLoading(false);
       ref.read(ReviewShowAllListProvider.notifier).clearReviews();
       print('리뷰 목록이 비어있습니다.');
     }

@@ -119,7 +119,7 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
               icon: Icon(_showIcons ? Icons.close : Icons.more_horiz),
             ),
           ],
-        ),
+        ).pSymmetric(h: 5),
       ),
     );
   }

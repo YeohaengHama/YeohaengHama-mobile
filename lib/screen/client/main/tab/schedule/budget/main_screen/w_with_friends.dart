@@ -53,9 +53,17 @@ class _WithFriendsWidgetState extends ConsumerState<WithFriendsWidget> {
 
   void _removeAccount(int accountId) {
     if (_amountControllers.containsKey(accountId)) {
+      int amountToRemove = int.tryParse(_amountControllers[accountId]!.text.replaceAll(',', '')) ?? 0;
+      int currentTotalAmount = ref.read(amountControllerProvider).amount;
+      ref.read(amountControllerProvider.notifier).setAmount(currentTotalAmount - amountToRemove);
+
       _amountControllers[accountId]!.dispose();
       _amountControllers.remove(accountId);
-      _recalculateAmounts();
+      if (isDutchTreat) {
+        _recalculateAmounts();
+      } else {
+        _updateTotalAmount();
+      }
     }
   }
 
@@ -106,7 +114,6 @@ class _WithFriendsWidgetState extends ConsumerState<WithFriendsWidget> {
     ref.listen<Map<int, bool>>(accountSelectionProvider, (previous, next) {
       next.forEach((accountId, isSelected) {
         if (!isSelected && _amountControllers.containsKey(accountId)) {
-          _amountControllers[accountId]!.text = '0';
           _removeAccount(accountId);
         }
       });

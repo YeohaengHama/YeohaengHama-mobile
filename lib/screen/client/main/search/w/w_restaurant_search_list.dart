@@ -4,112 +4,78 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../data/entity/area/search_simple_restaurant_result.dart';
-import '../../../../../data/entity/open_api/open_api_detail.dart';
-import '../../../../../data/entity/open_api/open_api_image.dart';
-import '../../../../../data/memory/area/area_detail_provider.dart';
-import '../../../../../data/memory/area/area_image_provider.dart';
-import '../../../../../data/memory/review/review_show_all_provider.dart';
-import '../../../../../data/network/area_api.dart';
-import '../../../../../data/network/review_api.dart';
-import '../../../post_detail/s_post_detail.dart';
 
-class RestaurantSearchListWidget extends ConsumerWidget {
+import '../../../post_detail/test_post_deatil.dart';
+
+
+class RestaurantSearchListWidget extends ConsumerStatefulWidget {
   const RestaurantSearchListWidget(this.searchSimpleRestaurantResult, {super.key});
 
   final SearchSimpleRestaurantResult searchSimpleRestaurantResult;
+
+  @override
+  ConsumerState<RestaurantSearchListWidget> createState() =>
+      _RestaurantSearchListWidgetState();
+}
+
+class _RestaurantSearchListWidgetState
+    extends ConsumerState<RestaurantSearchListWidget> {
   String truncateWithEllipsis(int cutoff, String myString) {
     return (myString.length <= cutoff) ? myString : '${myString.substring(0, cutoff)}...';
   }
 
-
-
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    String addr1Text = searchSimpleRestaurantResult.addr1.toString();
-    Future<void> postDetailArea() async {
-      final openApiDetail = OpenApiDetail(
-        numOfRows: '1',
-        page: '1',
-        contentTypeId: searchSimpleRestaurantResult.contentTypeId,
-        contentId: searchSimpleRestaurantResult.contentId,
-        mobileOS: 'IOS',
-      );
-      final areaApi = ref.read(areaApiProvider);
-      await areaApi.postDetailArea(openApiDetail, ref);
-    }
-    Future<void> postAreaImage() async {
-      final openApiImage = OpenApiImage(
-        contentId: searchSimpleRestaurantResult.contentId,
-        numOfRows: '1',
-        pageNo: '1',
-        mobileOS: 'IOS',
-      );
-      final areaApi = ref.read(areaApiProvider);
-      await areaApi.postAreaImage(openApiImage, ref);
-    }
-    Future<void> postAreaReview() async {
-      final reviewApi = ref.read(reviewApiProvider);
-      await reviewApi.showAllReview(int.parse(searchSimpleRestaurantResult.contentId),int.parse(searchSimpleRestaurantResult.contentTypeId) , ref);
-    }
+  Widget build(BuildContext context) {
+    String addr1Text = widget.searchSimpleRestaurantResult.addr1.toString();
 
-    return Tap(
-      //Nav.push(RestaurantDetailScreen(Restaurant.id, Restaurant: Restaurant,));
-      onTap: () async {
-        await postDetailArea();
-        await postAreaImage();
-        await postAreaReview();
-        final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;
-        final searchImageResult = ref.read(AreaImageApiResponseProvider);
-        final searchReviewResult =  ref.read(ReviewShowAllListProvider);
-        if (searchDetailResult != null && searchImageResult != null) {
-          Nav.push(postDetailScreen(
-            searchDetailResult: searchDetailResult,
-            searchImageResult: searchImageResult,
-            searchReviewResult: searchReviewResult,
-          ));
-        } else {
-          // Handle the case when either searchDetailResult or searchImageResult is null
-        }
+    return GestureDetector(
+      onTap: () {
+        Nav.push(TestPostDetailScreen(
+          searchSimpleResult: widget.searchSimpleRestaurantResult,
+        ));
       },
       child: Container(
         child: Row(
           children: [
-            searchSimpleRestaurantResult.firstimage == '' ||  searchSimpleRestaurantResult.firstimage =="null"
-                ?Container(
-              color: AppColors.whiteGrey,
-              width: 45,
-              height: 45,
-            ):CachedNetworkImage(
-              imageUrl: searchSimpleRestaurantResult.firstimage,
+            widget.searchSimpleRestaurantResult.firstimage != "null" &&
+                widget.searchSimpleRestaurantResult.firstimage!.isNotEmpty
+                ? CachedNetworkImage(
+              imageUrl: widget.searchSimpleRestaurantResult.firstimage!,
               width: 45,
               height: 45,
               fit: BoxFit.cover,
+            )
+                : Container(
+              color: AppColors.whiteGrey,
+              width: 45,
+              height: 45,
             ),
-            width10,
+            SizedBox(width: 10),
             SizedBox(
-
               height: 45,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  searchSimpleRestaurantResult.title.text.bold
-                      .color(AppColors.primaryGrey)
-                      .size(13)
-                      .make()
-                      .pOnly(top: 3),
-              Text(
-                truncateWithEllipsis(30, addr1Text),
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.thirdGrey,
-                  fontSize: 12,
-                ),
-              ).pOnly(bottom: 3),
-
+                  Text(
+                    widget.searchSimpleRestaurantResult.title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primaryGrey,
+                      fontSize: 13,
+                    ),
+                  ).pOnly(top: 3),
+                  Text(
+                    truncateWithEllipsis(30, addr1Text),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.thirdGrey,
+                      fontSize: 12,
+                    ),
+                  ).pOnly(bottom: 3),
                 ],
               ),
-            )
+            ),
           ],
         ).pOnly(top: 10, left: 20, bottom: 10),
       ),

@@ -52,6 +52,8 @@ class _ProfileSettingScreenState extends ConsumerState<ProfileSettingScreen> {
     );
 
     await _userApi.updateAccount(account, ref);
+    final diaryApi = ref.read(diaryApiProvider);
+    await diaryApi.showAllDiary(ref);
   }
 
   Future<void> _loadImage(String photoUrl) async {

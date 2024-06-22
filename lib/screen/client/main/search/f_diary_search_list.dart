@@ -1,4 +1,5 @@
-
+import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/search/provider/is_loading_provider.dart';
 import 'package:fast_app_base/screen/client/main/search/w/w_diary_search_list.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,15 +14,30 @@ class DiarySearchListFragment extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final diaryList = ref.watch(SearchDiaryAreaProvider);
-    return Expanded(
-      child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: diaryList.length,
-          itemBuilder: (context, index) {
-            return Row(
-              children: [DiarySearchListWidget(diaryList[index])],
-            );
-          }),
-    );
+    final _isLoading = ref.watch(isLoadingProvider.notifier).state;
+
+    return diaryList.isEmpty && !_isLoading
+        ? SizedBox(
+            child: Center(
+                child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              '아직 작성 된 여행일기가 없어요'.text.color(AppColors.thirdGrey).bold.make(),
+              '여행일기를 작성해 볼까요?'.text.color(AppColors.thirdGrey).make(),
+              Height(30),
+              Line(color: AppColors.outline,width: 340)
+            ],
+          ))).pSymmetric(v: 30)
+        : Expanded(
+            child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: diaryList.length,
+                itemBuilder: (context, index) {
+                  return Row(
+                    children: [DiarySearchListWidget(diaryList[index])],
+                  );
+                }),
+          );
   }
 }

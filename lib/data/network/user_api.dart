@@ -69,7 +69,7 @@ class UserApi {
       );
 
       if (response.statusCode == 200) {
-        final data = response.data['data'] ;
+        final data = response.data['data'];
 
         final id = data['id'].toString();
         final nickName = data['nickname'];
@@ -77,16 +77,24 @@ class UserApi {
         print('로그인 성공: id=$id, nickName=$nickName, photoUrl=$photoUrl');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-              backgroundColor: AppColors.mainPurple,
-              content: Text("$nickName님 반가워요 여행하마와 함께 떠나볼까요?💜",style:TextStyle(fontWeight: FontWeight.bold),)),
+            backgroundColor: AppColors.mainPurple,
+            content: Text(
+              "$nickName님 반가워요 여행하마와 함께 떠나볼까요?💜",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
         );
         final currentAccount = CurrentAccount(id: id, nickName: nickName, photoUrl: photoUrl);
         accountNotifier.addCurrentAccount(currentAccount);
 
-        data['role'] != 'ACCOUNT' ? Nav.push(ManagerScreen()) : Navigator.push(
+
+
+        data['role'] != 'ACCOUNT'
+            ? Nav.push(ManagerScreen())
+            : Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => MainScreen(),
+            builder: (context) => MainScreen(userId: id),
           ),
         );
 
@@ -102,6 +110,7 @@ class UserApi {
       throw e;
     }
   }
+
   Future<Response> postSearchArea(OpenApiArea openApiArea) async {
     try {
       final response = await _dio.post(

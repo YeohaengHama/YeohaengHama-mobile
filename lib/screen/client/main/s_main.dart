@@ -1,21 +1,22 @@
-
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/client/main/tab/tab_navigator.dart';
 import 'package:flutter/material.dart';
-
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../../../data/network/notification_api.dart';
 import 'menu/w_menu_drawer.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends ConsumerStatefulWidget {
   final TabItem? initialTab;
-  const MainScreen({super.key, this.initialTab});
+  final String? userId; // 추가: userId를 받아서 사용
+
+  const MainScreen({super.key, this.initialTab, this.userId});
 
   @override
-  State<MainScreen> createState() => MainScreenState();
+  ConsumerState<MainScreen> createState() => MainScreenState();
 }
 
-class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
-
+class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProviderStateMixin {
   TabItem _currentTab = TabItem.home;
   final tabs = [TabItem.home, TabItem.schedule, TabItem.meeting, TabItem.information];
   final List<GlobalKey<NavigatorState>> navigatorKeys = [];
@@ -26,13 +27,16 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
 
   bool get extendBody => true;
 
-  static double get bottomNavigationBarBorderRadius =>0.0;
+  static double get bottomNavigationBarBorderRadius => 0.0;
 
   @override
   void initState() {
     super.initState();
     initNavigatorKeys();
     _currentTab = widget.initialTab ?? TabItem.home;
+    if(widget.userId != null){
+    final notiApi = ref.read(notificationApiProvider);
+    notiApi.startListeningToServer(widget.userId!, ref);}
   }
 
 
@@ -42,7 +46,7 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
       canPop: isRootPage,
       onPopInvoked: _handleBackPressed,
       child: Scaffold(
-        extendBody: extendBody, //bottomNavigationBar 아래 영역 까지 그림
+        extendBody: extendBody, // bottomNavigationBar 아래 영역 까지 그림
         endDrawer: const MenuDrawer(),
         body: Container(
           color: Colors.transparent,
@@ -53,18 +57,19 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
       ),
     );
   }
-  bool get isRootPage =>
-      _currentTab == TabItem.home && _currentTabNavigationKey.currentState?.canPop() == false;
+
+  bool get isRootPage => _currentTab == TabItem.home && _currentTabNavigationKey.currentState?.canPop() == false;
+
   IndexedStack get pages => IndexedStack(
       index: _currentIndex,
       children: tabs
           .mapIndexed((tab, index) => Offstage(
-                offstage: _currentTab != tab,
-                child: TabNavigator(
-                  navigatorKey: navigatorKeys[index],
-                  tabItem: tab,
-                ),
-              ))
+        offstage: _currentTab != tab,
+        child: TabNavigator(
+          navigatorKey: navigatorKeys[index],
+          tabItem: tab,
+        ),
+      ))
           .toList());
 
   void _handleBackPressed(bool didPop) {
@@ -75,7 +80,6 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
       }
       if (_currentTab != TabItem.home) {
         changeTab(tabs.indexOf(TabItem.home));
-
       }
     }
   }
@@ -111,10 +115,10 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
     return tabs
         .mapIndexed(
           (tab, index) => tab.toNavigationBarItem(
-            context,
-            isActivated: _currentIndex == index,
-          ),
-        )
+        context,
+        isActivated: _currentIndex == index,
+      ),
+    )
         .toList();
   }
 
@@ -124,8 +128,7 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
     });
   }
 
-  BottomNavigationBarItem bottomItem(
-      bool activate, IconData iconData, IconData inActivateIconData, String label) {
+  BottomNavigationBarItem bottomItem(bool activate, IconData iconData, IconData inActivateIconData, String label) {
     return BottomNavigationBarItem(
         icon: Icon(
           key: ValueKey(label),

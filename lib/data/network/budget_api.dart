@@ -82,6 +82,36 @@ class BudgetApi {
       throw e;
     }
   }
+
+  Future<void> showExpenditures(CheckItinerary checkItinerary, WidgetRef ref) async {
+    final url = '$baseUrl/Budget/budgetShow';
+
+    try {
+      final response = await _dio.post(
+          url,
+          data: {
+            "budgetId" : checkItinerary.budgetId,
+            "accountId" : checkItinerary.account.id
+          }
+      );
+
+      if (response.statusCode == 200) {
+        print('가계부 불러오기 성공: ${response.data}');
+        // 가계부 생성 성공 시 setCurrentBudget를 호출하여 데이터를 저장
+
+        ref.read(currentBudgetProvider.notifier).setCurrentBudget(CurrentBudget.fromJson(response.data));
+      } else if (response.statusCode == 401) {
+        print('error');
+        return null;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('예외가 발생했습니다: $e');
+      throw e;
+    }
+  }
   Future<void> addBudget(AddBudget addBudget,WidgetRef ref) async {
     final url = '$baseUrl/Budget/addExpenditures';
     final account = ref.read(accountProvider);

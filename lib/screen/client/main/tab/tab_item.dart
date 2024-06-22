@@ -1,4 +1,4 @@
-import 'package:fast_app_base/common/common.dart';
+ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/f_schedule.dart';
 
 import 'package:flutter/material.dart';
