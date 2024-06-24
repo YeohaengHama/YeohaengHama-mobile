@@ -29,8 +29,8 @@ class AreasWidget extends ConsumerWidget {
     return Container(
       child: Row(
         children: [
-          CachedNetworkImage(
-            imageUrl: area.areaImages,
+          Image.asset(
+            area.areaImages,
             width: 45,
             height: 45,
             fit: BoxFit.cover,
@@ -64,7 +64,7 @@ class AreasWidget extends ConsumerWidget {
                   area: itineraryProviderNotifier.selectedArea!,
                   startDate: itineraryProviderNotifier.selectedStartDate!,
                   endDate: itineraryProviderNotifier.selectedEndDate!,
-                  expense: '',
+                  expense: '0',
                 );
                 await itineraryApi.postJoinItinerary(newItinerary, ref);
                 itineraryProviderNotifier.addItinerary(newItinerary);

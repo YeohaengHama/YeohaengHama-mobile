@@ -14,7 +14,7 @@ import '../entity/budget/vo_statistics.dart';
 import '../memory/budget/current_budget_provider.dart';
 import '../memory/budget/statistics_provider.dart';
 import '../memory/itinerary/itinerary_check_provider.dart';
-import '../memory/user_provider.dart';
+import '../memory/account/user_provider.dart';
 
 final budgetApiProvider = Provider<BudgetApi>((ref) => BudgetApi());
 
@@ -174,8 +174,6 @@ class BudgetApi {
 
         await showBudget(itinerary!, ref);
         // 가계부 생성 성공 시 setCurrentBudget를 호출하여 데이터를 저장
-        ref.read(currentBudgetProvider.notifier).setCurrentBudget(CurrentBudget.fromJson(response.data));
-
       } else if (response.statusCode == 401) {
         print('error');
         return null;

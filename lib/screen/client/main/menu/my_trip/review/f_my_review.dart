@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../../../../../data/memory/review/review_show_account.dart';
-import '../../../../../../data/memory/user_provider.dart';
+import '../../../../../../data/memory/account/user_provider.dart';
 import '../../../../../../data/network/review_api.dart';
 
 class MyReviewFragment extends ConsumerStatefulWidget {

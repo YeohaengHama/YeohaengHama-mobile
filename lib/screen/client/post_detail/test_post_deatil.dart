@@ -137,7 +137,7 @@ class TestPostDetailScreen extends HookConsumerWidget {
                     final searchDetailResult =
                         ref.read(DetailAreaApiResponseProvider).value;
                     final searchImageResult =
-                    ref.read(AreaImageApiResponseProvider)!;
+                    ref.read(AreaImageApiResponseProvider);
                     final searchReviewResult =
                     ref.read(ReviewShowAllListProvider);
 
@@ -164,7 +164,9 @@ class TestPostDetailScreen extends HookConsumerWidget {
                     AnimatedOpacity(
                       duration: const Duration(milliseconds: 300),
                       opacity: shouldShowTitle.value ? 1.0 : 0.0,
-                      child: Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
                         child: Text(
                           ref.read(DetailAreaApiResponseProvider).value?.title ?? '',
                           style: const TextStyle(

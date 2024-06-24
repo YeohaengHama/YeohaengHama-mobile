@@ -8,6 +8,7 @@ import 'package:fast_app_base/data/entity/itinerary/vo_pick_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_save_place.dart';
 import 'package:fast_app_base/data/entity/menu/all_itinerary.dart';
 import 'package:fast_app_base/data/network/budget_api.dart';
+import 'package:fast_app_base/data/network/user_api.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
@@ -24,7 +25,7 @@ import '../memory/itinerary/itinerary_created_provider.dart';
 import '../memory/itinerary/itinerary_show_all_provider.dart';
 import '../memory/itinerary/show_save_place_provider.dart';
 
-import '../memory/user_provider.dart';
+import '../memory/account/user_provider.dart';
 
 final itineraryApiProvider = Provider<ItineraryApi>((ref) => ItineraryApi());
 
@@ -70,6 +71,7 @@ class ItineraryApi {
         );
 
         ref.read(itineraryCreatedProvider.notifier).addItinerary(createItinerary);
+        getItinerary(ref, createItinerary.id.toString());
         budgetApi.createBudget(createItinerary.id, ref);
         print('일정 생성 완료');
         getItinerary(ref, createItinerary.id.toString());

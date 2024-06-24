@@ -12,7 +12,7 @@ import 'package:simple_shadow/simple_shadow.dart';
 import '../../../../common/language/language.dart';
 import '../../../../common/theme/theme_util.dart';
 import '../../../../common/widget/w_mode_switch.dart';
-import '../../../../data/memory/user_provider.dart';
+import '../../../../data/memory/account/user_provider.dart';
 import '../../dialog/d_message.dart';
 import 'my_option/s/s_profile_setting.dart';
 import 'my_option/s_my_option.dart';
@@ -91,7 +91,7 @@ class _MenuDrawerState extends ConsumerState<MenuDrawer> {
                 child: IconButton(
                   onPressed: () async{
 
-                    Nav.push(NotificationScreen()); },
+                    Nav.push(NotificationScreen(accountNotifier)); },
                   icon: Icon(
                     Icons.notifications_none,
                     color: context.appColors.drawerText,

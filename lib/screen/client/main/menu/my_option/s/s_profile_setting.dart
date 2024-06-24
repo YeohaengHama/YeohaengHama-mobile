@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_tap.dart';
 import 'package:fast_app_base/data/entity/account/vo_current_account.dart';
-import 'package:fast_app_base/data/memory/user_provider.dart';
+import 'package:fast_app_base/data/memory/account/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';

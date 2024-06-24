@@ -1,5 +1,7 @@
 
 import 'package:dio/dio.dart';
+import 'package:fast_app_base/data/memory/account/user_provider.dart';
+import 'package:fast_app_base/data/network/user_api.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../common/constants.dart';
@@ -13,7 +15,8 @@ class ChatApi {
   final String baseUrl = chatServerUrl;
 
   Future<void> findAllChatRoom(WidgetRef ref) async {
-    final url = '$baseUrl/chat/rooms';
+    final account = ref.read(accountProvider);
+    final url = '$baseUrl/chat/roomFindAccount?accountId=${account!.id}';
 
     try {
       final response = await _dio.get(

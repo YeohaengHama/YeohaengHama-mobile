@@ -11,7 +11,7 @@ import '../../../data/entity/itinerary/vo_save_place.dart';
 import '../../../data/memory/area/area_detail_provider.dart';
 import '../../../data/memory/itinerary/itinerary_check_provider.dart';
 import '../../../data/memory/review/review_check_writed_provider.dart';
-import '../../../data/memory/user_provider.dart';
+import '../../../data/memory/account/user_provider.dart';
 import '../../../data/network/itinerary_api.dart';
 import '../review/s_review.dart';
 

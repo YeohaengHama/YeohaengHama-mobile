@@ -113,7 +113,7 @@ class _StatisticsScreen extends ConsumerState<StatisticsScreen> {
             child: Row(
               children: [
                 Text(
-                  formatNumber(budget!.totalAmount.toString()),
+                  formatNumber(budget!.budgetTotalAmount.toString()),
                   style: TextStyle(
                       fontSize: 20,
                       color: AppColors.mainPurple,

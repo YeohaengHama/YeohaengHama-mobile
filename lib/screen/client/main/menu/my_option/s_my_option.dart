@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../common/widget/w_menu.dart';
 import '../../../../../data/memory/itinerary/itinerary_check_provider.dart';
-import '../../../../../data/memory/user_provider.dart';
+import '../../../../../data/memory/account/user_provider.dart';
 
 import 'package:http/http.dart' as http;
 class MyOptionScreen extends ConsumerStatefulWidget {

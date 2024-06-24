@@ -1,4 +1,4 @@
-import 'package:fast_app_base/data/memory/user_provider.dart';
+import 'package:fast_app_base/data/memory/account/user_provider.dart';
 import 'package:fast_app_base/screen/client/review/picker/picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

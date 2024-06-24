@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../../../../../../data/memory/user_provider.dart';
+import '../../../../../../data/memory/account/user_provider.dart';
 import '../../../../../../data/network/diary_api.dart';
 
 class MyDiaryFragment extends ConsumerStatefulWidget {

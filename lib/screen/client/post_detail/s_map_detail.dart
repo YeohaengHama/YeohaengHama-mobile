@@ -19,7 +19,7 @@ import '../../../data/entity/review/a_review_show_all.dart';
 import '../../../data/memory/area/area_detail_provider.dart';
 import '../../../data/memory/area/selectedDayIndex_provider.dart';
 import '../../../data/memory/itinerary/itinerary_check_provider.dart';
-import '../../../data/memory/user_provider.dart';
+import '../../../data/memory/account/user_provider.dart';
 import '../../../data/network/itinerary_api.dart';
 import '../../../entity/dummies.dart';
 
@@ -177,14 +177,14 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(5),
-                        child: widget.searchImageResult.imagesUrl != null
+                        child: widget.searchImageResult != null
                             ? CachedNetworkImage(
                           imageUrl: widget.searchImageResult.imagesUrl!.first,
                           width: 100,
                           height: 120,
                           fit: BoxFit.cover,
                         )
-                            : Image.asset('$basePath/icon/colorHama.png', width: 100, height: 120, fit: BoxFit.cover),
+                            : Image.asset('assets/image/icon/colorHama.png', width: 50, height: 50, fit: BoxFit.cover),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -193,7 +193,7 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
                           Height(3),
                           ReviewStar(),
                           Height(5),
-                          SizedBox(width: 220, child: overviewText.text.maxLines(2).color(AppColors.secondGrey).make()),
+                          overviewText.text != null &&  overviewText.text != "null" ? SizedBox(width: 220, child: overviewText.text.maxLines(2).color(AppColors.secondGrey).make()): SizedBox(),
                           Height(5),
                           widget.searchDetailResult.addr1.text.color(AppColors.thirdGrey).size(10).make(),
                           Height(5),

@@ -13,7 +13,7 @@ import '../entity/review/a_review_show_all.dart';
 import '../entity/review/vo_check_write_review.dart';
 import '../entity/review/vo_review_show_account_.dart';
 import '../memory/review/review_show_account.dart';
-import '../memory/user_provider.dart';
+import '../memory/account/user_provider.dart';
 
 
 final reviewApiProvider = Provider<ReviewApi>((ref) => ReviewApi());
