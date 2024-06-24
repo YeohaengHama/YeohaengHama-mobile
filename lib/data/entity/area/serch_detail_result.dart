@@ -20,6 +20,8 @@ class SearchDetailResult with _$SearchDetailResult {
     required String mapY,
 
 
+
+
     }
       ) = _SearchDetailResult;
 

@@ -282,7 +282,7 @@ class AreaApi {
           } else {
             // Handle the case where 'item' is empty or not present
             const searchImageResult = SearchImageResult(
-                imagesUrl: ['null'] // Add an empty string to imagesUrl
+                imagesUrl: [''] // Add an empty string to imagesUrl
             );
             areaImageNotifier.addAreaImage(searchImageResult);
             print(searchImageResult);

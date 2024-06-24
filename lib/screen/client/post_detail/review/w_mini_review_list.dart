@@ -55,11 +55,9 @@ class _MiniReviewListState extends ConsumerState<MiniReviewList> {
               scrollDirection: Axis.horizontal,
               itemCount: review.length,
               itemBuilder: (context, index) {
-                final reversedIndex = review.length - 1 - index;
-
                 return Row(
                   children: [
-                    MiniReview(review[reversedIndex])
+                    MiniReview(review[index])
                   ],
                 );
               },

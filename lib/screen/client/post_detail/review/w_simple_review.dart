@@ -146,7 +146,7 @@ class _SimpleReviewWidgetState extends ConsumerState<SimpleReviewWidget> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                for (int index = review.length - 1; index >= 0; index--)
+                for (int index = 0; index < review.length; index++)
                   Padding(
                     padding: EdgeInsets.only(bottom: 10),
                     child: SimpleReviewList(review[index]),
