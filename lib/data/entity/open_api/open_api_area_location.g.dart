@@ -9,7 +9,7 @@ part of 'open_api_area_location.dart';
 _$OpenApiAreaLocationImpl _$$OpenApiAreaLocationImplFromJson(
         Map<String, dynamic> json) =>
     _$OpenApiAreaLocationImpl(
-      numOfRows: json['numOfRows'] as String? ?? '1',
+      numOfRows: json['numOfRows'] as String? ?? '100',
       page: json['page'] as String? ?? '1',
       mapX: json['mapX'] as String,
       mapY: json['mapY'] as String,

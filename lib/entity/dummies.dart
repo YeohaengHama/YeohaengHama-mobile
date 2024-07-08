@@ -19,20 +19,20 @@ String picSum(int id) {
 
 final hamaArea1 = HamaArea(area: '서울', areaImages: 'assets/image/area/seoul.png');
 final hamaArea2 = HamaArea(area: '인천', areaImages: 'assets/image/area/incheon.jpg');
-final hamaArea3 = HamaArea(area: '경기', areaImages: 'assets/image/area/gyeonggi.png');
+final hamaArea3 = HamaArea(area: '경기', areaImages: 'assets/image/area/gyeonggi.jpg');
 final hamaArea4 = HamaArea(area: '경남', areaImages: 'assets/image/area/gyeongsangnam.jpg');
 final hamaArea5 = HamaArea(area: '경주', areaImages: 'assets/image/area/gyeongju.jpeg');
 final hamaArea6 = HamaArea(area: '대전', areaImages: 'assets/image/area/daejeon.jpeg');
 final hamaArea7 = HamaArea(area: '부산', areaImages: 'assets/image/area/busan.jpeg');
 final hamaArea8 = HamaArea(area: '대구', areaImages: 'assets/image/area/daegu.jpeg');
-// final hamaArea9 = HamaArea(area: '광주', areaImages: 'assets/image/area/gyeongju.jpeg');
-// final hamaArea10 = HamaArea(area: '울산', areaImages: picSum(311));
-// final hamaArea11 = HamaArea(area: '강원', areaImages: picSum(312));
-// final hamaArea12 = HamaArea(area: '충북', areaImages: picSum(313));
-// final hamaArea13 = HamaArea(area: '충남', areaImages: picSum(314));
-// final hamaArea14 = HamaArea(area: '전북', areaImages: picSum(315));
-// final hamaArea15 = HamaArea(area: '전남', areaImages: picSum(316));
-// final hamaArea16 = HamaArea(area: '제주', areaImages: picSum(317));
+final hamaArea9 = HamaArea(area: '광주', areaImages: 'assets/image/area/gwangju.jpeg');
+final hamaArea10 = HamaArea(area: '울산', areaImages: 'assets/image/area/ulsan.png');
+final hamaArea11 = HamaArea(area: '강원', areaImages: 'assets/image/area/gangwon.jpg');
+final hamaArea12 = HamaArea(area: '충북', areaImages: 'assets/image/area/chungbuk.jpg');
+final hamaArea13 = HamaArea(area: '충남', areaImages: 'assets/image/area/chungnam.jpg');
+final hamaArea14 = HamaArea(area: '전북', areaImages: 'assets/image/area/jeonbuk.jpg');
+final hamaArea15 = HamaArea(area: '전남', areaImages: 'assets/image/area/jeonnam.jpg');
+final hamaArea16 = HamaArea(area: '제주', areaImages: 'assets/image/area/jeju.png');
 
 
 final user1 = User(
@@ -255,14 +255,14 @@ final areaList = [
   hamaArea6,
   hamaArea7,
   hamaArea8,
-  // hamaArea9,
-  // hamaArea10,
-  // hamaArea11,
-  // hamaArea12,
-  // hamaArea13,
-  // hamaArea14,
-  // hamaArea15,
-  // hamaArea16,
+  hamaArea9,
+  hamaArea10,
+  hamaArea11,
+  hamaArea12,
+  hamaArea13,
+  hamaArea14,
+  hamaArea15,
+  hamaArea16,
 ];
 final diaryList = [
   diary1,

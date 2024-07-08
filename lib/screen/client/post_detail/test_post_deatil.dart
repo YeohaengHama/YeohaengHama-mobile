@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
@@ -18,6 +17,7 @@ import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
 import '../../../data/entity/area/search_simple_toursim_result.dart';
 import '../../../data/entity/diary/vo_detail_diary.dart';
+import '../../../data/entity/open_api/open_api_area_location.dart';
 import '../../../data/entity/open_api/open_api_detail.dart';
 import '../../../data/entity/open_api/open_api_image.dart';
 import '../../../data/memory/area/area_detail_provider.dart';
@@ -61,6 +61,7 @@ class TestPostDetailScreen extends HookConsumerWidget {
       await areaApi.postDetailArea(openApiDetail, ref);
     }
 
+
     Future<void> postAreaImage() async {
       final openApiImage = OpenApiImage(
         contentId: searchSimpleResult != null
@@ -95,7 +96,6 @@ class TestPostDetailScreen extends HookConsumerWidget {
         await postDetailArea();
         await postAreaImage();
         await postAreaReview();
-
         isLoading.setLoading(false);
       });
     }
@@ -137,7 +137,7 @@ class TestPostDetailScreen extends HookConsumerWidget {
                     final searchDetailResult =
                         ref.read(DetailAreaApiResponseProvider).value;
                     final searchImageResult =
-                    ref.read(AreaImageApiResponseProvider)!;
+                    ref.read(AreaImageApiResponseProvider);
                     final searchReviewResult =
                     ref.read(ReviewShowAllListProvider);
 
@@ -164,7 +164,9 @@ class TestPostDetailScreen extends HookConsumerWidget {
                     AnimatedOpacity(
                       duration: const Duration(milliseconds: 300),
                       opacity: shouldShowTitle.value ? 1.0 : 0.0,
-                      child: Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
                         child: Text(
                           ref.read(DetailAreaApiResponseProvider).value?.title ?? '',
                           style: const TextStyle(

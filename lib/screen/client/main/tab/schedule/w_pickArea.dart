@@ -8,7 +8,7 @@ import '../../../../../data/entity/itinerary/a_check_itinerary.dart';
 import '../../../../../data/entity/itinerary/vo_delete_place.dart';
 import '../../../../../data/entity/itinerary/vo_pick_place.dart';
 import '../../../../../data/memory/area/selectedDayIndex_provider.dart';
-import '../../../../../data/memory/user_provider.dart';
+import '../../../../../data/memory/account/user_provider.dart';
 import '../../../../../data/network/itinerary_api.dart';
 
 

@@ -57,6 +57,7 @@ class _DiaryMapWidgetState extends ConsumerState<DiaryMapWidget> {
       final markerId = 'marker$i';
       final marker = NMarker(
         icon: const NOverlayImage.fromAssetImage('$basePath/icon/hamaMarker.png'),
+        size: Size(60,30),
         id: markerId,
         position: placeCoordinates[i],
         caption: NOverlayCaption(text: (i + 1).toString()), // 인덱스 번호를 마커에 출력

@@ -12,19 +12,26 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../data/entity/area/saerch_image_result.dart';
 import '../../../data/entity/area/serch_detail_result.dart';
+import '../../../data/entity/itinerary/a_add_pick_place.dart';
 import '../../../data/entity/itinerary/check_save_place/a_check_save_place.dart';
 import '../../../data/entity/itinerary/vo_delete_place.dart';
 import '../../../data/entity/itinerary/vo_save_place.dart';
 import '../../../data/entity/review/a_review_show_all.dart';
 import '../../../data/memory/area/area_detail_provider.dart';
 import '../../../data/memory/area/selectedDayIndex_provider.dart';
+import '../../../data/memory/itinerary/add_pick_each_place_provider.dart';
 import '../../../data/memory/itinerary/itinerary_check_provider.dart';
-import '../../../data/memory/user_provider.dart';
+import '../../../data/memory/account/user_provider.dart';
 import '../../../data/network/itinerary_api.dart';
 import '../../../entity/dummies.dart';
 
 class MapDetailScreen extends ConsumerStatefulWidget {
-  const MapDetailScreen({Key? key, required this.searchDetailResult, required this.searchImageResult, required this.searchReviewResult}) : super(key: key);
+  const MapDetailScreen(
+      {Key? key,
+      required this.searchDetailResult,
+      required this.searchImageResult,
+      required this.searchReviewResult})
+      : super(key: key);
   final SearchDetailResult searchDetailResult;
   final SearchImageResult searchImageResult;
   final List<ReviewShowAll> searchReviewResult;
@@ -54,7 +61,8 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
       );
 
       try {
-        final bool isSaved = await itineraryApi.checkSavePlace(checkSavePlace, ref);
+        final bool isSaved =
+            await itineraryApi.checkSavePlace(checkSavePlace, ref);
         setState(() {
           isPickArea = isSaved;
         });
@@ -67,15 +75,23 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final ItineraryApi itineraryApi= ItineraryApi();
+
+
     String overviewText = widget.searchDetailResult.overView;
     if (overviewText.length > 20) {
       overviewText = overviewText.substring(0, 45) + '...';
     }
     final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;
-    final selectedDayIndexNotifier = ref.read(selectedDayIndexNotifierProvider.notifier);
+    final selectedDayIndexNotifier =
+        ref.read(selectedDayIndexNotifierProvider.notifier);
+    final pickedDay =  ref.read(selectedDayIndexNotifierProvider.notifier).state;
+
     final selectedIndex = ref.watch(selectedDayIndexNotifierProvider);
     final itinerary = ref.read(itineraryCheckProvider);
     final accountNotifier = ref.read(accountProvider.notifier);
+    final AddPickPlace addPickPlace = AddPickPlace(day: selectedIndex+1 ,addr1:  widget.searchDetailResult.addr1, mapx: double.parse( widget.searchDetailResult.mapX), mapy: double.parse(widget.searchDetailResult.mapY), placeType:  widget.searchDetailResult.contentTypeId, placeNum:  widget.searchDetailResult.contentId, placeName: widget.searchDetailResult.title,startTime: "string", endTime: "string",memo: "string" );
+    final _addPickEachPlaceProvider = ref.watch(addPickEachPlaceProvider);
     return Scaffold(
       extendBodyBehindAppBar: true, // Extend the body behind the AppBar
       appBar: AppBar(
@@ -85,26 +101,13 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
           IconButton(
             padding: const EdgeInsets.all(0),
             onPressed: () async {
+
               if (itinerary != null) {
                 setState(() {
                   isPickArea = !isPickArea;
                 });
+                await itineraryApi.PostAddEachPickPlace(ref, addPickPlace);
 
-                final checkSavePlace = CheckSavePlace(
-                    placeNum: searchDetailResult!.contentId,
-                    contentTypeId: searchDetailResult.contentTypeId);
-                final savePlace = SavePlace(
-                  accountId: int.parse(accountNotifier.state!.id)!,
-                  placeNum: searchDetailResult!.contentId, // 여기에 장소 번호를 제공합니다.
-                  contentTypeId: searchDetailResult.contentTypeId, // 여기에 콘텐츠 유형 ID를 제공합니다.
-                );
-                final deletePlace = DeletePlace(
-                    accountId: int.parse(accountNotifier.state!.id),
-                    placeNum: searchDetailResult.contentId,
-                    contentTypeId: searchDetailResult.contentTypeId);
-                isPickArea
-                    ? itineraryApi.postSavePlace(savePlace, ref)
-                    : itineraryApi.postDeletePlace(deletePlace, ref);
               } else {
                 const snackBar = SnackBar(
                   content: Text('아직 일정이 추가 되지 않았습니다.'),
@@ -138,7 +141,8 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
                           currentDay = index + 1;
                         });
                       },
-                      children: List<Widget>.generate(itinerary!.placesByDay.length, (int index) {
+                      children: List<Widget>.generate(
+                          itinerary!.placesByDay.length, (int index) {
                         return Center(
                           child: Text('Day-${index + 1}'),
                         );
@@ -155,12 +159,12 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
         children: [
           itinerary != null
               ? DetailMapWidget(
-            mapX: double.parse(widget.searchDetailResult.mapX),
-            mapY: double.parse(widget.searchDetailResult.mapY),
-          )
+                  mapX: double.parse(widget.searchDetailResult.mapX),
+                  mapY: double.parse(widget.searchDetailResult.mapY),
+                )
               : MapWidget(
-              mapX: double.parse(widget.searchDetailResult.mapX),
-              mapY: double.parse(widget.searchDetailResult.mapY)),
+                  mapX: double.parse(widget.searchDetailResult.mapX),
+                  mapY: double.parse(widget.searchDetailResult.mapY)),
           Align(
             alignment: Alignment.bottomCenter,
             child: Tap(
@@ -177,25 +181,43 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(5),
-                        child: widget.searchImageResult.imagesUrl != null
+                        child: widget.searchImageResult != null &&
+                                widget.searchImageResult.imagesUrl!.first !=
+                                    '' &&
+                                widget.searchImageResult.imagesUrl!.first !=
+                                    'null'
                             ? CachedNetworkImage(
-                          imageUrl: widget.searchImageResult.imagesUrl!.first,
-                          width: 100,
-                          height: 120,
-                          fit: BoxFit.cover,
-                        )
-                            : Image.asset('$basePath/icon/colorHama.png', width: 100, height: 120, fit: BoxFit.cover),
+                                imageUrl:
+                                    widget.searchImageResult.imagesUrl!.first,
+                                width: 100,
+                                height: 120,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset('assets/image/icon/colorHama.png',
+                                width: 100, height: 120, fit: BoxFit.fill),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          widget.searchDetailResult.title.text.bold.color(AppColors.primaryGrey).make(),
+                          widget.searchDetailResult.title.text.bold
+                              .color(AppColors.primaryGrey)
+                              .make(),
                           Height(3),
                           ReviewStar(),
                           Height(5),
-                          SizedBox(width: 220, child: overviewText.text.maxLines(2).color(AppColors.secondGrey).make()),
+                          overviewText.text != null && overviewText.text != "null"
+                              ? SizedBox(
+                                  width: 220,
+                                  child: overviewText.text
+                                      .maxLines(2)
+                                      .color(AppColors.secondGrey)
+                                      .make())
+                              : SizedBox(),
                           Height(5),
-                          widget.searchDetailResult.addr1.text.color(AppColors.thirdGrey).size(10).make(),
+                          widget.searchDetailResult.addr1.text
+                              .color(AppColors.thirdGrey)
+                              .size(10)
+                              .make(),
                           Height(5),
                         ],
                       ).pOnly(left: 10),

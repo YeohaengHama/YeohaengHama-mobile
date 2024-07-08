@@ -11,8 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../screen/client/main/s_main.dart';
+import '../entity/account/show_all_account.dart';
 import '../entity/open_api/open_api_area.dart';
-import '../memory/user_provider.dart';
+import '../memory/account/all_account_provider.dart';
+import '../memory/account/user_provider.dart';
 import '../simple_result.dart';
 
 final userApiProvider = Provider<UserApi>((ref) => UserApi());
@@ -75,6 +77,7 @@ class UserApi {
         final nickName = data['nickname'];
         final photoUrl = data['photoUrl'];
         print('로그인 성공: id=$id, nickName=$nickName, photoUrl=$photoUrl');
+        if(id != null && id != "null"){
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: AppColors.mainPurple,
@@ -83,7 +86,7 @@ class UserApi {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-        );
+        ); }
         final currentAccount = CurrentAccount(id: id, nickName: nickName, photoUrl: photoUrl);
         accountNotifier.addCurrentAccount(currentAccount);
 
@@ -234,6 +237,32 @@ class UserApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
+    }
+  }
+
+  Future<void> showAllAccount(WidgetRef ref) async {
+    final url = '$baseUrl/account/showAll';
+
+    try {
+      final response = await _dio.post(
+        url,
+      );
+
+      if (response.statusCode == 200) {
+        List<dynamic> data = response.data['data'];
+        List<ShowAllAccount> accounts = data.map((account) => ShowAllAccount.fromJson(account)).toList();
+        print(accounts);
+        final accountProvider = ref.read(allAccountProvider.notifier);
+        accountProvider.addAccount(accounts);
+      } else if (response.statusCode == 401) {
+        print('error');
+        return null;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('일기 목록이 비어있습니다.');
     }
   }
 }

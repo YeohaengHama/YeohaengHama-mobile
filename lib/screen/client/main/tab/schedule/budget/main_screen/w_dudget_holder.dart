@@ -143,28 +143,30 @@ class BudgetHolderList extends ConsumerWidget {
                               }
 
                               if (response.isTapConfirmButton) {
-                                ArtSweetAlert.show(
-                                  context: context,
-                                  artDialogArgs: ArtDialogArgs(
-                                    type: ArtSweetAlertType.success,
-                                    title: "Deleted!",
-                                  ),
-                                );
+                                await budgetApi.deleteBudgetOne(expenditure.id, ref);
 
-                                await budgetApi.deleteBudgetOne(
-                                    expenditure.id, ref);
+                                // 안전하게 스낵바와 알림을 표시하기 위해 Future.microtask 사용
+                                Future.microtask(() {
+                                  if (ScaffoldMessenger.of(context).mounted) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: category.color,
+                                        content: Text(
+                                          "'${expenditure.content}' 지출이 삭제되었습니다.",
+                                          style: TextStyle(fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    );
 
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    backgroundColor: category.color,
-                                    content: Text(
-                                      "'${expenditure.content}' 지출이 삭제되었습니다.",
-                                      style: TextStyle(fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                );
-
-
+                                    ArtSweetAlert.show(
+                                      context: context,
+                                      artDialogArgs: ArtDialogArgs(
+                                        type: ArtSweetAlertType.success,
+                                        title: "Deleted!",
+                                      ),
+                                    );
+                                  }
+                                });
                               }
                             },
                             backgroundColor: Colors.red,

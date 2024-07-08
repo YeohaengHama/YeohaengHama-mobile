@@ -29,8 +29,8 @@ class AreasWidget extends ConsumerWidget {
     return Container(
       child: Row(
         children: [
-          CachedNetworkImage(
-            imageUrl: area.areaImages,
+          Image.asset(
+            area.areaImages,
             width: 45,
             height: 45,
             fit: BoxFit.cover,
@@ -64,11 +64,11 @@ class AreasWidget extends ConsumerWidget {
                   area: itineraryProviderNotifier.selectedArea!,
                   startDate: itineraryProviderNotifier.selectedStartDate!,
                   endDate: itineraryProviderNotifier.selectedEndDate!,
-                  expense: '',
+                  expense: '0',
                 );
                 await itineraryApi.postJoinItinerary(newItinerary, ref);
                 itineraryProviderNotifier.addItinerary(newItinerary);
-                await itineraryApi.showSavePlace(ref);
+
 
                 // 현재까지 쌓인 창을 pop하고 MainScreen으로 이동
                 Navigator.popUntil(context, (route) => route.isFirst);

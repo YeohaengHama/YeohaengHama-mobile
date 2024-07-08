@@ -8,7 +8,7 @@ import '../../../../../data/entity/chat/chatRoom.dart';
 import '../../../../../data/entity/chat/message.dart';
 import '../../../../../data/memory/chat/chat_room_proivder.dart';
 import '../../../../../data/memory/chat/chat_service.dart';
-import '../../../../../data/memory/user_provider.dart';
+import '../../../../../data/memory/account/user_provider.dart';
 import '../../../../../data/network/chat_api.dart';
 
 class ChatRoomsListWidget extends ConsumerStatefulWidget {

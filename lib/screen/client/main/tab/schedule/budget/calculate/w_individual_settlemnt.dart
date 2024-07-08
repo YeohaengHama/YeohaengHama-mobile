@@ -9,7 +9,7 @@ import '../../../../../../../common/dart/extension/datetime_extension.dart';
 import '../../../../../../../data/entity/budget/vo_current_budget.dart';
 import '../../../../../../../data/memory/budget/current_budget_provider.dart';
 import '../../../../../../../data/memory/budget/statistics_provider.dart';
-import '../../../../../../../data/memory/user_provider.dart';
+import '../../../../../../../data/memory/account/user_provider.dart';
 import '../../../../../../../data/network/budget_api.dart';
 
 class IndividualSettlement extends ConsumerStatefulWidget {
@@ -153,7 +153,7 @@ class _IndividualSettlement extends ConsumerState<IndividualSettlement> {
           ).pSymmetric(v: 8);
         }).toList(),
       ],
-    );
+    ).pOnly(bottom: 20);
   }
 
   // Helper method to find account by id

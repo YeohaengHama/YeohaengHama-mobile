@@ -18,7 +18,7 @@ class ProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipOval(
-      child: photoUrl != null
+      child: photoUrl != null && photoUrl !=""
           ? CachedNetworkImage(
         imageUrl: photoUrl!,
         height: height,

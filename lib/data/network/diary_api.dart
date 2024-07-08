@@ -12,7 +12,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../common/constants.dart';
 import '../entity/diary/vo_detail_diary.dart';
 import '../memory/diary/diary_detail_proiver.dart';
-import '../memory/user_provider.dart';
+import '../memory/account/user_provider.dart';
 
 final diaryApiProvider = Provider<DiaryApi>((ref) => DiaryApi());
 

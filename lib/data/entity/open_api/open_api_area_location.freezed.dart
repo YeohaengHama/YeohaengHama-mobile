@@ -178,7 +178,7 @@ class __$$OpenApiAreaLocationImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$OpenApiAreaLocationImpl implements _OpenApiAreaLocation {
   const _$OpenApiAreaLocationImpl(
-      {this.numOfRows = '1',
+      {this.numOfRows = '100',
       this.page = '1',
       required this.mapX,
       required this.mapY,

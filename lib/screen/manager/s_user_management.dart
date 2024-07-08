@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/data/memory/user_provider.dart';
+import 'package:fast_app_base/data/memory/account/user_provider.dart';
 import 'package:fast_app_base/screen/client/main/menu/my_trip/review/f_my_review.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

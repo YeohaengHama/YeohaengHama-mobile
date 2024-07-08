@@ -5,21 +5,23 @@ import 'package:fast_app_base/data/memory/diary/diary_detail_proiver.dart';
 import 'package:fast_app_base/screen/client/diary/w_diary_place_holder_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
 import '../../../data/entity/diary/vo_detail_diary.dart';
 import '../../../data/memory/area/area_detail_provider.dart';
+import '../../../data/network/itinerary_api.dart';
 
-class DetailDiaryScreen extends HookWidget {
+class DetailDiaryScreen extends HookConsumerWidget {
   final DetailDiary detailDiary;
 
   const DetailDiaryScreen(this.detailDiary, {Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final pageController = usePageController();
     final customController = usePageController();
-
+    final itineraryApi= ref.read(itineraryApiProvider);
     final shouldShowTitle = useState(false);
 
     useEffect(() {
@@ -118,23 +120,26 @@ class DetailDiaryScreen extends HookWidget {
                           .pSymmetric(h: contentLeftPadding, v: 30),
                       DiaryPlaceHolderList(places: detailDiary.itinerary.place),
                       Center(
-                        child: RoundedContainer(
-                          padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15),
-                          radius: 5,
-                          backgroundColor: AppColors.mainPurple,
-                          child: SizedBox(
-                            width: double.infinity,
-                            height: 20,
-                            child: Center(
-                              child: '내 일정으로 담기'
-                                  .text
-                                  .size(15)
-                                  .color(Colors.white)
-                                  .bold
-                                  .make(),
+                        child: Tap (
+                          onTap: (){itineraryApi.itineraryCopy(context, ref, detailDiary.itinerary.itineraryId);},
+                          child: RoundedContainer(
+                            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15),
+                            radius: 5,
+                            backgroundColor: AppColors.mainPurple,
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: 20,
+                              child: Center(
+                                child: '내 일정으로 담기'
+                                    .text
+                                    .size(15)
+                                    .color(Colors.white)
+                                    .bold
+                                    .make(),
+                              ),
                             ),
-                          ),
-                        ).pSymmetric(h: 50),
+                          ).pSymmetric(h: 50),
+                        ),
                       ),
                       Height(20),
                       Line(color: AppColors.outline,),

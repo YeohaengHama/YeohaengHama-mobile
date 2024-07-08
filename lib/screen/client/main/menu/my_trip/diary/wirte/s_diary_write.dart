@@ -9,7 +9,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
-import '../../../../../../../data/memory/user_provider.dart';
+import '../../../../../../../data/memory/account/user_provider.dart';
 import '../../../../../../../data/network/diary_api.dart';
 import '../../../../../review/picker/picker.dart';
 import '../../../../search/provider/is_loading_provider.dart';

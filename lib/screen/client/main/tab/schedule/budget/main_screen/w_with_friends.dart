@@ -54,8 +54,10 @@ class _WithFriendsWidgetState extends ConsumerState<WithFriendsWidget> {
   void _removeAccount(int accountId) {
     if (_amountControllers.containsKey(accountId)) {
       int amountToRemove = int.tryParse(_amountControllers[accountId]!.text.replaceAll(',', '')) ?? 0;
-      int currentTotalAmount = ref.read(amountControllerProvider).amount;
-      ref.read(amountControllerProvider.notifier).setAmount(currentTotalAmount - amountToRemove);
+      if (!isDutchTreat) {
+        int currentTotalAmount = ref.read(amountControllerProvider).amount;
+        ref.read(amountControllerProvider.notifier).setAmount(currentTotalAmount - amountToRemove);
+      }
 
       _amountControllers[accountId]!.dispose();
       _amountControllers.remove(accountId);
@@ -74,7 +76,9 @@ class _WithFriendsWidgetState extends ConsumerState<WithFriendsWidget> {
 
       List<int> amounts = [];
       _amountControllers.forEach((key, controller) {
+        controller.removeListener(_updateTotalAmount);
         controller.text = formatNumber(dividedAmount.toString());
+        controller.addListener(_updateTotalAmount);
         amounts.add(dividedAmount);
       });
 
@@ -92,7 +96,9 @@ class _WithFriendsWidgetState extends ConsumerState<WithFriendsWidget> {
   void _clearTextFields() {
     ref.read(amountControllerProvider.notifier).setAmount(0);
     _amountControllers.forEach((key, controller) {
+      controller.removeListener(_updateTotalAmount);
       controller.clear();
+      controller.addListener(_updateTotalAmount);
     });
   }
 
@@ -114,6 +120,7 @@ class _WithFriendsWidgetState extends ConsumerState<WithFriendsWidget> {
     ref.listen<Map<int, bool>>(accountSelectionProvider, (previous, next) {
       next.forEach((accountId, isSelected) {
         if (!isSelected && _amountControllers.containsKey(accountId)) {
+          _amountControllers[accountId]!.text = '0';
           _removeAccount(accountId);
         }
       });
@@ -124,7 +131,9 @@ class _WithFriendsWidgetState extends ConsumerState<WithFriendsWidget> {
       addBudget.accounts?.forEach((account) {
         final controller = _amountControllers.putIfAbsent(
             account.id, () => TextEditingController());
+        controller.removeListener(_updateTotalAmount);
         controller.text = formatNumber(dividedAmount.toString());
+        controller.addListener(_updateTotalAmount);
         int amount = int.tryParse(controller.text.replaceAll(',', '')) ?? 0;
         amounts.add(amount);
       });
@@ -170,10 +179,11 @@ class _WithFriendsWidgetState extends ConsumerState<WithFriendsWidget> {
                     setState(() {
                       isDutchTreat = value ?? true;
                       ref.read(addBudgetProvider.notifier).setDivided(isDutchTreat);
-
-                      _clearTextFields(); // 텍스트 필드 초기화
+                      if (isDutchTreat) {
+                        _clearTextFields(); // 텍스트 필드 초기화
+                        _recalculateAmounts(); // 모드 변경 시 금액 재계산
+                      }
                     });
-                    _recalculateAmounts(); // 모드 변경 시 금액 재계산
                   },
                 ),
                 Text('직접 입력')
@@ -191,10 +201,10 @@ class _WithFriendsWidgetState extends ConsumerState<WithFriendsWidget> {
                     setState(() {
                       isDutchTreat = !(value ?? false);
                       ref.read(addBudgetProvider.notifier).setDivided(isDutchTreat);
-
-                      _clearTextFields(); // 텍스트 필드 초기화
+                      if (!isDutchTreat) {
+                        _updateTotalAmount(); // 모드 변경 시 합계 업데이트
+                      }
                     });
-                    _updateTotalAmount(); // 모드 변경 시 합계 업데이트
                   },
                 ),
               ],

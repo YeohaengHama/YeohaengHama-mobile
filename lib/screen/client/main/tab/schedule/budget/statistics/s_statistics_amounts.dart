@@ -88,7 +88,7 @@ class _WalletScreenState extends ConsumerState<StatisticsAmountScreen> {
         case 'other':
           return statistics!.budget.category.amount.other;
         default:
-          return budget.totalAmount!.toDouble();
+          return budget.budgetTotalAmount!.toDouble();
       }
     }
 

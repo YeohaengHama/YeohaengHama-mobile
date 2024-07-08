@@ -8,6 +8,7 @@ import 'package:fast_app_base/data/entity/itinerary/vo_pick_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_save_place.dart';
 import 'package:fast_app_base/data/entity/menu/all_itinerary.dart';
 import 'package:fast_app_base/data/network/budget_api.dart';
+import 'package:fast_app_base/data/network/user_api.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
@@ -16,26 +17,27 @@ import '../../common/constants.dart';
 import '../entity/itinerary/a_add_pick_place.dart';
 import '../entity/itinerary/a_check_itinerary.dart';
 import '../entity/itinerary/a_creat_itinerary.dart';
+import '../entity/itinerary/share_itinerary.dart';
 import '../entity/open_api/open_api_detail.dart';
 
 import '../memory/itinerary/add_pick_each_place_provider.dart';
 import '../memory/itinerary/itinerary_check_provider.dart';
 import '../memory/itinerary/itinerary_created_provider.dart';
 import '../memory/itinerary/itinerary_show_all_provider.dart';
+import '../memory/itinerary/share_itinerary_list_provider.dart';
 import '../memory/itinerary/show_save_place_provider.dart';
 
-import '../memory/user_provider.dart';
+import '../memory/account/user_provider.dart';
 
 final itineraryApiProvider = Provider<ItineraryApi>((ref) => ItineraryApi());
 
 class ItineraryApi {
   final Dio _dio = Dio();
-  final String baseUrl =
-      serverUrl;
+  final String baseUrl = serverUrl;
   final String testUrl = 'http://localhost:8080/api';
   final String jinUrl = 'http://172.16.111.158:8080/api';
 
-  Future<void> postJoinItinerary(Itinerary itinerary,WidgetRef ref) async {
+  Future<void> postJoinItinerary(Itinerary itinerary, WidgetRef ref) async {
     try {
       final accountNotifier = ref.read(accountProvider.notifier);
 
@@ -60,21 +62,28 @@ class ItineraryApi {
         final CreateItinerary createItinerary = CreateItinerary(
           id: responseData['id'] as int,
           name: responseData['name'] as String,
-          type: (responseData['type'] as List<dynamic>).map((type) => type as String).toList(),
-          style: (responseData['style'] as List<dynamic>).map((style) => style as String).toList(),
+          type: (responseData['type'] as List<dynamic>)
+              .map((type) => type as String)
+              .toList(),
+          style: (responseData['style'] as List<dynamic>)
+              .map((style) => style as String)
+              .toList(),
           transportation: responseData['transportation'] as String?,
           area: responseData['area'] as String,
           startDate: responseData['startDate'] as String,
           endDate: responseData['endDate'] as String,
-          expense: responseData['expense'] as String?,
         );
 
-        ref.read(itineraryCreatedProvider.notifier).addItinerary(createItinerary);
-        budgetApi.createBudget(createItinerary.id, ref);
+        ref
+            .read(itineraryCreatedProvider.notifier)
+            .addItinerary(createItinerary);
+        await budgetApi.createBudget(createItinerary.id, ref);
+        await getItinerary(ref, createItinerary.id.toString());
+
         print('일정 생성 완료');
+
         getItinerary(ref, createItinerary.id.toString());
         print(createItinerary);
-
       } else if (response.statusCode == 401) {
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       } else {
@@ -89,7 +98,7 @@ class ItineraryApi {
     }
   }
 
-  Future<void> editItinerary(Itinerary itinerary,WidgetRef ref) async {
+  Future<void> editItinerary(Itinerary itinerary, WidgetRef ref) async {
     try {
       final accountNotifier = ref.read(accountProvider.notifier);
       final itineraryProvider = ref.read(itineraryCheckProvider);
@@ -110,8 +119,6 @@ class ItineraryApi {
       if (response.statusCode == 200) {
         await getItinerary(ref, itineraryProvider!.itineraryId);
         print('일정 수정 완료');
-
-
       } else if (response.statusCode == 401) {
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       } else {
@@ -125,7 +132,6 @@ class ItineraryApi {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
   }
-
 
   Future<Response> postSavePlace(SavePlace savePlace, WidgetRef ref) async {
     try {
@@ -166,7 +172,8 @@ class ItineraryApi {
       DeletePlace deletePlace, WidgetRef ref) async {
     // &placeNum${deletePlace.placeNum}&contentTypeId${deletePlace.contentTypeId}
     try {
-      final pickPlaceNotifier = ref.read(showPickPlaceApiResponseProvider.notifier);
+      final pickPlaceNotifier =
+          ref.read(showPickPlaceApiResponseProvider.notifier);
 
       final response = await _dio.post(
         '$baseUrl/account/deletePlace?accountId=${deletePlace.accountId}',
@@ -179,7 +186,6 @@ class ItineraryApi {
       if (response.statusCode == 200) {
         await removeShowSavePlace(ref, deletePlace.placeNum);
         print('장소 삭제 완료');
-
 
         return response;
       } else if (response.statusCode == 401) {
@@ -198,16 +204,14 @@ class ItineraryApi {
 
   Future<bool> checkSavePlace(
       CheckSavePlace checkSavePlace, WidgetRef ref) async {
-
     try {
       final accountNotifier = ref.read(accountProvider.notifier);
       final itinerary = ref.read(itineraryCheckProvider);
 
-
       final response = await _dio.post(
           '$baseUrl/account/checkSavePlace?accountId=${accountNotifier.state!.id}',
           data: {
-            'itineraryId' :  int.parse(itinerary!.itineraryId),
+            'itineraryId': int.parse(itinerary!.itineraryId),
             'placeNum': checkSavePlace.placeNum,
             'contentTypeId': checkSavePlace.contentTypeId
           });
@@ -250,7 +254,6 @@ class ItineraryApi {
 
         final item = responseData['data'];
 
-
         if (item != null && item.isNotEmpty) {
           final contentTypeId = item['contenttypeid'].toString();
           final contentId = item['contentid'].toString();
@@ -287,19 +290,14 @@ class ItineraryApi {
     }
   }
 
-
-
   Future<Response> showSavePlace(WidgetRef ref) async {
     try {
       final accountNotifier = ref.read(accountProvider.notifier);
       final itinerary = ref.read(itineraryCheckProvider);
 
       final response = await _dio.post(
-        '$baseUrl/account/${accountNotifier.state!.id}',
-        data: {
-          "itineraryId" : itinerary!.itineraryId
-        }
-      );
+          '$baseUrl/account/${accountNotifier.state!.id}',
+          data: {"itineraryId": itinerary!.itineraryId});
       if (response.statusCode == 200) {
         // final jsonData = response.data['data'] as List<dynamic>;
         //
@@ -341,7 +339,8 @@ class ItineraryApi {
               mapx: mapx,
               mapy: mapy,
               firstImage: firstImage);
-          ref.read(showPickPlaceApiResponseProvider.notifier)
+          ref
+              .read(showPickPlaceApiResponseProvider.notifier)
               .addOrRemovePickPlace(pickPlace);
         }
         return response;
@@ -359,6 +358,7 @@ class ItineraryApi {
       // container.dispose();
     }
   }
+
   Future<Response> addShowSavePlace(WidgetRef ref) async {
     try {
       final accountNotifier = ref.read(accountProvider.notifier);
@@ -367,18 +367,14 @@ class ItineraryApi {
 
       final response = await _dio.post(
           '$baseUrl/account/${accountNotifier.state!.id}',
-          data: {
-            "itineraryId" : itinerary!.itineraryId
-          }
-
-      );
+          data: {"itineraryId": itinerary!.itineraryId});
       if (response.statusCode == 200) {
         Map<String, dynamic> responseData = response.data; // 응답 데이터를 Map으로 가져옴
         List<dynamic> dataList = responseData['data'] as List<dynamic>;
         for (var data in dataList) {
           String placeNum = data['placeNum'].toString(); // placeNum 값 추출
           String contentTypeId =
-          data['contentTypeId'].toString(); // contentTypeId 값 추출
+              data['contentTypeId'].toString(); // contentTypeId 값 추출
 
           final openApiDetail = OpenApiDetail(
             contentId: placeNum,
@@ -388,7 +384,7 @@ class ItineraryApi {
 
           // pickPlaceContents 함수 호출하여 title과 firstImage 값 가져오기
           Map<String, dynamic> contents =
-          await pickPlaceContents(openApiDetail, ref);
+              await pickPlaceContents(openApiDetail, ref);
           String title = contents['title'];
           String firstImage = contents['firstImage'];
           String addr1 = contents['addr1'];
@@ -422,6 +418,7 @@ class ItineraryApi {
       // container.dispose();
     }
   }
+
   Future<Response> removeShowSavePlace(WidgetRef ref, String removeId) async {
     try {
       final accountNotifier = ref.read(accountProvider.notifier);
@@ -429,17 +426,14 @@ class ItineraryApi {
 
       final response = await _dio.post(
           '$baseUrl/account/${accountNotifier.state!.id}',
-          data: {
-            "itineraryId" : itinerary!.itineraryId
-          }
-      );
+          data: {"itineraryId": itinerary!.itineraryId});
       if (response.statusCode == 200) {
         Map<String, dynamic> responseData = response.data; // 응답 데이터를 Map으로 가져옴
         List<dynamic> dataList = responseData['data'] as List<dynamic>;
         for (var data in dataList) {
           String placeNum = data['placeNum'].toString(); // placeNum 값 추출
           String contentTypeId =
-          data['contentTypeId'].toString(); // contentTypeId 값 추출
+              data['contentTypeId'].toString(); // contentTypeId 값 추출
 
           final openApiDetail = OpenApiDetail(
             contentId: placeNum,
@@ -449,7 +443,7 @@ class ItineraryApi {
 
           // pickPlaceContents 함수 호출하여 title과 firstImage 값 가져오기
           Map<String, dynamic> contents =
-          await pickPlaceContents(openApiDetail, ref);
+              await pickPlaceContents(openApiDetail, ref);
           String title = contents['title'];
           String firstImage = contents['firstImage'];
           String addr1 = contents['addr1'];
@@ -458,7 +452,6 @@ class ItineraryApi {
           ref
               .read(showPickPlaceApiResponseProvider.notifier)
               .removePickPlace(removeId);
-
         }
         return response;
       } else if (response.statusCode == 401) {
@@ -475,9 +468,11 @@ class ItineraryApi {
       // container.dispose();
     }
   }
+
   Future<Response> getItinerary(WidgetRef ref, String id) async {
     try {
-      final itineraryCreatedNotifier = ref.read(itineraryCreatedProvider.notifier);
+      final itineraryCreatedNotifier =
+          ref.read(itineraryCreatedProvider.notifier);
 
       final response = await _dio.get(
         '$baseUrl/itinerary/${id}',
@@ -504,7 +499,9 @@ class ItineraryApi {
       // container.dispose();
     }
   }
-  Future<Response> PostAddPickPlace(List<AddPickPlace> addPickPlaces, WidgetRef ref) async {
+
+  Future<Response> PostAddPickPlace(
+      List<AddPickPlace> addPickPlaces, WidgetRef ref) async {
     try {
       final itineraryCheckNotifier = ref.read(itineraryCheckProvider.notifier);
 
@@ -542,42 +539,43 @@ class ItineraryApi {
       throw e;
     }
   }
-  Future<Response> PostAddEachPickPlace(WidgetRef ref, AddPickPlace addPickPlace) async {
+
+  Future<Response> PostAddEachPickPlace(
+      WidgetRef ref, AddPickPlace addPickPlace) async {
     try {
       final itineraryCheckNotifier = ref.read(itineraryCheckProvider.notifier);
       Response response;
 
-        final data = {
-          'day': addPickPlace.day,
-          'startTime': addPickPlace.startTime,
-          'endTime': addPickPlace.endTime,
-          'placeType': addPickPlace.placeType,
-          'placeNum': addPickPlace.placeNum,
-          'placeName': addPickPlace.placeName,
-          'addr1': addPickPlace.addr1,
-          'mapx': addPickPlace.mapx.toString(),
-          'mapy': addPickPlace.mapy.toString(),
-          'memo': addPickPlace.memo,
+      final data = {
+        'day': addPickPlace.day,
+        'startTime': addPickPlace.startTime,
+        'endTime': addPickPlace.endTime,
+        'placeType': addPickPlace.placeType,
+        'placeNum': addPickPlace.placeNum,
+        'placeName': addPickPlace.placeName,
+        'addr1': addPickPlace.addr1,
+        'mapx': addPickPlace.mapx.toString(),
+        'mapy': addPickPlace.mapy.toString(),
+        'memo': addPickPlace.memo,
+      };
 
-        };
-
-        response = await _dio.post(
-          '$baseUrl/itinerary/joinPlace/${itineraryCheckNotifier.state?.itineraryId}',
-          data: data,
-        );
-
+      response = await _dio.post(
+        '$baseUrl/itinerary/joinPlace/${itineraryCheckNotifier.state?.itineraryId}',
+        data: data,
+      );
 
       if (response.statusCode == 200) {
         final jsonDataList = response.data['data'] as List<dynamic>;
-        final List<AddPickPlace> addPickPlaces = jsonDataList
-            .map((json) => AddPickPlace.fromJson(json))
-            .toList();
+        final List<AddPickPlace> addPickPlaces =
+            jsonDataList.map((json) => AddPickPlace.fromJson(json)).toList();
 
         if (addPickPlaces.isEmpty) {
           ref.read(addPickEachPlaceProvider.notifier).clearPlace();
           print('장소 목록이 비어있습니다.');
         } else {
-          ref.read(addPickEachPlaceProvider.notifier).setAddPickPlace(addPickPlaces);
+          ref
+              .read(addPickEachPlaceProvider.notifier)
+              .setAddPickPlace(addPickPlaces);
           print('장소 추가 성공: $addPickPlaces');
         }
 
@@ -604,21 +602,19 @@ class ItineraryApi {
       print(itineraryCheckNotifier.state!.itineraryId);
       response = await _dio.post(
         '$baseUrl/itinerary/joinPlace/${itineraryCheckNotifier.state!.itineraryId}',
-        data:{},
+        data: {},
       );
 
-
       if (response.statusCode == 200) {
-
         ref.read(addPickEachPlaceProvider.notifier).clearPlace();
         final jsonDataList = response.data['data'] as List<dynamic>;
-        final List<AddPickPlace> addPickPlaces = jsonDataList
-            .map((json) => AddPickPlace.fromJson(json))
-            .toList();
-          // Nav.push(ScheduleScreen(itineraryCheckNotifier.state!));
-          ref.read(addPickEachPlaceProvider.notifier).setAddPickPlace(addPickPlaces);
-          print('장소 추가 성공: $addPickPlaces');
-
+        final List<AddPickPlace> addPickPlaces =
+            jsonDataList.map((json) => AddPickPlace.fromJson(json)).toList();
+        // Nav.push(ScheduleScreen(itineraryCheckNotifier.state!));
+        ref
+            .read(addPickEachPlaceProvider.notifier)
+            .setAddPickPlace(addPickPlaces);
+        print('장소 추가 성공: $addPickPlaces');
 
         print('일정에 장소 추가 완료');
         return response;
@@ -641,8 +637,8 @@ class ItineraryApi {
       Response response;
 
       final data = {
-        'itineraryId' : itineraryCheckNotifier.state!.itineraryId,
-        'placeId':placeId
+        'itineraryId': itineraryCheckNotifier.state!.itineraryId,
+        'placeId': placeId
       };
 
       response = await _dio.post(
@@ -650,18 +646,18 @@ class ItineraryApi {
         data: data,
       );
 
-
       if (response.statusCode == 200) {
         final jsonDataList = response.data['data'] as List<dynamic>;
-        final List<AddPickPlace> addPickPlaces = jsonDataList
-            .map((json) => AddPickPlace.fromJson(json))
-            .toList();
+        final List<AddPickPlace> addPickPlaces =
+            jsonDataList.map((json) => AddPickPlace.fromJson(json)).toList();
 
         if (addPickPlaces.isEmpty) {
           ref.read(addPickEachPlaceProvider.notifier).clearPlace();
           print('장소 목록이 비어있습니다.');
         } else {
-          ref.read(addPickEachPlaceProvider.notifier).setAddPickPlace(addPickPlaces);
+          ref
+              .read(addPickEachPlaceProvider.notifier)
+              .setAddPickPlace(addPickPlaces);
           print('장소 삭제 성공: $addPickPlaces');
         }
 
@@ -681,7 +677,6 @@ class ItineraryApi {
   }
 
   Future<void> showAllItinerary(WidgetRef ref) async {
-
     final accountNotifier = ref.read(accountProvider.notifier).state!;
     final url = '$baseUrl/itinerary/itineraryShow/${accountNotifier.id}';
     try {
@@ -696,10 +691,12 @@ class ItineraryApi {
           print('일정 목록이 비어있습니다.');
         } else {
           final itinerarys = jsonData
-              .map((json) =>
-              AllItinerary.fromJson(json as Map<String, dynamic>))
+              .map(
+                  (json) => AllItinerary.fromJson(json as Map<String, dynamic>))
               .toList();
-          ref.read(ItineraryShowAllListProvider.notifier).addItinerary(itinerarys);
+          ref
+              .read(ItineraryShowAllListProvider.notifier)
+              .addItinerary(itinerarys);
           print('일정 불러오기 성공: $itinerarys');
         }
       } else if (response.statusCode == 401) {
@@ -714,13 +711,50 @@ class ItineraryApi {
       throw e;
     }
   }
+
+  Future<void> showAllShareItinerary(WidgetRef ref) async {
+    final accountNotifier = ref.read(accountProvider.notifier).state!;
+    final url = '$baseUrl/itinerary/itineraryShareShow/${accountNotifier.id}';
+    try {
+      final response = await _dio.get(url);
+
+      if (response.statusCode == 200) {
+        final data = response.data['data'];
+
+        // Check if the data is null
+        if (data == null) {
+          ref.read(shareItineraryListProvider.notifier).clearItinerarys();
+          print('일정 목록이 비어있습니다.');
+        } else {
+          final jsonData = data as List<dynamic>;
+          final itinerarys = jsonData
+              .map(
+                  (json) => AllItinerary.fromJson(json as Map<String, dynamic>))
+              .toList();
+          ref
+              .read(shareItineraryListProvider.notifier)
+              .addItinerary(itinerarys);
+          print('일정 불러오기 성공: $itinerarys');
+        }
+      } else if (response.statusCode == 401) {
+        print('error');
+        return null;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('오류');
+      throw e;
+    }
+  }
+
   Future<void> DeleteItinerary(int itineraryId, WidgetRef ref) async {
     try {
       final account = ref.read(accountProvider.notifier);
 
       final response = await _dio.post(
         '$baseUrl/itinerary/delete?itineraryId=${itineraryId}&accountId=${account.state!.id}',
-
       );
 
       if (response.statusCode == 200) {
@@ -740,13 +774,11 @@ class ItineraryApi {
     }
   }
 
-  Future<void> inviteItinerary(String accountId, String itineraryId,  BuildContext context, WidgetRef ref) async {
+  Future<void> inviteItinerary(String accountId, String itineraryId,
+      BuildContext context, WidgetRef ref) async {
     try {
-
-
       final response = await _dio.post(
-        '$baseUrl/itinerary/addAccount?accountId=$accountId&itineraryId=$itineraryId'
-      );
+          '$baseUrl/itinerary/addAccount?accountId=$accountId&itineraryId=$itineraryId');
 
       if (response.statusCode == 200) {
         await getItinerary(ref, itineraryId.toString());
@@ -756,7 +788,10 @@ class ItineraryApi {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
               backgroundColor: AppColors.mainPurple,
-              content: Text("이제부터 친구와 함께 여행하마! 💜",style:TextStyle(fontWeight: FontWeight.bold),)),
+              content: Text(
+                "이제부터 친구와 함께 여행하마! 💜",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )),
         );
 
         return null;
@@ -769,6 +804,44 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
+      throw e;
+    }
+  }
+
+  Future<void> itineraryCopy(
+      BuildContext context, WidgetRef ref, int itineraryId) async {
+    final accountNotifier = ref.read(accountProvider.notifier).state!;
+    final url = '$baseUrl/itinerary/copy';
+    try {
+      final response = await _dio.post(url, data: {
+        "accountId": int.parse(accountNotifier.id),
+        "itineraryId": itineraryId,
+      });
+
+      if (response.statusCode == 200) {
+        final responseData = response.data;
+        final int newItineraryId = responseData['data']['itineraryId'];
+
+        final budgetApi = BudgetApi();
+        budgetApi.createBudget(newItineraryId, ref);
+        print('일정 담기 성공');
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: AppColors.mainPurple,
+          content: Text(
+            "내 일정에 쏘옥!✨ 여행하마와 함께 떠나볼까요?💜",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ));
+      } else if (response.statusCode == 401) {
+        print('error');
+        return null;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('오류');
       throw e;
     }
   }

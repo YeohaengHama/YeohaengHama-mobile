@@ -94,6 +94,7 @@ class _DetailMapWidgetState extends ConsumerState<DetailMapWidget> {
       final markerId = 'marker${i + 1}';
       final marker = NMarker(
         icon: const NOverlayImage.fromAssetImage('$basePath/icon/hamaMarker.png'),
+        size: Size(60,30),
         id: markerId,
         position: placeCoordinates[i],
         caption: NOverlayCaption(text: (i + 1).toString()),

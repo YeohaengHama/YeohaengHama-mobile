@@ -16,21 +16,24 @@ class MeetingFragment extends ConsumerStatefulWidget {
   ConsumerState<MeetingFragment> createState() => _MeetingFragmentState();
 }
 
-
 class _MeetingFragmentState extends ConsumerState<MeetingFragment> {
-  @override
-  void initState(){
-    super.initState();
+  Future<void> _refreshChatRooms() async {
     final chatApi = ref.read(chatApiProvider);
-    chatApi.findAllChatRoom(ref);
+    await chatApi.findAllChatRoom(ref);
   }
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshChatRooms(); // Initial load of chat rooms
+  }
+
   @override
   Widget build(BuildContext context) {
     final rooms = ref.watch(chatRoomsProvider);
 
     return Scaffold(
       appBar: AppBar(
-
         title: '모임'.text.make(),
         elevation: 0,
         scrolledUnderElevation: 0,
@@ -42,20 +45,23 @@ class _MeetingFragmentState extends ConsumerState<MeetingFragment> {
           ),
         ],
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: ListView.builder(
-              itemCount: rooms.length,
-              itemBuilder: (context, index) {
-                final reversedIndex = rooms.length - 1 - index;
-                final room = rooms[reversedIndex];
-                return ChatRoomsListWidget(room);
-              },
+      body: RefreshIndicator(
+        color: AppColors.mainPurple,
+        onRefresh: _refreshChatRooms,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: ListView.builder(
+                itemCount: rooms.length,
+                itemBuilder: (context, index) {
+                  final reversedIndex = rooms.length - 1 - index;
+                  final room = rooms[reversedIndex];
+                  return ChatRoomsListWidget(room);
+                },
+              ),
             ),
-          ),
-
-        ],
+          ],
+        ),
       ),
     );
   }
