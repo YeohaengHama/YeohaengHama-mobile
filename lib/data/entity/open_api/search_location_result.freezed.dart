@@ -20,8 +20,8 @@ SearchLocationResult _$SearchLocationResultFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SearchLocationResult {
-  String get addr1 => throw _privateConstructorUsedError;
-  String get addr2 => throw _privateConstructorUsedError;
+  String? get addr1 => throw _privateConstructorUsedError;
+  String? get addr2 => throw _privateConstructorUsedError;
   String get contentid => throw _privateConstructorUsedError;
   String get contenttypeid => throw _privateConstructorUsedError;
   String get firstimage => throw _privateConstructorUsedError;
@@ -42,8 +42,8 @@ abstract class $SearchLocationResultCopyWith<$Res> {
       _$SearchLocationResultCopyWithImpl<$Res, SearchLocationResult>;
   @useResult
   $Res call(
-      {String addr1,
-      String addr2,
+      {String? addr1,
+      String? addr2,
       String contentid,
       String contenttypeid,
       String firstimage,
@@ -66,8 +66,8 @@ class _$SearchLocationResultCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? addr1 = null,
-    Object? addr2 = null,
+    Object? addr1 = freezed,
+    Object? addr2 = freezed,
     Object? contentid = null,
     Object? contenttypeid = null,
     Object? firstimage = null,
@@ -76,14 +76,14 @@ class _$SearchLocationResultCopyWithImpl<$Res,
     Object? title = null,
   }) {
     return _then(_value.copyWith(
-      addr1: null == addr1
+      addr1: freezed == addr1
           ? _value.addr1
           : addr1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      addr2: null == addr2
+              as String?,
+      addr2: freezed == addr2
           ? _value.addr2
           : addr2 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       contentid: null == contentid
           ? _value.contentid
           : contentid // ignore: cast_nullable_to_non_nullable
@@ -121,8 +121,8 @@ abstract class _$$SearchLocationResultImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String addr1,
-      String addr2,
+      {String? addr1,
+      String? addr2,
       String contentid,
       String contenttypeid,
       String firstimage,
@@ -142,8 +142,8 @@ class __$$SearchLocationResultImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? addr1 = null,
-    Object? addr2 = null,
+    Object? addr1 = freezed,
+    Object? addr2 = freezed,
     Object? contentid = null,
     Object? contenttypeid = null,
     Object? firstimage = null,
@@ -152,14 +152,14 @@ class __$$SearchLocationResultImplCopyWithImpl<$Res>
     Object? title = null,
   }) {
     return _then(_$SearchLocationResultImpl(
-      addr1: null == addr1
+      addr1: freezed == addr1
           ? _value.addr1
           : addr1 // ignore: cast_nullable_to_non_nullable
-              as String,
-      addr2: null == addr2
+              as String?,
+      addr2: freezed == addr2
           ? _value.addr2
           : addr2 // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       contentid: null == contentid
           ? _value.contentid
           : contentid // ignore: cast_nullable_to_non_nullable
@@ -205,9 +205,9 @@ class _$SearchLocationResultImpl implements _SearchLocationResult {
       _$$SearchLocationResultImplFromJson(json);
 
   @override
-  final String addr1;
+  final String? addr1;
   @override
-  final String addr2;
+  final String? addr2;
   @override
   final String contentid;
   @override
@@ -267,8 +267,8 @@ class _$SearchLocationResultImpl implements _SearchLocationResult {
 
 abstract class _SearchLocationResult implements SearchLocationResult {
   const factory _SearchLocationResult(
-      {required final String addr1,
-      required final String addr2,
+      {required final String? addr1,
+      required final String? addr2,
       required final String contentid,
       required final String contenttypeid,
       required final String firstimage,
@@ -280,9 +280,9 @@ abstract class _SearchLocationResult implements SearchLocationResult {
       _$SearchLocationResultImpl.fromJson;
 
   @override
-  String get addr1;
+  String? get addr1;
   @override
-  String get addr2;
+  String? get addr2;
   @override
   String get contentid;
   @override

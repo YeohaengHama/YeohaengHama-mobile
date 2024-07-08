@@ -41,6 +41,8 @@ class _CalcultateScreen extends ConsumerState<CalcultateScreen> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
+        scrolledUnderElevation: 0,
+
         backgroundColor: AppColors.white,
         leading: IconButton(
           onPressed: () {

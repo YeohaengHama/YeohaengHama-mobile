@@ -153,7 +153,7 @@ class _IndividualSettlement extends ConsumerState<IndividualSettlement> {
           ).pSymmetric(v: 8);
         }).toList(),
       ],
-    );
+    ).pOnly(bottom: 20);
   }
 
   // Helper method to find account by id

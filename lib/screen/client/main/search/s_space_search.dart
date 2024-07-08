@@ -176,9 +176,10 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
             labelPadding: const EdgeInsets.symmetric(vertical: 5),
             overlayColor: const MaterialStatePropertyAll(Colors.transparent),
             tabs: [
-              '여행일기'.text.make(),
+
               '관광'.text.make(),
               '맛집'.text.make(),
+              '여행일기'.text.make(),
             ],
           )
         ],
@@ -210,11 +211,11 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
   Future<Widget> switchTabFragment() async {
     switch (currentIndex) {
       case 0:
-        return const DiarySearchListFragment();
-      case 1:
         return const TourismSearchListFragment();
-      case 2:
+      case 1:
         return const RestaurantSearchListFragment();
+      case 2:
+        return const DiarySearchListFragment();
       default:
         return Container();
     }

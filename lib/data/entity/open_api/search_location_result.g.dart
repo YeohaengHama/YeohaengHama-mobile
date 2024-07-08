@@ -9,8 +9,8 @@ part of 'search_location_result.dart';
 _$SearchLocationResultImpl _$$SearchLocationResultImplFromJson(
         Map<String, dynamic> json) =>
     _$SearchLocationResultImpl(
-      addr1: json['addr1'] as String,
-      addr2: json['addr2'] as String,
+      addr1: json['addr1'] as String?,
+      addr2: json['addr2'] as String?,
       contentid: json['contentid'] as String,
       contenttypeid: json['contenttypeid'] as String,
       firstimage: json['firstimage'] as String,

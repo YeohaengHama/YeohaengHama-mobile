@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:isar/isar.dart';
 
 import '../../../../../../common/dart/extension/datetime_extension.dart';
+import '../../../../../../data/memory/itinerary/show_save_place_provider.dart';
 
 class ItineraryList extends ConsumerStatefulWidget {
   const ItineraryList({Key? key, required this.allItinerary}) : super(key: key);
@@ -62,8 +63,11 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
         if (_showIcons) _toggleIcons(false);
       },
       child: Tap(
-        onTap: () async {
+        onTap: () async {  ref
+            .read(showPickPlaceApiResponseProvider.notifier).removeAllPlace();
           await getItinerary();
+
+          await ItineraryApi.showSavePlace(ref);
           // ItineraryApi.PostAddNewEachPickPlace(ref);
           Nav.pop(context);
         },

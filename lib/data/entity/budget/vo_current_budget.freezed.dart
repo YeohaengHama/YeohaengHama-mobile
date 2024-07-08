@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$CurrentBudget {
   int get budgetId => throw _privateConstructorUsedError;
-  int get budgetTotalAmount => throw _privateConstructorUsedError;
+  int get budgetTotalAmount =>
+      throw _privateConstructorUsedError; // No longer nullable
   int get totalAmount => throw _privateConstructorUsedError;
   int get itineraryId => throw _privateConstructorUsedError;
   Map<int, List<Expenditure>> get expenditures =>
@@ -159,6 +160,7 @@ class _$CurrentBudgetImpl implements _CurrentBudget {
   final int budgetId;
   @override
   final int budgetTotalAmount;
+// No longer nullable
   @override
   final int totalAmount;
   @override
@@ -222,7 +224,7 @@ abstract class _CurrentBudget implements CurrentBudget {
   int get budgetId;
   @override
   int get budgetTotalAmount;
-  @override
+  @override // No longer nullable
   int get totalAmount;
   @override
   int get itineraryId;

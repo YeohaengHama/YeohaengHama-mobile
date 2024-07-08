@@ -37,7 +37,6 @@ class BudgetApi {
       if (response.statusCode == 200) {
         print('가계부 생성 성공: ${response.data}');
         // 가계부 생성 성공 시 setCurrentBudget를 호출하여 데이터를 저장
-        ref.read(currentBudgetProvider.notifier).setCurrentBudget(CurrentBudget.fromJson(response.data));
       } else if (response.statusCode == 401) {
         print('error');
         return null;

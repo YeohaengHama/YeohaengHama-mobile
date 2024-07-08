@@ -68,7 +68,7 @@ class AreasWidget extends ConsumerWidget {
                 );
                 await itineraryApi.postJoinItinerary(newItinerary, ref);
                 itineraryProviderNotifier.addItinerary(newItinerary);
-                await itineraryApi.showSavePlace(ref);
+
 
                 // 현재까지 쌓인 창을 pop하고 MainScreen으로 이동
                 Navigator.popUntil(context, (route) => route.isFirst);

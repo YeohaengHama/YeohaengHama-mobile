@@ -1,3 +1,5 @@
+import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/tab/information%20/search/detail/w_area_info_map.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../../data/entity/area/search_simple_toursim_result.dart';
@@ -18,8 +20,7 @@ class DetailMap extends ConsumerStatefulWidget {
 class _DetailMapState extends ConsumerState<DetailMap> {
   @override
   Widget build(BuildContext context) {
-    final searchDetailResult =
-        ref.read(DetailAreaApiResponseProvider).value;
+    final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;
     final searchResult = widget.searchSimpleResult;
     return Scaffold(
       body: Stack(
@@ -29,15 +30,27 @@ class _DetailMapState extends ConsumerState<DetailMap> {
               SliverAppBar(
                 title: Text(
                   searchResult.title,
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 15),
                 ),
                 centerTitle: false,
                 pinned: true,
+                actions: [RoundedContainer(
+                  borderColor: AppColors.mainPurple,
+                    radius: 20,
+                    padding:  EdgeInsets.symmetric(horizontal: 10, vertical:5),
+                    child: '출발'.text.make()).pOnly(right: 10), RoundedContainer(
+                    borderColor: AppColors.mainPurple,
+                    backgroundColor: AppColors.mainPurple,
+                    radius: 20,
+                    padding:  EdgeInsets.symmetric(horizontal: 10, vertical:5),
+                    child: '도착'.text.color(Colors.white).make()).pOnly(right: 20)],
               ),
               SliverFillRemaining(
-                child: searchDetailResult!.mapX != null ? MapWidget(
-                    mapX: double.parse(searchDetailResult.mapX),
-                    mapY: double.parse(searchDetailResult.mapY)): Container(), // 여기에 SearchLocationArea 위젯을 사용합니다.
+                child: searchDetailResult!.mapX != null
+                    ? AreaInfoMap(
+                        mapX: double.parse(searchDetailResult.mapX),
+                        mapY: double.parse(searchDetailResult.mapY))
+                    : Container(), // 여기에 SearchLocationArea 위젯을 사용합니다.
               ),
             ],
           ),
@@ -70,7 +83,8 @@ class _DetailMapState extends ConsumerState<DetailMap> {
                               ),
                               Expanded(
                                 child: TestPostDetailScreen(
-                                    searchSimpleResult: searchResult!), // 여기에 TestPostDetailScreen 위젯을 추가합니다.
+                                    searchSimpleResult:
+                                        searchResult!), // 여기에 TestPostDetailScreen 위젯을 추가합니다.
                               ),
                             ],
                           ),

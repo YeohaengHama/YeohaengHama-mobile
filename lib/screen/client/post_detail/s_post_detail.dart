@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
@@ -18,6 +17,7 @@ import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
 import '../../../data/entity/area/search_simple_toursim_result.dart';
 import '../../../data/entity/diary/vo_detail_diary.dart';
+import '../../../data/entity/open_api/open_api_area_location.dart';
 import '../../../data/entity/open_api/open_api_detail.dart';
 import '../../../data/entity/open_api/open_api_image.dart';
 import '../../../data/memory/area/area_detail_provider.dart';

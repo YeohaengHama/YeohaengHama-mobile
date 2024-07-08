@@ -24,10 +24,11 @@ class _WalletScreenState extends ConsumerState<BudgetScreen> {
   @override
   Widget build(BuildContext context) {
     final budget = ref.watch(currentBudgetProvider);
-    final formattedTotalAmount = NumberFormat('#,##0', 'en_US').format(budget!.budgetTotalAmount);
+    final formattedTotalAmount = NumberFormat('#,##0', 'en_US').format(budget!.budgetTotalAmount == null ? 0 : budget!.budgetTotalAmount!);
 
     return Scaffold(
       appBar: AppBar(
+
         scrolledUnderElevation: 0,
         backgroundColor: AppColors.white,
         title: Column(

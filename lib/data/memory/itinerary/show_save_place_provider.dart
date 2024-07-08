@@ -22,7 +22,9 @@ class PickPlaceNotifier extends StateNotifier<List<PickPlace>> {
     }
 
   }
-
+  void removeAllPlace() {
+    state = [];
+  }
   void addAllPickPlace(List<PickPlace> pickPlace){
     state = pickPlace;
   }

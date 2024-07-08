@@ -17,12 +17,14 @@ import '../../common/constants.dart';
 import '../entity/itinerary/a_add_pick_place.dart';
 import '../entity/itinerary/a_check_itinerary.dart';
 import '../entity/itinerary/a_creat_itinerary.dart';
+import '../entity/itinerary/share_itinerary.dart';
 import '../entity/open_api/open_api_detail.dart';
 
 import '../memory/itinerary/add_pick_each_place_provider.dart';
 import '../memory/itinerary/itinerary_check_provider.dart';
 import '../memory/itinerary/itinerary_created_provider.dart';
 import '../memory/itinerary/itinerary_show_all_provider.dart';
+import '../memory/itinerary/share_itinerary_list_provider.dart';
 import '../memory/itinerary/show_save_place_provider.dart';
 
 import '../memory/account/user_provider.dart';
@@ -70,15 +72,16 @@ class ItineraryApi {
           area: responseData['area'] as String,
           startDate: responseData['startDate'] as String,
           endDate: responseData['endDate'] as String,
-          expense: responseData['expense'] as String?,
         );
 
         ref
             .read(itineraryCreatedProvider.notifier)
             .addItinerary(createItinerary);
-        getItinerary(ref, createItinerary.id.toString());
-        budgetApi.createBudget(createItinerary.id, ref);
+        await budgetApi.createBudget(createItinerary.id, ref);
+        await getItinerary(ref, createItinerary.id.toString());
+
         print('일정 생성 완료');
+
         getItinerary(ref, createItinerary.id.toString());
         print(createItinerary);
       } else if (response.statusCode == 401) {
@@ -709,6 +712,43 @@ class ItineraryApi {
     }
   }
 
+  Future<void> showAllShareItinerary(WidgetRef ref) async {
+    final accountNotifier = ref.read(accountProvider.notifier).state!;
+    final url = '$baseUrl/itinerary/itineraryShareShow/${accountNotifier.id}';
+    try {
+      final response = await _dio.get(url);
+
+      if (response.statusCode == 200) {
+        final data = response.data['data'];
+
+        // Check if the data is null
+        if (data == null) {
+          ref.read(shareItineraryListProvider.notifier).clearItinerarys();
+          print('일정 목록이 비어있습니다.');
+        } else {
+          final jsonData = data as List<dynamic>;
+          final itinerarys = jsonData
+              .map(
+                  (json) => AllItinerary.fromJson(json as Map<String, dynamic>))
+              .toList();
+          ref
+              .read(shareItineraryListProvider.notifier)
+              .addItinerary(itinerarys);
+          print('일정 불러오기 성공: $itinerarys');
+        }
+      } else if (response.statusCode == 401) {
+        print('error');
+        return null;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('오류');
+      throw e;
+    }
+  }
+
   Future<void> DeleteItinerary(int itineraryId, WidgetRef ref) async {
     try {
       final account = ref.read(accountProvider.notifier);
@@ -779,9 +819,13 @@ class ItineraryApi {
       });
 
       if (response.statusCode == 200) {
+        final responseData = response.data;
+        final int newItineraryId = responseData['data']['itineraryId'];
+
         final budgetApi = BudgetApi();
-        budgetApi.createBudget(itineraryId, ref);
+        budgetApi.createBudget(newItineraryId, ref);
         print('일정 담기 성공');
+
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: AppColors.mainPurple,
           content: Text(

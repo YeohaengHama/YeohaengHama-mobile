@@ -317,10 +317,10 @@ class AreaApi {
       final response = await _dio.post(
         '$baseUrl/openApi/searchLocation',
         data: {
-          'numOfRows': openApiAreaLocation.numOfRows,
+          'numOfRows': '500',
           'page': openApiAreaLocation.page,
-          'mapx' : openApiAreaLocation.mapX,
-          'mapy': openApiAreaLocation.mapY,
+          'mapX' : openApiAreaLocation.mapX,
+          'mapY': openApiAreaLocation.mapY,
           'radius': openApiAreaLocation.radius,
           'contentTypeId' : openApiAreaLocation.contentTypeId,
           'mobileOS': openApiAreaLocation.mobileOS,
@@ -333,6 +333,7 @@ class AreaApi {
 
         final List<dynamic> items = responseData['response']['body']['items']['item'];
         List<SearchLocationResult> locations = items.map((item) => SearchLocationResult.fromJson(item)).toList();
+        print(locations);
         searchLocationNotifier.setSearchLocations(locations);
 
         return response;

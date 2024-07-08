@@ -77,6 +77,7 @@ class UserApi {
         final nickName = data['nickname'];
         final photoUrl = data['photoUrl'];
         print('로그인 성공: id=$id, nickName=$nickName, photoUrl=$photoUrl');
+        if(id != null && id != "null"){
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: AppColors.mainPurple,
@@ -85,7 +86,7 @@ class UserApi {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-        );
+        ); }
         final currentAccount = CurrentAccount(id: id, nickName: nickName, photoUrl: photoUrl);
         accountNotifier.addCurrentAccount(currentAccount);
 

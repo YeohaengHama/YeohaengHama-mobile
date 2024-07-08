@@ -39,8 +39,8 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          backgroundColor: AppColors.mainPurple,
-          content: Text('일치하는 회원정보를 찾을 수 없습니다.'),
+          backgroundColor: Colors.red,
+          content: Text('해당 계정은 정지되었습니다.'),
         ),
       );
     }

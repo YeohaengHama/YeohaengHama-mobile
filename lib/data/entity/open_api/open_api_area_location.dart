@@ -8,7 +8,7 @@ part 'open_api_area_location.freezed.dart';
 class OpenApiAreaLocation with _$OpenApiAreaLocation {
   const factory OpenApiAreaLocation(
       {
-        @Default('1') String numOfRows,
+        @Default('100') String numOfRows,
         @Default('1')  String page,
         required String mapX,
         required String mapY,
