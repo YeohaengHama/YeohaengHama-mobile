@@ -30,7 +30,7 @@ class _RestaurantSearchListWidgetState
 
     return GestureDetector(
       onTap: () {
-        Nav.push(TestPostDetailScreen(
+        Nav.push(PostDetailScreen(
           searchSimpleResult: widget.searchSimpleRestaurantResult,
         ));
       },

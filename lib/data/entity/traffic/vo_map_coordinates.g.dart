@@ -8,8 +8,10 @@ part of 'vo_map_coordinates.dart';
 
 _$MapCoordinatesImpl _$$MapCoordinatesImplFromJson(Map<String, dynamic> json) =>
     _$MapCoordinatesImpl(
-      statX: (json['statX'] as num).toDouble(),
-      statY: (json['statY'] as num).toDouble(),
+      startTitle: json['startTitle'] as String,
+      startX: (json['startX'] as num).toDouble(),
+      startY: (json['startY'] as num).toDouble(),
+      endTitle: json['endTitle'] as String,
       endX: (json['endX'] as num).toDouble(),
       endY: (json['endY'] as num).toDouble(),
     );
@@ -17,8 +19,10 @@ _$MapCoordinatesImpl _$$MapCoordinatesImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$MapCoordinatesImplToJson(
         _$MapCoordinatesImpl instance) =>
     <String, dynamic>{
-      'statX': instance.statX,
-      'statY': instance.statY,
+      'startTitle': instance.startTitle,
+      'startX': instance.startX,
+      'startY': instance.startY,
+      'endTitle': instance.endTitle,
       'endX': instance.endX,
       'endY': instance.endY,
     };

@@ -14,6 +14,7 @@ class NoScheduleWidget extends StatelessWidget {
         width: maxWidthSize,
         color: AppColors.mainPurple,
         child: RoundedContainer(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           borderColor: Colors.white,
           backgroundColor: AppColors.mainPurple,
           borderWidth: 2,

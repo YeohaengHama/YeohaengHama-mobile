@@ -38,7 +38,7 @@ class _TourismSearchListWidgetState
 
     return GestureDetector(
       onTap: () async {
-        Nav.push(TestPostDetailScreen(
+        Nav.push(PostDetailScreen(
           searchSimpleResult: widget.searchSimpleTourismResult,
         ));
       },

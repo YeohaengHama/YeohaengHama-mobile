@@ -79,5 +79,6 @@
     <string>앱이 사용자의 위치 정보를 항상 사용할 필요가 있습니다.</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>앱이 사용자의 위치 정보를 항상 사용할 필요가 있습니다.</string>
+
 </dict>
 </plist>
