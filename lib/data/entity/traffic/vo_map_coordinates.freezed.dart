@@ -20,8 +20,10 @@ MapCoordinates _$MapCoordinatesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MapCoordinates {
-  double get statX => throw _privateConstructorUsedError;
-  double get statY => throw _privateConstructorUsedError;
+  String get startTitle => throw _privateConstructorUsedError;
+  double get startX => throw _privateConstructorUsedError;
+  double get startY => throw _privateConstructorUsedError;
+  String get endTitle => throw _privateConstructorUsedError;
   double get endX => throw _privateConstructorUsedError;
   double get endY => throw _privateConstructorUsedError;
 
@@ -37,7 +39,13 @@ abstract class $MapCoordinatesCopyWith<$Res> {
           MapCoordinates value, $Res Function(MapCoordinates) then) =
       _$MapCoordinatesCopyWithImpl<$Res, MapCoordinates>;
   @useResult
-  $Res call({double statX, double statY, double endX, double endY});
+  $Res call(
+      {String startTitle,
+      double startX,
+      double startY,
+      String endTitle,
+      double endX,
+      double endY});
 }
 
 /// @nodoc
@@ -53,20 +61,30 @@ class _$MapCoordinatesCopyWithImpl<$Res, $Val extends MapCoordinates>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? statX = null,
-    Object? statY = null,
+    Object? startTitle = null,
+    Object? startX = null,
+    Object? startY = null,
+    Object? endTitle = null,
     Object? endX = null,
     Object? endY = null,
   }) {
     return _then(_value.copyWith(
-      statX: null == statX
-          ? _value.statX
-          : statX // ignore: cast_nullable_to_non_nullable
+      startTitle: null == startTitle
+          ? _value.startTitle
+          : startTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      startX: null == startX
+          ? _value.startX
+          : startX // ignore: cast_nullable_to_non_nullable
               as double,
-      statY: null == statY
-          ? _value.statY
-          : statY // ignore: cast_nullable_to_non_nullable
+      startY: null == startY
+          ? _value.startY
+          : startY // ignore: cast_nullable_to_non_nullable
               as double,
+      endTitle: null == endTitle
+          ? _value.endTitle
+          : endTitle // ignore: cast_nullable_to_non_nullable
+              as String,
       endX: null == endX
           ? _value.endX
           : endX // ignore: cast_nullable_to_non_nullable
@@ -87,7 +105,13 @@ abstract class _$$MapCoordinatesImplCopyWith<$Res>
       __$$MapCoordinatesImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double statX, double statY, double endX, double endY});
+  $Res call(
+      {String startTitle,
+      double startX,
+      double startY,
+      String endTitle,
+      double endX,
+      double endY});
 }
 
 /// @nodoc
@@ -101,20 +125,30 @@ class __$$MapCoordinatesImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? statX = null,
-    Object? statY = null,
+    Object? startTitle = null,
+    Object? startX = null,
+    Object? startY = null,
+    Object? endTitle = null,
     Object? endX = null,
     Object? endY = null,
   }) {
     return _then(_$MapCoordinatesImpl(
-      statX: null == statX
-          ? _value.statX
-          : statX // ignore: cast_nullable_to_non_nullable
+      startTitle: null == startTitle
+          ? _value.startTitle
+          : startTitle // ignore: cast_nullable_to_non_nullable
+              as String,
+      startX: null == startX
+          ? _value.startX
+          : startX // ignore: cast_nullable_to_non_nullable
               as double,
-      statY: null == statY
-          ? _value.statY
-          : statY // ignore: cast_nullable_to_non_nullable
+      startY: null == startY
+          ? _value.startY
+          : startY // ignore: cast_nullable_to_non_nullable
               as double,
+      endTitle: null == endTitle
+          ? _value.endTitle
+          : endTitle // ignore: cast_nullable_to_non_nullable
+              as String,
       endX: null == endX
           ? _value.endX
           : endX // ignore: cast_nullable_to_non_nullable
@@ -131,26 +165,53 @@ class __$$MapCoordinatesImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MapCoordinatesImpl implements _MapCoordinates {
   const _$MapCoordinatesImpl(
-      {required this.statX,
-      required this.statY,
+      {required this.startTitle,
+      required this.startX,
+      required this.startY,
+      required this.endTitle,
       required this.endX,
       required this.endY});
 
   factory _$MapCoordinatesImpl.fromJson(Map<String, dynamic> json) =>
       _$$MapCoordinatesImplFromJson(json);
 
+
+
+  MapCoordinates setStart(String startTitle, double startX, double startY) {
+    return copyWith(startTitle: startTitle, startX: startX, startY: startY);
+  }
+
+  // setEnd 메서드 추가
+  MapCoordinates setEnd(String endTitle, double endX, double endY) {
+    return copyWith(endTitle: endTitle, endX: endX, endY: endY);
+  }
+  MapCoordinates swapStartAndEnd() {
+    return copyWith(
+      startTitle: endTitle,
+      startX: endX,
+      startY: endY,
+      endTitle: startTitle,
+      endX: startX,
+      endY: startY,
+    );
+  }
   @override
-  final double statX;
+  final String startTitle;
   @override
-  final double statY;
+  final double startX;
+  @override
+  final double startY;
+  @override
+  final String endTitle;
   @override
   final double endX;
   @override
   final double endY;
 
+
   @override
   String toString() {
-    return 'MapCoordinates(statX: $statX, statY: $statY, endX: $endX, endY: $endY)';
+    return 'MapCoordinates(startTitle: $startTitle, startX: $startX, startY: $startY, endTitle: $endTitle, endX: $endX, endY: $endY)';
   }
 
   @override
@@ -158,15 +219,20 @@ class _$MapCoordinatesImpl implements _MapCoordinates {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MapCoordinatesImpl &&
-            (identical(other.statX, statX) || other.statX == statX) &&
-            (identical(other.statY, statY) || other.statY == statY) &&
+            (identical(other.startTitle, startTitle) ||
+                other.startTitle == startTitle) &&
+            (identical(other.startX, startX) || other.startX == startX) &&
+            (identical(other.startY, startY) || other.startY == startY) &&
+            (identical(other.endTitle, endTitle) ||
+                other.endTitle == endTitle) &&
             (identical(other.endX, endX) || other.endX == endX) &&
             (identical(other.endY, endY) || other.endY == endY));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, statX, statY, endX, endY);
+  int get hashCode => Object.hash(
+      runtimeType, startTitle, startX, startY, endTitle, endX, endY);
 
   @JsonKey(ignore: true)
   @override
@@ -185,8 +251,10 @@ class _$MapCoordinatesImpl implements _MapCoordinates {
 
 abstract class _MapCoordinates implements MapCoordinates {
   const factory _MapCoordinates(
-      {required final double statX,
-      required final double statY,
+      {required final String startTitle,
+      required final double startX,
+      required final double startY,
+      required final String endTitle,
       required final double endX,
       required final double endY}) = _$MapCoordinatesImpl;
 
@@ -194,9 +262,13 @@ abstract class _MapCoordinates implements MapCoordinates {
       _$MapCoordinatesImpl.fromJson;
 
   @override
-  double get statX;
+  String get startTitle;
   @override
-  double get statY;
+  double get startX;
+  @override
+  double get startY;
+  @override
+  String get endTitle;
   @override
   double get endX;
   @override

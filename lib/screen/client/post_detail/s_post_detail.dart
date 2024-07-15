@@ -27,11 +27,11 @@ import '../../../data/network/area_api.dart';
 import '../../../data/network/review_api.dart';
 import '../main/search/provider/is_detail_loading_provider.dart';
 
-class TestPostDetailScreen extends HookConsumerWidget {
+class PostDetailScreen extends HookConsumerWidget {
   final dynamic? searchSimpleResult;
   final Place? place;
 
-  const TestPostDetailScreen({
+  const PostDetailScreen({
     this.searchSimpleResult = null,
     this.place = null,
     super.key,
@@ -127,6 +127,7 @@ class TestPostDetailScreen extends HookConsumerWidget {
           controller: customController,
           slivers: [
             SliverAppBar(
+              backgroundColor: Colors.white,
               expandedHeight: 200.0,
               floating: false,
               pinned: true,
@@ -182,7 +183,7 @@ class TestPostDetailScreen extends HookConsumerWidget {
                               title,
                               style: titleStyle,
                               overflow: TextOverflow.ellipsis, // 긴 텍스트 처리
-                            ),
+                            ).pOnly(left: 55),
                           );
                         },
                       ),
@@ -206,72 +207,155 @@ class TestPostDetailScreen extends HookConsumerWidget {
               ),
             ),
             SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  const Height(20),
-                  isDetailLoading
-                      ? CardLoading(
-                    height: 24,
-                    width: 200,
-                    borderRadius: BorderRadius.circular(5),
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                  )
-                      : Text(
-                    ref
+              child: Container(
+                color: Colors.white,
+                child: Column(
+                  children: [
+                    const Height(20),
+                    isDetailLoading
+                        ? CardLoading(
+                      height: 24,
+                      width: 200,
+                      borderRadius: BorderRadius.circular(5),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                    )
+                        : Text(
+                      ref
+                          .read(DetailAreaApiResponseProvider)
+                          .value
+                          ?.title ??
+                          '',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      ),
+                    ).pOnly(top: 20, bottom: 10),
+                    isDetailLoading
+                        ? CardLoading(
+                      height: 20,
+                      width: 100,
+                      borderRadius: BorderRadius.circular(5),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                    )
+                        : ReviewStar(),
+                    const Height(20),
+                    isDetailLoading
+                        ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: CardLoading(
+                            height: 40,
+                            width: 40,
+                            borderRadius: BorderRadius.circular(5),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 45, vertical: 10),
+                          ),
+                        ),
+                        Expanded(
+                          child: CardLoading(
+                            height: 40,
+                            width: 40,
+                            borderRadius: BorderRadius.circular(5),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 45, vertical: 10),
+                          ),
+                        ),
+                        Expanded(
+                          child: CardLoading(
+                            height: 40,
+                            width: 40,
+                            borderRadius: BorderRadius.circular(5),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 45, vertical: 10),
+                          ),
+                        ),
+                      ],
+                    )
+                        : IconsWidget(
+                        int.parse(ref
+                            .read(DetailAreaApiResponseProvider)
+                            .value!
+                            .contentId),
+                        int.parse(ref
+                            .read(DetailAreaApiResponseProvider)
+                            .value!
+                            .contentTypeId)),
+                    const Height(20),
+                    const Line(
+                      width: maxWidthSize,
+                      color: AppColors.outline,
+                      height: 1.5,
+                    ).pSymmetric(h: 40),
+                    const Height(20),
+                    isDetailLoading
+                        ? CardLoading(
+                      height: 100,
+                      width: 250,
+                      borderRadius: BorderRadius.circular(10),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 0),
+                    )
+                        : MiniReviewList(controller: reviewController),
+                    const Height(20),
+                    const Line(
+                      width: maxWidthSize,
+                      color: AppColors.outline,
+                      height: 1.5,
+                    ).pSymmetric(h: 40),
+                    isDetailLoading
+                        ? mainTextWidget()
+                        : ref
                         .read(DetailAreaApiResponseProvider)
                         .value
-                        ?.title ??
-                        '',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  ).pOnly(top: 20, bottom: 10),
-                  isDetailLoading
-                      ? CardLoading(
-                    height: 20,
-                    width: 100,
-                    borderRadius: BorderRadius.circular(5),
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                  )
-                      : ReviewStar(),
-                  const Height(20),
-                  isDetailLoading
-                      ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: CardLoading(
-                          height: 40,
-                          width: 40,
-                          borderRadius: BorderRadius.circular(5),
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 45, vertical: 10),
-                        ),
+                        ?.overView !=
+                        "null" &&
+                        ref
+                            .read(DetailAreaApiResponseProvider)
+                            .value
+                            ?.overView !=
+                            null
+                        ? Text(
+                      ref
+                          .read(DetailAreaApiResponseProvider)
+                          .value!
+                          .overView!,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: AppColors.secondGrey,
                       ),
-                      Expanded(
-                        child: CardLoading(
-                          height: 40,
-                          width: 40,
-                          borderRadius: BorderRadius.circular(5),
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 45, vertical: 10),
-                        ),
-                      ),
-                      Expanded(
-                        child: CardLoading(
-                          height: 40,
-                          width: 40,
-                          borderRadius: BorderRadius.circular(5),
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 45, vertical: 10),
-                        ),
-                      ),
-                    ],
-                  )
-                      : IconsWidget(
+                    ).pSymmetric(h: 30, v: 30)
+                        : Container(),
+                    const Line(color: AppColors.outline, height: 10),
+                    isDetailLoading
+                        ? CardLoading(
+                      height: 200,
+                      width: double.infinity,
+                      borderRadius: BorderRadius.circular(5),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                    )
+                        : InfoMapWidget(
+                      searchDetailResult: ref
+                          .read(DetailAreaApiResponseProvider)
+                          .value!,
+                      searchImageResult:
+                      ref.read(AreaImageApiResponseProvider)!,
+                      searchReviewResult:
+                      ref.read(ReviewShowAllListProvider),
+                    ).pSymmetric(v: 30, h: 25),
+                    const Line(color: AppColors.outline, height: 10),
+                    isDetailLoading
+                        ? CardLoading(
+                      height: 200,
+                      width: double.infinity,
+                      borderRadius: BorderRadius.circular(5),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                    )
+                        : SimpleReviewWidget(
                       int.parse(ref
                           .read(DetailAreaApiResponseProvider)
                           .value!
@@ -279,91 +363,11 @@ class TestPostDetailScreen extends HookConsumerWidget {
                       int.parse(ref
                           .read(DetailAreaApiResponseProvider)
                           .value!
-                          .contentTypeId)),
-                  const Height(20),
-                  const Line(
-                    width: maxWidthSize,
-                    color: AppColors.outline,
-                    height: 1.5,
-                  ).pSymmetric(h: 40),
-                  const Height(20),
-                  isDetailLoading
-                      ? CardLoading(
-                    height: 100,
-                    width: 250,
-                    borderRadius: BorderRadius.circular(10),
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 0),
-                  )
-                      : MiniReviewList(controller: reviewController),
-                  const Height(20),
-                  const Line(
-                    width: maxWidthSize,
-                    color: AppColors.outline,
-                    height: 1.5,
-                  ).pSymmetric(h: 40),
-                  isDetailLoading
-                      ? mainTextWidget()
-                      : ref
-                      .read(DetailAreaApiResponseProvider)
-                      .value
-                      ?.overView !=
-                      "null" &&
-                      ref
-                          .read(DetailAreaApiResponseProvider)
-                          .value
-                          ?.overView !=
-                          null
-                      ? Text(
-                    ref
-                        .read(DetailAreaApiResponseProvider)
-                        .value!
-                        .overView!,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: AppColors.secondGrey,
-                    ),
-                  ).pSymmetric(h: 30, v: 30)
-                      : Container(),
-                  const Line(color: AppColors.outline, height: 10),
-                  isDetailLoading
-                      ? CardLoading(
-                    height: 200,
-                    width: double.infinity,
-                    borderRadius: BorderRadius.circular(5),
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                  )
-                      : InfoMapWidget(
-                    searchDetailResult: ref
-                        .read(DetailAreaApiResponseProvider)
-                        .value!,
-                    searchImageResult:
-                    ref.read(AreaImageApiResponseProvider)!,
-                    searchReviewResult:
-                    ref.read(ReviewShowAllListProvider),
-                  ).pSymmetric(v: 30, h: 25),
-                  const Line(color: AppColors.outline, height: 10),
-                  isDetailLoading
-                      ? CardLoading(
-                    height: 200,
-                    width: double.infinity,
-                    borderRadius: BorderRadius.circular(5),
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
-                  )
-                      : SimpleReviewWidget(
-                    int.parse(ref
-                        .read(DetailAreaApiResponseProvider)
-                        .value!
-                        .contentId),
-                    int.parse(ref
-                        .read(DetailAreaApiResponseProvider)
-                        .value!
-                        .contentTypeId),
-                  ).pSymmetric(h: 25, v: 30),
-                  const Height(100),
-                ],
+                          .contentTypeId),
+                    ).pSymmetric(h: 25, v: 30),
+                    const Height(100),
+                  ],
+                ),
               ),
             ),
           ],

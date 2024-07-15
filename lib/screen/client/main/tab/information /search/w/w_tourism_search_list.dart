@@ -70,9 +70,15 @@ class _TourismSearchListWidgetState
     return GestureDetector(
       onTap: () async {
         await loadData();
-        Nav.push(DetailMap(
-          searchSimpleResult: widget.searchSimpleTourismResult,
-        ));
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DetailMap(
+            searchSimpleResult: widget.searchSimpleTourismResult,
+          )),
+        );
+
+
       },
       child: Container(
         padding: EdgeInsets.only(top: 10, left: 20, bottom: 10),  // 여기서 pOnly 대신 EdgeInsets 사용

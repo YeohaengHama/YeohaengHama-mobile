@@ -1,12 +1,16 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/data/entity/traffic/vo_map_coordinates.dart';
 import 'package:fast_app_base/screen/client/main/tab/information%20/search/detail/w_area_info_map.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../../data/entity/area/search_simple_toursim_result.dart';
 import '../../../../../../../data/memory/area/area_detail_provider.dart';
+import '../../../../../../../data/memory/traffic/map_coordinates_provider.dart';
+import '../../../../../../../data/network/traffic_api.dart';
 import '../../../../../post_detail/s_post_detail.dart';
 import '../../../../../post_detail/w_map.dart';
-import '../../f_search_location_area.dart'; // 적절한 경로로 수정하세요
+import '../../f_search_location_area.dart';
+import '../Directions/s_directions.dart'; // 적절한 경로로 수정하세요
 
 class DetailMap extends ConsumerStatefulWidget {
   const DetailMap({super.key, required this.searchSimpleResult});
@@ -22,28 +26,101 @@ class _DetailMapState extends ConsumerState<DetailMap> {
   Widget build(BuildContext context) {
     final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;
     final searchResult = widget.searchSimpleResult;
+    final mapCoordinates = ref.read(mapCoordinatesProvider.notifier);
+    final _mapCoordinatesProvider = ref.read(mapCoordinatesProvider);
+
+    final _trafficApiProvider = ref.read(trafficApiProvider);
     return Scaffold(
       body: Stack(
         children: [
           CustomScrollView(
             slivers: [
               SliverAppBar(
+                backgroundColor: Colors.white,
                 title: Text(
                   searchResult.title,
                   style: TextStyle(fontSize: 15),
                 ),
                 centerTitle: false,
                 pinned: true,
-                actions: [RoundedContainer(
-                  borderColor: AppColors.mainPurple,
-                    radius: 20,
-                    padding:  EdgeInsets.symmetric(horizontal: 10, vertical:5),
-                    child: '출발'.text.make()).pOnly(right: 10), RoundedContainer(
-                    borderColor: AppColors.mainPurple,
-                    backgroundColor: AppColors.mainPurple,
-                    radius: 20,
-                    padding:  EdgeInsets.symmetric(horizontal: 10, vertical:5),
-                    child: '도착'.text.color(Colors.white).make()).pOnly(right: 20)],
+                actions: [
+                  Tap(
+                    onTap: () async {
+                      mapCoordinates.setStart(
+                          searchDetailResult!.title,
+                          double.parse(searchDetailResult!.mapX),
+                          double.parse(searchDetailResult!.mapY));
+                      if (_mapCoordinatesProvider.endTitle != '') {
+                        _trafficApiProvider.getInfoTraffic(
+                            _mapCoordinatesProvider.startX,
+                            _mapCoordinatesProvider.startY,
+                            _mapCoordinatesProvider.endX,
+                            _mapCoordinatesProvider.endY,
+                            ref);
+                        await _trafficApiProvider.getInfoCarTraffic(
+                            _mapCoordinatesProvider.startX,
+                            _mapCoordinatesProvider.startY,
+                            _mapCoordinatesProvider.endX,
+                            _mapCoordinatesProvider.endY,
+                            ref);
+                      }
+                      Nav.pop(context);
+                      Nav.pop(context);
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DirectionsFragment()),
+                      );
+                    },
+                    child: RoundedContainer(
+                            borderColor: AppColors.mainPurple,
+                            radius: 20,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            child: '출발'.text.make())
+                        .pOnly(right: 10),
+                  ),
+                  Tap(
+                    onTap: () async {
+                      mapCoordinates.setEnd(
+                          searchDetailResult!.title,
+                          double.parse(searchDetailResult!.mapX),
+                          double.parse(searchDetailResult!.mapY));
+                      if (_mapCoordinatesProvider.startTitle != '') {
+                        await _trafficApiProvider.getInfoTraffic(
+                            _mapCoordinatesProvider.startX,
+                            _mapCoordinatesProvider.startY,
+                            _mapCoordinatesProvider.endX,
+                            _mapCoordinatesProvider.endY,
+                            ref);
+                        await _trafficApiProvider.getInfoCarTraffic(
+                            _mapCoordinatesProvider.startX,
+                            _mapCoordinatesProvider.startY,
+                            _mapCoordinatesProvider.endX,
+                            _mapCoordinatesProvider.endY,
+                            ref);
+
+
+                      }
+                      Nav.pop(context);
+                      Nav.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DirectionsFragment()),
+                      );
+                    },
+                    child: RoundedContainer(
+                            borderColor: AppColors.mainPurple,
+                            backgroundColor: AppColors.mainPurple,
+                            radius: 20,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            child: '도착'.text.color(Colors.white).make())
+                        .pOnly(right: 20),
+                  )
+                ],
               ),
               SliverFillRemaining(
                 child: searchDetailResult!.mapX != null
@@ -55,9 +132,9 @@ class _DetailMapState extends ConsumerState<DetailMap> {
             ],
           ),
           DraggableScrollableSheet(
-            initialChildSize: 0.3,
-            minChildSize: 0.3,
-            maxChildSize: 0.8,
+            initialChildSize: 0.1,
+            minChildSize: 0.05,
+            maxChildSize: 0.87,
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
                 color: Colors.white,
@@ -82,7 +159,7 @@ class _DetailMapState extends ConsumerState<DetailMap> {
                                 ),
                               ),
                               Expanded(
-                                child: TestPostDetailScreen(
+                                child: PostDetailScreen(
                                     searchSimpleResult:
                                         searchResult!), // 여기에 TestPostDetailScreen 위젯을 추가합니다.
                               ),

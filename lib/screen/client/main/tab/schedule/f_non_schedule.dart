@@ -14,6 +14,7 @@ class NonSecheduleFragment extends StatelessWidget {
         width: maxWidthSize,
 
         child: RoundedContainer(
+          padding :EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           backgroundColor: Colors.white,
           borderColor: AppColors.mainPurple,
           borderWidth: 2,

@@ -1,6 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/search/provider/is_loading_provider.dart';
-import 'package:fast_app_base/screen/client/main/search/w_search_app_bar.dart';
+import 'package:fast_app_base/screen/client/main/tab/information%20/search/w_search_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';

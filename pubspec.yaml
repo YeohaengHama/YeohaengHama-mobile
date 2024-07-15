@@ -129,6 +129,9 @@ dependencies:
   webview_flutter_wkwebview: ^3.9.4
   web: ^0.3.0
   multi_image_picker_view: ^1.0.2
+  geolocator: ^11.1.0
+  permission_handler: ^11.3.1
+  geocoding: ^3.0.0
 
 dev_dependencies:
   flutter_test:
