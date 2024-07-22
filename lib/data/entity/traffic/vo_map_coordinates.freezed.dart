@@ -176,7 +176,6 @@ class _$MapCoordinatesImpl implements _MapCoordinates {
       _$$MapCoordinatesImplFromJson(json);
 
 
-
   MapCoordinates setStart(String startTitle, double startX, double startY) {
     return copyWith(startTitle: startTitle, startX: startX, startY: startY);
   }
@@ -195,6 +194,7 @@ class _$MapCoordinatesImpl implements _MapCoordinates {
       endY: startY,
     );
   }
+
   @override
   final String startTitle;
   @override
@@ -207,7 +207,6 @@ class _$MapCoordinatesImpl implements _MapCoordinates {
   final double endX;
   @override
   final double endY;
-
 
   @override
   String toString() {
