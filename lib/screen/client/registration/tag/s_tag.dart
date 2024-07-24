@@ -91,6 +91,7 @@ class _TagScreenState extends ConsumerState<TagScreen> {
                 print('Selected Style Tags: $selectedStyleTags');
                 Nav.push(AreaPick());} ,
               child: RoundedContainer(
+                padding :EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                 radius: 5,
                 backgroundColor: AppColors.mainPurple,
                 child: SizedBox(

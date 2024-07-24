@@ -1,5 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/diary/w_diary_review_list.dart';
+import 'package:fast_app_base/screen/client/post_detail/s_post_detail.dart';
 import 'package:fast_app_base/screen/client/post_detail/test_post_deatil.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -19,7 +20,7 @@ class DiaryPlaceListWidget extends ConsumerWidget {
       children: [
         Tap(
           onTap: () async {
-           Nav.push(TestPostDetailScreen(place: place,));
+           Nav.push(PostDetailScreen(place: place,));
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

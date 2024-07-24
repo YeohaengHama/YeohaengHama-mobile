@@ -3,10 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../entity/traffic/vo_map_coordinates.dart';
 
-final mapCoordinatesProvider =
-StateNotifierProvider<MapCoordinatesNotifier, MapCoordinates>((ref) {
+final mapCoordinatesProvider = StateNotifierProvider<MapCoordinatesNotifier, MapCoordinates>((ref) {
   return MapCoordinatesNotifier(MapCoordinates(
-
     startTitle: '',
     startX: 0.0,
     startY: 0.0,
@@ -21,15 +19,23 @@ class MapCoordinatesNotifier extends StateNotifier<MapCoordinates> {
 
   // setStart 메서드 정의
   void setStart(String startTitle, double startX, double startY) {
-    state = state.setStart(startTitle, startX, startY);
+    state = state.copyWith(startTitle: startTitle, startX: startX, startY: startY);
   }
 
   // setEnd 메서드 정의
   void setEnd(String endTitle, double endX, double endY) {
-    state = state.setEnd(endTitle, endX, endY);
+    state = state.copyWith(endTitle: endTitle, endX: endX, endY: endY);
   }
 
+  // swapStartAndEnd 메서드 정의
   void swapStartAndEnd() {
-    state = state.swapStartAndEnd();
+    state = state.copyWith(
+      startTitle: state.endTitle,
+      startX: state.endX,
+      startY: state.endY,
+      endTitle: state.startTitle,
+      endX: state.startX,
+      endY: state.startY,
+    );
   }
 }

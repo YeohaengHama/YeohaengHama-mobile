@@ -16,6 +16,7 @@ import '../entity/open_api/open_api_area.dart';
 import '../memory/account/all_account_provider.dart';
 import '../memory/account/user_provider.dart';
 import '../simple_result.dart';
+import 'itinerary_api.dart';
 
 final userApiProvider = Provider<UserApi>((ref) => UserApi());
 
@@ -61,6 +62,7 @@ class UserApi {
 
   Future<void> postLoginUser(LogIn logIn, BuildContext context, WidgetRef ref) async {
     final accountNotifier = ref.read(accountProvider.notifier);
+
     try {
       final response = await _dio.post(
         '$baseUrl/account/login',

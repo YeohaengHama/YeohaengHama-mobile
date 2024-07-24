@@ -1,4 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/tab/shorts/p_is_playing.dart';
 import 'package:fast_app_base/screen/client/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/client/main/tab/tab_navigator.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ import 'menu/w_menu_drawer.dart';
 
 class MainScreen extends ConsumerStatefulWidget {
   final TabItem? initialTab;
-  final String? userId; // 추가: userId를 받아서 사용
+  final String? userId;
 
   const MainScreen({super.key, this.initialTab, this.userId});
 
@@ -17,12 +18,11 @@ class MainScreen extends ConsumerStatefulWidget {
 }
 
 class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProviderStateMixin {
-  TabItem _currentTab = TabItem.home;
-  final tabs = [TabItem.home, TabItem.schedule, TabItem.meeting, TabItem.shorts, TabItem.information];
+  late TabItem _currentTab;
+  final List<TabItem> tabs = [TabItem.home, TabItem.schedule, TabItem.meeting, TabItem.shorts, TabItem.information];
   final List<GlobalKey<NavigatorState>> navigatorKeys = [];
 
   int get _currentIndex => tabs.indexOf(_currentTab);
-
   GlobalKey<NavigatorState> get _currentTabNavigationKey => navigatorKeys[_currentIndex];
 
   bool get extendBody => true;
@@ -32,13 +32,9 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
   @override
   void initState() {
     super.initState();
-    initNavigatorKeys();
     _currentTab = widget.initialTab ?? TabItem.home;
-    if(widget.userId != null){
-    final notiApi = ref.read(notificationApiProvider);
-    notiApi.startListeningToServer(widget.userId!, ref);}
+    initNavigatorKeys();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +42,23 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
       canPop: isRootPage,
       onPopInvoked: _handleBackPressed,
       child: Scaffold(
-        extendBody: extendBody, // bottomNavigationBar 아래 영역 까지 그림
+        extendBody: extendBody,
         endDrawer: const MenuDrawer(),
         body: Container(
           color: Colors.transparent,
           padding: EdgeInsets.only(bottom: extendBody ? 60 - bottomNavigationBarBorderRadius : 0),
-          child: pages,
+          child: IndexedStack(
+            index: _currentIndex,
+            children: tabs.mapIndexed((tab, index) {
+              return Offstage(
+                offstage: _currentTab != tab,
+                child: TabNavigator(
+                  navigatorKey: navigatorKeys[index],
+                  tabItem: tab,
+                ),
+              );
+            }).toList(),
+          ),
         ),
         bottomNavigationBar: _buildBottomNavigationBar(context),
       ),
@@ -59,18 +66,6 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
   }
 
   bool get isRootPage => _currentTab == TabItem.home && _currentTabNavigationKey.currentState?.canPop() == false;
-
-  IndexedStack get pages => IndexedStack(
-      index: _currentIndex,
-      children: tabs
-          .mapIndexed((tab, index) => Offstage(
-        offstage: _currentTab != tab,
-        child: TabNavigator(
-          navigatorKey: navigatorKeys[index],
-          tabItem: tab,
-        ),
-      ))
-          .toList());
 
   void _handleBackPressed(bool didPop) {
     if (!didPop) {
@@ -101,7 +96,14 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
           currentIndex: _currentIndex,
           selectedItemColor: context.appColors.text,
           unselectedItemColor: context.appColors.iconButtonInactivate,
-          onTap: _handleOnTapNavigationBarItem,
+          onTap: (index) {
+            if (tabs[index] == TabItem.shorts) {
+              ref.read(isPlayingProvider.notifier).setPlaying(true);
+            } else {
+              ref.read(isPlayingProvider.notifier).setPlaying(false);
+            }
+            _handleOnTapNavigationBarItem(index);
+          },
           showSelectedLabels: true,
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
@@ -112,30 +114,18 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
   }
 
   List<BottomNavigationBarItem> navigationBarItems(BuildContext context) {
-    return tabs
-        .mapIndexed(
-          (tab, index) => tab.toNavigationBarItem(
+    return tabs.mapIndexed((tab, index) {
+      return tab.toNavigationBarItem(
         context,
         isActivated: _currentIndex == index,
-      ),
-    )
-        .toList();
+      );
+    }).toList();
   }
 
   void changeTab(int index) {
     setState(() {
       _currentTab = tabs[index];
     });
-  }
-
-  BottomNavigationBarItem bottomItem(bool activate, IconData iconData, IconData inActivateIconData, String label) {
-    return BottomNavigationBarItem(
-        icon: Icon(
-          key: ValueKey(label),
-          activate ? iconData : inActivateIconData,
-          color: activate ? context.appColors.iconButton : context.appColors.iconButtonInactivate,
-        ),
-        label: label);
   }
 
   void _handleOnTapNavigationBarItem(int index) {

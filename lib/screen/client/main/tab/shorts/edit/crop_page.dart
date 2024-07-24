@@ -73,7 +73,7 @@ class CropPage extends StatelessWidget {
                             icon: controller.preferredCropAspectRatio != null &&
                                 controller.preferredCropAspectRatio! < 1
                                 ? const Icon(
-                                Icons.panorama_vertical_select_rounded)
+                                Icons.panorama_vertical_select_rounded, color: AppColors.mainPurple,)
                                 : const Icon(Icons.panorama_vertical_rounded),
                           ),
                           IconButton(
@@ -86,7 +86,7 @@ class CropPage extends StatelessWidget {
                             icon: controller.preferredCropAspectRatio != null &&
                                 controller.preferredCropAspectRatio! > 1
                                 ? const Icon(
-                                Icons.panorama_horizontal_select_rounded)
+                                Icons.panorama_horizontal_select_rounded, color: AppColors.mainPurple,)
                                 : const Icon(Icons.panorama_horizontal_rounded),
                           ),
                         ],
@@ -141,7 +141,7 @@ class CropPage extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           backgroundColor: controller.preferredCropAspectRatio == f?.toDouble()
-              ? Colors.grey.shade800
+              ? AppColors.mainPurple
               : null,
           foregroundColor: controller.preferredCropAspectRatio == f?.toDouble()
               ? Colors.white

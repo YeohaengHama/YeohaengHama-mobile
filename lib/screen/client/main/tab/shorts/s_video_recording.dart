@@ -2,13 +2,20 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:fast_app_base/screen/client/main/tab/shorts/s_video_editor.dart';
-class VideoRecordingScreen extends StatefulWidget {
+import 'package:fast_app_base/screen/client/main/tab/shorts/edit/s_video_editor.dart';
+
+import '../../../../../common/constant/app_colors.dart';
+import 'p_is_playing.dart';
+
+class VideoRecordingScreen extends ConsumerStatefulWidget {
   final List<CameraDescription> descriptions;
 
   const VideoRecordingScreen({Key? key, required this.descriptions}) : super(key: key);
@@ -17,8 +24,7 @@ class VideoRecordingScreen extends StatefulWidget {
   _VideoRecordingScreenState createState() => _VideoRecordingScreenState();
 }
 
-class _VideoRecordingScreenState extends State<VideoRecordingScreen>
-    with WidgetsBindingObserver, SingleTickerProviderStateMixin {
+class _VideoRecordingScreenState extends ConsumerState<VideoRecordingScreen> with WidgetsBindingObserver, SingleTickerProviderStateMixin {
   late CameraController controller;
   late Future<void> initializeControllerFuture;
   bool isRecording = false;
@@ -31,6 +37,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   XFile? _pickedVideo;
   bool hasRecordedVideo = false;
   bool isPaused = false;
+  XFile? recordedVideoFile; // 새로 추가된 변수
 
   late AnimationController _animationController;
   late Animation<double> _animation;
@@ -120,6 +127,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
           isRecording = false;
           recordingSeconds = 0;
           isPaused = false;
+          recordedVideoFile = videoFile; // 녹화된 비디오 파일을 저장
         });
         stopTimer();
         await saveVideoToGallery(videoFile);
@@ -161,6 +169,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     }
   }
 
+
   Future<void> saveVideoToGallery(XFile videoFile) async {
     final result = await ImageGallerySaver.saveFile(videoFile.path);
     print('Video saved to gallery: $result');
@@ -180,8 +189,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
 
   Future<void> loadFirstGalleryVideoThumbnail() async {
     final directory = await getApplicationDocumentsDirectory();
-    final files =
-    directory.listSync().where((file) => file.path.endsWith('.mp4')).toList();
+    final files = directory.listSync().where((file) => file.path.endsWith('.mp4')).toList();
     if (files.isNotEmpty) {
       setState(() {
         firstVideoFile = files.first as File?;
@@ -200,8 +208,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              VideoEditingScreen(videoFile: File(_pickedVideo!.path)),
+          builder: (context) => VideoEditingScreen(videoFile: File(_pickedVideo!.path)),
         ),
       );
     }
@@ -210,24 +217,30 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   Future<void> navigateToEditingScreen() async {
     if (controller.value.isRecordingVideo) {
       await stopRecording();
-
     }
 
-    if (firstVideoFile != null) {
+    if (recordedVideoFile != null) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => VideoEditingScreen(videoFile: firstVideoFile!),
+          builder: (context) => VideoEditingScreen(videoFile: File(recordedVideoFile!.path)),
         ),
       );
+      setState(() {
+        hasRecordedVideo = false; // 버튼을 누른 후 `hasRecordedVideo`를 `false`로 설정
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final _isPlayingProvider = ref.read(isPlayingProvider.notifier);
+
     if (!controller.value.isInitialized) {
       return Scaffold(
-        body: Center(child: CircularProgressIndicator()),
+        body: Center(
+            child: LoadingAnimationWidget.fallingDot(
+                color: AppColors.mainPurple, size: 100)),
       );
     }
 
@@ -247,6 +260,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                   icon: Icon(Icons.close),
                   color: Colors.white,
                   onPressed: () {
+                    _isPlayingProvider.setPlaying(true);
                     Navigator.pop(context);
                   },
                 ),

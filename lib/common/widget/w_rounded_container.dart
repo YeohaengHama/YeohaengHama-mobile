@@ -18,7 +18,7 @@ class RoundedContainer extends StatelessWidget {
       this.backgroundColor,
       this.margin,
       this.borderColor,
-      this.padding = const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+      this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       this.borderWidth= 1.0});
 
   @override
