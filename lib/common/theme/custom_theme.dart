@@ -35,6 +35,7 @@ ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     brightness: Brightness.light,
+    scaffoldBackgroundColor: AppColors.white ,
     // textTheme: CustomGoogleFonts.diphylleiaTextTheme(
     //   ThemeData(brightness: Brightness.light).textTheme,
     // ),

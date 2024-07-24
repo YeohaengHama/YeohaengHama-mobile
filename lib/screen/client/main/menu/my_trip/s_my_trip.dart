@@ -30,6 +30,7 @@ class _MyTripScreenState extends ConsumerState<MyTripScreen> with SingleTickerPr
 
     return  Scaffold(
       appBar:AppBar(
+        backgroundColor: Colors.white,
         scrolledUnderElevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),

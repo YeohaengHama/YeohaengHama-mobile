@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../data/memory/itinerary/itinerary_show_all_provider.dart';
+import '../../../../../../../data/memory/shorts/p_short_write.dart';
 
 class SelectItineraryList extends ConsumerWidget {
   const SelectItineraryList({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class SelectItineraryList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final allItinerary = ref.watch(ItineraryShowAllListProvider);
+
     if (allItinerary.isNotEmpty) {
       return Expanded(
         child: ListView.builder(
@@ -34,6 +36,7 @@ class SelectItineraryList extends ConsumerWidget {
       );
     } else {
       return RoundedContainer(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           borderColor: AppColors.mainPurple,
           radius: 10,
           borderWidth: 1,
