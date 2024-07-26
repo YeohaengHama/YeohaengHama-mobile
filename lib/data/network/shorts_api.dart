@@ -52,20 +52,20 @@ class shortsApi {
     }
   }
   Future<void> readShorts(WidgetRef ref) async {
-    final url = '$baseUrl/shorts/readShorts?numOfRows=1&page=1';
+    final url = '$baseUrl/shorts/readShorts?numOfRows=10&page=0';
     final dio = Dio();
 
     try {
-      final response = await dio.post(
+      final response = await dio.get(
         url,
-        data:{}
       );
 
       if (response.statusCode == 200) {
         final data = response.data['data'];
         final shortsRead = ShortsRead.fromJson(data);
-        final _ShortsReadProvider = ref.watch(ShortsReadProvider.notifier);
-        _ShortsReadProvider.readShorts(shortsRead);
+        final _shortsReadProvider = ref.read(shortsReadProvider.notifier);
+        _shortsReadProvider.state = shortsRead;
+        print('자:${_shortsReadProvider.state}');
         print(data);
       } else if (response.statusCode == 401) {
         print('Unauthorized');
