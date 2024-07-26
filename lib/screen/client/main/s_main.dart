@@ -1,4 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/tab/shorts/p_bottom_nav_visible.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/p_is_playing.dart';
 import 'package:fast_app_base/screen/client/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/client/main/tab/tab_navigator.dart';
@@ -38,12 +39,16 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
 
   @override
   Widget build(BuildContext context) {
+    final isBottomNavBarVisible = ref.watch(bottomNavBarVisibleProvider);
+
     return PopScope(
       canPop: isRootPage,
       onPopInvoked: _handleBackPressed,
       child: Scaffold(
         extendBody: extendBody,
         endDrawer: const MenuDrawer(),
+        bottomNavigationBar: isBottomNavBarVisible ? _buildBottomNavigationBar(context) : null,
+
         body: Container(
           color: Colors.transparent,
           padding: EdgeInsets.only(bottom: extendBody ? 60 - bottomNavigationBarBorderRadius : 0),
@@ -60,7 +65,6 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
             }).toList(),
           ),
         ),
-        bottomNavigationBar: _buildBottomNavigationBar(context),
       ),
     );
   }

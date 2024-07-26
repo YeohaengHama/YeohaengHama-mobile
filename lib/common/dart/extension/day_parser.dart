@@ -12,3 +12,17 @@ int getIndexFromDayString(String dayString) {
 String formatNumber(String s) {
   return s.replaceAllMapped(RegExp(r'(\d)(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},');
 }
+String getTimeDifference(DateTime date) {
+  final now = DateTime.now();
+  final difference = now.difference(date);
+
+  if (difference.inMinutes < 60) {
+    return '${difference.inMinutes}분';
+  } else if (difference.inHours < 24) {
+    return '${difference.inHours}시간';
+  } else if (difference.inDays < 7) {
+    return '${difference.inDays}일';
+  } else {
+    return '${(difference.inDays / 7).floor()}주';
+  }
+}

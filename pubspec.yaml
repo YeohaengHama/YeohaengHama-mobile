@@ -139,6 +139,7 @@ dependencies:
   image_gallery_saver: ^2.0.3
   fraction: ^5.0.2
   ffmpeg_kit_flutter: ^6.0.3
+  chewie: ^1.7.5
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,13 +1,14 @@
-import 'dart:ui' as ui;
-import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/tab/shorts/w_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:video_player/video_player.dart';
+import 'package:fast_app_base/common/common.dart';
 import '../../../../../common/widget/w_profile_image.dart';
 import '../../../../../data/entity/shorts/vo_shorts_read.dart';
 import '../../../../../data/memory/shorts/p_shorts_read.dart';
 import '../../../../../data/network/shorts_api.dart';
 import 'p_is_playing.dart'; // isPlayingProvider의 경로를 맞게 조정하세요
+import 'dart:ui' as ui;
 
 class VideoSwipeScreen extends ConsumerStatefulWidget {
   const VideoSwipeScreen({Key? key}) : super(key: key);
@@ -16,31 +17,53 @@ class VideoSwipeScreen extends ConsumerStatefulWidget {
   _VideoSwipeScreenState createState() => _VideoSwipeScreenState();
 }
 
-class _VideoSwipeScreenState extends ConsumerState<VideoSwipeScreen>
-    with AutomaticKeepAliveClientMixin {
+class _VideoSwipeScreenState extends ConsumerState<VideoSwipeScreen> with AutomaticKeepAliveClientMixin {
   final PageController _pageController = PageController();
+  final Map<int, VideoPlayerController> _videoControllers = {};
+  final int _preloadCount = 2; // 앞뒤로 로드할 비디오 수
 
   @override
   void initState() {
     super.initState();
     ref.read(shortsApiProvider).readShorts(ref);
+    _pageController.addListener(_onPageChanged);
   }
 
-  @override
-  void didUpdateWidget(VideoSwipeScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    _togglePlayPause(ref.read(isPlayingProvider));
-  }
-
-  void _togglePlayPause(bool isPlaying) {
+  void _onPageChanged() {
     final currentPage = _pageController.page?.toInt() ?? 0;
-    final currentController = VideoPlayerController.network(
-        ref.read(shortsReadProvider).shortsList[currentPage].videoUrl);
 
-    if (isPlaying) {
-      currentController.play();
-    } else {
-      currentController.pause();
+    // 현재 페이지에 대한 비디오를 멈추고, 재생 위치를 초기화합니다.
+    _videoControllers.forEach((index, controller) {
+      if (index != currentPage) {
+        controller.pause();
+        controller.seekTo(Duration.zero);
+      } else {
+        controller.play();
+      }
+    });
+
+    // 페이지에 맞게 비디오를 프리로드합니다.
+    _preloadVideos(currentPage);
+  }
+
+  void _preloadVideos(int index) {
+    final shortsList = ref.read(shortsReadProvider).shortsList;
+    for (int i = -_preloadCount; i <= _preloadCount; i++) {
+      final preloadIndex = index + i;
+      if (preloadIndex >= 0 && preloadIndex < shortsList.length) {
+        final videoUrl = shortsList[preloadIndex].videoUrl;
+        if (!_videoControllers.containsKey(preloadIndex)) {
+          final controller = VideoPlayerController.network(videoUrl)
+            ..initialize().then((_) {
+              if (mounted) {
+                setState(() {});
+              }
+            }).catchError((error) {
+              print('Error initializing video player: $error');
+            });
+          _videoControllers[preloadIndex] = controller;
+        }
+      }
     }
   }
 
@@ -51,6 +74,7 @@ class _VideoSwipeScreenState extends ConsumerState<VideoSwipeScreen>
     final isPlaying = ref.watch(isPlayingProvider);
 
     return Scaffold(
+      backgroundColor: Colors.black,
       body: shortsRead.shortsList.isEmpty
           ? Center(child: CircularProgressIndicator())
           : PageView.builder(
@@ -58,12 +82,21 @@ class _VideoSwipeScreenState extends ConsumerState<VideoSwipeScreen>
         scrollDirection: Axis.vertical,
         itemCount: shortsRead.shortsList.length,
         itemBuilder: (context, index) {
-          final videoUrl = shortsRead.shortsList[index].videoUrl;
+          // 현재 페이지와 앞뒤로 비디오 로드
+          _preloadVideos(index);
           return VideoPlayerScreen(
-            videoUrl: videoUrl,
+            videoUrl: shortsRead.shortsList[index].videoUrl,
             isPlaying: isPlaying,
             shorts: shortsRead.shortsList[index],
+            controller: _videoControllers[index],
+            onControllerCreated: (controller) {
+              _videoControllers[index] = controller;
+            },
           );
+        },
+        onPageChanged: (index) {
+          // 페이지가 변경될 때 불필요한 비디오 컨트롤러를 제거합니다.
+          _videoControllers.removeWhere((key, value) => key < index - _preloadCount || key > index + _preloadCount);
         },
       ),
     );
@@ -71,198 +104,4 @@ class _VideoSwipeScreenState extends ConsumerState<VideoSwipeScreen>
 
   @override
   bool get wantKeepAlive => true;
-}
-
-class VideoPlayerScreen extends StatefulWidget {
-  final String videoUrl;
-  final bool isPlaying;
-  final Shorts shorts;
-
-  VideoPlayerScreen({
-    required this.videoUrl,
-    required this.isPlaying,
-    required this.shorts,
-  });
-
-  @override
-  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
-}
-
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> with TickerProviderStateMixin {
-  late VideoPlayerController _controller;
-  bool _isExpanded = false; // 확장 상태를 관리하는 변수
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = VideoPlayerController.network(widget.videoUrl)
-      ..initialize().then((_) {
-        if (widget.isPlaying) {
-          _controller.play();
-        }
-        _controller.setLooping(true);
-        setState(() {}); // Update the UI after initialization
-      });
-  }
-
-  @override
-  void didUpdateWidget(VideoPlayerScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.isPlaying != widget.isPlaying) {
-      if (widget.isPlaying) {
-        _controller.play();
-      } else {
-        _controller.pause();
-      }
-    }
-  }
-
-  void _togglePlayPause() {
-    setState(() {
-      if (_controller.value.isPlaying) {
-        _controller.pause();
-      } else {
-        _controller.play();
-      }
-    });
-  }
-
-  void _toggleExpand() {
-    setState(() {
-      _isExpanded = !_isExpanded;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final contentText = '${widget.shorts.content}';
-    final textStyle = TextStyle(color: Colors.white);
-
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: _controller.value.isInitialized
-              ? FittedBox(
-            fit: BoxFit.cover,
-            child: SizedBox(
-              width: _controller.value.size.width,
-              height: _controller.value.size.height,
-              child: VideoPlayer(_controller),
-            ),
-          )
-              : Container(
-            color: Colors.black, // 검은 배경
-          ),
-        ),
-        Positioned.fill(
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.transparent,
-                  Colors.black.withOpacity(0.2),
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-          ),
-        ),
-        GestureDetector(
-          onTap: _togglePlayPause,
-          child: Container(
-            color: Colors.transparent,
-          ),
-        ),
-        Positioned(
-          bottom: 120,
-          right: 20,
-          child: Column(
-            children: [
-              Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Icon(
-                      Icons.favorite_border_rounded,
-                      color: Colors.white,
-                      size: 30.0,
-                    ).pSymmetric(v: 5),
-                  ),
-                  Text(
-                    '${widget.shorts.likes}',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-              SizedBox(height: 10),
-              Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Icon(
-                      Icons.chat_bubble_outline_rounded,
-                      color: Colors.white,
-                      size: 30.0,
-                    ).pSymmetric(v: 5),
-                  ),
-                  Text(
-                    '${widget.shorts.commentNum}',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        if (_isExpanded)
-          Container(
-            color: Colors.black.withOpacity(0.5), // 어두운 배경
-          ),
-        Positioned(
-          bottom: 100,
-          left: 20,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ProfileImage(
-                      photoUrl: widget.shorts.account.photoUrl,
-                      width: 35,
-                      height: 35)
-                      .pOnly(right: 10),
-                  '${widget.shorts.account.nickname}'.text.white.make()
-                ],
-              ),
-              GestureDetector(
-                onTap: _toggleExpand,
-                child: AnimatedSize(
-                  duration: Duration(milliseconds: 300),
-                  curve: Curves.easeInOut,
-                  child: Container(
-                    width: 300,
-                    child: Text(
-                      contentText*20,
-                      style: textStyle,
-                      overflow: _isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
-                      maxLines: _isExpanded ? null : 1,
-                      textDirection: ui.TextDirection.ltr,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 }

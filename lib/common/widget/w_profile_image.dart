@@ -19,12 +19,15 @@ class ProfileImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipOval(
       child: photoUrl != null && photoUrl !=""
-          ? CachedNetworkImage(
-        imageUrl: photoUrl!,
-        height: height,
-        width: width,
-        fit: BoxFit.cover,
-      )
+          ? Container(
+        color: AppColors.outline,
+            child: CachedNetworkImage(
+                    imageUrl: photoUrl!,
+                    height: height,
+                    width: width,
+                    fit: BoxFit.cover,
+                  ),
+          )
           : Image.asset(
         '$basePath/icon/colorHama.png',
         width: width,
