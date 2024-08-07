@@ -1,4 +1,3 @@
-![IMG_0458](https://github.com/user-attachments/assets/fbd0fe92-9c3a-46ab-bbcc-15ad03a78b65)# 여행하마 모바일
 ![스크린샷 2024-08-07 오후 4 16 17](https://github.com/user-attachments/assets/b4a226b4-66db-4e1a-8771-5034f827ff7f)
 
 ![스크린샷 2024-08-07 오후 6 15 15](https://github.com/user-attachments/assets/bf325cca-6cb0-48dc-8b41-6f97801b28fb)
