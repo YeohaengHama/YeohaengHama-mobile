@@ -14,10 +14,14 @@
 
 ### 스킬
 
-상태관리: `Freezed`, `riverPod` , `hooks_riverpod`  
+상태관리: `Freezed`, `riverPod` , `hooks_riverpod`
+
 통신:`http`, `dio`, `RestAPI`,`webScoket`
-관리:  `Jira`, `Git` 
+
+관리:  `Jira`, `Git`
+
 디자인: `Figma`
+
 기타:  `디버깅`, `NullSafety`, `비동기` , `async & await`
 
 ---
