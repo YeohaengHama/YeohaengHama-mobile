@@ -159,7 +159,7 @@ class _DiaryWriteScreenState extends ConsumerState<DiaryWriteScreen> {
                   color: Colors.black.withOpacity(0.3),
                 ),
                 Center(
-                    child: LoadingAnimationWidget.fourRotatingDots(
+                    child: LoadingAnimationWidget.inkDrop(
                         color: AppColors.mainPurple, size: 100)),
               ],
             ),

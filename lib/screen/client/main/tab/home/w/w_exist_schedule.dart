@@ -50,14 +50,10 @@ class ExistScheduleWidget extends ConsumerWidget {
               child: Container(
                 alignment: Alignment.center, // Center align the container
                 child: RoundButton(
-                  text: '여행 도우미',
+                  text: '일정 수정',
                   fontSize: 14,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HelperScreen()),
-                    );
+                    ShowBottomDialog(context, EditScheduleDialog());
                   },
                   textColor: Colors.white,
                   leftWidget: const Icon(

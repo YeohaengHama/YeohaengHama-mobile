@@ -1,13 +1,22 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:geocoding/geocoding.dart'; // Geocoding 패키지 추가
+import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../../../../../common/constants.dart';
+import '../../../../../common/widget/scaffold/show_bottom_dialog.dart';
+import '../../../../../common/widget/w_tap.dart';
 import '../../../../../data/entity/itinerary/a_add_pick_place.dart';
 import '../../../../../data/memory/area/selectedDayIndex_provider.dart';
 import '../../../../../data/memory/itinerary/add_pick_each_place_provider.dart';
+import '../../../../../data/network/traffic_api.dart';
+import 'f_gps_map.dart';
 
 class ScheduleMapWidget extends ConsumerStatefulWidget {
   const ScheduleMapWidget({Key? key}) : super(key: key);
@@ -17,10 +26,20 @@ class ScheduleMapWidget extends ConsumerStatefulWidget {
 }
 
 class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
-  late NaverMapController? _controller;
+  late NaverMapController _controller;
   late List<AddPickPlace> placeList;
   final List<NLatLng> placeCoordinates = [];
-  bool _isControllerInitialized = false; // Flag to track controller initialization
+  bool _isControllerInitialized = false;
+  StreamSubscription<Position>? _positionStreamSubscription;
+  NMarker? _currentLocationMarker;
+  Position? _currentPosition;
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _startLocationTracking();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,42 +49,144 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
         placeList = ref.watch(addPickEachPlaceProvider);
 
         if (_isControllerInitialized) {
-
           _updatePlaceCoordinates(selectedIndex);
         }
+
         return Scaffold(
-          body: NaverMap(
-            forceGesture: true,
-            options: const NaverMapViewOptions(
-              mapType: NMapType.basic,
-              activeLayerGroups: [
-                NLayerGroup.building,
-                NLayerGroup.transit,
-              ],
-            ),
-            onMapReady: (controller) {
-              _controller = controller;
-              _isControllerInitialized = true; // Set the flag to true when controller is initialized
-              _updatePlaceCoordinates(selectedIndex);
-              print("네이버 맵 로딩됨!");
-            },
+          body: Stack(
+            children: [
+              NaverMap(
+                forceGesture: true,
+                options: const NaverMapViewOptions(
+                  mapType: NMapType.basic,
+                  activeLayerGroups: [
+                    NLayerGroup.building,
+                    NLayerGroup.transit,
+                  ],
+                ),
+                onMapReady: (controller) {
+                  _controller = controller;
+                  _isControllerInitialized = true;
+                  _updatePlaceCoordinates(selectedIndex);
+                  print("네이버 맵 로딩됨!");
+                },
+              ),
+              Positioned(
+                bottom: 16,
+                right: 16,
+                child: Tap(
+                  onTap: () {
+                    _refreshCurrentLocation();
+                  },
+                  child: Icon(Icons.my_location),
+                ),
+              ),
+              if (_isLoading)
+                Stack(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      color: Colors.black.withOpacity(0.3),
+                    ),
+                    Center(
+                        child: LoadingAnimationWidget.fourRotatingDots(
+                            color: AppColors.mainPurple, size: 100)),
+                  ],
+                ),
+            ],
           ),
         );
       },
     );
   }
 
+  void _startLocationTracking() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      print('Location services are disabled.');
+      return;
+    }
+
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        print('Location permission denied.');
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      print('Location permission denied forever.');
+      return;
+    }
+
+    _positionStreamSubscription = Geolocator.getPositionStream(
+      locationSettings: const LocationSettings(
+        accuracy: LocationAccuracy.high,
+        distanceFilter: 10,
+      ),
+    ).listen((Position position) {
+      print('Current position: ${position.latitude}, ${position.longitude}');
+      if (_isControllerInitialized) {
+        _currentPosition = position;
+        _updateCurrentLocationMarker(position);
+      }
+    });
+  }
+
+  void _updateCurrentLocationMarker(Position position) {
+    if (!_isControllerInitialized) return;
+
+    final currentLocation = NLatLng(position.latitude, position.longitude);
+
+    // 현재 위치 마커가 존재하면 제거
+    if (_currentLocationMarker != null) {
+      _controller.deleteOverlay(_currentLocationMarker! as NOverlayInfo);
+    }
+
+    // 새로운 위치에 마커 생성 및 추가
+    _currentLocationMarker = NMarker(
+      id: 'current_location',
+      position: currentLocation,
+      iconTintColor: AppColors.deepPurple,
+      caption: NOverlayCaption(text: '현재 위치'),
+    );
+    _controller.addOverlay(_currentLocationMarker!);
+
+    // 카메라를 현재 위치로 이동
+    _controller.updateCamera(
+      NCameraUpdate.fromCameraPosition(
+        NCameraPosition(
+          target: currentLocation,
+          zoom: 15.0,
+        ),
+      ),
+    );
+  }
+
+  void _refreshCurrentLocation() {
+    // 현재 위치를 강제로 새로고침하도록 트리거합니다.
+    _positionStreamSubscription?.pause();
+    _positionStreamSubscription?.resume();
+  }
+
+  @override
+  void dispose() {
+    _positionStreamSubscription?.cancel();
+    super.dispose();
+  }
+
   void _updatePlaceCoordinates(int selectedIndex) {
-    if (_controller == null) return;
+    if (!_isControllerInitialized) return;
+
     if (placeList.isEmpty) {
-      // Logic to add default location when place list is empty
       _removeMarkers();
       placeCoordinates.clear();
       placeCoordinates.add(NLatLng(36, 128));
     } else {
-      // Logic to update place coordinates when place list is not empty
       _removeMarkers();
-      _controller!.clearOverlays();
       placeCoordinates.clear();
       for (final place in placeList) {
         if (place.day == selectedIndex + 1) {
@@ -79,36 +200,45 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
   }
 
   void _addMarkers() {
-    if (_controller == null) return;
+    if (!_isControllerInitialized) return;
 
     for (int i = 0; i < placeCoordinates.length; i++) {
       final markerId = 'marker$i';
       final marker = NMarker(
-        icon: const NOverlayImage.fromAssetImage('$basePath/icon/hamaMarker.png'),
-        size: Size(60,30),
+        icon: NOverlayImage.fromAssetImage('$basePath/icon/hamaMarker.png'),
+        size: const Size(60, 30),
         id: markerId,
         position: placeCoordinates[i],
         caption: NOverlayCaption(text: (i + 1).toString()),
       );
-      _controller!.addOverlay(marker);
+
+      // 마커 클릭 이벤트 리스너 추가
+      marker.setOnTapListener((marker) {
+        _onMarkerTap(marker);
+        return true;
+      });
+
+      _controller.addOverlay(marker);
+      print(
+          "Marker added: ${i + 1} at (${placeCoordinates[i].latitude}, ${placeCoordinates[i].longitude})");
     }
   }
 
   void _removeMarkers() {
-    if (_controller == null) return;
-    _controller!.clearOverlays();
+    if (!_isControllerInitialized) return;
+    _controller.clearOverlays();
   }
 
   void _drawLines() {
-    if (_controller == null || placeCoordinates.length < 2) return;
+    if (!_isControllerInitialized || placeCoordinates.length < 2) return;
 
     final polyline = NPolylineOverlay(
       coords: placeCoordinates,
       color: AppColors.forthGrey,
       width: 4,
-      id: '',
+      id: 'route_line',
     );
-    _controller!.addOverlay(polyline);
+    _controller.addOverlay(polyline);
   }
 
   void _moveCameraToMarkers() {
@@ -121,17 +251,94 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
       longitudes.add(coord.longitude);
     }
 
-    final double minLat = latitudes.reduce((value, element) => min(value, element));
-    final double maxLat = latitudes.reduce((value, element) => max(value, element));
-    final double minLng = longitudes.reduce((value, element) => min(value, element));
-    final double maxLng = longitudes.reduce((value, element) => max(value, element));
+    final double minLat =
+        latitudes.reduce((value, element) => min(value, element));
+    final double maxLat =
+        latitudes.reduce((value, element) => max(value, element));
+    final double minLng =
+        longitudes.reduce((value, element) => min(value, element));
+    final double maxLng =
+        longitudes.reduce((value, element) => max(value, element));
 
     final bounds = NLatLngBounds(
       southWest: NLatLng(minLat, minLng),
       northEast: NLatLng(maxLat, maxLng),
     );
-    _controller!.updateCamera(
-      NCameraUpdate.fitBounds(bounds, padding: EdgeInsets.symmetric(vertical: 70, horizontal: 70)),
+    _controller.updateCamera(
+      NCameraUpdate.fitBounds(bounds,
+          padding: const EdgeInsets.symmetric(vertical: 70, horizontal: 70)),
     );
+  }
+
+  void _onMarkerTap(NMarker marker) async {
+    if (_currentPosition == null) return;
+    setState(() {
+      _isLoading = true; // 로딩 상태 시작
+    });
+    final currentLocation = _currentPosition!;
+    final markerPosition = marker.position;
+    final _trafficApiProvider = ref.read(trafficApiProvider);
+
+    await _trafficApiProvider.getInfoTraffic(
+        currentLocation.longitude,
+        currentLocation.latitude,
+        markerPosition.longitude,
+        markerPosition.latitude,
+        ref);
+    await _trafficApiProvider.getInfoCarTraffic(
+        currentLocation.longitude,
+        currentLocation.latitude,
+        markerPosition.longitude,
+        markerPosition.latitude,
+        ref);
+    setState(() {
+      _isLoading = false; // 로딩 상태 시작
+    });
+    // 현재 위치를 도로명 주소로 변환
+    String currentAddress = await _getAddressFromCoordinates(
+        currentLocation.latitude, currentLocation.longitude);
+
+    // 마커의 placeName을 얻기 위해 placeList를 검색합니다.
+    final markerPlace = placeList.firstWhere(
+      (place) => NLatLng(place.mapy, place.mapx) == markerPosition,
+    );
+    final markerPlaceName = markerPlace.placeName;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Container(
+            width: double.maxFinite,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+            ),
+            child: SizedBox(
+                    height: 700,
+                    child: GpsMapDialog(currentLocation, markerPosition,
+                        currentAddress, markerPlaceName!))
+                .pSymmetric(v: 15));
+      },
+    );
+  }
+
+  // 도로명 주소를 얻는 함수
+  Future<String> _getAddressFromCoordinates(
+      double latitude, double longitude) async {
+    try {
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(latitude, longitude);
+      if (placemarks.isNotEmpty) {
+        Placemark placemark = placemarks.first;
+        return '${placemark.street}, ${placemark.locality}, ${placemark.country}';
+      }
+    } catch (e) {
+      print('Error getting address: $e');
+    }
+    return '주소를 찾을 수 없습니다';
   }
 }
