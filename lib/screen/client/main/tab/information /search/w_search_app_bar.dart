@@ -52,6 +52,8 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
       );
       final areaApi = ref.read(areaApiProvider);
       await areaApi.postSearchRestaurantArea(openApiArea, ref);
+      isLoading.setLoading(false);
+
     }
 
     Future<void> _getCurrentLocationAndUpdateStart(WidgetRef ref) async {
@@ -123,20 +125,23 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
           ),
           IconButton(
             onPressed: () async {
-              isLoading.setLoading(true);
-              postSearchArea();
-              postSearchRestaurantArea();
+              if(controller.text != null) {
+                isLoading.setLoading(true);
 
-              final simpleAreaNotifier =
-              ref.read(simpleAreaApiResponseProvider.notifier);
-              final simpleAreaRestaurantNotifier =
-              ref.read(simpleAreaRestaurantApiResponseProvider.notifier);
+                postSearchArea();
+                postSearchRestaurantArea();
+                // SearchSimpleResult가 비어있지 않으면 리스트 비우기
+                final simpleAreaNotifier =
+                ref.read(simpleAreaApiResponseProvider.notifier);
+                final simpleAreaRestaurantNotifier = ref
+                    .read(simpleAreaRestaurantApiResponseProvider.notifier);
 
-              if (simpleAreaNotifier.state.isNotEmpty) {
-                simpleAreaNotifier.state = [];
-              }
-              if (simpleAreaRestaurantNotifier.state.isNotEmpty) {
-                simpleAreaRestaurantNotifier.state = [];
+                if (simpleAreaNotifier.state.isNotEmpty) {
+                  simpleAreaNotifier.state = [];
+                }
+                if (simpleAreaRestaurantNotifier.state.isNotEmpty) {
+                  simpleAreaRestaurantNotifier.state = [];
+                }
               }
             },
             icon: Icon(Icons.search),

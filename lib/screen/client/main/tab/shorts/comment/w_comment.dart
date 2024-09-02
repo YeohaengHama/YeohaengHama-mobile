@@ -24,7 +24,7 @@ class CommentWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ProfileImage(photoUrl: comment.account.photoUrl, width: 35, height: 35),
+        ProfileImage(photoUrl: comment.account.photoUrl, width: 40, height: 40),
         SizedBox(width: 10),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -32,12 +32,12 @@ class CommentWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text(comment.account.nickname, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
+                Text(comment.account.nickname, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
                 SizedBox(width: 10),
-                Text(timeDifference, style: TextStyle(fontSize: 12, color: AppColors.secondGrey)),
+                Text(timeDifference, style: TextStyle(fontSize: 14, color: AppColors.secondGrey)),
               ],
             ),
-            Text(comment.comment, style: TextStyle(fontSize: 12)),
+            Text(comment.comment, style: TextStyle(fontSize: 14)),
           ],
         ),
       ],

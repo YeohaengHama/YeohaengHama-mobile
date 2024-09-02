@@ -32,29 +32,43 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
   late VideoPlayerController _controller;
   bool _isExpanded = false;
   bool _isPlaying = false;
+  FocusNode _focusNode = FocusNode();
+  bool _textFieldFocused = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? VideoPlayerController.network(widget.videoUrl)
-      ..initialize().then((_) {
-        if (widget.isPlaying) {
-          _controller.play();
-        }
-        _controller.setLooping(true);
-        setState(() {});
-        if (widget.onControllerCreated != null) {
-          widget.onControllerCreated!(_controller);
-        }
-      }).catchError((error) {
-        print('Error initializing video player: $error');
+
+    if (widget.controller != null) {
+      _controller = widget.controller!;
+    } else {
+      _controller = VideoPlayerController.network(widget.videoUrl)
+        ..initialize().then((_) {
+          if (widget.isPlaying) {
+            _controller.play();
+            _isPlaying = true;
+          }
+          _controller.setLooping(true);
+          setState(() {});
+          if (widget.onControllerCreated != null) {
+            widget.onControllerCreated!(_controller);
+          }
+        }).catchError((error) {
+          print('Error initializing video player: $error');
+        });
+    }
+
+    _focusNode.addListener(() {
+      setState(() {
+        _textFieldFocused = _focusNode.hasFocus;
       });
+    });
   }
 
   @override
   void didUpdateWidget(VideoPlayerScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.isPlaying != oldWidget.isPlaying) {
+    if (widget.isPlaying != oldWidget.isPlaying && !_textFieldFocused) {
       if (widget.isPlaying) {
         _controller.play();
       } else {
@@ -68,19 +82,22 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
     if (widget.controller == null) {
       _controller.dispose();
     }
+    _focusNode.dispose();
     super.dispose();
   }
 
   void _togglePlayPause() {
-    setState(() {
-      if (_controller.value.isPlaying) {
-        _controller.pause();
-        _isPlaying = false;
-      } else {
-        _controller.play();
-        _isPlaying = true;
-      }
-    });
+    if (!_textFieldFocused) {
+      setState(() {
+        if (_controller.value.isPlaying) {
+          _controller.pause();
+          _isPlaying = false;
+        } else {
+          _controller.play();
+          _isPlaying = true;
+        }
+      });
+    }
   }
 
   void _toggleExpand() {
@@ -102,13 +119,8 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
             child: _controller.value.isInitialized
                 ? LayoutBuilder(
               builder: (context, constraints) {
-                // 비디오 비율 계산
                 final videoRatio = _controller.value.size.width / _controller.value.size.height;
-                final screenRatio = constraints.maxWidth / constraints.maxHeight;
-
-                // 비디오 비율에 맞춰 BoxFit 설정
                 final fit = videoRatio > 0.5 && videoRatio < 0.6 ? BoxFit.cover : BoxFit.contain;
-
                 return FittedBox(
                   fit: fit,
                   child: SizedBox(
@@ -119,18 +131,13 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                 );
               },
             )
-                : Container(
-              color: Colors.black,
-            ),
+                : Container(color: Colors.black),
           ),
           Positioned.fill(
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [
-                    Colors.transparent,
-                    Colors.black.withOpacity(0.2),
-                  ],
+                  colors: [Colors.transparent, Colors.black.withOpacity(0.2)],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
@@ -146,16 +153,9 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                   children: [
                     GestureDetector(
                       onTap: () {},
-                      child: Icon(
-                        Icons.favorite_border_rounded,
-                        color: Colors.white,
-                        size: 30.0,
-                      ).pSymmetric(v: 5),
+                      child: Icon(Icons.favorite_border_rounded, color: Colors.white, size: 30.0).pSymmetric(v: 5),
                     ),
-                    Text(
-                      '${widget.shorts.likes}',
-                      style: TextStyle(color: Colors.white),
-                    ),
+                    Text('${widget.shorts.likes}', style: TextStyle(color: Colors.white)),
                   ],
                 ),
                 SizedBox(height: 10),
@@ -166,7 +166,6 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                         final isBottomNavBarVisible = ref.read(bottomNavBarVisibleProvider.notifier);
                         isBottomNavBarVisible.hide();
 
-
                         showModalBottomSheet(
                           context: context,
                           isScrollControlled: true,
@@ -175,7 +174,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                               padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15),
                               radius: 15,
                               child: FractionallySizedBox(
-                                heightFactor: 0.8,
+                                heightFactor: 0.65,
                                 child: DraggableScrollableSheet(
                                   initialChildSize: 1.0,
                                   minChildSize: 1.0,
@@ -189,20 +188,12 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                             );
                           },
                         ).whenComplete(() {
-                          // When the bottom sheet is closed, restore the bottom navigation bar visibility
                           isBottomNavBarVisible.show();
                         });
                       },
-                      child: Icon(
-                        Icons.chat_bubble_outline_rounded,
-                        color: Colors.white,
-                        size: 30.0,
-                      ).pSymmetric(v: 5),
+                      child: Icon(Icons.chat_bubble_outline_rounded, color: Colors.white, size: 30.0).pSymmetric(v: 5),
                     ),
-                    Text(
-                      '${widget.shorts.commentNum}',
-                      style: TextStyle(color: Colors.white),
-                    ),
+                    Text('${widget.shorts.commentNum}', style: TextStyle(color: Colors.white)),
                   ],
                 ),
               ],
@@ -229,6 +220,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                     '${widget.shorts.account.nickname}'.text.white.make()
                   ],
                 ),
+                Height(5),
                 GestureDetector(
                   onTap: _toggleExpand,
                   child: AnimatedSize(
@@ -237,7 +229,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                     child: Container(
                       width: 300,
                       child: Text(
-                        contentText * 20,
+                        contentText,
                         style: textStyle,
                         overflow: _isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
                         maxLines: _isExpanded ? null : 1,

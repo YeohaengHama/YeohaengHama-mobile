@@ -34,7 +34,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     stompClient = StompClient(
       config: StompConfig(
         url:
-            'wss://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/ws-stomp/websocket',
+            'ws://43.202.208.22:8080/ws-stomp/websocket',
         // 웹소켓 URL 사용
         onConnect: onConnect,
         onStompError: (StompFrame frame) {
@@ -194,6 +194,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         title: Text(widget.chatRoom.name),
         backgroundColor: Colors.white.withOpacity(0.1),
         scrolledUnderElevation: 0,

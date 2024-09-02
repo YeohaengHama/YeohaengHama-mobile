@@ -12,10 +12,12 @@ class ImageScrollView extends StatefulWidget {
     Key? key,
     required this.pageController,
     required this.searchImageResult,
+    this.viewRadius = 0,
   }) : super(key: key);
 
   final PageController pageController;
   final SearchImageResult searchImageResult;
+  final double? viewRadius;
 
   @override
   _ImageScrollViewState createState() => _ImageScrollViewState();
@@ -30,7 +32,7 @@ class _ImageScrollViewState extends State<ImageScrollView> {
       child: Stack(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(0),
+            borderRadius: BorderRadius.circular(widget.viewRadius!),
             child: PageView(
               controller: widget.pageController,
               children: [

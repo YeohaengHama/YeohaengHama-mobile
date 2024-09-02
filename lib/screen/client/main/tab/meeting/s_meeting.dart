@@ -34,6 +34,7 @@ class _MeetingFragmentState extends ConsumerState<MeetingFragment> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: '모임'.text.make(),
         elevation: 0,
         scrolledUnderElevation: 0,

@@ -18,7 +18,7 @@ class NotificationApi {
 
   Future<void> startListeningToServer(String id, WidgetRef ref) async {
     final client = http.Client();
-    final request = http.Request('GET', Uri.parse('https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api/notifications/subscribe/$id'));
+    final request = http.Request('GET', Uri.parse('http://43.202.208.22:8080/api/notifications/subscribe/$id'));
     final List<NotificationMessage> _messages = [];
 
     try {

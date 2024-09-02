@@ -52,6 +52,7 @@ class _DiaryWriteScreenState extends ConsumerState<DiaryWriteScreen> {
           CustomScrollView(
             slivers: [
               SliverAppBar(
+                backgroundColor: Colors.white,
                 title: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

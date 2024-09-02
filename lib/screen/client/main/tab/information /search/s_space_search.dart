@@ -1,5 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/search/provider/is_loading_provider.dart';
+import 'package:fast_app_base/screen/client/main/tab/information%20/search/f_restaurant_search_list.dart';
 import 'package:fast_app_base/screen/client/main/tab/information%20/search/w_search_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +14,6 @@ import '../../../../../../data/memory/search/search_simple_restaurant_provider.d
 import '../../../../../../data/network/area_api.dart';
 import '../../../../../../data/network/search_api.dart';
 import 'content_type_provider.dart';
-import 'f_restaurant_search_list.dart';
 import 'f_tourism_search_list.dart';
 
 class SpaceSearchFragment extends ConsumerStatefulWidget {

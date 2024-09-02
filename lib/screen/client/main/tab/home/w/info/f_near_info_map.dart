@@ -10,16 +10,16 @@ import '../../../../../../../data/network/area_api.dart';
 import '../../../../../../../data/network/review_api.dart';
 import '../../../../search/provider/is_detail_loading_provider.dart';
 
-class AreaInfoMap extends ConsumerStatefulWidget {
-  const AreaInfoMap({Key? key, this.mapX = 126.979, this.mapY = 37.566}) : super(key: key);
+class NearInfoMap extends ConsumerStatefulWidget {
+  const NearInfoMap({Key? key, this.mapX = 126.979, this.mapY = 37.566}) : super(key: key);
   final double mapX;
   final double mapY;
 
   @override
-  ConsumerState<AreaInfoMap> createState() => _AreaInfoMapState();
+  ConsumerState<NearInfoMap> createState() => _AreaInfoMapState();
 }
 
-class _AreaInfoMapState extends ConsumerState<AreaInfoMap> {
+class _AreaInfoMapState extends ConsumerState<NearInfoMap> {
   late NaverMapController _controller;
   late NLatLng placeLatLng;
   String? _selectedMarkerTitle;
@@ -80,7 +80,7 @@ class _AreaInfoMapState extends ConsumerState<AreaInfoMap> {
           options: NaverMapViewOptions(
             initialCameraPosition: NCameraPosition(
               target: placeLatLng,
-              zoom: 14.5,
+              zoom: 13,
             ),
             mapType: NMapType.basic,
           ),
@@ -112,6 +112,7 @@ class _AreaInfoMapState extends ConsumerState<AreaInfoMap> {
     final marker = NMarker(
       id: 'initial_marker',
       position: placeLatLng,
+      caption: NOverlayCaption(text: 'Initial Location'),
     );
 
     marker.setOnTapListener((NMarker marker) {

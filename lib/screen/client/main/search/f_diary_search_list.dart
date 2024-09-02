@@ -16,28 +16,51 @@ class DiarySearchListFragment extends ConsumerWidget {
     final diaryList = ref.watch(SearchDiaryAreaProvider);
     final _isLoading = ref.watch(isLoadingProvider.notifier).state;
 
-    return diaryList.isEmpty && !_isLoading
-        ? SizedBox(
-            child: Center(
-                child: Column(
+    // 디버깅 출력
+    print('Diary List Length: ${diaryList.length}');
+    for (var i = 0; i < diaryList.length; i++) {
+      print('Diary[$i]: ${diaryList[i]}');
+    }
+    print('_isLoading: $_isLoading');
+
+    if (_isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+
+    if (diaryList.isEmpty) {
+      return SizedBox(
+        child: Center(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               '아직 작성 된 여행일기가 없어요'.text.color(AppColors.thirdGrey).bold.make(),
               '여행일기를 작성해 볼까요?'.text.color(AppColors.thirdGrey).make(),
               Height(30),
-              Line(color: AppColors.outline,width: 340)
+              Line(color: AppColors.outline, width: 340),
             ],
-          ))).pSymmetric(v: 30)
-        : Expanded(
-            child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: diaryList.length,
-                itemBuilder: (context, index) {
-                  return Row(
-                    children: [DiarySearchListWidget(diaryList[index])],
-                  );
-                }),
+          ),
+        ),
+      ).pSymmetric(v: 30);
+    }
+print(diaryList[0]);
+    return Expanded(
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        itemCount: diaryList.length,
+
+        itemBuilder: (context, index) {
+          // 디버깅 출력
+          print('Building item at index: $index');
+          return Row(
+            children: [
+              Expanded(
+                child: DiarySearchListWidget(diaryList[index]),
+              ),
+            ],
           );
+        },
+      ),
+    );
   }
 }

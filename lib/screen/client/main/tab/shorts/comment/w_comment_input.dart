@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import '../../../../../../data/memory/account/user_provider.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_profile_image.dart';
-
+import '../../../../../../data/memory/account/user_provider.dart';
+import '../../../../../../data/memory/shorts/p_comment_write_loading.dart';
 import '../../../../../../data/network/shorts_api.dart';
 
 class CommentInputWidget extends ConsumerStatefulWidget {
@@ -25,6 +25,7 @@ class _CommentInputWidgetState extends ConsumerState<CommentInputWidget> {
   final TextEditingController _controller = TextEditingController();
   final List<String> _emojis = ['❤️', '🙌', '🔥', '👏', '😢', '😍', '🥳', '😎']; // 사용할 이모지 목록
   bool _isButtonEnabled = false; // 버튼 활성화 상태
+
   bool _isLoading = false; // 로딩 상태
 
   @override
@@ -55,10 +56,12 @@ class _CommentInputWidgetState extends ConsumerState<CommentInputWidget> {
   Future<void> _submitComment() async {
     final newComment = _controller.text.trim();
     final account = ref.read(accountProvider);
+    final writeLoading = ref.read(commentWriteLoadingProvider.notifier);
 
     if (newComment.isEmpty) return;
 
     setState(() {
+      writeLoading.setCheckWrited(true);
       _isLoading = true; // 로딩 시작
       _isButtonEnabled = false; // 버튼 비활성화
     });
@@ -71,9 +74,13 @@ class _CommentInputWidgetState extends ConsumerState<CommentInputWidget> {
     } finally {
       setState(() {
         _isLoading = false; // 로딩 종료
+        writeLoading.setCheckWrited(false);
+
         _controller.clear(); // 입력 필드 초기화
         _isButtonEnabled = _controller.text.trim().isNotEmpty; // 버튼 활성화 상태 다시 설정
       });
+      FocusScope.of(context).unfocus(); // 키보드 닫기
+      ref.read(shortsApiProvider).readShorts(ref);
     }
   }
 
@@ -162,14 +169,14 @@ class _CommentInputWidgetState extends ConsumerState<CommentInputWidget> {
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20.0),
                               borderSide: BorderSide(
-                                color: AppColors.forthGrey,
-                                width: 1.0,
+                                color: _isButtonEnabled ? AppColors.mainPurple : AppColors.forthGrey,
+                                width:  _isButtonEnabled ? 1.5 :1.0,
                               ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20.0),
                               borderSide: BorderSide(
-                                color: AppColors.mainPurple,
+                                color: _isButtonEnabled || widget.focusNode.hasFocus ? AppColors.mainPurple : AppColors.secondGrey,
                                 width: 1.5,
                               ),
                             ),
@@ -189,14 +196,14 @@ class _CommentInputWidgetState extends ConsumerState<CommentInputWidget> {
               ],
             ),
           ),
-          if (_isLoading)
-            Positioned.fill(
-              child: Container(
-                  child: Center(
-                      child: LoadingAnimationWidget.fallingDot(
-                          color: AppColors.mainPurple, size: 100))
-              ),
-            ),
+          // if (_isLoading)
+          //   Positioned.fill(
+          //     child: Container(
+          //         child: Center(
+          //             child: LoadingAnimationWidget.fallingDot(
+          //                 color: AppColors.mainPurple, size: 100))
+          //     ),
+          //   ),
         ],
       ),
     );

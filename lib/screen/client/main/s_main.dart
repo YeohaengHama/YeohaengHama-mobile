@@ -98,7 +98,7 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
         child: BottomNavigationBar(
           items: navigationBarItems(context),
           currentIndex: _currentIndex,
-          selectedItemColor: context.appColors.text,
+          selectedItemColor: AppColors.mainPurple,
           unselectedItemColor: context.appColors.iconButtonInactivate,
           onTap: (index) {
             if (tabs[index] == TabItem.shorts) {
@@ -111,7 +111,7 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
           showSelectedLabels: true,
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: context.appColors.seedColor,
+          backgroundColor: (tabs[_currentIndex] == TabItem.shorts) ? Colors.black : context.appColors.seedColor
         ),
       ),
     );

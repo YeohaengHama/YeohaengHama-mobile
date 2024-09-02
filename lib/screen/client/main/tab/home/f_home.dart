@@ -24,16 +24,43 @@ class HomeFragment extends ConsumerStatefulWidget {
   ConsumerState<HomeFragment> createState() => _HomeFragmentState();
 }
 
-class _HomeFragmentState extends ConsumerState<HomeFragment> with SingleTickerProviderStateMixin {
+class _HomeFragmentState extends ConsumerState<HomeFragment>
+    with SingleTickerProviderStateMixin {
   final List<String> _areaList = [
-    "서울", "인천", "경기", "경남", "경주", "대전",
-    "부산", "대구", "광주", "울산", "강원", "충북",
-    "충남", "전북", "전남", "제주"
+    "서울",
+    "인천",
+    "경기",
+    "경남",
+    "경주",
+    "대전",
+    "부산",
+    "대구",
+    "광주",
+    "울산",
+    "강원",
+    "충북",
+    "충남",
+    "전북",
+    "전남",
+    "제주"
   ];
   final List<String> choSungList = [
-    "ㅅㅇ", "ㅇㅊ", "ㄱㄱ", "ㄱㄴ", "ㄱㅈ", "ㄷㅈ",
-    "ㅂㅅ", "ㄷㄱ", "ㄱㅈ", "ㅇㅅ", "ㄱㅇ", "ㅊㅂ",
-    "ㅊㄴ", "ㅈㅂ", "ㅈㄴ", "ㅈㅈ"
+    "ㅅㅇ",
+    "ㅇㅊ",
+    "ㄱㄱ",
+    "ㄱㄴ",
+    "ㄱㅈ",
+    "ㄷㅈ",
+    "ㅂㅅ",
+    "ㄷㄱ",
+    "ㄱㅈ",
+    "ㅇㅅ",
+    "ㄱㅇ",
+    "ㅊㅂ",
+    "ㅊㄴ",
+    "ㅈㅂ",
+    "ㅈㄴ",
+    "ㅈㅈ",
   ];
 
   late ConfettiController _confettiController;
@@ -56,7 +83,8 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> with SingleTickerPr
   void initState() {
     super.initState();
 
-    _confettiController = ConfettiController(duration: const Duration(seconds: 10));
+    _confettiController =
+        ConfettiController(duration: const Duration(seconds: 10));
 
     final diaryApi = ref.read(diaryApiProvider);
     diaryApi.showAllDiary(ref);
@@ -71,8 +99,10 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> with SingleTickerPr
   void onPointerMove(PointerMoveEvent event) {
     setState(() {
       // pullHeight를 0과 maxPullHeight 사이로 제한
-      pullHeight = (pullHeight + event.delta.dy * 0.5).clamp(0.0, maxPullHeight);
-      int index = (pullHeight / maxPullHeight * choSungList.length).floor() % choSungList.length;
+      pullHeight =
+          (pullHeight + event.delta.dy * 0.5).clamp(0.0, maxPullHeight);
+      int index = (pullHeight / maxPullHeight * choSungList.length).floor() %
+          choSungList.length;
       choSungText = choSungList[index];
     });
   }
@@ -85,7 +115,8 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> with SingleTickerPr
         choSungText = "";
       });
       _confettiController.play(); // 폭죽 애니메이션 시작
-      await scrollController.animateTo(0, duration: const Duration(milliseconds: 1500), curve: Curves.easeOut);
+      await scrollController.animateTo(0,
+          duration: const Duration(milliseconds: 1500), curve: Curves.easeOut);
       Timer(const Duration(milliseconds: 800), () {
         setState(() {
           pullHeight = 0;
@@ -100,6 +131,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> with SingleTickerPr
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final createdItinerary = ref.watch(itineraryCheckProvider);
@@ -132,8 +164,9 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> with SingleTickerPr
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (
-                                context) => const SpaceSearchFragment(null)),
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const SpaceSearchFragment(null)),
                           );
                         },
                         icon: const Icon(
@@ -154,7 +187,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> with SingleTickerPr
                       background: createdItinerary != null
                           ? ExistScheduleWidget(createdItinerary)
                           : NonSchduleWidget(
-                          tabListph: tabListph, tabListpV: tabListpV),
+                              tabListph: tabListph, tabListpV: tabListpV),
                     ),
                   ),
                   SliverPersistentHeader(
@@ -170,28 +203,31 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> with SingleTickerPr
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             AnimatedOpacity(
-                              opacity: (pullHeight / maxPullHeight).clamp(
-                                  0.0, 1.0), // opacity 값을 0과 1 사이로 제한
+                              opacity: (pullHeight / maxPullHeight)
+                                  .clamp(0.0, 1.0), // opacity 값을 0과 1 사이로 제한
                               duration: const Duration(milliseconds: 300),
                               child: Text(
                                 choSungText.isNotEmpty ? choSungText : "",
-                                style: TextStyle(fontSize: 24,
+                                style: TextStyle(
+                                    fontSize: 24,
                                     fontWeight: FontWeight.bold,
-                                    color: AppColors.primaryGrey),
+                                    color: AppColors.purple),
                               ),
                             ),
-                            if(displayText.isNotEmpty)...{
+                            if (displayText.isNotEmpty) ...{
                               Text(
                                 displayText,
-                                style: TextStyle(fontSize: 24,
+                                style: TextStyle(
+                                    fontSize: 24,
                                     fontWeight: FontWeight.bold,
-                                    color: AppColors.primaryGrey),
+                                    color: AppColors.purple),
                               ),
                             },
                             const SizedBox(width: 8),
                             Text(
                               "땡겨요",
-                              style: TextStyle(fontSize: 24,
+                              style: TextStyle(
+                                  fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.primaryGrey),
                             ),
@@ -291,16 +327,24 @@ class _HomeFragmentState extends ConsumerState<HomeFragment> with SingleTickerPr
                 blastDirectionality: BlastDirectionality.explosive,
                 createParticlePath: drawCloud,
                 shouldLoop: false,
+                numberOfParticles: 20,
+                // 폭죽의 양을 늘립니다
                 colors: const [
                   AppColors.mainPurple,
                   AppColors.pastelPuple,
-                  AppColors.deepPurple
+                  AppColors.whitePuple,
+                  AppColors.purple,
                 ],
+                gravity: 0.05,
+                emissionFrequency: 0.05,
+                // 폭죽이 발사되는 빈도
+                minBlastForce: 15,
+                // 최소 폭죽 발사 힘
+                maxBlastForce: 25, // 최대 폭죽 발사 힘
               ),
             ),
           ],
-        )
-    );
+        ));
   }
 
   void openEndDrawer(BuildContext context) {
@@ -321,7 +365,8 @@ class _SliverPullToRefreshDelegate extends SliverPersistentHeaderDelegate {
         _maxExtent = maxExtent;
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return SizedBox.expand(child: child);
   }
 
@@ -339,9 +384,6 @@ class _SliverPullToRefreshDelegate extends SliverPersistentHeaderDelegate {
   }
 }
 
-
-
-
 Path drawCloud(Size size) {
   double width = 50;
   double height = 50;
@@ -349,15 +391,22 @@ Path drawCloud(Size size) {
   Path path = Path();
 
   // 구름 모양의 타원들을 그리기
-  path.addOval(Rect.fromLTWH(0.1 * width, 0.3 * height, 0.3 * width, 0.3 * height));
-  path.addOval(Rect.fromLTWH(0.2 * width, 0.2 * height, 0.4 * width, 0.4 * height));
-  path.addOval(Rect.fromLTWH(0.4 * width, 0.3 * height, 0.3 * width, 0.3 * height));
-  path.addOval(Rect.fromLTWH(0.5 * width, 0.4 * height, 0.2 * width, 0.2 * height));
+  path.addOval(
+      Rect.fromLTWH(0.1 * width, 0.3 * height, 0.3 * width, 0.3 * height));
+  path.addOval(
+      Rect.fromLTWH(0.2 * width, 0.2 * height, 0.4 * width, 0.4 * height));
+  path.addOval(
+      Rect.fromLTWH(0.4 * width, 0.3 * height, 0.3 * width, 0.3 * height));
+  path.addOval(
+      Rect.fromLTWH(0.5 * width, 0.4 * height, 0.2 * width, 0.2 * height));
 
   // 구름 모양의 중첩된 타원 형태
-  path.addOval(Rect.fromLTWH(0.2 * width, 0.4 * height, 0.3 * width, 0.3 * height));
-  path.addOval(Rect.fromLTWH(0.3 * width, 0.5 * height, 0.2 * width, 0.2 * height));
-  path.addOval(Rect.fromLTWH(0.4 * width, 0.4 * height, 0.3 * width, 0.3 * height));
+  path.addOval(
+      Rect.fromLTWH(0.2 * width, 0.4 * height, 0.3 * width, 0.3 * height));
+  path.addOval(
+      Rect.fromLTWH(0.3 * width, 0.5 * height, 0.2 * width, 0.2 * height));
+  path.addOval(
+      Rect.fromLTWH(0.4 * width, 0.4 * height, 0.3 * width, 0.3 * height));
 
   // 클로즈로 경로를 닫아서 구름의 형태 완성
   path.close();

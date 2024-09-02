@@ -19,7 +19,7 @@ class shortsApi {
   final Dio _dio = Dio();
   final String baseUrl = serverUrl; // Replace with your server URL
 
-  Future<void> uploadShorts(ShortsWrite shortWrite) async {
+  Future<void> uploadShorts(ShortsWrite shortWrite, WidgetRef ref) async {
     final url = '$baseUrl/shorts/uploadShorts';
     final dio = Dio();
 
@@ -41,6 +41,8 @@ class shortsApi {
 
       if (response.statusCode == 200) {
         final data = response.data;
+        await ref.read(shortsApiProvider).readShorts(ref);
+
         print(data);
       } else if (response.statusCode == 401) {
         print('Unauthorized');
@@ -54,7 +56,7 @@ class shortsApi {
     }
   }
   Future<void> readShorts(WidgetRef ref) async {
-    final url = '$baseUrl/shorts/readShorts?numOfRows=10&page=0';
+    final url = '$baseUrl/shorts/readShorts?numOfRows=100&page=0';
     final dio = Dio();
 
     try {
@@ -123,6 +125,7 @@ class shortsApi {
 
       if (response.statusCode == 200) {
         await ref.read(shortsApiProvider).readComment(shortsId, ref);
+
         print("댓글 작성 완료");
 
       } else if (response.statusCode == 401) {

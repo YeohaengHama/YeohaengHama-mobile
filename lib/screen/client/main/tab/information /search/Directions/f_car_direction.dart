@@ -1,3 +1,7 @@
+import 'dart:math';
+
+import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/tab/information%20/search/Directions/w_bouncing_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,7 +12,7 @@ import '../../../schedule/traffic/w_public_transport_map.dart';
 class CarDirectionFragment extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final carTrafficInfoAsync = ref.watch(infoCarTrafficProvider);
+    final carTrafficInfoAsync = ref.read(infoCarTrafficProvider);
     final controllerProvider = StateProvider<NaverMapController?>((ref) => null);
 
     return Scaffold(
@@ -19,7 +23,7 @@ class CarDirectionFragment extends HookConsumerWidget {
           final endPoint = carTrafficInfo.trafast.first.path.last;
 
           return FutureBuilder<List<NAddableOverlay>>(
-            future: _createOverlaysAsync(carTrafficInfo.trafast),
+            future: _createOverlaysAsync(carTrafficInfo.trafast, startPoint, endPoint),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
@@ -28,48 +32,14 @@ class CarDirectionFragment extends HookConsumerWidget {
               } else {
                 final overlays = snapshot.data ?? [];
 
-                // 지도에 보여질 경로가 있는 경우 카메라를 해당 경로로 조정
-                WidgetsBinding.instance?.addPostFrameCallback((_) {
-                  if (overlays.isNotEmpty) {
-                    _moveCameraToRoute(ref, overlays.first, controllerProvider);
-                  }
-                });
-
                 return Column(
                   children: [
                     Expanded(
                       child: TransportMap(
                         overlays: overlays,
-                        onMapReady: (controller) {
+                        onMapReady: (controller) async {
                           ref.read(controllerProvider.notifier).state = controller;
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: carTrafficInfo.trafast.length,
-                        itemBuilder: (context, index) {
-                          final routeSummary = carTrafficInfo.trafast[index];
-                          return GestureDetector(
-                            onTap: () {
-                              // 선택한 경로에 대한 추가 작업을 수행할 수 있음
-                            },
-                            child: Container(
-                              color: Colors.white,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Route ${index + 1}'),
-                                    Text('Distance: ${routeSummary.distance}m'),
-                                    Text('Duration: ${routeSummary.duration}mins'),
-                                    Text('Taxi Fare: ${routeSummary.taxiFare}won'),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
+                          await _moveCameraToRoute(ref, overlays, controllerProvider);
                         },
                       ),
                     ),
@@ -85,7 +55,7 @@ class CarDirectionFragment extends HookConsumerWidget {
     );
   }
 
-  Future<List<NAddableOverlay>> _createOverlaysAsync(List<RouteSummary> routeSummaries) async {
+  Future<List<NAddableOverlay>> _createOverlaysAsync(List<RouteSummary> routeSummaries, RoutePoint startPoint, RoutePoint endPoint) async {
     List<NAddableOverlay> overlays = [];
     int overlayIdCounter = 1;
 
@@ -104,30 +74,58 @@ class CarDirectionFragment extends HookConsumerWidget {
       overlayIdCounter++;
     }
 
+    // 출발지 마커 추가
+    final startMarker = NMarker(
+      id: 'start_marker',
+      position: NLatLng(startPoint.latitude, startPoint.longitude),
+      caption: NOverlayCaption(text: '출발지'),
+      iconTintColor: Colors.blue,
+
+    );
+    overlays.add(startMarker);
+
+    // 도착지 마커 추가
+    final endMarker = NMarker(
+      id: 'end_marker',
+      position: NLatLng(endPoint.latitude, endPoint.longitude),
+      caption: NOverlayCaption(text: '도착지'),
+      iconTintColor: Colors.red,
+    );
+    overlays.add(endMarker);
+
     return overlays;
   }
 
-  void _moveCameraToRoute(WidgetRef ref, NAddableOverlay overlay, StateProvider<NaverMapController?> controllerProvider) {
+  Future<void> _moveCameraToRoute(WidgetRef ref, List<NAddableOverlay> overlays, StateProvider<NaverMapController?> controllerProvider) async {
     final controller = ref.read(controllerProvider.notifier).state;
     if (controller != null) {
-      // 경로의 시작점과 끝점으로 카메라를 조정
-      final bounds = _calculateBoundsFromPolyline(overlay);
-      controller.updateCamera(NCameraUpdate.fitBounds(bounds, padding: EdgeInsets.all(50)));
+      // 모든 오버레이에서 경계 계산
+      final bounds = _calculateBoundsForOverlays(overlays);
+      await controller.updateCamera(NCameraUpdate.fitBounds(bounds, padding: EdgeInsets.all(150)));
     }
   }
 
-  NLatLngBounds _calculateBoundsFromPolyline(NAddableOverlay overlay) {
-    List<NLatLng> points = (overlay as NPolylineOverlay).coords;
-    double minLat = points.first.latitude;
-    double maxLat = points.first.latitude;
-    double minLng = points.first.longitude;
-    double maxLng = points.first.longitude;
+  NLatLngBounds _calculateBoundsForOverlays(List<NAddableOverlay> overlays) {
+    double minLat = double.infinity;
+    double maxLat = -double.infinity;
+    double minLng = double.infinity;
+    double maxLng = -double.infinity;
 
-    for (var point in points) {
-      if (point.latitude < minLat) minLat = point.latitude;
-      if (point.latitude > maxLat) maxLat = point.latitude;
-      if (point.longitude < minLng) minLng = point.longitude;
-      if (point.longitude > maxLng) maxLng = point.longitude;
+    for (var overlay in overlays) {
+      if (overlay is NPolylineOverlay) {
+        for (var point in overlay.coords) {
+          if (point.latitude < minLat) minLat = point.latitude;
+          if (point.latitude > maxLat) maxLat = point.latitude;
+          if (point.longitude < minLng) minLng = point.longitude;
+          if (point.longitude > maxLng) maxLng = point.longitude;
+        }
+      } else if (overlay is NMarker) {
+        final position = overlay.position;
+        if (position.latitude < minLat) minLat = position.latitude;
+        if (position.latitude > maxLat) maxLat = position.latitude;
+        if (position.longitude < minLng) minLng = position.longitude;
+        if (position.longitude > maxLng) maxLng = position.longitude;
+      }
     }
 
     return NLatLngBounds(
