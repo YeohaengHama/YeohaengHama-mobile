@@ -7,6 +7,7 @@ import 'package:fast_app_base/data/memory/diary/diary_detail_proiver.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../../common/widget/w_profile_image.dart';
 import '../../../../../../data/memory/diary/diary_find_all_proiver.dart';
 import '../../../../../../data/network/diary_api.dart';
 import '../../../../diary/s_diary_detail.dart';
@@ -18,7 +19,6 @@ class HomeDiaryWidget extends ConsumerWidget {
   final FindAllDiary diary;
   final double diaryContainerWidth = 270;
   final double diaryContainerHeight = 250;
-  final double profile = 40;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -123,32 +123,7 @@ class HomeDiaryWidget extends ConsumerWidget {
           Positioned(
             left: 30,
             top: 75,
-            child: Container(
-              width: profile+5,
-              height: profile+5,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.white, // 원하는 테두리 색상 설정
-                  width: 2.0, // 테두리 두께 설정
-                ),
-              ),
-              child: ClipOval(
-                child: diary.accountShowDTO.photoUrl != null
-                    ?
-                CachedNetworkImage(
-                  // imageUrl: diary.user.profileUrl,
-                  imageUrl: diary.accountShowDTO.photoUrl!,
-                  width: profile,
-                  height: profile,
-                  fit: BoxFit.cover,
-                ) :  Image.asset(
-                  '$basePath/icon/colorHama.png',
-                  width: profile,
-                  height: profile,
-                ),
-              ),
-            ),
+            child: ProfileImage(photoUrl: diary.accountShowDTO.photoUrl, width: 42, height: 42)
           )
     ]
       ),

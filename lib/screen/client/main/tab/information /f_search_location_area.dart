@@ -27,9 +27,6 @@ class _SearchLocationAreaState extends State<SearchLocationArea> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Search Location'),
-      ),
       body: Stack(
         children: [
           NaverMap(
@@ -49,7 +46,7 @@ class _SearchLocationAreaState extends State<SearchLocationArea> {
             ),
           ),
           Positioned(
-            top: 16,
+            top: 140,
             right: 16,
             child: GestureDetector(
               onTap: _getCurrentLocation,
@@ -90,7 +87,7 @@ class _SearchLocationAreaState extends State<SearchLocationArea> {
 
   void _getCurrentLocation() async {
     try {
-      var position = await Geolocator.getCurrentPosition();
+      LocationPermission permission = await Geolocator.requestPermission();      var position = await Geolocator.getCurrentPosition();
       setState(() {
         placeLatLng = NLatLng(position.latitude, position.longitude);
       });

@@ -21,6 +21,7 @@ class AppColors {
   static const Color pastelPuple = Color.fromARGB(255, 212, 219, 255);
   static const Color whitePuple = Color.fromARGB(255, 226, 230, 255);
   static const Color mainPurple = Color.fromARGB(255, 137, 152, 232);
+  static const Color purple = Color.fromARGB(255, 94, 89, 253);
   static const Color deepPurple = Color.fromARGB(255, 138, 146, 189);
   static const Color primaryGrey = Color.fromARGB(255, 51, 51, 51);
   static const Color secondGrey = Color.fromARGB(255, 102, 102, 102);

@@ -65,7 +65,7 @@ class _VideoEditingScreenState extends ConsumerState<VideoEditingScreen> {
   void _exportVideo() async {
     _exportingProgress.value = 0;
     _isExporting.value = true;
-
+    _controller.video.pause();
     final config = VideoFFmpegVideoEditorConfig(
       _controller,
       // format: VideoExportFormat.gif,

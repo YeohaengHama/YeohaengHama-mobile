@@ -54,29 +54,25 @@ class DetailDiaryScreen extends HookConsumerWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: 17,
               ),
-            ),
+            ).pOnly(left: 50),
           );
         },
       );
     }
 
-    return Scaffold(
+    return Scaffold(backgroundColor: AppColors.white,
       body: Material(
+        color: Colors.white,
         child: CustomScrollView(
           controller: customController,
           slivers: [
             SliverAppBar(
+              backgroundColor: Colors.white,
               floating: false,
               pinned: true,
               scrolledUnderElevation: 0,
               actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.map_outlined,
-                    color: Colors.black,
-                  ),
-                ),
+
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(
@@ -86,6 +82,7 @@ class DetailDiaryScreen extends HookConsumerWidget {
                 ),
               ],
               flexibleSpace: FlexibleSpaceBar(
+
                 centerTitle: true,
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.start,

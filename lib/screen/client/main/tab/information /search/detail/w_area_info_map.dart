@@ -80,7 +80,7 @@ class _AreaInfoMapState extends ConsumerState<AreaInfoMap> {
           options: NaverMapViewOptions(
             initialCameraPosition: NCameraPosition(
               target: placeLatLng,
-              zoom: 15,
+              zoom: 14.5,
             ),
             mapType: NMapType.basic,
           ),
@@ -112,7 +112,6 @@ class _AreaInfoMapState extends ConsumerState<AreaInfoMap> {
     final marker = NMarker(
       id: 'initial_marker',
       position: placeLatLng,
-      caption: NOverlayCaption(text: 'Initial Location'),
     );
 
     marker.setOnTapListener((NMarker marker) {

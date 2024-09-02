@@ -32,6 +32,7 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor:  Colors.white,
         leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios_rounded),
             onPressed: () {

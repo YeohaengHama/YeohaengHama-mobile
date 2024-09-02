@@ -1,4 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/tab/home/w/info/s_pick_place_info.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_no_pick_place.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_no_schdule.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,10 +26,9 @@ class ShowPickPlace extends ConsumerWidget {
     final PageController _pageController = PageController();
     final ValueNotifier<int> currentPageNotifier = ValueNotifier<int>(0);
 
-    print(currentDay);
-    // 현재 일치하는 요소만 필터링
+
     List<AddPickPlace> filteredList = addPickPlaceListNotifier.where((element) => element.day == currentDay).toList();
-    print(filteredList);
+
 
     _pageController.addListener(() {
       double? currentPage = _pageController.page;
@@ -95,7 +95,11 @@ class ShowPickPlace extends ConsumerWidget {
       children: [
         Tap(
           onTap: () {
-
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => PickPlaceInfoScreen(addPickPlace)),
+            );
           },
           child: RoundedContainer(
             radius: 20,

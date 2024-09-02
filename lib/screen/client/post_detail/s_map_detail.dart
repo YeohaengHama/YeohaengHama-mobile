@@ -124,6 +124,7 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
               color: isPickArea ? Colors.red : null,
             ),
           ),
+          if(itinerary != null)...{
           IconButton(
             icon: Icon(Icons.more_vert),
             onPressed: () async {
@@ -152,7 +153,7 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
                 },
               );
             },
-          ),
+          )},
         ],
       ),
       body: Stack(

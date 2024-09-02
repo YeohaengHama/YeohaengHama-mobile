@@ -113,7 +113,8 @@ class _VideoResultPopupState extends ConsumerState<VideoResultPopup> {
                     itineraryId: shortsWriteProviderState.itineraryId,
                     itineraryTitle: shortsWriteProviderState.itineraryTitle);
                 shortsWriteProviderNoti.updateShortsWirte(shortsWrite);
-                await shortsApi.uploadShorts(shortsWrite);
+                await shortsApi.uploadShorts(shortsWrite, ref);
+                ref.read(shortsWriteProvider.notifier).resetShortsWrite();
                 Nav.pop(context);
                 Nav.pop(context);
                 Nav.pop(context);

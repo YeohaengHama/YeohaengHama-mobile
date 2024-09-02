@@ -14,7 +14,7 @@ import '../../../../../../../data/memory/traffic/transport_provider.dart';
 class BusDirectionFragment extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final trafficInfoAsync = ref.watch(infoTrafficProvider);
+    final trafficInfoAsync = ref.read(infoTrafficProvider);
     final selectedPathIndexNoti = ref.watch(selectedTrafficRouteIndexNotifierProvider);
     final selectedPathIndex = ref.read(selectedTrafficRouteIndexNotifierProvider.notifier).state;
     final controllerProvider = StateProvider<NaverMapController?>((ref) => null);
@@ -209,6 +209,48 @@ class BusDirectionFragment extends HookConsumerWidget {
     List<NAddableOverlay> overlays = [];
     int overlayIdCounter = 1;
 
+    // 출발지 좌표를 유효한 값으로 찾기
+    NLatLng? startLatLng;
+    for (var subPath in path.subPath!) {
+      if (subPath.startX != null && subPath.startY != null) {
+        startLatLng = NLatLng(subPath.startY!, subPath.startX!);
+        break; // 유효한 좌표를 찾으면 루프 종료
+      }
+    }
+
+    // 출발지 마커 추가 (유효한 좌표가 있을 때만)
+    if (startLatLng != null) {
+      final startMarker = NMarker(
+        id: 'start_marker',
+        position: startLatLng,
+        caption:NOverlayCaption(text: '출발지'),
+
+        iconTintColor: Colors.red,
+      );
+      overlays.add(startMarker);
+    }
+
+    // 도착지 좌표를 유효한 값으로 찾기
+    NLatLng? endLatLng;
+    for (var i = path.subPath!.length - 1; i >= 0; i--) {
+      final subPath = path.subPath![i];
+      if (subPath.endX != null && subPath.endY != null) {
+        endLatLng = NLatLng(subPath.endY!, subPath.endX!);
+        break; // 유효한 좌표를 찾으면 루프 종료
+      }
+    }
+
+    // 도착지 마커 추가 (유효한 좌표가 있을 때만)
+    if (endLatLng != null) {
+      final endMarker = NMarker(
+        id: 'end_marker',
+        position: endLatLng,
+        caption: NOverlayCaption(text: '도착지'),
+        iconTintColor: Colors.blue,
+      );
+      overlays.add(endMarker);
+    }
+
     for (var subPath in path.subPath!) {
       List<NLatLng> points = [];
 
@@ -234,6 +276,7 @@ class BusDirectionFragment extends HookConsumerWidget {
 
     return overlays;
   }
+
 
   void _moveCameraToOverlays(NaverMapController? controller, List<NAddableOverlay> overlays) {
     if (overlays.isEmpty || controller == null) return;
