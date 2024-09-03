@@ -127,13 +127,19 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
         accuracy: LocationAccuracy.high,
         distanceFilter: 10,
       ),
-    ).listen((Position position) {
+    ).listen((Position position) async {
       print('Current position: ${position.latitude}, ${position.longitude}');
       if (_isControllerInitialized) {
         _currentPosition = position;
         _updateCurrentLocationMarker(position);
       }
     });
+
+    // 초기 위치 가져오기
+    _currentPosition = await Geolocator.getCurrentPosition();
+    if (_currentPosition != null) {
+      _updateCurrentLocationMarker(_currentPosition!);
+    }
   }
 
   void _updateCurrentLocationMarker(Position position) {
@@ -252,13 +258,13 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
     }
 
     final double minLat =
-        latitudes.reduce((value, element) => min(value, element));
+    latitudes.reduce((value, element) => min(value, element));
     final double maxLat =
-        latitudes.reduce((value, element) => max(value, element));
+    latitudes.reduce((value, element) => max(value, element));
     final double minLng =
-        longitudes.reduce((value, element) => min(value, element));
+    longitudes.reduce((value, element) => min(value, element));
     final double maxLng =
-        longitudes.reduce((value, element) => max(value, element));
+    longitudes.reduce((value, element) => max(value, element));
 
     final bounds = NLatLngBounds(
       southWest: NLatLng(minLat, minLng),
@@ -292,15 +298,16 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
         markerPosition.latitude,
         ref);
     setState(() {
-      _isLoading = false; // 로딩 상태 시작
+      _isLoading = false; // 로딩 상태 종료
     });
+
     // 현재 위치를 도로명 주소로 변환
     String currentAddress = await _getAddressFromCoordinates(
         currentLocation.latitude, currentLocation.longitude);
 
     // 마커의 placeName을 얻기 위해 placeList를 검색합니다.
     final markerPlace = placeList.firstWhere(
-      (place) => NLatLng(place.mapy, place.mapx) == markerPosition,
+          (place) => NLatLng(place.mapy, place.mapx) == markerPosition,
     );
     final markerPlaceName = markerPlace.placeName;
 
@@ -318,9 +325,9 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
               ),
             ),
             child: SizedBox(
-                    height: 700,
-                    child: GpsMapDialog(currentLocation, markerPosition,
-                        currentAddress, markerPlaceName!))
+                height: 700,
+                child: GpsMapDialog(currentLocation, markerPosition,
+                    currentAddress, markerPlaceName!))
                 .pSymmetric(v: 15));
       },
     );
@@ -331,7 +338,7 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
       double latitude, double longitude) async {
     try {
       List<Placemark> placemarks =
-          await placemarkFromCoordinates(latitude, longitude);
+      await placemarkFromCoordinates(latitude, longitude);
       if (placemarks.isNotEmpty) {
         Placemark placemark = placemarks.first;
         return '${placemark.street}, ${placemark.locality}, ${placemark.country}';
