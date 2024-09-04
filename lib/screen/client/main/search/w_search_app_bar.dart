@@ -9,6 +9,7 @@ import '../../../../common/widget/w_arrow.dart';
 import '../../../../data/entity/open_api/open_api_area.dart';
 import '../../../../data/memory/search/search_simple_area_provider.dart';
 import '../../../../data/memory/search/search_simple_restaurant_provider.dart';
+import '../../../../data/memory/shorts/p_shorts_search.dart';
 import '../../../../data/network/area_api.dart';
 import '../../../../data/network/search_api.dart';
 
@@ -56,6 +57,11 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
       final searchApi = ref.read(SearchApiProvider);
       await searchApi.searchDiaryArea(controller.text, ref);
     }
+
+    Future<void> postShortsSearch() async {
+      final searchApi = ref.read(SearchApiProvider);
+      await searchApi.searchShorts(controller.text, ref);
+    }
     return SafeArea(
       child: Row(
         children: [
@@ -81,12 +87,14 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     postSearchArea();
                     postSearchRestaurantArea();
                     postDiarySearch();
+                    postShortsSearch();
                     // SearchSimpleResult가 비어있지 않으면 리스트 비우기
                     final simpleAreaNotifier =
                         ref.read(simpleAreaApiResponseProvider.notifier);
                     final simpleAreaRestaurantNotifier = ref
                         .read(simpleAreaRestaurantApiResponseProvider.notifier);
                     final simpleDiaryNotifier = ref.read(SearchDiaryAreaProvider.notifier);
+                    final simpleShortsNotifer = ref.read(shortsSearchProvider.notifier);
 
                     if (simpleAreaNotifier.state.isNotEmpty) {
                       simpleAreaNotifier.state = [];
@@ -96,6 +104,9 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
                     }
                     if (simpleDiaryNotifier.state.isNotEmpty) {
                       simpleDiaryNotifier.state = [];
+                    }
+                    if (simpleShortsNotifer.state.shortsList.isNotEmpty) {
+                      simpleShortsNotifer.state = simpleShortsNotifer.state.copyWith(shortsList: []);
                     }
 
                   },

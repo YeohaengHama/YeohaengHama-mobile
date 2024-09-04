@@ -1,3 +1,4 @@
+import 'package:fast_app_base/screen/client/main/search/provider/bottom_nav_black.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/w_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -7,37 +8,38 @@ import '../../../../../common/widget/w_profile_image.dart';
 import '../../../../../data/entity/shorts/vo_shorts_read.dart';
 import '../../../../../data/memory/shorts/p_shorts_read.dart';
 import '../../../../../data/network/shorts_api.dart';
-import 'p_is_playing.dart'; // isPlayingProvider의 경로를 맞게 조정하세요
 import 'dart:ui' as ui;
 
-import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import '../tab/shorts/p_is_playing.dart';
 
-// 비디오 스와이프 화면을 나타내는 위젯
 class VideoSwipeScreen extends ConsumerStatefulWidget {
-  const VideoSwipeScreen({Key? key}) : super(key: key);
+  final int initialIndex; // 추가된 부분
+
+  const VideoSwipeScreen({Key? key, required this.initialIndex}) : super(key: key);
 
   @override
   _VideoSwipeScreenState createState() => _VideoSwipeScreenState();
 }
 
-class _VideoSwipeScreenState extends ConsumerState<VideoSwipeScreen> with AutomaticKeepAliveClientMixin {
+class _VideoSwipeScreenState extends ConsumerState<VideoSwipeScreen>
+    with AutomaticKeepAliveClientMixin {
   final PageController _pageController = PageController();
   final Map<int, VideoPlayerController> _videoControllers = {};
-  final int _preloadCount = 5; // 앞뒤로 로드할 비디오 수
+  final int _preloadCount = 5;
 
   @override
   void initState() {
     super.initState();
     ref.read(shortsApiProvider).readShorts(ref);
     _pageController.addListener(_onPageChanged);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _pageController.jumpToPage(widget.initialIndex); // 생성자에서 전달받은 initialIndex로 페이지 이동
+    });
   }
 
   void _onPageChanged() {
     final currentPage = _pageController.page?.toInt() ?? 0;
 
-    // 현재 페이지의 비디오 컨트롤러를 재생하고, 나머지는 일시 정지
     _videoControllers.forEach((index, controller) {
       if (index != currentPage) {
         controller.pause();
@@ -47,7 +49,6 @@ class _VideoSwipeScreenState extends ConsumerState<VideoSwipeScreen> with Automa
       }
     });
 
-    // 현재 페이지와 앞뒤로 비디오를 프리로드합니다.
     _preloadVideos(currentPage);
   }
 
@@ -77,33 +78,52 @@ class _VideoSwipeScreenState extends ConsumerState<VideoSwipeScreen> with Automa
     super.build(context);
     final shortsRead = ref.watch(shortsReadProvider);
     final isPlaying = ref.watch(isPlayingProvider);
+    final isBlack = ref.read(BottomNavBlackProvider.notifier);
 
     return Scaffold(
       backgroundColor: Colors.black,
-      body: shortsRead.shortsList.isEmpty
-          ? Center(child: CircularProgressIndicator())
-          : PageView.builder(
-        controller: _pageController,
-        scrollDirection: Axis.vertical,
-        itemCount: shortsRead.shortsList.length,
-        itemBuilder: (context, index) {
-          // 현재 페이지와 앞뒤로 비디오 로드
-          _preloadVideos(index);
-          return VideoPlayerScreen(
-            videoUrl: shortsRead.shortsList[index].videoUrl,
-            isPlaying: isPlaying,
-            shorts: shortsRead.shortsList[index],
-            controller: _videoControllers[index],
-            onControllerCreated: (controller) {
-              _videoControllers[index] = controller;
+      body: Stack(
+        children: [
+          shortsRead.shortsList.isEmpty
+              ? Center(child: CircularProgressIndicator())
+              : PageView.builder(
+            controller: _pageController,
+            scrollDirection: Axis.vertical,
+            itemCount: shortsRead.shortsList.length,
+            itemBuilder: (context, index) {
+              _preloadVideos(index);
+              return VideoPlayerScreen(
+                videoUrl: shortsRead.shortsList[index].videoUrl,
+                isPlaying: isPlaying,
+                shorts: shortsRead.shortsList[index],
+                controller: _videoControllers[index],
+                onControllerCreated: (controller) {
+                  _videoControllers[index] = controller;
+                },
+              );
             },
-          );
-        },
-        onPageChanged: (index) {
-          // 페이지가 변경될 때 불필요한 비디오 컨트롤러를 제거합니다.
-          _videoControllers.removeWhere((key, value) => key < index - _preloadCount || key > index + _preloadCount);
-          _onPageChanged();
-        },
+            onPageChanged: (index) {
+              _videoControllers.removeWhere((key, value) =>
+              key < index - _preloadCount ||
+                  key > index + _preloadCount);
+              _onPageChanged();
+            },
+          ),
+          Positioned(
+            top: 60,
+            left: 20,
+            child: GestureDetector(
+              onTap: () async {
+                isBlack.setBlack(false);
+                Nav.pop(context);
+              },
+              child: Icon(
+                Icons.arrow_back_ios_rounded,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -120,12 +140,6 @@ class _VideoSwipeScreenState extends ConsumerState<VideoSwipeScreen> with Automa
   @override
   bool get wantKeepAlive => true;
 }
-
-
-
-
-
-
 
 // import 'package:fast_app_base/screen/client/main/tab/shorts/w_video_player.dart';
 // import 'package:flutter/material.dart';
@@ -436,11 +450,3 @@ class _VideoSwipeScreenState extends ConsumerState<VideoSwipeScreen> with Automa
 //
 //
 //
-
-
-
-
-
-
-
-

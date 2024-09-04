@@ -78,6 +78,10 @@ class PlaceByDay {
       final String placeName;
       final String memo;
       final int placeId;
+      final String addr1;
+      final double mapx;
+      final double mapy;
+
 
       PlaceByDay({
             required this.startTime,
@@ -87,6 +91,9 @@ class PlaceByDay {
             required this.placeName,
             required this.memo,
             required this.placeId,
+            required this.addr1,
+            required this.mapx,
+            required this.mapy
       });
 
       factory PlaceByDay.fromJson(Map<String, dynamic> json) =>

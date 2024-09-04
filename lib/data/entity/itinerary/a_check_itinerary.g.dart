@@ -42,6 +42,9 @@ PlaceByDay _$PlaceByDayFromJson(Map<String, dynamic> json) => PlaceByDay(
       placeName: json['placeName'] as String,
       memo: json['memo'] as String,
       placeId: (json['placeId'] as num).toInt(),
+      addr1: json['addr1'] as String,
+      mapx: (json['mapx'] as num).toDouble(),
+      mapy: (json['mapy'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$PlaceByDayToJson(PlaceByDay instance) =>
@@ -53,6 +56,9 @@ Map<String, dynamic> _$PlaceByDayToJson(PlaceByDay instance) =>
       'placeName': instance.placeName,
       'memo': instance.memo,
       'placeId': instance.placeId,
+      'addr1': instance.addr1,
+      'mapx': instance.mapx,
+      'mapy': instance.mapy,
     };
 
 _$CheckItineraryImpl _$$CheckItineraryImplFromJson(Map<String, dynamic> json) =>

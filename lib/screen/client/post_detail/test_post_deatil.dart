@@ -29,7 +29,7 @@ import '../main/search/provider/is_detail_loading_provider.dart';
 
 class TestPostDetailScreen extends HookConsumerWidget {
   final dynamic? searchSimpleResult;
-  final Place? place;
+  final dynamic? place;
 
   const TestPostDetailScreen({
     this.searchSimpleResult = null,

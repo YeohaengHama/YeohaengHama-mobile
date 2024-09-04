@@ -1,4 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/search/f_shorts_search_list.dart';
 import 'package:fast_app_base/screen/client/main/search/provider/is_loading_provider.dart';
 import 'package:fast_app_base/screen/client/main/search/w_search_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
 
   final TextEditingController searchController = TextEditingController();
   late final TabController tabController =
-      TabController(length: 3, vsync: this);
+      TabController(length: 4, vsync: this);
   int currentIndex = 0;
   String contentTypeId = '';
 
@@ -63,6 +64,7 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
       await postSearchArea();
       await postSearchRestaurantArea();
       await postDiarySearch();
+      await postShortsSearch();
     } catch (e, stackTrace) {
       print('Exception occurred during initializeSearch: $e');
       print('StackTrace: $stackTrace');
@@ -100,6 +102,11 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
   Future<void> postDiarySearch() async {
     final searchApi = ref.read(SearchApiProvider);
     await searchApi.searchDiaryArea(searchController.text, ref);
+  }
+
+  Future<void> postShortsSearch() async {
+    final searchApi = ref.read(SearchApiProvider);
+    await searchApi.searchShorts(searchController.text, ref);
   }
 
   @override
@@ -180,6 +187,7 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
               '관광'.text.make(),
               '맛집'.text.make(),
               '여행일기'.text.make(),
+              '숏츠'.text.make()
             ],
           )
         ],
@@ -200,6 +208,10 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
           ref.read(contentTypeIdProvider.notifier).state = '39';
           contentTypeId = ref.read(contentTypeIdProvider.notifier).state;
           break;
+        case 3:
+          ref.read(contentTypeIdProvider.notifier).state = '39';
+          contentTypeId = ref.read(contentTypeIdProvider.notifier).state;
+          break;
         default:
       }
     } catch (e, stackTrace) {
@@ -216,6 +228,8 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
         return const RestaurantSearchListFragment();
       case 2:
         return const DiarySearchListFragment();
+      case 3:
+        return const ShortsSearchListFragment();
       default:
         return Container();
     }

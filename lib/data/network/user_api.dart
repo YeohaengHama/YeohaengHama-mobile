@@ -25,6 +25,8 @@ class UserApi {
   final String baseUrl =
       serverUrl;
 
+
+
   Future<void> postAccountData(Account account) async {
     final url = '$baseUrl/account/join';
 
@@ -59,6 +61,7 @@ class UserApi {
       print('예외가 발생했습니다: $e');
     }
   }
+
 
   Future<void> postLoginUser(LogIn logIn, BuildContext context, WidgetRef ref) async {
     final accountNotifier = ref.read(accountProvider.notifier);

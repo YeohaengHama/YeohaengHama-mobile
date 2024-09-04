@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:fast_app_base/screen/Account/s_join.dart';
+import 'package:fast_app_base/screen/Account/v_kakao_web.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import '../../common/common.dart';
 import '../../data/entity/account/vo_login.dart';
 import '../../data/network/shorts_api.dart';
@@ -41,7 +45,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: Colors.red,
-          content: Text('해당 계정은 정지되었습니다.'),
+          content: Text('계정 정보를 확인해주세요.'),
         ),
       );
     }
@@ -177,15 +181,21 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                     ],
                   ),
                 ),
+
                 const SizedBox(height: 40),
                 SizedBox(
-                  width: loginWidth,
+                  width: 300,
                   child: Row(
                     children: [
                       Expanded(
-                        child: Tap(
+                        child: InkWell(
                           onTap: () {
-                            _launchURL();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => KakaoLoginWebView(),
+                              ),
+                            );
                           },
                           child: Image.asset(
                             '$basePath/icon/kakao.png',
@@ -210,7 +220,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -220,12 +230,5 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
   }
 }
 
-void _launchURL() async {
-  final Uri url = Uri.parse(
-      'https://kauth.kakao.com/oauth/authorize?client_id=a9d1711e66ed62d5be76957294ab0a9f&redirect_uri=https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api/kakao/login&response_type=code');
-  if (await canLaunchUrl(url)) {
-    await launchUrl(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
+
+

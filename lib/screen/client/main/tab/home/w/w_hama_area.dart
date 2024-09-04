@@ -29,7 +29,12 @@ class HamaAreaWidget extends ConsumerWidget {
 
     return  Tap(
       onTap: () async{
-        Nav.push(SpaceSearchFragment(area.area));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  SpaceSearchFragment(area.area)),
+        );
 
         },
       child: Container(

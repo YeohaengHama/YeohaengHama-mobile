@@ -1,12 +1,13 @@
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/search/provider/bottom_nav_black.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/p_bottom_nav_visible.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/p_is_playing.dart';
 import 'package:fast_app_base/screen/client/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/client/main/tab/tab_navigator.dart';
-import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../data/network/notification_api.dart';
-import 'menu/w_menu_drawer.dart';
+import 'package:fast_app_base/data/network/notification_api.dart';
+import 'package:fast_app_base/screen/client/main/menu/w_menu_drawer.dart';
 
 class MainScreen extends ConsumerStatefulWidget {
   final TabItem? initialTab;
@@ -40,6 +41,7 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
   @override
   Widget build(BuildContext context) {
     final isBottomNavBarVisible = ref.watch(bottomNavBarVisibleProvider);
+    final isBottomNavBlack = ref.watch(BottomNavBlackProvider); // BottomNavBlackProvider 상태 구독
 
     return PopScope(
       canPop: isRootPage,
@@ -47,8 +49,9 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
       child: Scaffold(
         extendBody: extendBody,
         endDrawer: const MenuDrawer(),
-        bottomNavigationBar: isBottomNavBarVisible ? _buildBottomNavigationBar(context) : null,
-
+        bottomNavigationBar: isBottomNavBarVisible
+            ? _buildBottomNavigationBar(context, isBottomNavBlack) // isBottomNavBlack 상태 전달
+            : null,
         body: Container(
           color: Colors.transparent,
           padding: EdgeInsets.only(bottom: extendBody ? 60 - bottomNavigationBarBorderRadius : 0),
@@ -83,7 +86,7 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
     }
   }
 
-  Widget _buildBottomNavigationBar(BuildContext context) {
+  Widget _buildBottomNavigationBar(BuildContext context, bool isBlack) {
     return Container(
       decoration: const BoxDecoration(
         boxShadow: [
@@ -104,6 +107,7 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
             if (tabs[index] == TabItem.shorts) {
               ref.read(isPlayingProvider.notifier).setPlaying(true);
             } else {
+              ref.read(BottomNavBlackProvider.notifier).setBlack(false);
               ref.read(isPlayingProvider.notifier).setPlaying(false);
             }
             _handleOnTapNavigationBarItem(index);
@@ -111,7 +115,7 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
           showSelectedLabels: true,
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: (tabs[_currentIndex] == TabItem.shorts) ? Colors.black : context.appColors.seedColor
+          backgroundColor:tabs[_currentIndex] == TabItem.shorts|| isBlack ? Colors.black : context.appColors.seedColor, // 상태에 따라 색상 변경
         ),
       ),
     );

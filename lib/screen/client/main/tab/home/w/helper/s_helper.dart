@@ -9,13 +9,22 @@ class HelperScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Tap(onTap: () {
-          Nav.pop(context);
-        },
-        child: Icon(Icons.arrow_back_ios_rounded)),
-      ),
-      body: HelperMapFragment(),
+      body: Stack(children: [
+        HelperMapFragment(),
+        SafeArea(
+          child: Positioned(
+
+            child: Row(
+              children: [
+                Tap(onTap: () { Nav.pop(context); },
+                child: Icon(Icons.arrow_back_ios_rounded).pOnly(left: 25)),
+                spacer,
+                Tap(onTap: () { Nav.pop(context); },
+                    child: Icon(Icons.wallet_rounded).pOnly(right: 25))
+              ],
+            ),
+          ),
+        ),]),
     );
   }
 }

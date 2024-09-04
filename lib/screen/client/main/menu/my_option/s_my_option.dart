@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../common/widget/w_menu.dart';
+import '../../../../../data/memory/bot/p_chat.dart';
 import '../../../../../data/memory/itinerary/itinerary_check_provider.dart';
 import '../../../../../data/memory/account/user_provider.dart';
 
@@ -26,6 +27,8 @@ class _MyOptionScreenState extends ConsumerState<MyOptionScreen> {
 
     final _account = ref.watch(accountProvider.notifier);
     final _itinerary = ref.watch(itineraryCheckProvider.notifier);
+    final _chatNotifier = ref.read(chatProvider.notifier);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -75,6 +78,7 @@ class _MyOptionScreenState extends ConsumerState<MyOptionScreen> {
               Nav.pop(context);
               _itinerary.reset();
               _account.reset();
+              _chatNotifier.reset();
               Nav.push(const LogInScreen());
             },
           ).pSymmetric(v:5),
