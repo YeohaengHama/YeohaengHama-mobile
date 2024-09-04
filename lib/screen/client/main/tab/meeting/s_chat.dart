@@ -34,7 +34,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     stompClient = StompClient(
       config: StompConfig(
         url:
-            'ws://43.202.208.22:8080/ws-stomp/websocket',
+        'ws://43.202.208.22:8080/ws-stomp/websocket',
         // 웹소켓 URL 사용
         onConnect: onConnect,
         onStompError: (StompFrame frame) {
@@ -164,28 +164,28 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-          Text(
-            message['sender']!,
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ).pSymmetric(h:10),
+              Text(
+                message['sender']!,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ).pSymmetric(h:10),
 
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              color: Colors.grey[300],
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.zero,
-                  topRight: chatRadius,
-                  bottomLeft: chatRadius,
-                  bottomRight: chatRadius),
-            ),
-            child:   Text(message['message']!),
-          ),
-        ]),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.zero,
+                      topRight: chatRadius,
+                      bottomLeft: chatRadius,
+                      bottomRight: chatRadius),
+                ),
+                child:   Text(message['message']!),
+              ),
+            ]),
       );
     }
   }
@@ -194,7 +194,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         title: Text(widget.chatRoom.name),
         backgroundColor: Colors.white.withOpacity(0.1),
         scrolledUnderElevation: 0,

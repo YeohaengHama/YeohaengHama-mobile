@@ -6,6 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../common/constants.dart';
 import '../../screen/client/main/search/provider/is_loading_provider.dart';
 import '../entity/search/vo_search_diary_area.dart' as SearchDiaryArea;
+import '../entity/shorts/vo_shorts_read.dart';
+import '../memory/shorts/p_shorts_search.dart';
 
 final SearchApiProvider = Provider<SearchApi>((ref) => SearchApi());
 
@@ -69,6 +71,39 @@ class SearchApi {
       print(e);
       ref.read(SearchDiaryAreaProvider.notifier).clearDiarys();
 
+    }
+  }
+  Future<void> searchShorts(String area, WidgetRef ref) async {
+    final url = '$baseUrl/shorts/search';
+    final dio = Dio();
+
+    try {
+      final formData = FormData.fromMap({
+        'area': area,
+
+      });
+
+      final response = await _dio.get(
+        url,
+        data: formData,
+      );
+
+
+      if (response.statusCode == 200) {
+        final data = response.data['data'];
+        final shortsRead = ShortsRead.fromJson(data);
+        final _shortsSearchProvider = ref.read(shortsSearchProvider.notifier);
+        _shortsSearchProvider.state = shortsRead;
+        print(data);
+      } else if (response.statusCode == 401) {
+        print('Unauthorized');
+      } else {
+        print('Failed with status code: ${response.statusCode}');
+        throw Exception('Failed with status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('An exception occurred: $e');
+      throw e;
     }
   }
   }

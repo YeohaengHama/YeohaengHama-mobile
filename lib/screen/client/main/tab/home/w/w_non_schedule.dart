@@ -3,6 +3,7 @@ import 'package:fast_app_base/screen/client/main/tab/home/w/w_no_schdule.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../registration/calendar/s_calendar.dart';
+import '../chat_bot/s_chat_bot.dart';
 
 class NonSchduleWidget extends StatelessWidget {
   const NonSchduleWidget({
@@ -67,7 +68,20 @@ class NonSchduleWidget extends StatelessWidget {
                     .color(AppColors.primaryGrey)
                     .make(),
               ).pSymmetric(h: tabListph, v: tabListpV),
-            ],
+
+              Tap(
+                onTap: () {
+                Nav.push(ChatBotScreen());
+                },
+                child: Container(
+                  child: '챗봇'
+                      .text
+                      .size(18)
+                      .bold
+                      .color(AppColors.primaryGrey)
+                      .make(),
+                ).pSymmetric(h: tabListph, v: tabListpV),
+              ),            ],
           ),
         ),
       ],

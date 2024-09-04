@@ -1,5 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/entity/itinerary/a_check_itinerary.dart';
+import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/s_chat_bot.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/helper/s_helper.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_show_pick_day.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_show_pick_place.dart';
@@ -36,7 +37,6 @@ class ExistScheduleWidget extends ConsumerWidget {
             .bold
             .center
             .make(),
-        
         Stack(
           children: [
             Row(
@@ -57,7 +57,7 @@ class ExistScheduleWidget extends ConsumerWidget {
                   },
                   textColor: Colors.white,
                   leftWidget: const Icon(
-                   Icons.cloud_outlined,
+                    Icons.cloud_outlined,
                     size: 20,
                     color: Colors.white,
                   ),
@@ -93,6 +93,19 @@ class ExistScheduleWidget extends ConsumerWidget {
                     .color(AppColors.primaryGrey)
                     .make(),
               ).pSymmetric(h: tabListph, v: tabListpV),
+              Tap(
+                onTap: () {
+                 Nav.push(ChatBotScreen());
+                },
+                child: Container(
+                  child: '챗봇'
+                      .text
+                      .size(18)
+                      .bold
+                      .color(AppColors.primaryGrey)
+                      .make(),
+                ).pSymmetric(h: tabListph, v: tabListpV),
+              ),
             ],
           ),
         ),

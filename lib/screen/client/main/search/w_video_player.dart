@@ -1,17 +1,15 @@
-import 'package:fast_app_base/screen/client/main/tab/shorts/itinerary/s_itinerary_detail.dart';
+import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:video_player/video_player.dart';
-import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/screen/client/main/tab/shorts/comment/s_comment.dart';
-import '../../../../../common/widget/w_profile_image.dart';
 import '../../../../../data/entity/shorts/vo_shorts_read.dart';
-import 'dart:ui' as ui;
-
-import '../../../../../data/memory/shorts/p_get_itinerary.dart';
-import '../../../../../data/network/itinerary_api.dart';
 import '../../../../../data/network/shorts_api.dart';
-import 'p_bottom_nav_visible.dart';
+import 'dart:ui' as ui;
+import '../../../../../common/widget/w_profile_image.dart';
+import '../../../../../data/memory/shorts/p_get_itinerary.dart';
+import '../tab/shorts/comment/s_comment.dart';
+import '../tab/shorts/itinerary/s_itinerary_detail.dart';
+import '../tab/shorts/p_bottom_nav_visible.dart';
 
 class VideoPlayerScreen extends ConsumerStatefulWidget {
   final String videoUrl;
@@ -116,7 +114,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
     final titleText = '${widget.shorts.title}';
     final textStyle = TextStyle(color: Colors.white);
     final _shortsApiProvider = ref.read(shortsApiProvider);
-    final _getItineraryProvider =ref.read(getItineraryProvider.notifier).state;
+    final _getItineraryProvider = ref.read(getItineraryProvider.notifier).state;
     return GestureDetector(
       onTap: _togglePlayPause,
       child: Stack(
@@ -201,12 +199,19 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                     ),
                     Text('${widget.shorts.commentNum}', style: TextStyle(color: Colors.white)),
                     SizedBox(height: 10),
-                    Tap(onTap: () async{
-                      await _shortsApiProvider.getItinerary(ref, widget.shorts.itinerary.itineraryId.toString());
+                    Tap(
+                      onTap: () async {
+                        await _shortsApiProvider.getItinerary(ref, widget.shorts.itinerary.itineraryId.toString());
 
-                      Nav.push(DetailItineraryScreen(_getItineraryProvider!, widget.shorts.title));
-                    },
-                    child: Icon(Icons.calendar_today_outlined, color: Colors.white, size: 27.0).pSymmetric(v: 5))
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailItineraryScreen(_getItineraryProvider!, widget.shorts.title),
+                          ),
+                        );
+                      },
+                      child: Icon(Icons.calendar_today_outlined, color: Colors.white, size: 27.0).pSymmetric(v: 5),
+                    ),
                   ],
                 ),
               ],
@@ -230,10 +235,10 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                       width: 35,
                       height: 35,
                     ).pOnly(right: 10),
-                    '${widget.shorts.account.nickname}'.text.white.make()
+                    '${widget.shorts.account.nickname}'.text.white.make(),
                   ],
                 ),
-                Height(5),
+                SizedBox(height: 5),
                 GestureDetector(
                   onTap: _toggleExpand,
                   child: AnimatedSize(
@@ -244,7 +249,10 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          '$titleText'.text.color(Colors.white).bold.make(),
+                          Text(
+                            titleText,
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                          ),
                           Text(
                             contentText,
                             style: textStyle,

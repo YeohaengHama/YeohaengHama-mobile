@@ -16,18 +16,8 @@ class DiarySearchListFragment extends ConsumerWidget {
     final diaryList = ref.watch(SearchDiaryAreaProvider);
     final _isLoading = ref.watch(isLoadingProvider.notifier).state;
 
-    // 디버깅 출력
-    print('Diary List Length: ${diaryList.length}');
-    for (var i = 0; i < diaryList.length; i++) {
-      print('Diary[$i]: ${diaryList[i]}');
-    }
-    print('_isLoading: $_isLoading');
 
-    if (_isLoading) {
-      return Center(child: CircularProgressIndicator());
-    }
-
-    if (diaryList.isEmpty) {
+    if (diaryList.isEmpty&& _isLoading) {
       return SizedBox(
         child: Center(
           child: Column(

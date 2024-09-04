@@ -120,8 +120,7 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
               }
             },
             icon: Icon(
-              isPickArea ? Icons.favorite : Icons.favorite_outline,
-              color: isPickArea ? Colors.red : null,
+         Icons.get_app
             ),
           ),
           if(itinerary != null)...{
