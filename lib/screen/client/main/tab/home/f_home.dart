@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:fast_app_base/screen/client/main/tab/home/w/w_hama_area_holder.dart';
+import 'package:fast_app_base/screen/client/main/tab/home/w/w_random_area_holder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -12,9 +14,13 @@ import 'package:fast_app_base/screen/client/main/tab/home/w/w_home_diary.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_non_schedule.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/dummies.dart';
+import '../../../../../data/entity/open_api/open_api_area.dart';
 import '../../../../../data/memory/diary/diary_find_all_proiver.dart';
 import '../../../../../data/memory/itinerary/itinerary_check_provider.dart';
+import '../../../../../data/memory/search/search_simple_area_provider.dart';
+import '../../../../../data/network/area_api.dart';
 import '../../../../../data/network/diary_api.dart';
+import '../../search/provider/is_loading_provider.dart';
 import '../../search/s_space_search.dart';
 
 class HomeFragment extends ConsumerStatefulWidget {
@@ -64,6 +70,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment>
   ];
 
   late ConfettiController _confettiController;
+  final TextEditingController searchController = TextEditingController();
 
   double pullHeight = 0.0;
   final double maxPullHeight = 80.0;
@@ -78,6 +85,8 @@ class _HomeFragmentState extends ConsumerState<HomeFragment>
   final double listFontSize = 20.0;
   final double diaryContainerWidth = 270;
   final double diaryContainerHeight = 250;
+  bool defaultArea = true;
+  String? randomArea;
 
   @override
   void initState() {
@@ -88,39 +97,78 @@ class _HomeFragmentState extends ConsumerState<HomeFragment>
 
     final diaryApi = ref.read(diaryApiProvider);
     diaryApi.showAllDiary(ref);
+
+    scrollController.addListener(() {
+      // 스크롤 위치가 가장 위에 있을 때만 pullHeight를 업데이트할 수 있도록
+      if (scrollController.offset <= scrollController.position.minScrollExtent) {
+        setState(() {});
+      }
+    });
   }
 
   @override
   void dispose() {
     _confettiController.dispose();
+    searchController.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 
+  Future<void> postSearchArea() async {
+    final loadingNotifier = ref.read(isLoadingProvider.notifier);
+
+    // 로딩 상태 시작
+    loadingNotifier.setLoading(true);
+
+    final openApiArea = OpenApiArea(
+      numOfRows: '10',
+      page: '1',
+      contentTypeId: '12',
+      keyword: searchController.text,  // 선택된 지역명을 keyword로 사용
+      mobileOS: 'IOS',
+    );
+    final areaApi = ref.read(areaApiProvider);
+    await areaApi.searchRandomArea(openApiArea, ref);
+    loadingNotifier.setLoading(false);
+  }
+
   void onPointerMove(PointerMoveEvent event) {
-    setState(() {
-      // pullHeight를 0과 maxPullHeight 사이로 제한
-      pullHeight =
-          (pullHeight + event.delta.dy * 0.5).clamp(0.0, maxPullHeight);
-      int index = (pullHeight / maxPullHeight * choSungList.length).floor() %
-          choSungList.length;
-      choSungText = choSungList[index];
-    });
+    if (scrollController.offset <= scrollController.position.minScrollExtent) {
+      setState(() {
+        // pullHeight를 0과 maxPullHeight 사이로 제한
+        pullHeight =
+            (pullHeight + event.delta.dy * 0.5).clamp(0.0, maxPullHeight);
+        int index = (pullHeight / maxPullHeight * choSungList.length).floor() %
+            choSungList.length;
+        choSungText = choSungList[index];
+      });
+    }
   }
 
   void onPointerUp(PointerUpEvent event) async {
     if (pullHeight >= maxPullHeight) {
       int index = Random().nextInt(_areaList.length);
       setState(() {
+        defaultArea = false;
         displayText = "${_areaList[index]}";
+        randomArea =  "${_areaList[index]}";
         choSungText = "";
       });
+
+      // 선택된 지역명을 searchController.text에 저장하고, postSearchArea 호출
+      searchController.text = displayText;
+
       _confettiController.play(); // 폭죽 애니메이션 시작
+      await postSearchArea();
       await scrollController.animateTo(0,
           duration: const Duration(milliseconds: 1500), curve: Curves.easeOut);
+
       Timer(const Duration(milliseconds: 800), () {
         setState(() {
           pullHeight = 0;
+          choSungText = "";
           displayText = "";
+          // displayText를 더 이상 빈 문자열로 초기화하지 않음
           _confettiController.stop(); // 폭죽 애니메이션 멈춤
         });
       });
@@ -135,7 +183,6 @@ class _HomeFragmentState extends ConsumerState<HomeFragment>
   @override
   Widget build(BuildContext context) {
     final createdItinerary = ref.watch(itineraryCheckProvider);
-
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: AppColors.mainPurple,
       statusBarIconBrightness: Brightness.light,
@@ -162,11 +209,12 @@ class _HomeFragmentState extends ConsumerState<HomeFragment>
                     actions: [
                       IconButton(
                         onPressed: () {
+                          _confettiController.stop();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const SpaceSearchFragment(null)),
+                                const SpaceSearchFragment(null)),
                           );
                         },
                         icon: const Icon(
@@ -187,7 +235,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment>
                       background: createdItinerary != null
                           ? ExistScheduleWidget(createdItinerary)
                           : NonSchduleWidget(
-                              tabListph: tabListph, tabListpV: tabListpV),
+                          tabListph: tabListph, tabListpV: tabListpV),
                     ),
                   ),
                   SliverPersistentHeader(
@@ -207,16 +255,16 @@ class _HomeFragmentState extends ConsumerState<HomeFragment>
                                   .clamp(0.0, 1.0), // opacity 값을 0과 1 사이로 제한
                               duration: const Duration(milliseconds: 300),
                               child: Text(
-                                choSungText.isNotEmpty ? choSungText : "",
+                                choSungText.isNotEmpty&&displayText.isEmpty ? choSungText : "",
                                 style: TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
                                     color: AppColors.purple),
                               ),
                             ),
-                            if (displayText.isNotEmpty) ...{
+                            if (defaultArea == false) ...{
                               Text(
-                                displayText,
+                                displayText!,
                                 style: TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
@@ -249,14 +297,14 @@ class _HomeFragmentState extends ConsumerState<HomeFragment>
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: '여행하마 ',
+                                    text: randomArea!= null ? randomArea : '여행하마',
                                     style: TextStyle(
                                         color: AppColors.mainPurple,
                                         fontSize: listFontSize,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   TextSpan(
-                                    text: '여행 추천지',
+                                    text: ' 여행 추천지',
                                     style: TextStyle(
                                         color: AppColors.primaryGrey,
                                         fontSize: listFontSize,
@@ -266,39 +314,10 @@ class _HomeFragmentState extends ConsumerState<HomeFragment>
                               ),
                             ).pSymmetric(v: 8),
                           ).pOnly(left: contentLeftPadding, top: contentP),
-                          SizedBox(
-                            width: double.infinity,
-                            height: areaSize + areaSize + 40,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: (_areaList.length / 2).ceil(),
-                              itemBuilder: (context, index) {
-                                return Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    if (index * 2 < _areaList.length)
-                                      SizedBox(
-                                        width: areaSize,
-                                        height: areaSize,
-                                        child: HamaAreaWidget(
-                                          areaList[index * 2],
-                                          indexInList: index * 2 + 1,
-                                        ),
-                                      ).p(5),
-                                    if (index * 2 + 1 < _areaList.length)
-                                      SizedBox(
-                                        width: areaSize,
-                                        height: areaSize,
-                                        child: HamaAreaWidget(
-                                          areaList[index * 2 + 1],
-                                          indexInList: index * 2 + 2,
-                                        ),
-                                      ).p(5),
-                                  ],
-                                );
-                              },
-                            ),
-                          ).pOnly(top: contentP - 5),
+                          defaultArea == true ? HamaAreaHolder(areaSize: areaSize, areaList: _areaList).pOnly(top: contentP - 5) :
+                          RandomAreaHolder(areaSize: areaSize),
+
+
                           const Line(
                               color: AppColors.outline, height: lineHeight),
                           Container(

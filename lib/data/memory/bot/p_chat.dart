@@ -6,9 +6,9 @@ import '../../network/bot_api.dart';
 import '../../memory/bot/p_chat_bot.dart'; // ChatbotResponseNotifier를 import합니다.
 
 final chatProvider =
-    StateNotifierProvider<ChatNotifier, List<ChatMessage>>((ref) {
+StateNotifierProvider<ChatNotifier, List<ChatMessage>>((ref) {
   final chatbotResponseNotifier =
-      ref.watch(chatbotResponseNotifierProvider.notifier);
+  ref.watch(chatbotResponseNotifierProvider.notifier);
   return ChatNotifier(chatbotResponseNotifier);
 });
 
@@ -22,30 +22,63 @@ class ChatNotifier extends StateNotifier<List<ChatMessage>> {
         ChatMessage message;
 
         switch (response.type) {
-          case 'showDiaryAll':
-            message = ChatMessage<ShowDiaryAllResult>(
+          case 'searchKeyword':
+            message = ChatMessage<List<Place>>(
                 text: answer,
                 isUser: false,
                 type: response.type,
-                result: response.result as ShowDiaryAllResult,
+                result: response.result as List<Place>,
                 other: response.other);
             break;
-          case 'showDiaryPlace':
-            message = ChatMessage<ShowDiaryPlaceResult>(
+
+          case 'searchShorts':
+          case 'randomShorts':
+            message = ChatMessage<Shorts>(
                 text: answer,
                 isUser: false,
                 type: response.type,
-                result: response.result as ShowDiaryPlaceResult,
+                result: response.result as Shorts,
                 other: response.other);
             break;
-          case 'showPopularArea':
-            message = ChatMessage<ShowPopularAreaResult>(
+
+          case 'searchItinerary':
+          case 'randomItinerary':
+            message = ChatMessage<Itinerary>(
                 text: answer,
                 isUser: false,
                 type: response.type,
-                result: response.result as ShowPopularAreaResult,
+                result: response.result as Itinerary,
                 other: response.other);
             break;
+
+          case 'searchDiary':
+          case 'randomDiary':
+            message = ChatMessage<Diary>(
+                text: answer,
+                isUser: false,
+                type: response.type,
+                result: response.result as Diary,
+                other: response.other);
+            break;
+
+          case 'randomPlace':
+            message = ChatMessage<RandomPlace>(
+                text: answer,
+                isUser: false,
+                type: response.type,
+                result: response.result as RandomPlace,
+                other: response.other);
+            break;
+
+          case 'randomArea':
+            message = ChatMessage<RandomArea>(
+                text: answer,
+                isUser: false,
+                type: response.type,
+                result: response.result as RandomArea,
+                other: response.other);
+            break;
+
           default:
             message = ChatMessage<String>(
                 text: answer,
@@ -71,7 +104,7 @@ class ChatNotifier extends StateNotifier<List<ChatMessage>> {
       isUser: true,
       type: 'default',
       result: null,
-        other: null
+      other: null,
     ));
 
     final botApi = ref.read(botApiProvider);
@@ -83,14 +116,15 @@ class ChatNotifier extends StateNotifier<List<ChatMessage>> {
         isUser: false,
         type: 'default',
         result: null,
-          other: null
-
+        other: null,
       ));
     }
   }
+
   void reset() {
     state = [];
   }
+
   void receiveMessage(ChatMessage message) {
     addMessage(message);
   }

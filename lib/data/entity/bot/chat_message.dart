@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'chat_bot.dart';
+
 part 'chat_message.freezed.dart';
 
 @freezed
@@ -9,7 +11,7 @@ class ChatMessage<T> with _$ChatMessage<T> {
     required bool isUser,
     required String type, // Message type
     required T? result, // Generic result
-    required List<Map<String, double>>? other, // Other suggestions, nullable
+    required List<Other>? other, // Other suggestions, nullable
   }) = _ChatMessage<T>;
 
   factory ChatMessage.fromJson(
@@ -22,7 +24,7 @@ class ChatMessage<T> with _$ChatMessage<T> {
       type: json['type'] as String,
       result: json['result'] == null ? null : fromJsonT(json['result']),
       other: (json['other'] as List<dynamic>?)
-          ?.map((e) => Map<String, double>.from(e as Map))
+          ?.map((e) => Other.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
   }

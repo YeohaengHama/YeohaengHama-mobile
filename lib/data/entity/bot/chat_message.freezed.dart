@@ -20,7 +20,7 @@ mixin _$ChatMessage<T> {
   bool get isUser => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError; // Message type
   T? get result => throw _privateConstructorUsedError; // Generic result
-  List<Map<String, double>>? get other => throw _privateConstructorUsedError;
+  List<Other>? get other => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ChatMessageCopyWith<T, ChatMessage<T>> get copyWith =>
@@ -34,11 +34,7 @@ abstract class $ChatMessageCopyWith<T, $Res> {
       _$ChatMessageCopyWithImpl<T, $Res, ChatMessage<T>>;
   @useResult
   $Res call(
-      {String text,
-      bool isUser,
-      String type,
-      T? result,
-      List<Map<String, double>>? other});
+      {String text, bool isUser, String type, T? result, List<Other>? other});
 }
 
 /// @nodoc
@@ -80,7 +76,7 @@ class _$ChatMessageCopyWithImpl<T, $Res, $Val extends ChatMessage<T>>
       other: freezed == other
           ? _value.other
           : other // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, double>>?,
+              as List<Other>?,
     ) as $Val);
   }
 }
@@ -94,11 +90,7 @@ abstract class _$$ChatMessageImplCopyWith<T, $Res>
   @override
   @useResult
   $Res call(
-      {String text,
-      bool isUser,
-      String type,
-      T? result,
-      List<Map<String, double>>? other});
+      {String text, bool isUser, String type, T? result, List<Other>? other});
 }
 
 /// @nodoc
@@ -138,7 +130,7 @@ class __$$ChatMessageImplCopyWithImpl<T, $Res>
       other: freezed == other
           ? _value._other
           : other // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, double>>?,
+              as List<Other>?,
     ));
   }
 }
@@ -151,7 +143,7 @@ class _$ChatMessageImpl<T> implements _ChatMessage<T> {
       required this.isUser,
       required this.type,
       required this.result,
-      required final List<Map<String, double>>? other})
+      required final List<Other>? other})
       : _other = other;
 
   @override
@@ -164,10 +156,10 @@ class _$ChatMessageImpl<T> implements _ChatMessage<T> {
   @override
   final T? result;
 // Generic result
-  final List<Map<String, double>>? _other;
+  final List<Other>? _other;
 // Generic result
   @override
-  List<Map<String, double>>? get other {
+  List<Other>? get other {
     final value = _other;
     if (value == null) return null;
     if (_other is EqualUnmodifiableListView) return _other;
@@ -215,7 +207,7 @@ abstract class _ChatMessage<T> implements ChatMessage<T> {
       required final bool isUser,
       required final String type,
       required final T? result,
-      required final List<Map<String, double>>? other}) = _$ChatMessageImpl<T>;
+      required final List<Other>? other}) = _$ChatMessageImpl<T>;
 
   @override
   String get text;
@@ -226,7 +218,7 @@ abstract class _ChatMessage<T> implements ChatMessage<T> {
   @override // Message type
   T? get result;
   @override // Generic result
-  List<Map<String, double>>? get other;
+  List<Other>? get other;
   @override
   @JsonKey(ignore: true)
   _$$ChatMessageImplCopyWith<T, _$ChatMessageImpl<T>> get copyWith =>

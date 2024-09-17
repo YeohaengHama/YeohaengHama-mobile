@@ -6,9 +6,8 @@ import '../../../../../../entity/dummies.dart';
 import '../w/w_hama_area.dart';
 
 class PopularAreaWidget extends StatelessWidget {
-  final ShowPopularAreaResult data;
 
-  PopularAreaWidget({required this.data});
+  PopularAreaWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

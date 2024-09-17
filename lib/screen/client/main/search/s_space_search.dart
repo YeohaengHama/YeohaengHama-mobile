@@ -77,7 +77,7 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
 
   Future<void> postSearchArea() async {
     final openApiArea = OpenApiArea(
-      numOfRows: '100',
+      numOfRows: '10',
       page: '1',
       contentTypeId: '12',
       keyword: searchController.text,

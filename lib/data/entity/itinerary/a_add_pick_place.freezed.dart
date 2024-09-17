@@ -31,6 +31,7 @@ mixin _$AddPickPlace {
   String? get endTime => throw _privateConstructorUsedError;
   String? get memo => throw _privateConstructorUsedError;
   int? get placeId => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,7 +56,8 @@ abstract class $AddPickPlaceCopyWith<$Res> {
       String? startTime,
       String? endTime,
       String? memo,
-      int? placeId});
+      int? placeId,
+      String? image});
 }
 
 /// @nodoc
@@ -82,6 +84,7 @@ class _$AddPickPlaceCopyWithImpl<$Res, $Val extends AddPickPlace>
     Object? endTime = freezed,
     Object? memo = freezed,
     Object? placeId = freezed,
+    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
       day: null == day
@@ -128,6 +131,10 @@ class _$AddPickPlaceCopyWithImpl<$Res, $Val extends AddPickPlace>
           ? _value.placeId
           : placeId // ignore: cast_nullable_to_non_nullable
               as int?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -151,7 +158,8 @@ abstract class _$$AddPickPlaceImplCopyWith<$Res>
       String? startTime,
       String? endTime,
       String? memo,
-      int? placeId});
+      int? placeId,
+      String? image});
 }
 
 /// @nodoc
@@ -176,6 +184,7 @@ class __$$AddPickPlaceImplCopyWithImpl<$Res>
     Object? endTime = freezed,
     Object? memo = freezed,
     Object? placeId = freezed,
+    Object? image = freezed,
   }) {
     return _then(_$AddPickPlaceImpl(
       day: null == day
@@ -222,6 +231,10 @@ class __$$AddPickPlaceImplCopyWithImpl<$Res>
           ? _value.placeId
           : placeId // ignore: cast_nullable_to_non_nullable
               as int?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -240,7 +253,8 @@ class _$AddPickPlaceImpl implements _AddPickPlace {
       this.startTime,
       this.endTime,
       this.memo,
-      this.placeId});
+      this.placeId,
+      this.image});
 
   factory _$AddPickPlaceImpl.fromJson(Map<String, dynamic> json) =>
       _$$AddPickPlaceImplFromJson(json);
@@ -267,10 +281,12 @@ class _$AddPickPlaceImpl implements _AddPickPlace {
   final String? memo;
   @override
   final int? placeId;
+  @override
+  final String? image;
 
   @override
   String toString() {
-    return 'AddPickPlace(day: $day, placeType: $placeType, placeNum: $placeNum, placeName: $placeName, addr1: $addr1, mapx: $mapx, mapy: $mapy, startTime: $startTime, endTime: $endTime, memo: $memo, placeId: $placeId)';
+    return 'AddPickPlace(day: $day, placeType: $placeType, placeNum: $placeNum, placeName: $placeName, addr1: $addr1, mapx: $mapx, mapy: $mapy, startTime: $startTime, endTime: $endTime, memo: $memo, placeId: $placeId, image: $image)';
   }
 
   @override
@@ -292,13 +308,14 @@ class _$AddPickPlaceImpl implements _AddPickPlace {
                 other.startTime == startTime) &&
             (identical(other.endTime, endTime) || other.endTime == endTime) &&
             (identical(other.memo, memo) || other.memo == memo) &&
-            (identical(other.placeId, placeId) || other.placeId == placeId));
+            (identical(other.placeId, placeId) || other.placeId == placeId) &&
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, day, placeType, placeNum,
-      placeName, addr1, mapx, mapy, startTime, endTime, memo, placeId);
+      placeName, addr1, mapx, mapy, startTime, endTime, memo, placeId, image);
 
   @JsonKey(ignore: true)
   @override
@@ -326,7 +343,8 @@ abstract class _AddPickPlace implements AddPickPlace {
       final String? startTime,
       final String? endTime,
       final String? memo,
-      final int? placeId}) = _$AddPickPlaceImpl;
+      final int? placeId,
+      final String? image}) = _$AddPickPlaceImpl;
 
   factory _AddPickPlace.fromJson(Map<String, dynamic> json) =
       _$AddPickPlaceImpl.fromJson;
@@ -353,6 +371,8 @@ abstract class _AddPickPlace implements AddPickPlace {
   String? get memo;
   @override
   int? get placeId;
+  @override
+  String? get image;
   @override
   @JsonKey(ignore: true)
   _$$AddPickPlaceImplCopyWith<_$AddPickPlaceImpl> get copyWith =>

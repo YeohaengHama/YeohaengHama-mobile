@@ -1,16 +1,14 @@
 import 'package:fast_app_base/screen/client/main/search/provider/bottom_nav_black.dart';
-import 'package:fast_app_base/screen/client/main/tab/shorts/w_video_player.dart';
+import 'package:fast_app_base/screen/client/main/search/provider/is_playing_shots.dart';
+import 'package:fast_app_base/screen/client/main/search/w_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:video_player/video_player.dart';
 import 'package:fast_app_base/common/common.dart';
-import '../../../../../common/widget/w_profile_image.dart';
-import '../../../../../data/entity/shorts/vo_shorts_read.dart';
 import '../../../../../data/memory/shorts/p_shorts_read.dart';
 import '../../../../../data/network/shorts_api.dart';
 import 'dart:ui' as ui;
 
-import '../tab/shorts/p_is_playing.dart';
 
 class VideoSwipeScreen extends ConsumerStatefulWidget {
   final int initialIndex; // 추가된 부분
@@ -77,7 +75,8 @@ class _VideoSwipeScreenState extends ConsumerState<VideoSwipeScreen>
   Widget build(BuildContext context) {
     super.build(context);
     final shortsRead = ref.watch(shortsReadProvider);
-    final isPlaying = ref.watch(isPlayingProvider);
+    final isPlayingShorts = ref.watch(isPlayingShortsProvider);
+
     final isBlack = ref.read(BottomNavBlackProvider.notifier);
 
     return Scaffold(
@@ -94,7 +93,7 @@ class _VideoSwipeScreenState extends ConsumerState<VideoSwipeScreen>
               _preloadVideos(index);
               return VideoPlayerScreen(
                 videoUrl: shortsRead.shortsList[index].videoUrl,
-                isPlaying: isPlaying,
+                isPlaying: isPlayingShorts,
                 shorts: shortsRead.shortsList[index],
                 controller: _videoControllers[index],
                 onControllerCreated: (controller) {

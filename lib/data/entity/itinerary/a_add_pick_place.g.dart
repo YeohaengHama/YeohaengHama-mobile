@@ -19,6 +19,7 @@ _$AddPickPlaceImpl _$$AddPickPlaceImplFromJson(Map<String, dynamic> json) =>
       endTime: json['endTime'] as String?,
       memo: json['memo'] as String?,
       placeId: (json['placeId'] as num?)?.toInt(),
+      image: json['image'] as String?,
     );
 
 Map<String, dynamic> _$$AddPickPlaceImplToJson(_$AddPickPlaceImpl instance) =>
@@ -34,4 +35,5 @@ Map<String, dynamic> _$$AddPickPlaceImplToJson(_$AddPickPlaceImpl instance) =>
       'endTime': instance.endTime,
       'memo': instance.memo,
       'placeId': instance.placeId,
+      'image': instance.image,
     };

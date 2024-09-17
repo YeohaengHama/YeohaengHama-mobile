@@ -20,8 +20,6 @@ class BotApi {
       // FormData 객체 생성
       final formData = FormData.fromMap({
         'question': question,
-        // 필요한 추가 필드를 여기에 추가할 수 있습니다.
-        // 예: 'userId': account.userId,
       });
 
       final response = await _dio.post(
@@ -30,33 +28,60 @@ class BotApi {
       );
 
       if (response.statusCode == 200) {
-        // API 응답을 파싱하여 ChatbotResponse로 변환
         final data = response.data as Map<String, dynamic>;
         final type = data['type'] as String;
 
-        // ChatbotResponse를 제네릭 타입으로 변환하는 함수를 정의합니다.
+        // ChatbotResponse를 제네릭 타입으로 변환하는 부분
         ChatbotResponse<dynamic> chatbotResponse;
 
         switch (type) {
-          case 'showDiaryAll':
-            chatbotResponse = ChatbotResponse<ShowDiaryAllResult>.fromJson(
+          case 'searchKeyword':
+            chatbotResponse = ChatbotResponse<List<Place>>.fromJson(
               data,
-                  (json) => ShowDiaryAllResult.fromJson(json as Map<String, dynamic>),
+                  (json) => (json as List<dynamic>)
+                  .map((e) => Place.fromJson(e as Map<String, dynamic>))
+                  .toList(),
             );
             break;
-          case 'showDiaryPlace':
-            chatbotResponse = ChatbotResponse<ShowDiaryPlaceResult>.fromJson(
+
+          case 'searchShorts':
+          case 'randomShorts':
+            chatbotResponse = ChatbotResponse<Shorts>.fromJson(
               data,
-                  (json) => ShowDiaryPlaceResult.fromJson(json as Map<String, dynamic>),
+                  (json) => Shorts.fromJson(json as Map<String, dynamic>),
             );
             break;
-          case 'showPopularArea':
-            chatbotResponse = ChatbotResponse<ShowPopularAreaResult>.fromJson(
+
+          case 'searchItinerary':
+          case 'randomItinerary':
+            chatbotResponse = ChatbotResponse<Itinerary>.fromJson(
               data,
-                  (json) => ShowPopularAreaResult.fromJson(json as Map<String, dynamic>),
+                  (json) => Itinerary.fromJson(json as Map<String, dynamic>),
             );
             break;
-          case 'classifying':
+
+          case 'searchDiary':
+          case 'randomDiary':
+            chatbotResponse = ChatbotResponse<Diary>.fromJson(
+              data,
+                  (json) => Diary.fromJson(json as Map<String, dynamic>),
+            );
+            break;
+
+          case 'randomPlace':
+            chatbotResponse = ChatbotResponse<RandomPlace>.fromJson(
+              data,
+                  (json) => RandomPlace.fromJson(json as Map<String, dynamic>),
+            );
+            break;
+
+          case 'randomArea':
+            chatbotResponse = ChatbotResponse<RandomArea>.fromJson(
+              data,
+                  (json) => RandomArea.fromJson(json as Map<String, dynamic>),
+            );
+            break;
+
           default:
             chatbotResponse = ChatbotResponse<Null>.fromJson(
               data,
@@ -74,7 +99,7 @@ class BotApi {
         throw Exception('Failed with status code: ${response.statusCode}');
       }
     } catch (e) {
-      print('An exception occurred: $e');
+      throw Exception('서버와 통신이 원할하지 않습니다. 잠시 후 다시 시도해주세요.');
       throw e;
     }
   }
