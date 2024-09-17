@@ -16,9 +16,7 @@ _$ChatbotResponseImpl<T> _$$ChatbotResponseImplFromJson<T>(
       type: json['type'] as String,
       result: _$nullableGenericFromJson(json['result'], fromJsonT),
       other: (json['other'] as List<dynamic>?)
-          ?.map((e) => (e as Map<String, dynamic>).map(
-                (k, e) => MapEntry(k, (e as num).toDouble()),
-              ))
+          ?.map((e) => Other.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -46,61 +44,108 @@ Object? _$nullableGenericToJson<T>(
 ) =>
     input == null ? null : toJson(input);
 
-_$ShowDiaryAllResultImpl _$$ShowDiaryAllResultImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ShowDiaryAllResultImpl(
-      keyword: json['keyword'] as String,
-      diary: (json['diary'] as List<dynamic>)
-          .map((e) => Diary.fromJson(e as Map<String, dynamic>))
-          .toList(),
+_$OtherImpl _$$OtherImplFromJson(Map<String, dynamic> json) => _$OtherImpl(
+      question: json['question'] as String,
+      answerId: json['answerId'] as String,
     );
 
-Map<String, dynamic> _$$ShowDiaryAllResultImplToJson(
-        _$ShowDiaryAllResultImpl instance) =>
+Map<String, dynamic> _$$OtherImplToJson(_$OtherImpl instance) =>
     <String, dynamic>{
-      'keyword': instance.keyword,
-      'diary': instance.diary,
+      'question': instance.question,
+      'answerId': instance.answerId,
     };
 
-_$ShowDiaryPlaceResultImpl _$$ShowDiaryPlaceResultImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ShowDiaryPlaceResultImpl(
-      keyword: json['keyword'] as String,
-      diary: (json['diary'] as List<dynamic>)
-          .map((e) => Diary.fromJson(e as Map<String, dynamic>))
-          .toList(),
+_$PlaceImpl _$$PlaceImplFromJson(Map<String, dynamic> json) => _$PlaceImpl(
+      addr1: json['addr1'] as String,
+      addr2: json['addr2'] as String?,
+      contentid: json['contentid'] as String,
+      contenttypeid: json['contenttypeid'] as String,
+      tel: json['tel'] as String?,
+      title: json['title'] as String,
+      firstimage: json['firstimage'] as String?,
+      firstimage2: json['firstimage2'] as String?,
+      mapx: json['mapx'] as String,
+      mapy: json['mapy'] as String,
     );
 
-Map<String, dynamic> _$$ShowDiaryPlaceResultImplToJson(
-        _$ShowDiaryPlaceResultImpl instance) =>
+Map<String, dynamic> _$$PlaceImplToJson(_$PlaceImpl instance) =>
     <String, dynamic>{
-      'keyword': instance.keyword,
-      'diary': instance.diary,
+      'addr1': instance.addr1,
+      'addr2': instance.addr2,
+      'contentid': instance.contentid,
+      'contenttypeid': instance.contenttypeid,
+      'tel': instance.tel,
+      'title': instance.title,
+      'firstimage': instance.firstimage,
+      'firstimage2': instance.firstimage2,
+      'mapx': instance.mapx,
+      'mapy': instance.mapy,
     };
 
-_$ShowPopularAreaResultImpl _$$ShowPopularAreaResultImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ShowPopularAreaResultImpl(
-      first: json['first'] as String,
-      second: json['second'] as String?,
-      third: json['third'] as String?,
+_$ShortsImpl _$$ShortsImplFromJson(Map<String, dynamic> json) => _$ShortsImpl(
+      id: (json['id'] as num).toInt(),
+      title: json['title'] as String,
+      videoUrl: json['videoUrl'] as String,
     );
 
-Map<String, dynamic> _$$ShowPopularAreaResultImplToJson(
-        _$ShowPopularAreaResultImpl instance) =>
+Map<String, dynamic> _$$ShortsImplToJson(_$ShortsImpl instance) =>
     <String, dynamic>{
-      'first': instance.first,
-      'second': instance.second,
-      'third': instance.third,
+      'id': instance.id,
+      'title': instance.title,
+      'videoUrl': instance.videoUrl,
+    };
+
+_$ItineraryImpl _$$ItineraryImplFromJson(Map<String, dynamic> json) =>
+    _$ItineraryImpl(
+      id: (json['id'] as num).toInt(),
+      area: json['area'] as String,
+      name: json['name'] as String,
+    );
+
+Map<String, dynamic> _$$ItineraryImplToJson(_$ItineraryImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'area': instance.area,
+      'name': instance.name,
     };
 
 _$DiaryImpl _$$DiaryImplFromJson(Map<String, dynamic> json) => _$DiaryImpl(
-      diaryId: (json['diaryId'] as num).toInt(),
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String,
+      content: json['content'] as String,
     );
 
 Map<String, dynamic> _$$DiaryImplToJson(_$DiaryImpl instance) =>
     <String, dynamic>{
-      'diaryId': instance.diaryId,
+      'id': instance.id,
       'title': instance.title,
+      'content': instance.content,
+    };
+
+_$RandomPlaceImpl _$$RandomPlaceImplFromJson(Map<String, dynamic> json) =>
+    _$RandomPlaceImpl(
+      playNum: json['playNum'] as String,
+      playType: json['playType'] as String,
+      addr1: json['addr1'] as String,
+      name: json['name'] as String?,
+      image: json['image'] as String?,
+    );
+
+Map<String, dynamic> _$$RandomPlaceImplToJson(_$RandomPlaceImpl instance) =>
+    <String, dynamic>{
+      'playNum': instance.playNum,
+      'playType': instance.playType,
+      'addr1': instance.addr1,
+      'name': instance.name,
+      'image': instance.image,
+    };
+
+_$RandomAreaImpl _$$RandomAreaImplFromJson(Map<String, dynamic> json) =>
+    _$RandomAreaImpl(
+      area: json['area'] as String,
+    );
+
+Map<String, dynamic> _$$RandomAreaImplToJson(_$RandomAreaImpl instance) =>
+    <String, dynamic>{
+      'area': instance.area,
     };

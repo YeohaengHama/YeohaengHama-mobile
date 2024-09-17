@@ -2,9 +2,12 @@ import 'package:card_loading/card_loading.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/search/provider/bottom_nav_black.dart';
 import 'package:fast_app_base/screen/client/main/search/provider/is_loading_provider.dart';
+import 'package:fast_app_base/screen/client/main/search/provider/is_playing_shots.dart';
 import 'package:fast_app_base/screen/client/main/search/s_video_swipe.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:video_thumbnail/video_thumbnail.dart';
+import 'dart:typed_data';
 
 import '../../../../data/memory/shorts/p_shorts_search.dart';
 
@@ -13,64 +16,104 @@ class ShortsSearchListFragment extends ConsumerWidget {
     super.key,
   });
 
+  Future<List<Uint8List?>> _generateThumbnails(List<String> videoUrls) async {
+    final futures = videoUrls.map((url) => VideoThumbnail.thumbnailData(
+      video: url,
+      imageFormat: ImageFormat.PNG,
+      maxWidth: 128, // 썸네일 너비
+      quality: 75,
+    )).toList();
+    return Future.wait(futures);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final shortsList = ref.watch(shortsSearchProvider);
     final _isLoading = ref.watch(isLoadingProvider.notifier).state;
     final isBlack = ref.read(BottomNavBlackProvider.notifier);
-    if (shortsList.shortsList.isEmpty && _isLoading) {
-      return Expanded(
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,      // 가로에 3개의 항목 배치
-            crossAxisSpacing: 4.0,   // 항목 사이의 가로 간격
-            mainAxisSpacing: 4.0,    // 항목 사이의 세로 간격
-            childAspectRatio: 0.5625, // 9:16 비율 (9/16 = 0.5625)
-          ),
-          itemCount: 9, // 로딩 중 표시할 항목 개수
-          itemBuilder: (context, index) {
-            return CardLoading(
-              height: 200, // 이미지 높이에 맞게 설정 (childAspectRatio와 일치)
-              width: double.infinity, // 가로 폭을 전체로 설정
-              borderRadius: BorderRadius.circular(5),
-              margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0), // GridView의 간격에 맞게 설정
-            );
-          },
-        ),
-      );
-    }
+
+    // 비디오 URL 리스트 생성
+    final videoUrls = shortsList.shortsList.map((short) => short.videoUrl).toList();
 
     return Expanded(
-      child: GridView.builder(
+      child: _isLoading
+          ? GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,      // 가로에 3개의 항목 배치
-          crossAxisSpacing: 4.0,   // 항목 사이의 가로 간격
-          mainAxisSpacing: 4.0,    // 항목 사이의 세로 간격
-          childAspectRatio: 0.5625, // 9:16 비율 (9/16 = 0.5625)
+          crossAxisCount: 3,
+          crossAxisSpacing: 4.0,
+          mainAxisSpacing: 4.0,
+          childAspectRatio: 0.5625,
         ),
-        itemCount: shortsList.shortsList.length,
+        itemCount: 12,
         itemBuilder: (context, index) {
-          final short = shortsList.shortsList[index];
-          return GestureDetector(
-            onTap: () {
-              isBlack.setBlack(true);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        VideoSwipeScreen(initialIndex: index)),
-              );
-            },
-            child: Container(
-              color: Colors.transparent,
-              child: ClipRRect(
-                child: Image.network(
-                  short.videoUrl,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+          return CardLoading(
+            height: 200,
+            width: double.infinity,
+            borderRadius: BorderRadius.circular(5),
+            margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
           );
+        },
+      )
+          : FutureBuilder<List<Uint8List?>>(
+        future: _generateThumbnails(videoUrls), // 모든 썸네일 생성
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 4.0,
+                mainAxisSpacing: 4.0,
+                childAspectRatio: 0.5625,
+              ),
+              itemCount: shortsList.shortsList.length,
+              itemBuilder: (context, index) {
+                return CardLoading(
+                  height: 200,
+                  width: double.infinity,
+                  borderRadius: BorderRadius.circular(5),
+                  margin: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
+                ); // 로딩 표시
+              },
+            );
+          } else if (snapshot.hasError || !snapshot.hasData) {
+            return Center(child: Icon(Icons.error)); // 에러 처리
+          } else {
+            final thumbnails = snapshot.data!;
+
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 4.0,
+                mainAxisSpacing: 4.0,
+                childAspectRatio: 0.5625,
+              ),
+              itemCount: thumbnails.length,
+              itemBuilder: (context, index) {
+                final short = shortsList.shortsList[index];
+                return GestureDetector(
+                  onTap: () {
+                    isBlack.setBlack(true);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              VideoSwipeScreen(initialIndex: index)),
+                    );
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: Image.memory(
+                        thumbnails[index]!, // 썸네일 이미지
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          }
         },
       ),
     );

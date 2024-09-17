@@ -1,4 +1,7 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/search/provider/bottom_nav_black.dart';
+import 'package:fast_app_base/screen/client/main/search/provider/is_playing_shots.dart';
+import 'package:fast_app_base/screen/client/main/search/s_itinerary_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:video_player/video_player.dart';
@@ -7,9 +10,10 @@ import '../../../../../data/network/shorts_api.dart';
 import 'dart:ui' as ui;
 import '../../../../../common/widget/w_profile_image.dart';
 import '../../../../../data/memory/shorts/p_get_itinerary.dart';
+import '../tab/information /search/provider/is_loading_provider.dart';
 import '../tab/shorts/comment/s_comment.dart';
-import '../tab/shorts/itinerary/s_itinerary_detail.dart';
 import '../tab/shorts/p_bottom_nav_visible.dart';
+import '../tab/shorts/p_is_playing.dart';
 
 class VideoPlayerScreen extends ConsumerStatefulWidget {
   final String videoUrl;
@@ -30,7 +34,8 @@ class VideoPlayerScreen extends ConsumerStatefulWidget {
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
 }
 
-class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with TickerProviderStateMixin {
+class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen>
+    with TickerProviderStateMixin {
   late VideoPlayerController _controller;
   bool _isExpanded = false;
   bool _isPlaying = false;
@@ -114,7 +119,8 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
     final titleText = '${widget.shorts.title}';
     final textStyle = TextStyle(color: Colors.white);
     final _shortsApiProvider = ref.read(shortsApiProvider);
-    final _getItineraryProvider = ref.read(getItineraryProvider.notifier).state;
+    final _getItineraryProvider =
+        ref.watch(getItineraryProvider.notifier).state;
     return GestureDetector(
       onTap: _togglePlayPause,
       child: Stack(
@@ -122,19 +128,22 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
           Positioned.fill(
             child: _controller.value.isInitialized
                 ? LayoutBuilder(
-              builder: (context, constraints) {
-                final videoRatio = _controller.value.size.width / _controller.value.size.height;
-                final fit = videoRatio > 0.5 && videoRatio < 0.6 ? BoxFit.cover : BoxFit.contain;
-                return FittedBox(
-                  fit: fit,
-                  child: SizedBox(
-                    width: _controller.value.size.width,
-                    height: _controller.value.size.height,
-                    child: VideoPlayer(_controller),
-                  ),
-                );
-              },
-            )
+                    builder: (context, constraints) {
+                      final videoRatio = _controller.value.size.width /
+                          _controller.value.size.height;
+                      final fit = videoRatio > 0.5 && videoRatio < 0.6
+                          ? BoxFit.cover
+                          : BoxFit.contain;
+                      return FittedBox(
+                        fit: fit,
+                        child: SizedBox(
+                          width: _controller.value.size.width,
+                          height: _controller.value.size.height,
+                          child: VideoPlayer(_controller),
+                        ),
+                      );
+                    },
+                  )
                 : Container(color: Colors.black),
           ),
           Positioned.fill(
@@ -157,9 +166,12 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                   children: [
                     GestureDetector(
                       onTap: () {},
-                      child: Icon(Icons.favorite_border_rounded, color: Colors.white, size: 30.0).pSymmetric(v: 5),
+                      child: Icon(Icons.favorite_border_rounded,
+                              color: Colors.white, size: 30.0)
+                          .pSymmetric(v: 5),
                     ),
-                    Text('${widget.shorts.likes}', style: TextStyle(color: Colors.white)),
+                    Text('${widget.shorts.likes}',
+                        style: TextStyle(color: Colors.white)),
                   ],
                 ),
                 SizedBox(height: 10),
@@ -167,7 +179,8 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                   children: [
                     GestureDetector(
                       onTap: () {
-                        final isBottomNavBarVisible = ref.read(bottomNavBarVisibleProvider.notifier);
+                        final isBottomNavBarVisible =
+                            ref.read(bottomNavBarVisibleProvider.notifier);
                         isBottomNavBarVisible.hide();
 
                         showModalBottomSheet(
@@ -175,7 +188,8 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                           isScrollControlled: true,
                           builder: (BuildContext context) {
                             return RoundedContainer(
-                              padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 0, vertical: 15),
                               radius: 15,
                               child: FractionallySizedBox(
                                 heightFactor: 0.65,
@@ -184,8 +198,11 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                                   minChildSize: 1.0,
                                   maxChildSize: 1.0,
                                   expand: true,
-                                  builder: (BuildContext context, ScrollController scrollController) {
-                                    return CommentScreen(scrollController: scrollController, shortsId: widget.shorts.shortsId);
+                                  builder: (BuildContext context,
+                                      ScrollController scrollController) {
+                                    return CommentScreen(
+                                        scrollController: scrollController,
+                                        shortsId: widget.shorts.shortsId);
                                   },
                                 ),
                               ),
@@ -195,23 +212,47 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                           isBottomNavBarVisible.show();
                         });
                       },
-                      child: Icon(Icons.chat_bubble_outline_rounded, color: Colors.white, size: 30.0).pSymmetric(v: 5),
+                      child: Icon(Icons.chat_bubble_outline_rounded,
+                              color: Colors.white, size: 30.0)
+                          .pSymmetric(v: 5),
                     ),
-                    Text('${widget.shorts.commentNum}', style: TextStyle(color: Colors.white)),
+                    Text('${widget.shorts.commentNum}',
+                        style: TextStyle(color: Colors.white)),
                     SizedBox(height: 10),
                     Tap(
                       onTap: () async {
-                        await _shortsApiProvider.getItinerary(ref, widget.shorts.itinerary.itineraryId.toString());
+                        // 로딩 상태 시작
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailItineraryScreen(_getItineraryProvider!, widget.shorts.title),
-                          ),
-                        );
+                        // 데이터를 불러옴
+                        await _shortsApiProvider.getItinerary(ref,
+                            widget.shorts.itinerary.itineraryId.toString());
+
+                        // 데이터를 불러왔을 때만 화면 이동
+                        final itinerary = ref.read(getItineraryProvider);
+                        if (itinerary != null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailItineraryScreen(
+                                  itinerary, widget.shorts.title),
+                            ),
+                          );
+
+                          // 필요한 상태 업데이트
+                          ref
+                              .read(BottomNavBlackProvider.notifier)
+                              .setBlack(false);
+                          ref
+                              .read(isPlayingShortsProvider.notifier)
+                              .setPlayingShorts(false);
+                        }
+
+                        // 로딩 상태 종료
                       },
-                      child: Icon(Icons.calendar_today_outlined, color: Colors.white, size: 27.0).pSymmetric(v: 5),
-                    ),
+                      child: Icon(Icons.calendar_today_outlined,
+                              color: Colors.white, size: 27.0)
+                          .pSymmetric(v: 5),
+                    )
                   ],
                 ),
               ],
@@ -251,12 +292,16 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                         children: [
                           Text(
                             titleText,
-                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             contentText,
                             style: textStyle,
-                            overflow: _isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
+                            overflow: _isExpanded
+                                ? TextOverflow.visible
+                                : TextOverflow.ellipsis,
                             maxLines: _isExpanded ? null : 1,
                             textDirection: ui.TextDirection.ltr,
                           ),

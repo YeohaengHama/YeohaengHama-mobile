@@ -9,9 +9,8 @@ import '../../../../diary/s_diary_detail.dart';
 import '../w/home_diary_holder.dart';
 
 class DiaryAllWidget extends ConsumerWidget {
-  final ShowDiaryAllResult data;
 
-  DiaryAllWidget({required this.data});
+  DiaryAllWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

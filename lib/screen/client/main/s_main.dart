@@ -1,3 +1,4 @@
+import 'package:fast_app_base/screen/client/main/search/provider/is_playing_shots.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:fast_app_base/common/common.dart';
@@ -109,6 +110,12 @@ class MainScreenState extends ConsumerState<MainScreen> with SingleTickerProvide
             } else {
               ref.read(BottomNavBlackProvider.notifier).setBlack(false);
               ref.read(isPlayingProvider.notifier).setPlaying(false);
+            }
+            if (tabs[index] == TabItem.home) {
+              ref.read(isPlayingShortsProvider.notifier).setPlayingShorts(true);
+            } else {
+              ref.read(isPlayingShortsProvider.notifier).setPlayingShorts(false);
+
             }
             _handleOnTapNavigationBarItem(index);
           },

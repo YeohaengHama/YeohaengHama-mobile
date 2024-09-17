@@ -557,6 +557,7 @@ class ItineraryApi {
         'mapx': addPickPlace.mapx.toString(),
         'mapy': addPickPlace.mapy.toString(),
         'memo': addPickPlace.memo,
+        'image' : addPickPlace.image
       };
 
       response = await _dio.post(

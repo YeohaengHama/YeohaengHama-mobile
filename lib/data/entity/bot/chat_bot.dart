@@ -11,10 +11,9 @@ class ChatbotResponse<T> with _$ChatbotResponse<T> {
     required String answer,
     required String type,
     required T? result,
-    List<Map<String, double>>? other, // 수정: null 허용
+    List<Other>? other, // 수정: Other 타입의 리스트로 변경
   }) = _ChatbotResponse<T>;
 
-  // 직접 fromJson 구현
   factory ChatbotResponse.fromJson(
       Map<String, dynamic> json,
       T Function(Object? json) fromJsonT,
@@ -27,48 +26,91 @@ class ChatbotResponse<T> with _$ChatbotResponse<T> {
       other: json['other'] == null
           ? null
           : (json['other'] as List<dynamic>)
-          .map((e) => Map<String, double>.from(e as Map))
+          .map((e) => Other.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
   }
 }
-@freezed
-class ShowDiaryAllResult with _$ShowDiaryAllResult {
-  const factory ShowDiaryAllResult({
-    required String keyword,
-    required List<Diary> diary,
-  }) = _ShowDiaryAllResult;
 
-  factory ShowDiaryAllResult.fromJson(Map<String, dynamic> json) => _$ShowDiaryAllResultFromJson(json);
+@freezed
+class Other with _$Other {
+  const factory Other({
+    required String question,
+    required String answerId,
+  }) = _Other;
+
+  factory Other.fromJson(Map<String, dynamic> json) => _$OtherFromJson(json);
 }
 
 @freezed
-class ShowDiaryPlaceResult with _$ShowDiaryPlaceResult {
-  const factory ShowDiaryPlaceResult({
-    required String keyword,
-    required List<Diary> diary,
-  }) = _ShowDiaryPlaceResult;
+class Place with _$Place {
+  const factory Place({
+    required String addr1,
+    String? addr2,
+    required String contentid,
+    required String contenttypeid,
+    String? tel,
+    required String title,
+    String? firstimage,
+    String? firstimage2,
+    required String mapx,
+    required String mapy,
+  }) = _Place;
 
-  factory ShowDiaryPlaceResult.fromJson(Map<String, dynamic> json) => _$ShowDiaryPlaceResultFromJson(json);
+  factory Place.fromJson(Map<String, dynamic> json) => _$PlaceFromJson(json);
 }
 
 @freezed
-class ShowPopularAreaResult with _$ShowPopularAreaResult {
-  const factory ShowPopularAreaResult({
-    required String first,
-    required String? second,
-    required String? third,
-  }) = _ShowPopularAreaResult;
+class Shorts with _$Shorts {
+  const factory Shorts({
+    required int id,
+    required String title,
+    required String videoUrl,
+  }) = _Shorts;
 
-  factory ShowPopularAreaResult.fromJson(Map<String, dynamic> json) => _$ShowPopularAreaResultFromJson(json);
+  factory Shorts.fromJson(Map<String, dynamic> json) => _$ShortsFromJson(json);
+}
+
+@freezed
+class Itinerary with _$Itinerary {
+  const factory Itinerary({
+    required int id,
+    required String area,
+    required String name,
+  }) = _Itinerary;
+
+  factory Itinerary.fromJson(Map<String, dynamic> json) => _$ItineraryFromJson(json);
 }
 
 @freezed
 class Diary with _$Diary {
   const factory Diary({
-    required int diaryId,
+    required int id,
     required String title,
+    required String content,
   }) = _Diary;
 
   factory Diary.fromJson(Map<String, dynamic> json) => _$DiaryFromJson(json);
+}
+
+@freezed
+class RandomPlace with _$RandomPlace {
+  const factory RandomPlace({
+    required String playNum,
+    required String playType,
+    required String addr1,
+    String? name,
+    String? image,
+  }) = _RandomPlace;
+
+  factory RandomPlace.fromJson(Map<String, dynamic> json) => _$RandomPlaceFromJson(json);
+}
+
+@freezed
+class RandomArea with _$RandomArea {
+  const factory RandomArea({
+    required String area,
+  }) = _RandomArea;
+
+  factory RandomArea.fromJson(Map<String, dynamic> json) => _$RandomAreaFromJson(json);
 }

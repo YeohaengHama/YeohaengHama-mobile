@@ -12,6 +12,7 @@ import '../../../../../data/memory/shorts/p_get_itinerary.dart';
 import '../../../../../data/network/itinerary_api.dart';
 import '../../../../../data/network/shorts_api.dart';
 import 'p_bottom_nav_visible.dart';
+import 'p_is_playing.dart';
 
 class VideoPlayerScreen extends ConsumerStatefulWidget {
   final String videoUrl;
@@ -63,10 +64,17 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
     }
 
     _focusNode.addListener(() {
-      setState(() {
-        _textFieldFocused = _focusNode.hasFocus;
-      });
+      if (_focusNode.hasFocus) {
+        setState(() {
+          _textFieldFocused = true;
+        });
+      } else {
+        setState(() {
+          _textFieldFocused = false;
+        });
+      }
     });
+
   }
 
   @override
@@ -117,6 +125,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
     final textStyle = TextStyle(color: Colors.white);
     final _shortsApiProvider = ref.read(shortsApiProvider);
     final _getItineraryProvider =ref.read(getItineraryProvider.notifier).state;
+
     return GestureDetector(
       onTap: _togglePlayPause,
       child: Stack(
@@ -205,6 +214,8 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                       await _shortsApiProvider.getItinerary(ref, widget.shorts.itinerary.itineraryId.toString());
 
                       Nav.push(DetailItineraryScreen(_getItineraryProvider!, widget.shorts.title));
+                      ref.read(isPlayingProvider.notifier).setPlaying(false);
+
                     },
                     child: Icon(Icons.calendar_today_outlined, color: Colors.white, size: 27.0).pSymmetric(v: 5))
                   ],

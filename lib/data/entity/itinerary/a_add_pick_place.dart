@@ -17,7 +17,8 @@ class AddPickPlace with _$AddPickPlace {
     String? startTime,
     String? endTime,
     String? memo,
-    int? placeId
+    int? placeId,
+    String? image
 
 
 }

@@ -2,6 +2,8 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_image_scroll_view.dart';
 import 'package:fast_app_base/common/widget/w_rounded_container.dart';
 import 'package:fast_app_base/data/entity/itinerary/a_check_itinerary.dart';
+import 'package:fast_app_base/screen/client/main/search/provider/bottom_nav_black.dart';
+import 'package:fast_app_base/screen/client/main/search/provider/is_playing_shots.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/itinerary/w_itinerary_place_holder_list.dart';
 
 import 'package:flutter/material.dart';
@@ -10,7 +12,6 @@ import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
 import '../../../../../../data/entity/diary/vo_detail_diary.dart';
 import '../../../../../../data/network/itinerary_api.dart';
-import '../p_is_playing.dart';
 
 
 class DetailItineraryScreen extends HookConsumerWidget {
@@ -25,7 +26,7 @@ class DetailItineraryScreen extends HookConsumerWidget {
     final customController = usePageController();
     final itineraryApi= ref.read(itineraryApiProvider);
     final shouldShowTitle = useState(false);
-    final isPlaying = ref.read(isPlayingProvider.notifier);
+    final isPlaying = ref.read(isPlayingShortsProvider.notifier);
 
     useEffect(() {
       final controller = customController;
@@ -70,7 +71,8 @@ class DetailItineraryScreen extends HookConsumerWidget {
                 icon: const Icon(Icons.arrow_back, color: Colors.black),
                 onPressed: () {
                   Navigator.pop(context);  // 뒤로 가기
-                  isPlaying.setPlaying(true);  // 뒤로 가기 아이콘을 눌렀을 때 실행
+                  isPlaying.setPlayingShorts(true);  // 뒤로 가기 아이콘을 눌렀을 때 실행
+                  ref.read(BottomNavBlackProvider.notifier).setBlack(true);
 
                 },
               ),

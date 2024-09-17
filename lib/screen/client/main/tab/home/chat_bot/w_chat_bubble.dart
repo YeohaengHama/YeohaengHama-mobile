@@ -1,15 +1,18 @@
+import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_type/w_itinerary.dart';
+import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_type/w_place_list.dart';
+import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_type/w_random_area.dart';
+import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_type/w_random_place.dart';
+import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_type/w_shorts.dart';
+import 'package:flutter/material.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_diary_all.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_diary_place.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_popular_area.dart';
-import 'package:flutter/material.dart';
-
-import '../../../../../../data/entity/bot/chat_bot.dart';
 import '../../../../../../data/entity/bot/chat_message.dart';
-
+import '../../../../../../data/entity/bot/chat_bot.dart';
 class ChatBubble<T> extends StatelessWidget {
   final ChatMessage<T> message;
-  final Function(String) onSendMessage; // 메시지를 전송하는 콜백
+  final Function(String) onSendMessage;
 
   const ChatBubble({required this.message, required this.onSendMessage});
 
@@ -47,22 +50,44 @@ class ChatBubble<T> extends StatelessWidget {
 
     // 메세지 본문 추가
     Widget mainContent;
-    switch (messageType) {
-      case 'showDiaryAll':
-        mainContent = DiaryAllWidget(data: message.result as ShowDiaryAllResult);
-        break;
-      case 'showDiaryPlace':
-        mainContent = DiaryPlaceWidget(data: message.result as ShowDiaryPlaceResult);
-        break;
-      case 'showPopularArea':
-        mainContent = PopularAreaWidget(data: message.result as ShowPopularAreaResult);
-        break;
-      default:
-        mainContent = Text(
-          message.text,
-          style: TextStyle(color: message.isUser ? Colors.white : AppColors.secondGrey),
-        );
+    try {
+      switch (messageType) {
+        case 'searchKeyword':
+          mainContent = PlaceListWidget(places: message.result as List<Place>);
+          break;
+        case 'searchShorts':
+        case 'randomShorts':
+          mainContent = ShortsWidget(shorts: message.result as Shorts);
+          break;
+        case 'searchItinerary':
+        case 'randomItinerary':
+          mainContent = ItineraryWidget(itinerary: message.result as Itinerary);
+          break;
+        case 'searchDiary':
+        case 'randomDiary':
+        // 적절한 다이어리 위젯을 사용
+          mainContent = DiaryAllWidget();
+          break;
+        case 'randomPlace':
+          mainContent = RandomPlaceWidget(randomPlace: message.result as RandomPlace);
+          break;
+        case 'randomArea':
+        // 적절한 랜덤 지역 위젯을 사용
+          mainContent = RandomAreaWidget(randomArea: message.result as RandomArea);
+          break;
+        default:
+          mainContent = Text(
+            message.text,
+            style: TextStyle(color: message.isUser ? Colors.white : AppColors.secondGrey),
+          );
+      }
+    } catch (e) {
+      mainContent = Text(
+        '오류 발생: ${e.toString()}',
+        style: TextStyle(color: Colors.red),
+      );
     }
+
     content.add(mainContent);
 
     // other 데이터가 존재하면 추가
@@ -95,14 +120,11 @@ class ChatBubble<T> extends StatelessWidget {
               ],
             ),
             SizedBox(height: 10),
-            ...message.other!.map((suggestion) {
-              final key = suggestion.keys.first;
-              // ':' 이후의 숫자를 제거
-              final cleanKey = key.split(':').first.trim();
+            ...message.other!.map((other) {
               return GestureDetector(
                 onTap: () {
                   // 클릭 시 메시지 전송
-                  onSendMessage(cleanKey);
+                  onSendMessage(other.question);
                 },
                 child: RoundedContainer(
                   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -110,7 +132,7 @@ class ChatBubble<T> extends StatelessWidget {
                   child: SizedBox(
                     child: Center(
                       child: Text(
-                        cleanKey,
+                        other.question,
                         style: TextStyle(color: AppColors.mainPurple, fontSize: 12),
                       ),
                     ),

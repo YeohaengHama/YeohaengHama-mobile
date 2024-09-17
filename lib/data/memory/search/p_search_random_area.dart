@@ -1,12 +1,12 @@
 import 'package:fast_app_base/data/entity/area/search_simple_toursim_result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final simpleAreaApiResponseProvider = StateNotifierProvider<SimpleAreaNotifier, List<SearchSimpleTourismResult>>((ref) {
-  return SimpleAreaNotifier();
+final randomAreaApiResponseProvider = StateNotifierProvider<RandomAreaNotifier, List<SearchSimpleTourismResult>>((ref) {
+  return RandomAreaNotifier();
 });
 
-class SimpleAreaNotifier extends StateNotifier<List<SearchSimpleTourismResult>> {
-  SimpleAreaNotifier() : super([]);
+class RandomAreaNotifier extends StateNotifier<List<SearchSimpleTourismResult>> {
+  RandomAreaNotifier() : super([]);
 
   String _contentTypeId= "";
   String _contentId = "";
