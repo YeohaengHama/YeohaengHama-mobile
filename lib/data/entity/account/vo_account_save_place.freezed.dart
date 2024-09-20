@@ -25,8 +25,12 @@ mixin _$AccountSavePlace {
   String get contentTypeID => throw _privateConstructorUsedError;
   Account get account => throw _privateConstructorUsedError;
 
+  /// Serializes this AccountSavePlace to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AccountSavePlace
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AccountSavePlaceCopyWith<AccountSavePlace> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$AccountSavePlaceCopyWithImpl<$Res, $Val extends AccountSavePlace>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AccountSavePlace
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class _$AccountSavePlaceCopyWithImpl<$Res, $Val extends AccountSavePlace>
     ) as $Val);
   }
 
+  /// Create a copy of AccountSavePlace
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AccountCopyWith<$Res> get account {
@@ -111,6 +119,8 @@ class __$$AccountSavePlaceImplCopyWithImpl<$Res>
       $Res Function(_$AccountSavePlaceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AccountSavePlace
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -176,12 +186,14 @@ class _$AccountSavePlaceImpl implements _AccountSavePlace {
             (identical(other.account, account) || other.account == account));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, placeNum, contentTypeID, account);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AccountSavePlace
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AccountSavePlaceImplCopyWith<_$AccountSavePlaceImpl> get copyWith =>
@@ -214,8 +226,11 @@ abstract class _AccountSavePlace implements AccountSavePlace {
   String get contentTypeID;
   @override
   Account get account;
+
+  /// Create a copy of AccountSavePlace
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AccountSavePlaceImplCopyWith<_$AccountSavePlaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

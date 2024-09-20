@@ -147,35 +147,39 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
 
     final currentLocation = NLatLng(position.latitude, position.longitude);
 
-    // 현재 위치 마커가 존재하면 제거
+    // 현재 위치 마커가 존재하면 삭제
     if (_currentLocationMarker != null) {
-      _controller.deleteOverlay(_currentLocationMarker! as NOverlayInfo);
+      final overlayInfo = NOverlayInfo(
+        type: NOverlayType.marker, // 마커 타입
+        id: _currentLocationMarker!.info.id, // 기존 마커의 ID
+      );
+      _controller.deleteOverlay(overlayInfo);
     }
 
     // 새로운 위치에 마커 생성 및 추가
     _currentLocationMarker = NMarker(
-      id: 'current_location',
+      id: 'current_location', // 고유 ID
       position: currentLocation,
       iconTintColor: AppColors.deepPurple,
       caption: NOverlayCaption(text: '현재 위치'),
     );
-    _controller.addOverlay(_currentLocationMarker!);
 
-    // 카메라를 현재 위치로 이동
-    _controller.updateCamera(
-      NCameraUpdate.fromCameraPosition(
-        NCameraPosition(
-          target: currentLocation,
-          zoom: 15.0,
-        ),
-      ),
-    );
+    // 새 마커 추가
+    _controller.addOverlay(_currentLocationMarker!);
   }
 
   void _refreshCurrentLocation() {
-    // 현재 위치를 강제로 새로고침하도록 트리거합니다.
-    _positionStreamSubscription?.pause();
-    _positionStreamSubscription?.resume();
+    if (_currentPosition != null && _isControllerInitialized) {
+      final currentLocation = NLatLng(_currentPosition!.latitude, _currentPosition!.longitude);
+      _controller.updateCamera(
+        NCameraUpdate.fromCameraPosition(
+          NCameraPosition(
+            target: currentLocation,
+            zoom: 15.0,
+          ),
+        ),
+      );
+    }
   }
 
   @override

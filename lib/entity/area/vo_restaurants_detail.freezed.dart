@@ -19,7 +19,9 @@ mixin _$RestaurantsDetail {
   Restaurant get restaurant => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RestaurantsDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RestaurantsDetailCopyWith<RestaurantsDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,6 +47,8 @@ class _$RestaurantsDetailCopyWithImpl<$Res, $Val extends RestaurantsDetail>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of RestaurantsDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -63,6 +67,8 @@ class _$RestaurantsDetailCopyWithImpl<$Res, $Val extends RestaurantsDetail>
     ) as $Val);
   }
 
+  /// Create a copy of RestaurantsDetail
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $RestaurantCopyWith<$Res> get restaurant {
@@ -94,6 +100,8 @@ class __$$RestaurantsDetailImplCopyWithImpl<$Res>
       $Res Function(_$RestaurantsDetailImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RestaurantsDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -142,7 +150,9 @@ class _$RestaurantsDetailImpl implements _RestaurantsDetail {
   @override
   int get hashCode => Object.hash(runtimeType, restaurant, content);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RestaurantsDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RestaurantsDetailImplCopyWith<_$RestaurantsDetailImpl> get copyWith =>
@@ -159,8 +169,11 @@ abstract class _RestaurantsDetail implements RestaurantsDetail {
   Restaurant get restaurant;
   @override
   String get content;
+
+  /// Create a copy of RestaurantsDetail
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RestaurantsDetailImplCopyWith<_$RestaurantsDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

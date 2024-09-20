@@ -26,8 +26,12 @@ mixin _$Place {
   String get placeName => throw _privateConstructorUsedError;
   Itinerary? get itinerary => throw _privateConstructorUsedError;
 
+  /// Serializes this Place to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Place
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PlaceCopyWith<Place> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -56,6 +60,8 @@ class _$PlaceCopyWithImpl<$Res, $Val extends Place>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Place
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -89,6 +95,8 @@ class _$PlaceCopyWithImpl<$Res, $Val extends Place>
     ) as $Val);
   }
 
+  /// Create a copy of Place
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ItineraryCopyWith<$Res>? get itinerary {
@@ -128,6 +136,8 @@ class __$$PlaceImplCopyWithImpl<$Res>
       _$PlaceImpl _value, $Res Function(_$PlaceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Place
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -206,12 +216,14 @@ class _$PlaceImpl implements _Place {
                 other.itinerary == itinerary));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, day, placeNum, placeName, itinerary);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Place
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PlaceImplCopyWith<_$PlaceImpl> get copyWith =>
@@ -245,8 +257,11 @@ abstract class _Place implements Place {
   String get placeName;
   @override
   Itinerary? get itinerary;
+
+  /// Create a copy of Place
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PlaceImplCopyWith<_$PlaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

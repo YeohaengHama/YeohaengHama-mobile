@@ -23,7 +23,9 @@ mixin _$Diary {
   List<String> get diaryImages => throw _privateConstructorUsedError;
   List<String> get diaryTag => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Diary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DiaryCopyWith<Diary> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -53,6 +55,8 @@ class _$DiaryCopyWithImpl<$Res, $Val extends Diary>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Diary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,6 +95,8 @@ class _$DiaryCopyWithImpl<$Res, $Val extends Diary>
     ) as $Val);
   }
 
+  /// Create a copy of Diary
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
@@ -127,6 +133,8 @@ class __$$DiaryImplCopyWithImpl<$Res>
       _$DiaryImpl _value, $Res Function(_$DiaryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Diary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -229,7 +237,9 @@ class _$DiaryImpl implements _Diary {
       const DeepCollectionEquality().hash(_diaryImages),
       const DeepCollectionEquality().hash(_diaryTag));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Diary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DiaryImplCopyWith<_$DiaryImpl> get copyWith =>
@@ -257,8 +267,11 @@ abstract class _Diary implements Diary {
   List<String> get diaryImages;
   @override
   List<String> get diaryTag;
+
+  /// Create a copy of Diary
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DiaryImplCopyWith<_$DiaryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

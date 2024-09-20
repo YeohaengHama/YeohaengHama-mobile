@@ -22,8 +22,12 @@ CommentList _$CommentListFromJson(Map<String, dynamic> json) {
 mixin _$CommentList {
   List<Comment> get comment => throw _privateConstructorUsedError;
 
+  /// Serializes this CommentList to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CommentList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CommentListCopyWith<CommentList> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$CommentListCopyWithImpl<$Res, $Val extends CommentList>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CommentList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$CommentListImplCopyWithImpl<$Res>
       _$CommentListImpl _value, $Res Function(_$CommentListImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CommentList
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -124,12 +132,14 @@ class _$CommentListImpl implements _CommentList {
             const DeepCollectionEquality().equals(other._comment, _comment));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_comment));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CommentList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CommentListImplCopyWith<_$CommentListImpl> get copyWith =>
@@ -152,8 +162,11 @@ abstract class _CommentList implements CommentList {
 
   @override
   List<Comment> get comment;
+
+  /// Create a copy of CommentList
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CommentListImplCopyWith<_$CommentListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -169,8 +182,12 @@ mixin _$Comment {
   String get comment => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
 
+  /// Serializes this Comment to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Comment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CommentCopyWith<Comment> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -194,6 +211,8 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Comment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -222,6 +241,8 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
     ) as $Val);
   }
 
+  /// Create a copy of Comment
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AccountCopyWith<$Res> get account {
@@ -252,6 +273,8 @@ class __$$CommentImplCopyWithImpl<$Res>
       _$CommentImpl _value, $Res Function(_$CommentImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Comment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -319,12 +342,14 @@ class _$CommentImpl implements _Comment {
             (identical(other.date, date) || other.date == date));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, commentId, account, comment, date);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Comment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CommentImplCopyWith<_$CommentImpl> get copyWith =>
@@ -355,8 +380,11 @@ abstract class _Comment implements Comment {
   String get comment;
   @override
   DateTime get date;
+
+  /// Create a copy of Comment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CommentImplCopyWith<_$CommentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -372,8 +400,12 @@ mixin _$Account {
   String get photoUrl => throw _privateConstructorUsedError;
   String get accountRole => throw _privateConstructorUsedError;
 
+  /// Serializes this Account to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Account
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AccountCopyWith<Account> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -395,6 +427,8 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Account
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -442,6 +476,8 @@ class __$$AccountImplCopyWithImpl<$Res>
       _$AccountImpl _value, $Res Function(_$AccountImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Account
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -511,12 +547,14 @@ class _$AccountImpl implements _Account {
                 other.accountRole == accountRole));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, nickname, photoUrl, accountRole);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Account
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
@@ -547,8 +585,11 @@ abstract class _Account implements Account {
   String get photoUrl;
   @override
   String get accountRole;
+
+  /// Create a copy of Account
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

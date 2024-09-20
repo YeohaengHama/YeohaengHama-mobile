@@ -29,8 +29,12 @@ mixin _$SearchLocationResult {
   String get mapy => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
 
+  /// Serializes this SearchLocationResult to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SearchLocationResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SearchLocationResultCopyWith<SearchLocationResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -63,6 +67,8 @@ class _$SearchLocationResultCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SearchLocationResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -139,6 +145,8 @@ class __$$SearchLocationResultImplCopyWithImpl<$Res>
       $Res Function(_$SearchLocationResultImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SearchLocationResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -244,12 +252,14 @@ class _$SearchLocationResultImpl implements _SearchLocationResult {
             (identical(other.title, title) || other.title == title));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, addr1, addr2, contentid,
       contenttypeid, firstimage, mapx, mapy, title);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchLocationResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchLocationResultImplCopyWith<_$SearchLocationResultImpl>
@@ -295,8 +305,11 @@ abstract class _SearchLocationResult implements SearchLocationResult {
   String get mapy;
   @override
   String get title;
+
+  /// Create a copy of SearchLocationResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchLocationResultImplCopyWith<_$SearchLocationResultImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

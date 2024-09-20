@@ -8,9 +8,12 @@ class AllItinerary with _$AllItinerary {
   const factory AllItinerary({
     required String startDate,
     required String endDate,
+    required String area,
     required int id,
     required String name,
     required int placeLength,
+    required int sharedAccount,
+    required bool diary
 
   }
       ) = _AllItinerary;

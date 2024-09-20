@@ -26,8 +26,12 @@ mixin _$OpenApiArea {
   String get contentTypeId => throw _privateConstructorUsedError;
   String get mobileOS => throw _privateConstructorUsedError;
 
+  /// Serializes this OpenApiArea to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of OpenApiArea
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OpenApiAreaCopyWith<OpenApiArea> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$OpenApiAreaCopyWithImpl<$Res, $Val extends OpenApiArea>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OpenApiArea
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,6 +120,8 @@ class __$$OpenApiAreaImplCopyWithImpl<$Res>
       _$OpenApiAreaImpl _value, $Res Function(_$OpenApiAreaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OpenApiArea
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -194,12 +202,14 @@ class _$OpenApiAreaImpl implements _OpenApiArea {
                 other.mobileOS == mobileOS));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, numOfRows, page, keyword, contentTypeId, mobileOS);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OpenApiArea
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OpenApiAreaImplCopyWith<_$OpenApiAreaImpl> get copyWith =>
@@ -234,8 +244,11 @@ abstract class _OpenApiArea implements OpenApiArea {
   String get contentTypeId;
   @override
   String get mobileOS;
+
+  /// Create a copy of OpenApiArea
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OpenApiAreaImplCopyWith<_$OpenApiAreaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

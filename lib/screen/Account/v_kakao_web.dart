@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../common/constant/app_colors.dart';
+import '../../common/constants.dart';
 import '../../data/entity/account/vo_current_account.dart';
 import '../client/main/s_main.dart';
 import '../../data/memory/account/user_provider.dart';
@@ -32,7 +33,7 @@ class _KakaoLoginWebViewState extends ConsumerState<KakaoLoginWebView> {
         ),
       )
       ..loadRequest(
-        Uri.parse('https://kauth.kakao.com/oauth/authorize?client_id=a9d1711e66ed62d5be76957294ab0a9f&redirect_uri=https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api/kakao/login&response_type=code'),
+        Uri.parse('https://kauth.kakao.com/oauth/authorize?client_id=a9d1711e66ed62d5be76957294ab0a9f&redirect_uri=${serverUrl}/api/kakao/login&response_type=code'),
       );
   }
 

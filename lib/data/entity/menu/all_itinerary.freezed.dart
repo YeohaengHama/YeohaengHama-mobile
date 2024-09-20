@@ -22,12 +22,19 @@ AllItinerary _$AllItineraryFromJson(Map<String, dynamic> json) {
 mixin _$AllItinerary {
   String get startDate => throw _privateConstructorUsedError;
   String get endDate => throw _privateConstructorUsedError;
+  String get area => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get placeLength => throw _privateConstructorUsedError;
+  int get sharedAccount => throw _privateConstructorUsedError;
+  bool get diary => throw _privateConstructorUsedError;
 
+  /// Serializes this AllItinerary to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AllItinerary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AllItineraryCopyWith<AllItinerary> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -39,7 +46,14 @@ abstract class $AllItineraryCopyWith<$Res> {
       _$AllItineraryCopyWithImpl<$Res, AllItinerary>;
   @useResult
   $Res call(
-      {String startDate, String endDate, int id, String name, int placeLength});
+      {String startDate,
+      String endDate,
+      String area,
+      int id,
+      String name,
+      int placeLength,
+      int sharedAccount,
+      bool diary});
 }
 
 /// @nodoc
@@ -52,14 +66,19 @@ class _$AllItineraryCopyWithImpl<$Res, $Val extends AllItinerary>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AllItinerary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? startDate = null,
     Object? endDate = null,
+    Object? area = null,
     Object? id = null,
     Object? name = null,
     Object? placeLength = null,
+    Object? sharedAccount = null,
+    Object? diary = null,
   }) {
     return _then(_value.copyWith(
       startDate: null == startDate
@@ -69,6 +88,10 @@ class _$AllItineraryCopyWithImpl<$Res, $Val extends AllItinerary>
       endDate: null == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      area: null == area
+          ? _value.area
+          : area // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -82,6 +105,14 @@ class _$AllItineraryCopyWithImpl<$Res, $Val extends AllItinerary>
           ? _value.placeLength
           : placeLength // ignore: cast_nullable_to_non_nullable
               as int,
+      sharedAccount: null == sharedAccount
+          ? _value.sharedAccount
+          : sharedAccount // ignore: cast_nullable_to_non_nullable
+              as int,
+      diary: null == diary
+          ? _value.diary
+          : diary // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -95,7 +126,14 @@ abstract class _$$AllItineraryImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String startDate, String endDate, int id, String name, int placeLength});
+      {String startDate,
+      String endDate,
+      String area,
+      int id,
+      String name,
+      int placeLength,
+      int sharedAccount,
+      bool diary});
 }
 
 /// @nodoc
@@ -106,14 +144,19 @@ class __$$AllItineraryImplCopyWithImpl<$Res>
       _$AllItineraryImpl _value, $Res Function(_$AllItineraryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AllItinerary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? startDate = null,
     Object? endDate = null,
+    Object? area = null,
     Object? id = null,
     Object? name = null,
     Object? placeLength = null,
+    Object? sharedAccount = null,
+    Object? diary = null,
   }) {
     return _then(_$AllItineraryImpl(
       startDate: null == startDate
@@ -123,6 +166,10 @@ class __$$AllItineraryImplCopyWithImpl<$Res>
       endDate: null == endDate
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
+              as String,
+      area: null == area
+          ? _value.area
+          : area // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -136,6 +183,14 @@ class __$$AllItineraryImplCopyWithImpl<$Res>
           ? _value.placeLength
           : placeLength // ignore: cast_nullable_to_non_nullable
               as int,
+      sharedAccount: null == sharedAccount
+          ? _value.sharedAccount
+          : sharedAccount // ignore: cast_nullable_to_non_nullable
+              as int,
+      diary: null == diary
+          ? _value.diary
+          : diary // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -146,9 +201,12 @@ class _$AllItineraryImpl implements _AllItinerary {
   const _$AllItineraryImpl(
       {required this.startDate,
       required this.endDate,
+      required this.area,
       required this.id,
       required this.name,
-      required this.placeLength});
+      required this.placeLength,
+      required this.sharedAccount,
+      required this.diary});
 
   factory _$AllItineraryImpl.fromJson(Map<String, dynamic> json) =>
       _$$AllItineraryImplFromJson(json);
@@ -158,15 +216,21 @@ class _$AllItineraryImpl implements _AllItinerary {
   @override
   final String endDate;
   @override
+  final String area;
+  @override
   final int id;
   @override
   final String name;
   @override
   final int placeLength;
+  @override
+  final int sharedAccount;
+  @override
+  final bool diary;
 
   @override
   String toString() {
-    return 'AllItinerary(startDate: $startDate, endDate: $endDate, id: $id, name: $name, placeLength: $placeLength)';
+    return 'AllItinerary(startDate: $startDate, endDate: $endDate, area: $area, id: $id, name: $name, placeLength: $placeLength, sharedAccount: $sharedAccount, diary: $diary)';
   }
 
   @override
@@ -177,18 +241,24 @@ class _$AllItineraryImpl implements _AllItinerary {
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.area, area) || other.area == area) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.placeLength, placeLength) ||
-                other.placeLength == placeLength));
+                other.placeLength == placeLength) &&
+            (identical(other.sharedAccount, sharedAccount) ||
+                other.sharedAccount == sharedAccount) &&
+            (identical(other.diary, diary) || other.diary == diary));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, startDate, endDate, id, name, placeLength);
+  int get hashCode => Object.hash(runtimeType, startDate, endDate, area, id,
+      name, placeLength, sharedAccount, diary);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AllItinerary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AllItineraryImplCopyWith<_$AllItineraryImpl> get copyWith =>
@@ -206,9 +276,12 @@ abstract class _AllItinerary implements AllItinerary {
   const factory _AllItinerary(
       {required final String startDate,
       required final String endDate,
+      required final String area,
       required final int id,
       required final String name,
-      required final int placeLength}) = _$AllItineraryImpl;
+      required final int placeLength,
+      required final int sharedAccount,
+      required final bool diary}) = _$AllItineraryImpl;
 
   factory _AllItinerary.fromJson(Map<String, dynamic> json) =
       _$AllItineraryImpl.fromJson;
@@ -218,13 +291,22 @@ abstract class _AllItinerary implements AllItinerary {
   @override
   String get endDate;
   @override
+  String get area;
+  @override
   int get id;
   @override
   String get name;
   @override
   int get placeLength;
   @override
-  @JsonKey(ignore: true)
+  int get sharedAccount;
+  @override
+  bool get diary;
+
+  /// Create a copy of AllItinerary
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AllItineraryImplCopyWith<_$AllItineraryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

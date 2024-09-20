@@ -5,8 +5,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../common/constants.dart';
 import '../../screen/client/main/search/provider/is_loading_provider.dart';
+import '../entity/account/show_all_account.dart';
 import '../entity/search/vo_search_diary_area.dart' as SearchDiaryArea;
 import '../entity/shorts/vo_shorts_read.dart';
+import '../memory/account/all_account_provider.dart';
 import '../memory/shorts/p_shorts_search.dart';
 
 final SearchApiProvider = Provider<SearchApi>((ref) => SearchApi());
@@ -104,6 +106,36 @@ class SearchApi {
     } catch (e) {
       print('An exception occurred: $e');
       throw e;
+    }
+  }
+  Future<void> searchAccount(WidgetRef ref, String name) async {
+    final url = '$baseUrl/search/account';
+
+    try {
+      final response = await _dio.post(
+          url,
+          data: {
+            "keyWord": name,
+            "numOfRows": 3,
+            "page": 0
+          }
+      );
+
+      if (response.statusCode == 200) {
+        List<dynamic> data = response.data['data'];
+        List<ShowAllAccount> accounts = data.map((account) => ShowAllAccount.fromJson(account)).toList();
+        print(accounts);
+        final accountProvider = ref.read(allAccountProvider.notifier);
+        accountProvider.addAccount(accounts);
+      } else if (response.statusCode == 401) {
+        print('error');
+        return null;
+      } else {
+        print('실패. 상태 코드: ${response.statusCode}');
+        throw Exception('실패. 상태 코드: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('유저 목록이 비어있습니다.');
     }
   }
   }

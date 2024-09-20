@@ -19,7 +19,9 @@ mixin _$TourismDetail {
   Tourism get tourism => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TourismDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TourismDetailCopyWith<TourismDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,6 +47,8 @@ class _$TourismDetailCopyWithImpl<$Res, $Val extends TourismDetail>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TourismDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -63,6 +67,8 @@ class _$TourismDetailCopyWithImpl<$Res, $Val extends TourismDetail>
     ) as $Val);
   }
 
+  /// Create a copy of TourismDetail
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TourismCopyWith<$Res> get tourism {
@@ -94,6 +100,8 @@ class __$$TourismDetailImplCopyWithImpl<$Res>
       _$TourismDetailImpl _value, $Res Function(_$TourismDetailImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TourismDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -140,7 +148,9 @@ class _$TourismDetailImpl implements _TourismDetail {
   @override
   int get hashCode => Object.hash(runtimeType, tourism, content);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TourismDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TourismDetailImplCopyWith<_$TourismDetailImpl> get copyWith =>
@@ -156,8 +166,11 @@ abstract class _TourismDetail implements TourismDetail {
   Tourism get tourism;
   @override
   String get content;
+
+  /// Create a copy of TourismDetail
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TourismDetailImplCopyWith<_$TourismDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

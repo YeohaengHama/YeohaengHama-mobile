@@ -23,8 +23,12 @@ mixin _$CheckWriteReview {
   String get placeNum => throw _privateConstructorUsedError;
   String get contentTypeId => throw _privateConstructorUsedError;
 
+  /// Serializes this CheckWriteReview to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CheckWriteReview
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CheckWriteReviewCopyWith<CheckWriteReview> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$CheckWriteReviewCopyWithImpl<$Res, $Val extends CheckWriteReview>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CheckWriteReview
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$CheckWriteReviewImplCopyWithImpl<$Res>
       $Res Function(_$CheckWriteReviewImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CheckWriteReview
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -135,11 +143,13 @@ class _$CheckWriteReviewImpl implements _CheckWriteReview {
                 other.contentTypeId == contentTypeId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, placeNum, contentTypeId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CheckWriteReview
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CheckWriteReviewImplCopyWith<_$CheckWriteReviewImpl> get copyWith =>
@@ -166,8 +176,11 @@ abstract class _CheckWriteReview implements CheckWriteReview {
   String get placeNum;
   @override
   String get contentTypeId;
+
+  /// Create a copy of CheckWriteReview
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CheckWriteReviewImplCopyWith<_$CheckWriteReviewImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

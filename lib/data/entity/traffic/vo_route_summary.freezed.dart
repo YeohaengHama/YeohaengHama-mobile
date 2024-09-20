@@ -23,8 +23,12 @@ mixin _$RoutePoint {
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
 
+  /// Serializes this RoutePoint to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RoutePoint
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RoutePointCopyWith<RoutePoint> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$RoutePointCopyWithImpl<$Res, $Val extends RoutePoint>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of RoutePoint
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$RoutePointImplCopyWithImpl<$Res>
       _$RoutePointImpl _value, $Res Function(_$RoutePointImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RoutePoint
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -134,11 +142,13 @@ class _$RoutePointImpl implements _RoutePoint {
                 other.longitude == longitude));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, latitude, longitude);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RoutePoint
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RoutePointImplCopyWith<_$RoutePointImpl> get copyWith =>
@@ -164,8 +174,11 @@ abstract class _RoutePoint implements RoutePoint {
   double get latitude;
   @override
   double get longitude;
+
+  /// Create a copy of RoutePoint
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RoutePointImplCopyWith<_$RoutePointImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -181,8 +194,12 @@ mixin _$RouteSummary {
   int get distance => throw _privateConstructorUsedError;
   int get taxiFare => throw _privateConstructorUsedError;
 
+  /// Serializes this RouteSummary to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of RouteSummary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RouteSummaryCopyWith<RouteSummary> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -206,6 +223,8 @@ class _$RouteSummaryCopyWithImpl<$Res, $Val extends RouteSummary>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of RouteSummary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -254,6 +273,8 @@ class __$$RouteSummaryImplCopyWithImpl<$Res>
       _$RouteSummaryImpl _value, $Res Function(_$RouteSummaryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of RouteSummary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -330,12 +351,14 @@ class _$RouteSummaryImpl implements _RouteSummary {
                 other.taxiFare == taxiFare));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(_path), duration, distance, taxiFare);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of RouteSummary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RouteSummaryImplCopyWith<_$RouteSummaryImpl> get copyWith =>
@@ -367,8 +390,11 @@ abstract class _RouteSummary implements RouteSummary {
   int get distance;
   @override
   int get taxiFare;
+
+  /// Create a copy of RouteSummary
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RouteSummaryImplCopyWith<_$RouteSummaryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -381,8 +407,12 @@ CarTrafficInfo _$CarTrafficInfoFromJson(Map<String, dynamic> json) {
 mixin _$CarTrafficInfo {
   List<RouteSummary> get trafast => throw _privateConstructorUsedError;
 
+  /// Serializes this CarTrafficInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CarTrafficInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CarTrafficInfoCopyWith<CarTrafficInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -406,6 +436,8 @@ class _$CarTrafficInfoCopyWithImpl<$Res, $Val extends CarTrafficInfo>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CarTrafficInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -439,6 +471,8 @@ class __$$CarTrafficInfoImplCopyWithImpl<$Res>
       _$CarTrafficInfoImpl _value, $Res Function(_$CarTrafficInfoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CarTrafficInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -483,12 +517,14 @@ class _$CarTrafficInfoImpl implements _CarTrafficInfo {
             const DeepCollectionEquality().equals(other._trafast, _trafast));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_trafast));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CarTrafficInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CarTrafficInfoImplCopyWith<_$CarTrafficInfoImpl> get copyWith =>
@@ -512,8 +548,11 @@ abstract class _CarTrafficInfo implements CarTrafficInfo {
 
   @override
   List<RouteSummary> get trafast;
+
+  /// Create a copy of CarTrafficInfo
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CarTrafficInfoImplCopyWith<_$CarTrafficInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

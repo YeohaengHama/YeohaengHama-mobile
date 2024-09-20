@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../data/network/diary_api.dart';
 import '../client/main/menu/my_trip/diary/f_my_diary.dart';
-import '../client/main/menu/my_trip/itnierary/f_my_itnerary.dart';
+import '../client/main/menu/my_trip/itnierary/f_my_itinerary.dart';
 
 
 
@@ -92,7 +92,7 @@ class _UserManagementState extends ConsumerState<UserManagement> with SingleTick
   Future<Widget> switchTabFragment() async {
     switch (currentIndex) {
       case 0:
-        return const MyItneraryFragment();
+        return const MyItineraryFragment();
       case 1:
         return const MyReviewFragment();
       case 2:

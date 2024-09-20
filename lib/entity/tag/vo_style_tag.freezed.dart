@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$StyleTag {
   String get style => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StyleTag
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $StyleTagCopyWith<StyleTag> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -41,6 +43,8 @@ class _$StyleTagCopyWithImpl<$Res, $Val extends StyleTag>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of StyleTag
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -74,6 +78,8 @@ class __$$StyleTagImplCopyWithImpl<$Res>
       _$StyleTagImpl _value, $Res Function(_$StyleTagImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of StyleTag
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -112,7 +118,9 @@ class _$StyleTagImpl implements _StyleTag {
   @override
   int get hashCode => Object.hash(runtimeType, style);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of StyleTag
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$StyleTagImplCopyWith<_$StyleTagImpl> get copyWith =>
@@ -124,8 +132,11 @@ abstract class _StyleTag implements StyleTag {
 
   @override
   String get style;
+
+  /// Create a copy of StyleTag
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$StyleTagImplCopyWith<_$StyleTagImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

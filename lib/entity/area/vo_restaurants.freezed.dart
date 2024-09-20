@@ -22,7 +22,9 @@ mixin _$Restaurant {
   List<String> get retaurantImages => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Restaurant
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $RestaurantCopyWith<Restaurant> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +53,8 @@ class _$RestaurantCopyWithImpl<$Res, $Val extends Restaurant>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Restaurant
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -109,6 +113,8 @@ class __$$RestaurantImplCopyWithImpl<$Res>
       _$RestaurantImpl _value, $Res Function(_$RestaurantImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Restaurant
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -196,7 +202,9 @@ class _$RestaurantImpl implements _Restaurant {
       const DeepCollectionEquality().hash(_retaurantImages),
       content);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Restaurant
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$RestaurantImplCopyWith<_$RestaurantImpl> get copyWith =>
@@ -221,8 +229,11 @@ abstract class _Restaurant implements Restaurant {
   List<String> get retaurantImages;
   @override
   String get content;
+
+  /// Create a copy of Restaurant
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RestaurantImplCopyWith<_$RestaurantImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -31,8 +31,12 @@ mixin _$Package {
   bool get isSdk => throw _privateConstructorUsedError;
   bool get isDirectDependency => throw _privateConstructorUsedError;
 
+  /// Serializes this Package to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Package
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PackageCopyWith<Package> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -64,6 +68,8 @@ class _$PackageCopyWithImpl<$Res, $Val extends Package>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Package
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,6 +157,8 @@ class __$$PackageImplCopyWithImpl<$Res>
       _$PackageImpl _value, $Res Function(_$PackageImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Package
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -283,7 +291,7 @@ class _$PackageImpl implements _Package {
                 other.isDirectDependency == isDirectDependency));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -298,7 +306,9 @@ class _$PackageImpl implements _Package {
       isSdk,
       isDirectDependency);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Package
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PackageImplCopyWith<_$PackageImpl> get copyWith =>
@@ -347,8 +357,11 @@ abstract class _Package implements Package {
   bool get isSdk;
   @override
   bool get isDirectDependency;
+
+  /// Create a copy of Package
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PackageImplCopyWith<_$PackageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

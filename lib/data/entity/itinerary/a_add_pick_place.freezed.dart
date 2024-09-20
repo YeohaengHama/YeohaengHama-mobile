@@ -33,8 +33,12 @@ mixin _$AddPickPlace {
   int? get placeId => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
 
+  /// Serializes this AddPickPlace to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AddPickPlace
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AddPickPlaceCopyWith<AddPickPlace> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -70,6 +74,8 @@ class _$AddPickPlaceCopyWithImpl<$Res, $Val extends AddPickPlace>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AddPickPlace
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -170,6 +176,8 @@ class __$$AddPickPlaceImplCopyWithImpl<$Res>
       _$AddPickPlaceImpl _value, $Res Function(_$AddPickPlaceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AddPickPlace
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -312,12 +320,14 @@ class _$AddPickPlaceImpl implements _AddPickPlace {
             (identical(other.image, image) || other.image == image));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, day, placeType, placeNum,
       placeName, addr1, mapx, mapy, startTime, endTime, memo, placeId, image);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddPickPlace
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddPickPlaceImplCopyWith<_$AddPickPlaceImpl> get copyWith =>
@@ -373,8 +383,11 @@ abstract class _AddPickPlace implements AddPickPlace {
   int? get placeId;
   @override
   String? get image;
+
+  /// Create a copy of AddPickPlace
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddPickPlaceImplCopyWith<_$AddPickPlaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -22,7 +22,9 @@ mixin _$ChatMessage<T> {
   T? get result => throw _privateConstructorUsedError; // Generic result
   List<Other>? get other => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChatMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChatMessageCopyWith<T, ChatMessage<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +49,8 @@ class _$ChatMessageCopyWithImpl<T, $Res, $Val extends ChatMessage<T>>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ChatMessage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,6 +105,8 @@ class __$$ChatMessageImplCopyWithImpl<T, $Res>
       _$ChatMessageImpl<T> _value, $Res Function(_$ChatMessageImpl<T>) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChatMessage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -193,7 +199,9 @@ class _$ChatMessageImpl<T> implements _ChatMessage<T> {
       const DeepCollectionEquality().hash(result),
       const DeepCollectionEquality().hash(_other));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChatMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChatMessageImplCopyWith<T, _$ChatMessageImpl<T>> get copyWith =>
@@ -214,13 +222,16 @@ abstract class _ChatMessage<T> implements ChatMessage<T> {
   @override
   bool get isUser;
   @override
-  String get type;
-  @override // Message type
-  T? get result;
-  @override // Generic result
-  List<Other>? get other;
+  String get type; // Message type
   @override
-  @JsonKey(ignore: true)
+  T? get result; // Generic result
+  @override
+  List<Other>? get other;
+
+  /// Create a copy of ChatMessage
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChatMessageImplCopyWith<T, _$ChatMessageImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

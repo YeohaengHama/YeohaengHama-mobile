@@ -19,7 +19,9 @@ mixin _$FloatingButtonState {
   bool get isExpanded => throw _privateConstructorUsedError;
   bool get isSmall => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FloatingButtonState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FloatingButtonStateCopyWith<FloatingButtonState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$FloatingButtonStateCopyWithImpl<$Res, $Val extends FloatingButtonState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FloatingButtonState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -81,6 +85,8 @@ class __$$FloatingButtonStateImplCopyWithImpl<$Res>
       $Res Function(_$FloatingButtonStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FloatingButtonState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,7 +134,9 @@ class _$FloatingButtonStateImpl implements _FloatingButtonState {
   @override
   int get hashCode => Object.hash(runtimeType, isExpanded, isSmall);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FloatingButtonState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FloatingButtonStateImplCopyWith<_$FloatingButtonStateImpl> get copyWith =>
@@ -144,8 +152,11 @@ abstract class _FloatingButtonState implements FloatingButtonState {
   bool get isExpanded;
   @override
   bool get isSmall;
+
+  /// Create a copy of FloatingButtonState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FloatingButtonStateImplCopyWith<_$FloatingButtonStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

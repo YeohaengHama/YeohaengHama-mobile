@@ -270,4 +270,5 @@ class UserApi {
       print('일기 목록이 비어있습니다.');
     }
   }
+
 }

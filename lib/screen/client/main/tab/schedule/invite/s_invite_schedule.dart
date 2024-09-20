@@ -9,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../common/common.dart';
 import '../../../../../../data/memory/account/all_account_provider.dart';
 import '../../../../../../data/memory/itinerary/itinerary_check_provider.dart';
-
+import '../../../../../../data/network/search_api.dart';
 class InvateSchedule extends ConsumerWidget {
   const InvateSchedule({super.key});
 
@@ -17,16 +17,18 @@ class InvateSchedule extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final itinerary = ref.watch(itineraryCheckProvider);
     final accountsProvider = ref.watch(allAccountProvider);
-
+    final _SearchApiProvider = ref.read(SearchApiProvider);
     final itineraryApi = ItineraryApi();
-    String accountId = '';
-    final sharedAccounts = itinerary!.sharedAccount
-        .where((sharedAccount) => sharedAccount.id != itinerary.account.id)
-        .toList();
+    String nickName = '';
+    final filteredAccounts = accountsProvider.where((account) =>
+    ![itinerary!.account.id, ...itinerary.sharedAccount.map((sharedAccount) => sharedAccount.id)]
+        .contains(account.id)).toList(); // 하마친구 필터링
     final ScrollController _scrollControlle = ScrollController();
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0.0,
         leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios_rounded),
             onPressed: () {
@@ -39,7 +41,7 @@ class InvateSchedule extends ConsumerWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              '${itinerary.name}'
+              '${itinerary!.name}'
                   .text
                   .bold
                   .size(20)
@@ -51,62 +53,62 @@ class InvateSchedule extends ConsumerWidget {
                   .size(14)
                   .color(AppColors.secondGrey)
                   .make(),
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.end,
-              //   children: [
-              //     Container(
-              //       width: 190,
-              //       child: TextField(
-              //         cursorColor: AppColors.mainPurple,
-              //         onChanged: (value) {
-              //           accountId = value;
-              //         },
-              //         decoration: const InputDecoration(
-              //           hintText: '사용자 코드를 입력해주세요.',
-              //           hintStyle: TextStyle(
-              //             color: AppColors.forthGrey,
-              //           ),
-              //           border: UnderlineInputBorder(
-              //             borderSide: BorderSide(
-              //               color: AppColors.mainPurple,
-              //               width: 1,
-              //             ),
-              //           ),
-              //           enabledBorder: UnderlineInputBorder(
-              //             borderSide: BorderSide(
-              //               color: AppColors.mainPurple,
-              //               width: 0.5,
-              //             ),
-              //           ),
-              //           focusedBorder: UnderlineInputBorder(
-              //             borderSide: BorderSide(
-              //               color: AppColors.mainPurple,
-              //               width: 1,
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     Width(10),
-              //     // RoundButton(
-              //     //   height: 40,
-              //     //   bgColor: Colors.transparent,
-              //     //   borderColor: AppColors.mainPurple,
-              //     //   borderRadius: 5,
-              //     //   text: '초대',
-              //     //   textColor: AppColors.mainPurple,
-              //     //   onTap: () async {
-              //     //     await itineraryApi.inviteItinerary(
-              //     //         accountId, itinerary.itineraryId, context, ref);
-              //     //   },
-              //     // ),
-              //   ],
-              // ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    width: 190,
+                    child: TextField(
+                      cursorColor: AppColors.mainPurple,
+                      onChanged: (value) {
+                        nickName = value;
+                      },
+                      decoration: const InputDecoration(
+                        hintText: '닉네임을 입력해주세요.',
+                        hintStyle: TextStyle(
+                          color: AppColors.forthGrey,
+                        ),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.mainPurple,
+                            width: 1,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.mainPurple,
+                            width: 0.5,
+                          ),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.mainPurple,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Width(10),
+                  RoundButton(
+                    height: 40,
+                    bgColor: Colors.transparent,
+                    borderColor: AppColors.mainPurple,
+                    borderRadius: 5,
+                    text: '검색',
+                    textColor: AppColors.mainPurple,
+                    onTap: () async {
+                      await _SearchApiProvider.searchAccount(ref, nickName);
+
+                    },
+                  ),
+                ],
+              ),
               Height(15),
               Row(
                 children: [
-                  '여행친구'.text.bold.color(AppColors.primaryGrey).make(),
-                  '${sharedAccounts.length}'
+                  '하마 친구'.text.bold.color(AppColors.primaryGrey).make(), // 하마 친구로 변경
+                  '${filteredAccounts.length}'
                       .text
                       .bold
                       .color(AppColors.mainPurple)
@@ -114,13 +116,39 @@ class InvateSchedule extends ConsumerWidget {
                 ],
               ),
               Expanded(
-                child: FriendsListWidget(),
+                child: ListView.builder(
+                  controller: _scrollControlle,
+                  itemCount: filteredAccounts.length,
+                  itemBuilder: (context, index) {
+                    final account = filteredAccounts[index];
+                    return Row(
+                      children: [
+                        ProfileImage(photoUrl: account.photoUrl, width: 40, height: 40),
+                        Width(10),
+                        '${account.nickname}'.text.bold.color(AppColors.primaryGrey).make(),
+                        spacer,
+                        RoundButton(
+                          height: 30,
+                          bgColor: Colors.transparent,
+                          borderColor: AppColors.mainPurple,
+                          borderRadius: 5,
+                          text: '초대',
+                          textColor: AppColors.mainPurple,
+                          onTap: () async {
+                            await itineraryApi.inviteItinerary(
+                                account.id.toString(), itinerary.itineraryId, context, ref);
+                          },
+                        ),
+                      ],
+                    ).pSymmetric(v: 10);
+                  },
+                ),
               ),
             ],
           ).pSymmetric(h: 30),
           DraggableScrollableSheet(
-            initialChildSize: 0.2,
-            minChildSize: 0.1,
+            initialChildSize: 0.5,
+            minChildSize: 0.2,
             maxChildSize: 0.8,
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(

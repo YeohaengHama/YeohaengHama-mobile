@@ -22,6 +22,25 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
   late Animation<Offset> _offsetAnimation;
 
   bool _showIcons = false;
+  final Map<String, String> areaImageMap = {
+    '서울': 'assets/image/area/seoul.png',
+    '인천': 'assets/image/area/incheon.jpg',
+    '경기': 'assets/image/area/gyeonggi.jpg',
+    '경남': 'assets/image/area/gyeongsangnam.jpg',
+    '경주': 'assets/image/area/gyeongju.jpeg',
+    '대전': 'assets/image/area/daejeon.jpeg',
+    '부산': 'assets/image/area/busan.jpeg',
+    '대구': 'assets/image/area/daegu.jpeg',
+    '광주': 'assets/image/area/gwangju.jpeg',
+    '울산': 'assets/image/area/ulsan.png',
+    '강원': 'assets/image/area/gangwon.jpg',
+    '충북': 'assets/image/area/chungbuk.jpg',
+    '충남': 'assets/image/area/chungnam.jpg',
+    '전북': 'assets/image/area/jeonbuk.jpg',
+    '전남': 'assets/image/area/jeonnam.jpg',
+    '제주': 'assets/image/area/jeju.png',
+  };
+
 
   @override
   void initState() {
@@ -55,6 +74,8 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
       await ItineraryApi.getItinerary(ref, widget.allItinerary.id.toString());
 
     }
+    String areaImage = areaImageMap[widget.allItinerary.area] ?? '$basePath/icon/colorHama.png';
+
     return MouseRegion(
       onEnter: (_) {
         if (!_showIcons) _toggleIcons(true);
@@ -75,7 +96,8 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
           children: [
             ClipOval(
               child: Image.asset(
-                '$basePath/icon/colorHama.png',
+                fit: BoxFit.fill,
+                areaImage,  // 지역명에 맞는 이미지 경로를 사용
                 width: 60,
                 height: 60,
               ),
@@ -85,7 +107,12 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   '${widget.allItinerary.name}'.text.bold.color(AppColors.primaryGrey).make(),
-                  '${formatDateRange(widget.allItinerary.startDate,widget.allItinerary.endDate)}'.text.color(AppColors.secondGrey).make(),
+                  Row(
+                    children: [
+                      '${formatDateRange(widget.allItinerary.startDate,widget.allItinerary.endDate)}'.text.size(13).color(AppColors.secondGrey).make(),
+                      if(widget.allItinerary.sharedAccount != 0) ', ${widget.allItinerary.sharedAccount}명과 함께'.text.size(13).color(AppColors.secondGrey).make()
+                    ],
+                  ),
 
                 ],
               ),

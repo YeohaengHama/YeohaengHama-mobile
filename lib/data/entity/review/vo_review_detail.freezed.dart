@@ -26,8 +26,12 @@ mixin _$ReviewDetail {
   String get content => throw _privateConstructorUsedError;
   List<String> get reviewPhotoURLList => throw _privateConstructorUsedError;
 
+  /// Serializes this ReviewDetail to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ReviewDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ReviewDetailCopyWith<ReviewDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$ReviewDetailCopyWithImpl<$Res, $Val extends ReviewDetail>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ReviewDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,6 +120,8 @@ class __$$ReviewDetailImplCopyWithImpl<$Res>
       _$ReviewDetailImpl _value, $Res Function(_$ReviewDetailImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ReviewDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -199,12 +207,14 @@ class _$ReviewDetailImpl implements _ReviewDetail {
                 .equals(other._reviewPhotoURLList, _reviewPhotoURLList));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, contentId, contentTypeId, rating,
       content, const DeepCollectionEquality().hash(_reviewPhotoURLList));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ReviewDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReviewDetailImplCopyWith<_$ReviewDetailImpl> get copyWith =>
@@ -239,8 +249,11 @@ abstract class _ReviewDetail implements ReviewDetail {
   String get content;
   @override
   List<String> get reviewPhotoURLList;
+
+  /// Create a copy of ReviewDetail
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReviewDetailImplCopyWith<_$ReviewDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

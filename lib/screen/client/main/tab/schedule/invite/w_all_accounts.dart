@@ -1,3 +1,4 @@
+import 'package:fast_app_base/screen/client/main/tab/schedule/invite/w_friends_list.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -6,7 +7,6 @@ import '../../../../../../common/widget/w_profile_image.dart';
 import '../../../../../../data/memory/account/all_account_provider.dart';
 import '../../../../../../data/memory/itinerary/itinerary_check_provider.dart';
 import '../../../../../../data/network/itinerary_api.dart';
-
 class AllAccountsWidget extends ConsumerWidget {
   final ScrollController scrollController;
 
@@ -18,21 +18,17 @@ class AllAccountsWidget extends ConsumerWidget {
     final itinerary = ref.watch(itineraryCheckProvider);
     final itineraryApi = ItineraryApi();
 
-    // itinerary의 account와 sharedAccount의 id를 수집
-    final excludeIds = [
-      itinerary!.account.id,
-      ...itinerary.sharedAccount.map((sharedAccount) => sharedAccount.id),
-    ];
-
-    // excludeIds에 포함되지 않는 계정만 필터링
-    final filteredAccounts = accounts.where((account) => !excludeIds.contains(account.id)).toList();
+    // 여행친구 필터링
+    final sharedAccounts = itinerary!.sharedAccount
+        .where((sharedAccount) => sharedAccount.id != itinerary.account.id)
+        .toList();
 
     return Column(
       children: [
         Row(
           children: [
-            '하마 친구'.text.bold.color(AppColors.primaryGrey).make(),
-            '${filteredAccounts.length}'
+            '여행친구'.text.bold.color(AppColors.primaryGrey).make(), // 여행친구로 변경
+            '${sharedAccounts.length}'
                 .text
                 .bold
                 .color(AppColors.mainPurple)
@@ -40,33 +36,7 @@ class AllAccountsWidget extends ConsumerWidget {
           ],
         ),
         Expanded(
-          child: ListView.builder(
-            controller: scrollController,
-            itemCount: filteredAccounts.length,
-            itemBuilder: (context, index) {
-              final account = filteredAccounts[index];
-              return Row(
-                children: [
-                  ProfileImage(photoUrl: account.photoUrl, width: 40, height: 40),
-                  Width(10),
-                  '${account.nickname}'.text.bold.color(AppColors.primaryGrey).make(),
-                  spacer,
-                  RoundButton(
-                    height: 30,
-                    bgColor: Colors.transparent,
-                    borderColor: AppColors.mainPurple,
-                    borderRadius: 5,
-                    text: '초대',
-                    textColor: AppColors.mainPurple,
-                    onTap: () async {
-                      await itineraryApi.inviteItinerary(
-                          account.id.toString(), itinerary.itineraryId, context, ref);
-                    },
-                  ),
-                ],
-              ).pSymmetric(v: 10);
-            },
-          ),
+          child: FriendsListWidget(),
         ),
       ],
     );

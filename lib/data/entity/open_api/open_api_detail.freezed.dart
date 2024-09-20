@@ -26,8 +26,12 @@ mixin _$OpenApiDetail {
   String get page => throw _privateConstructorUsedError;
   String get mobileOS => throw _privateConstructorUsedError;
 
+  /// Serializes this OpenApiDetail to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of OpenApiDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OpenApiDetailCopyWith<OpenApiDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$OpenApiDetailCopyWithImpl<$Res, $Val extends OpenApiDetail>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OpenApiDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -114,6 +120,8 @@ class __$$OpenApiDetailImplCopyWithImpl<$Res>
       _$OpenApiDetailImpl _value, $Res Function(_$OpenApiDetailImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OpenApiDetail
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -196,12 +204,14 @@ class _$OpenApiDetailImpl implements _OpenApiDetail {
                 other.mobileOS == mobileOS));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, contentId, contentTypeId, numOfRows, page, mobileOS);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OpenApiDetail
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OpenApiDetailImplCopyWith<_$OpenApiDetailImpl> get copyWith =>
@@ -236,8 +246,11 @@ abstract class _OpenApiDetail implements OpenApiDetail {
   String get page;
   @override
   String get mobileOS;
+
+  /// Create a copy of OpenApiDetail
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OpenApiDetailImplCopyWith<_$OpenApiDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

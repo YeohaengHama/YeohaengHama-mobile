@@ -29,8 +29,12 @@ mixin _$ShareItinerary {
   int get sharedAccount => throw _privateConstructorUsedError;
   bool get diary => throw _privateConstructorUsedError;
 
+  /// Serializes this ShareItinerary to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ShareItinerary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ShareItineraryCopyWith<ShareItinerary> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -62,6 +66,8 @@ class _$ShareItineraryCopyWithImpl<$Res, $Val extends ShareItinerary>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ShareItinerary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -138,6 +144,8 @@ class __$$ShareItineraryImplCopyWithImpl<$Res>
       _$ShareItineraryImpl _value, $Res Function(_$ShareItineraryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ShareItinerary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -243,12 +251,14 @@ class _$ShareItineraryImpl implements _ShareItinerary {
             (identical(other.diary, diary) || other.diary == diary));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, area, startDate,
       endDate, placeLength, sharedAccount, diary);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ShareItinerary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ShareItineraryImplCopyWith<_$ShareItineraryImpl> get copyWith =>
@@ -293,8 +303,11 @@ abstract class _ShareItinerary implements ShareItinerary {
   int get sharedAccount;
   @override
   bool get diary;
+
+  /// Create a copy of ShareItinerary
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ShareItineraryImplCopyWith<_$ShareItineraryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

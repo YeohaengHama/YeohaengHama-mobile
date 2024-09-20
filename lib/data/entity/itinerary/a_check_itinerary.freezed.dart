@@ -35,8 +35,12 @@ mixin _$CheckItinerary {
       throw _privateConstructorUsedError; // Map<String, List<PlaceByDay>>로 수정
   List<SharedAccount> get sharedAccount => throw _privateConstructorUsedError;
 
+  /// Serializes this CheckItinerary to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CheckItinerary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CheckItineraryCopyWith<CheckItinerary> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -73,6 +77,8 @@ class _$CheckItineraryCopyWithImpl<$Res, $Val extends CheckItinerary>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CheckItinerary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -179,6 +185,8 @@ class __$$CheckItineraryImplCopyWithImpl<$Res>
       _$CheckItineraryImpl _value, $Res Function(_$CheckItineraryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CheckItinerary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -368,7 +376,7 @@ class _$CheckItineraryImpl implements _CheckItinerary {
                 .equals(other._sharedAccount, _sharedAccount));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -386,7 +394,9 @@ class _$CheckItineraryImpl implements _CheckItinerary {
       const DeepCollectionEquality().hash(_placesByDay),
       const DeepCollectionEquality().hash(_sharedAccount));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CheckItinerary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CheckItineraryImplCopyWith<_$CheckItineraryImpl> get copyWith =>
@@ -441,13 +451,17 @@ abstract class _CheckItinerary implements CheckItinerary {
   @override
   int get budgetId;
   @override
-  Account get account;
-  @override // Account 객체로 수정
-  Map<String, List<PlaceByDay>> get placesByDay;
-  @override // Map<String, List<PlaceByDay>>로 수정
-  List<SharedAccount> get sharedAccount;
+  Account get account; // Account 객체로 수정
   @override
-  @JsonKey(ignore: true)
+  Map<String, List<PlaceByDay>>
+      get placesByDay; // Map<String, List<PlaceByDay>>로 수정
+  @override
+  List<SharedAccount> get sharedAccount;
+
+  /// Create a copy of CheckItinerary
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CheckItineraryImplCopyWith<_$CheckItineraryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

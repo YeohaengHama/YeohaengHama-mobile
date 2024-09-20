@@ -19,7 +19,9 @@ mixin _$HamaArea {
   String get area => throw _privateConstructorUsedError;
   String get areaImages => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HamaArea
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $HamaAreaCopyWith<HamaArea> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -42,6 +44,8 @@ class _$HamaAreaCopyWithImpl<$Res, $Val extends HamaArea>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of HamaArea
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +84,8 @@ class __$$HamaAreaImplCopyWithImpl<$Res>
       _$HamaAreaImpl _value, $Res Function(_$HamaAreaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HamaArea
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -127,7 +133,9 @@ class _$HamaAreaImpl implements _HamaArea {
   @override
   int get hashCode => Object.hash(runtimeType, area, areaImages);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HamaArea
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$HamaAreaImplCopyWith<_$HamaAreaImpl> get copyWith =>
@@ -143,8 +151,11 @@ abstract class _HamaArea implements HamaArea {
   String get area;
   @override
   String get areaImages;
+
+  /// Create a copy of HamaArea
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HamaAreaImplCopyWith<_$HamaAreaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

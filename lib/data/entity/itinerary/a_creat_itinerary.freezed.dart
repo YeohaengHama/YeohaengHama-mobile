@@ -26,7 +26,9 @@ mixin _$CreateItinerary {
   String get endDate => throw _privateConstructorUsedError;
   String? get expense => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CreateItinerary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CreateItineraryCopyWith<CreateItinerary> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,6 +61,8 @@ class _$CreateItineraryCopyWithImpl<$Res, $Val extends CreateItinerary>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CreateItinerary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -141,6 +145,8 @@ class __$$CreateItineraryImplCopyWithImpl<$Res>
       _$CreateItineraryImpl _value, $Res Function(_$CreateItineraryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CreateItinerary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -280,7 +286,9 @@ class _$CreateItineraryImpl implements _CreateItinerary {
       endDate,
       expense);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CreateItinerary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateItineraryImplCopyWith<_$CreateItineraryImpl> get copyWith =>
@@ -318,8 +326,11 @@ abstract class _CreateItinerary implements CreateItinerary {
   String get endDate;
   @override
   String? get expense;
+
+  /// Create a copy of CreateItinerary
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CreateItineraryImplCopyWith<_$CreateItineraryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

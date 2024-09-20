@@ -17,12 +17,12 @@ class DiarySearchListFragment extends ConsumerWidget {
     final _isLoading = ref.watch(isLoadingProvider.notifier).state;
 
 
-    if (diaryList.isEmpty&& _isLoading) {
+    if (diaryList.isEmpty || _isLoading) {
       return SizedBox(
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               '아직 작성 된 여행일기가 없어요'.text.color(AppColors.thirdGrey).bold.make(),
               '여행일기를 작성해 볼까요?'.text.color(AppColors.thirdGrey).make(),
@@ -34,7 +34,9 @@ class DiarySearchListFragment extends ConsumerWidget {
       ).pSymmetric(v: 30);
     }
 print(diaryList[0]);
-    return Expanded(
+    return SizedBox(
+      // 여기에 적절한 높이를 설정
+      height: MediaQuery.of(context).size.height,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         itemCount: diaryList.length,

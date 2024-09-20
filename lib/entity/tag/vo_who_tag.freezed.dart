@@ -18,7 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$WhoTag {
   String get who => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WhoTag
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WhoTagCopyWith<WhoTag> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -40,6 +42,8 @@ class _$WhoTagCopyWithImpl<$Res, $Val extends WhoTag>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WhoTag
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -72,6 +76,8 @@ class __$$WhoTagImplCopyWithImpl<$Res>
       _$WhoTagImpl _value, $Res Function(_$WhoTagImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WhoTag
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -110,7 +116,9 @@ class _$WhoTagImpl implements _WhoTag {
   @override
   int get hashCode => Object.hash(runtimeType, who);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WhoTag
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WhoTagImplCopyWith<_$WhoTagImpl> get copyWith =>
@@ -122,8 +130,11 @@ abstract class _WhoTag implements WhoTag {
 
   @override
   String get who;
+
+  /// Create a copy of WhoTag
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WhoTagImplCopyWith<_$WhoTagImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

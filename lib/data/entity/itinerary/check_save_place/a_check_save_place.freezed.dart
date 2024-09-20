@@ -23,8 +23,12 @@ mixin _$CheckSavePlace {
   String get placeNum => throw _privateConstructorUsedError;
   String get contentTypeId => throw _privateConstructorUsedError;
 
+  /// Serializes this CheckSavePlace to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CheckSavePlace
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CheckSavePlaceCopyWith<CheckSavePlace> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$CheckSavePlaceCopyWithImpl<$Res, $Val extends CheckSavePlace>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CheckSavePlace
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$CheckSavePlaceImplCopyWithImpl<$Res>
       _$CheckSavePlaceImpl _value, $Res Function(_$CheckSavePlaceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CheckSavePlace
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -135,11 +143,13 @@ class _$CheckSavePlaceImpl implements _CheckSavePlace {
                 other.contentTypeId == contentTypeId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, placeNum, contentTypeId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CheckSavePlace
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CheckSavePlaceImplCopyWith<_$CheckSavePlaceImpl> get copyWith =>
@@ -166,8 +176,11 @@ abstract class _CheckSavePlace implements CheckSavePlace {
   String get placeNum;
   @override
   String get contentTypeId;
+
+  /// Create a copy of CheckSavePlace
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CheckSavePlaceImplCopyWith<_$CheckSavePlaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

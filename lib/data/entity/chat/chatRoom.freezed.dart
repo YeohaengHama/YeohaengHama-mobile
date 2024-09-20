@@ -24,8 +24,12 @@ mixin _$ChatRoom {
   String get name => throw _privateConstructorUsedError;
   List<String> get users => throw _privateConstructorUsedError;
 
+  /// Serializes this ChatRoom to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ChatRoom
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ChatRoomCopyWith<ChatRoom> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$ChatRoomCopyWithImpl<$Res, $Val extends ChatRoom>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ChatRoom
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,6 +97,8 @@ class __$$ChatRoomImplCopyWithImpl<$Res>
       _$ChatRoomImpl _value, $Res Function(_$ChatRoomImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ChatRoom
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -154,12 +162,14 @@ class _$ChatRoomImpl implements _ChatRoom {
             const DeepCollectionEquality().equals(other._users, _users));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, roomId, name, const DeepCollectionEquality().hash(_users));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ChatRoom
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ChatRoomImplCopyWith<_$ChatRoomImpl> get copyWith =>
@@ -188,8 +198,11 @@ abstract class _ChatRoom implements ChatRoom {
   String get name;
   @override
   List<String> get users;
+
+  /// Create a copy of ChatRoom
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChatRoomImplCopyWith<_$ChatRoomImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

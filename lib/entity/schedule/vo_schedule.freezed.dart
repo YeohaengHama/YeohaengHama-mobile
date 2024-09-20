@@ -22,7 +22,9 @@ mixin _$Schedule {
   List<Tourism>? get pickTourism => throw _privateConstructorUsedError;
   List<dynamic>? get pickMyArea => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Schedule
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ScheduleCopyWith<Schedule> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +54,8 @@ class _$ScheduleCopyWithImpl<$Res, $Val extends Schedule>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Schedule
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -85,6 +89,8 @@ class _$ScheduleCopyWithImpl<$Res, $Val extends Schedule>
     ) as $Val);
   }
 
+  /// Create a copy of Schedule
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $HamaAreaCopyWith<$Res>? get area {
@@ -125,6 +131,8 @@ class __$$ScheduleImplCopyWithImpl<$Res>
       _$ScheduleImpl _value, $Res Function(_$ScheduleImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Schedule
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -242,7 +250,9 @@ class _$ScheduleImpl implements _Schedule {
       const DeepCollectionEquality().hash(_pickTourism),
       const DeepCollectionEquality().hash(_pickMyArea));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Schedule
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ScheduleImplCopyWith<_$ScheduleImpl> get copyWith =>
@@ -267,8 +277,11 @@ abstract class _Schedule implements Schedule {
   List<Tourism>? get pickTourism;
   @override
   List<dynamic>? get pickMyArea;
+
+  /// Create a copy of Schedule
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ScheduleImplCopyWith<_$ScheduleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

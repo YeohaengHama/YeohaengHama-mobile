@@ -21,12 +21,15 @@ ShowAllAccount _$ShowAllAccountFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ShowAllAccount {
   int get id => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
 
+  /// Serializes this ShowAllAccount to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ShowAllAccount
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ShowAllAccountCopyWith<ShowAllAccount> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -37,7 +40,7 @@ abstract class $ShowAllAccountCopyWith<$Res> {
           ShowAllAccount value, $Res Function(ShowAllAccount) then) =
       _$ShowAllAccountCopyWithImpl<$Res, ShowAllAccount>;
   @useResult
-  $Res call({int id, String email, String? photoUrl, String nickname});
+  $Res call({int id, String? photoUrl, String nickname});
 }
 
 /// @nodoc
@@ -50,11 +53,12 @@ class _$ShowAllAccountCopyWithImpl<$Res, $Val extends ShowAllAccount>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ShowAllAccount
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
-    Object? email = null,
     Object? photoUrl = freezed,
     Object? nickname = null,
   }) {
@@ -63,10 +67,6 @@ class _$ShowAllAccountCopyWithImpl<$Res, $Val extends ShowAllAccount>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
       photoUrl: freezed == photoUrl
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
@@ -87,7 +87,7 @@ abstract class _$$ShowAllAccountImplCopyWith<$Res>
       __$$ShowAllAccountImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String email, String? photoUrl, String nickname});
+  $Res call({int id, String? photoUrl, String nickname});
 }
 
 /// @nodoc
@@ -98,11 +98,12 @@ class __$$ShowAllAccountImplCopyWithImpl<$Res>
       _$ShowAllAccountImpl _value, $Res Function(_$ShowAllAccountImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ShowAllAccount
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
-    Object? email = null,
     Object? photoUrl = freezed,
     Object? nickname = null,
   }) {
@@ -111,10 +112,6 @@ class __$$ShowAllAccountImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
       photoUrl: freezed == photoUrl
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
@@ -131,10 +128,7 @@ class __$$ShowAllAccountImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ShowAllAccountImpl implements _ShowAllAccount {
   const _$ShowAllAccountImpl(
-      {required this.id,
-      required this.email,
-      required this.photoUrl,
-      required this.nickname});
+      {required this.id, required this.photoUrl, required this.nickname});
 
   factory _$ShowAllAccountImpl.fromJson(Map<String, dynamic> json) =>
       _$$ShowAllAccountImplFromJson(json);
@@ -142,15 +136,13 @@ class _$ShowAllAccountImpl implements _ShowAllAccount {
   @override
   final int id;
   @override
-  final String email;
-  @override
   final String? photoUrl;
   @override
   final String nickname;
 
   @override
   String toString() {
-    return 'ShowAllAccount(id: $id, email: $email, photoUrl: $photoUrl, nickname: $nickname)';
+    return 'ShowAllAccount(id: $id, photoUrl: $photoUrl, nickname: $nickname)';
   }
 
   @override
@@ -159,18 +151,19 @@ class _$ShowAllAccountImpl implements _ShowAllAccount {
         (other.runtimeType == runtimeType &&
             other is _$ShowAllAccountImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.email, email) || other.email == email) &&
             (identical(other.photoUrl, photoUrl) ||
                 other.photoUrl == photoUrl) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, email, photoUrl, nickname);
+  int get hashCode => Object.hash(runtimeType, id, photoUrl, nickname);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ShowAllAccount
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ShowAllAccountImplCopyWith<_$ShowAllAccountImpl> get copyWith =>
@@ -188,7 +181,6 @@ class _$ShowAllAccountImpl implements _ShowAllAccount {
 abstract class _ShowAllAccount implements ShowAllAccount {
   const factory _ShowAllAccount(
       {required final int id,
-      required final String email,
       required final String? photoUrl,
       required final String nickname}) = _$ShowAllAccountImpl;
 
@@ -198,13 +190,14 @@ abstract class _ShowAllAccount implements ShowAllAccount {
   @override
   int get id;
   @override
-  String get email;
-  @override
   String? get photoUrl;
   @override
   String get nickname;
+
+  /// Create a copy of ShowAllAccount
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ShowAllAccountImplCopyWith<_$ShowAllAccountImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,4 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/client/main/tab/schedule/provider/p_edit_mode.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/traffic/selected_transportation_index_provider.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/traffic/w_traffic.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,7 @@ import '../../../../../data/network/itinerary_api.dart';
 import 'dart:math';
 
 import '../../../../../data/network/traffic_api.dart';
+import '../home/w/info/s_pick_place_info.dart';
 
 class ShowPickPlace extends ConsumerWidget {
   const ShowPickPlace(this.currentDay, {Key? key}) : super(key: key);
@@ -23,6 +25,7 @@ class ShowPickPlace extends ConsumerWidget {
     final addPickPlaceListNotifier = ref.watch(addPickEachPlaceProvider);
     final ItineraryApi itineraryApi = ItineraryApi();
     final PageController _pageController = PageController();
+
     final ValueNotifier<int> currentPageNotifier = ValueNotifier<int>(0);
     print(currentDay);
     // 현재 일치하는 요소만 필터링
@@ -42,58 +45,64 @@ class ShowPickPlace extends ConsumerWidget {
       children: [
         Container(
           height: 70,
-          child: filteredList.isEmpty? SizedBox(
-              child: Center(child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  '아직 추가 된 장소가 없어요'.text.color(AppColors.thirdGrey).bold.make(),
-                  '장소를 추가해 볼까요?'.text.color(AppColors.thirdGrey).make(),
-                ],
-              ))
-          ).pSymmetric(h: 70) : filteredList.length == 1
-              ? Center(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        buildPickPlaceItem(context, ref, itineraryApi,
-                            filteredList, radiusBold, 0)
-                      ]),
-                )
-              : ListView.builder(
-                  controller: _pageController,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: filteredList.length,
-                  itemBuilder: (context, index) {
-                    return buildPickPlaceItem(context, ref, itineraryApi,
-                        filteredList, radiusBold, index);
-                  },
-                ),
-        ).pOnly(bottom: filteredList.isEmpty? 12: 0),
+          child: filteredList.isEmpty
+              ? SizedBox(
+                  child: Center(
+                      child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    '아직 추가 된 장소가 없어요'
+                        .text
+                        .color(AppColors.thirdGrey)
+                        .bold
+                        .make(),
+                    '장소를 추가해 볼까요?'.text.color(AppColors.thirdGrey).make(),
+                  ],
+                ))).pSymmetric(h: 70)
+              : filteredList.length == 1
+                  ? Center(
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            buildPickPlaceItem(context, ref, itineraryApi,
+                                filteredList, radiusBold, 0)
+                          ]),
+                    )
+                  : ListView.builder(
+                      controller: _pageController,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: filteredList.length,
+                      itemBuilder: (context, index) {
+                        return buildPickPlaceItem(context, ref, itineraryApi,
+                            filteredList, radiusBold, index);
+                      },
+                    ),
+        ).pOnly(bottom: filteredList.isEmpty ? 12 : 0),
         SizedBox(height: 16),
         filteredList.isEmpty
             ? Container()
             : ValueListenableBuilder<int>(
-          valueListenable: currentPageNotifier,
-          builder: (context, currentPage, child) {
-            return SmoothPageIndicator(
-              controller: _pageController,
-              count: filteredList.length,
-              effect: ScrollingDotsEffect(
-                dotHeight: 8,
-                dotWidth: 8,
-                activeDotScale: 1.5,
-                activeDotColor: AppColors.mainPurple,
-                dotColor: AppColors.thirdGrey,
+                valueListenable: currentPageNotifier,
+                builder: (context, currentPage, child) {
+                  return SmoothPageIndicator(
+                    controller: _pageController,
+                    count: filteredList.length,
+                    effect: ScrollingDotsEffect(
+                      dotHeight: 8,
+                      dotWidth: 8,
+                      activeDotScale: 1.5,
+                      activeDotColor: AppColors.mainPurple,
+                      dotColor: AppColors.thirdGrey,
+                    ),
+                    onDotClicked: (index) {
+                      _pageController.animateToPage(index,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeInOut);
+                    },
+                  );
+                },
               ),
-              onDotClicked: (index) {
-                _pageController.animateToPage(index,
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeInOut);
-              },
-            );
-          },
-        ),
       ],
     );
   }
@@ -107,13 +116,23 @@ class ShowPickPlace extends ConsumerWidget {
       int index) {
     final addPickPlace = filteredList[index];
     final trafficApi = ref.read(trafficApiProvider);
-    final selectedPathIndex = ref.read(selectedTrafficRouteIndexNotifierProvider.notifier);
-
+    final selectedPathIndex =
+        ref.read(selectedTrafficRouteIndexNotifierProvider.notifier);
+    final _editModeProvider = ref.watch(editModeProvider);
+    final isEdit = ref.watch(editModeProvider.notifier).state;
     return Row(
       children: [
         Tap(
           onTap: () {
-            itineraryApi.PostDeleteEachPickPlace(ref, addPickPlace.placeId!);
+            isEdit
+                ? itineraryApi.PostDeleteEachPickPlace(
+                    ref, addPickPlace.placeId!)
+                : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PickPlaceInfoScreen(addPickPlace)),
+                  );
           },
           child: RoundedContainer(
             radius: 20,
@@ -165,8 +184,6 @@ class ShowPickPlace extends ConsumerWidget {
         if (index < filteredList.length - 1)
           Tap(
             onTap: () {
-
-
               trafficApi.getTransportInfo(
                   addPickPlace.mapx,
                   addPickPlace.mapy,

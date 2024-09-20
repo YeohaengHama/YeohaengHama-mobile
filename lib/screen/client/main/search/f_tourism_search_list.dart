@@ -13,16 +13,17 @@ class TourismSearchListFragment extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Provider 등록
     final tourismAreaList = ref.watch(simpleAreaApiResponseProvider);
-    final _isLoading = ref.watch(isLoadingProvider.notifier).state;
+    final _isLoading = ref.read(isLoadingProvider.notifier).state;
+    final _isLoadingP = ref.watch(isLoadingProvider);
 
     // 현재 저장된 SearchSimpleResult 리스트 출력
 
-    return tourismAreaList.isEmpty && !_isLoading
+    return tourismAreaList.isEmpty || _isLoading
         ? SizedBox(
             child: Center(
                 child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               '키워드와 일치하는 장소가 없어요'.text.color(AppColors.thirdGrey).bold.make(),
               '다시 검색해 볼까요?'.text.color(AppColors.thirdGrey).make(),
@@ -30,7 +31,9 @@ class TourismSearchListFragment extends ConsumerWidget {
               Line(color: AppColors.outline, width: 340)
             ],
           ))).pSymmetric(v: 30)
-        : Expanded(
+        : SizedBox(
+      // 여기에 적절한 높이를 설정
+      height: MediaQuery.of(context).size.height,
             child: ListView.builder(
               scrollDirection: Axis.vertical,
               itemCount: tourismAreaList.length,

@@ -21,7 +21,9 @@ mixin _$PickPlaceContents {
   String get title => throw _privateConstructorUsedError;
   String get firstImage => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PickPlaceContents
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PickPlaceContentsCopyWith<PickPlaceContents> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +51,8 @@ class _$PickPlaceContentsCopyWithImpl<$Res, $Val extends PickPlaceContents>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PickPlaceContents
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,6 +105,8 @@ class __$$PickPlaceContentsImplCopyWithImpl<$Res>
       $Res Function(_$PickPlaceContentsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PickPlaceContents
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -171,7 +177,9 @@ class _$PickPlaceContentsImpl implements _PickPlaceContents {
   int get hashCode =>
       Object.hash(runtimeType, contentId, contentTypeId, title, firstImage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PickPlaceContents
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PickPlaceContentsImplCopyWith<_$PickPlaceContentsImpl> get copyWith =>
@@ -194,8 +202,11 @@ abstract class _PickPlaceContents implements PickPlaceContents {
   String get title;
   @override
   String get firstImage;
+
+  /// Create a copy of PickPlaceContents
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PickPlaceContentsImplCopyWith<_$PickPlaceContentsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

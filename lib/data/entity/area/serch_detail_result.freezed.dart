@@ -29,8 +29,12 @@ mixin _$SearchDetailResult {
   String get mapX => throw _privateConstructorUsedError;
   String get mapY => throw _privateConstructorUsedError;
 
+  /// Serializes this SearchDetailResult to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SearchDetailResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SearchDetailResultCopyWith<SearchDetailResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -62,6 +66,8 @@ class _$SearchDetailResultCopyWithImpl<$Res, $Val extends SearchDetailResult>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SearchDetailResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -138,6 +144,8 @@ class __$$SearchDetailResultImplCopyWithImpl<$Res>
       $Res Function(_$SearchDetailResultImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SearchDetailResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -243,12 +251,14 @@ class _$SearchDetailResultImpl implements _SearchDetailResult {
             (identical(other.mapY, mapY) || other.mapY == mapY));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, contentId, contentTypeId, title,
       addr1, addr2, overView, mapX, mapY);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchDetailResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchDetailResultImplCopyWith<_$SearchDetailResultImpl> get copyWith =>
@@ -293,8 +303,11 @@ abstract class _SearchDetailResult implements SearchDetailResult {
   String get mapX;
   @override
   String get mapY;
+
+  /// Create a copy of SearchDetailResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchDetailResultImplCopyWith<_$SearchDetailResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

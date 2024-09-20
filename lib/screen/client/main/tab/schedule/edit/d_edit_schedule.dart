@@ -43,7 +43,6 @@ class EditScheduleDialog extends ConsumerWidget {
             child: '여행날짜 수정'.text.bold.color(AppColors.primaryGrey).make().pSymmetric(v: columnP)),
         Tap(
             onTap: () async{
-              await userApi.showAllAccount(ref);
               Nav.push(
 
                   InvateSchedule());

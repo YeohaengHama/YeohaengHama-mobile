@@ -24,7 +24,9 @@ mixin _$ReviewPost {
   String get accountId => throw _privateConstructorUsedError;
   List<String>? get photos => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ReviewPost
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ReviewPostCopyWith<ReviewPost> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +57,8 @@ class _$ReviewPostCopyWithImpl<$Res, $Val extends ReviewPost>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ReviewPost
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,6 +129,8 @@ class __$$ReviewPostImplCopyWithImpl<$Res>
       _$ReviewPostImpl _value, $Res Function(_$ReviewPostImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ReviewPost
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -239,7 +245,9 @@ class _$ReviewPostImpl implements _ReviewPost {
       accountId,
       const DeepCollectionEquality().hash(_photos));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ReviewPost
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReviewPostImplCopyWith<_$ReviewPostImpl> get copyWith =>
@@ -270,8 +278,11 @@ abstract class _ReviewPost implements ReviewPost {
   String get accountId;
   @override
   List<String>? get photos;
+
+  /// Create a copy of ReviewPost
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReviewPostImplCopyWith<_$ReviewPostImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

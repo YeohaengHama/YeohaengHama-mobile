@@ -22,7 +22,9 @@ mixin _$SaveDiary {
   String get content => throw _privateConstructorUsedError;
   List<String>? get photos => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SaveDiary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SaveDiaryCopyWith<SaveDiary> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +52,8 @@ class _$SaveDiaryCopyWithImpl<$Res, $Val extends SaveDiary>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SaveDiary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -108,6 +112,8 @@ class __$$SaveDiaryImplCopyWithImpl<$Res>
       _$SaveDiaryImpl _value, $Res Function(_$SaveDiaryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SaveDiary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -194,7 +200,9 @@ class _$SaveDiaryImpl implements _SaveDiary {
   int get hashCode => Object.hash(runtimeType, itinerary, date, title, content,
       const DeepCollectionEquality().hash(_photos));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SaveDiary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SaveDiaryImplCopyWith<_$SaveDiaryImpl> get copyWith =>
@@ -219,8 +227,11 @@ abstract class _SaveDiary implements SaveDiary {
   String get content;
   @override
   List<String>? get photos;
+
+  /// Create a copy of SaveDiary
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SaveDiaryImplCopyWith<_$SaveDiaryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

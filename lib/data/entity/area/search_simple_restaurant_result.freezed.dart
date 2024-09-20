@@ -23,7 +23,9 @@ mixin _$SearchSimpleRestaurantResult {
   String get addr2 => throw _privateConstructorUsedError;
   String get firstimage => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchSimpleRestaurantResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SearchSimpleRestaurantResultCopyWith<SearchSimpleRestaurantResult>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -56,6 +58,8 @@ class _$SearchSimpleRestaurantResultCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SearchSimpleRestaurantResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -123,6 +127,8 @@ class __$$SearchSimpleRestaurantResultImplCopyWithImpl<$Res>
       $Res Function(_$SearchSimpleRestaurantResultImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SearchSimpleRestaurantResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -212,7 +218,9 @@ class _$SearchSimpleRestaurantResultImpl
   int get hashCode => Object.hash(
       runtimeType, contentTypeId, contentId, title, addr1, addr2, firstimage);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SearchSimpleRestaurantResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchSimpleRestaurantResultImplCopyWith<
@@ -243,8 +251,11 @@ abstract class _SearchSimpleRestaurantResult
   String get addr2;
   @override
   String get firstimage;
+
+  /// Create a copy of SearchSimpleRestaurantResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchSimpleRestaurantResultImplCopyWith<
           _$SearchSimpleRestaurantResultImpl>
       get copyWith => throw _privateConstructorUsedError;

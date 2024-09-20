@@ -35,7 +35,20 @@ class ShortsSearchListFragment extends ConsumerWidget {
     // 비디오 URL 리스트 생성
     final videoUrls = shortsList.shortsList.map((short) => short.videoUrl).toList();
 
-    return Expanded(
+    return shortsList.shortsList.isEmpty || _isLoading ?
+    SizedBox(
+        child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                '해당 키워드의 숏츠가 없어요'.text.color(AppColors.thirdGrey).bold.make(),
+                '다시 검색해 볼까요?'.text.color(AppColors.thirdGrey).make(),
+                Height(30),
+                Line(color: AppColors.outline,width: 340)
+              ],
+            ))).pSymmetric(v: 30)
+        : Expanded(
       child: _isLoading
           ? GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

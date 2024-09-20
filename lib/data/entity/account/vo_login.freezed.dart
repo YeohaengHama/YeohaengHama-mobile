@@ -23,8 +23,12 @@ mixin _$LogIn {
   String get email => throw _privateConstructorUsedError;
   String get pw => throw _privateConstructorUsedError;
 
+  /// Serializes this LogIn to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of LogIn
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $LogInCopyWith<LogIn> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -46,6 +50,8 @@ class _$LogInCopyWithImpl<$Res, $Val extends LogIn>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of LogIn
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -83,6 +89,8 @@ class __$$logInImplCopyWithImpl<$Res>
       _$logInImpl _value, $Res Function(_$logInImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of LogIn
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -129,11 +137,13 @@ class _$logInImpl implements _logIn {
             (identical(other.pw, pw) || other.pw == pw));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, email, pw);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of LogIn
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$logInImplCopyWith<_$logInImpl> get copyWith =>
@@ -157,8 +167,11 @@ abstract class _logIn implements LogIn {
   String get email;
   @override
   String get pw;
+
+  /// Create a copy of LogIn
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$logInImplCopyWith<_$logInImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

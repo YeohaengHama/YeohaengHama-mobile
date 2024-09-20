@@ -9,7 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../data/network/diary_api.dart';
 import '../../../fab/w_floating_daangn_button.dart';
 import 'diary/f_my_diary.dart';
-import 'itnierary/f_my_itnerary.dart';
+import 'itnierary/f_my_itinerary.dart';
 
 
 
@@ -126,7 +126,7 @@ class _MyTripScreenState extends ConsumerState<MyTripScreen> with SingleTickerPr
   Future<Widget> switchTabFragment() async {
     switch (currentIndex) {
       case 0:
-        return const MyItneraryFragment();
+        return const MyItineraryFragment();
       case 1:
         return const MyReviewFragment();
       case 2:

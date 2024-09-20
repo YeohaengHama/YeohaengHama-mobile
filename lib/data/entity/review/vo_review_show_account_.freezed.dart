@@ -27,8 +27,12 @@ mixin _$ReviewShowAccount {
   String get date => throw _privateConstructorUsedError;
   List<String> get reviewPhotoURLList => throw _privateConstructorUsedError;
 
+  /// Serializes this ReviewShowAccount to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ReviewShowAccount
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ReviewShowAccountCopyWith<ReviewShowAccount> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$ReviewShowAccountCopyWithImpl<$Res, $Val extends ReviewShowAccount>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ReviewShowAccount
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +128,8 @@ class __$$ReviewShowAccountImplCopyWithImpl<$Res>
       $Res Function(_$ReviewShowAccountImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ReviewShowAccount
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -216,12 +224,14 @@ class _$ReviewShowAccountImpl implements _ReviewShowAccount {
                 .equals(other._reviewPhotoURLList, _reviewPhotoURLList));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, reviewId, placeName, rating,
       content, date, const DeepCollectionEquality().hash(_reviewPhotoURLList));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ReviewShowAccount
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReviewShowAccountImplCopyWith<_$ReviewShowAccountImpl> get copyWith =>
@@ -261,8 +271,11 @@ abstract class _ReviewShowAccount implements ReviewShowAccount {
   String get date;
   @override
   List<String> get reviewPhotoURLList;
+
+  /// Create a copy of ReviewShowAccount
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReviewShowAccountImplCopyWith<_$ReviewShowAccountImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

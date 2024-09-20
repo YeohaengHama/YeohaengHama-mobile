@@ -33,7 +33,7 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
 
   final TextEditingController searchController = TextEditingController();
   late final TabController tabController =
-      TabController(length: 4, vsync: this);
+  TabController(length: 4, vsync: this);
   int currentIndex = 0;
   String contentTypeId = '';
 
@@ -46,6 +46,14 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
         initializeSearch();
       });
     }
+    tabController.addListener(() {
+      if (tabController.indexIsChanging) {
+        setState(() {
+          currentIndex = tabController.index;
+        });
+        switchTabContent(tabController.index);
+      }
+    });
   }
 
   Future<void> initializeSearch() async {
@@ -77,7 +85,7 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
 
   Future<void> postSearchArea() async {
     final openApiArea = OpenApiArea(
-      numOfRows: '10',
+      numOfRows: '100',
       page: '1',
       contentTypeId: '12',
       keyword: searchController.text,
@@ -130,15 +138,16 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
           body: Column(
             children: [
               tabBar,
-              FutureBuilder<Widget>(
-                future: switchTabFragment(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return snapshot.data ?? Container();
-                  } else {
-                    return CircularProgressIndicator();
-                  }
-                },
+              Expanded(
+                child: TabBarView(
+                  controller: tabController,
+                  children: [
+                    const TourismSearchListFragment(),
+                    const RestaurantSearchListFragment(),
+                    const DiarySearchListFragment(),
+                    const ShortsSearchListFragment(),
+                  ],
+                ),
               ),
             ],
           ),
@@ -152,8 +161,11 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
                 color: Colors.transparent,
               ),
               Center(
-                  child: LoadingAnimationWidget.fourRotatingDots(
-                      color: AppColors.mainPurple, size: 100)),
+                child: LoadingAnimationWidget.fourRotatingDots(
+                  color: AppColors.mainPurple,
+                  size: 100,
+                ),
+              ),
             ],
           ),
       ],
@@ -161,37 +173,30 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
   }
 
   Widget get tabBar => Column(
-        children: [
-          TabBar(
-            onTap: (index) {
-              switchTabContent(index);
-              setState(() {
-                currentIndex = index;
-              });
-            },
-            labelStyle:
-                const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            labelColor: AppColors.primaryGrey,
-            controller: tabController,
-            indicatorColor: AppColors.mainPurple,
-            unselectedLabelStyle: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: AppColors.forthGrey,
-            ),
-            indicatorSize: TabBarIndicatorSize.tab,
-            labelPadding: const EdgeInsets.symmetric(vertical: 5),
-            overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-            tabs: [
-
-              '관광'.text.make(),
-              '맛집'.text.make(),
-              '여행일기'.text.make(),
-              '숏츠'.text.make()
-            ],
-          )
+    children: [
+      TabBar(
+        controller: tabController,
+        labelStyle:
+        const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        labelColor: AppColors.primaryGrey,
+        indicatorColor: AppColors.mainPurple,
+        unselectedLabelStyle: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+          color: AppColors.forthGrey,
+        ),
+        indicatorSize: TabBarIndicatorSize.tab,
+        labelPadding: const EdgeInsets.symmetric(vertical: 5),
+        overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+        tabs: [
+          '관광'.text.make(),
+          '맛집'.text.make(),
+          '여행일기'.text.make(),
+          '숏츠'.text.make(),
         ],
-      );
+      ),
+    ],
+  );
 
   Future<void> switchTabContent(int index) async {
     try {
@@ -217,21 +222,6 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
     } catch (e, stackTrace) {
       print('Exception occurred during switchTabContent: $e');
       print('StackTrace: $stackTrace');
-    }
-  }
-
-  Future<Widget> switchTabFragment() async {
-    switch (currentIndex) {
-      case 0:
-        return const TourismSearchListFragment();
-      case 1:
-        return const RestaurantSearchListFragment();
-      case 2:
-        return const DiarySearchListFragment();
-      case 3:
-        return const ShortsSearchListFragment();
-      default:
-        return Container();
     }
   }
 }

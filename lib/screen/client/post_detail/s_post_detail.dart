@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/entity/area/saerch_image_result.dart';
@@ -178,12 +177,13 @@ class PostDetailScreen extends HookConsumerWidget {
                             titleStyle = titleStyle.copyWith(fontSize: 14);
                           }
 
-                          return Flexible(
+                          return Container(
+                            padding: EdgeInsets.only(left: 55),
                             child: Text(
                               title,
                               style: titleStyle,
-                              overflow: TextOverflow.ellipsis, // 긴 텍스트 처리
-                            ).pOnly(left: 55),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           );
                         },
                       ),
@@ -328,7 +328,6 @@ class PostDetailScreen extends HookConsumerWidget {
                       ),
                     ).pSymmetric(h: 30, v: 30)
                         : Container(),
-                    const Line(color: AppColors.outline, height: 10),
                     isDetailLoading
                         ? CardLoading(
                       height: 200,

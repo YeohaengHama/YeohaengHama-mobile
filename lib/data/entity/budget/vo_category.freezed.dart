@@ -21,7 +21,9 @@ mixin _$CategoryIcon {
   String get engCategory => throw _privateConstructorUsedError;
   Color get color => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CategoryIcon
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CategoryIconCopyWith<CategoryIcon> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,6 +47,8 @@ class _$CategoryIconCopyWithImpl<$Res, $Val extends CategoryIcon>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CategoryIcon
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -93,6 +97,8 @@ class __$$CategoryIconImplCopyWithImpl<$Res>
       _$CategoryIconImpl _value, $Res Function(_$CategoryIconImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CategoryIcon
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -162,7 +168,9 @@ class _$CategoryIconImpl implements _CategoryIcon {
   int get hashCode =>
       Object.hash(runtimeType, icon, category, engCategory, color);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CategoryIcon
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CategoryIconImplCopyWith<_$CategoryIconImpl> get copyWith =>
@@ -184,8 +192,11 @@ abstract class _CategoryIcon implements CategoryIcon {
   String get engCategory;
   @override
   Color get color;
+
+  /// Create a copy of CategoryIcon
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CategoryIconImplCopyWith<_$CategoryIconImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

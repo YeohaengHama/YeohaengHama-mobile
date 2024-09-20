@@ -16,21 +16,23 @@ class RestaurantSearchListFragment extends ConsumerWidget {
     final _isLoading = ref.watch(isLoadingProvider.notifier).state;
     // 현재 저장된 SearchSimpleResult 리스트 출력
 
-    return restaurantAreaList.isEmpty && !_isLoading ?
+    return restaurantAreaList.isEmpty || _isLoading ?
     SizedBox(
         child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                '아직 작성 된 여행일기가 없어요'.text.color(AppColors.thirdGrey).bold.make(),
-                '여행일기를 작성해 볼까요?'.text.color(AppColors.thirdGrey).make(),
+                '키워드와 일치하는 장소가 없어요'.text.color(AppColors.thirdGrey).bold.make(),
+                '다시 검색해 볼까요?'.text.color(AppColors.thirdGrey).make(),
                 Height(30),
                 Line(color: AppColors.outline,width: 340)
               ],
             ))).pSymmetric(v: 30)
         :
-    Expanded(
+    SizedBox(
+      // 여기에 적절한 높이를 설정
+      height: MediaQuery.of(context).size.height,
       child: restaurantAreaList.isNotEmpty
           ? ListView.builder(
         scrollDirection: Axis.vertical,

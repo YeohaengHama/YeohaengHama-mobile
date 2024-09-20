@@ -28,8 +28,12 @@ mixin _$OpenApiAreaLocation {
   String get contentTypeId => throw _privateConstructorUsedError;
   String get mobileOS => throw _privateConstructorUsedError;
 
+  /// Serializes this OpenApiAreaLocation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of OpenApiAreaLocation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OpenApiAreaLocationCopyWith<OpenApiAreaLocation> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -60,6 +64,8 @@ class _$OpenApiAreaLocationCopyWithImpl<$Res, $Val extends OpenApiAreaLocation>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OpenApiAreaLocation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -130,6 +136,8 @@ class __$$OpenApiAreaLocationImplCopyWithImpl<$Res>
       $Res Function(_$OpenApiAreaLocationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OpenApiAreaLocation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -229,12 +237,14 @@ class _$OpenApiAreaLocationImpl implements _OpenApiAreaLocation {
                 other.mobileOS == mobileOS));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, numOfRows, page, mapX, mapY,
       radius, contentTypeId, mobileOS);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OpenApiAreaLocation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OpenApiAreaLocationImplCopyWith<_$OpenApiAreaLocationImpl> get copyWith =>
@@ -276,8 +286,11 @@ abstract class _OpenApiAreaLocation implements OpenApiAreaLocation {
   String get contentTypeId;
   @override
   String get mobileOS;
+
+  /// Create a copy of OpenApiAreaLocation
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OpenApiAreaLocationImplCopyWith<_$OpenApiAreaLocationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

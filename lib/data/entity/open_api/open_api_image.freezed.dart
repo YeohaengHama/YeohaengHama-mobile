@@ -25,8 +25,12 @@ mixin _$OpenApiImage {
   String get pageNo => throw _privateConstructorUsedError;
   String get mobileOS => throw _privateConstructorUsedError;
 
+  /// Serializes this OpenApiImage to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of OpenApiImage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $OpenApiImageCopyWith<OpenApiImage> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -51,6 +55,8 @@ class _$OpenApiImageCopyWithImpl<$Res, $Val extends OpenApiImage>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of OpenApiImage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -100,6 +106,8 @@ class __$$OpenApiImageImplCopyWithImpl<$Res>
       _$OpenApiImageImpl _value, $Res Function(_$OpenApiImageImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of OpenApiImage
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -169,12 +177,14 @@ class _$OpenApiImageImpl implements _OpenApiImage {
                 other.mobileOS == mobileOS));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, contentId, numOfRows, pageNo, mobileOS);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of OpenApiImage
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$OpenApiImageImplCopyWith<_$OpenApiImageImpl> get copyWith =>
@@ -206,8 +216,11 @@ abstract class _OpenApiImage implements OpenApiImage {
   String get pageNo;
   @override
   String get mobileOS;
+
+  /// Create a copy of OpenApiImage
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$OpenApiImageImplCopyWith<_$OpenApiImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

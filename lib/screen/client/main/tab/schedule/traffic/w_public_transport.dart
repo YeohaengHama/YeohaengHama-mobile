@@ -54,136 +54,142 @@ class PublicTransportWidget extends HookConsumerWidget {
                           final path = trafficInfo.result.path[index];
                           final totalTime = path.info.totalTime;
                           bool firstWalkIconShown = false;
-                          return Container(
-                            color: Colors.white,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Baseline(
-                                        baseline: TextStyle(fontSize: 15).fontSize! * 0.8, // 폰트 크기에 따라 기준선을 설정
-                                        baselineType: TextBaseline.alphabetic,
-                                        child: Container(
-                                          padding: EdgeInsets.all(8),
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: AppColors.deepPurple,
-                                          ),
-                                          child: Text(
-                                            '${index + 1}',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold,
-                                              color: AppColors.white,
+                          return Tap(
+                            onTap: () {
+                              ref.read(selectedTrafficRouteIndexNotifierProvider.notifier).setSelectedTrafficRouteIndex(index);
+
+                            },
+                            child: Container(
+                              color: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Baseline(
+                                          baseline: TextStyle(fontSize: 15).fontSize! * 0.8, // 폰트 크기에 따라 기준선을 설정
+                                          baselineType: TextBaseline.alphabetic,
+                                          child: Container(
+                                            padding: EdgeInsets.all(8),
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: AppColors.deepPurple,
+                                            ),
+                                            child: Text(
+                                              '${index + 1}',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                                color: AppColors.white,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(width: 8), // 아이템 간의 간격을 조절
-                                      Baseline(
-                                        baseline: TextStyle(fontSize: 30).fontSize! * 0.8, // 폰트 크기에 따라 기준선을 설정
-                                        baselineType: TextBaseline.alphabetic,
-                                        child: '${totalTime}'.text.bold.color(AppColors.primaryGrey).size(30).make(),
-                                      ),
-                                      Baseline(
-                                        baseline: TextStyle(fontSize: 15).fontSize! * 0.8,
-                                        baselineType: TextBaseline.alphabetic,
-                                        child: '분'.text.bold.color(AppColors.primaryGrey).size(15).make(),
-                                      ),
-                                      Baseline(
-                                        baseline: TextStyle(fontSize: 15).fontSize! * 0.8,
-                                        baselineType: TextBaseline.alphabetic,
-                                        child: '|'.text.color(AppColors.outline).bold.make(),
-                                      ),
-                                      Baseline(
-                                        baseline: TextStyle(fontSize: 15).fontSize! * 0.8,
-                                        baselineType: TextBaseline.alphabetic,
-                                        child: ' ${path.info.payment}원'.text.bold.color(AppColors.primaryGrey).make(),
-                                      ),
-                                    ],
-                                  ),
-
-
-                                  SizedBox(height: 10),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: AppColors.forthGrey,
-                                      borderRadius: BorderRadius.circular(10),
+                                        SizedBox(width: 8), // 아이템 간의 간격을 조절
+                                        Baseline(
+                                          baseline: TextStyle(fontSize: 30).fontSize! * 0.8, // 폰트 크기에 따라 기준선을 설정
+                                          baselineType: TextBaseline.alphabetic,
+                                          child: '${totalTime}'.text.bold.color(AppColors.primaryGrey).size(30).make(),
+                                        ),
+                                        Baseline(
+                                          baseline: TextStyle(fontSize: 15).fontSize! * 0.8,
+                                          baselineType: TextBaseline.alphabetic,
+                                          child: '분'.text.bold.color(AppColors.primaryGrey).size(15).make(),
+                                        ),
+                                        Baseline(
+                                          baseline: TextStyle(fontSize: 15).fontSize! * 0.8,
+                                          baselineType: TextBaseline.alphabetic,
+                                          child: '|'.text.color(AppColors.outline).bold.make(),
+                                        ),
+                                        Baseline(
+                                          baseline: TextStyle(fontSize: 15).fontSize! * 0.8,
+                                          baselineType: TextBaseline.alphabetic,
+                                          child: ' ${path.info.payment}원'.text.bold.color(AppColors.primaryGrey).make(),
+                                        ),
+                                      ],
                                     ),
-                                    child: Row(
+
+
+                                    SizedBox(height: 10),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: AppColors.forthGrey,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Row(
+                                        children: path.subPath!.map((subPath) {
+                                          final proportion = subPath.sectionTime! / totalTime;
+                                          final isWalk = subPath.trafficType == 3;
+                                          Widget icon = _getIcon(subPath.trafficType);
+                                          Widget text = Text(
+                                            '${subPath.sectionTime}분',
+                                            style: TextStyle(color: Colors.white, fontWeight:FontWeight.bold, fontSize: 10),
+                                          );
+
+                                          if (isWalk && firstWalkIconShown) {
+                                            icon = Container();
+                                          } else if (isWalk) {
+                                            firstWalkIconShown = true;
+                                          }
+
+                                          return Expanded(
+                                            flex: (proportion * 100).round(),
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  height: 20,
+                                                  decoration: BoxDecoration(
+                                                    color: subPath.sectionTime! >= 4
+                                                        ? _getColor(subPath.trafficType)
+                                                        : AppColors.forthGrey,
+                                                    borderRadius: BorderRadius.circular(10),
+                                                  ),
+                                                  child: subPath.sectionTime! >= 5
+                                                      ? Stack(
+                                                    children: [
+                                                      Center(child: text),
+                                                      Positioned(
+                                                        left: 5,
+                                                        top: 2,
+                                                        child: icon,
+                                                      ),
+                                                    ],
+                                                  )
+                                                      : Center(
+                                                    child: subPath.trafficType != 5
+                                                        ? icon
+                                                        : Container(),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ),
+                                    SizedBox(height: 2),
+                                    Row(
                                       children: path.subPath!.map((subPath) {
                                         final proportion = subPath.sectionTime! / totalTime;
-                                        final isWalk = subPath.trafficType == 3;
-                                        Widget icon = _getIcon(subPath.trafficType);
-                                        Widget text = Text(
-                                          '${subPath.sectionTime}분',
-                                          style: TextStyle(color: Colors.white, fontWeight:FontWeight.bold, fontSize: 10),
-                                        );
-
-                                        if (isWalk && firstWalkIconShown) {
-                                          icon = Container();
-                                        } else if (isWalk) {
-                                          firstWalkIconShown = true;
-                                        }
-
                                         return Expanded(
                                           flex: (proportion * 100).round(),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                height: 20,
-                                                decoration: BoxDecoration(
-                                                  color: subPath.sectionTime! >= 4
-                                                      ? _getColor(subPath.trafficType)
-                                                      : AppColors.forthGrey,
-                                                  borderRadius: BorderRadius.circular(10),
-                                                ),
-                                                child: subPath.sectionTime! >= 5
-                                                    ? Stack(
-                                                  children: [
-                                                    Center(child: text),
-                                                    Positioned(
-                                                      left: 5,
-                                                      top: 2,
-                                                      child: icon,
-                                                    ),
-                                                  ],
-                                                )
-                                                    : Center(
-                                                  child: subPath.trafficType != 5
-                                                      ? icon
-                                                      : Container(),
-                                                ),
-                                              ),
-                                            ],
+                                          child: Center(
+                                            child: Text(
+                                              subPath.sectionTime! >= 4
+                                                  ? _getSubPathLabel(subPath)
+                                                  : '',
+                                              style: TextStyle(fontSize: 10),
+                                            ),
                                           ),
                                         );
                                       }).toList(),
                                     ),
-                                  ),
-                                  SizedBox(height: 2),
-                                  Row(
-                                    children: path.subPath!.map((subPath) {
-                                      final proportion = subPath.sectionTime! / totalTime;
-                                      return Expanded(
-                                        flex: (proportion * 100).round(),
-                                        child: Center(
-                                          child: Text(
-                                            subPath.sectionTime! >= 4
-                                                ? _getSubPathLabel(subPath)
-                                                : '',
-                                            style: TextStyle(fontSize: 10),
-                                          ),
-                                        ),
-                                      );
-                                    }).toList(),
-                                  ),
-                                  Divider(thickness: 2),
-                                ],
+                                    Divider(thickness: 2),
+                                  ],
+                                ),
                               ),
                             ),
                           );
@@ -201,10 +207,51 @@ class PublicTransportWidget extends HookConsumerWidget {
       ),
     );
   }
-
   Future<List<NAddableOverlay>> _createOverlaysAsync(Path path) async {
     List<NAddableOverlay> overlays = [];
     int overlayIdCounter = 1;
+
+    // 출발지 좌표를 유효한 값으로 찾기
+    NLatLng? startLatLng;
+    for (var subPath in path.subPath!) {
+      if (subPath.startX != null && subPath.startY != null) {
+        startLatLng = NLatLng(subPath.startY!, subPath.startX!);
+        break; // 유효한 좌표를 찾으면 루프 종료
+      }
+    }
+
+    // 출발지 마커 추가 (유효한 좌표가 있을 때만)
+    if (startLatLng != null) {
+      final startMarker = NMarker(
+        id: 'start_marker',
+        position: startLatLng,
+        caption:NOverlayCaption(text: '출발지'),
+
+        iconTintColor: Colors.red,
+      );
+      overlays.add(startMarker);
+    }
+
+    // 도착지 좌표를 유효한 값으로 찾기
+    NLatLng? endLatLng;
+    for (var i = path.subPath!.length - 1; i >= 0; i--) {
+      final subPath = path.subPath![i];
+      if (subPath.endX != null && subPath.endY != null) {
+        endLatLng = NLatLng(subPath.endY!, subPath.endX!);
+        break; // 유효한 좌표를 찾으면 루프 종료
+      }
+    }
+
+    // 도착지 마커 추가 (유효한 좌표가 있을 때만)
+    if (endLatLng != null) {
+      final endMarker = NMarker(
+        id: 'end_marker',
+        position: endLatLng,
+        caption: NOverlayCaption(text: '도착지'),
+        iconTintColor: Colors.blue,
+      );
+      overlays.add(endMarker);
+    }
 
     for (var subPath in path.subPath!) {
       List<NLatLng> points = [];
@@ -231,7 +278,6 @@ class PublicTransportWidget extends HookConsumerWidget {
 
     return overlays;
   }
-
   void _moveCameraToOverlays(NaverMapController? controller, List<NAddableOverlay> overlays) {
     if (overlays.isEmpty || controller == null) return;
 

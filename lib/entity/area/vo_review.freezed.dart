@@ -24,7 +24,9 @@ mixin _$Review {
   List<String>? get Images => throw _privateConstructorUsedError;
   String get contents => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Review
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ReviewCopyWith<Review> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -56,6 +58,8 @@ class _$ReviewCopyWithImpl<$Res, $Val extends Review>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Review
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -99,6 +103,8 @@ class _$ReviewCopyWithImpl<$Res, $Val extends Review>
     ) as $Val);
   }
 
+  /// Create a copy of Review
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TourismCopyWith<$Res> get tourism {
@@ -107,6 +113,8 @@ class _$ReviewCopyWithImpl<$Res, $Val extends Review>
     });
   }
 
+  /// Create a copy of Review
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
@@ -146,6 +154,8 @@ class __$$ReviewImplCopyWithImpl<$Res>
       _$ReviewImpl _value, $Res Function(_$ReviewImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Review
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -252,7 +262,9 @@ class _$ReviewImpl implements _Review {
   int get hashCode => Object.hash(runtimeType, tourism, id, user, score,
       wirteTime, const DeepCollectionEquality().hash(_Images), contents);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Review
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReviewImplCopyWith<_$ReviewImpl> get copyWith =>
@@ -283,8 +295,11 @@ abstract class _Review implements Review {
   List<String>? get Images;
   @override
   String get contents;
+
+  /// Create a copy of Review
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReviewImplCopyWith<_$ReviewImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -9,11 +9,11 @@ class ShowAllAccount with _$ShowAllAccount {
   const factory ShowAllAccount(
   {
     required int id,
-    required String email,
     required String? photoUrl,
     required String nickname,
 
-}
+
+  }
 
       ) = _ShowAllAccount;
 

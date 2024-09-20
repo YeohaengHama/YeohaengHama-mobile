@@ -23,7 +23,9 @@ mixin _$ShortsWrite {
   int get itineraryId => throw _privateConstructorUsedError;
   String get itineraryTitle => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ShortsWrite
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ShortsWriteCopyWith<ShortsWrite> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +55,8 @@ class _$ShortsWriteCopyWithImpl<$Res, $Val extends ShortsWrite>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ShortsWrite
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -117,6 +121,8 @@ class __$$ShortsWriteImplCopyWithImpl<$Res>
       _$ShortsWriteImpl _value, $Res Function(_$ShortsWriteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ShortsWrite
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -205,7 +211,9 @@ class _$ShortsWriteImpl implements _ShortsWrite {
   int get hashCode => Object.hash(runtimeType, accountId, video, title, content,
       itineraryId, itineraryTitle);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ShortsWrite
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ShortsWriteImplCopyWith<_$ShortsWriteImpl> get copyWith =>
@@ -233,8 +241,11 @@ abstract class _ShortsWrite implements ShortsWrite {
   int get itineraryId;
   @override
   String get itineraryTitle;
+
+  /// Create a copy of ShortsWrite
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ShortsWriteImplCopyWith<_$ShortsWriteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

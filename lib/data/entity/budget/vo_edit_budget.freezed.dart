@@ -34,8 +34,12 @@ mixin _$EditBudget {
   String get category => throw _privateConstructorUsedError;
   bool get individual => throw _privateConstructorUsedError;
 
+  /// Serializes this EditBudget to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of EditBudget
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $EditBudgetCopyWith<EditBudget> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -75,6 +79,8 @@ class _$EditBudgetCopyWithImpl<$Res, $Val extends EditBudget>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of EditBudget
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -148,6 +154,8 @@ class _$EditBudgetCopyWithImpl<$Res, $Val extends EditBudget>
     ) as $Val);
   }
 
+  /// Create a copy of EditBudget
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PayerIdCopyWith<$Res> get payerId {
@@ -156,6 +164,8 @@ class _$EditBudgetCopyWithImpl<$Res, $Val extends EditBudget>
     });
   }
 
+  /// Create a copy of EditBudget
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $PlaceCopyWith<$Res> get place {
@@ -202,6 +212,8 @@ class __$$EditBudgetImplCopyWithImpl<$Res>
       _$EditBudgetImpl _value, $Res Function(_$EditBudgetImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EditBudget
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -370,7 +382,7 @@ class _$EditBudgetImpl implements _EditBudget {
                 other.individual == individual));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -388,7 +400,9 @@ class _$EditBudgetImpl implements _EditBudget {
       category,
       individual);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EditBudget
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EditBudgetImplCopyWith<_$EditBudgetImpl> get copyWith =>
@@ -447,8 +461,11 @@ abstract class _EditBudget implements EditBudget {
   String get category;
   @override
   bool get individual;
+
+  /// Create a copy of EditBudget
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EditBudgetImplCopyWith<_$EditBudgetImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -464,8 +481,12 @@ mixin _$PayerId {
   String get photoUrl => throw _privateConstructorUsedError;
   String get accountRole => throw _privateConstructorUsedError;
 
+  /// Serializes this PayerId to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PayerId
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PayerIdCopyWith<PayerId> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -487,6 +508,8 @@ class _$PayerIdCopyWithImpl<$Res, $Val extends PayerId>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PayerId
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -534,6 +557,8 @@ class __$$PayerIdImplCopyWithImpl<$Res>
       _$PayerIdImpl _value, $Res Function(_$PayerIdImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PayerId
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -603,12 +628,14 @@ class _$PayerIdImpl implements _PayerId {
                 other.accountRole == accountRole));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, nickname, photoUrl, accountRole);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PayerId
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PayerIdImplCopyWith<_$PayerIdImpl> get copyWith =>
@@ -639,8 +666,11 @@ abstract class _PayerId implements PayerId {
   String get photoUrl;
   @override
   String get accountRole;
+
+  /// Create a copy of PayerId
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PayerIdImplCopyWith<_$PayerIdImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -656,8 +686,12 @@ mixin _$AccountId {
   String get photoUrl => throw _privateConstructorUsedError;
   String get accountRole => throw _privateConstructorUsedError;
 
+  /// Serializes this AccountId to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AccountId
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AccountIdCopyWith<AccountId> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -680,6 +714,8 @@ class _$AccountIdCopyWithImpl<$Res, $Val extends AccountId>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AccountId
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -728,6 +764,8 @@ class __$$AccountIdImplCopyWithImpl<$Res>
       _$AccountIdImpl _value, $Res Function(_$AccountIdImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AccountId
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -797,12 +835,14 @@ class _$AccountIdImpl implements _AccountId {
                 other.accountRole == accountRole));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, nickname, photoUrl, accountRole);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AccountId
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AccountIdImplCopyWith<_$AccountIdImpl> get copyWith =>
@@ -834,8 +874,11 @@ abstract class _AccountId implements AccountId {
   String get photoUrl;
   @override
   String get accountRole;
+
+  /// Create a copy of AccountId
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AccountIdImplCopyWith<_$AccountIdImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -851,8 +894,12 @@ mixin _$Place {
   String get placeNum => throw _privateConstructorUsedError;
   String get placeType => throw _privateConstructorUsedError;
 
+  /// Serializes this Place to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Place
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PlaceCopyWith<Place> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -874,6 +921,8 @@ class _$PlaceCopyWithImpl<$Res, $Val extends Place>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Place
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -921,6 +970,8 @@ class __$$PlaceImplCopyWithImpl<$Res>
       _$PlaceImpl _value, $Res Function(_$PlaceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Place
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -990,12 +1041,14 @@ class _$PlaceImpl implements _Place {
                 other.placeType == placeType));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, id, placeName, placeNum, placeType);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Place
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PlaceImplCopyWith<_$PlaceImpl> get copyWith =>
@@ -1026,8 +1079,11 @@ abstract class _Place implements Place {
   String get placeNum;
   @override
   String get placeType;
+
+  /// Create a copy of Place
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PlaceImplCopyWith<_$PlaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

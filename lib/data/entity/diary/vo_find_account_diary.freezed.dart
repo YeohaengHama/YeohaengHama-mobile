@@ -29,8 +29,12 @@ mixin _$FindAccountDiary {
   List<String> get photos => throw _privateConstructorUsedError;
   AccountShowDTO get accountShowDTO => throw _privateConstructorUsedError;
 
+  /// Serializes this FindAccountDiary to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FindAccountDiary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $FindAccountDiaryCopyWith<FindAccountDiary> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -64,6 +68,8 @@ class _$FindAccountDiaryCopyWithImpl<$Res, $Val extends FindAccountDiary>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of FindAccountDiary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -112,6 +118,8 @@ class _$FindAccountDiaryCopyWithImpl<$Res, $Val extends FindAccountDiary>
     ) as $Val);
   }
 
+  /// Create a copy of FindAccountDiary
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AccountShowDTOCopyWith<$Res> get accountShowDTO {
@@ -151,6 +159,8 @@ class __$$FindAccountDiaryImplCopyWithImpl<$Res>
       $Res Function(_$FindAccountDiaryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FindAccountDiary
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -269,7 +279,7 @@ class _$FindAccountDiaryImpl implements _FindAccountDiary {
                 other.accountShowDTO == accountShowDTO));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -282,7 +292,9 @@ class _$FindAccountDiaryImpl implements _FindAccountDiary {
       const DeepCollectionEquality().hash(_photos),
       accountShowDTO);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FindAccountDiary
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$FindAccountDiaryImplCopyWith<_$FindAccountDiaryImpl> get copyWith =>
@@ -327,8 +339,11 @@ abstract class _FindAccountDiary implements FindAccountDiary {
   List<String> get photos;
   @override
   AccountShowDTO get accountShowDTO;
+
+  /// Create a copy of FindAccountDiary
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FindAccountDiaryImplCopyWith<_$FindAccountDiaryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -343,8 +358,12 @@ mixin _$AccountShowDTO {
   String get nickname => throw _privateConstructorUsedError;
   String? get photoUrl => throw _privateConstructorUsedError;
 
+  /// Serializes this AccountShowDTO to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AccountShowDTO
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AccountShowDTOCopyWith<AccountShowDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -368,6 +387,8 @@ class _$AccountShowDTOCopyWithImpl<$Res, $Val extends AccountShowDTO>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AccountShowDTO
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -411,6 +432,8 @@ class __$$AccountShowDTOImplCopyWithImpl<$Res>
       _$AccountShowDTOImpl _value, $Res Function(_$AccountShowDTOImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AccountShowDTO
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -468,11 +491,13 @@ class _$AccountShowDTOImpl implements _AccountShowDTO {
                 other.photoUrl == photoUrl));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, nickname, photoUrl);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AccountShowDTO
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AccountShowDTOImplCopyWith<_$AccountShowDTOImpl> get copyWith =>
@@ -502,8 +527,11 @@ abstract class _AccountShowDTO implements AccountShowDTO {
   String get nickname;
   @override
   String? get photoUrl;
+
+  /// Create a copy of AccountShowDTO
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AccountShowDTOImplCopyWith<_$AccountShowDTOImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

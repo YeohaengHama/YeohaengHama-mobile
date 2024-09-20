@@ -26,8 +26,12 @@ mixin _$Area {
   String get contentTypeId => throw _privateConstructorUsedError;
   String get mobileOs => throw _privateConstructorUsedError;
 
+  /// Serializes this Area to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AreaCopyWith<Area> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -54,6 +58,8 @@ class _$AreaCopyWithImpl<$Res, $Val extends Area>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -110,6 +116,8 @@ class __$$AreaImplCopyWithImpl<$Res>
   __$$AreaImplCopyWithImpl(_$AreaImpl _value, $Res Function(_$AreaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -184,12 +192,14 @@ class _$AreaImpl implements _Area {
                 other.mobileOs == mobileOs));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, numOfRows, page, keyword, contentTypeId, mobileOs);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AreaImplCopyWith<_$AreaImpl> get copyWith =>
@@ -223,8 +233,11 @@ abstract class _Area implements Area {
   String get contentTypeId;
   @override
   String get mobileOs;
+
+  /// Create a copy of Area
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AreaImplCopyWith<_$AreaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

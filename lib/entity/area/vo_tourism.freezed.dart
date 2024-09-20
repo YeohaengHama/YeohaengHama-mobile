@@ -22,7 +22,9 @@ mixin _$Tourism {
   List<String> get tourismImages => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Tourism
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TourismCopyWith<Tourism> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -49,6 +51,8 @@ class _$TourismCopyWithImpl<$Res, $Val extends Tourism>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Tourism
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,6 +110,8 @@ class __$$TourismImplCopyWithImpl<$Res>
       _$TourismImpl _value, $Res Function(_$TourismImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Tourism
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -188,7 +194,9 @@ class _$TourismImpl implements _Tourism {
   int get hashCode => Object.hash(runtimeType, id, tourismName, tourismArea,
       const DeepCollectionEquality().hash(_tourismImages), content);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Tourism
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TourismImplCopyWith<_$TourismImpl> get copyWith =>
@@ -213,8 +221,11 @@ abstract class _Tourism implements Tourism {
   List<String> get tourismImages;
   @override
   String get content;
+
+  /// Create a copy of Tourism
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TourismImplCopyWith<_$TourismImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

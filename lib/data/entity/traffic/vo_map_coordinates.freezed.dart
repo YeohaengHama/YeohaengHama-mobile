@@ -27,8 +27,12 @@ mixin _$MapCoordinates {
   double get endX => throw _privateConstructorUsedError;
   double get endY => throw _privateConstructorUsedError;
 
+  /// Serializes this MapCoordinates to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MapCoordinates
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MapCoordinatesCopyWith<MapCoordinates> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$MapCoordinatesCopyWithImpl<$Res, $Val extends MapCoordinates>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MapCoordinates
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -122,6 +128,8 @@ class __$$MapCoordinatesImplCopyWithImpl<$Res>
       _$MapCoordinatesImpl _value, $Res Function(_$MapCoordinatesImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MapCoordinates
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -208,12 +216,14 @@ class _$MapCoordinatesImpl implements _MapCoordinates {
             (identical(other.endY, endY) || other.endY == endY));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, startTitle, startX, startY, endTitle, endX, endY);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MapCoordinates
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MapCoordinatesImplCopyWith<_$MapCoordinatesImpl> get copyWith =>
@@ -252,8 +262,11 @@ abstract class _MapCoordinates implements MapCoordinates {
   double get endX;
   @override
   double get endY;
+
+  /// Create a copy of MapCoordinates
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MapCoordinatesImplCopyWith<_$MapCoordinatesImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

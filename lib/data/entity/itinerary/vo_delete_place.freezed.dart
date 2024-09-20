@@ -24,8 +24,12 @@ mixin _$DeletePlace {
   String get placeNum => throw _privateConstructorUsedError;
   String get contentTypeId => throw _privateConstructorUsedError;
 
+  /// Serializes this DeletePlace to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeletePlace
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeletePlaceCopyWith<DeletePlace> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$DeletePlaceCopyWithImpl<$Res, $Val extends DeletePlace>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeletePlace
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$DeletePlaceImplCopyWithImpl<$Res>
       _$DeletePlaceImpl _value, $Res Function(_$DeletePlaceImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeletePlace
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -152,12 +160,14 @@ class _$DeletePlaceImpl implements _DeletePlace {
                 other.contentTypeId == contentTypeId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, accountId, placeNum, contentTypeId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeletePlace
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeletePlaceImplCopyWith<_$DeletePlaceImpl> get copyWith =>
@@ -186,8 +196,11 @@ abstract class _DeletePlace implements DeletePlace {
   String get placeNum;
   @override
   String get contentTypeId;
+
+  /// Create a copy of DeletePlace
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeletePlaceImplCopyWith<_$DeletePlaceImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

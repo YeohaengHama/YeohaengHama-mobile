@@ -129,7 +129,6 @@ class DraggableInfoScreen extends HookConsumerWidget {
               floating: false,
               pinned: true,
               scrolledUnderElevation: 0,
-            automaticallyImplyLeading:false,
               actions: [
                 IconButton(
                   onPressed: () {
@@ -176,12 +175,13 @@ class DraggableInfoScreen extends HookConsumerWidget {
                             titleStyle = titleStyle.copyWith(fontSize: 14);
                           }
 
-                          return Flexible(
+                          return Container(
+                            padding: EdgeInsets.only(left: 55),
                             child: Text(
                               title,
                               style: titleStyle,
-                              overflow: TextOverflow.ellipsis, // 긴 텍스트 처리
-                            ).pOnly(left: 55),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           );
                         },
                       ),
@@ -326,7 +326,6 @@ class DraggableInfoScreen extends HookConsumerWidget {
                       ),
                     ).pSymmetric(h: 30, v: 30)
                         : Container(),
-                    const Line(color: AppColors.outline, height: 10),
                     isDetailLoading
                         ? CardLoading(
                       height: 200,
