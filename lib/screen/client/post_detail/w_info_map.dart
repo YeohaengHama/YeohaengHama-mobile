@@ -41,8 +41,7 @@ class InfoMapWidget extends StatelessWidget {
                 .make()
                 .pOnly(bottom: 15),
           ),
-          Spacer(),
-          '자세히>'.text.size(12).color(AppColors.secondGrey).make().pOnly(right: 10)
+
         ]),
       ),
       SizedBox(
@@ -56,9 +55,31 @@ class InfoMapWidget extends StatelessWidget {
                 searchReviewResult: searchReviewResult,
               ));
             },
-            child: searchDetailResult.mapX != null ? MapWidget(
-                mapX: double.parse(searchDetailResult.mapX),
-                mapY: double.parse(searchDetailResult.mapY)): Container()),
+            child: searchDetailResult.mapX != null ? Stack(
+              children: [MapWidget(
+                  mapX: double.parse(searchDetailResult.mapX),
+                  mapY: double.parse(searchDetailResult.mapY)),
+              Positioned(
+                bottom: 10,
+                  left: 0,
+                  right: 0,
+                  child:Center(
+                    child: Tap(
+                      onTap: () { Nav.push(MapDetailScreen(
+                        searchDetailResult: searchDetailResult,
+                        searchImageResult: searchImageResult,
+                        searchReviewResult: searchReviewResult,
+                      ));  },
+                      child: RoundedContainer(
+                        borderColor: AppColors.whiteGrey,
+                        radius: 25,
+                        padding: EdgeInsets.symmetric(horizontal: 15 , vertical:10),
+                          backgroundColor: Colors.white,
+                          child: '이 장소 탐색'.text.color(AppColors.mainPurple).bold.make()),
+                    ),
+                  ))
+              ],
+            ): Container()),
       ),
       Height(10),
       RoundedContainer(

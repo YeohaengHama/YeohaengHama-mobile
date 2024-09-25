@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/entity/itinerary/a_add_pick_place.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/provider/p_edit_mode.dart';
+import 'package:fast_app_base/screen/client/main/tab/schedule/addAreaPick/w_add_area_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -11,6 +12,7 @@ import '../../../../../data/entity/itinerary/vo_pick_place.dart';
 import '../../../../../data/memory/area/selectedDayIndex_provider.dart';
 import '../../../../../data/memory/account/user_provider.dart';
 import '../../../../../data/network/itinerary_api.dart';
+import 'edit/m_title_edit.dart';
 
 class PickAreaWidget extends ConsumerWidget {
   const PickAreaWidget(this.pickPlace, this.itinerary, {Key? key})
@@ -46,6 +48,12 @@ class PickAreaWidget extends ConsumerWidget {
     return Tap(
       onTap: () async {
         if (!isEdit) {
+
+
+          // showDialog(
+          //   context: context,
+          //   builder: (_) => AddAreaModal(pickPlace, itinerary), // Custom modal widget for editing travel dates
+          // );
           await itineraryApi.postDeletePlace(deletePlace, ref);
           await itineraryApi.PostAddEachPickPlace(ref, addPickPlace);
         }

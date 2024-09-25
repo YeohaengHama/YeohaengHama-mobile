@@ -33,7 +33,7 @@ class _KakaoLoginWebViewState extends ConsumerState<KakaoLoginWebView> {
         ),
       )
       ..loadRequest(
-        Uri.parse('https://kauth.kakao.com/oauth/authorize?client_id=a9d1711e66ed62d5be76957294ab0a9f&redirect_uri=${serverUrl}/api/kakao/login&response_type=code'),
+        Uri.parse('https://kauth.kakao.com/oauth/authorize?client_id=a9d1711e66ed62d5be76957294ab0a9f&redirect_uri=${serverUrl}/kakao/login&response_type=code'),
       );
   }
 
