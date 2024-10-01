@@ -11,7 +11,7 @@ import '../../../../../../../data/network/review_api.dart';
 import '../../../../search/provider/is_detail_loading_provider.dart';
 
 class NearInfoMap extends ConsumerStatefulWidget {
-  const NearInfoMap({Key? key, this.mapX = 126.979, this.mapY = 37.566}) : super(key: key);
+  const NearInfoMap({Key? super.key, this.mapX = 126.979, this.mapY = 37.566});
   final double mapX;
   final double mapY;
 
@@ -112,7 +112,7 @@ class _AreaInfoMapState extends ConsumerState<NearInfoMap> {
     final marker = NMarker(
       id: 'initial_marker',
       position: placeLatLng,
-      caption: NOverlayCaption(text: 'Initial Location'),
+      caption: const NOverlayCaption(text: 'Initial Location'),
     );
 
     marker.setOnTapListener((NMarker marker) {

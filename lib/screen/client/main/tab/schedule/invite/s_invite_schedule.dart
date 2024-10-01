@@ -1,7 +1,6 @@
 import 'package:fast_app_base/common/widget/w_profile_image.dart';
 import 'package:fast_app_base/data/network/itinerary_api.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/invite/w_all_accounts.dart';
-import 'package:fast_app_base/screen/client/main/tab/schedule/invite/w_friends_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -18,12 +17,13 @@ class InvateSchedule extends ConsumerWidget {
     final itinerary = ref.watch(itineraryCheckProvider);
     final accountsProvider = ref.watch(allAccountProvider);
     final _SearchApiProvider = ref.read(SearchApiProvider);
+
     final itineraryApi = ItineraryApi();
     String nickName = '';
     final filteredAccounts = accountsProvider.where((account) =>
     ![itinerary!.account.id, ...itinerary.sharedAccount.map((sharedAccount) => sharedAccount.id)]
         .contains(account.id)).toList(); // 하마친구 필터링
-    final ScrollController _scrollControlle = ScrollController();
+    final ScrollController scrollControlle = ScrollController();
 
     return Scaffold(
       appBar: AppBar(
@@ -41,13 +41,13 @@ class InvateSchedule extends ConsumerWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              '${itinerary!.name}'
+              itinerary!.name
                   .text
                   .bold
                   .size(20)
                   .color(AppColors.primaryGrey)
                   .make(),
-              Height(15),
+              const Height(15),
               '함께 여행갈 친구나 가족을 초대해보세요.\n여행 일정을 함께 계획할 수 있습니다.\n(모임 채팅방이 자동 개설 됩니다.)'
                   .text
                   .size(14)
@@ -89,7 +89,7 @@ class InvateSchedule extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  Width(10),
+                  const Width(10),
                   RoundButton(
                     height: 40,
                     bgColor: Colors.transparent,
@@ -104,7 +104,7 @@ class InvateSchedule extends ConsumerWidget {
                   ),
                 ],
               ),
-              Height(15),
+              const Height(15),
               Row(
                 children: [
                   '하마 친구'.text.bold.color(AppColors.primaryGrey).make(), // 하마 친구로 변경
@@ -117,15 +117,15 @@ class InvateSchedule extends ConsumerWidget {
               ),
               Expanded(
                 child: ListView.builder(
-                  controller: _scrollControlle,
+                  controller: scrollControlle,
                   itemCount: filteredAccounts.length,
                   itemBuilder: (context, index) {
                     final account = filteredAccounts[index];
                     return Row(
                       children: [
                         ProfileImage(photoUrl: account.photoUrl, width: 40, height: 40),
-                        Width(10),
-                        '${account.nickname}'.text.bold.color(AppColors.primaryGrey).make(),
+                        const Width(10),
+                        account.nickname.text.bold.color(AppColors.primaryGrey).make(),
                         spacer,
                         RoundButton(
                           height: 30,

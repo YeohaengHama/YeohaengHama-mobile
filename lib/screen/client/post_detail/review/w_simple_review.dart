@@ -7,11 +7,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common/theme/text_size.dart';
 import '../../../../common/widget/scaffold/bottom_dialog_scaffold.dart';
 import '../../../../common/widget/w_arrow.dart';
-import '../../../../data/network/review_api.dart';
 import '../../review/s_review.dart';
 
 class SimpleReviewWidget extends ConsumerStatefulWidget {
-  const SimpleReviewWidget(this.id, this.type, {Key? key}) : super(key: key);
+  const SimpleReviewWidget(this.id, this.type, {Key? super.key});
 
   final int id;
   final int type;
@@ -154,7 +153,7 @@ class _SimpleReviewWidgetState extends ConsumerState<SimpleReviewWidget> {
               ],
             )
           else
-            NoReviewList(), // 리뷰가 비어있을 때 빈 컨테이너 출력
+            const NoReviewList(), // 리뷰가 비어있을 때 빈 컨테이너 출력
 
 
         ],

@@ -1,7 +1,5 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:fast_app_base/data/entity/open_api/open_api_image.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../common/constants.dart';
@@ -40,14 +38,14 @@ class DiaryApi {
         print('일기쓰기 성공: ${response.data}');
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
 

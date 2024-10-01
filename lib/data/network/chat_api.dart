@@ -1,7 +1,6 @@
 
 import 'package:dio/dio.dart';
 import 'package:fast_app_base/data/memory/account/user_provider.dart';
-import 'package:fast_app_base/data/network/user_api.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../common/constants.dart';
@@ -34,14 +33,14 @@ class ChatApi {
         ref.read(chatRoomsProvider.notifier).setRooms(chatRooms);
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
   Future<void> createRoom(String roomName, WidgetRef ref) async {

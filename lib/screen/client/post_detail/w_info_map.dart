@@ -81,7 +81,7 @@ class InfoMapWidget extends StatelessWidget {
               ],
             ): Container()),
       ),
-      Height(10),
+      const Height(10),
       RoundedContainer(
         radius: 5,
         backgroundColor: AppColors.whiteGrey,

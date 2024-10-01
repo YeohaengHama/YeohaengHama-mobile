@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/screen/client/post_detail/review/w_star.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -9,13 +8,13 @@ import '../../../../../../data/entity/review/vo_review_show_account_.dart';
 
 
 class ReviewImagesWidget extends ConsumerWidget {
-  const ReviewImagesWidget(this.review, {Key? key}) : super(key: key);
+  const ReviewImagesWidget(this.review, {Key? super.key});
   final ReviewShowAccount review;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     String overviewText = review.content;
     if (overviewText.length > 80) {
-      overviewText = overviewText.substring(0, 80) + '...더보기';
+      overviewText = '${overviewText.substring(0, 80)}...더보기';
     }
 
     List<Widget> imageWidgets = [];

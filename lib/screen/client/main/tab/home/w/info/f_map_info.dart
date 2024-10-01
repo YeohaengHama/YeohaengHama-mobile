@@ -1,7 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/w_tap.dart';
-import 'package:fast_app_base/screen/client/post_detail/review/w_review_star.dart';
 import 'package:fast_app_base/screen/client/post_detail/w_detail_map.dart';
 import 'package:fast_app_base/screen/client/post_detail/w_map.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,8 +21,7 @@ import '../../../../../../../data/network/itinerary_api.dart';
 class MapInfoFragment extends ConsumerStatefulWidget {
   const MapInfoFragment(
       this.searchDetailResult, this.searchImageResult, this.searchReviewResult,
-      {Key? key})
-      : super(key: key);
+      {Key? super.key});
 
   final SearchDetailResult? searchDetailResult;
   final SearchImageResult? searchImageResult;
@@ -75,7 +70,7 @@ class _MapDetailScreenState extends ConsumerState<MapInfoFragment> {
 
     String overviewText = widget.searchDetailResult?.overView ?? '';
     if (overviewText.length > 20) {
-      overviewText = overviewText.substring(0, 45) + '...';
+      overviewText = '${overviewText.substring(0, 45)}...';
     }
 
     final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;

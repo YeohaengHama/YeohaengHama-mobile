@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 
-import 'custom_examples.dart';
 import 'picker.dart';
 
 

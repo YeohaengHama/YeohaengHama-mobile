@@ -4,12 +4,10 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/memory/itinerary/itinerary_check_provider.dart';
 import '../../../../../../../common/dart/extension/day_parser.dart';
 import '../../../../../../../common/widget/DottedLine.dart';
-import '../../../../../../../common/dart/extension/datetime_extension.dart';
 import '../../../../../../../data/entity/budget/vo_current_budget.dart';
 import '../../../../../../../data/memory/budget/current_budget_provider.dart';
 import '../../../../../../../data/memory/budget/statistics_provider.dart';
 import '../../../../../../../data/memory/account/user_provider.dart';
-import '../../../../../../../data/network/budget_api.dart';
 class PayResult extends ConsumerStatefulWidget {
   const PayResult({super.key});
 
@@ -30,7 +28,7 @@ class _PayResultState extends ConsumerState<PayResult> {
       final payerId = expenditure.payerId.id;
 
 
-      expenditure.calculate.forEach((calculation) {
+      for (var calculation in expenditure.calculate) {
         final receiverId = calculation.accountShowDTO.id;
 
 
@@ -39,7 +37,7 @@ class _PayResultState extends ConsumerState<PayResult> {
           settlementResults[receiverId]![payerId] =
               (settlementResults[receiverId]![payerId] ?? 0) + calculation.amount;
         }
-      });
+      }
     });
 
     return    Column(
@@ -93,14 +91,14 @@ class _PayResultState extends ConsumerState<PayResult> {
               ),
             ],);
           });
-        }).toList(),
+        }),
       ],
 
     ) ;
   }
   // Helper method to find account by id
   Account findAccountById(int id, List<Account> accounts) {
-    return accounts.firstWhere((account) => account.id == id, orElse: () => Account(id: 0, nickname: 'Unknown'));
+    return accounts.firstWhere((account) => account.id == id, orElse: () => const Account(id: 0, nickname: 'Unknown'));
   }
 
   // Helper method to find account name by id in budget

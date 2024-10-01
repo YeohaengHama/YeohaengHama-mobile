@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../entity/diary/vo_find_account_diary.dart';
 import '../../entity/diary/vo_find_all_diary.dart';
 
 final DiaryFindAllProvider =

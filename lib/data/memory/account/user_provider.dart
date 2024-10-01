@@ -1,5 +1,4 @@
 import 'package:fast_app_base/data/entity/account/vo_current_account.dart';
-import 'package:fast_app_base/data/entity/area/search_simple_toursim_result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // AccountProvider 생성

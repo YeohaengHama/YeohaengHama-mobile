@@ -1,7 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/entity/itinerary/a_check_itinerary.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/s_chat_bot.dart';
-import 'package:fast_app_base/screen/client/main/tab/home/w/helper/s_helper.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_show_pick_day.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_show_pick_place.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ import '../../../../../../common/widget/scaffold/show_bottom_dialog.dart';
 import '../../../../../../data/memory/area/selectedDayIndex_provider.dart';
 import '../../../../../../data/memory/itinerary/itinerary_check_provider.dart';
 import '../../schedule/edit/d_edit_schedule.dart';
-import 'info/s_pick_place_info.dart';
 
 class ExistScheduleWidget extends ConsumerWidget {
   const ExistScheduleWidget(this.itinerary, {super.key});
@@ -53,7 +51,7 @@ class ExistScheduleWidget extends ConsumerWidget {
                   text: '일정 수정',
                   fontSize: 14,
                   onTap: () {
-                    ShowBottomDialog(context, EditScheduleDialog());
+                    ShowBottomDialog(context, const EditScheduleDialog());
                   },
                   textColor: Colors.white,
                   leftWidget: const Icon(

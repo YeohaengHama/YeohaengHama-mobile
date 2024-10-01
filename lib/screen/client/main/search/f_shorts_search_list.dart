@@ -8,7 +8,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 import 'dart:typed_data';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../../data/memory/shorts/p_shorts_search.dart';
 
@@ -48,13 +47,13 @@ class ShortsSearchListFragment extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final shortsList = ref.watch(shortsSearchProvider);
-    final _isLoading = ref.watch(isLoadingProvider.notifier).state;
+    final isLoading = ref.watch(isLoadingProvider.notifier).state;
     final isBlack = ref.read(BottomNavBlackProvider.notifier);
 
     // 비디오 URL 리스트 생성
     final videoUrls = shortsList.shortsList.map((short) => short.videoUrl).toList();
 
-    return shortsList.shortsList.isEmpty || _isLoading
+    return shortsList.shortsList.isEmpty || isLoading
         ? SizedBox(
         child: Center(
             child: Column(
@@ -63,12 +62,12 @@ class ShortsSearchListFragment extends ConsumerWidget {
               children: [
                 '해당 키워드의 숏츠가 없어요'.text.color(AppColors.thirdGrey).bold.make(),
                 '다시 검색해 볼까요?'.text.color(AppColors.thirdGrey).make(),
-                Height(30),
-                Line(color: AppColors.outline, width: 340)
+                const Height(30),
+                const Line(color: AppColors.outline, width: 340)
               ],
             ))).pSymmetric(v: 30)
         : Expanded(
-        child: _isLoading
+        child: isLoading
         ? GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,

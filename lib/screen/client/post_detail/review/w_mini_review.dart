@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
 
 import '../../../../data/entity/review/a_review_show_all.dart';
-import '../../../../entity/area/vo_review.dart';
 
 class MiniReview extends StatelessWidget {
   final ReviewShowAll review;

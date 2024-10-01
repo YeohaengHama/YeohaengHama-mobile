@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:fast_app_base/data/entity/itinerary/check_save_place/a_check_save_place.dart';
@@ -8,16 +7,13 @@ import 'package:fast_app_base/data/entity/itinerary/vo_pick_place.dart';
 import 'package:fast_app_base/data/entity/itinerary/vo_save_place.dart';
 import 'package:fast_app_base/data/entity/menu/all_itinerary.dart';
 import 'package:fast_app_base/data/network/budget_api.dart';
-import 'package:fast_app_base/data/network/user_api.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:riverpod/riverpod.dart';
 
 import '../../common/constants.dart';
 import '../entity/itinerary/a_add_pick_place.dart';
 import '../entity/itinerary/a_check_itinerary.dart';
 import '../entity/itinerary/a_creat_itinerary.dart';
-import '../entity/itinerary/share_itinerary.dart';
 import '../entity/open_api/open_api_detail.dart';
 
 import '../memory/itinerary/add_pick_each_place_provider.dart';
@@ -92,7 +88,7 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
@@ -117,7 +113,7 @@ class ItineraryApi {
       );
 
       if (response.statusCode == 200) {
-        await getItinerary(ref, itineraryProvider!.itineraryId);
+        await getItinerary(ref, itineraryProvider.itineraryId);
         print('일정 수정 완료');
       } else if (response.statusCode == 401) {
         throw Exception('실패. 상태 코드: ${response.statusCode}');
@@ -127,7 +123,7 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
@@ -162,7 +158,7 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
@@ -196,7 +192,7 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
@@ -229,7 +225,7 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
@@ -286,7 +282,7 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -353,7 +349,7 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose();
     }
@@ -413,7 +409,7 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose();
     }
@@ -448,7 +444,7 @@ class ItineraryApi {
           String firstImage = contents['firstImage'];
           String addr1 = contents['addr1'];
 
-          print('아이디:${removeId}');
+          print('아이디:$removeId');
           ref
               .read(showPickPlaceApiResponseProvider.notifier)
               .removePickPlace(removeId);
@@ -463,7 +459,7 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose();
     }
@@ -475,13 +471,13 @@ class ItineraryApi {
           ref.read(itineraryCreatedProvider.notifier);
 
       final response = await _dio.get(
-        '$baseUrl/itinerary/${id}',
+        '$baseUrl/itinerary/$id',
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = response.data['data'];
 
         final CheckItinerary checkItinerary = CheckItinerary.fromJson(data);
-        ref.read(itineraryCheckProvider.notifier).setItinerary!(checkItinerary);
+        ref.read(itineraryCheckProvider.notifier).setItinerary(checkItinerary);
         await PostAddNewEachPickPlace(ref);
 
         return response;
@@ -494,7 +490,7 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose();
     }
@@ -536,7 +532,7 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -557,7 +553,8 @@ class ItineraryApi {
         'mapx': addPickPlace.mapx.toString(),
         'mapy': addPickPlace.mapy.toString(),
         'memo': addPickPlace.memo,
-        'image' : addPickPlace.image
+        'image' : addPickPlace.image,
+        'placeOrder' : null
       };
 
       response = await _dio.post(
@@ -591,7 +588,7 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -673,7 +670,7 @@ class ItineraryApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -702,14 +699,14 @@ class ItineraryApi {
         }
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('오류');
-      throw e;
+      rethrow;
     }
   }
 
@@ -739,14 +736,14 @@ class ItineraryApi {
         }
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('오류');
-      throw e;
+      rethrow;
     }
   }
 
@@ -755,23 +752,23 @@ class ItineraryApi {
       final account = ref.read(accountProvider.notifier);
 
       final response = await _dio.post(
-        '$baseUrl/itinerary/delete?itineraryId=${itineraryId}&accountId=${account.state!.id}',
+        '$baseUrl/itinerary/delete?itineraryId=$itineraryId&accountId=${account.state!.id}',
       );
 
       if (response.statusCode == 200) {
         await showAllItinerary(ref);
         print('일정삭제 완료');
-        return null;
+        return;
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -795,17 +792,17 @@ class ItineraryApi {
               )),
         );
 
-        return null;
+        return;
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -836,14 +833,14 @@ class ItineraryApi {
         ));
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('오류');
-      throw e;
+      rethrow;
     }
   }
 }

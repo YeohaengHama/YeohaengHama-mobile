@@ -12,7 +12,7 @@ import '../../../../../../data/entity/itinerary/vo_pick_place.dart';
 import '../../../../../../data/memory/itinerary/add_pick_each_place_provider.dart';
 
 class AddAreaModal extends ConsumerStatefulWidget {
-  const AddAreaModal(this.pickPlace, this.itinerary, {Key? key}) : super(key: key);
+  const AddAreaModal(this.pickPlace, this.itinerary, {Key? super.key});
   final PickPlace pickPlace;
   final CheckItinerary itinerary;
 
@@ -27,7 +27,7 @@ class _AddAreaModalState extends ConsumerState<AddAreaModal> {
     final addPickPlaceListNotifier = ref.watch(addPickEachPlaceProvider);
 
     // 데이터가 없을 때를 대비한 처리
-    if (addPickPlaceListNotifier == null || addPickPlaceListNotifier.isEmpty) {
+    if (addPickPlaceListNotifier.isEmpty) {
       return Center(child: Text('추가할 장소가 없습니다.'));
     }
 
@@ -79,7 +79,7 @@ class _AddAreaModalState extends ConsumerState<AddAreaModal> {
               transportation: 'bus',
               area: currentItinerary.area,
               startDate: currentItinerary.startDate,
-              endDate: currentItinerary.endDate!,
+              endDate: currentItinerary.endDate,
               expense: '',
             );
             await itineraryApi.editItinerary(editItinerary, ref);

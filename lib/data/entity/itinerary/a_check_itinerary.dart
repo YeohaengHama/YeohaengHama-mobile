@@ -43,7 +43,7 @@ class Account {
 
       factory Account.fromJson(Map<String, dynamic> json) {
             // photoUrl이 null인 경우 빈 문자열로 처리
-            final photoUrl = json['photoUrl'] != null ? json['photoUrl'] : '';
+            final photoUrl = json['photoUrl'] ?? '';
             return _$AccountFromJson(json..['photoUrl'] = photoUrl);
       }
 }
@@ -64,7 +64,7 @@ class SharedAccount {
 
       factory SharedAccount.fromJson(Map<String, dynamic> json) {
             // photoUrl이 null인 경우 빈 문자열로 처리
-            final photoUrl = json['photoUrl'] != null ? json['photoUrl'] : '';
+            final photoUrl = json['photoUrl'] ?? '';
             return _$SharedAccountFromJson(json..['photoUrl'] = photoUrl);
       }
 }

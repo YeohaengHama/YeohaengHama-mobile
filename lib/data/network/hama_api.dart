@@ -1,9 +1,6 @@
-import 'package:fast_app_base/common/cli_common.dart';
 import 'package:fast_app_base/data/network/api_error.dart';
-import 'package:fast_app_base/entity/area/vo_restaurants_detail.dart';
 import 'package:fast_app_base/entity/area/vo_tourism_detail.dart';
 import 'package:fast_app_base/entity/dummies.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 
 import '../../entity/notification/notification.dart';

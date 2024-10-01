@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 Future<void> initializeNotifications() async {
-  var initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
+  var initializationSettingsAndroid = const AndroidInitializationSettings('@mipmap/ic_launcher');
   var initializationSettingsIOS = DarwinInitializationSettings(
     requestAlertPermission: true,
     requestBadgePermission: true,
@@ -39,8 +39,8 @@ Future<void> startListeningToServer(String id) async {
     bool connected = false;
 
     response.stream
-        .transform(Utf8Decoder())
-        .transform(LineSplitter())
+        .transform(const Utf8Decoder())
+        .transform(const LineSplitter())
         .listen((line) {
       print('Received line: $line');
 
@@ -78,7 +78,7 @@ Future<void> startListeningToServer(String id) async {
 }
 
 Future<void> showNotification(String message) async {
-  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+  var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
     'important_notifications',
     'Important Notifications',
     channelDescription: 'Notifications for important updates and alerts',
@@ -86,7 +86,7 @@ Future<void> showNotification(String message) async {
     priority: Priority.high,
     ticker: 'ticker',
   );
-  var iOSPlatformChannelSpecifics = DarwinNotificationDetails(
+  var iOSPlatformChannelSpecifics = const DarwinNotificationDetails(
     presentAlert: true,  // 알림을 표시합니다.
     presentBadge: true,  // 뱃지를 표시합니다.
     presentSound: true,  // 소리를 재생합니다.

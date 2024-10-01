@@ -3,19 +3,16 @@ import 'dart:io';
 import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:video_editor/video_editor.dart';
 
 import 'crop_page.dart';
-import '../p_is_playing.dart';
 import '../wirte/export_result.dart';
 import 'export_service.dart';
 
 class VideoEditingScreen extends ConsumerStatefulWidget {
   final File videoFile;
 
-  const VideoEditingScreen({Key? key, required this.videoFile})
-      : super(key: key);
+  const VideoEditingScreen({Key? super.key, required this.videoFile});
 
   @override
   _VideoEditingScreenState createState() => _VideoEditingScreenState();

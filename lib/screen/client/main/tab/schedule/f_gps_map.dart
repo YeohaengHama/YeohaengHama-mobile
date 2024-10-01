@@ -1,9 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/data/entity/traffic/vo_map_coordinates.dart';
 import 'package:fast_app_base/screen/client/main/tab/information%20/search/Directions/f_bus_direction.dart';
 import 'package:fast_app_base/screen/client/main/tab/information%20/search/Directions/f_car_direction.dart';
-import 'package:fast_app_base/screen/client/main/tab/information%20/search/Directions/w_set_direction.dart';
-import 'package:fast_app_base/screen/client/main/tab/information%20/search/s_space_search.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/w_set_gps_direction.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
@@ -11,8 +8,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../../../../data/memory/traffic/map_coordinates_provider.dart';
-import '../../../../../../../data/network/traffic_api.dart';
+import '../../../../../data/network/traffic_api.dart';
 import '../../search/content_type_provider.dart';
 
 class GpsMapDialog extends ConsumerStatefulWidget {
@@ -47,10 +43,10 @@ class _GpsMapDialogState extends ConsumerState<GpsMapDialog>
             bottom: false,
             child: Column(
               children: [
-                Height(10),
+                const Height(10),
 
                 SetGpsDirectionWidget( trafficApiProvider: _trafficApiProvider, ref: ref, titleHeight: titleHeight, currentAddress: widget.currentAddress, markerPlaceName:widget.markerPlaceName, currentLocation: widget.currentLocation, markerPosition: widget.markerPosition,).pSymmetric(h: 5),
-                Height(10),
+                const Height(10),
                 tabBar,
                 Expanded(
                   child: FutureBuilder<Widget>(

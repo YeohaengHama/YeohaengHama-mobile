@@ -6,8 +6,6 @@ import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_type/w_shor
 import 'package:flutter/material.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_diary_all.dart';
-import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_diary_place.dart';
-import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_popular_area.dart';
 import '../../../../../../data/entity/bot/chat_message.dart';
 import '../../../../../../data/entity/bot/chat_bot.dart';
 class ChatBubble<T> extends StatelessWidget {
@@ -18,7 +16,7 @@ class ChatBubble<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double bubbleRadius = 10.0;
+    const double bubbleRadius = 10.0;
     return Align(
       alignment: message.isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
@@ -139,7 +137,7 @@ class ChatBubble<T> extends StatelessWidget {
                   ),
                 ).pSymmetric(v: 5),
               );
-            }).toList(),
+            }),
           ],
         ),
       );

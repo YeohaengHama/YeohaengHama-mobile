@@ -7,7 +7,6 @@ import 'package:fast_app_base/screen/client/main/tab/shorts/p_bottom_nav_visible
 import 'package:fast_app_base/screen/client/main/tab/shorts/p_is_playing.dart';
 import 'package:fast_app_base/screen/client/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/client/main/tab/tab_navigator.dart';
-import 'package:fast_app_base/data/network/notification_api.dart';
 import 'package:fast_app_base/screen/client/main/menu/w_menu_drawer.dart';
 
 class MainScreen extends ConsumerStatefulWidget {

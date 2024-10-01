@@ -1,15 +1,10 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/tab/meeting/s_chat.dart';
-import 'package:fast_app_base/screen/client/main/tab/meeting/s_chat_room.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../data/entity/chat/chatRoom.dart';
-import '../../../../../data/entity/chat/message.dart';
-import '../../../../../data/memory/chat/chat_room_proivder.dart';
-import '../../../../../data/memory/chat/chat_service.dart';
 import '../../../../../data/memory/account/user_provider.dart';
-import '../../../../../data/network/chat_api.dart';
 
 class ChatRoomsListWidget extends ConsumerStatefulWidget {
   const ChatRoomsListWidget(this.chatRoom, {super.key});
@@ -36,7 +31,7 @@ class _ChatRoomsListWidgetState extends ConsumerState<ChatRoomsListWidget> {
                 .make()
           ],
         ).pSymmetric(h: contentLeftPadding, v: 15),
-        Line(color: AppColors.outline, height: 1,)
+        const Line(color: AppColors.outline, height: 1,)
       ],
       ),
     );

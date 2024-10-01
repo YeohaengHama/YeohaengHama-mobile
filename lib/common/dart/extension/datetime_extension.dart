@@ -40,7 +40,7 @@ String formatStayDuration(String startDate, String endDate) {
   int days = difference.inDays + 1; // 날짜의 차이 값에 1을 더한 것이 '일'의 개념
 
   // "몇 박 몇 일" 형식으로 변환
-  String formattedDuration = '${nights}박 ${days}일';
+  String formattedDuration = '$nights박 $days일';
   return formattedDuration;
 }
 

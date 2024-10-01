@@ -8,7 +8,7 @@ import '../../../../../data/memory/area/selectedDayIndex_provider.dart';
 
 
 class ShowPickDay extends ConsumerStatefulWidget {
-  const ShowPickDay(this.itinerary, {Key? key}) : super(key: key);
+  const ShowPickDay(this.itinerary, {Key? super.key});
   final CheckItinerary itinerary;
 
   @override
@@ -33,7 +33,7 @@ class _ShowPickAreaState extends ConsumerState<ShowPickDay> {
                   selectedDayIndexNotifier.state = index != null ? index + 1 : 0;
                   selectedDayIndexNotifier.setSelectedDayIndex(index!);
                   setState(() {
-                    currentDay = index! + 1;
+                    currentDay = index + 1;
                   });
                 },
                 items: List.generate(widget.itinerary.placesByDay.length, (index) {

@@ -22,10 +22,10 @@ class RandomAreaHolder extends ConsumerStatefulWidget {
 class _RandomAreaHolderState extends ConsumerState<RandomAreaHolder> {
   @override
   Widget build(BuildContext context) {
-    final _randomAreaList = ref.watch(randomAreaApiResponseProvider.notifier).state;
-    final _isLoading = ref.watch(isLoadingProvider.notifier).state;
+    final randomAreaList = ref.watch(randomAreaApiResponseProvider.notifier).state;
+    final isLoading = ref.watch(isLoadingProvider.notifier).state;
 
-    if (_isLoading) {
+    if (isLoading) {
       return SizedBox(
         width: double.infinity,
         height: widget.areaSize * 2 + 40, // Adjust height if needed
@@ -71,12 +71,12 @@ class _RandomAreaHolderState extends ConsumerState<RandomAreaHolder> {
                 children: List.generate(5, (index) {
                   final itemIndex = index * 2; // 0, 2, 4, 6, 8
 
-                  if (itemIndex < _randomAreaList.length) {
+                  if (itemIndex < randomAreaList.length) {
                     return SizedBox(
                       width: widget.areaSize,
                       height: widget.areaSize,
                       child: RandomAreaWidget(
-                        _randomAreaList[itemIndex],
+                        randomAreaList[itemIndex],
                         indexInList: itemIndex + 1,
                       ),
                     ).p(5);
@@ -96,12 +96,12 @@ class _RandomAreaHolderState extends ConsumerState<RandomAreaHolder> {
                 children: List.generate(5, (index) {
                   final itemIndex = index * 2 + 1; // 1, 3, 5, 7, 9
 
-                  if (itemIndex < _randomAreaList.length) {
+                  if (itemIndex < randomAreaList.length) {
                     return SizedBox(
                       width: widget.areaSize,
                       height: widget.areaSize,
                       child: RandomAreaWidget(
-                        _randomAreaList[itemIndex],
+                        randomAreaList[itemIndex],
                         indexInList: itemIndex + 1,
                       ),
                     ).p(5);

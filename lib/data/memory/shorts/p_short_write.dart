@@ -8,7 +8,7 @@ final shortsWriteProvider = StateNotifierProvider<ShortsWriteNotifier, ShortsWri
 });
 class ShortsWriteNotifier extends StateNotifier<ShortsWrite> {
   ShortsWriteNotifier() : super(
-    ShortsWrite(
+    const ShortsWrite(
       accountId: 0,
       video: '',
       title: '',

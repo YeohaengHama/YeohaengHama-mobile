@@ -1,20 +1,9 @@
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/entity/dummies.dart';
-import 'package:fast_app_base/entity/area/vo_area.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_hama_area.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:quiver/collection.dart';
 
-import '../../../../../../data/entity/open_api/open_api_area.dart';
-import '../../../../../../data/memory/search/search_simple_area_provider.dart';
-import '../../../../../../data/memory/search/search_simple_diary_provider.dart';
-import '../../../../../../data/memory/search/search_simple_restaurant_provider.dart';
-import '../../../../../../data/network/area_api.dart';
-import '../../../../../../data/network/search_api.dart';
-import '../../../search/s_space_search.dart';
 class HamaAreaHolder extends StatelessWidget {
   const HamaAreaHolder({
     super.key,

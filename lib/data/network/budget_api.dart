@@ -3,10 +3,8 @@
 import 'package:dio/dio.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/entity/itinerary/a_check_itinerary.dart';
-import 'package:fast_app_base/data/entity/review/vo_check_write_review.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../common/constants.dart';
 import '../entity/budget/vo_add_budget.dart';
 import '../entity/budget/vo_current_budget.dart';
 
@@ -39,14 +37,14 @@ class BudgetApi {
         // 가계부 생성 성공 시 setCurrentBudget를 호출하여 데이터를 저장
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -71,14 +69,14 @@ class BudgetApi {
         ref.read(currentBudgetProvider.notifier).setCurrentBudget(CurrentBudget.fromJson(response.data));
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -101,14 +99,14 @@ class BudgetApi {
         ref.read(currentBudgetProvider.notifier).setCurrentBudget(CurrentBudget.fromJson(response.data));
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
   Future<void> addBudget(AddBudget addBudget,WidgetRef ref) async {
@@ -143,14 +141,14 @@ class BudgetApi {
 
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -175,14 +173,14 @@ class BudgetApi {
         // 가계부 생성 성공 시 setCurrentBudget를 호출하여 데이터를 저장
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -207,14 +205,14 @@ class BudgetApi {
         ref.read(statisticsProvider.notifier).updateStatistics(statisticsData); // updateBudget 호출하여 Budget 객체 업데이트
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
 

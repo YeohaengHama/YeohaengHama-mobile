@@ -5,7 +5,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../common/common.dart';
-import '../../../../../../../data/entity/traffic/vo_map_coordinates.dart';
 import '../../../../../../../data/memory/traffic/map_coordinates_provider.dart';
 import '../../../../../../../data/network/traffic_api.dart';
 
@@ -35,7 +34,7 @@ class SetGpsDirectionWidget extends StatelessWidget {
 
     return Row(
       children: [
-        Width(30),
+        const Width(30),
         Flexible(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +57,7 @@ class SetGpsDirectionWidget extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child:
-                          '${currentAddress}'
+                          currentAddress
                               .text
                               .make()
                               .pSymmetric(h: 5)
@@ -83,7 +82,7 @@ class SetGpsDirectionWidget extends StatelessWidget {
                     width: double.infinity,
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: '$markerPlaceName'
+                      child: markerPlaceName
                               .text
                               .make()
                               .pSymmetric(h: 5)

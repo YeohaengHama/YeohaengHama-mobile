@@ -1,15 +1,11 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/memory/traffic/info_traffic_provider.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/traffic/selected_transportation_index_provider.dart';
-import 'package:fast_app_base/screen/client/main/tab/schedule/traffic/w_TransportationDropdown.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/traffic/w_public_transport_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:nav_hooks/nav.dart';
-import '../../../../../../../common/constant/app_colors.dart';
 import '../../../../../../../data/entity/traffic/vo_transport.dart';
-import '../../../../../../../data/memory/traffic/transport_provider.dart';
 
 class BusDirectionFragment extends HookConsumerWidget {
   @override
@@ -91,7 +87,7 @@ class BusDirectionFragment extends HookConsumerWidget {
                                         Baseline(
                                           baseline: TextStyle(fontSize: 30).fontSize! * 0.8, // 폰트 크기에 따라 기준선을 설정
                                           baselineType: TextBaseline.alphabetic,
-                                          child: '${totalTime}'.text.bold.color(AppColors.primaryGrey).size(30).make(),
+                                          child: '$totalTime'.text.bold.color(AppColors.primaryGrey).size(30).make(),
                                         ),
                                         Baseline(
                                           baseline: TextStyle(fontSize: 15).fontSize! * 0.8,
@@ -223,7 +219,7 @@ class BusDirectionFragment extends HookConsumerWidget {
       final startMarker = NMarker(
         id: 'start_marker',
         position: startLatLng,
-        caption:NOverlayCaption(text: '출발지'),
+        caption:const NOverlayCaption(text: '출발지'),
 
         iconTintColor: Colors.red,
       );
@@ -245,7 +241,7 @@ class BusDirectionFragment extends HookConsumerWidget {
       final endMarker = NMarker(
         id: 'end_marker',
         position: endLatLng,
-        caption: NOverlayCaption(text: '도착지'),
+        caption: const NOverlayCaption(text: '도착지'),
         iconTintColor: Colors.blue,
       );
       overlays.add(endMarker);
@@ -256,7 +252,7 @@ class BusDirectionFragment extends HookConsumerWidget {
 
       if (subPath.trafficType == 1) {
         points = subPath.passStopList!.stations.map((station) {
-          return NLatLng(double.parse(station.y!), double.parse(station.x!));
+          return NLatLng(double.parse(station.y), double.parse(station.x));
         }).toList();
       } else if (subPath.trafficType == 2) {
         points = [NLatLng(subPath.startY!, subPath.startX!), NLatLng(subPath.endY!, subPath.endX!)];

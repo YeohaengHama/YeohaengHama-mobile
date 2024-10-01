@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common/common.dart';
-import '../../../../common/widget/w_height_and_width.dart';
 
 class NoReviewList extends StatelessWidget {
   const NoReviewList({super.key});

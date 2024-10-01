@@ -8,7 +8,7 @@ import '../../../../post_detail/s_post_detail.dart';
 class ItineraryPlaceListWidget extends ConsumerWidget {
   final PlaceByDay place; // 가정한 프로퍼티입니다. 실제 코드에 맞게 조정해주세요.
 
-  ItineraryPlaceListWidget(this.place, {Key? key}) : super(key: key);
+  ItineraryPlaceListWidget(this.place, {Key? super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

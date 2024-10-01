@@ -1,9 +1,7 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/data/entity/traffic/vo_map_coordinates.dart';
 import 'package:fast_app_base/screen/client/main/tab/information%20/search/Directions/f_bus_direction.dart';
 import 'package:fast_app_base/screen/client/main/tab/information%20/search/Directions/f_car_direction.dart';
 import 'package:fast_app_base/screen/client/main/tab/information%20/search/Directions/w_set_direction.dart';
-import 'package:fast_app_base/screen/client/main/tab/information%20/search/s_space_search.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,8 +9,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../../../data/memory/traffic/map_coordinates_provider.dart';
 import '../../../../../../../data/network/traffic_api.dart';
 import '../../../../search/content_type_provider.dart';
-import '../../../../search/f_restaurant_search_list.dart';
-import '../../../../search/f_tourism_search_list.dart';
 
 class DirectionsFragment extends ConsumerStatefulWidget {
   const DirectionsFragment({super.key});
@@ -45,7 +41,7 @@ class _DirectionsFragmentState extends ConsumerState<DirectionsFragment>
             child: Column(
               children: [
                 SetDirectionWidget(mapCoordinatesNoti: mapCoordinatesNoti, mapCoordinates: mapCoordinates, trafficApiProvider: _trafficApiProvider, ref: ref, titleHeight: titleHeight).pSymmetric(h: 5),
-                Height(10),
+                const Height(10),
                 tabBar,
                 Expanded(
                   child: FutureBuilder<Widget>(

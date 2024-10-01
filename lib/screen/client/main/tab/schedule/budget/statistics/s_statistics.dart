@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:fast_app_base/common/widget/w_tap.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/budget/statistics/s_statistics_amounts.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -10,7 +9,6 @@ import 'package:fast_app_base/data/memory/itinerary/itinerary_check_provider.dar
 import '../../../../../../../common/widget/DottedLine.dart';
 import '../../../../../../../common/dart/extension/datetime_extension.dart';
 import '../../../../../../../common/dart/extension/day_parser.dart';
-import '../../../../../../../common/dart/extension/num_formatter.dart';
 import '../../../../../../../data/entity/budget/vo_statistics.dart';
 import '../../../../../../../data/memory/budget/current_budget_provider.dart';
 import '../../../../../../../data/memory/budget/statistics_provider.dart';
@@ -86,7 +84,7 @@ class _StatisticsScreen extends ConsumerState<StatisticsScreen> {
 
           itinerary.name.text.size(20).color(AppColors.primaryGrey).bold.make(),
           '지출내역입니다.'.text.size(20).color(AppColors.primaryGrey).bold.make(),
-          Height(30),
+          const Height(30),
           Container(
             width: double.maxFinite,
             height: 2,
@@ -109,7 +107,7 @@ class _StatisticsScreen extends ConsumerState<StatisticsScreen> {
             ),
           ),
           Tap(
-            onTap: () { ; },
+            onTap: () { },
             child: Row(
               children: [
                 Text(
@@ -147,9 +145,9 @@ class _StatisticsScreen extends ConsumerState<StatisticsScreen> {
               painter: DottedLinePainter(),
             ),
           ),
-          Height(30),
+          const Height(30),
           '지출 내역 비율'.text.size(18).color(AppColors.primaryGrey).bold.make(),
-          Height(20),
+          const Height(20),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -159,7 +157,7 @@ class _StatisticsScreen extends ConsumerState<StatisticsScreen> {
               ),
             ),
           ),
-          Height(40),
+          const Height(40),
         ],
       ).pSymmetric(h: 30),
     );

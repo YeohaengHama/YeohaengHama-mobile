@@ -6,11 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../data/entity/area/search_simple_toursim_result.dart';
 import '../../../../../../../data/entity/open_api/open_api_detail.dart';
-import '../../../../../../../data/entity/open_api/open_api_image.dart';
 import '../../../../../../../data/memory/area/area_detail_provider.dart';
 import '../../../../../../../data/network/area_api.dart';
-import '../../../../../../../data/network/review_api.dart';
-import '../../../../../post_detail/s_post_detail.dart';
 import '../../../../search/provider/is_detail_loading_provider.dart';
 import '../detail/f_detail_map.dart';
 class TourismSearchListWidget extends ConsumerStatefulWidget {

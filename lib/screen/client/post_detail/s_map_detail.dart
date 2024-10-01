@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/w_tap.dart';
+import 'package:fast_app_base/data/memory/itinerary/add_pick_each_place_provider.dart';
 import 'package:fast_app_base/screen/client/post_detail/review/w_review_star.dart';
 import 'package:fast_app_base/screen/client/post_detail/w_detail_map.dart';
 import 'package:fast_app_base/screen/client/post_detail/w_map.dart';
@@ -14,24 +14,19 @@ import '../../../data/entity/area/saerch_image_result.dart';
 import '../../../data/entity/area/serch_detail_result.dart';
 import '../../../data/entity/itinerary/a_add_pick_place.dart';
 import '../../../data/entity/itinerary/check_save_place/a_check_save_place.dart';
-import '../../../data/entity/itinerary/vo_delete_place.dart';
-import '../../../data/entity/itinerary/vo_save_place.dart';
 import '../../../data/entity/review/a_review_show_all.dart';
 import '../../../data/memory/area/area_detail_provider.dart';
 import '../../../data/memory/area/selectedDayIndex_provider.dart';
-import '../../../data/memory/itinerary/add_pick_each_place_provider.dart';
 import '../../../data/memory/itinerary/itinerary_check_provider.dart';
 import '../../../data/memory/account/user_provider.dart';
 import '../../../data/network/itinerary_api.dart';
-import '../../../entity/dummies.dart';
 
 class MapDetailScreen extends ConsumerStatefulWidget {
   const MapDetailScreen(
-      {Key? key,
+      {Key? super.key,
       required this.searchDetailResult,
       required this.searchImageResult,
-      required this.searchReviewResult})
-      : super(key: key);
+      required this.searchReviewResult});
   final SearchDetailResult searchDetailResult;
   final SearchImageResult searchImageResult;
   final List<ReviewShowAll> searchReviewResult;
@@ -80,7 +75,7 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
 
     String overviewText = widget.searchDetailResult.overView;
     if (overviewText.length > 20) {
-      overviewText = overviewText.substring(0, 45) + '...';
+      overviewText = '${overviewText.substring(0, 45)}...';
     }
     final searchDetailResult = ref.read(DetailAreaApiResponseProvider).value;
     final selectedDayIndexNotifier =
@@ -142,7 +137,7 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
                         });
                       },
                       children: List<Widget>.generate(
-                          itinerary!.placesByDay.length, (int index) {
+                          itinerary.placesByDay.length, (int index) {
                         return Center(
                           child: Text('Day-${index + 1}'),
                         );
@@ -202,9 +197,9 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
                           widget.searchDetailResult.title.text.bold
                               .color(AppColors.primaryGrey)
                               .make(),
-                          Height(3),
-                          ReviewStar(),
-                          Height(5),
+                          const Height(3),
+                          const ReviewStar(),
+                          const Height(5),
                           overviewText.text != null && overviewText.text != "null"
                               ? SizedBox(
                                   width: 220,
@@ -213,12 +208,12 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
                                       .color(AppColors.secondGrey)
                                       .make())
                               : SizedBox(),
-                          Height(5),
+                          const Height(5),
                           widget.searchDetailResult.addr1.text
                               .color(AppColors.thirdGrey)
                               .size(10)
                               .make(),
-                          Height(5),
+                          const Height(5),
                         ],
                       ).pOnly(left: 10),
                     ],

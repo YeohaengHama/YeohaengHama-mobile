@@ -6,14 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../../data/entity/shorts/vo_shorts_read.dart';
-import '../../../../../data/network/shorts_api.dart';
 import 'dart:ui' as ui;
 import '../../../../../common/widget/w_profile_image.dart';
-import '../../../../../data/memory/shorts/p_get_itinerary.dart';
-import '../tab/information /search/provider/is_loading_provider.dart';
+import '../../../../data/memory/shorts/p_get_itinerary.dart';
+import '../../../../data/network/shorts_api.dart';
 import '../tab/shorts/comment/s_comment.dart';
 import '../tab/shorts/p_bottom_nav_visible.dart';
-import '../tab/shorts/p_is_playing.dart';
 
 class VideoPlayerScreen extends ConsumerStatefulWidget {
   final String videoUrl;
@@ -39,7 +37,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen>
   late VideoPlayerController _controller;
   bool _isExpanded = false;
   bool _isPlaying = false;
-  FocusNode _focusNode = FocusNode();
+  final FocusNode _focusNode = FocusNode();
   bool _textFieldFocused = false;
 
   @override
@@ -283,7 +281,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen>
                 GestureDetector(
                   onTap: _toggleExpand,
                   child: AnimatedSize(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     curve: Curves.easeInOut,
                     child: Container(
                       width: 300,

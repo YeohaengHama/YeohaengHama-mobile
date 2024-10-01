@@ -17,11 +17,7 @@ class DetailDiary with _$DetailDiary {
   }) = _DetailDiary;
 
   factory DetailDiary.fromJson(Map<String, dynamic> json) {
-    final Map<String, dynamic>? data = json as Map<String, dynamic>?;
-
-    if (data == null) {
-      throw Exception("Invalid JSON format: 'data' key is missing or null.");
-    }
+    final Map<String, dynamic> data = json;
 
     final Map<String, dynamic>? itineraryMap = data['itinerary'] as Map<String, dynamic>?;
 
@@ -50,7 +46,7 @@ class DetailDiary with _$DetailDiary {
 
       // Convert each placeJson to Place object
       return placesData.cast<Map<String, dynamic>>().map((placeJson) {
-        return Place.fromJson(placeJson as Map<String, dynamic>);
+        return Place.fromJson(placeJson);
       });
     }).toList();
 

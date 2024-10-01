@@ -9,7 +9,7 @@ import '../../../../../../data/entity/itinerary/a_check_itinerary.dart';
 
 
 class ItineraryMapWidget extends ConsumerStatefulWidget {
-  const ItineraryMapWidget(this.placeList, {Key? key}) : super(key: key);
+  const ItineraryMapWidget(this.placeList, {Key? super.key});
   final List<PlaceByDay> placeList;
   @override
   ConsumerState<ItineraryMapWidget> createState() => _DiaryMapWidgetState();

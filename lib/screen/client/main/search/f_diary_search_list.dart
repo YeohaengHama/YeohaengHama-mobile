@@ -14,10 +14,10 @@ class DiarySearchListFragment extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final diaryList = ref.watch(SearchDiaryAreaProvider);
-    final _isLoading = ref.watch(isLoadingProvider.notifier).state;
+    final isLoading = ref.watch(isLoadingProvider.notifier).state;
 
 
-    if (diaryList.isEmpty || _isLoading) {
+    if (diaryList.isEmpty || isLoading) {
       return SizedBox(
         child: Center(
           child: Column(
@@ -26,8 +26,8 @@ class DiarySearchListFragment extends ConsumerWidget {
             children: [
               '아직 작성 된 여행일기가 없어요'.text.color(AppColors.thirdGrey).bold.make(),
               '여행일기를 작성해 볼까요?'.text.color(AppColors.thirdGrey).make(),
-              Height(30),
-              Line(color: AppColors.outline, width: 340),
+              const Height(30),
+              const Line(color: AppColors.outline, width: 340),
             ],
           ),
         ),

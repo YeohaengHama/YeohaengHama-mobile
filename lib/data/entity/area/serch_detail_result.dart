@@ -1,4 +1,3 @@
-import 'package:fast_app_base/data/entity/area/search_simple_toursim_result.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'serch_detail_result.freezed.dart';

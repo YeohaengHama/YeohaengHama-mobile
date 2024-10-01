@@ -8,14 +8,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../data/entity/review/a_review_show_all.dart';
 
 class SimpleReviewList extends ConsumerWidget {
-  const SimpleReviewList(this.review, {Key? key}) : super(key: key);
+  const SimpleReviewList(this.review, {Key? super.key});
   final ReviewShowAll review;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     String overviewText = review.content;
     if (overviewText.length > 80) {
-      overviewText = overviewText.substring(0, 80) + '...더보기';
+      overviewText = '${overviewText.substring(0, 80)}...더보기';
     }
 
     List<Widget> imageWidgets = [];

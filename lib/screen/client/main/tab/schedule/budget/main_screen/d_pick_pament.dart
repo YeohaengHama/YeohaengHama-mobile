@@ -1,5 +1,4 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/data/entity/budget/vo_current_budget.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

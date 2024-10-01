@@ -4,9 +4,9 @@ import 'package:fast_app_base/screen/client/main/tab/information%20/search/detai
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../../../../data/memory/area/area_detail_provider.dart';
+
 import '../../../../../../../data/memory/traffic/map_coordinates_provider.dart';
 import '../../../../../../../data/network/traffic_api.dart';
-
 import '../Directions/s_directions.dart'; // 적절한 경로로 수정하세요
 
 class DetailMap extends ConsumerStatefulWidget {
@@ -25,7 +25,7 @@ class _DetailMapState extends ConsumerState<DetailMap> {
     final searchDetailResultP = ref.watch(DetailAreaApiResponseProvider);
 
     final searchResult = widget.searchSimpleResult;
-    final mapCoordinates = ref.read(mapCoordinatesProvider.notifier);
+    final _mapCoordinates = ref.read(mapCoordinatesProvider.notifier);
     final _mapCoordinatesProvider = ref.read(mapCoordinatesProvider);
     final _trafficApiProvider = ref.read(trafficApiProvider);
     return Scaffold(
@@ -44,20 +44,20 @@ class _DetailMapState extends ConsumerState<DetailMap> {
                 actions: [
                   Tap(
                     onTap: () async {
-                      mapCoordinates.setStart(
-                          searchDetailResult!.title,
-                          double.parse(searchDetailResult!.mapX),
-                          double.parse(searchDetailResult!.mapY));
+                      _mapCoordinates.setStart(
+                          searchDetailResult.title,
+                          double.parse(searchDetailResult.mapX),
+                          double.parse(searchDetailResult.mapY));
                       if (_mapCoordinatesProvider.endTitle != '') {
                         _trafficApiProvider.getInfoTraffic(
-                            mapCoordinates.state.startX,
-                            mapCoordinates.state.startY,
+                            _mapCoordinates.state.startX,
+                            _mapCoordinates.state.startY,
                             _mapCoordinatesProvider.endX,
                             _mapCoordinatesProvider.endY,
                             ref);
                         _trafficApiProvider.getInfoCarTraffic(
-                            mapCoordinates.state.startX,
-                            mapCoordinates.state.startY,
+                            _mapCoordinates.state.startX,
+                            _mapCoordinates.state.startY,
                             _mapCoordinatesProvider.endX,
                             _mapCoordinatesProvider.endY,
                             ref);
@@ -68,7 +68,7 @@ class _DetailMapState extends ConsumerState<DetailMap> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => DirectionsFragment()),
+                            builder: (context) => const DirectionsFragment()),
                       );
                     },
                     child: RoundedContainer(
@@ -81,23 +81,23 @@ class _DetailMapState extends ConsumerState<DetailMap> {
                   ),
                   Tap(
                     onTap: () async {
-                      mapCoordinates.setEnd(
-                          searchDetailResult!.title,
-                          double.parse(searchDetailResult!.mapX),
-                          double.parse(searchDetailResult!.mapY));
+                      _mapCoordinates.setEnd(
+                          searchDetailResult.title,
+                          double.parse(searchDetailResult.mapX),
+                          double.parse(searchDetailResult.mapY));
 
                       if (_mapCoordinatesProvider.startTitle != '') {
                         await _trafficApiProvider.getInfoTraffic(
                             _mapCoordinatesProvider.startX,
                             _mapCoordinatesProvider.startY,
-                            mapCoordinates.state.endX,
-                            mapCoordinates.state.endY,
+                            _mapCoordinates.state.endX,
+                            _mapCoordinates.state.endY,
                             ref);
                         await _trafficApiProvider.getInfoCarTraffic(
                             _mapCoordinatesProvider.startX,
                             _mapCoordinatesProvider.startY,
-                            mapCoordinates.state.endX,
-                            mapCoordinates.state.endY,
+                            _mapCoordinates.state.endX,
+                            _mapCoordinates.state.endY,
                             ref);
 
 
@@ -108,7 +108,7 @@ class _DetailMapState extends ConsumerState<DetailMap> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => DirectionsFragment()),
+                            builder: (context) => const DirectionsFragment()),
                       );
                     },
                     child: RoundedContainer(
@@ -123,7 +123,7 @@ class _DetailMapState extends ConsumerState<DetailMap> {
                 ],
               ),
               SliverFillRemaining(
-                child: searchDetailResult!.mapX != null
+                child: searchDetailResult.mapX != null
                     ? AreaInfoMap(
                         mapX: double.parse(searchDetailResult.mapX),
                         mapY: double.parse(searchDetailResult.mapY))

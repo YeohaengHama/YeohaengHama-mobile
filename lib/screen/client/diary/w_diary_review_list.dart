@@ -2,9 +2,7 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_star_rating.dart';
 import 'package:fast_app_base/screen/client/diary/w_diary_detail_image_scroll_view.dart';
 import 'package:flutter/material.dart';
-import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
-import '../../../common/widget/w_image_scroll_view.dart';
 import '../../../data/entity/diary/vo_detail_diary.dart';
 
 class DiaryReviewListWidget extends StatefulWidget {
@@ -27,8 +25,8 @@ class _DiaryReviewListWidgetState extends State<DiaryReviewListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final _review = widget.review;
-    if (_review == null) {
+    final review = widget.review;
+    if (review == null) {
       // review가 null인 경우 빈 컨테이너 반환
       return Container();
     } else {
@@ -36,11 +34,11 @@ class _DiaryReviewListWidgetState extends State<DiaryReviewListWidget> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          StarRating(score: _review.rating!).pOnly(bottom: 5),
+          StarRating(score: review.rating!).pOnly(bottom: 5),
           SizedBox(
             width: double.maxFinite,
             child: Text(
-              _review.content!,
+              review.content!,
               overflow: TextOverflow.ellipsis,
               softWrap: true,
               maxLines: 3,
@@ -50,9 +48,9 @@ class _DiaryReviewListWidgetState extends State<DiaryReviewListWidget> {
               ),
             ),
           ),
-          Height(10),
-          if (_review.reviewPhotoURLList != null &&
-              _review.reviewPhotoURLList!.isNotEmpty)
+          const Height(10),
+          if (review.reviewPhotoURLList != null &&
+              review.reviewPhotoURLList!.isNotEmpty)
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: SizedBox(
@@ -60,7 +58,7 @@ class _DiaryReviewListWidgetState extends State<DiaryReviewListWidget> {
                 height: 200,
                 child: DiaryRiviewImagesScrollWidget(
                   pageController: pageController,
-                  review: _review,
+                  review: review,
                 ),
               ),
             ),

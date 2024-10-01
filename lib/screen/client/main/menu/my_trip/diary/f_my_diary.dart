@@ -11,7 +11,7 @@ import '../../../../../../data/memory/account/user_provider.dart';
 import '../../../../../../data/network/diary_api.dart';
 
 class MyDiaryFragment extends ConsumerStatefulWidget {
-  const MyDiaryFragment({Key? key}) : super(key: key);
+  const MyDiaryFragment({Key? super.key});
 
   @override
   ConsumerState<MyDiaryFragment> createState() => _MyDiaryFragmentState();
@@ -65,7 +65,7 @@ class _MyDiaryFragmentState extends ConsumerState<MyDiaryFragment> {
                   ),);
               } else {
                 // 데이터가 비어있을 때
-                return NoDiaryList();
+                return const NoDiaryList();
               }
             }
           } else {

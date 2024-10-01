@@ -1,11 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:video_player/video_player.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/edit/s_video_editor.dart';
 

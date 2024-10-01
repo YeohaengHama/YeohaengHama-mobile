@@ -106,7 +106,7 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
 
   @override
   Widget build(BuildContext context) {
-    final _isLoading = ref.watch(isLoadingProvider);
+    final isLoading = ref.watch(isLoadingProvider);
 
     return Stack(
       children: [
@@ -132,7 +132,7 @@ class _SpaceSearchFragmentState extends ConsumerState<SpaceSearchFragment>
             ],
           ),
         ),
-        if (_isLoading)
+        if (isLoading)
           Stack(
             children: [
               Container(

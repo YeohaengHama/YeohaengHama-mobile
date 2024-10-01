@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_profile_image.dart';
 import '../../../../../../data/memory/account/user_provider.dart';
@@ -9,10 +8,10 @@ import '../../../../../../data/network/shorts_api.dart';
 
 class CommentInputWidget extends ConsumerStatefulWidget {
   const CommentInputWidget({
-    Key? key,
+    Key? super.key,
     required this.shortsId,
     required this.focusNode, // FocusNode 추가
-  }) : super(key: key);
+  });
 
   final int shortsId;
   final FocusNode focusNode; // FocusNode 속성 추가
@@ -111,7 +110,7 @@ class _CommentInputWidgetState extends ConsumerState<CommentInputWidget> {
                       ),
                     ],
                   ),
-                  child: Line(height: 1, color: AppColors.outline),
+                  child: const Line(height: 1, color: AppColors.outline),
                 ),
                 // 이모지 선택 부분
                 SizedBox(

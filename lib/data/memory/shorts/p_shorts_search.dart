@@ -7,7 +7,7 @@ final shortsSearchProvider = StateNotifierProvider<ShortsSearchNotifier, ShortsR
 });
 
 class ShortsSearchNotifier extends StateNotifier<ShortsRead> {
-  ShortsSearchNotifier() : super(ShortsRead(shortsList: []));
+  ShortsSearchNotifier() : super(const ShortsRead(shortsList: []));
 
   void addShort(Shorts short) {
     state = state.copyWith(shortsList: [...state.shortsList, short]);

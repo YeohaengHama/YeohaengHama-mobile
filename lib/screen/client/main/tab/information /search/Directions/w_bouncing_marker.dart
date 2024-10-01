@@ -20,7 +20,7 @@ class _BouncingMarkerState extends State<BouncingMarker> with SingleTickerProvid
     // 애니메이션 컨트롤러 초기화
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 600),
     );
 
     // 트윈 애니메이션 설정

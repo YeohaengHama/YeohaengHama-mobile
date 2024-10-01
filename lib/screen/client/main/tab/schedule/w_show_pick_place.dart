@@ -1,7 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/provider/p_edit_mode.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/traffic/selected_transportation_index_provider.dart';
-import 'package:fast_app_base/screen/client/main/tab/schedule/traffic/w_traffic.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,21 +9,20 @@ import '../../../../../common/dart/extension/calculate_distance.dart';
 import '../../../../../data/entity/itinerary/a_add_pick_place.dart';
 import '../../../../../data/memory/itinerary/add_pick_each_place_provider.dart';
 import '../../../../../data/network/itinerary_api.dart';
-import 'dart:math';
 
 import '../../../../../data/network/traffic_api.dart';
 import '../home/w/info/s_pick_place_info.dart';
 
 class ShowPickPlace extends ConsumerWidget {
-  const ShowPickPlace(this.currentDay, {Key? key}) : super(key: key);
+  const ShowPickPlace(this.currentDay, {Key? super.key});
   final int currentDay;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final radiusBold = 2.5;
+    const radiusBold = 2.5;
     final addPickPlaceListNotifier = ref.watch(addPickEachPlaceProvider);
     final ItineraryApi itineraryApi = ItineraryApi();
-    final PageController _pageController = PageController();
+    final PageController pageController = PageController();
 
     final ValueNotifier<int> currentPageNotifier = ValueNotifier<int>(0);
     print(currentDay);
@@ -34,8 +32,8 @@ class ShowPickPlace extends ConsumerWidget {
         .toList();
     print('필터리스트:$filteredList');
 
-    _pageController.addListener(() {
-      int nextPage = _pageController.page?.round() ?? 0;
+    pageController.addListener(() {
+      int nextPage = pageController.page?.round() ?? 0;
       if (currentPageNotifier.value != nextPage) {
         currentPageNotifier.value = nextPage;
       }
@@ -70,7 +68,7 @@ class ShowPickPlace extends ConsumerWidget {
                           ]),
                     )
                   : ListView.builder(
-                      controller: _pageController,
+                      controller: pageController,
                       scrollDirection: Axis.horizontal,
                       itemCount: filteredList.length,
                       itemBuilder: (context, index) {
@@ -86,9 +84,9 @@ class ShowPickPlace extends ConsumerWidget {
                 valueListenable: currentPageNotifier,
                 builder: (context, currentPage, child) {
                   return SmoothPageIndicator(
-                    controller: _pageController,
+                    controller: pageController,
                     count: filteredList.length,
-                    effect: ScrollingDotsEffect(
+                    effect: const ScrollingDotsEffect(
                       dotHeight: 8,
                       dotWidth: 8,
                       activeDotScale: 1.5,
@@ -96,8 +94,8 @@ class ShowPickPlace extends ConsumerWidget {
                       dotColor: AppColors.thirdGrey,
                     ),
                     onDotClicked: (index) {
-                      _pageController.animateToPage(index,
-                          duration: Duration(milliseconds: 500),
+                      pageController.animateToPage(index,
+                          duration: const Duration(milliseconds: 500),
                           curve: Curves.easeInOut);
                     },
                   );
@@ -118,7 +116,7 @@ class ShowPickPlace extends ConsumerWidget {
     final trafficApi = ref.read(trafficApiProvider);
     final selectedPathIndex =
         ref.read(selectedTrafficRouteIndexNotifierProvider.notifier);
-    final _editModeProvider = ref.watch(editModeProvider);
+    final editModeProviderWactch = ref.watch(editModeProvider);
     final isEdit = ref.watch(editModeProvider.notifier).state;
     return Row(
       children: [
@@ -171,7 +169,7 @@ class ShowPickPlace extends ConsumerWidget {
                     ],
                   ),
                   addPickPlace.addr1 != null
-                      ? addPickPlace.addr1!.text
+                      ? addPickPlace.addr1.text
                           .color(AppColors.thirdGrey)
                           .size(10)
                           .make()

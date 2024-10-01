@@ -1,5 +1,4 @@
 import 'package:fast_app_base/entity/area/vo_tourism.dart';
-import 'package:fast_app_base/entity/area/vo_tourism_detail.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../user/vo_user.dart';

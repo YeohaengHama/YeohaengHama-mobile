@@ -85,7 +85,7 @@ class BotApi {
           default:
             chatbotResponse = ChatbotResponse<Null>.fromJson(
               data,
-                  (json) => null as Null,
+                  (json) => null,
             );
             break;
         }
@@ -100,7 +100,7 @@ class BotApi {
       }
     } catch (e) {
       throw Exception('서버와 통신이 원할하지 않습니다. 잠시 후 다시 시도해주세요.');
-      throw e;
+      rethrow;
     }
   }
 }

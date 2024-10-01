@@ -1,23 +1,12 @@
 
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:confetti/confetti.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/entity/dummies.dart';
-import 'package:fast_app_base/entity/area/vo_area.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:quiver/collection.dart';
 
 import '../../../../../../data/entity/area/search_simple_toursim_result.dart';
-import '../../../../../../data/entity/open_api/open_api_area.dart';
-import '../../../../../../data/memory/search/search_simple_area_provider.dart';
-import '../../../../../../data/memory/search/search_simple_diary_provider.dart';
-import '../../../../../../data/memory/search/search_simple_restaurant_provider.dart';
-import '../../../../../../data/network/area_api.dart';
-import '../../../../../../data/network/search_api.dart';
 import '../../../../post_detail/s_post_detail.dart';
-import '../../../search/s_space_search.dart';
 
 class RandomAreaWidget extends ConsumerWidget {
   final SearchSimpleTourismResult area;
@@ -59,7 +48,7 @@ class RandomAreaWidget extends ConsumerWidget {
               area.firstimage != "null" &&
                   area.firstimage.isNotEmpty
                   ? CachedNetworkImage(
-                imageUrl: area.firstimage!,
+                imageUrl: area.firstimage,
                 width: 150,
                 height: 150,
                 fit: BoxFit.cover,

@@ -21,7 +21,7 @@ class ManagerScreen extends StatelessWidget {
             '여행하마 관리자'.text.bold.size(20).color(AppColors.mainPurple).make().pSymmetric(v: 5),
             ElevatedButton(
               onPressed: () {
-                Nav.push(UserManagement());
+                Nav.push(const UserManagement());
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: AppColors.mainPurple, backgroundColor: AppColors.white, // 텍스트 색상
@@ -79,7 +79,7 @@ class ManagerScreen extends StatelessWidget {
             ).pOnly(top: 5),
             SizedBox(height: 20), // '로그아웃' 텍스트와의 간격을 설정합니다.
             Tap(
-              onTap: () { Nav.push(LogInScreen()); },
+              onTap: () { Nav.push(const LogInScreen()); },
               child: '로그아웃'
                   .text
                   .size(15)

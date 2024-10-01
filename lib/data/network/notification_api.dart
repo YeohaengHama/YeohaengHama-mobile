@@ -19,7 +19,7 @@ class NotificationApi {
   Future<void> startListeningToServer(String id, WidgetRef ref) async {
     final client = http.Client();
     final request = http.Request('GET', Uri.parse('http://43.202.208.22:8080/api/notifications/subscribe/$id'));
-    final List<NotificationMessage> _messages = [];
+    final List<NotificationMessage> messages = [];
 
     try {
       final notiMassage = ref.read(notificationMessageListProvider.notifier);
@@ -55,7 +55,7 @@ class NotificationApi {
               data: currentData,
             );
             notiMassage.addNotificationMessage(message);
-            _messages.add(message); // Add the message to the local list
+            messages.add(message); // Add the message to the local list
 
             currentId = '';
             currentEvent = '';

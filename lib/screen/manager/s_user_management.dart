@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/memory/account/user_provider.dart';
 import 'package:fast_app_base/screen/client/main/menu/my_trip/review/f_my_review.dart';
@@ -6,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 
-import '../../../../../data/network/diary_api.dart';
 import '../client/main/menu/my_trip/diary/f_my_diary.dart';
 import '../client/main/menu/my_trip/itnierary/f_my_itinerary.dart';
 
@@ -41,7 +39,7 @@ class _UserManagementState extends ConsumerState<UserManagement> with SingleTick
       ),
       body: Column(
         children: [
-          Height(10),
+          const Height(10),
           tabBar,
           // FutureBuilder<Widget>(
           //   future: switchTabFragment(),

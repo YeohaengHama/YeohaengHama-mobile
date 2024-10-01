@@ -9,7 +9,7 @@ class TagButton extends ConsumerStatefulWidget {
   final Map<int, String>? whoTagMap;
   final Map<int, String>? styleTagMap;
 
-  const TagButton({Key? key, this.whoTagMap, this.styleTagMap}) : super(key: key);
+  const TagButton({Key? super.key, this.whoTagMap, this.styleTagMap});
 
   @override
   ConsumerState<TagButton> createState() => _TagButtonState();
@@ -24,9 +24,9 @@ class _TagButtonState extends ConsumerState<TagButton> {
     return Wrap(
       spacing: 6,
       runSpacing: 3,
-      children: (widget.whoTagMap?.entries ?? []).map((_entry) {
-        final int key = _entry.key;
-        final String value = _entry.value;
+      children: (widget.whoTagMap?.entries ?? []).map((entry) {
+        final int key = entry.key;
+        final String value = entry.value;
         bool isSelected = selectedWhoTags.contains(key);
 
         return ElevatedButton(
@@ -54,9 +54,9 @@ class _TagButtonState extends ConsumerState<TagButton> {
         );
       }).toList()
         ..addAll(
-          (widget.styleTagMap?.entries ?? []).map((_entry) {
-            final int key = _entry.key;
-            final String value = _entry.value;
+          (widget.styleTagMap?.entries ?? []).map((entry) {
+            final int key = entry.key;
+            final String value = entry.value;
             bool isSelected = selectedStyleTags.contains(key);
 
             return ElevatedButton(

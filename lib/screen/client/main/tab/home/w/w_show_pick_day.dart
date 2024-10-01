@@ -1,5 +1,4 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/screen/client/main/tab/home/w/w_show_pick_place.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -8,7 +7,7 @@ import '../../../../../../data/memory/area/selectedDayIndex_provider.dart';
 
 
 class ShowPickDay extends ConsumerStatefulWidget {
-  const ShowPickDay(this.itinerary, {Key? key}) : super(key: key);
+  const ShowPickDay(this.itinerary, {Key? super.key});
   final CheckItinerary itinerary;
 
   @override
@@ -33,7 +32,7 @@ class _ShowPickAreaState extends ConsumerState<ShowPickDay> {
                   selectedDayIndexNotifier.state = index != null ? index + 1 : 0;
                   selectedDayIndexNotifier.setSelectedDayIndex(index!);
                   setState(() {
-                    currentDay = index! + 1;
+                    currentDay = index + 1;
                   });
                 },
                 selectedItemBuilder: (BuildContext context) {

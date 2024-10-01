@@ -48,8 +48,8 @@ class AllAccountsWidget extends ConsumerWidget {
               return Row(
                 children: [
                   ProfileImage(photoUrl: account.photoUrl, width: 40, height: 40),
-                  Width(10),
-                  '${account.nickname}'.text.bold.color(AppColors.primaryGrey).make(),
+                  const Width(10),
+                  account.nickname.text.bold.color(AppColors.primaryGrey).make(),
                   spacer,
                   RoundButton(
                     height: 30,

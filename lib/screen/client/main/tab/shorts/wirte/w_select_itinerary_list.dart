@@ -1,5 +1,4 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/w_rounded_container.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/wirte/w_select_itinerary_list_item.dart';
 
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ import '../../../../../../../data/memory/itinerary/itinerary_show_all_provider.d
 import '../../../menu/my_trip/itnierary/w_no_itinerary_list.dart';
 
 class SelectItineraryList extends ConsumerWidget {
-  const SelectItineraryList({Key? key}) : super(key: key);
+  const SelectItineraryList({Key? super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -37,7 +36,7 @@ class SelectItineraryList extends ConsumerWidget {
         borderColor: AppColors.mainPurple,
         radius: 10,
         borderWidth: 1,
-        child: NoItnieraryListWidget(),
+        child: const NoItnieraryListWidget(),
       ).pSymmetric(v: 30);
     }
   }

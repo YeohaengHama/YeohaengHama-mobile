@@ -3,8 +3,6 @@ import 'package:fast_app_base/screen/client/main/tab/information%20/search/s_spa
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:fast_app_base/screen/client/main/tab/information%20/f_search_location_area.dart';
-import 'package:nav_hooks/nav.dart';
-import '../../../../../common/widget/w_tap.dart';
 import '../../../../../data/memory/traffic/map_coordinates_provider.dart';
 import '../../../../../data/network/area_api.dart';
 
@@ -19,7 +17,7 @@ class InformationFragment extends ConsumerWidget {
     return Scaffold(
       body: Stack(
         children: [
-          SearchLocationArea(),
+          const SearchLocationArea(),
           Positioned(
             top: 70.0, // 원하는 위치로 조정
             left: 20.0,

@@ -7,7 +7,7 @@ final commentListProvider = StateNotifierProvider<CommentListNotifier, CommentLi
 
 
 class CommentListNotifier extends StateNotifier<CommentList> {
-  CommentListNotifier() : super(CommentList(comment: []));
+  CommentListNotifier() : super(const CommentList(comment: []));
 
 
   void clearCommentList() {

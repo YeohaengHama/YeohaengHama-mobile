@@ -28,8 +28,8 @@ class FriendsListWidget extends ConsumerWidget {
         return Row(
           children: [
             ProfileImage(photoUrl: sharedAccount.photoUrl, width: 40, height: 40),
-            Width(10),
-            '${sharedAccount.nickname}'.text.bold.color(AppColors.primaryGrey).make()
+            const Width(10),
+            sharedAccount.nickname.text.bold.color(AppColors.primaryGrey).make()
           ],
         ).pSymmetric(v: 10);
       },

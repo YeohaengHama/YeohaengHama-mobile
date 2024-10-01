@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:fast_app_base/common/common.dart';
@@ -56,7 +55,7 @@ class shortsApi {
       }
     } catch (e) {
       print('An exception occurred: $e');
-      throw e;
+      rethrow;
     }
   }
   Future<void> readShorts(WidgetRef ref) async {
@@ -83,7 +82,7 @@ class shortsApi {
       }
     } catch (e) {
       print('An exception occurred: $e');
-      throw e;
+      rethrow;
     }
   }
   Future<void> searchShorts(String area, WidgetRef ref) async {
@@ -117,7 +116,7 @@ class shortsApi {
       }
     } catch (e) {
       print('An exception occurred: $e');
-      throw e;
+      rethrow;
     }
   }
   Future<void> readComment(int shortsId, WidgetRef ref) async {
@@ -184,7 +183,7 @@ class shortsApi {
       ref.read(itineraryCreatedProvider.notifier);
 
       final response = await _dio.get(
-        '$baseUrl/itinerary/${id}',
+        '$baseUrl/itinerary/$id',
       );
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = response.data['data'];
@@ -203,7 +202,7 @@ class shortsApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose();
     }

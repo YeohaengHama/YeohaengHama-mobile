@@ -12,7 +12,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../common/constants.dart';
 import '../entity/diary/vo_detail_diary.dart';
 import '../memory/diary/diary_detail_proiver.dart';
-import '../memory/account/user_provider.dart';
 
 final diaryApiProvider = Provider<DiaryApi>((ref) => DiaryApi());
 
@@ -42,19 +41,19 @@ class DiaryApi {
         print('일기쓰기 성공: ${response.data}');
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
 
   Future<void> showAccountAllDiary(int accountId, WidgetRef ref) async {
-    final url = '$baseUrl/Diary/findAccountDiary?accountId=${accountId}';
+    final url = '$baseUrl/Diary/findAccountDiary?accountId=$accountId';
 
     try {
       final response = await _dio.post(
@@ -93,7 +92,7 @@ class DiaryApi {
         }
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
@@ -144,7 +143,7 @@ class DiaryApi {
         }
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
@@ -156,11 +155,11 @@ class DiaryApi {
   }
 
   Future<void> showDetailDiary(int diaryId, WidgetRef ref) async {
-    final _dio = Dio();
+    final dio = Dio();
     final url = '$baseUrl/Diary/show?diaryId=$diaryId';
 
     try {
-      final response = await _dio.post(url);
+      final response = await dio.post(url);
 
       if (response.statusCode == 200) {
         final jsonData = response.data['data'] as Map<String, dynamic>;
@@ -168,7 +167,7 @@ class DiaryApi {
         ref.read(detailDiaryProvider.notifier).addDetailDiary(detailDiary);
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');

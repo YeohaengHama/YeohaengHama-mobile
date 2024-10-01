@@ -9,7 +9,6 @@ import '../../../../../data/entity/shorts/vo_shorts_read.dart';
 import 'dart:ui' as ui;
 
 import '../../../../../data/memory/shorts/p_get_itinerary.dart';
-import '../../../../../data/network/itinerary_api.dart';
 import '../../../../../data/network/shorts_api.dart';
 import 'p_bottom_nav_visible.dart';
 import 'p_is_playing.dart';
@@ -37,7 +36,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
   late VideoPlayerController _controller;
   bool _isExpanded = false;
   bool _isPlaying = false;
-  FocusNode _focusNode = FocusNode();
+  final FocusNode _focusNode = FocusNode();
   bool _textFieldFocused = false;
 
   @override
@@ -123,7 +122,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
     final contentText = '${widget.shorts.content}';
     final titleText = '${widget.shorts.title}';
     final textStyle = TextStyle(color: Colors.white);
-    final _shortsApiProvider = ref.read(shortsApiProvider);
+    final _shortsApiProviderRead = ref.read(shortsApiProvider);
     final _getItineraryProvider =ref.read(getItineraryProvider.notifier).state;
 
     return GestureDetector(
@@ -211,7 +210,7 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                     Text('${widget.shorts.commentNum}', style: TextStyle(color: Colors.white)),
                     SizedBox(height: 10),
                     Tap(onTap: () async{
-                      await _shortsApiProvider.getItinerary(ref, widget.shorts.itinerary.itineraryId.toString());
+                      await _shortsApiProviderRead.getItinerary(ref, widget.shorts.itinerary.itineraryId.toString());
 
                       Nav.push(DetailItineraryScreen(_getItineraryProvider!, widget.shorts.title));
                       ref.read(isPlayingProvider.notifier).setPlaying(false);
@@ -244,18 +243,18 @@ class _VideoPlayerScreenState extends ConsumerState<VideoPlayerScreen> with Tick
                     '${widget.shorts.account.nickname}'.text.white.make()
                   ],
                 ),
-                Height(5),
+                const Height(5),
                 GestureDetector(
                   onTap: _toggleExpand,
                   child: AnimatedSize(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     curve: Curves.easeInOut,
                     child: Container(
                       width: 300,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          '$titleText'.text.color(Colors.white).bold.make(),
+                          titleText.text.color(Colors.white).bold.make(),
                           Text(
                             contentText,
                             style: textStyle,

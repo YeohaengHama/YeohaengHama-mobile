@@ -3,7 +3,6 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 
 
 import '../../../../data/entity/itinerary/vo_itinerary.dart';
@@ -13,7 +12,7 @@ import '../../../../data/network/itinerary_api.dart';
 import '../tag/s_tag.dart';
 
 class RangeCalendar extends ConsumerStatefulWidget {
-  const RangeCalendar({Key? key, this.isEditMode}) : super(key: key);
+  const RangeCalendar({Key? super.key, this.isEditMode});
 
   final bool?  isEditMode;
   @override
@@ -53,7 +52,7 @@ class _RangeCalendarState extends ConsumerState<RangeCalendar> {
     } else if (datePickerType == CalendarDatePicker2Type.range) {
       if (values.isNotEmpty) {
         final startDate = _formatDate(values[0]);
-        final endDate = values.length > 1 ? '~ ' + _formatDateWithoutYear(values[1]) : '';
+        final endDate = values.length > 1 ? '~ ${_formatDateWithoutYear(values[1])}' : '';
         valueText = '$startDate $endDate';
       } else {
         return '';
@@ -138,19 +137,19 @@ class _RangeCalendarState extends ConsumerState<RangeCalendar> {
         Tap(
           onTap: () async {
             if(widget.isEditMode == false){
-              Nav.push(TagScreen());
+              Nav.push(const TagScreen());
             } else {
 
               final itineraryApi = ItineraryApi();
               final currentItinerary = ref.read(itineraryCheckProvider);
               final editItinerary = Itinerary(
-                name: '${currentItinerary!.name}',
+                name: currentItinerary!.name,
                 type: currentItinerary.type!,
                 itineraryStyle: currentItinerary.style!,
                 transportation: 'bus',
                 area: currentItinerary.area,
                 startDate: itineraryProviderNotifier.getSelectedStartDate()!,
-                endDate:itineraryProviderNotifier.getSelectedEndDate()!!,
+                endDate:itineraryProviderNotifier.getSelectedEndDate()!,
                 expense: '',
               );
               await itineraryApi.editItinerary(editItinerary, ref);

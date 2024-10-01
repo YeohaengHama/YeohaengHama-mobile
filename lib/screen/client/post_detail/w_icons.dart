@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../common/common.dart';
-import '../../../common/widget/w_height_and_width.dart';
 import '../../../data/entity/itinerary/vo_save_place.dart';
 import '../../../data/memory/area/area_detail_provider.dart';
 import '../../../data/memory/itinerary/itinerary_check_provider.dart';
@@ -103,8 +102,8 @@ class _icons_widgetState extends ConsumerState<IconsWidget> {
                     placeNum: searchDetailResult!.contentId,
                     contentTypeId: searchDetailResult.contentTypeId);
                 final savePlace = SavePlace(
-                  accountId: int.parse(accountNotifier.state!.id)!,
-                  placeNum: searchDetailResult!.contentId, // 여기에 장소 번호를 제공합니다.
+                  accountId: int.parse(accountNotifier.state!.id),
+                  placeNum: searchDetailResult.contentId, // 여기에 장소 번호를 제공합니다.
                   contentTypeId:
                       searchDetailResult.contentTypeId, // 여기에 콘텐츠 유형 ID를 제공합니다.
                 );

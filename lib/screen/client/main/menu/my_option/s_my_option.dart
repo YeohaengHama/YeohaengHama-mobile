@@ -11,9 +11,8 @@ import '../../../../../data/memory/bot/p_chat.dart';
 import '../../../../../data/memory/itinerary/itinerary_check_provider.dart';
 import '../../../../../data/memory/account/user_provider.dart';
 
-import 'package:http/http.dart' as http;
 class MyOptionScreen extends ConsumerStatefulWidget {
-  const MyOptionScreen({Key? key}) : super(key: key);
+  const MyOptionScreen({Key? super.key});
 
   @override
   ConsumerState<MyOptionScreen> createState() => _MyOptionScreenState();
@@ -25,9 +24,9 @@ class _MyOptionScreenState extends ConsumerState<MyOptionScreen> {
   @override
   Widget build(BuildContext context) {
 
-    final _account = ref.watch(accountProvider.notifier);
-    final _itinerary = ref.watch(itineraryCheckProvider.notifier);
-    final _chatNotifier = ref.read(chatProvider.notifier);
+    final account = ref.watch(accountProvider.notifier);
+    final itinerary = ref.watch(itineraryCheckProvider.notifier);
+    final chatNotifier = ref.read(chatProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -76,9 +75,9 @@ class _MyOptionScreenState extends ConsumerState<MyOptionScreen> {
             textSize: 20,
             onTap: () async {
               Nav.pop(context);
-              _itinerary.reset();
-              _account.reset();
-              _chatNotifier.reset();
+              itinerary.reset();
+              account.reset();
+              chatNotifier.reset();
               Nav.push(const LogInScreen());
             },
           ).pSymmetric(v:5),

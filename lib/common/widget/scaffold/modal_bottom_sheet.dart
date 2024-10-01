@@ -1,5 +1,5 @@
-import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class BottomDialog extends StatelessWidget {
   final Widget body;

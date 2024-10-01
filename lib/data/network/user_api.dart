@@ -16,7 +16,6 @@ import '../entity/open_api/open_api_area.dart';
 import '../memory/account/all_account_provider.dart';
 import '../memory/account/user_provider.dart';
 import '../simple_result.dart';
-import 'itinerary_api.dart';
 
 final userApiProvider = Provider<UserApi>((ref) => UserApi());
 
@@ -82,7 +81,7 @@ class UserApi {
         final nickName = data['nickname'];
         final photoUrl = data['photoUrl'];
         print('로그인 성공: id=$id, nickName=$nickName, photoUrl=$photoUrl');
-        if(id != null && id != "null"){
+        if(id != "null"){
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: AppColors.mainPurple,
@@ -98,7 +97,7 @@ class UserApi {
 
 
         data['role'] != 'ACCOUNT'
-            ? Nav.push(ManagerScreen())
+            ? Nav.push(const ManagerScreen())
             : Navigator.push(
           context,
           MaterialPageRoute(
@@ -115,7 +114,7 @@ class UserApi {
     } catch (e) {
       print('예외가 발생했습니다: $e');
       // 예외 발생 시에도 Future를 반환하여 호출자에게 예외 정보를 전달할 수 있도록 합니다.
-      throw e;
+      rethrow;
     }
   }
 
@@ -156,7 +155,7 @@ class UserApi {
     } catch (e) {
       print('예외가 발생했습니다: $e');
       // 예외 발생 시에도 Future를 반환하여 호출자에게 예외 정보를 전달할 수 있도록 합니다.
-      throw e;
+      rethrow;
     }
   }
 
@@ -171,7 +170,7 @@ class UserApi {
   }
 
   Future<void> handleKakaoLogin(String code) async {
-    final String tokenUrl = 'https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api/kakao/login';
+    const String tokenUrl = 'https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api/kakao/login';
 
     final Map<String, dynamic> data = {
       'code': code,
@@ -261,7 +260,7 @@ class UserApi {
         accountProvider.addAccount(accounts);
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');

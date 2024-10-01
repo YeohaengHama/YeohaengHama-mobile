@@ -1,5 +1,4 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/w_tap.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/budget/main_screen/s_add_account.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,7 +22,7 @@ class WithFriendsWidget extends ConsumerStatefulWidget {
 }
 
 class _WithFriendsWidgetState extends ConsumerState<WithFriendsWidget> {
-  late Map<int, TextEditingController> _amountControllers = {};
+  late final Map<int, TextEditingController> _amountControllers = {};
   bool isDutchTreat = true;
 
   @override
@@ -33,7 +32,9 @@ class _WithFriendsWidgetState extends ConsumerState<WithFriendsWidget> {
 
   @override
   void dispose() {
-    _amountControllers.values.forEach((controller) => controller.dispose());
+    for (var controller in _amountControllers.values) {
+      controller.dispose();
+    }
     super.dispose();
   }
 
@@ -256,7 +257,7 @@ class _WithFriendsWidgetState extends ConsumerState<WithFriendsWidget> {
                         const Width(5),
                       ],
                       Expanded(
-                        child: '${account.nickName}'
+                        child: account.nickName
                             .text
                             .size(16.0)
                             .bold

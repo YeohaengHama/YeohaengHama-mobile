@@ -1,4 +1,3 @@
-import 'package:fast_app_base/data/entity/area/search_simple_toursim_result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../entity/area/saerch_image_result.dart';

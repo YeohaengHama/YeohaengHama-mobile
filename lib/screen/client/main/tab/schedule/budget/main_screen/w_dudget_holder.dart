@@ -7,7 +7,6 @@ import 'package:fast_app_base/screen/client/main/tab/schedule/budget/main_screen
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:art_sweetalert/art_sweetalert.dart';
 
@@ -20,7 +19,7 @@ import '../../../../../../../entity/dummies.dart';
 class BudgetHolderList extends ConsumerWidget {
   final CurrentBudget budget;
 
-  const BudgetHolderList(this.budget, {Key? key}) : super(key: key);
+  const BudgetHolderList(this.budget, {Key? super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -36,7 +35,7 @@ class BudgetHolderList extends ConsumerWidget {
           children: budget.expenditures.entries.map((entry) {
             final title = 'Day-${entry.key}';
             final expenditureList = entry.value;
-            if (expenditureList == null || expenditureList.isEmpty) {
+            if (expenditureList.isEmpty) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

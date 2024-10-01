@@ -89,7 +89,7 @@ class _TagScreenState extends ConsumerState<TagScreen> {
                     ref.read(itineraryProvider.notifier).selectedStyleTags;
                 print('Selected Who Tags: $selectedWhoTags');
                 print('Selected Style Tags: $selectedStyleTags');
-                Nav.push(AreaPick());} ,
+                Nav.push(const AreaPick());} ,
               child: RoundedContainer(
                 padding :EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                 radius: 5,

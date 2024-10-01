@@ -1,4 +1,3 @@
-import 'package:fast_app_base/entity/area/vo_review.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'vo_tourism.freezed.dart';
 

@@ -5,12 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../data/entity/itinerary/a_add_pick_place.dart';
-import '../../../../../data/memory/itinerary/add_pick_each_place_provider.dart';
 import '../../../data/entity/diary/vo_detail_diary.dart';
 
 class DiaryMapWidget extends ConsumerStatefulWidget {
-  const DiaryMapWidget(this.placeList, {Key? key}) : super(key: key);
+  const DiaryMapWidget(this.placeList, {Key? super.key});
   final List<Place> placeList;
   @override
   ConsumerState<DiaryMapWidget> createState() => _DiaryMapWidgetState();

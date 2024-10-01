@@ -2,21 +2,15 @@ import 'package:fast_app_base/screen/client/main/tab/shorts/w_video_player.dart'
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:video_player/video_player.dart';
-import 'package:fast_app_base/common/common.dart';
-import '../../../../../common/widget/w_profile_image.dart';
-import '../../../../../data/entity/shorts/vo_shorts_read.dart';
 import '../../../../../data/memory/shorts/p_shorts_read.dart';
 import '../../../../../data/network/shorts_api.dart';
 import 'p_is_playing.dart'; // isPlayingProvider의 경로를 맞게 조정하세요
 import 'dart:ui' as ui;
 
-import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // 비디오 스와이프 화면을 나타내는 위젯
 class VideoSwipeScreen extends ConsumerStatefulWidget {
-  const VideoSwipeScreen({Key? key}) : super(key: key);
+  const VideoSwipeScreen({Key? super.key});
 
   @override
   _VideoSwipeScreenState createState() => _VideoSwipeScreenState();

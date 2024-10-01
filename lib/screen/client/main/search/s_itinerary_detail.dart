@@ -1,6 +1,4 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/w_image_scroll_view.dart';
-import 'package:fast_app_base/common/widget/w_rounded_container.dart';
 import 'package:fast_app_base/data/entity/itinerary/a_check_itinerary.dart';
 import 'package:fast_app_base/screen/client/main/search/provider/bottom_nav_black.dart';
 import 'package:fast_app_base/screen/client/main/search/provider/is_playing_shots.dart';
@@ -10,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
-import '../../../../../../data/entity/diary/vo_detail_diary.dart';
 import '../../../../../../data/network/itinerary_api.dart';
 
 
@@ -18,7 +15,7 @@ class DetailItineraryScreen extends HookConsumerWidget {
   final CheckItinerary itinerary;
   final String title;
 
-  const DetailItineraryScreen(this.itinerary, this.title, {Key? key}) : super(key: key);
+  const DetailItineraryScreen(this.itinerary, this.title, {Key? super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -128,8 +125,8 @@ class DetailItineraryScreen extends HookConsumerWidget {
                           ).pSymmetric(h: 50),
                         ),
                       ),
-                      Height(20),
-                      Line(color: AppColors.outline,),
+                      const Height(20),
+                      const Line(color: AppColors.outline,),
 
                       Wrap(
                         alignment: WrapAlignment.start,
@@ -138,12 +135,12 @@ class DetailItineraryScreen extends HookConsumerWidget {
                           ...itinerary.type!,
                           ...itinerary.style!,
                         ].map((tag) {
-                          return '#${tag} '.text.bold.color(AppColors.secondGrey).make().pOnly(right: 2);
+                          return '#$tag '.text.bold.color(AppColors.secondGrey).make().pOnly(right: 2);
                         }).toList(),
                       ).pSymmetric(h: contentLeftPadding, v: 20),
 
 
-                      Height(30)
+                      const Height(30)
                     ],
                   );
                 },

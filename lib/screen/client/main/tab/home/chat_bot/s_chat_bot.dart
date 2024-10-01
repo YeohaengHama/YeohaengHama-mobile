@@ -30,7 +30,7 @@ class _ChatBotScreenState extends ConsumerState<ChatBotScreen> {
     final chatMessages = ref.watch(chatProvider);
 
     // 스크롤을 맨 아래로 이동하는 함수
-    void _scrollToBottom() {
+    void scrollToBottom() {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (_scrollController.hasClients) {
           _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
@@ -40,7 +40,7 @@ class _ChatBotScreenState extends ConsumerState<ChatBotScreen> {
 
     // 메시지가 업데이트될 때마다 스크롤을 맨 아래로 이동
     ref.listen<List<ChatMessage>>(chatProvider, (_, __) {
-      _scrollToBottom();
+      scrollToBottom();
     });
 
     return Scaffold(

@@ -8,14 +8,13 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:multi_image_picker_view/multi_image_picker_view.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
-import '../../../common/constant/app_colors.dart';
 import '../../../data/entity/review/a_review_post.dart';
 import '../../../data/memory/area/area_detail_provider.dart';
 import '../../../data/network/review_api.dart';
 import 'w_put_review_star.dart';
 
 class ReviewScreen extends ConsumerStatefulWidget {
-  const ReviewScreen(this.id, this.type, {Key? key}) : super(key: key);
+  const ReviewScreen(this.id, this.type, {Key? super.key});
   final int id;
   final int type;
 

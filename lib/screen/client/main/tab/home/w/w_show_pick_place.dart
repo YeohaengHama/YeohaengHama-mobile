@@ -1,13 +1,11 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/info/s_pick_place_info.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_no_pick_place.dart';
-import 'package:fast_app_base/screen/client/main/tab/home/w/w_no_schdule.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'dart:math';
 
 import '../../../../../../common/dart/extension/calculate_distance.dart';
 import '../../../../../../data/entity/itinerary/a_add_pick_place.dart';
@@ -15,24 +13,24 @@ import '../../../../../../data/memory/itinerary/add_pick_each_place_provider.dar
 import '../../../../../../data/network/itinerary_api.dart';
 
 class ShowPickPlace extends ConsumerWidget {
-  const ShowPickPlace(this.currentDay, {Key? key}) : super(key: key);
+  const ShowPickPlace(this.currentDay, {Key? super.key});
   final int currentDay;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final radiusBold = 2.5;
+    const radiusBold = 2.5;
     final addPickPlaceListNotifier = ref.watch(addPickEachPlaceProvider);
     final ItineraryApi itineraryApi = ItineraryApi();
-    final PageController _pageController = PageController();
+    final PageController pageController = PageController();
     final ValueNotifier<int> currentPageNotifier = ValueNotifier<int>(0);
 
 
     List<AddPickPlace> filteredList = addPickPlaceListNotifier.where((element) => element.day == currentDay).toList();
 
 
-    _pageController.addListener(() {
-      double? currentPage = _pageController.page;
-      if (currentPage != null && currentPage.isFinite && !currentPage.isNaN) {
+    pageController.addListener(() {
+      double? currentPage = pageController.page;
+      if (currentPage!.isFinite && !currentPage.isNaN) {
         int nextPage = currentPage.round();
         if (currentPageNotifier.value != nextPage) {
           currentPageNotifier.value = nextPage;
@@ -52,23 +50,23 @@ class ShowPickPlace extends ConsumerWidget {
                 children: [buildPickPlaceItem(context, ref, itineraryApi, filteredList, radiusBold, 0)]),
           )
               : ListView.builder(
-            controller: _pageController,
+            controller: pageController,
             scrollDirection: Axis.horizontal,
             itemCount: filteredList.length,
             itemBuilder: (context, index) {
               return buildPickPlaceItem(context, ref, itineraryApi, filteredList, radiusBold, index);
             },
           ),
-        ): NoPickPlace(),
+        ): const NoPickPlace(),
         SizedBox(height:filteredList.isNotEmpty? 10 : 0),
         filteredList.isEmpty
             ? Container(): ValueListenableBuilder<int>(
           valueListenable: currentPageNotifier,
           builder: (context, currentPage, child) {
             return SmoothPageIndicator(
-              controller: _pageController,
+              controller: pageController,
               count: filteredList.length,
-              effect: ScrollingDotsEffect(
+              effect: const ScrollingDotsEffect(
                 dotHeight: 8,
                 dotWidth: 8,
                 activeDotScale: 1.5,
@@ -77,8 +75,8 @@ class ShowPickPlace extends ConsumerWidget {
               ),
               onDotClicked: (index) {
                 if (index < filteredList.length) {
-                  _pageController.animateToPage(index,
-                      duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+                  pageController.animateToPage(index,
+                      duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
                 }
               },
             );
@@ -132,7 +130,7 @@ class ShowPickPlace extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  addPickPlace.addr1 != null ? addPickPlace.addr1!.text.color(AppColors.thirdGrey).size(10).make() : ''.text.size(15).make(),
+                  addPickPlace.addr1 != null ? addPickPlace.addr1.text.color(AppColors.thirdGrey).size(10).make() : ''.text.size(15).make(),
                 ],
               ),
             ),

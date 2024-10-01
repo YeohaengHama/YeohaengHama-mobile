@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
-import 'message.dart';
 
 part 'chatRoom.freezed.dart';
 part 'chatRoom.g.dart';
