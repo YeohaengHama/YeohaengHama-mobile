@@ -56,8 +56,8 @@ class _MenuDrawerState extends ConsumerState<MenuDrawer> {
             color: context.colors.background),
         child: isSmallScreen(context)
             ? SingleChildScrollView(
-                child: getMenus(context),
-              )
+          child: getMenus(context),
+        )
             : getMenus(context),
       ),
     );
@@ -83,7 +83,7 @@ class _MenuDrawerState extends ConsumerState<MenuDrawer> {
                   icon: const Icon(EvaIcons.close),
                   onPressed: () {
                     closeDrawer(context);
-                    },
+                  },
                 ),
               ),
               Padding(
@@ -112,19 +112,19 @@ class _MenuDrawerState extends ConsumerState<MenuDrawer> {
               ),
             )
                 : ClipOval(
-                  child: Image.asset(
-                                '$basePath/icon/colorHama.png',
-                                width: 120,
-                                height: 120,
-                              ),
-                ),
+              child: Image.asset(
+                '$basePath/icon/colorHama.png',
+                width: 120,
+                height: 120,
+              ),
+            ),
           ),
 
           Center(child: '${accountNotifier.nickName}'.text.color(AppColors.primaryGrey).size(24).bold.make()),
           Tap(onTap: () {
             Nav.push(const ProfileSettingScreen());
           },
-          child: Center(child: '프로필 편집 >'.text.color(AppColors.forthGrey).size(12).make())),
+              child: Center(child: '프로필 편집 >'.text.color(AppColors.forthGrey).size(12).make())),
 
           const Height(10),
 
@@ -228,42 +228,42 @@ class _MenuDrawerState extends ConsumerState<MenuDrawer> {
   }
 
   Widget getLanguageOption(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Tap(
-            child: Container(
-                padding: const EdgeInsets.only(left: 5, right: 5),
-                margin: const EdgeInsets.only(left: 15, right: 20),
-                decoration: BoxDecoration(
-                    border: Border.all(color: context.appColors.veryBrightGrey),
-                    borderRadius: BorderRadius.circular(10),
-                    color: context.appColors.drawerBg,
-                    boxShadow: [context.appShadows.buttonShadowSmall]),
-                child: Row(
-                  children: [
-                    const Width(10),
-                    DropdownButton<String>(
-                      items: [
-                        menu(currentLanguage),
-                        menu(Language.values.where((element) => element != currentLanguage).first),
-                      ],
-                      onChanged: (value) async {
-                        if (value == null) {
-                          return;
-                        }
-                        await context.setLocale(Language.find(value.toLowerCase()).locale);
-                      },
-                      value: describeEnum(currentLanguage).capitalizeFirst,
-                      underline: const SizedBox.shrink(),
-                      elevation: 1,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+      Tap(
+        child: Container(
+            padding: const EdgeInsets.only(left: 5, right: 5),
+            margin: const EdgeInsets.only(left: 15, right: 20),
+            decoration: BoxDecoration(
+                border: Border.all(color: context.appColors.veryBrightGrey),
+                borderRadius: BorderRadius.circular(10),
+                color: context.appColors.drawerBg,
+                boxShadow: [context.appShadows.buttonShadowSmall]),
+            child: Row(
+              children: [
+                const Width(10),
+                DropdownButton<String>(
+                  items: [
+                    menu(currentLanguage),
+                    menu(Language.values.where((element) => element != currentLanguage).first),
                   ],
-                )),
-            onTap: () async {},
-          ),
-        ],
-      );
+                  onChanged: (value) async {
+                    if (value == null) {
+                      return;
+                    }
+                    await context.setLocale(Language.find(value.toLowerCase()).locale);
+                  },
+                  value: describeEnum(currentLanguage).capitalizeFirst,
+                  underline: const SizedBox.shrink(),
+                  elevation: 1,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ],
+            )),
+        onTap: () async {},
+      ),
+    ],
+  );
 
   DropdownMenuItem<String> menu(Language language) {
     return DropdownMenuItem(
