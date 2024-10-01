@@ -1,6 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../entity/chat/chatRoom.dart';
-import '../../entity/chat/message.dart';
 
 final chatRoomsProvider = StateNotifierProvider<ChatRoomsNotifier, List<ChatRoom>>((ref) {
   return ChatRoomsNotifier();

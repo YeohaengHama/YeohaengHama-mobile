@@ -18,7 +18,7 @@ import '../../../../search/provider/is_detail_loading_provider.dart';
 
 
 class HelperMapFragment extends ConsumerStatefulWidget {
-  const HelperMapFragment({Key? key, this.mapX = 126.979, this.mapY = 37.566}) : super(key: key);
+  const HelperMapFragment({Key? super.key, this.mapX = 126.979, this.mapY = 37.566});
   final double mapX;
   final double mapY;
 
@@ -127,7 +127,7 @@ class _HelperMapFragmentState extends ConsumerState<HelperMapFragment> {
     final marker = NMarker(
       id: 'initial_marker',
       position: placeLatLng,
-      caption: NOverlayCaption(text: 'Initial Location'),
+      caption: const NOverlayCaption(text: 'Initial Location'),
     );
 
     marker.setOnTapListener((NMarker marker) {
@@ -203,7 +203,7 @@ class _HelperMapFragmentState extends ConsumerState<HelperMapFragment> {
     if (placeList.isEmpty) {
       _removeMarkers();
       placeCoordinates.clear();
-      placeCoordinates.add(NLatLng(36, 128));
+      placeCoordinates.add(const NLatLng(36, 128));
     } else {
       _removeMarkers();
       placeCoordinates.clear();

@@ -1,12 +1,10 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/theme/text_size.dart';
 import 'package:fast_app_base/common/widget/w_arrow.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/wirte/s_select_itinerary.dart';
 import 'package:flutter/material.dart';
-import 'package:fraction/fraction.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:video_player/video_player.dart';
@@ -49,8 +47,8 @@ class _VideoResultPopupState extends ConsumerState<VideoResultPopup> {
   @override
   void initState() {
     super.initState();
-    final _itineraryApiProvider = ref.read(itineraryApiProvider);
-    _itineraryApiProvider.showAllItinerary(ref);
+    final itineraryApiProviderRead = ref.read(itineraryApiProvider);
+    itineraryApiProviderRead.showAllItinerary(ref);
 
     if (_isGif) {
       _getImageDimension(
@@ -82,14 +80,14 @@ class _VideoResultPopupState extends ConsumerState<VideoResultPopup> {
 
   @override
   Widget build(BuildContext context) {
-    final _isPlayingProvider = ref.watch(isPlayingProvider.notifier);
-    final _shortsWriteProvider = ref.watch(shortsWriteProvider);
+    final isPlayingProviderNoti = ref.watch(isPlayingProvider.notifier);
+    final shortsWriteProviderWatch = ref.watch(shortsWriteProvider);
     final shortsWriteProviderNoti = ref.watch(shortsWriteProvider.notifier);
     final shortsWriteProviderState =
         ref.watch(shortsWriteProvider.notifier).state;
     final shortsApi = ref.read(shortsApiProvider);
-    final _accountProvider = ref.read(accountProvider.notifier).state;
-    bool _isLoading = false;
+    final accountProviderState = ref.read(accountProvider.notifier).state;
+    bool isLoading = false;
 
     return Scaffold(
       appBar: AppBar(
@@ -103,10 +101,10 @@ class _VideoResultPopupState extends ConsumerState<VideoResultPopup> {
           IconButton(
               onPressed: () async {
                 setState(() {
-                  _isLoading = true; // 로딩 상태 시작
+                  isLoading = true; // 로딩 상태 시작
                 });
                 final shortsWrite = ShortsWrite(
-                    accountId: int.parse(_accountProvider!.id),
+                    accountId: int.parse(accountProviderState!.id),
                     video: widget.video.toString(),
                     title: titleController.text,
                     content: captionController.text,
@@ -118,9 +116,9 @@ class _VideoResultPopupState extends ConsumerState<VideoResultPopup> {
                 Nav.pop(context);
                 Nav.pop(context);
                 Nav.pop(context);
-                _isPlayingProvider.setPlaying(true);
+                isPlayingProviderNoti.setPlaying(true);
                 setState(() {
-                  _isLoading = false; // 로딩 상태 해제
+                  isLoading = false; // 로딩 상태 해제
                 });
 
               },
@@ -225,7 +223,7 @@ class _VideoResultPopupState extends ConsumerState<VideoResultPopup> {
                       Spacer(),
                       if (shortsWriteProviderNoti.state.itineraryTitle !=
                           '') ...{
-                        '${shortsWriteProviderNoti.state.itineraryTitle}'
+                        shortsWriteProviderNoti.state.itineraryTitle
                             .text
                             .color(AppColors.secondGrey)
                             .make()
@@ -269,7 +267,7 @@ class _VideoResultPopupState extends ConsumerState<VideoResultPopup> {
               ),
             ),
           ),
-          if (_isLoading)
+          if (isLoading)
             Stack(
               children: [
                 Container(

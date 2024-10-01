@@ -1,12 +1,10 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../../../../common/widget/w_height_and_width.dart';
 import '../../../../../../../common/widget/w_profile_image.dart';
 import '../../../../../../../data/entity/budget/vo_add_budget.dart';
 import '../../../../../../../data/entity/itinerary/a_check_itinerary.dart';
 import '../../../../../../../data/memory/budget/add_budget_provider.dart';
-import '../../../../../../../data/memory/itinerary/itinerary_check_provider.dart';
 import 'account_selection_provider.dart';
 
 class AddAccountListWidget extends ConsumerStatefulWidget {
@@ -37,7 +35,7 @@ class _AddAccountListWidgetState extends ConsumerState<AddAccountListWidget> {
             photoUrl: widget.sharedAccount.photoUrl,
             width: 40,
             height: 40),
-        Width(10),
+        const Width(10),
         if (widget.sharedAccount.id == widget.accountId) ...[
           Container(
             width: 17,
@@ -49,7 +47,7 @@ class _AddAccountListWidgetState extends ConsumerState<AddAccountListWidget> {
             alignment: Alignment.center,
             child: '나'.text.size(7).bold.color(Colors.white).make(),
           ),
-          Width(5),
+          const Width(5),
         ],
         '${widget.sharedAccount.nickname}'
             .text.size(16)

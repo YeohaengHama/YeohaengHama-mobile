@@ -7,7 +7,7 @@ import '../../../../../data/entity/itinerary/a_check_itinerary.dart';
 import '../../../../../data/memory/area/selectedDayIndex_provider.dart';
 
 class ShowPickDay extends ConsumerStatefulWidget {
-  const ShowPickDay(this.itinerary, {Key? key}) : super(key: key);
+  const ShowPickDay(this.itinerary, {Key? super.key});
   final CheckItinerary itinerary;
 
   @override

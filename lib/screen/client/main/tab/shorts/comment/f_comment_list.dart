@@ -5,15 +5,12 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:card_loading/card_loading.dart';
 
 import '../../../../../../common/common.dart';
-import '../../../../../../common/widget/w_rounded_container.dart';
-import '../../../../../../data/entity/shorts/vo_shorts_comment.dart';
 import '../../../../../../data/memory/shorts/p_comment_read.dart';
 import '../../../../../../data/memory/shorts/p_comment_write_loading.dart';
 import '../../../../../../data/network/shorts_api.dart';
-import 'package:fast_app_base/common/widget/w_profile_image.dart';
 
 class CommentListFragment extends ConsumerStatefulWidget {
-  const CommentListFragment(this.shortId, {Key? key}) : super(key: key);
+  const CommentListFragment(this.shortId, {Key? super.key});
 
   final int shortId;
 
@@ -44,7 +41,7 @@ class _CommentListFragmentState extends ConsumerState<CommentListFragment> {
 
   @override
   Widget build(BuildContext context) {
-    final _commentList = ref.watch(commentListProvider);
+    final commentList = ref.watch(commentListProvider);
     final writeLoading = ref.watch(commentWriteLoadingProvider);
 
     if (_isLoading) {
@@ -70,19 +67,19 @@ class _CommentListFragmentState extends ConsumerState<CommentListFragment> {
               );
             }
             int commentIndex = writeLoading ? index - 1 : index;
-            int reverseIndex = _commentList.comment.length - 1 - commentIndex;
+            int reverseIndex = commentList.comment.length - 1 - commentIndex;
             if (reverseIndex >= 0) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12),
                 child: CommentWidget(
-                  comment: _commentList.comment[reverseIndex],
+                  comment: commentList.comment[reverseIndex],
                 ),
               );
             } else {
               return const SizedBox.shrink(); // Empty placeholder
             }
           },
-          childCount: _commentList.comment.length + (writeLoading ? 1 : 0),
+          childCount: commentList.comment.length + (writeLoading ? 1 : 0),
         ),
       ),
     );
@@ -109,7 +106,7 @@ class _CommentListFragmentState extends ConsumerState<CommentListFragment> {
                     borderRadius: BorderRadius.circular(5),
                     margin: EdgeInsets.only(bottom: 10),
                   ),
-                  Width(10),
+                  const Width(10),
                   CardLoading(
                     height: 14,
                     width: 20,

@@ -4,13 +4,12 @@ import 'package:fast_app_base/data/network/itinerary_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:isar/isar.dart';
 
 import '../../../../../../common/dart/extension/datetime_extension.dart';
 import '../../../../../../data/memory/itinerary/show_save_place_provider.dart';
 
 class ItineraryList extends ConsumerStatefulWidget {
-  const ItineraryList({Key? key, required this.allItinerary}) : super(key: key);
+  const ItineraryList({Key? super.key, required this.allItinerary});
   final AllItinerary allItinerary;
 
   @override
@@ -109,7 +108,7 @@ class _ItineraryListState extends ConsumerState<ItineraryList> with SingleTicker
                   '${widget.allItinerary.name}'.text.bold.color(AppColors.primaryGrey).make(),
                   Row(
                     children: [
-                      '${formatDateRange(widget.allItinerary.startDate,widget.allItinerary.endDate)}'.text.size(13).color(AppColors.secondGrey).make(),
+                      formatDateRange(widget.allItinerary.startDate,widget.allItinerary.endDate).text.size(13).color(AppColors.secondGrey).make(),
                       if(widget.allItinerary.sharedAccount != 0) ', ${widget.allItinerary.sharedAccount}명과 함께'.text.size(13).color(AppColors.secondGrey).make()
                     ],
                   ),

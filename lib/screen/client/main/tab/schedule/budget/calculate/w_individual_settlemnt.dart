@@ -5,12 +5,10 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/memory/itinerary/itinerary_check_provider.dart';
 import '../../../../../../../common/dart/extension/day_parser.dart';
 import '../../../../../../../common/widget/DottedLine.dart';
-import '../../../../../../../common/dart/extension/datetime_extension.dart';
 import '../../../../../../../data/entity/budget/vo_current_budget.dart';
 import '../../../../../../../data/memory/budget/current_budget_provider.dart';
 import '../../../../../../../data/memory/budget/statistics_provider.dart';
 import '../../../../../../../data/memory/account/user_provider.dart';
-import '../../../../../../../data/network/budget_api.dart';
 
 class IndividualSettlement extends ConsumerStatefulWidget {
   const IndividualSettlement({super.key});
@@ -32,7 +30,7 @@ class _IndividualSettlement extends ConsumerState<IndividualSettlement> {
     // 모든 지출을 순회하며 정산 금액을 계산
     // 사용자 리스트 초기화
     final List<Account> accounts = itinerary!.sharedAccount.isNotEmpty
-        ? itinerary!.sharedAccount
+        ? itinerary.sharedAccount
             .map((sharedAccount) => Account(
                   id: sharedAccount.id,
                   nickname: sharedAccount.nickname,
@@ -41,16 +39,16 @@ class _IndividualSettlement extends ConsumerState<IndividualSettlement> {
             .toList()
         : [
             Account(
-              id: itinerary!.account.id,
+              id: itinerary.account.id,
               nickname: itinerary.account.nickname,
               photoUrl: itinerary.account.photoUrl,
             )
           ];
 
-    accounts.forEach((account) {
+    for (var account in accounts) {
       totalExpenditureAmounts.putIfAbsent(account.id, () => 0);
       totalCalculationAmounts.putIfAbsent(account.id, () => 0);
-    });
+    }
 
     // 모든 지출을 순회하며 정산 금액을 계산
     budget?.expenditures.values.expand((e) => e).forEach((expenditure) {
@@ -61,13 +59,13 @@ class _IndividualSettlement extends ConsumerState<IndividualSettlement> {
           (totalExpenditureAmounts[payerId] ?? 0) +
               expenditure.expendituresTotalAmount;
 
-      expenditure.calculate.forEach((calculation) {
+      for (var calculation in expenditure.calculate) {
         final receiverId = calculation.accountShowDTO.id;
 
         // 개인별 지출 금액을 누적
         totalCalculationAmounts[receiverId] =
             (totalCalculationAmounts[receiverId] ?? 0) + calculation.amount;
-      });
+      }
     });
 
     return Column(
@@ -151,7 +149,7 @@ class _IndividualSettlement extends ConsumerState<IndividualSettlement> {
               ),
             ],
           ).pSymmetric(v: 8);
-        }).toList(),
+        }),
       ],
     ).pOnly(bottom: 20);
   }
@@ -159,7 +157,7 @@ class _IndividualSettlement extends ConsumerState<IndividualSettlement> {
   // Helper method to find account by id
   Account findAccountById(int id, List<Account> accounts) {
     return accounts.firstWhere((account) => account.id == id,
-        orElse: () => Account(id: 0, nickname: 'Unknown'));
+        orElse: () => const Account(id: 0, nickname: 'Unknown'));
   }
 
   // Helper method to find account name by id in budget

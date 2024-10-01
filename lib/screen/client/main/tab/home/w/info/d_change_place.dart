@@ -9,7 +9,7 @@ import '../../../../../../../data/memory/itinerary/add_pick_each_place_provider.
 import '../../../../../../../data/memory/itinerary/itinerary_check_provider.dart';
 
 class ChangePlace extends ConsumerStatefulWidget {
-  const ChangePlace({Key? key}) : super(key: key);
+  const ChangePlace({Key? super.key});
 
   @override
   ConsumerState<ChangePlace> createState() => _ChangePlaceState();
@@ -45,7 +45,7 @@ class _ChangePlaceState extends ConsumerState<ChangePlace> {
             }
           },
           selectedItemBuilder: (BuildContext context) {
-            return List.generate(createdItinerary!.placesByDay.length, (index) {
+            return List.generate(createdItinerary.placesByDay.length, (index) {
               final day = 'Day-${index + 1}';
               return Container(
                 alignment: Alignment.center,

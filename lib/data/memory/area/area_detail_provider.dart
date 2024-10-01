@@ -1,4 +1,3 @@
-import 'package:fast_app_base/data/entity/area/search_simple_toursim_result.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../entity/area/serch_detail_result.dart';
@@ -9,7 +8,7 @@ StateNotifierProvider<DetailAreaNotifier, AsyncValue<SearchDetailResult>>((ref) 
 });
 
 class DetailAreaNotifier extends StateNotifier<AsyncValue<SearchDetailResult>> {
-  DetailAreaNotifier() : super(AsyncValue.loading());
+  DetailAreaNotifier() : super(const AsyncValue.loading());
 
 
   void addDetailArea(SearchDetailResult searchDetailResult) {
@@ -20,7 +19,7 @@ class DetailAreaNotifier extends StateNotifier<AsyncValue<SearchDetailResult>> {
       String firstimage) async {
     try {
       // Set loading state
-      state = AsyncValue.loading();
+      state = const AsyncValue.loading();
 
       // Fetch data here
       final searchDetailResult = await fetchData(contentTypeId, contentId, title, addr1, addr2);
@@ -37,7 +36,7 @@ class DetailAreaNotifier extends StateNotifier<AsyncValue<SearchDetailResult>> {
       String addr2) async {
     // Add logic for handling firstimage if needed
     // Simulate a delay to show loading state
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
     // Simulate fetching data from an API
     return SearchDetailResult(

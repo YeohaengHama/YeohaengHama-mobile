@@ -10,7 +10,6 @@ import 'package:fast_app_base/screen/client/post_detail/w_info_map.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:card_loading/card_loading.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
 import '../../../../../../../data/entity/budget/vo_current_budget.dart';
@@ -25,12 +24,12 @@ import '../../../../search/provider/is_detail_loading_provider.dart';
 
 
 class DraggableInfoScreen extends HookConsumerWidget {
-  final dynamic? searchSimpleResult;
+  final dynamic searchSimpleResult;
   final Place? place;
 
   const DraggableInfoScreen({
-    this.searchSimpleResult = null,
-    this.place = null,
+    this.searchSimpleResult,
+    this.place,
     super.key,
   });
 
@@ -139,8 +138,7 @@ class DraggableInfoScreen extends HookConsumerWidget {
                     final searchReviewResult =
                     ref.read(ReviewShowAllListProvider);
 
-                    if (searchDetailResult != null &&
-                        searchImageResult != null) {
+                    if (searchDetailResult != null) {
                       Nav.push(MapDetailScreen(
                         searchDetailResult: searchDetailResult,
                         searchImageResult: searchImageResult,
@@ -237,7 +235,7 @@ class DraggableInfoScreen extends HookConsumerWidget {
                       margin: EdgeInsets.symmetric(
                           horizontal: 20, vertical: 10),
                     )
-                        : ReviewStar(),
+                        : const ReviewStar(),
                     const Height(20),
                     isDetailLoading
                         ? Row(
@@ -304,7 +302,7 @@ class DraggableInfoScreen extends HookConsumerWidget {
                       height: 1.5,
                     ).pSymmetric(h: 40),
                     isDetailLoading
-                        ? mainTextWidget()
+                        ? const mainTextWidget()
                         : ref
                         .read(DetailAreaApiResponseProvider)
                         .value
@@ -319,7 +317,7 @@ class DraggableInfoScreen extends HookConsumerWidget {
                       ref
                           .read(DetailAreaApiResponseProvider)
                           .value!
-                          .overView!,
+                          .overView,
                       style: TextStyle(
                         fontSize: 14,
                         color: AppColors.secondGrey,

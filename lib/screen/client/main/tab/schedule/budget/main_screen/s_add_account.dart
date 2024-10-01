@@ -2,10 +2,6 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/budget/main_screen/w_add_account_list.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../../../../common/widget/w_height_and_width.dart';
-import '../../../../../../../common/widget/w_profile_image.dart';
-import '../../../../../../../data/entity/budget/vo_add_budget.dart';
-import '../../../../../../../data/entity/itinerary/a_check_itinerary.dart';
 import '../../../../../../../data/memory/budget/add_budget_provider.dart';
 import '../../../../../../../data/memory/itinerary/itinerary_check_provider.dart';
 
@@ -50,13 +46,13 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
               .size(25)
               .color(AppColors.primaryGrey)
               .make(),
-          Height(10),
+          const Height(10),
           '여행을 함께 한 친구들을 볼 수 있어요'
               .text
               .size(14)
               .color(AppColors.thirdGrey)
               .make(),
-          Height(15),
+          const Height(15),
           Row(
             children: [
               '함께한 친구'.text.bold.color(AppColors.secondGrey).make(),
@@ -72,7 +68,7 @@ class _AddAccountScreenState extends ConsumerState<AddAccountScreen> {
                 size: 16,
                 color: AppColors.secondGrey,
               ),
-              Width(5),
+              const Width(5),
               '함께'.text.color(AppColors.secondGrey).bold.make(),
               Icon(
                 Icons.help_outline_rounded,

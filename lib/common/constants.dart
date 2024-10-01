@@ -10,4 +10,4 @@ const serverUrl = 'http://43.202.208.22:8080/api';
 // const serverUrl = 'https://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app/api';
 const chatServerUrl = 'http://43.202.208.22:8080';
 final int portNumber = int.parse(Platform.environment['APP_PORT'] ?? '443');
-final  socketUrl = 'wss://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app:433';
+const  socketUrl = 'wss://port-0-yeohaenghama-backend-dc9c2nlsmwen6i.sel5.cloudtype.app:433';

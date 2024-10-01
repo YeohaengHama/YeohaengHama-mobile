@@ -26,7 +26,7 @@ class PlaceListWidget extends StatelessWidget {
               // 장소 세부 정보 화면으로 이동
             },
           );
-        }).toList(),
+        }),
       ],
     );
   }

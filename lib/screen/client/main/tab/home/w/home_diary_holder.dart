@@ -51,7 +51,7 @@ class _HomeDiaryHolderState extends  ConsumerState<HomeDiaryHolder> {
     return _isLoading
         ? Center(child: CircularProgressIndicator())
         : allDiary.isEmpty
-        ? NoDiaryList() // Return empty container if no data
+        ? const NoDiaryList() // Return empty container if no data
         : SizedBox(
       width: maxWidthSize,
       height: diaryContainerHeight + 20,

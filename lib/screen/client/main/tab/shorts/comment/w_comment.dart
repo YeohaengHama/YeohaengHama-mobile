@@ -1,8 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_profile_image.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import '../../../../../../common/dart/extension/datetime_extension.dart';
 import '../../../../../../common/dart/extension/day_parser.dart';
 import '../../../../../../data/entity/shorts/vo_shorts_comment.dart';
 
@@ -16,10 +14,8 @@ class CommentWidget extends StatelessWidget {
     final commentDate = comment.date;
     String timeDifference = 'Invalid date';
 
-    if (commentDate != null) {
-      timeDifference = getTimeDifference(commentDate);
-    }
-
+    timeDifference = getTimeDifference(commentDate);
+  
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,

@@ -66,7 +66,7 @@ class _ScheduleScreenState extends ConsumerState<ScheduleScreen> {
                         .make(),
                     Tap(
                         onTap: () {
-                          ShowBottomDialog(context, EditScheduleDialog());
+                          ShowBottomDialog(context, const EditScheduleDialog());
                         },
                         child: '편집'
                             .text

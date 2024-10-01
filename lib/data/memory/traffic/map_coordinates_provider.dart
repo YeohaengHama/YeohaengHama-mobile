@@ -1,10 +1,9 @@
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../entity/traffic/vo_map_coordinates.dart';
 
 final mapCoordinatesProvider = StateNotifierProvider<MapCoordinatesNotifier, MapCoordinates>((ref) {
-  return MapCoordinatesNotifier(MapCoordinates(
+  return MapCoordinatesNotifier(const MapCoordinates(
     startTitle: '',
     startX: 0.0,
     startY: 0.0,
@@ -15,7 +14,7 @@ final mapCoordinatesProvider = StateNotifierProvider<MapCoordinatesNotifier, Map
 });
 
 class MapCoordinatesNotifier extends StateNotifier<MapCoordinates> {
-  MapCoordinatesNotifier(MapCoordinates state) : super(state);
+  MapCoordinatesNotifier(super.state);
 
   // setStart 메서드 정의
   void setStart(String startTitle, double startX, double startY) {

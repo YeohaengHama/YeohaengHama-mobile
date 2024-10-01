@@ -1,7 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../data/entity/bot/chat_bot.dart';
 import '../../../../../../entity/dummies.dart';
 import '../w/w_hama_area.dart';
 
@@ -11,8 +10,8 @@ class PopularAreaWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double areaSize = 130;
-    final double contentP = 15;
+    const double areaSize = 130;
+    const double contentP = 15;
 
     // PopularArea 데이터의 UI를 구성합니다.
     return Column(

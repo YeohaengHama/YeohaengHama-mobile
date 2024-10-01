@@ -58,7 +58,7 @@ class TrafficApi {
       }
     } catch (e) {
       print('An exception occurred: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -104,7 +104,7 @@ class TrafficApi {
       }
     } catch (e) {
       print('An exception occurred: $e');
-      throw e;
+      rethrow;
     }
   }
   Future<void> getInfoCarTraffic(double x1, double y1, double x2, double y2, WidgetRef ref) async {
@@ -158,7 +158,7 @@ class TrafficApi {
       }
     } catch (e) {
       print('An exception occurred: $e');
-      throw e;
+      rethrow;
     }
   }
 }

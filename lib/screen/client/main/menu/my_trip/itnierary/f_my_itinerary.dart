@@ -11,7 +11,7 @@ import '../../../../../../data/memory/itinerary/share_itinerary_list_provider.da
 import '../../../../../../data/network/itinerary_api.dart';
 
 class MyItineraryFragment extends ConsumerStatefulWidget {
-  const MyItineraryFragment({Key? key}) : super(key: key);
+  const MyItineraryFragment({Key? super.key});
 
   @override
   ConsumerState<MyItineraryFragment> createState() => _MyItineraryFragmentState();
@@ -63,7 +63,7 @@ class _MyItineraryFragmentState extends ConsumerState<MyItineraryFragment> {
               if (displayList.isNotEmpty) {
                 return Column(
                   children: [
-                    Height(10),
+                    const Height(10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -110,7 +110,7 @@ class _MyItineraryFragmentState extends ConsumerState<MyItineraryFragment> {
                 // 데이터가 비어있을 때
                 return Column(
                   children: [
-                    Height(10),
+                    const Height(10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -139,7 +139,7 @@ class _MyItineraryFragmentState extends ConsumerState<MyItineraryFragment> {
                         Text('함께').pOnly(right: 15, left: 2),
                       ],
                     ),
-                    NoItnieraryListWidget(),
+                    const NoItnieraryListWidget(),
                   ],
                 );
               }

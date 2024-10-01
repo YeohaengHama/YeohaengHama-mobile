@@ -77,13 +77,11 @@ class _SearchLocationAreaState extends State<SearchLocationArea> {
   }
 
   void _addMarker() {
-    if (_controller != null) {
-      _controller.addOverlay(NMarker(
-        id: 'current_location_marker',
-        position: placeLatLng,
-      ));
+    _controller.addOverlay(NMarker(
+      id: 'current_location_marker',
+      position: placeLatLng,
+    ));
     }
-  }
 
   void _getCurrentLocation() async {
     try {
@@ -91,16 +89,14 @@ class _SearchLocationAreaState extends State<SearchLocationArea> {
       setState(() {
         placeLatLng = NLatLng(position.latitude, position.longitude);
       });
-      if (_controller != null) {
-        _controller.updateCamera(
-          NCameraUpdate.scrollAndZoomTo(
-            target: placeLatLng,
-            zoom: 5,
-          ),
-        );
-        _addMarker();
-      }
-    } catch (e) {
+      _controller.updateCamera(
+        NCameraUpdate.scrollAndZoomTo(
+          target: placeLatLng,
+          zoom: 5,
+        ),
+      );
+      _addMarker();
+        } catch (e) {
       print("Error getting current location: $e");
     }
   }

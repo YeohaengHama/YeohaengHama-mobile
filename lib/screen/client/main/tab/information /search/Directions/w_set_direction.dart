@@ -72,7 +72,7 @@ class SetDirectionWidget extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: mapCoordinates.startTitle != ''
-                          ? '${mapCoordinates.startTitle}'
+                          ? mapCoordinates.startTitle
                           .text
                           .make()
                           .pSymmetric(h: 5)
@@ -103,7 +103,7 @@ class SetDirectionWidget extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: mapCoordinates.endTitle != ''
-                          ? '${mapCoordinates.endTitle}'
+                          ? mapCoordinates.endTitle
                           .text
                           .make()
                           .pSymmetric(h: 5)

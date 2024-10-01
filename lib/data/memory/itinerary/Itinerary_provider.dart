@@ -24,8 +24,8 @@ class ItineraryNotifier extends StateNotifier<List<Itinerary>> {
 
     // 선택된 시작 날짜와 종료 날짜가 모두 null이 아닐 경우에만 포맷팅하여 저장합니다.
     if (startDate != null && endDate != null) {
-      selectedStartDate = formatDate(startDate!);
-      selectedEndDate = formatDate(endDate!);
+      selectedStartDate = formatDate(startDate);
+      selectedEndDate = formatDate(endDate);
     }
   }
 

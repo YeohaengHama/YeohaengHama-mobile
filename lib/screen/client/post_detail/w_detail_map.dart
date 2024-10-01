@@ -9,7 +9,7 @@ import '../../../../../data/memory/area/selectedDayIndex_provider.dart';
 import '../../../../../data/memory/itinerary/add_pick_each_place_provider.dart';
 
 class DetailMapWidget extends ConsumerStatefulWidget {
-  const DetailMapWidget({Key? key, this.mapX = 126.979, this.mapY = 37.566}) : super(key: key);
+  const DetailMapWidget({Key? super.key, this.mapX = 126.979, this.mapY = 37.566});
   final double mapX;
   final double mapY;
 
@@ -71,7 +71,6 @@ class _DetailMapWidgetState extends ConsumerState<DetailMapWidget> {
   }
 
   void _updatePlaceCoordinates(int selectedIndex) {
-    if (_controller == null) return;
     _removeMarkers();
     _addSingleMarker(); // Ensure the single marker is added back after removing all markers
     placeCoordinates.clear();
@@ -88,8 +87,6 @@ class _DetailMapWidgetState extends ConsumerState<DetailMapWidget> {
   }
 
   void _addMarkers() {
-    if (_controller == null) return;
-
     for (int i = 0; i < placeCoordinates.length; i++) {
       final markerId = 'marker${i + 1}';
       final marker = NMarker(
@@ -104,12 +101,11 @@ class _DetailMapWidgetState extends ConsumerState<DetailMapWidget> {
   }
 
   void _removeMarkers() {
-    if (_controller == null) return;
     _controller.clearOverlays();
   }
 
   void _drawLines() {
-    if (_controller == null || placeCoordinates.length < 2) return;
+    if (placeCoordinates.length < 2) return;
 
     final polyline = NPolylineOverlay(
       coords: placeCoordinates,

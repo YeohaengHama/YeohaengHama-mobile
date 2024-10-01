@@ -1,7 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
 
-import 'package:fast_app_base/screen/client/diary/w_diary_review_list.dart';
-import 'package:fast_app_base/screen/client/main/menu/my_trip/diary/wirte/w_diary_map.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/itinerary/w_Itinerary_map.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/itinerary/w_itinerary_place_list.dart';
 import 'package:flutter/material.dart';

@@ -64,7 +64,7 @@ class SearchApi {
         }
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
@@ -105,7 +105,7 @@ class SearchApi {
       }
     } catch (e) {
       print('An exception occurred: $e');
-      throw e;
+      rethrow;
     }
   }
   Future<void> searchAccount(WidgetRef ref, String name) async {
@@ -129,7 +129,7 @@ class SearchApi {
         accountProvider.addAccount(accounts);
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');

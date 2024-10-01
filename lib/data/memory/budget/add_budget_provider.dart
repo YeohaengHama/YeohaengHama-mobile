@@ -61,7 +61,7 @@ class AddBudgetNotifier extends StateNotifier<AddBudget> {
   }
   int getAccountListLength() {
 
-    return state.accountId!.length;
+    return state.accountId.length;
   }
 
   void setPlaceName(String placeName) {

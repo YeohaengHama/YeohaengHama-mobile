@@ -1,7 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/diary/w_diary_review_list.dart';
 import 'package:fast_app_base/screen/client/post_detail/s_post_detail.dart';
-import 'package:fast_app_base/screen/client/post_detail/test_post_deatil.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../data/entity/diary/vo_detail_diary.dart';
@@ -9,7 +8,7 @@ import '../../../data/entity/diary/vo_detail_diary.dart';
 class DiaryPlaceListWidget extends ConsumerWidget {
   final Place place; // 가정한 프로퍼티입니다. 실제 코드에 맞게 조정해주세요.
 
-  DiaryPlaceListWidget(this.place, {Key? key}) : super(key: key);
+  DiaryPlaceListWidget(this.place, {Key? super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

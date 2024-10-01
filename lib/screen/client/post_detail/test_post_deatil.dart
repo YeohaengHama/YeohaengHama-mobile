@@ -1,7 +1,5 @@
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/data/entity/area/saerch_image_result.dart';
 import 'package:fast_app_base/screen/client/post_detail/review/w_mini_review_list.dart';
 import 'package:fast_app_base/screen/client/post_detail/review/w_review_star.dart';
 import 'package:fast_app_base/screen/client/post_detail/review/w_simple_review.dart';
@@ -12,12 +10,8 @@ import 'package:fast_app_base/screen/client/post_detail/w_info_map.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:card_loading/card_loading.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
-import '../../../data/entity/area/search_simple_toursim_result.dart';
-import '../../../data/entity/diary/vo_detail_diary.dart';
-import '../../../data/entity/open_api/open_api_area_location.dart';
 import '../../../data/entity/open_api/open_api_detail.dart';
 import '../../../data/entity/open_api/open_api_image.dart';
 import '../../../data/memory/area/area_detail_provider.dart';
@@ -28,12 +22,12 @@ import '../../../data/network/review_api.dart';
 import '../main/search/provider/is_detail_loading_provider.dart';
 
 class TestPostDetailScreen extends HookConsumerWidget {
-  final dynamic? searchSimpleResult;
-  final dynamic? place;
+  final dynamic searchSimpleResult;
+  final dynamic place;
 
   const TestPostDetailScreen({
-    this.searchSimpleResult = null,
-    this.place = null,
+    this.searchSimpleResult,
+    this.place,
     super.key,
   });
 
@@ -229,7 +223,7 @@ class TestPostDetailScreen extends HookConsumerWidget {
                         margin: EdgeInsets.symmetric(
                             horizontal: 20, vertical: 10),
                       )
-                          : ReviewStar(),
+                          : const ReviewStar(),
                       const Height(20),
                       isDetailLoading
                           ? Row(
@@ -296,7 +290,7 @@ class TestPostDetailScreen extends HookConsumerWidget {
                         height: 1.5,
                       ).pSymmetric(h: 40),
                       isDetailLoading
-                          ? mainTextWidget()
+                          ? const mainTextWidget()
                           : ref
                           .read(DetailAreaApiResponseProvider)
                           .value
@@ -311,7 +305,7 @@ class TestPostDetailScreen extends HookConsumerWidget {
                         ref
                             .read(DetailAreaApiResponseProvider)
                             .value!
-                            .overView!,
+                            .overView,
                         style: TextStyle(
                           fontSize: 14,
                           color: AppColors.secondGrey,

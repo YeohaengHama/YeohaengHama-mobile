@@ -1,13 +1,11 @@
-import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../data/entity/review/a_review_show_all.dart';
 import '../../../../data/memory/review/review_show_all_provider.dart';
-import '../../../../entity/area/vo_review.dart';
 
 class ReviewStar extends ConsumerWidget {
-  const ReviewStar({Key? key, this.starSize = 20.0}) : super(key: key);
+  const ReviewStar({Key? super.key, this.starSize = 20.0});
   final double starSize;
 
   @override
@@ -46,7 +44,7 @@ class ReviewStar extends ConsumerWidget {
   }
 
   double _calculateAverageScore(List<ReviewShowAll> reviews) {
-    if (reviews == null || reviews.isEmpty) {
+    if (reviews.isEmpty) {
       return 0.0;
     } else {
       // Null 값을 제외한 리뷰 리스트 생성

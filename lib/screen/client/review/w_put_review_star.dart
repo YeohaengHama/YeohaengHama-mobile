@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/common.dart';
-import '../../../common/constant/app_colors.dart';
 
 
 

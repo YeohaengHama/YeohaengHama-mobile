@@ -4,12 +4,11 @@ import 'package:fast_app_base/screen/client/main/tab/schedule/budget/statistics/
 import 'package:fast_app_base/screen/client/main/tab/schedule/budget/main_screen/w_dudget_holder.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart'; // Import the intl package
+// Import the intl package
 
 import '../../../../../../../common/theme/text_size.dart';
 import '../../../../../../../data/entity/itinerary/a_check_itinerary.dart';
 import '../../../../../../../data/memory/budget/current_budget_provider.dart';
-import '../../../../search/s_space_search.dart';
 
 class BudgetScreen extends ConsumerStatefulWidget {
   const BudgetScreen(this.itinerary, {super.key});
@@ -24,7 +23,7 @@ class _WalletScreenState extends ConsumerState<BudgetScreen> {
   @override
   Widget build(BuildContext context) {
     final budget = ref.watch(currentBudgetProvider);
-    final formattedTotalAmount = NumberFormat('#,##0', 'en_US').format(budget!.budgetTotalAmount == null ? 0 : budget!.budgetTotalAmount!);
+    final formattedTotalAmount = NumberFormat('#,##0', 'en_US').format(budget!.budgetTotalAmount == null ? 0 : budget.budgetTotalAmount);
 
     return Scaffold(
       appBar: AppBar(
@@ -52,10 +51,10 @@ class _WalletScreenState extends ConsumerState<BudgetScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                Nav.push(StatisticsScreen());
+                Nav.push(const StatisticsScreen());
               },
               icon: const Icon(Icons.percent_rounded)), //Colock Loader 10
-          IconButton(onPressed: () {Nav.push(CalcultateScreen());}, icon: const Icon(Icons.more_horiz)),
+          IconButton(onPressed: () {Nav.push(const CalcultateScreen());}, icon: const Icon(Icons.more_horiz)),
           IconButton(onPressed: () {}, icon: const Icon(Icons.list)),
         ],
       ),

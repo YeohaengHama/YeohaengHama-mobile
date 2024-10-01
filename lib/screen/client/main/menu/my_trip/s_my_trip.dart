@@ -68,7 +68,7 @@ class _MyTripScreenState extends ConsumerState<MyTripScreen> with SingleTickerPr
               ),
             ),
 
-            Center(child: '${accountNotifier.nickName}'.text.color(AppColors.primaryGrey).size(24).bold.make()),
+            Center(child: accountNotifier.nickName.text.color(AppColors.primaryGrey).size(24).bold.make()),
             tabBar,
             FutureBuilder<Widget>(
               future: switchTabFragment(),

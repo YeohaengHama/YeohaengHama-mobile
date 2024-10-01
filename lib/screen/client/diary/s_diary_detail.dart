@@ -1,7 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_image_scroll_view.dart';
-import 'package:fast_app_base/common/widget/w_rounded_container.dart';
-import 'package:fast_app_base/data/memory/diary/diary_detail_proiver.dart';
 import 'package:fast_app_base/screen/client/diary/w_diary_place_holder_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +7,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 
 import '../../../data/entity/diary/vo_detail_diary.dart';
-import '../../../data/memory/area/area_detail_provider.dart';
 import '../../../data/network/itinerary_api.dart';
 
 class DetailDiaryScreen extends HookConsumerWidget {
   final DetailDiary detailDiary;
 
-  const DetailDiaryScreen(this.detailDiary, {Key? key}) : super(key: key);
+  const DetailDiaryScreen(this.detailDiary, {Key? super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -138,18 +135,18 @@ class DetailDiaryScreen extends HookConsumerWidget {
                           ).pSymmetric(h: 50),
                         ),
                       ),
-                      Height(20),
-                      Line(color: AppColors.outline,),
+                      const Height(20),
+                      const Line(color: AppColors.outline,),
 
                       Wrap(
                         alignment: WrapAlignment.start,
                         crossAxisAlignment: WrapCrossAlignment.center,
                         children: detailDiary.tag!.map((tag) {
-                          return '#${tag} '.text.bold.color(AppColors.secondGrey).make().pOnly(right: 2);
+                          return '#$tag '.text.bold.color(AppColors.secondGrey).make().pOnly(right: 2);
                         }).toList(),
                       ).pSymmetric(h:contentLeftPadding,v: 20),
 
-                      Height(30)
+                      const Height(30)
                     ],
                   );
                 },

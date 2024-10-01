@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math';
 
 import 'package:fast_app_base/common/common.dart';
@@ -9,9 +8,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../../../../../common/constants.dart';
-import '../../../../../common/widget/scaffold/show_bottom_dialog.dart';
-import '../../../../../common/widget/w_tap.dart';
 import '../../../../../data/entity/itinerary/a_add_pick_place.dart';
 import '../../../../../data/memory/area/selectedDayIndex_provider.dart';
 import '../../../../../data/memory/itinerary/add_pick_each_place_provider.dart';
@@ -19,7 +15,7 @@ import '../../../../../data/network/traffic_api.dart';
 import 'f_gps_map.dart';
 
 class ScheduleMapWidget extends ConsumerStatefulWidget {
-  const ScheduleMapWidget({Key? key}) : super(key: key);
+  const ScheduleMapWidget({Key? super.key});
 
   @override
   ConsumerState<ScheduleMapWidget> createState() => _ScheduleMapWidgetState();
@@ -161,7 +157,7 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
       id: 'current_location', // 고유 ID
       position: currentLocation,
       iconTintColor: AppColors.deepPurple,
-      caption: NOverlayCaption(text: '현재 위치'),
+      caption: const NOverlayCaption(text: '현재 위치'),
     );
 
     // 새 마커 추가
@@ -194,7 +190,7 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
     if (placeList.isEmpty) {
       _removeMarkers();
       placeCoordinates.clear();
-      placeCoordinates.add(NLatLng(36, 128));
+      placeCoordinates.add(const NLatLng(36, 128));
     } else {
       _removeMarkers();
       placeCoordinates.clear();
@@ -215,7 +211,7 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
     for (int i = 0; i < placeCoordinates.length; i++) {
       final markerId = 'marker$i';
       final marker = NMarker(
-        icon: NOverlayImage.fromAssetImage('$basePath/icon/hamaMarker.png'),
+        icon: const NOverlayImage.fromAssetImage('$basePath/icon/hamaMarker.png'),
         size: const Size(60, 30),
         id: markerId,
         position: placeCoordinates[i],
@@ -287,15 +283,15 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
     });
     final currentLocation = _currentPosition!;
     final markerPosition = marker.position;
-    final _trafficApiProvider = ref.read(trafficApiProvider);
+    final trafficApiProviderRead = ref.read(trafficApiProvider);
 
-    await _trafficApiProvider.getInfoTraffic(
+    await trafficApiProviderRead.getInfoTraffic(
         currentLocation.longitude,
         currentLocation.latitude,
         markerPosition.longitude,
         markerPosition.latitude,
         ref);
-    await _trafficApiProvider.getInfoCarTraffic(
+    await trafficApiProviderRead.getInfoCarTraffic(
         currentLocation.longitude,
         currentLocation.latitude,
         markerPosition.longitude,

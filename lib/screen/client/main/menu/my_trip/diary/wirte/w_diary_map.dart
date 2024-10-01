@@ -1,5 +1,4 @@
 
-import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 

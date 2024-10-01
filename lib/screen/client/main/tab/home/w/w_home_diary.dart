@@ -67,7 +67,7 @@ class HomeDiaryWidget extends ConsumerWidget {
                         topRight: i == min(3, diary.photos.length) - 1 ? Radius.circular(10) : Radius.zero,
                       ),
                       child: CachedNetworkImage(
-                        imageUrl: diary.photos[i]!,
+                        imageUrl: diary.photos[i],
                         width: diaryContainerWidth,
                         height: diaryContainerHeight,
                         fit: BoxFit.cover,

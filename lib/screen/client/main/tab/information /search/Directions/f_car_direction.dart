@@ -1,7 +1,5 @@
-import 'dart:math';
 
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/screen/client/main/tab/information%20/search/Directions/w_bouncing_marker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -78,7 +76,7 @@ class CarDirectionFragment extends HookConsumerWidget {
     final startMarker = NMarker(
       id: 'start_marker',
       position: NLatLng(startPoint.latitude, startPoint.longitude),
-      caption: NOverlayCaption(text: '출발지'),
+      caption: const NOverlayCaption(text: '출발지'),
       iconTintColor: Colors.blue,
 
     );
@@ -88,7 +86,7 @@ class CarDirectionFragment extends HookConsumerWidget {
     final endMarker = NMarker(
       id: 'end_marker',
       position: NLatLng(endPoint.latitude, endPoint.longitude),
-      caption: NOverlayCaption(text: '도착지'),
+      caption: const NOverlayCaption(text: '도착지'),
       iconTintColor: Colors.red,
     );
     overlays.add(endMarker);

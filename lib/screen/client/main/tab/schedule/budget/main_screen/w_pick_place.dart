@@ -28,7 +28,7 @@ class PickPlaceWidget extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             '${addPickPlace.placeName}'.text.size(16).color(AppColors.primaryGrey).bold.make(),
-            '${addPickPlace.addr1}'.text.color(AppColors.secondGrey).size(14).make()
+            addPickPlace.addr1.text.color(AppColors.secondGrey).size(14).make()
           ],
         ),
         spacer,

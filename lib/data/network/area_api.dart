@@ -81,7 +81,7 @@ class AreaApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
@@ -140,7 +140,7 @@ class AreaApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
@@ -194,7 +194,7 @@ class AreaApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
@@ -247,7 +247,7 @@ class AreaApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
@@ -306,7 +306,7 @@ class AreaApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
@@ -371,7 +371,7 @@ class AreaApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
@@ -411,7 +411,7 @@ class AreaApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }

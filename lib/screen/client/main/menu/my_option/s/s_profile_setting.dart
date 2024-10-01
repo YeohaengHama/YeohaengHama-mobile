@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/w_tap.dart';
 import 'package:fast_app_base/data/entity/account/vo_current_account.dart';
 import 'package:fast_app_base/data/memory/account/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ import '../../../../../Account/w_text_widget.dart';
 import '../../../../dialog/d_select_image_source.dart';
 
 class ProfileSettingScreen extends ConsumerStatefulWidget {
-  const ProfileSettingScreen({Key? key}) : super(key: key);
+  const ProfileSettingScreen({Key? super.key});
 
   @override
   ConsumerState<ProfileSettingScreen> createState() =>

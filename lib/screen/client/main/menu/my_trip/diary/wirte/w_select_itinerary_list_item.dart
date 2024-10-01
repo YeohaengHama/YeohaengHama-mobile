@@ -11,7 +11,7 @@ import '../../../../../../../common/dart/extension/datetime_extension.dart';
 
 
 class SelectItineraryListItem extends ConsumerStatefulWidget {
-  const SelectItineraryListItem({Key? key, required this.allItinerary}) : super(key: key);
+  const SelectItineraryListItem({Key? super.key, required this.allItinerary});
   final AllItinerary allItinerary;
 
   @override
@@ -22,7 +22,7 @@ class _SelectItineraryListItemState extends ConsumerState<SelectItineraryListIte
   late AnimationController _controller;
   late Animation<Offset> _offsetAnimation;
 
-  bool _showIcons = false;
+  final bool _showIcons = false;
 
 
 
@@ -54,7 +54,7 @@ class _SelectItineraryListItemState extends ConsumerState<SelectItineraryListIte
                     AppColors.primaryGrey).make(),
                 Row(
                   children: [
-                    '$formattedDateRange'.text.color(
+                    formattedDateRange.text.color(
                         AppColors.secondGrey).bold.make(),
                     ' $stayDay'.text.color(
                         AppColors.secondGrey).bold.make(),

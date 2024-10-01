@@ -30,12 +30,12 @@ class _IndividualState extends ConsumerState<Individual> {
                     .color(AppColors.secondGrey)
                     .make()
                     .pOnly(left: contentLeftPadding),
-                Width(5),
+                const Width(5),
                 Icon(Icons.lock,color: AppColors.forthGrey,size: 18,)
 
               ],
             ),
-            Height(10),
+            const Height(10),
             '일행에게 보이지 않는 비용이며, 정산에서 제외됩니다.'
                 .text
                 .size(13)

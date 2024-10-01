@@ -5,10 +5,9 @@ import 'package:fast_app_base/screen/client/main/tab/schedule/budget/main_screen
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../../data/memory/itinerary/add_pick_place_provider.dart';
 
 class BudgetPickArea extends ConsumerWidget {
-  const BudgetPickArea({Key? key}) : super(key: key);
+  const BudgetPickArea({Key? super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

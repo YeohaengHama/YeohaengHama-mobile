@@ -6,7 +6,6 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/memory/itinerary/itinerary_check_provider.dart';
 import '../../../../../../../common/widget/DottedLine.dart';
 import '../../../../../../../common/dart/extension/datetime_extension.dart';
-import '../../../../../../../data/entity/budget/vo_current_budget.dart';
 import '../../../../../../../data/memory/budget/current_budget_provider.dart';
 import '../../../../../../../data/memory/budget/statistics_provider.dart';
 import '../../../../../../../data/memory/account/user_provider.dart';
@@ -63,7 +62,7 @@ class _CalcultateScreen extends ConsumerState<CalcultateScreen> {
                 .make(),
             itinerary.name.text.size(20).color(AppColors.primaryGrey).bold.make(),
             '정산내역입니다.'.text.size(20).color(AppColors.primaryGrey).bold.make(),
-            Height(30),
+            const Height(30),
             Container(
               width: double.maxFinite,
               height: 2,
@@ -71,9 +70,9 @@ class _CalcultateScreen extends ConsumerState<CalcultateScreen> {
                 painter: DottedLinePainter(),
               ),
             ),
-            PayResult(),
-            Height(30),
-            IndividualSettlement(),
+            const PayResult(),
+            const Height(30),
+            const IndividualSettlement(),
           ],
         ).pSymmetric(h: 30),
       ),

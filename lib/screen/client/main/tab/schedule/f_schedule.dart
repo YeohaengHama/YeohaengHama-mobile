@@ -15,7 +15,7 @@ class ScheduleFragment extends ConsumerWidget {
     if (itinerary != null ) {
       return ScheduleScreen(itinerary);
     } else {
-      return NonSecheduleFragment(); // Placeholder는 필요에 따라 변경할 수 있습니다.
+      return const NonSecheduleFragment(); // Placeholder는 필요에 따라 변경할 수 있습니다.
     }
   }
 }

@@ -12,11 +12,10 @@ import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
 import '../../../../../../../data/memory/account/user_provider.dart';
 import '../../../../../../../data/network/diary_api.dart';
 import '../../../../../review/picker/picker.dart';
-import '../../../../search/provider/is_loading_provider.dart';
 
 
 class DiaryWriteScreen extends ConsumerStatefulWidget {
-  const DiaryWriteScreen(this.itineraryId, {Key? key}) : super(key: key);
+  const DiaryWriteScreen(this.itineraryId, {Key? super.key});
   final int itineraryId;
 
   @override

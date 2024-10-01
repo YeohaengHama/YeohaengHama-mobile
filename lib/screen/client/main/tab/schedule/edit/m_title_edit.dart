@@ -51,7 +51,7 @@ class TitleEditModal extends ConsumerWidget {
               transportation: 'bus',
               area: currentItinerary.area,
               startDate: currentItinerary.startDate,
-              endDate: currentItinerary.endDate!,
+              endDate: currentItinerary.endDate,
               expense: '',
             );
             await itineraryApi.editItinerary(editItinerary, ref);

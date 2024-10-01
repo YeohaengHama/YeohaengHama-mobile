@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_hama_area_holder.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_random_area_holder.dart';
@@ -6,25 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:confetti/confetti.dart';
-import 'package:fast_app_base/data/entity/diary/vo_find_all_diary.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/home_diary_holder.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_exist_schedule.dart';
-import 'package:fast_app_base/screen/client/main/tab/home/w/w_hama_area.dart';
-import 'package:fast_app_base/screen/client/main/tab/home/w/w_home_diary.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/w/w_non_schedule.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/entity/dummies.dart';
 import '../../../../../data/entity/open_api/open_api_area.dart';
-import '../../../../../data/memory/diary/diary_find_all_proiver.dart';
 import '../../../../../data/memory/itinerary/itinerary_check_provider.dart';
-import '../../../../../data/memory/search/search_simple_area_provider.dart';
 import '../../../../../data/network/area_api.dart';
 import '../../../../../data/network/diary_api.dart';
 import '../../search/provider/is_loading_provider.dart';
 import '../../search/s_space_search.dart';
 
 class HomeFragment extends ConsumerStatefulWidget {
-  const HomeFragment({Key? key}) : super(key: key);
+  const HomeFragment({Key? super.key});
 
   @override
   ConsumerState<HomeFragment> createState() => _HomeFragmentState();
@@ -150,8 +143,8 @@ class _HomeFragmentState extends ConsumerState<HomeFragment>
       int index = Random().nextInt(_areaList.length);
       setState(() {
         defaultArea = false;
-        displayText = "${_areaList[index]}";
-        randomArea =  "${_areaList[index]}";
+        displayText = _areaList[index];
+        randomArea =  _areaList[index];
         choSungText = "";
       });
 
@@ -264,7 +257,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment>
                             ),
                             if (defaultArea == false) ...{
                               Text(
-                                displayText!,
+                                displayText,
                                 style: TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.bold,
@@ -297,7 +290,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment>
                               text: TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: randomArea!= null ? randomArea : '여행하마',
+                                    text: randomArea ?? '여행하마',
                                     style: TextStyle(
                                         color: AppColors.mainPurple,
                                         fontSize: listFontSize,
@@ -330,7 +323,7 @@ class _HomeFragmentState extends ConsumerState<HomeFragment>
                                 .pSymmetric(v: contentP, h: contentLeftPadding)
                                 .pOnly(top: 6),
                           ),
-                          HomeDiaryHolder(),
+                          const HomeDiaryHolder(),
                           const Height(30),
                         ],
                       ),

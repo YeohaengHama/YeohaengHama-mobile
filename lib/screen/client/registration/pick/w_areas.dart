@@ -1,7 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/w_height_and_width.dart';
-import 'package:fast_app_base/data/network/budget_api.dart';
 import 'package:fast_app_base/entity/area/vo_area.dart';
 
 
@@ -18,7 +15,7 @@ import '../../main/tab/tab_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AreasWidget extends ConsumerWidget {
-  const AreasWidget(this.area, this.isEditMode, {Key? key,}) : super(key: key);
+  const AreasWidget(this.area, this.isEditMode, {Key? super.key,});
   final HamaArea area;
   final bool isEditMode;
   @override
@@ -51,7 +48,7 @@ class AreasWidget extends ConsumerWidget {
           RoundButton(
             text: '선택',
             onTap: () async{
-              if( isEditMode! == false ){
+              if( isEditMode == false ){
                 // 선택한 지역 정보를 ItineraryProvider에 저장
                 final itineraryProviderNotifier = ref.watch(itineraryProvider.notifier);
                 itineraryProviderNotifier.setSelectedArea(area.area);
@@ -72,17 +69,17 @@ class AreasWidget extends ConsumerWidget {
 
                 // 현재까지 쌓인 창을 pop하고 MainScreen으로 이동
                 Navigator.popUntil(context, (route) => route.isFirst);
-                Nav.push(MainScreen(initialTab: TabItem.schedule));
+                Nav.push(const MainScreen(initialTab: TabItem.schedule));
               } else {
                 final currentItinerary = ref.read(itineraryCheckProvider);
                 final editItinerary = Itinerary(
-                  name: '${currentItinerary!.name}',
+                  name: currentItinerary!.name,
                   type: currentItinerary.type!,
                   itineraryStyle: currentItinerary.style!,
                   transportation: 'bus',
                   area: area.area,
                   startDate: currentItinerary.startDate,
-                  endDate: currentItinerary.endDate!,
+                  endDate: currentItinerary.endDate,
                   expense: '',
                 );
                 await itineraryApi.editItinerary(editItinerary, ref);

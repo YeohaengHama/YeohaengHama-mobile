@@ -1,12 +1,9 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:fast_app_base/data/entity/open_api/open_api_image.dart';
 import 'package:fast_app_base/data/memory/review/review_show_all_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../common/constants.dart';
-import '../../screen/client/main/search/provider/is_loading_provider.dart';
 import '../entity/review/a_review_post.dart';
 
 import '../entity/review/a_review_show_all.dart';
@@ -49,14 +46,14 @@ class ReviewApi {
         print('리뷰쓰기 성공: ${response.data}');
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     }
   }
   Future<bool> checkWriteReivew(
@@ -85,7 +82,7 @@ class ReviewApi {
       }
     } catch (e) {
       print('예외가 발생했습니다: $e');
-      throw e;
+      rethrow;
     } finally {
       // container.dispose(); // ProviderContainer 정리 - 이 부분을 주석 처리하거나 삭제
     }
@@ -120,7 +117,7 @@ class ReviewApi {
         }
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');
@@ -151,7 +148,7 @@ class ReviewApi {
         ref.read(reviewShowAccountProvider.notifier).addReview(reviews);
       } else if (response.statusCode == 401) {
         print('error');
-        return null;
+        return;
       } else {
         print('실패. 상태 코드: ${response.statusCode}');
         throw Exception('실패. 상태 코드: ${response.statusCode}');

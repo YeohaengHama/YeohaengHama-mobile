@@ -1,5 +1,4 @@
 import 'package:fast_app_base/data/entity/account/vo_account.dart';
-import 'package:fast_app_base/data/entity/itinerary/vo_itinerary.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part'vo_account_save_place.freezed.dart';
 part'vo_account_save_place.g.dart';

@@ -10,7 +10,7 @@ class HelperScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
-        HelperMapFragment(),
+        const HelperMapFragment(),
         SafeArea(
           child: Positioned(
 

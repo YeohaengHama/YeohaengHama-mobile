@@ -5,7 +5,7 @@ import 'package:fast_app_base/common/common.dart'; // 앱 색상 및 스타일
 class ChatInputField extends ConsumerStatefulWidget {
   final Function(String) onSendMessage;
 
-  ChatInputField({required this.onSendMessage, Key? key}) : super(key: key);
+  ChatInputField({required this.onSendMessage, Key? super.key});
 
   @override
   _ChatInputFieldState createState() => _ChatInputFieldState();

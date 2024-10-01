@@ -1,6 +1,7 @@
 ///Dialog barrierDismissible 위한 Scaffold (From Flutter Framework)
 ///
 ///Material type: MaterialType.transparency 적용
+library;
 
 // Copyright 2014 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
@@ -3182,7 +3183,7 @@ class PersistentBottomSheetController<T>
     super.widget,
     super.completer,
     super.close,
-    StateSetter super.setState,
+    super.setState,
     this._isLocalHistoryEntry,
   ) : super._();
 

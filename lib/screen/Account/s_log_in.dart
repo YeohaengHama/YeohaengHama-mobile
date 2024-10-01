@@ -1,15 +1,10 @@
-import 'dart:convert';
 
 import 'package:fast_app_base/screen/Account/s_join.dart';
 import 'package:fast_app_base/screen/Account/v_kakao_web.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:http/http.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import '../../common/common.dart';
 import '../../data/entity/account/vo_login.dart';
-import '../../data/network/shorts_api.dart';
 import '../../data/network/user_api.dart';
 import 'w_text_widget.dart'; // TextWidget 파일이 있는 경로에 맞게 수정
 
@@ -17,8 +12,8 @@ final userApiProvider = Provider<UserApi>((ref) => UserApi());
 
 class LogInScreen extends ConsumerStatefulWidget {
   const LogInScreen({
-    Key? key,
-  }) : super(key: key);
+    Key? super.key,
+  });
 
   @override
   _LogInScreenState createState() => _LogInScreenState();

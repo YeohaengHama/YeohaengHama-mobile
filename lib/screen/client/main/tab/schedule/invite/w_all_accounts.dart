@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../common/common.dart';
-import '../../../../../../common/widget/w_profile_image.dart';
 import '../../../../../../data/memory/account/all_account_provider.dart';
 import '../../../../../../data/memory/itinerary/itinerary_check_provider.dart';
 import '../../../../../../data/network/itinerary_api.dart';
@@ -36,7 +35,7 @@ class AllAccountsWidget extends ConsumerWidget {
           ],
         ),
         Expanded(
-          child: FriendsListWidget(),
+          child: const FriendsListWidget(),
         ),
       ],
     );

@@ -22,14 +22,14 @@ class SelectItineraryScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           '여행일기를 작성할 일정을\n선택해주세요.'.text.bold.size(28).color(AppColors.primaryGrey).make(),
-          Height(50),
+          const Height(50),
           Row(
             children: [
               '하마'.text.color(AppColors.mainPurple).size(15).bold.make(), // '하마' 텍스트만 색상을 변경합니다.
               '와 함께한 여행'.text.bold.size(15).color(AppColors.primaryGrey).make(), // 나머지 텍스트는 원래 색상을 유지합니다.
             ],
           ),
-          SelectItineraryList(),
+          const SelectItineraryList(),
         ],
       ).pSymmetric(h: 30, v: 15),
 

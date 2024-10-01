@@ -12,12 +12,12 @@ import '../../../../../../data/memory/diary/diary_detail_proiver.dart';
 import '../../../../diary/s_diary_detail.dart';
 
 class DiaryList extends HookConsumerWidget {
-  const DiaryList(this.accountDiary, {Key? key}) : super(key: key);
+  const DiaryList(this.accountDiary, {Key? super.key});
   final FindAccountDiary accountDiary;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _accounDiary = accountDiary;
+    final accounDiary = accountDiary;
     final diaryApi = DiaryApi();
     final pageController = usePageController();
     return Tap(
@@ -36,9 +36,9 @@ class DiaryList extends HookConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              '${_accounDiary.title}'.text.bold.color(AppColors.secondGrey).size(18).make(),
+              accounDiary.title.text.bold.color(AppColors.secondGrey).size(18).make(),
               const Height(5),
-              '${_accounDiary.content}'.text.color(AppColors.secondGrey).size(15).make(),
+              accounDiary.content.text.color(AppColors.secondGrey).size(15).make(),
               const Height(5),
               Container(
                 decoration: BoxDecoration(
@@ -60,7 +60,7 @@ class DiaryList extends HookConsumerWidget {
                   borderRadius: BorderRadius.circular(5),
                   child: Column(
                     children: [
-                      DiaryImageScrollView(pageController: pageController, accountDiary: _accounDiary),
+                      DiaryImageScrollView(pageController: pageController, accountDiary: accounDiary),
                       Container(
                         width: double.infinity,
                         color: Colors.white,
@@ -69,8 +69,8 @@ class DiaryList extends HookConsumerWidget {
                           child: Wrap(
                             alignment: WrapAlignment.start,
                             crossAxisAlignment: WrapCrossAlignment.center,
-                            children: _accounDiary.tag.map((tag) {
-                              return '#${tag} '.text.bold.color(AppColors.primaryGrey).make().pOnly(right: 2);
+                            children: accounDiary.tag.map((tag) {
+                              return '#$tag '.text.bold.color(AppColors.primaryGrey).make().pOnly(right: 2);
                             }).toList(),
                           ).pSymmetric(h:10),
                         ),

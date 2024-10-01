@@ -12,7 +12,6 @@ import '../../../../../../data/memory/search/search_simple_area_provider.dart';
 import '../../../../../../data/memory/search/search_simple_restaurant_provider.dart';
 import '../../../../../../data/memory/traffic/map_coordinates_provider.dart';
 import '../../../../../../data/network/area_api.dart';
-import '../../../../../../data/entity/traffic/vo_map_coordinates.dart';
 import 'Directions/s_directions.dart';
 
 class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
@@ -56,7 +55,7 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
     }
 
-    Future<void> _getCurrentLocationAndUpdateStart(WidgetRef ref) async {
+    Future<void> getCurrentLocationAndUpdateStart(WidgetRef ref) async {
       bool serviceEnabled;
       LocationPermission permission;
 
@@ -119,7 +118,7 @@ class SearchAppBar extends ConsumerWidget implements PreferredSizeWidget {
           ),
           IconButton(
             onPressed: () async {
-              await _getCurrentLocationAndUpdateStart(ref);
+              await getCurrentLocationAndUpdateStart(ref);
             },
             icon: Icon(Icons.gps_fixed_rounded),
           ),

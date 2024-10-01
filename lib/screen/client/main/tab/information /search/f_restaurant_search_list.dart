@@ -13,10 +13,10 @@ class RestaurantSearchListFragment extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Provider 등록
     final restaurantAreaList = ref.watch(simpleAreaRestaurantApiResponseProvider);
-    final _isLoading = ref.watch(isLoadingProvider.notifier).state;
+    final isLoading = ref.watch(isLoadingProvider.notifier).state;
     // 현재 저장된 SearchSimpleResult 리스트 출력
 
-    return restaurantAreaList.isEmpty && !_isLoading ?
+    return restaurantAreaList.isEmpty && !isLoading ?
     SizedBox(
         child: Center(
             child: Column(
@@ -25,8 +25,8 @@ class RestaurantSearchListFragment extends ConsumerWidget {
               children: [
                 '키워드와 일치하는 장소가 없어요.'.text.color(AppColors.thirdGrey).bold.make(),
                 '여행일기를 작성해 볼까요?'.text.color(AppColors.thirdGrey).make(),
-                Height(30),
-                Line(color: AppColors.outline,width: 340)
+                const Height(30),
+                const Line(color: AppColors.outline,width: 340)
               ],
             ))).pSymmetric(v: 30)
         :

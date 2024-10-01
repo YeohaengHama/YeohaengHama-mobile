@@ -31,7 +31,7 @@ class PlaceInfoFragment extends ConsumerWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Height(10),
+          const Height(10),
           Container(
             color: Colors.white,
             child: Column(
@@ -100,7 +100,7 @@ class PlaceInfoFragment extends ConsumerWidget {
                     : (searchDetailResult?.overView != "null" &&
                     searchDetailResult?.overView != null)
                     ? Text(
-                  searchDetailResult!.overView!,
+                  searchDetailResult!.overView,
                   style: const TextStyle(
                     fontSize: 14,
                     color: AppColors.secondGrey,

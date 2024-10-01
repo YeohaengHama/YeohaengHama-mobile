@@ -7,9 +7,8 @@ class RxPreferenceItem<T, R extends Rx<T>> extends PreferenceItem<T> {
   final R _rxValue;
   bool _isLoaded = false;
 
-  RxPreferenceItem(String key, T defaultValue)
-      : _rxValue = createRxValue<T, R>(defaultValue),
-        super(key, defaultValue);
+  RxPreferenceItem(super.key, super.defaultValue)
+      : _rxValue = createRxValue<T, R>(defaultValue);
 
   void _load() {
     _isLoaded = true;

@@ -8,7 +8,7 @@ import '../../../../../data/network/notification_api.dart';
 class NotificationScreen extends ConsumerStatefulWidget {
   final CurrentAccount currentAccount;
 
-  const NotificationScreen(this.currentAccount, {Key? key}) : super(key: key);
+  const NotificationScreen(this.currentAccount, {Key? super.key});
 
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
@@ -45,12 +45,12 @@ class _NotificationScreenState extends ConsumerState<NotificationScreen> {
                 final message = filteredNotification[index];
                 return Column(
                   children: [
-                    Line(color: AppColors.outline, height: 1,),
+                    const Line(color: AppColors.outline, height: 1,),
                     ListTile(
                       leading: ClipOval(child: Container( width: 35, height :35,color: AppColors.mainPurple, child: Icon(Icons.notifications_none,color: Colors.white,))),
                       title: '일정에 초대되었습니다.'.text.size(15).make(),
                     ),
-                    Line(color: AppColors.outline, height: 1,),
+                    const Line(color: AppColors.outline, height: 1,),
                   ],
                 );
               },

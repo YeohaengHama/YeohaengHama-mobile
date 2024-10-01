@@ -63,7 +63,7 @@ class _TransportationDropdownState extends ConsumerState<TrafficRouteDropDown> {
                   child: Text(
                     selectedPathIndex == null
                         ? '경로 >'
-                        : '경로 ${selectedPathIndex! + 1} >',
+                        : '경로 ${selectedPathIndex + 1} >',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,

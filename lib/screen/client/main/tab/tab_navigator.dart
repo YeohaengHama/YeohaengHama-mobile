@@ -2,7 +2,6 @@ import 'package:fast_app_base/screen/client/main/tab/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/p_is_playing.dart';
-import 'package:fast_app_base/screen/client/main/tab/shorts/s_shorts.dart';
 
 class TabNavigator extends ConsumerWidget {
   const TabNavigator({

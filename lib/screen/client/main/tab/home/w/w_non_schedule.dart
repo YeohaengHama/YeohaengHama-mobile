@@ -30,7 +30,7 @@ class NonSchduleWidget extends StatelessWidget {
         RoundButton(
           text: '일정 등록',
           fontSize: 14,
-          onTap: (){Nav.push(CalenderScreen());},
+          onTap: (){Nav.push(const CalenderScreen());},
           textColor: Colors.white,
           leftWidget: const Icon(
             Icons.calendar_today_outlined,

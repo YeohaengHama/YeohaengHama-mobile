@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nav_hooks/dialog/hook_consumer_dialog.dart';
-import 'package:velocity_x/velocity_x.dart';
 import 'package:fast_app_base/common/widget/scaffold/show_bottom_dialog.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/entity/itinerary/a_add_pick_place.dart';
@@ -159,7 +158,7 @@ class _PickPlaceInfoScreenState extends ConsumerState<PickPlaceInfoScreen> {
               onTap: () {
                 ShowBottomDialog(
                   context,
-                  SizedBox(height: 200, child: ChangePlace()),
+                  SizedBox(height: 200, child: const ChangePlace()),
                 );
               },
               child: Icon(Icons.format_list_numbered_outlined, size: 30)
@@ -202,7 +201,7 @@ class _PickPlaceInfoScreenState extends ConsumerState<PickPlaceInfoScreen> {
               MapInfoFragment(
                 searchDetailResult,
                 searchImageResult,
-                searchReviewResult!,
+                searchReviewResult,
               ),
 
 

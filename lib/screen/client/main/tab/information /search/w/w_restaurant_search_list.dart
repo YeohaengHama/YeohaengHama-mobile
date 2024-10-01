@@ -8,7 +8,6 @@ import '../../../../../../../data/entity/open_api/open_api_area_location.dart';
 import '../../../../../../../data/entity/open_api/open_api_detail.dart';
 import '../../../../../../../data/memory/area/area_detail_provider.dart';
 import '../../../../../../../data/network/area_api.dart';
-import '../../../../../post_detail/s_post_detail.dart';
 import '../../../../search/provider/is_detail_loading_provider.dart';
 import '../detail/f_detail_map.dart';
 

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:fast_app_base/common/dart/kotlin_style/kotlin_style_extensions.dart';
 import 'package:flutter/material.dart';
 
 import 'package:stomp_dart_client/stomp_dart_client.dart';

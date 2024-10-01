@@ -6,7 +6,7 @@ final addPickPlaceProvider = StateNotifierProvider<AddPickPlaceListNotifier, Lis
 });
 
 class AddPickPlaceListNotifier extends StateNotifier<List<AddPickPlace>> {
-  AddPickPlaceListNotifier(List<AddPickPlace> initialState) : super(initialState);
+  AddPickPlaceListNotifier(super.initialState);
 
   // void setAddPickPlaces(List<AddPickPlace> addPickPlaces) {
   //   state = addPickPlaces;

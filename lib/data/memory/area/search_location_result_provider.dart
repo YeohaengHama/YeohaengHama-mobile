@@ -1,6 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:dio/dio.dart';
-import 'dart:convert';
 
 
 import '../../entity/open_api/search_location_result.dart';

@@ -1,4 +1,3 @@
-import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/entity/budget/vo_category.dart';
 import 'package:fast_app_base/entity/area/vo_area.dart';
 import 'package:fast_app_base/entity/area/vo_restaurants.dart';
@@ -6,7 +5,6 @@ import 'package:fast_app_base/entity/area/vo_review.dart';
 import 'package:fast_app_base/entity/area/vo_tourism_detail.dart';
 import 'package:fast_app_base/entity/diary/vo_diary.dart';
 import 'package:fast_app_base/entity/schedule/vo_schedule.dart';
-import 'package:fast_app_base/entity/tag/vo_who_tag.dart';
 import 'package:fast_app_base/entity/user/vo_user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,22 +15,22 @@ String picSum(int id) {
   return 'https://picsum.photos/id/$id/200/200';
 }
 
-final hamaArea1 = HamaArea(area: '서울', areaImages: 'assets/image/area/seoul.png');
-final hamaArea2 = HamaArea(area: '인천', areaImages: 'assets/image/area/incheon.jpg');
-final hamaArea3 = HamaArea(area: '경기', areaImages: 'assets/image/area/gyeonggi.jpg');
-final hamaArea4 = HamaArea(area: '경남', areaImages: 'assets/image/area/gyeongsangnam.jpg');
-final hamaArea5 = HamaArea(area: '경주', areaImages: 'assets/image/area/gyeongju.jpeg');
-final hamaArea6 = HamaArea(area: '대전', areaImages: 'assets/image/area/daejeon.jpeg');
-final hamaArea7 = HamaArea(area: '부산', areaImages: 'assets/image/area/busan.jpeg');
-final hamaArea8 = HamaArea(area: '대구', areaImages: 'assets/image/area/daegu.jpeg');
-final hamaArea9 = HamaArea(area: '광주', areaImages: 'assets/image/area/gwangju.jpeg');
-final hamaArea10 = HamaArea(area: '울산', areaImages: 'assets/image/area/ulsan.png');
-final hamaArea11 = HamaArea(area: '강원', areaImages: 'assets/image/area/gangwon.jpg');
-final hamaArea12 = HamaArea(area: '충북', areaImages: 'assets/image/area/chungbuk.jpg');
-final hamaArea13 = HamaArea(area: '충남', areaImages: 'assets/image/area/chungnam.jpg');
-final hamaArea14 = HamaArea(area: '전북', areaImages: 'assets/image/area/jeonbuk.jpg');
-final hamaArea15 = HamaArea(area: '전남', areaImages: 'assets/image/area/jeonnam.jpg');
-final hamaArea16 = HamaArea(area: '제주', areaImages: 'assets/image/area/jeju.png');
+const hamaArea1 = HamaArea(area: '서울', areaImages: 'assets/image/area/seoul.png');
+const hamaArea2 = HamaArea(area: '인천', areaImages: 'assets/image/area/incheon.jpg');
+const hamaArea3 = HamaArea(area: '경기', areaImages: 'assets/image/area/gyeonggi.jpg');
+const hamaArea4 = HamaArea(area: '경남', areaImages: 'assets/image/area/gyeongsangnam.jpg');
+const hamaArea5 = HamaArea(area: '경주', areaImages: 'assets/image/area/gyeongju.jpeg');
+const hamaArea6 = HamaArea(area: '대전', areaImages: 'assets/image/area/daejeon.jpeg');
+const hamaArea7 = HamaArea(area: '부산', areaImages: 'assets/image/area/busan.jpeg');
+const hamaArea8 = HamaArea(area: '대구', areaImages: 'assets/image/area/daegu.jpeg');
+const hamaArea9 = HamaArea(area: '광주', areaImages: 'assets/image/area/gwangju.jpeg');
+const hamaArea10 = HamaArea(area: '울산', areaImages: 'assets/image/area/ulsan.png');
+const hamaArea11 = HamaArea(area: '강원', areaImages: 'assets/image/area/gangwon.jpg');
+const hamaArea12 = HamaArea(area: '충북', areaImages: 'assets/image/area/chungbuk.jpg');
+const hamaArea13 = HamaArea(area: '충남', areaImages: 'assets/image/area/chungnam.jpg');
+const hamaArea14 = HamaArea(area: '전북', areaImages: 'assets/image/area/jeonbuk.jpg');
+const hamaArea15 = HamaArea(area: '전남', areaImages: 'assets/image/area/jeonnam.jpg');
+const hamaArea16 = HamaArea(area: '제주', areaImages: 'assets/image/area/jeju.png');
 
 
 final user1 = User(

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/w_rounded_container.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/wirte/w_select_itinerary_list_item.dart';
 import '../../../../../../data/memory/itinerary/itinerary_show_all_provider.dart';
 import '../../../menu/my_trip/itnierary/w_no_itinerary_list.dart';
 
 class SelectItineraryScreen extends ConsumerWidget {
-  const SelectItineraryScreen({Key? key, required this.scrollController}) : super(key: key);
+  const SelectItineraryScreen({Key? super.key, required this.scrollController});
 
   final ScrollController scrollController;
 
@@ -91,7 +90,7 @@ class SelectItineraryScreen extends ConsumerWidget {
               borderColor: AppColors.mainPurple,
               radius: 10,
               borderWidth: 1,
-              child: NoItnieraryListWidget(),
+              child: const NoItnieraryListWidget(),
             ).pSymmetric(v: 30),
           ),
       ],

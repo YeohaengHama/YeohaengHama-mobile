@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/w_rounded_container.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/comment/f_comment_list.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/comment/w_comment_input.dart';
-import '../../../../../../../data/memory/itinerary/itinerary_show_all_provider.dart';
 import '../../../../../../common/widget/w_scroll_holder.dart';
 import '../../../../../../data/memory/shorts/p_comment_read.dart';
-import '../../../menu/my_trip/itnierary/w_no_itinerary_list.dart';
 
 class CommentScreen extends ConsumerStatefulWidget {
   const CommentScreen({
-    Key? key,
+    Key? super.key,
     required this.scrollController,
     required this.shortsId,
-  }) : super(key: key);
+  });
 
   final ScrollController scrollController;
   final int shortsId;

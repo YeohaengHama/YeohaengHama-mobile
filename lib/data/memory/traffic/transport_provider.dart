@@ -1,7 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../entity/traffic/vo_transport.dart';
-import '../../network/traffic_api.dart';
 
 final trafficInfoProvider = StateNotifierProvider<TrafficInfoNotifier, AsyncValue<TrafficInfo>>((ref) {
   return TrafficInfoNotifier(ref);

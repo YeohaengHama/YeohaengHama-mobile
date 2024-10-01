@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../common/common.dart';
 import '../simple_result.dart';
 
 enum NetworkErrorType {

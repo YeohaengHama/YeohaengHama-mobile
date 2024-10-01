@@ -1,19 +1,14 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/screen/client/main/tab/schedule/budget/statistics/s_statistics.dart';
-import 'package:fast_app_base/screen/client/main/tab/schedule/budget/main_screen/w_dudget_holder.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/budget/statistics/s_statistics_list_holder.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart'; // Import the intl package
+// Import the intl package
 
 import '../../../../../../../common/dart/extension/day_parser.dart';
-import '../../../../../../../common/theme/text_size.dart';
-import '../../../../../../../common/widget/DottedLine.dart';
 import '../../../../../../../data/entity/itinerary/a_check_itinerary.dart';
 import '../../../../../../../data/memory/budget/current_budget_provider.dart';
 import '../../../../../../../data/memory/budget/statistics_provider.dart';
 import '../../../../../../../entity/dummies.dart';
-import '../../../../search/s_space_search.dart';
 
 class StatisticsAmountScreen extends ConsumerStatefulWidget {
   const StatisticsAmountScreen(this.itinerary, {super.key});
@@ -88,7 +83,7 @@ class _WalletScreenState extends ConsumerState<StatisticsAmountScreen> {
         case 'other':
           return statistics!.budget.category.amount.other;
         default:
-          return budget.budgetTotalAmount!.toDouble();
+          return budget.budgetTotalAmount.toDouble();
       }
     }
 
@@ -130,7 +125,7 @@ class _WalletScreenState extends ConsumerState<StatisticsAmountScreen> {
               '원을 쓰셨어요'.text.bold.color(AppColors.primaryGrey).size(25).make(),
             ],
           ),
-          Height(30),
+          const Height(30),
           Expanded(
             child: StatisticsListHolder(
               budget: budget,

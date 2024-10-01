@@ -1,6 +1,5 @@
  import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/f_schedule.dart';
-import 'package:fast_app_base/screen/client/main/tab/shorts/p_is_playing.dart';
 import 'package:fast_app_base/screen/client/main/tab/shorts/s_shorts.dart';
 
 import 'package:flutter/material.dart';

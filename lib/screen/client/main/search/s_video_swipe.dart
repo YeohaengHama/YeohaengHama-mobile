@@ -13,7 +13,7 @@ import 'dart:ui' as ui;
 class VideoSwipeScreen extends ConsumerStatefulWidget {
   final int initialIndex; // 추가된 부분
 
-  const VideoSwipeScreen({Key? key, required this.initialIndex}) : super(key: key);
+  const VideoSwipeScreen({Key? super.key, required this.initialIndex});
 
   @override
   _VideoSwipeScreenState createState() => _VideoSwipeScreenState();

@@ -26,7 +26,7 @@ class _CalenderScreenState extends ConsumerState<CalenderScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Height(55),
+                    const Height(55),
                     widget.isEditMode? '여행일정 수정'.text.bold.color(AppColors.primaryGrey).size(20).make() :'여행일정 등록'.text.bold.color(AppColors.primaryGrey).size(20).make(),
                     '일정에 따른 여행 정보를 알려드립니다.'.text.bold.color(AppColors.thirdGrey).size(15).make(),
                   ],

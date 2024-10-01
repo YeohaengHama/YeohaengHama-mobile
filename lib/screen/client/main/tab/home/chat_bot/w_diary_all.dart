@@ -2,10 +2,7 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../data/entity/bot/chat_bot.dart';
-import '../../../../../../data/memory/diary/diary_detail_proiver.dart';
 import '../../../../../../data/network/diary_api.dart';
-import '../../../../diary/s_diary_detail.dart';
 import '../w/home_diary_holder.dart';
 
 class DiaryAllWidget extends ConsumerWidget {
@@ -22,8 +19,8 @@ class DiaryAllWidget extends ConsumerWidget {
       children: [
         Text('좋아요! 하마 친구들이 남긴 여행일기를 보여줄게요💜',style: TextStyle(color: AppColors.secondGrey),),
 
-        Height(10),
-        HomeDiaryHolder(),
+        const Height(10),
+        const HomeDiaryHolder(),
         // SizedBox(
         //   height: 150, // ListView의 높이를 지정합니다.
         //   child: ListView.builder(

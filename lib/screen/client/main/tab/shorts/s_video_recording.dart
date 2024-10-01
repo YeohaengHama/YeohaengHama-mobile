@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
@@ -18,7 +17,7 @@ import 'p_is_playing.dart';
 class VideoRecordingScreen extends ConsumerStatefulWidget {
   final List<CameraDescription> descriptions;
 
-  const VideoRecordingScreen({Key? key, required this.descriptions}) : super(key: key);
+  const VideoRecordingScreen({Key? super.key, required this.descriptions});
 
   @override
   _VideoRecordingScreenState createState() => _VideoRecordingScreenState();
@@ -55,7 +54,7 @@ class _VideoRecordingScreenState extends ConsumerState<VideoRecordingScreen> wit
 
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 60),
+      duration: const Duration(seconds: 60),
     );
 
     _animation = Tween<double>(
@@ -176,7 +175,7 @@ class _VideoRecordingScreenState extends ConsumerState<VideoRecordingScreen> wit
   }
 
   void startTimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         recordingSeconds++;
       });
@@ -234,7 +233,7 @@ class _VideoRecordingScreenState extends ConsumerState<VideoRecordingScreen> wit
 
   @override
   Widget build(BuildContext context) {
-    final _isPlayingProvider = ref.read(isPlayingProvider.notifier);
+    final isPlayingProviderNoti = ref.read(isPlayingProvider.notifier);
 
     if (!controller.value.isInitialized) {
       return Scaffold(
@@ -260,7 +259,7 @@ class _VideoRecordingScreenState extends ConsumerState<VideoRecordingScreen> wit
                   icon: Icon(Icons.close),
                   color: Colors.white,
                   onPressed: () {
-                    _isPlayingProvider.setPlaying(true);
+                    isPlayingProviderNoti.setPlaying(true);
                     Navigator.pop(context);
                   },
                 ),

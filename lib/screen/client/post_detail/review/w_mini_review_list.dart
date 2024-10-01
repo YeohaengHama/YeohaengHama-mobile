@@ -1,11 +1,8 @@
-import 'package:fast_app_base/data/entity/review/a_review_show_all.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../common/common.dart';
 import '../../../../data/memory/review/review_show_all_provider.dart';
-import '../../../../data/network/review_api.dart';
-import '../../../../entity/dummies.dart';
 import 'w_mini_no_review_list.dart';
 import 'w_mini_review.dart';
 
@@ -15,9 +12,9 @@ class MiniReviewList extends ConsumerStatefulWidget {
 
   const MiniReviewList(
     {
-        Key? key,
+        Key? super.key,
         required this.controller,
-      }) : super(key: key);
+      });
 
   @override
   ConsumerState<MiniReviewList> createState() => _MiniReviewListState();
@@ -38,7 +35,7 @@ class _MiniReviewListState extends ConsumerState<MiniReviewList> {
     if (review is AsyncError) {
       // 오류가 발생한 경우 에러 메시지를 표시합니다.
       return Center(
-        child: MiniNoReviewList(),
+        child: const MiniNoReviewList(),
       );
     }
 
@@ -83,6 +80,6 @@ class _MiniReviewListState extends ConsumerState<MiniReviewList> {
         ),
       );
     }
-    return MiniNoReviewList();
+    return const MiniNoReviewList();
   }
 }

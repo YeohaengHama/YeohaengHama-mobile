@@ -12,7 +12,7 @@ import '../../../../../../data/memory/account/user_provider.dart';
 import '../../../../../../data/network/review_api.dart';
 
 class MyReviewFragment extends ConsumerStatefulWidget {
-  const MyReviewFragment({Key? key}) : super(key: key);
+  const MyReviewFragment({Key? super.key});
 
   @override
   ConsumerState<MyReviewFragment> createState() => _MyReviewFragmentState();
@@ -67,7 +67,7 @@ class _MyReviewFragmentState extends ConsumerState<MyReviewFragment> {
           ),);
               } else {
                 // 데이터가 비어있을 때
-                return NoReviewList();
+                return const NoReviewList();
               }
             }
           } else {

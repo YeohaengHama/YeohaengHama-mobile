@@ -99,7 +99,7 @@ class DiarySearchListWidget extends ConsumerWidget {
             ],
           ),
         ),
-        Line(color: AppColors.outline,width: 340,)
+        const Line(color: AppColors.outline,width: 340,)
       ]
       ),
     );

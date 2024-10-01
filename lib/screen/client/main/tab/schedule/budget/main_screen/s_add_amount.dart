@@ -1,7 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_arrow.dart';
-import 'package:fast_app_base/common/widget/w_rounded_container.dart';
-import 'package:fast_app_base/common/widget/w_tap.dart';
 import 'package:fast_app_base/data/memory/budget/seleted_day_provider.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/budget/main_screen/s_budget_pick_area.dart';
 import 'package:fast_app_base/screen/client/main/tab/schedule/budget/main_screen/w_individual.dart';
@@ -24,8 +22,7 @@ import 'd_pick_day.dart';
 import 'd_pick_pament.dart';
 
 class AddAmountScreen extends ConsumerStatefulWidget {
-  const AddAmountScreen(this.budget, this.itinerary, {Key? key})
-      : super(key: key);
+  const AddAmountScreen(this.budget, this.itinerary, {Key? super.key});
 
   final CurrentBudget budget;
   final CheckItinerary itinerary;
@@ -98,7 +95,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
     final selectedDay = ref.watch(selectedDayProvider);
 
     ref.listen<AmountState>(amountControllerProvider, (previous, next) {
-      _updateAmountTextField(next.amount!);
+      _updateAmountTextField(next.amount);
     });
 
     return Scaffold(
@@ -217,7 +214,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                '${addBudget.paymentMethod}'
+                                addBudget.paymentMethod
                                     .text
                                     .bold
                                     .size(contentTxtSize)
@@ -342,7 +339,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                   },
                   child: Container(
                     child: addBudget.placeName != ''
-                        ? '${addBudget.placeName}'
+                        ? addBudget.placeName
                         .text
                         .size(contentTxtSize)
                         .bold
@@ -365,7 +362,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                 ).pSymmetric(h: 30, v: 15),
 
                if(!soloBudget && addBudget.accounts!.isEmpty)...[
-                 Individual()
+                 const Individual()
                ],
                 Tap(
                   onTap: () async {
@@ -374,7 +371,7 @@ class _AddAmountScreenState extends ConsumerState<AddAmountScreen> {
                     if(addBudgetNotifier.getAccountListLength()==1){
                       addBudgetNotifier.setAmount([addBudgetNotifier.getTotalAmount()]
                       );
-                    };
+                    }
                     addBudgetNotifier.setContent(_contentController.text);
 
 

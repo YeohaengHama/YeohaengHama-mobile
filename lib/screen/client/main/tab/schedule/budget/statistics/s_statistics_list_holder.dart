@@ -3,14 +3,11 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/data/memory/budget/add_budget_provider.dart';
 import 'package:fast_app_base/data/memory/budget/seleted_day_provider.dart';
 import 'package:fast_app_base/data/network/budget_api.dart';
-import 'package:fast_app_base/screen/client/main/tab/schedule/budget/main_screen/s_add_amount.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../../../../../../../common/dart/extension/day_parser.dart';
 import '../../../../../../../common/widget/DottedLine.dart';
 import '../../../../../../../data/entity/budget/vo_current_budget.dart';
 import '../../../../../../../data/memory/budget/current_budget_provider.dart';
@@ -22,10 +19,10 @@ class StatisticsListHolder extends ConsumerStatefulWidget {
   final String selectedCategory;
 
   const StatisticsListHolder({
-    Key? key,
+    Key? super.key,
     required this.budget,
     required this.selectedCategory,
-  }) : super(key: key);
+  });
 
   @override
   ConsumerState<StatisticsListHolder> createState() => _StatisticsListHolderState();
