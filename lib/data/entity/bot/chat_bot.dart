@@ -38,12 +38,12 @@ class Other with _$Other {
     required Map<String, double> map, // Map 형태로 처리
   }) = _Other;
 
-  factory Other.fromJson(Map<String, dynamic> json) => _$OtherFromJson(json);
+  // factory Other.fromJson(Map<String, dynamic> json) => _$OtherFromJson(json);
 
-  // factory Other.fromJson(Map<String, dynamic> json) {
-  //   // JSON에서 Map<String, double>으로 변환
-  //   return Other(map: Map<String, double>.from(json));
-  // }
+  factory Other.fromJson(Map<String, dynamic> json) {
+    // JSON에서 Map<String, double>으로 변환
+    return Other(map: Map<String, double>.from(json));
+  }
 
 }
 

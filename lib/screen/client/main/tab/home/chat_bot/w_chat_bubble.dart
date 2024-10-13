@@ -1,3 +1,4 @@
+import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_popular_area.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_type/w_itinerary.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_type/w_place_list.dart';
 import 'package:fast_app_base/screen/client/main/tab/home/chat_bot/w_type/w_random_area.dart';
@@ -68,6 +69,9 @@ class ChatBubble<T> extends StatelessWidget {
           break;
         case 'randomPlace':
           mainContent = RandomPlaceWidget(randomPlace: message.result as RandomPlace);
+          break;
+        case 'popularArea':
+          mainContent = PopularAreaWidget();
           break;
         case 'randomArea':
         // 적절한 랜덤 지역 위젯을 사용
