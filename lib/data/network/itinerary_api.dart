@@ -24,6 +24,9 @@ import '../memory/itinerary/share_itinerary_list_provider.dart';
 import '../memory/itinerary/show_save_place_provider.dart';
 
 import '../memory/account/user_provider.dart';
+import 'package:http/http.dart' as http;
+import 'package:mime/mime.dart';
+import 'package:http_parser/http_parser.dart';  // MediaType 사용을 위한 임포트
 
 final itineraryApiProvider = Provider<ItineraryApi>((ref) => ItineraryApi());
 
@@ -113,7 +116,7 @@ class ItineraryApi {
       );
 
       if (response.statusCode == 200) {
-        await getItinerary(ref, itineraryProvider.itineraryId);
+        await getItinerary(ref, itineraryProvider.itineraryId.toString());
         print('일정 수정 완료');
       } else if (response.statusCode == 401) {
         throw Exception('실패. 상태 코드: ${response.statusCode}');
@@ -136,7 +139,7 @@ class ItineraryApi {
       final response = await _dio.post(
           '$baseUrl/account/savePlace?accountId=${savePlace.accountId}',
           data: {
-            'itineraryId': int.parse(itinerary!.itineraryId),
+            'itineraryId': int.parse(itinerary!.itineraryId.toString()),
             'placeNum': savePlace.placeNum,
             'contentTypeId': savePlace.contentTypeId,
           });
@@ -207,7 +210,7 @@ class ItineraryApi {
       final response = await _dio.post(
           '$baseUrl/account/checkSavePlace?accountId=${accountNotifier.state!.id}',
           data: {
-            'itineraryId': int.parse(itinerary!.itineraryId),
+            'itineraryId': int.parse(itinerary!.itineraryId.toString()),
             'placeNum': checkSavePlace.placeNum,
             'contentTypeId': checkSavePlace.contentTypeId
           });
@@ -536,44 +539,86 @@ class ItineraryApi {
     }
   }
 
+
+
+
   Future<Response> PostAddEachPickPlace(
-      WidgetRef ref, AddPickPlace addPickPlace) async {
+      WidgetRef ref, AddPickPlace addPickPlace, int? placeOrder) async {
     try {
       final itineraryCheckNotifier = ref.read(itineraryCheckProvider.notifier);
       Response response;
 
-      final data = {
-        'day': addPickPlace.day,
-        'startTime': addPickPlace.startTime,
-        'endTime': addPickPlace.endTime,
-        'placeType': addPickPlace.placeType,
-        'placeNum': addPickPlace.placeNum,
-        'placeName': addPickPlace.placeName,
-        'addr1': addPickPlace.addr1,
-        'mapx': addPickPlace.mapx.toString(),
-        'mapy': addPickPlace.mapy.toString(),
-        'memo': addPickPlace.memo,
-        'image' : addPickPlace.image,
-        'placeOrder' : null
-      };
+      // FormData 생성
+      FormData formData = FormData();
+      if (placeOrder == null) {
+        formData.fields.addAll([
+          MapEntry('day', addPickPlace.day.toString()),
+          MapEntry('startTime', addPickPlace.startTime ?? 'string'),
+          MapEntry('endTime', addPickPlace.endTime ?? 'string'),
+          MapEntry('placeType', addPickPlace.placeType),
+          MapEntry('placeNum', addPickPlace.placeNum.toString()),
+          MapEntry('placeName', addPickPlace.placeName!),
+          MapEntry('addr1', addPickPlace.addr1),
+          MapEntry('mapx', addPickPlace.mapx.toString()),
+          MapEntry('mapy', addPickPlace.mapy.toString()),
+          MapEntry('memo', addPickPlace.memo ?? 'string'),
+        ]);
+      } else {
+        formData.fields.addAll([
+          MapEntry('placeOrder', placeOrder.toString()),
+          MapEntry('day', addPickPlace.day.toString()),
+          MapEntry('startTime', addPickPlace.startTime ?? 'string'),
+          MapEntry('endTime', addPickPlace.endTime ?? 'string'),
+          MapEntry('placeType', addPickPlace.placeType),
+          MapEntry('placeNum', addPickPlace.placeNum.toString()),
+          MapEntry('placeName', addPickPlace.placeName!),
+          MapEntry('addr1', addPickPlace.addr1),
+          MapEntry('mapx', addPickPlace.mapx.toString()),
+          MapEntry('mapy', addPickPlace.mapy.toString()),
+          MapEntry('memo', addPickPlace.memo ?? 'string'),
+        ]);
+      }
 
+      // 이미지 URL이 있을 경우
+      if (addPickPlace.image != null && addPickPlace.image!.isNotEmpty) {
+        try {
+          // URL을 이용한 MultipartFile 생성
+          final url = addPickPlace.image!; // 이미지 URL
+          final imageResponse = await http.get(Uri.parse(url)); // 이미지 다운로드
+          if (imageResponse.statusCode == 200) {
+            final mimeType = lookupMimeType(addPickPlace.image!); // MIME 타입 추론
+            final imageFile = MultipartFile.fromBytes(
+              imageResponse.bodyBytes, // 이미지 데이터를 바이트로 변환
+              filename: 'image.jpg', // 파일 이름 설정
+              contentType: MediaType.parse(mimeType ?? 'application/octet-stream'), // MIME 타입 설정
+            );
+
+            formData.files.add(MapEntry('image', imageFile)); // 파일 추가
+          }
+        } catch (e) {
+          print('이미지 처리 중 오류 발생: $e');
+        }
+      }
+
+      // 요청 보내기
       response = await _dio.post(
         '$baseUrl/itinerary/joinPlace/${itineraryCheckNotifier.state?.itineraryId}',
-        data: data,
+        data: formData,
+        options: Options(
+          contentType: 'multipart/form-data',
+        ),
       );
 
       if (response.statusCode == 200) {
         final jsonDataList = response.data['data'] as List<dynamic>;
         final List<AddPickPlace> addPickPlaces =
-            jsonDataList.map((json) => AddPickPlace.fromJson(json)).toList();
+        jsonDataList.map((json) => AddPickPlace.fromJson(json)).toList();
 
         if (addPickPlaces.isEmpty) {
           ref.read(addPickEachPlaceProvider.notifier).clearPlace();
           print('장소 목록이 비어있습니다.');
         } else {
-          ref
-              .read(addPickEachPlaceProvider.notifier)
-              .setAddPickPlace(addPickPlaces);
+          ref.read(addPickEachPlaceProvider.notifier).setAddPickPlace(addPickPlaces);
           print('장소 추가 성공: $addPickPlaces');
         }
 
@@ -591,6 +636,7 @@ class ItineraryApi {
       rethrow;
     }
   }
+
 
   Future<Response?> PostAddNewEachPickPlace(WidgetRef ref) async {
     try {

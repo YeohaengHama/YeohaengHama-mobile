@@ -36,7 +36,9 @@ class PickAreaWidget extends ConsumerWidget {
         placeName: pickPlace.title,
         startTime: "string",
         endTime: "string",
-        memo: "string");
+        memo: "string",
+        image: pickPlace.firstImage
+    );
     final deletePlace = DeletePlace(
         accountId: int.parse(accountNotifier.state!.id),
         placeNum: pickPlace.contentId,
@@ -51,8 +53,8 @@ class PickAreaWidget extends ConsumerWidget {
           //   context: context,
           //   builder: (_) => AddAreaModal(pickPlace, itinerary), // Custom modal widget for editing travel dates
           // );
-          await itineraryApi.postDeletePlace(deletePlace, ref);
-          await itineraryApi.PostAddEachPickPlace(ref, addPickPlace);
+          // await itineraryApi.postDeletePlace(deletePlace, ref);
+          await itineraryApi.PostAddEachPickPlace(ref, addPickPlace, null);
         }
       },
       child: Container(

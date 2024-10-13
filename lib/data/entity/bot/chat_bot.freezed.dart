@@ -249,8 +249,7 @@ Other _$OtherFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Other {
-  String get question => throw _privateConstructorUsedError;
-  String get answerId => throw _privateConstructorUsedError;
+  Map<String, double> get map => throw _privateConstructorUsedError;
 
   /// Serializes this Other to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -266,7 +265,7 @@ abstract class $OtherCopyWith<$Res> {
   factory $OtherCopyWith(Other value, $Res Function(Other) then) =
       _$OtherCopyWithImpl<$Res, Other>;
   @useResult
-  $Res call({String question, String answerId});
+  $Res call({Map<String, double> map});
 }
 
 /// @nodoc
@@ -284,18 +283,13 @@ class _$OtherCopyWithImpl<$Res, $Val extends Other>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? question = null,
-    Object? answerId = null,
+    Object? map = null,
   }) {
     return _then(_value.copyWith(
-      question: null == question
-          ? _value.question
-          : question // ignore: cast_nullable_to_non_nullable
-              as String,
-      answerId: null == answerId
-          ? _value.answerId
-          : answerId // ignore: cast_nullable_to_non_nullable
-              as String,
+      map: null == map
+          ? _value.map
+          : map // ignore: cast_nullable_to_non_nullable
+              as Map<String, double>,
     ) as $Val);
   }
 }
@@ -307,7 +301,7 @@ abstract class _$$OtherImplCopyWith<$Res> implements $OtherCopyWith<$Res> {
       __$$OtherImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String question, String answerId});
+  $Res call({Map<String, double> map});
 }
 
 /// @nodoc
@@ -323,38 +317,37 @@ class __$$OtherImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? question = null,
-    Object? answerId = null,
+    Object? map = null,
   }) {
     return _then(_$OtherImpl(
-      question: null == question
-          ? _value.question
-          : question // ignore: cast_nullable_to_non_nullable
-              as String,
-      answerId: null == answerId
-          ? _value.answerId
-          : answerId // ignore: cast_nullable_to_non_nullable
-              as String,
+      map: null == map
+          ? _value._map
+          : map // ignore: cast_nullable_to_non_nullable
+              as Map<String, double>,
     ));
   }
 }
 
 /// @nodoc
+
 @JsonSerializable()
 class _$OtherImpl implements _Other {
-  const _$OtherImpl({required this.question, required this.answerId});
+  const _$OtherImpl({required final Map<String, double> map}) : _map = map;
 
   factory _$OtherImpl.fromJson(Map<String, dynamic> json) =>
       _$$OtherImplFromJson(json);
 
+  final Map<String, double> _map;
   @override
-  final String question;
-  @override
-  final String answerId;
+  Map<String, double> get map {
+    if (_map is EqualUnmodifiableMapView) return _map;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_map);
+  }
 
   @override
   String toString() {
-    return 'Other(question: $question, answerId: $answerId)';
+    return 'Other(map: $map)';
   }
 
   @override
@@ -362,15 +355,13 @@ class _$OtherImpl implements _Other {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$OtherImpl &&
-            (identical(other.question, question) ||
-                other.question == question) &&
-            (identical(other.answerId, answerId) ||
-                other.answerId == answerId));
+            const DeepCollectionEquality().equals(other._map, _map));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, question, answerId);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_map));
 
   /// Create a copy of Other
   /// with the given fields replaced by the non-null parameter values.
@@ -389,16 +380,12 @@ class _$OtherImpl implements _Other {
 }
 
 abstract class _Other implements Other {
-  const factory _Other(
-      {required final String question,
-      required final String answerId}) = _$OtherImpl;
+  const factory _Other({required final Map<String, double> map}) = _$OtherImpl;
 
   factory _Other.fromJson(Map<String, dynamic> json) = _$OtherImpl.fromJson;
 
   @override
-  String get question;
-  @override
-  String get answerId;
+  Map<String, double> get map;
 
   /// Create a copy of Other
   /// with the given fields replaced by the non-null parameter values.
@@ -1298,7 +1285,7 @@ mixin _$RandomPlace {
   String get playNum => throw _privateConstructorUsedError;
   String get playType => throw _privateConstructorUsedError;
   String get addr1 => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
 
   /// Serializes this RandomPlace to a JSON map.
@@ -1321,7 +1308,7 @@ abstract class $RandomPlaceCopyWith<$Res> {
       {String playNum,
       String playType,
       String addr1,
-      String? name,
+      String name,
       String? image});
 }
 
@@ -1343,7 +1330,7 @@ class _$RandomPlaceCopyWithImpl<$Res, $Val extends RandomPlace>
     Object? playNum = null,
     Object? playType = null,
     Object? addr1 = null,
-    Object? name = freezed,
+    Object? name = null,
     Object? image = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1359,10 +1346,10 @@ class _$RandomPlaceCopyWithImpl<$Res, $Val extends RandomPlace>
           ? _value.addr1
           : addr1 // ignore: cast_nullable_to_non_nullable
               as String,
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -1383,7 +1370,7 @@ abstract class _$$RandomPlaceImplCopyWith<$Res>
       {String playNum,
       String playType,
       String addr1,
-      String? name,
+      String name,
       String? image});
 }
 
@@ -1403,7 +1390,7 @@ class __$$RandomPlaceImplCopyWithImpl<$Res>
     Object? playNum = null,
     Object? playType = null,
     Object? addr1 = null,
-    Object? name = freezed,
+    Object? name = null,
     Object? image = freezed,
   }) {
     return _then(_$RandomPlaceImpl(
@@ -1419,10 +1406,10 @@ class __$$RandomPlaceImplCopyWithImpl<$Res>
           ? _value.addr1
           : addr1 // ignore: cast_nullable_to_non_nullable
               as String,
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -1438,7 +1425,7 @@ class _$RandomPlaceImpl implements _RandomPlace {
       {required this.playNum,
       required this.playType,
       required this.addr1,
-      this.name,
+      required this.name,
       this.image});
 
   factory _$RandomPlaceImpl.fromJson(Map<String, dynamic> json) =>
@@ -1451,7 +1438,7 @@ class _$RandomPlaceImpl implements _RandomPlace {
   @override
   final String addr1;
   @override
-  final String? name;
+  final String name;
   @override
   final String? image;
 
@@ -1499,7 +1486,7 @@ abstract class _RandomPlace implements RandomPlace {
       {required final String playNum,
       required final String playType,
       required final String addr1,
-      final String? name,
+      required final String name,
       final String? image}) = _$RandomPlaceImpl;
 
   factory _RandomPlace.fromJson(Map<String, dynamic> json) =
@@ -1512,7 +1499,7 @@ abstract class _RandomPlace implements RandomPlace {
   @override
   String get addr1;
   @override
-  String? get name;
+  String get name;
   @override
   String? get image;
 

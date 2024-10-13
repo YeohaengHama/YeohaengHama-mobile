@@ -45,14 +45,14 @@ Object? _$nullableGenericToJson<T>(
     input == null ? null : toJson(input);
 
 _$OtherImpl _$$OtherImplFromJson(Map<String, dynamic> json) => _$OtherImpl(
-      question: json['question'] as String,
-      answerId: json['answerId'] as String,
+      map: (json['map'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k, (e as num).toDouble()),
+      ),
     );
 
 Map<String, dynamic> _$$OtherImplToJson(_$OtherImpl instance) =>
     <String, dynamic>{
-      'question': instance.question,
-      'answerId': instance.answerId,
+      'map': instance.map,
     };
 
 _$PlaceImpl _$$PlaceImplFromJson(Map<String, dynamic> json) => _$PlaceImpl(
@@ -127,7 +127,7 @@ _$RandomPlaceImpl _$$RandomPlaceImplFromJson(Map<String, dynamic> json) =>
       playNum: json['playNum'] as String,
       playType: json['playType'] as String,
       addr1: json['addr1'] as String,
-      name: json['name'] as String?,
+      name: json['name'] as String,
       image: json['image'] as String?,
     );
 

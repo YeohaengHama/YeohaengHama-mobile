@@ -30,7 +30,7 @@ class Account with _$Account {
   const factory Account({
     required int id,
     required String nickname,
-    required String photoUrl,
+    required String? photoUrl,
     required String accountRole,
   }) = _Account;
 

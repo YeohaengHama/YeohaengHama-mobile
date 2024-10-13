@@ -286,7 +286,7 @@ Account _$AccountFromJson(Map<String, dynamic> json) {
 mixin _$Account {
   int get id => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
-  String get photoUrl => throw _privateConstructorUsedError;
+  String? get photoUrl => throw _privateConstructorUsedError;
   String get accountRole => throw _privateConstructorUsedError;
 
   /// Serializes this Account to a JSON map.
@@ -303,7 +303,7 @@ abstract class $AccountCopyWith<$Res> {
   factory $AccountCopyWith(Account value, $Res Function(Account) then) =
       _$AccountCopyWithImpl<$Res, Account>;
   @useResult
-  $Res call({int id, String nickname, String photoUrl, String accountRole});
+  $Res call({int id, String nickname, String? photoUrl, String accountRole});
 }
 
 /// @nodoc
@@ -323,7 +323,7 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
   $Res call({
     Object? id = null,
     Object? nickname = null,
-    Object? photoUrl = null,
+    Object? photoUrl = freezed,
     Object? accountRole = null,
   }) {
     return _then(_value.copyWith(
@@ -335,10 +335,10 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
-      photoUrl: null == photoUrl
+      photoUrl: freezed == photoUrl
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       accountRole: null == accountRole
           ? _value.accountRole
           : accountRole // ignore: cast_nullable_to_non_nullable
@@ -354,7 +354,7 @@ abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
       __$$AccountImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String nickname, String photoUrl, String accountRole});
+  $Res call({int id, String nickname, String? photoUrl, String accountRole});
 }
 
 /// @nodoc
@@ -372,7 +372,7 @@ class __$$AccountImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? nickname = null,
-    Object? photoUrl = null,
+    Object? photoUrl = freezed,
     Object? accountRole = null,
   }) {
     return _then(_$AccountImpl(
@@ -384,10 +384,10 @@ class __$$AccountImplCopyWithImpl<$Res>
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
               as String,
-      photoUrl: null == photoUrl
+      photoUrl: freezed == photoUrl
           ? _value.photoUrl
           : photoUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       accountRole: null == accountRole
           ? _value.accountRole
           : accountRole // ignore: cast_nullable_to_non_nullable
@@ -413,7 +413,7 @@ class _$AccountImpl implements _Account {
   @override
   final String nickname;
   @override
-  final String photoUrl;
+  final String? photoUrl;
   @override
   final String accountRole;
 
@@ -461,7 +461,7 @@ abstract class _Account implements Account {
   const factory _Account(
       {required final int id,
       required final String nickname,
-      required final String photoUrl,
+      required final String? photoUrl,
       required final String accountRole}) = _$AccountImpl;
 
   factory _Account.fromJson(Map<String, dynamic> json) = _$AccountImpl.fromJson;
@@ -471,7 +471,7 @@ abstract class _Account implements Account {
   @override
   String get nickname;
   @override
-  String get photoUrl;
+  String? get photoUrl;
   @override
   String get accountRole;
 

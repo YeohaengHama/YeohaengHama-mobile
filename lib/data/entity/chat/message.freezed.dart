@@ -22,7 +22,8 @@ Message _$MessageFromJson(Map<String, dynamic> json) {
 mixin _$Message {
   String get type => throw _privateConstructorUsedError;
   String get sender => throw _privateConstructorUsedError;
-  String get message => throw _privateConstructorUsedError;
+  String get message =>
+      throw _privateConstructorUsedError; // required String dataTime,
   String? get roomId => throw _privateConstructorUsedError;
 
   /// Serializes this Message to a JSON map.
@@ -150,6 +151,7 @@ class _$MessageImpl implements _Message {
   final String sender;
   @override
   final String message;
+// required String dataTime,
   @override
   final String? roomId;
 
@@ -203,7 +205,7 @@ abstract class _Message implements Message {
   @override
   String get sender;
   @override
-  String get message;
+  String get message; // required String dataTime,
   @override
   String? get roomId;
 

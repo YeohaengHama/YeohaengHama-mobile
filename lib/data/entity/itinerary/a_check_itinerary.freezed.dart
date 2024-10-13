@@ -20,7 +20,7 @@ CheckItinerary _$CheckItineraryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CheckItinerary {
-  String get itineraryId => throw _privateConstructorUsedError;
+  int get itineraryId => throw _privateConstructorUsedError;
   List<String>? get type => throw _privateConstructorUsedError;
   List<String>? get style => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $CheckItineraryCopyWith<$Res> {
       _$CheckItineraryCopyWithImpl<$Res, CheckItinerary>;
   @useResult
   $Res call(
-      {String itineraryId,
+      {int itineraryId,
       List<String>? type,
       List<String>? style,
       String name,
@@ -100,7 +100,7 @@ class _$CheckItineraryCopyWithImpl<$Res, $Val extends CheckItinerary>
       itineraryId: null == itineraryId
           ? _value.itineraryId
           : itineraryId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -162,7 +162,7 @@ abstract class _$$CheckItineraryImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String itineraryId,
+      {int itineraryId,
       List<String>? type,
       List<String>? style,
       String name,
@@ -208,7 +208,7 @@ class __$$CheckItineraryImplCopyWithImpl<$Res>
       itineraryId: null == itineraryId
           ? _value.itineraryId
           : itineraryId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       type: freezed == type
           ? _value._type
           : type // ignore: cast_nullable_to_non_nullable
@@ -287,7 +287,7 @@ class _$CheckItineraryImpl implements _CheckItinerary {
       _$$CheckItineraryImplFromJson(json);
 
   @override
-  final String itineraryId;
+  final int itineraryId;
   final List<String>? _type;
   @override
   List<String>? get type {
@@ -413,7 +413,7 @@ class _$CheckItineraryImpl implements _CheckItinerary {
 
 abstract class _CheckItinerary implements CheckItinerary {
   const factory _CheckItinerary(
-      {required final String itineraryId,
+      {required final int itineraryId,
       required final List<String>? type,
       required final List<String>? style,
       required final String name,
@@ -431,7 +431,7 @@ abstract class _CheckItinerary implements CheckItinerary {
       _$CheckItineraryImpl.fromJson;
 
   @override
-  String get itineraryId;
+  int get itineraryId;
   @override
   List<String>? get type;
   @override

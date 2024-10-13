@@ -82,10 +82,18 @@ class BotApi {
             );
             break;
 
+        // message 타입 처리 추가
+          case 'message':
+            chatbotResponse = ChatbotResponse<Null>.fromJson(
+              data,
+                  (json) => null, // result가 없기 때문에 null로 처리
+            );
+            break;
+
           default:
             chatbotResponse = ChatbotResponse<Null>.fromJson(
               data,
-                  (json) => null,
+                  (json) => null, // default의 경우도 result는 null로 처리
             );
             break;
         }
@@ -99,6 +107,7 @@ class BotApi {
         throw Exception('Failed with status code: ${response.statusCode}');
       }
     } catch (e) {
+      print('Error occurred: $e');
       throw Exception('서버와 통신이 원할하지 않습니다. 잠시 후 다시 시도해주세요.');
       rethrow;
     }

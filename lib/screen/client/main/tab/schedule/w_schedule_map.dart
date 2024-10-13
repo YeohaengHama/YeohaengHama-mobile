@@ -124,7 +124,7 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
         distanceFilter: 10,
       ),
     ).listen((Position position) async {
-      print('Current position: ${position.latitude}, ${position.longitude}');
+      // print('Current position: ${position.latitude}, ${position.longitude}');
       if (_isControllerInitialized) {
         _currentPosition = position;
         _updateCurrentLocationMarker(position);
@@ -225,8 +225,6 @@ class _ScheduleMapWidgetState extends ConsumerState<ScheduleMapWidget> {
       });
 
       _controller.addOverlay(marker);
-      print(
-          "Marker added: ${i + 1} at (${placeCoordinates[i].latitude}, ${placeCoordinates[i].longitude})");
     }
   }
 

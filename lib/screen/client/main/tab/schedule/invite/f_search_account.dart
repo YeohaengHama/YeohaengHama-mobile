@@ -60,7 +60,7 @@ class AllAccountsWidget extends ConsumerWidget {
                     textColor: AppColors.mainPurple,
                     onTap: () async {
                       await itineraryApi.inviteItinerary(
-                          account.id.toString(), itinerary.itineraryId, context, ref);
+                          account.id.toString(), itinerary.itineraryId.toString(), context, ref);
                     },
                   ),
                 ],

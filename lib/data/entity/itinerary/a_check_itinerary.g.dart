@@ -40,7 +40,7 @@ PlaceByDay _$PlaceByDayFromJson(Map<String, dynamic> json) => PlaceByDay(
       placeType: json['placeType'] as String,
       placeNum: json['placeNum'] as String,
       placeName: json['placeName'] as String,
-      memo: json['memo'] as String,
+      memo: json['memo'] as String?,
       placeId: (json['placeId'] as num).toInt(),
       addr1: json['addr1'] as String,
       mapx: (json['mapx'] as num).toDouble(),
@@ -63,7 +63,7 @@ Map<String, dynamic> _$PlaceByDayToJson(PlaceByDay instance) =>
 
 _$CheckItineraryImpl _$$CheckItineraryImplFromJson(Map<String, dynamic> json) =>
     _$CheckItineraryImpl(
-      itineraryId: json['itineraryId'] as String,
+      itineraryId: (json['itineraryId'] as num).toInt(),
       type: (json['type'] as List<dynamic>?)?.map((e) => e as String).toList(),
       style:
           (json['style'] as List<dynamic>?)?.map((e) => e as String).toList(),

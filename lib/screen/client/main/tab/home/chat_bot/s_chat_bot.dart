@@ -45,6 +45,7 @@ class _ChatBotScreenState extends ConsumerState<ChatBotScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         scrolledUnderElevation: 0,
         title: Text('Chatbot'),
       ),

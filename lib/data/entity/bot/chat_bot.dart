@@ -2,7 +2,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'chat_bot.freezed.dart';
 part 'chat_bot.g.dart';
-
 @freezed
 class ChatbotResponse<T> with _$ChatbotResponse<T> {
   @JsonSerializable(genericArgumentFactories: true)
@@ -11,7 +10,7 @@ class ChatbotResponse<T> with _$ChatbotResponse<T> {
     required String answer,
     required String type,
     required T? result,
-    List<Other>? other, // 수정: Other 타입의 리스트로 변경
+    List<Other>? other, // 수정된 Other 타입의 리스트
   }) = _ChatbotResponse<T>;
 
   factory ChatbotResponse.fromJson(
@@ -34,12 +33,18 @@ class ChatbotResponse<T> with _$ChatbotResponse<T> {
 
 @freezed
 class Other with _$Other {
+  @JsonSerializable()
   const factory Other({
-    required String question,
-    required String answerId,
+    required Map<String, double> map, // Map 형태로 처리
   }) = _Other;
 
   factory Other.fromJson(Map<String, dynamic> json) => _$OtherFromJson(json);
+
+  // factory Other.fromJson(Map<String, dynamic> json) {
+  //   // JSON에서 Map<String, double>으로 변환
+  //   return Other(map: Map<String, double>.from(json));
+  // }
+
 }
 
 @freezed
@@ -99,7 +104,7 @@ class RandomPlace with _$RandomPlace {
     required String playNum,
     required String playType,
     required String addr1,
-    String? name,
+    required String name,
     String? image,
   }) = _RandomPlace;
 

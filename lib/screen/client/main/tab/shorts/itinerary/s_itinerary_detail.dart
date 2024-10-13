@@ -103,7 +103,7 @@ class DetailItineraryScreen extends HookConsumerWidget {
                       ItineraryPlaceHolderList(places: itinerary.placesByDay),
                       Center(
                         child: Tap (
-                          onTap: (){itineraryApi.itineraryCopy(context, ref, int.parse(itinerary.itineraryId));},
+                          onTap: (){itineraryApi.itineraryCopy(context, ref, itinerary.itineraryId);},
                           child: RoundedContainer(
                             padding: EdgeInsets.symmetric(horizontal: 0, vertical: 15),
                             radius: 5,

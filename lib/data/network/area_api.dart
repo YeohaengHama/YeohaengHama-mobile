@@ -384,7 +384,7 @@ class AreaApi {
         '$baseUrl/openApi/searchLocation',
         data: {
           'numOfRows': '500',
-          'page': openApiAreaLocation.page,
+          'page': 0,
           'mapX' : openApiAreaLocation.mapX,
           'mapY': openApiAreaLocation.mapY,
           'radius': openApiAreaLocation.radius,

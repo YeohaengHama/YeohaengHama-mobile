@@ -61,6 +61,7 @@ class _RestaurantSearchListWidgetState
         radius: 3000,
         contentTypeId: searchDetailResult.contentTypeId);
     final areaApi = ref.read(areaApiProvider);
+
     await areaApi.searchLocationList(openApiAreaLocation, ref);
   }
 

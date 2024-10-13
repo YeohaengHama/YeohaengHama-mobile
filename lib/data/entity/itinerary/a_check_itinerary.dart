@@ -6,7 +6,7 @@ part 'a_check_itinerary.g.dart';
 @freezed
 class CheckItinerary with _$CheckItinerary {
       const factory CheckItinerary({
-            required String itineraryId,
+            required int itineraryId,
             required List<String>? type,
             required List<String>? style,
             required String name,
@@ -20,13 +20,13 @@ class CheckItinerary with _$CheckItinerary {
             required Map<String, List<PlaceByDay>> placesByDay, // Map<String, List<PlaceByDay>>로 수정
             required List<SharedAccount> sharedAccount, // sharedAccount 추가
       }) = _CheckItinerary;
-      //
-      // factory CheckItinerary.fromJson(Map<String, dynamic> json) =>
-      // _$CheckItineraryFromJson(json);
-  factory CheckItinerary.fromJson(Map<String, dynamic> json) {
-            final String itineraryId = json['itineraryId'].toString(); // itineraryId를 String으로 변환
-            return _$CheckItineraryFromJson(json..['itineraryId'] = itineraryId);
-      }
+
+      factory CheckItinerary.fromJson(Map<String, dynamic> json) =>
+      _$CheckItineraryFromJson(json);
+  // factory CheckItinerary.fromJson(Map<String, dynamic> json) {
+  //           final String itineraryId = json['itineraryId'].toString(); // itineraryId를 String으로 변환
+  //           return _$CheckItineraryFromJson(json..['itineraryId'] = itineraryId);
+  //     }
 }
 
 @JsonSerializable()
@@ -76,7 +76,7 @@ class PlaceByDay {
       final String placeType;
       final String placeNum;
       final String placeName;
-      final String memo;
+      @Default('') String? memo;
       final int placeId;
       final String addr1;
       final double mapx;

@@ -12,7 +12,7 @@ class RandomAreaWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '무작위 지역',
+          '이 지역은 어때요?',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black),
         ),
         SizedBox(height: 10),

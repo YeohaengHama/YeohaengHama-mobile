@@ -21,7 +21,9 @@ class _ChatRoomsListWidgetState extends ConsumerState<ChatRoomsListWidget> {
   Widget build(BuildContext context) {
     final currentAccount = ref.read(accountProvider);
     return Tap(
-      onTap: () { Nav.push(ChatScreen(widget.chatRoom, currentAccount!.nickName)); },
+      onTap: () {
+
+        Nav.push(ChatScreen(widget.chatRoom, currentAccount!.nickName)); },
       child: Column(children: [
         Row(
           children: [

@@ -101,7 +101,7 @@ class _MapDetailScreenState extends ConsumerState<MapDetailScreen> {
                 setState(() {
                   isPickArea = !isPickArea;
                 });
-                await itineraryApi.PostAddEachPickPlace(ref, addPickPlace);
+                await itineraryApi.PostAddEachPickPlace(ref, addPickPlace, null);
 
               } else {
                 const snackBar = SnackBar(

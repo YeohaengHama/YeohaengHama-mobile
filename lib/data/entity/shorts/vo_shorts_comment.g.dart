@@ -38,7 +38,7 @@ _$AccountImpl _$$AccountImplFromJson(Map<String, dynamic> json) =>
     _$AccountImpl(
       id: (json['id'] as num).toInt(),
       nickname: json['nickname'] as String,
-      photoUrl: json['photoUrl'] as String,
+      photoUrl: json['photoUrl'] as String?,
       accountRole: json['accountRole'] as String,
     );
 

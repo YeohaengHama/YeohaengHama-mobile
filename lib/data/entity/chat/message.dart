@@ -9,6 +9,7 @@ class Message with _$Message {
     required String type,
     required String sender,
     required String message,
+    // required String dataTime,
     String? roomId, // Add the roomId property here
   }) = _Message;
 
