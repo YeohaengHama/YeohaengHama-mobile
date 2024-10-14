@@ -28,6 +28,8 @@ class _SimpleReviewWidgetState extends ConsumerState<SimpleReviewWidget> {
   @override
   Widget build(BuildContext context) {
     final review = ref.watch(ReviewShowAllListProvider.notifier).state;
+    final reviewWatch = ref.watch(ReviewShowAllListProvider);
+
     return SingleChildScrollView(
       child: Column(
         children: [

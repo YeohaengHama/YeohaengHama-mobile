@@ -59,7 +59,7 @@ class _RestaurantSearchListWidgetState
         mapX: searchDetailResult!.mapX,
         mapY: searchDetailResult.mapY,
         radius: 3000,
-        contentTypeId: searchDetailResult.contentTypeId);
+        contentTypeId: searchDetailResult.contentTypeId=="80" ? "12": searchDetailResult.contentTypeId);
     final areaApi = ref.read(areaApiProvider);
 
     await areaApi.searchLocationList(openApiAreaLocation, ref);
