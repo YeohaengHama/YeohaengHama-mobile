@@ -53,8 +53,9 @@ class PickAreaWidget extends ConsumerWidget {
           //   context: context,
           //   builder: (_) => AddAreaModal(pickPlace, itinerary), // Custom modal widget for editing travel dates
           // );
-          // await itineraryApi.postDeletePlace(deletePlace, ref);
           await itineraryApi.PostAddEachPickPlace(ref, addPickPlace, null);
+          await itineraryApi.postDeletePlace(deletePlace, ref);
+
         }
       },
       child: Container(
